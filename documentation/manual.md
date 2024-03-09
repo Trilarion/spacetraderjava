@@ -1,0 +1,2 @@
+# SpaceTrader for Java Manual
+

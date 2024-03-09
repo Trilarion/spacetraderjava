@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'spacetrader'
+version '1.0'
+
+ext.mainClass = 'org.gts.bst.ApplicationST'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'org.jetbrains:annotations:24.1.0'
+}
+
+application {
+    mainClass = project.ext.mainClass
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': project.ext.mainClass
+        )
+    }
+}
