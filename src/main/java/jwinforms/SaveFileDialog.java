@@ -1,5 +1,5 @@
 package jwinforms;
-import util.Path;
+import org.spacetrader.util.Path;
 
 
 public class SaveFileDialog extends FileDialog {

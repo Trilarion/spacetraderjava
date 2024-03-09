@@ -6,7 +6,7 @@ plugins {
 group 'spacetrader'
 version '1.0'
 
-ext.mainClass = 'org.gts.bst.ApplicationST'
+ext.mainClass = 'org.spacetrader.Main'
 
 repositories {
     mavenCentral()

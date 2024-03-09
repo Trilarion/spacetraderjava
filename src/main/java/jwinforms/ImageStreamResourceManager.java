@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map.Entry;
-import util.Convertor;
-import util.Lisp;
+import org.spacetrader.util.Convertor;
+import org.spacetrader.util.Lisp;
 
 
 public class ImageStreamResourceManager extends ResourceManager {

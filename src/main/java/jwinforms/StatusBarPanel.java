@@ -1,7 +1,7 @@
 package jwinforms;
 import java.awt.Dimension;
 import jwinforms.enums.StatusBarPanelAutoSize;
-import swingextra.JStatusBarSection;
+import org.spacetrader.swingextra.JStatusBarSection;
 
 
 public class StatusBarPanel implements ISupportInitialize {

@@ -2,7 +2,7 @@ package jwinforms;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import jwinforms.enums.StatusBarPanelAutoSize;
-import swingextra.JStatusBar;
+import org.spacetrader.swingextra.JStatusBar;
 
 
 public class StatusBar extends WinformControl {

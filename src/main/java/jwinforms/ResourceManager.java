@@ -41,7 +41,7 @@ public class ResourceManager {
         try {
           return new ImageStreamResourceManager(classLoader.getResource(path + streamFilename), path).getStream();
         } catch(NullPointerException e) {
-          throw new Error("NPE while seeking for " + streamFilename);
+          throw new Error("NPE while seeking for " + path + streamFilename);
         }
       case "Image":
         String imageName = properties.getProperty(s);
