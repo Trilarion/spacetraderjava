@@ -9,31 +9,17 @@ import org.jwinforms.enums.FontStyle;
 import org.jwinforms.enums.FormBorderStyle;
 import org.jwinforms.enums.FormStartPosition;
 
-import javax.swing.*;
 import java.awt.*;
 
 
 public class FormAbout extends WinformForm {
-    private Button btnClose;
-    private Label lblAbout;
-    private Label lblTitle;
-    private PictureBox picLogo;
 
     public FormAbout() {
-        InitializeComponent();
-    }
-
-    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-        Launcher.runForm(new FormAbout());
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
         ComponentResourceManager resources = new ComponentResourceManager(FormAbout.class);
-        btnClose = new Button();
-        lblTitle = new Label();
-        lblAbout = new Label();
-        picLogo = new PictureBox();
+        Button btnClose = new Button();
+        Label lblTitle = new Label();
+        Label lblAbout = new Label();
+        PictureBox picLogo = new PictureBox();
         ((ISupportInitialize) (picLogo)).BeginInit();
         SuspendLayout();
         // btnClose
@@ -79,4 +65,5 @@ public class FormAbout extends WinformForm {
         ResumeLayout(false);
         PerformLayout();
     }
+
 }

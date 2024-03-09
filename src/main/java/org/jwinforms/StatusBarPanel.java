@@ -1,7 +1,6 @@
 package org.jwinforms;
 
 import org.jwinforms.enums.StatusBarPanelAutoSize;
-import org.spacetrader.swingextra.JStatusBarSection;
 
 import java.awt.*;
 

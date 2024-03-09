@@ -1,8 +1,5 @@
 package org.spacetrader.main.gui;
 
-import java.awt.Point;
-import java.util.Arrays;
-
 import org.jwinforms.Button;
 import org.jwinforms.FormSize;
 import org.jwinforms.Label;
@@ -15,57 +12,26 @@ import org.spacetrader.main.Functions;
 import org.spacetrader.main.HighScoreRecord;
 import org.spacetrader.main.Strings;
 
+import java.awt.*;
+import java.util.Arrays;
+
 
 public class FormViewHighScores extends WinformForm {
-    private Button btnClose;
-    private Label lblRank0;
-    private Label lblRank2;
-    private Label lblRank1;
-    private Label lblScore0;
-    private Label lblScore1;
-    private Label lblScore2;
-    private Label lblName0;
-    private Label lblName1;
-    private Label lblName2;
-    private Label lblStatus0;
-    private Label lblStatus1;
-    private Label lblStatus2;
 
     public FormViewHighScores() {
-        InitializeComponent();
-        Label[] lblName = new Label[]{lblName0, lblName1, lblName2};
-        Label[] lblScore = new Label[]{lblScore0, lblScore1, lblScore2};
-        Label[] lblStatus = new Label[]{lblStatus0, lblStatus1, lblStatus2};
-        HighScoreRecord[] highScores = Functions.GetHighScores(this);
-        for (int i = highScores.length - 1; i >= 0 && highScores[i] != null; i--) {
-            lblName[2 - i].setText(highScores[i].Name());
-            lblScore[2 - i].setText(Functions.FormatNumber(highScores[i].Score() / 10) + "." + highScores[i].Score() % 10);
-            lblStatus[2 - i].setText(Functions.StringVars(Strings.HighScoreStatus, new String[]{
-                    Strings.GameCompletionTypes[highScores[i].Type().CastToInt()],
-                    Functions.Multiples(highScores[i].Days(), Strings.TimeUnit),
-                    Functions.Multiples(highScores[i].Worth(), Strings.MoneyUnit),
-                    Strings.DifficultyLevels[highScores[i].Difficulty().CastToInt()].toLowerCase()
-            }));
-            lblScore[2 - i].setVisible(true);
-            lblStatus[2 - i].setVisible(true);
-        }
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
-        btnClose = new Button();
-        lblRank0 = new Label();
-        lblRank2 = new Label();
-        lblRank1 = new Label();
-        lblScore0 = new Label();
-        lblScore1 = new Label();
-        lblScore2 = new Label();
-        lblName0 = new Label();
-        lblName1 = new Label();
-        lblName2 = new Label();
-        lblStatus0 = new Label();
-        lblStatus1 = new Label();
-        lblStatus2 = new Label();
+        Button btnClose = new Button();
+        Label lblRank0 = new Label();
+        Label lblRank2 = new Label();
+        Label lblRank1 = new Label();
+        Label lblScore0 = new Label();
+        Label lblScore1 = new Label();
+        Label lblScore2 = new Label();
+        Label lblName0 = new Label();
+        Label lblName1 = new Label();
+        Label lblName2 = new Label();
+        Label lblStatus0 = new Label();
+        Label lblStatus1 = new Label();
+        Label lblStatus2 = new Label();
         SuspendLayout();
         // btnClose
         btnClose.setDialogResult(DialogResult.Cancel);
@@ -177,5 +143,22 @@ public class FormViewHighScores extends WinformForm {
         setStartPosition(FormStartPosition.CenterParent);
         setText("High Scores");
         ResumeLayout(false);
+        Label[] lblName = new Label[]{lblName0, lblName1, lblName2};
+        Label[] lblScore = new Label[]{lblScore0, lblScore1, lblScore2};
+        Label[] lblStatus = new Label[]{lblStatus0, lblStatus1, lblStatus2};
+        HighScoreRecord[] highScores = Functions.GetHighScores(this);
+        for (int i = highScores.length - 1; i >= 0 && highScores[i] != null; i--) {
+            lblName[2 - i].setText(highScores[i].Name());
+            lblScore[2 - i].setText(Functions.FormatNumber(highScores[i].Score() / 10) + "." + highScores[i].Score() % 10);
+            lblStatus[2 - i].setText(Functions.StringVars(Strings.HighScoreStatus, new String[]{
+                    Strings.GameCompletionTypes[highScores[i].Type().CastToInt()],
+                    Functions.Multiples(highScores[i].Days(), Strings.TimeUnit),
+                    Functions.Multiples(highScores[i].Worth(), Strings.MoneyUnit),
+                    Strings.DifficultyLevels[highScores[i].Difficulty().CastToInt()].toLowerCase()
+            }));
+            lblScore[2 - i].setVisible(true);
+            lblStatus[2 - i].setVisible(true);
+        }
     }
+
 }

@@ -14,23 +14,13 @@ import java.awt.*;
 public class FormFind extends WinformForm {
     private static String text = "";
     private static boolean boxChecked = false;
-    private Button btnOk;
-    private Button btnCancel;
     private CheckBox chkTrack;
-    private Label lblText;
     private TextBox txtSystem;
 
     public FormFind() {
-        InitializeComponent();
-        txtSystem.setText(text);
-        chkTrack.setChecked(boxChecked);
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
-        lblText = new Label();
-        btnOk = new Button();
-        btnCancel = new Button();
+        Label lblText = new Label();
+        Button btnOk = new Button();
+        Button btnCancel = new Button();
         txtSystem = new TextBox();
         chkTrack = new CheckBox();
         SuspendLayout();
@@ -88,7 +78,10 @@ public class FormFind extends WinformForm {
             }
         };
         ResumeLayout(false);
+        txtSystem.setText(text);
+        chkTrack.setChecked(boxChecked);
     }
+
 
     private void FormFind_Closed(Object sender, EventArgs e) {
         text = txtSystem.getText();

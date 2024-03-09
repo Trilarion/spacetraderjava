@@ -17,10 +17,71 @@ public class FormAlert extends WinformForm {
     private ImageList ilImages;
     private Label lblText;
     private Timer tmrTick;
-    private IContainer components;
 
     private FormAlert() {
-        InitializeComponent();
+
+        IContainer components = new Container();
+        ResourceManager resources = new ResourceManager(FormAlert.class);
+        lblText = new Label();
+        btn1 = new Button();
+        btn2 = new Button();
+        ilImages = new ImageList(components);
+        tmrTick = new Timer(components);
+        SuspendLayout();
+        // lblText
+        lblText.setLocation(new java.awt.Point(8, 8));
+        lblText.setName("lblText");
+        lblText.setTabIndex(3);
+        lblText.setText("X");
+        // btn1
+        btn1.setDialogResult(DialogResult.OK);
+        btn1.setFlatStyle(FlatStyle.Flat);
+        btn1.setLocation(new java.awt.Point(115, 32));
+        btn1.setName("btn1");
+        btn1.setSize(new FormSize(40, 22));
+        btn1.setTabIndex(1);
+        btn1.setText("Ok");
+        // btn2
+        btn2.setDialogResult(DialogResult.No);
+        btn2.setFlatStyle(FlatStyle.Flat);
+        btn2.setLocation(new java.awt.Point(200, 32));
+        btn2.setName("btn2");
+        btn2.setSize(new FormSize(40, 22));
+        btn2.setTabIndex(2);
+        btn2.setText("No");
+        btn2.setVisible(false);
+        // ilImages
+        ilImages.ColorDepth = ColorDepth.Depth24Bit;
+        ilImages.setImageSize(new FormSize(160, 160));
+        ilImages.setImageStream(((ImageListStreamer) (resources.GetObject("ilImages.ImageStream"))));
+        ilImages.setTransparentColor(null);
+        // tmrTick
+        tmrTick.setInterval(4000);
+        tmrTick.Tick = new EventHandler<>() {
+            @Override
+            public void handle(Object sender, EventArgs e) {
+                tmrTick_Tick();
+            }
+        };
+        // FormAlert
+        setAutoScaleBaseSize(new FormSize(5, 13));
+        setClientSize(new FormSize(270, 63));
+        setControlBox(false);
+        Controls.add(btn2);
+        Controls.add(btn1);
+        Controls.add(lblText);
+        setFormBorderStyle(FormBorderStyle.FixedDialog);
+        setName("FormAlert");
+        setShowInTaskbar(false);
+        setStartPosition(FormStartPosition.CenterParent);
+        setText("Title");
+        setClick(new EventHandler<>() {
+            @Override
+            public void handle(Object sender, EventArgs e) {
+                FormAlert_Click(sender, e);
+            }
+        });
+        ResumeLayout(false);
     }
 
     public FormAlert(String title, String text, String button1Text, DialogResult button1Result, String button2Text, DialogResult button2Result, String[] args) {
@@ -859,72 +920,6 @@ public class FormAlert extends WinformForm {
         if (btn1.getLeft() < 0) {
             Close();
         }
-    }
-
-    private void InitializeComponent() {
-        // Required method for Designer support - do not modify the contents of this method with the code editor.
-        components = new Container();
-        ResourceManager resources = new ResourceManager(FormAlert.class);
-        lblText = new Label();
-        btn1 = new Button();
-        btn2 = new Button();
-        ilImages = new ImageList(components);
-        tmrTick = new Timer(components);
-        SuspendLayout();
-        // lblText
-        lblText.setLocation(new java.awt.Point(8, 8));
-        lblText.setName("lblText");
-        lblText.setTabIndex(3);
-        lblText.setText("X");
-        // btn1
-        btn1.setDialogResult(DialogResult.OK);
-        btn1.setFlatStyle(FlatStyle.Flat);
-        btn1.setLocation(new java.awt.Point(115, 32));
-        btn1.setName("btn1");
-        btn1.setSize(new FormSize(40, 22));
-        btn1.setTabIndex(1);
-        btn1.setText("Ok");
-        // btn2
-        btn2.setDialogResult(DialogResult.No);
-        btn2.setFlatStyle(FlatStyle.Flat);
-        btn2.setLocation(new java.awt.Point(200, 32));
-        btn2.setName("btn2");
-        btn2.setSize(new FormSize(40, 22));
-        btn2.setTabIndex(2);
-        btn2.setText("No");
-        btn2.setVisible(false);
-        // ilImages
-        ilImages.ColorDepth = ColorDepth.Depth24Bit;
-        ilImages.setImageSize(new FormSize(160, 160));
-        ilImages.setImageStream(((ImageListStreamer) (resources.GetObject("ilImages.ImageStream"))));
-        ilImages.setTransparentColor(null);
-        // tmrTick
-        tmrTick.setInterval(4000);
-        tmrTick.Tick = new EventHandler<>() {
-            @Override
-            public void handle(Object sender, EventArgs e) {
-                tmrTick_Tick();
-            }
-        };
-        // FormAlert
-        setAutoScaleBaseSize(new FormSize(5, 13));
-        setClientSize(new FormSize(270, 63));
-        setControlBox(false);
-        Controls.add(btn2);
-        Controls.add(btn1);
-        Controls.add(lblText);
-        setFormBorderStyle(FormBorderStyle.FixedDialog);
-        setName("FormAlert");
-        setShowInTaskbar(false);
-        setStartPosition(FormStartPosition.CenterParent);
-        setText("Title");
-        setClick(new EventHandler<>() {
-            @Override
-            public void handle(Object sender, EventArgs e) {
-                FormAlert_Click(sender, e);
-            }
-        });
-        ResumeLayout(false);
     }
 
     private void tmrTick_Tick() {

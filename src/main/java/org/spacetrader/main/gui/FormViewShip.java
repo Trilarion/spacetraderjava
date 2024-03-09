@@ -18,10 +18,6 @@ import java.util.Arrays;
 
 
 public class FormViewShip extends WinformForm {
-    private Button btnClose;
-    private GroupBox boxSpecialCargo;
-    private Label lblTypeLabel;
-    private Label lblType;
     private Label lblSpecialCargo;
     private Label lblEquipLabel;
     private Label lblEquip;
@@ -29,22 +25,12 @@ public class FormViewShip extends WinformForm {
     private Ship ship = game.Commander().getShip();
 
     public FormViewShip() {
-        InitializeComponent();
-        lblType.setText(ship.Name());
-        lblEquipLabel.setText("");
-        lblEquip.setText("");
-        DisplayEquipment();
-        DisplaySpecialCargo();
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
-        lblTypeLabel = new Label();
-        lblType = new Label();
-        btnClose = new Button();
+        Label lblTypeLabel = new Label();
+        Label lblType = new Label();
+        Button btnClose = new Button();
         lblEquipLabel = new Label();
         lblEquip = new Label();
-        boxSpecialCargo = new GroupBox();
+        GroupBox boxSpecialCargo = new GroupBox();
         lblSpecialCargo = new Label();
         boxSpecialCargo.SuspendLayout();
         SuspendLayout();
@@ -105,7 +91,13 @@ public class FormViewShip extends WinformForm {
         setText("Current Ship");
         boxSpecialCargo.ResumeLayout(false);
         ResumeLayout(false);
+        lblType.setText(ship.Name());
+        lblEquipLabel.setText("");
+        lblEquip.setText("");
+        DisplayEquipment();
+        DisplaySpecialCargo();
     }
+
 
     private void DisplayEquipment() {
         if (game.getQuestStatusScarab() == SpecialEvent.StatusScarabDone) {

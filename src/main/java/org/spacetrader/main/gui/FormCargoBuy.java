@@ -15,60 +15,17 @@ import java.awt.*;
 
 public class FormCargoBuy extends WinformForm {
     private final Game game = Game.CurrentGame();
-    private final Commander cmdr = game.Commander();
-    private Button btnOk;
-    private Button btnAll;
-    private Button btnNone;
-    private Label lblQuestion;
-    private Label lblStatement;
-    private Label lblAvailable;
-    private Label lblAfford;
     private NumericUpDown numAmount;
 
     public FormCargoBuy(int item, int maxAmount, CargoBuyOp op) {
-        InitializeComponent();
-        numAmount.setMaximum(maxAmount);
-        numAmount.setValue(numAmount.getMinimum());
-        setText(Functions.StringVars(Strings.CargoTitle, Strings.CargoBuyOps[op.id], Constants.TradeItems[item].Name()));
-        lblQuestion.setText(Functions.StringVars("How many do you want to ^1?", Strings.CargoBuyOps[op.id].toLowerCase()));
-        switch (op) {
-            case BuySystem:
-                lblStatement.setText(Functions.StringVars("At ^1 each, you can buy up to ^2.", Functions.FormatMoney(game.PriceCargoBuy()[item]), Functions.FormatNumber(maxAmount)));
-                setHeight(btnOk.getTop() + btnOk.getHeight() + 34);
-                break;
-            case BuyTrader:
-                int afford = Math.min(cmdr.getCash() / game.PriceCargoBuy()[item], cmdr.getShip().FreeCargoBays());
-                if (afford < maxAmount) {
-                    numAmount.setMaximum(afford);
-                }
-                lblStatement.setText(Functions.StringVars("The trader wants to sell ^1 for the price of ^2 each.", Constants.TradeItems[item].Name(), Functions.FormatMoney(game.PriceCargoBuy()[item])));
-                lblAvailable.setText(Functions.StringVars("The trader has ^1 for sale.", Functions.Multiples(game.getOpponent().Cargo()[item], Strings.CargoUnit)));
-                lblAfford.setText(Functions.StringVars("You can afford to buy ^1.", Functions.Multiples(afford, Strings.CargoUnit)));
-                lblAvailable.setVisible(true);
-                lblAfford.setVisible(true);
-                btnOk.setTop(btnOk.getTop() + 26);
-                btnAll.setTop(btnAll.getTop() + 26);
-                btnNone.setTop(btnNone.getTop() + 26);
-                lblQuestion.setTop(lblQuestion.getTop() + 26);
-                numAmount.setTop(numAmount.getTop() + 26);
-                break;
-            case InPlunder:
-                lblStatement.setText(Functions.StringVars("Your victim has ^1 of these goods.", Functions.FormatNumber(game.getOpponent().Cargo()[item])));
-                setHeight(btnOk.getTop() + btnOk.getHeight() + 34);
-                break;
-        }
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
-        lblQuestion = new Label();
-        lblStatement = new Label();
+        Label lblQuestion = new Label();
+        Label lblStatement = new Label();
         numAmount = new NumericUpDown();
-        btnOk = new Button();
-        btnAll = new Button();
-        btnNone = new Button();
-        lblAvailable = new Label();
-        lblAfford = new Label();
+        Button btnOk = new Button();
+        Button btnAll = new Button();
+        Button btnNone = new Button();
+        Label lblAvailable = new Label();
+        Label lblAfford = new Label();
         ((ISupportInitialize) (numAmount)).BeginInit();
         SuspendLayout();
         // lblQuestion
@@ -157,7 +114,39 @@ public class FormCargoBuy extends WinformForm {
         setText("Buy Xxxxxxxxxx");
         ((ISupportInitialize) (numAmount)).EndInit();
         ResumeLayout(false);
+        numAmount.setMaximum(maxAmount);
+        numAmount.setValue(numAmount.getMinimum());
+        setText(Functions.StringVars(Strings.CargoTitle, Strings.CargoBuyOps[op.id], Constants.TradeItems[item].Name()));
+        lblQuestion.setText(Functions.StringVars("How many do you want to ^1?", Strings.CargoBuyOps[op.id].toLowerCase()));
+        Commander cmdr = game.Commander();
+        switch (op) {
+            case BuySystem:
+                lblStatement.setText(Functions.StringVars("At ^1 each, you can buy up to ^2.", Functions.FormatMoney(game.PriceCargoBuy()[item]), Functions.FormatNumber(maxAmount)));
+                setHeight(btnOk.getTop() + btnOk.getHeight() + 34);
+                break;
+            case BuyTrader:
+                int afford = Math.min(cmdr.getCash() / game.PriceCargoBuy()[item], cmdr.getShip().FreeCargoBays());
+                if (afford < maxAmount) {
+                    numAmount.setMaximum(afford);
+                }
+                lblStatement.setText(Functions.StringVars("The trader wants to sell ^1 for the price of ^2 each.", Constants.TradeItems[item].Name(), Functions.FormatMoney(game.PriceCargoBuy()[item])));
+                lblAvailable.setText(Functions.StringVars("The trader has ^1 for sale.", Functions.Multiples(game.getOpponent().Cargo()[item], Strings.CargoUnit)));
+                lblAfford.setText(Functions.StringVars("You can afford to buy ^1.", Functions.Multiples(afford, Strings.CargoUnit)));
+                lblAvailable.setVisible(true);
+                lblAfford.setVisible(true);
+                btnOk.setTop(btnOk.getTop() + 26);
+                btnAll.setTop(btnAll.getTop() + 26);
+                btnNone.setTop(btnNone.getTop() + 26);
+                lblQuestion.setTop(lblQuestion.getTop() + 26);
+                numAmount.setTop(numAmount.getTop() + 26);
+                break;
+            case InPlunder:
+                lblStatement.setText(Functions.StringVars("Your victim has ^1 of these goods.", Functions.FormatNumber(game.getOpponent().Cargo()[item])));
+                setHeight(btnOk.getTop() + btnOk.getHeight() + 34);
+                break;
+        }
     }
+
 
     private void btnAll_Click(Object sender, EventArgs e) {
         numAmount.setValue(numAmount.getMaximum());

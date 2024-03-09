@@ -1,42 +1,26 @@
 package org.spacetrader.main.gui;
 
-import java.awt.Point;
-import java.util.Arrays;
-
 import org.jwinforms.Button;
-import org.jwinforms.EventHandler;
-import org.jwinforms.FormSize;
-import org.jwinforms.LinkArea;
-import org.jwinforms.LinkLabel;
-import org.jwinforms.LinkLabelLinkClickedEventArgs;
-import org.jwinforms.WinformForm;
+import org.jwinforms.*;
 import org.jwinforms.enums.DialogResult;
 import org.jwinforms.enums.FormBorderStyle;
 import org.jwinforms.enums.FormStartPosition;
-import org.spacetrader.main.stub.ArrayList;
-import org.spacetrader.main.util.Util;
 import org.spacetrader.crew.CrewMemberId;
 import org.spacetrader.events.SpecialEventType;
-import org.spacetrader.main.Constants;
-import org.spacetrader.main.Functions;
-import org.spacetrader.main.Game;
-import org.spacetrader.main.SpecialEvent;
-import org.spacetrader.main.Strings;
+import org.spacetrader.main.*;
+import org.spacetrader.main.stub.ArrayList;
+import org.spacetrader.main.util.Util;
+
+import java.awt.*;
+import java.util.Arrays;
 
 
 public class FormViewQuests extends WinformForm {
     private final Game game = Game.CurrentGame();
-    private Button btnClose;
     private LinkLabel lblQuests;
 
     public FormViewQuests() {
-        InitializeComponent();
-        UpdateAll();
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
-        btnClose = new Button();
+        Button btnClose = new Button();
         lblQuests = new LinkLabel();
         SuspendLayout();
         // btnClose
@@ -84,7 +68,9 @@ public class FormViewQuests extends WinformForm {
         setStartPosition(FormStartPosition.CenterParent);
         setText("Quests");
         ResumeLayout(false);
+        UpdateAll();
     }
+
 
     private String[] GetQuestStrings() {
         ArrayList<String> quests = new ArrayList<>(12);

@@ -2,10 +2,10 @@ package org.spacetrader.main;
 
 import org.jwinforms.WinformPane;
 import org.jwinforms.enums.DialogResult;
+import org.spacetrader.crew.CrewMemberId;
 import org.spacetrader.main.enums.AlertType;
 import org.spacetrader.main.gui.FormAlert;
 import org.spacetrader.main.util.Hashtable;
-import org.spacetrader.crew.CrewMemberId;
 import org.spacetrader.ship.ShipType;
 import org.spacetrader.ship.equip.Equipment;
 import org.spacetrader.ship.equip.GadgetType;

@@ -16,57 +16,6 @@ public class FormShipList extends WinformForm {
     private final Game game = Game.CurrentGame();
     private final Commander cmdr = game.Commander();
     private final Ship ship = cmdr.getShip();
-    private Button btnClose;
-    private Button btnBuy0;
-    private Label lblName0;
-    private Button btnInfo0;
-    private Label lblPrice0;
-    private Label lblPrice1;
-    private Button btnInfo1;
-    private Label lblName1;
-    private Button btnBuy1;
-    private Label lblPrice2;
-    private Button btnInfo2;
-    private Label lblName2;
-    private Button btnBuy2;
-    private Label lblPrice3;
-    private Button btnInfo3;
-    private Label lblName3;
-    private Button btnBuy3;
-    private Label lblPrice4;
-    private Button btnInfo4;
-    private Label lblName4;
-    private Button btnBuy4;
-    private Label lblPrice5;
-    private Button btnInfo5;
-    private Label lblName5;
-    private Button btnBuy5;
-    private Label lblPrice6;
-    private Button btnInfo6;
-    private Label lblName6;
-    private Button btnBuy6;
-    private Label lblPrice7;
-    private Button btnInfo7;
-    private Label lblName7;
-    private Button btnBuy7;
-    private Label lblPrice8;
-    private Button btnInfo8;
-    private Label lblName8;
-    private Button btnBuy8;
-    private Label lblPrice9;
-    private Button btnInfo9;
-    private Label lblName9;
-    private Button btnBuy9;
-    private GroupBox boxShipInfo;
-    private Label lblSizeLabel;
-    private Label lblNameLabel;
-    private Label lblBaysLabel;
-    private Label lblRangeLabel;
-    private Label lblHullLabel;
-    private Label lblWeaponLabel;
-    private Label lblShieldLabel;
-    private Label lblCrewLabel;
-    private Label lblGadgetLabel;
     private PictureBox picShip;
     private Label lblName;
     private Label lblSize;
@@ -82,81 +31,48 @@ public class FormShipList extends WinformForm {
     private int[] prices = new int[Constants.ShipSpecs.length];
 
     public FormShipList() {
-        InitializeComponent();
-        lblPrice = new Label[]{
-                lblPrice0,
-                lblPrice1,
-                lblPrice2,
-                lblPrice3,
-                lblPrice4,
-                lblPrice5,
-                lblPrice6,
-                lblPrice7,
-                lblPrice8,
-                lblPrice9,};
-        btnBuy = new Button[]{
-                btnBuy0,
-                btnBuy1,
-                btnBuy2,
-                btnBuy3,
-                btnBuy4,
-                btnBuy5,
-                btnBuy6,
-                btnBuy7,
-                btnBuy8,
-                btnBuy9,};
-        UpdateAll();
-        Info(ship.Type().CastToInt());
-        if (ship.getTribbles() > 0 && !game.getTribbleMessage()) {
-            FormAlert.Alert(AlertType.TribblesTradeIn, this);
-            game.setTribbleMessage(true);
-        }
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
-        btnClose = new Button();
-        btnBuy0 = new Button();
-        lblName0 = new Label();
-        btnInfo0 = new Button();
-        lblPrice0 = new Label();
-        lblPrice1 = new Label();
-        btnInfo1 = new Button();
-        lblName1 = new Label();
-        btnBuy1 = new Button();
-        lblPrice2 = new Label();
-        btnInfo2 = new Button();
-        lblName2 = new Label();
-        btnBuy2 = new Button();
-        lblPrice3 = new Label();
-        btnInfo3 = new Button();
-        lblName3 = new Label();
-        btnBuy3 = new Button();
-        lblPrice4 = new Label();
-        btnInfo4 = new Button();
-        lblName4 = new Label();
-        btnBuy4 = new Button();
-        lblPrice5 = new Label();
-        btnInfo5 = new Button();
-        lblName5 = new Label();
-        btnBuy5 = new Button();
-        lblPrice6 = new Label();
-        btnInfo6 = new Button();
-        lblName6 = new Label();
-        btnBuy6 = new Button();
-        lblPrice7 = new Label();
-        btnInfo7 = new Button();
-        lblName7 = new Label();
-        btnBuy7 = new Button();
-        lblPrice8 = new Label();
-        btnInfo8 = new Button();
-        lblName8 = new Label();
-        btnBuy8 = new Button();
-        lblPrice9 = new Label();
-        btnInfo9 = new Button();
-        lblName9 = new Label();
-        btnBuy9 = new Button();
-        boxShipInfo = new GroupBox();
+        Button btnClose = new Button();
+        Button btnBuy0 = new Button();
+        Label lblName0 = new Label();
+        Button btnInfo0 = new Button();
+        Label lblPrice0 = new Label();
+        Label lblPrice1 = new Label();
+        Button btnInfo1 = new Button();
+        Label lblName1 = new Label();
+        Button btnBuy1 = new Button();
+        Label lblPrice2 = new Label();
+        Button btnInfo2 = new Button();
+        Label lblName2 = new Label();
+        Button btnBuy2 = new Button();
+        Label lblPrice3 = new Label();
+        Button btnInfo3 = new Button();
+        Label lblName3 = new Label();
+        Button btnBuy3 = new Button();
+        Label lblPrice4 = new Label();
+        Button btnInfo4 = new Button();
+        Label lblName4 = new Label();
+        Button btnBuy4 = new Button();
+        Label lblPrice5 = new Label();
+        Button btnInfo5 = new Button();
+        Label lblName5 = new Label();
+        Button btnBuy5 = new Button();
+        Label lblPrice6 = new Label();
+        Button btnInfo6 = new Button();
+        Label lblName6 = new Label();
+        Button btnBuy6 = new Button();
+        Label lblPrice7 = new Label();
+        Button btnInfo7 = new Button();
+        Label lblName7 = new Label();
+        Button btnBuy7 = new Button();
+        Label lblPrice8 = new Label();
+        Button btnInfo8 = new Button();
+        Label lblName8 = new Label();
+        Button btnBuy8 = new Button();
+        Label lblPrice9 = new Label();
+        Button btnInfo9 = new Button();
+        Label lblName9 = new Label();
+        Button btnBuy9 = new Button();
+        GroupBox boxShipInfo = new GroupBox();
         lblCrew = new Label();
         lblGadget = new Label();
         lblShield = new Label();
@@ -167,15 +83,15 @@ public class FormShipList extends WinformForm {
         lblSize = new Label();
         lblName = new Label();
         picShip = new PictureBox();
-        lblGadgetLabel = new Label();
-        lblCrewLabel = new Label();
-        lblShieldLabel = new Label();
-        lblWeaponLabel = new Label();
-        lblHullLabel = new Label();
-        lblRangeLabel = new Label();
-        lblBaysLabel = new Label();
-        lblNameLabel = new Label();
-        lblSizeLabel = new Label();
+        Label lblGadgetLabel = new Label();
+        Label lblCrewLabel = new Label();
+        Label lblShieldLabel = new Label();
+        Label lblWeaponLabel = new Label();
+        Label lblHullLabel = new Label();
+        Label lblRangeLabel = new Label();
+        Label lblBaysLabel = new Label();
+        Label lblNameLabel = new Label();
+        Label lblSizeLabel = new Label();
         boxShipInfo.SuspendLayout();
         SuspendLayout();
         // btnClose
@@ -802,7 +718,36 @@ public class FormShipList extends WinformForm {
         setText("Ship List");
         boxShipInfo.ResumeLayout(false);
         ResumeLayout(false);
+        lblPrice = new Label[]{
+                lblPrice0,
+                lblPrice1,
+                lblPrice2,
+                lblPrice3,
+                lblPrice4,
+                lblPrice5,
+                lblPrice6,
+                lblPrice7,
+                lblPrice8,
+                lblPrice9,};
+        btnBuy = new Button[]{
+                btnBuy0,
+                btnBuy1,
+                btnBuy2,
+                btnBuy3,
+                btnBuy4,
+                btnBuy5,
+                btnBuy6,
+                btnBuy7,
+                btnBuy8,
+                btnBuy9,};
+        UpdateAll();
+        Info(ship.Type().CastToInt());
+        if (ship.getTribbles() > 0 && !game.getTribbleMessage()) {
+            FormAlert.Alert(AlertType.TribblesTradeIn, this);
+            game.setTribbleMessage(true);
+        }
     }
+
 
     private void Buy(int id) {
         Info(id);

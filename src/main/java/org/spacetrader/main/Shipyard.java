@@ -1,11 +1,11 @@
 package org.spacetrader.main;
 
-import java.util.ArrayList;
-
+import org.spacetrader.main.enums.ShipyardId;
 import org.spacetrader.main.enums.ShipyardSkill;
 import org.spacetrader.ship.ShipSize;
 import org.spacetrader.ship.ShipType;
-import org.spacetrader.main.enums.ShipyardId;
+
+import java.util.ArrayList;
 
 
 // Represents a shipyard orbiting a solar system in the universe.

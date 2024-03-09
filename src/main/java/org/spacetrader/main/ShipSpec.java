@@ -2,11 +2,11 @@ package org.spacetrader.main;
 
 import org.jwinforms.WfImage;
 import org.spacetrader.main.enums.Activity;
+import org.spacetrader.main.enums.TechLevel;
 import org.spacetrader.main.util.Hashtable;
 import org.spacetrader.ship.ShipSize;
 import org.spacetrader.ship.ShipType;
 import org.spacetrader.ship.equip.EquipmentType;
-import org.spacetrader.main.enums.TechLevel;
 
 
 public class ShipSpec extends STSerializableObject {

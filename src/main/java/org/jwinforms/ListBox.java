@@ -17,7 +17,7 @@ public class ListBox extends WinformControl {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
+
     public void setBorderStyle(BorderStyle borderStyle) {
         if (borderStyle != BorderStyle.FixedSingle) {
             throw new Error("Unknown border style");

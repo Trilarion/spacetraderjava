@@ -1,13 +1,7 @@
 package org.spacetrader.main;
 
-import java.util.Arrays;
-import java.util.Iterator;
-
 import org.jwinforms.WinformPane;
 import org.jwinforms.enums.DialogResult;
-import org.spacetrader.main.stub.ArrayList;
-import org.spacetrader.main.util.Hashtable;
-import org.spacetrader.main.util.Util;
 import org.spacetrader.Main;
 import org.spacetrader.cargo.CargoBuyOp;
 import org.spacetrader.cargo.CargoSellOp;
@@ -15,33 +9,20 @@ import org.spacetrader.cargo.TradeItem;
 import org.spacetrader.cargo.TradeItemType;
 import org.spacetrader.crew.CrewMemberId;
 import org.spacetrader.difficulty.Difficulty;
-import org.spacetrader.events.EncounterResult;
-import org.spacetrader.events.EncounterType;
-import org.spacetrader.events.NewsEvent;
-import org.spacetrader.events.SpecialEventType;
-import org.spacetrader.events.VeryRareEncounter;
+import org.spacetrader.events.*;
+import org.spacetrader.main.enums.*;
+import org.spacetrader.main.gui.*;
+import org.spacetrader.main.stub.ArrayList;
+import org.spacetrader.main.util.Hashtable;
+import org.spacetrader.main.util.Util;
 import org.spacetrader.ship.ShipSize;
 import org.spacetrader.ship.ShipType;
 import org.spacetrader.ship.equip.EquipmentType;
 import org.spacetrader.ship.equip.GadgetType;
 import org.spacetrader.ship.equip.ShieldType;
 import org.spacetrader.ship.equip.WeaponType;
-import org.spacetrader.main.enums.AlertType;
-import org.spacetrader.main.enums.GameEndType;
-import org.spacetrader.main.enums.OpponentType;
-import org.spacetrader.main.enums.PoliticalSystemType;
-import org.spacetrader.main.enums.ShipyardId;
-import org.spacetrader.main.enums.SkillType;
-import org.spacetrader.main.enums.SpecialResource;
-import org.spacetrader.main.enums.StarSystemId;
-import org.spacetrader.main.enums.SystemPressure;
-import org.spacetrader.main.enums.TechLevel;
-import org.spacetrader.main.gui.FormAlert;
-import org.spacetrader.main.gui.FormCargoBuy;
-import org.spacetrader.main.gui.FormCargoSell;
-import org.spacetrader.main.gui.FormEncounter;
-import org.spacetrader.main.gui.FormJettison;
-import org.spacetrader.main.gui.FormPlunder;
+
+import java.util.Arrays;
 
 
 public class Game extends STSerializableObject {
@@ -87,7 +68,7 @@ public class Game extends STSerializableObject {
     private int _questStatusDragonfly = 0; // 0 = not available, 1 = Go to Baratas, 2 = Go to Melina, 3 = Go to Regulas, 4 = Go to Zalkon, 5 = Dragonfly destroyed, 6 = Got Shield
     private int _questStatusExperiment = 0; // 0 = not given yet, 1-11 = days from start; 12 = performed, 13 = cancelled
     private int _questStatusGemulon = 0; // 0 = not given yet, 1-7 = days from start, 8 = too late, 9 = in time, 10 = done
-    private int _questStatusJapori = 0; // 0 = no disease, 1 = Go to Japori (always at least 10 medicine cannisters), 2 = Assignment finished or canceled
+    private int _questStatusJapori = 0; // 0 = no disease, 1 = Go to Japori (always at least 10 medicine canisters), 2 = Assignment finished or canceled
     private int _questStatusJarek = 0; // 0 = not delivered, 1-11 = on board, 12 = delivered
     private int _questStatusMoon = 0; // 0 = not bought, 1 = bought, 2 = claimed
     private int _questStatusPrincess = 0; // 0 = not available, 1 = Go to Centauri, 2 = Go to Inthara, 3 = Go to Qonos, 4 = Princess Rescued, 5-14 = On Board, 15 = Princess Returned, 16 = Got Quantum Disruptor
@@ -140,7 +121,7 @@ public class Game extends STSerializableObject {
         }
     }
 
-    @SuppressWarnings("unchecked")
+
     public Game(Hashtable hash, Main parentWin) {
         super(hash);
         game = Game.CurrentGame();
@@ -3393,19 +3374,19 @@ public class Game extends STSerializableObject {
     }
 
     public void SelectNextSystemWithinRange(boolean forward) {
-        int[] dest = Destinations();
-        if (dest.length > 0) {
-            int index = Util.BruteSeek(dest, _warpSystemId.CastToInt());
+        int[] destinations = Destinations();
+        if (destinations.length > 0) {
+            int index = Util.BruteSeek(destinations, _warpSystemId.CastToInt());
             if (index < 0) {
-                index = forward ? 0 : dest.length - 1;
+                index = forward ? 0 : destinations.length - 1;
             } else {
-                index = (dest.length + index + (forward ? 1 : -1)) % dest.length;
+                index = (destinations.length + index + (forward ? 1 : -1)) % destinations.length;
             }
-            if (Functions.WormholeExists(cmdr.CurrentSystem(), _universe[dest[index]])) {
+            if (Functions.WormholeExists(cmdr.CurrentSystem(), _universe[destinations[index]])) {
                 SelectedSystemId(cmdr.getCurrentSystemId());
                 TargetWormhole(true);
             } else {
-                SelectedSystemId(StarSystemId.FromInt(dest[index]));
+                SelectedSystemId(StarSystemId.FromInt(destinations[index]));
             }
         }
     }

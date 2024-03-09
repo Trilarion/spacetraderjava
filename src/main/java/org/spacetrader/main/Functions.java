@@ -1,19 +1,9 @@
 package org.spacetrader.main;
 
-import java.awt.Color;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Random;
-
 import org.jwinforms.Graphics;
-import org.jwinforms.GraphicsUnit;
 import org.jwinforms.Rectangle;
-import org.jwinforms.WfBitmap;
-import org.jwinforms.WfImage;
-import org.jwinforms.WinformPane;
+import org.jwinforms.*;
+import org.spacetrader.difficulty.Difficulty;
 import org.spacetrader.main.enums.AlertType;
 import org.spacetrader.main.gui.FormAlert;
 import org.spacetrader.main.stub.ArrayList;
@@ -23,7 +13,10 @@ import org.spacetrader.main.stub.SerializationException;
 import org.spacetrader.main.util.Hashtable;
 import org.spacetrader.main.util.Log;
 import org.spacetrader.main.util.Util;
-import org.spacetrader.difficulty.Difficulty;
+
+import java.awt.*;
+import java.io.*;
+import java.util.Random;
 
 
 public class Functions {

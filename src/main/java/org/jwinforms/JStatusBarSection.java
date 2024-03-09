@@ -1,8 +1,7 @@
-package org.spacetrader.swingextra;
+package org.jwinforms;
 
-import javax.swing.BorderFactory;
 import javax.swing.Icon;
-import javax.swing.JLabel;
+import javax.swing.*;
 
 
 public class JStatusBarSection extends JLabel {

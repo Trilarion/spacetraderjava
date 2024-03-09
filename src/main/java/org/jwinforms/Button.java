@@ -62,7 +62,5 @@ public class Button extends WinformControl {
             default:
                 throw new Error("Unknown FlatStyle");
         }
-        // I think this is default.
-        //asJButtton().setBorder(BorderFactory.createRaisedBevelBorder());
     }
 }

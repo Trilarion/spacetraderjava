@@ -1,42 +1,22 @@
 package org.spacetrader.main.gui;
 
-import java.awt.Point;
-
 import org.jwinforms.Button;
-import org.jwinforms.EventArgs;
-import org.jwinforms.EventHandler;
 import org.jwinforms.Font;
-import org.jwinforms.FormSize;
-import org.jwinforms.GraphicsUnit;
-import org.jwinforms.GroupBox;
 import org.jwinforms.Label;
-import org.jwinforms.ListBox;
-import org.jwinforms.WinformForm;
-import org.jwinforms.enums.BorderStyle;
-import org.jwinforms.enums.DialogResult;
-import org.jwinforms.enums.FlatStyle;
-import org.jwinforms.enums.FontStyle;
-import org.jwinforms.enums.FormBorderStyle;
-import org.jwinforms.enums.FormStartPosition;
-import org.spacetrader.main.enums.AlertType;
+import org.jwinforms.*;
+import org.jwinforms.enums.*;
 import org.spacetrader.crew.CrewMemberId;
-import org.spacetrader.main.Commander;
-import org.spacetrader.main.CrewMember;
-import org.spacetrader.main.Functions;
-import org.spacetrader.main.Game;
-import org.spacetrader.main.Ship;
-import org.spacetrader.main.Strings;
+import org.spacetrader.main.*;
+import org.spacetrader.main.enums.AlertType;
+
+import java.awt.*;
 
 
 public class FormViewPersonnel extends WinformForm {
     private final Game game = Game.CurrentGame();
     private final Commander cmdr = game.Commander();
     private final Ship ship = cmdr.getShip();
-    private Button btnClose;
     private Button btnHireFire;
-    private GroupBox boxForHire;
-    private GroupBox boxInfo;
-    private GroupBox boxCurrentCrew;
     private Label lblRate;
     private Label lblName;
     private Label lblEngineer;
@@ -55,18 +35,12 @@ public class FormViewPersonnel extends WinformForm {
     private boolean handlingSelect = false;
 
     public FormViewPersonnel() {
-        InitializeComponent();
-        UpdateAll();
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
-        btnClose = new Button();
-        boxCurrentCrew = new GroupBox();
+        Button btnClose = new Button();
+        GroupBox boxCurrentCrew = new GroupBox();
         lstCrew = new ListBox();
-        boxForHire = new GroupBox();
+        GroupBox boxForHire = new GroupBox();
         lstForHire = new ListBox();
-        boxInfo = new GroupBox();
+        GroupBox boxInfo = new GroupBox();
         btnHireFire = new Button();
         lblRate = new Label();
         lblName = new Label();
@@ -275,7 +249,9 @@ public class FormViewPersonnel extends WinformForm {
         boxForHire.ResumeLayout(false);
         boxInfo.ResumeLayout(false);
         ResumeLayout(false);
+        UpdateAll();
     }
+
 
     private void DeselectAll() {
         lstForHire.clearSelected();

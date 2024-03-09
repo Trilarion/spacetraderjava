@@ -1,40 +1,18 @@
 package org.spacetrader.main.gui;
 
-import java.awt.Point;
-import java.util.Arrays;
-
 import org.jwinforms.Button;
-import org.jwinforms.ComboBox;
-import org.jwinforms.EventArgs;
-import org.jwinforms.EventHandler;
-import org.jwinforms.FormSize;
-import org.jwinforms.ISupportInitialize;
 import org.jwinforms.Label;
-import org.jwinforms.NumericUpDown;
-import org.jwinforms.TextBox;
-import org.jwinforms.WinformForm;
-import org.jwinforms.enums.ComboBoxStyle;
-import org.jwinforms.enums.ContentAlignment;
-import org.jwinforms.enums.DialogResult;
-import org.jwinforms.enums.FlatStyle;
-import org.jwinforms.enums.FormBorderStyle;
-import org.jwinforms.enums.FormStartPosition;
-import org.jwinforms.enums.HorizontalAlignment;
+import org.jwinforms.*;
+import org.jwinforms.enums.*;
 import org.spacetrader.difficulty.Difficulty;
+
+import java.awt.*;
+import java.util.Arrays;
 
 
 public class FormNewCommander extends WinformForm {
-    private Button btnClose;
     private Button btnOk;
     private ComboBox selDifficulty;
-    private Label lblName;
-    private Label lblDifficulty;
-    private Label lblSkillPoints;
-    private Label lblPilot;
-    private Label lblFighter;
-    private Label lblTrader;
-    private Label lblEngineer;
-    private Label lblPointsRemaining;
     private Label lblPoints;
     private NumericUpDown numFighter;
     private NumericUpDown numTrader;
@@ -43,28 +21,22 @@ public class FormNewCommander extends WinformForm {
     private TextBox txtName;
 
     public FormNewCommander() {
-        InitializeComponent();
-        selDifficulty.setSelectedIndex(2);
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
-        lblName = new Label();
+        Label lblName = new Label();
         txtName = new TextBox();
-        btnClose = new Button();
-        lblDifficulty = new Label();
-        lblSkillPoints = new Label();
-        lblPilot = new Label();
-        lblFighter = new Label();
-        lblTrader = new Label();
-        lblEngineer = new Label();
+        Button btnClose = new Button();
+        Label lblDifficulty = new Label();
+        Label lblSkillPoints = new Label();
+        Label lblPilot = new Label();
+        Label lblFighter = new Label();
+        Label lblTrader = new Label();
+        Label lblEngineer = new Label();
         selDifficulty = new ComboBox();
         numPilot = new NumericUpDown();
         numFighter = new NumericUpDown();
         numTrader = new NumericUpDown();
         numEngineer = new NumericUpDown();
         btnOk = new Button();
-        lblPointsRemaining = new Label();
+        Label lblPointsRemaining = new Label();
         lblPoints = new Label();
         ((ISupportInitialize) (numPilot)).BeginInit();
         ((ISupportInitialize) (numFighter)).BeginInit();
@@ -299,7 +271,9 @@ public class FormNewCommander extends WinformForm {
         ((ISupportInitialize) (numTrader)).EndInit();
         ((ISupportInitialize) (numEngineer)).EndInit();
         ResumeLayout(false);
+        selDifficulty.setSelectedIndex(2);
     }
+
 
     private void UpdateOkEnabled() {
         btnOk.setEnabled(lblPoints.getText().equals("0") && !txtName.getText().isEmpty());

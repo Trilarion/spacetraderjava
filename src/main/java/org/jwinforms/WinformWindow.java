@@ -11,14 +11,12 @@ import java.awt.*;
 public class WinformWindow extends WinformControl implements WinformPane {
     protected final WinformJPanel Controls;
     private final JFrame frame;
-    private final WinformJPanel panel;
     protected Integer Left, Top;
     protected FormWindowState WindowState;
     DialogResult result;
     // Must encapsulate most of these.
     private FormSize AutoScaleBaseSize;
     private FormBorderStyle FormBorderStyle;
-    private Icon Icon;
     private boolean ControlBox;
     private boolean MinimizeBox;
     private boolean MaximizeBox;
@@ -31,7 +29,7 @@ public class WinformWindow extends WinformControl implements WinformPane {
         super(new JFrame());
         frame = (JFrame) swingVersion;
         // panel = (WinformJPanel)swingVersion;
-        panel = new WinformJPanel(this);
+        WinformJPanel panel = new WinformJPanel(this);
         frame.getContentPane().add(panel, BorderLayout.CENTER);
         Controls = panel;
         frame.setResizable(false);
@@ -125,8 +123,7 @@ public class WinformWindow extends WinformControl implements WinformPane {
     }
 
     public void setIcon(Icon icon) {
-        Icon = icon;
-//		Image icon = Toolkit.getDefaultToolkit().getImage("icon.gif");
+        //		Image icon = Toolkit.getDefaultToolkit().getImage("icon.gif");
         frame.setIconImage(icon.asSwingImage());
     }
 

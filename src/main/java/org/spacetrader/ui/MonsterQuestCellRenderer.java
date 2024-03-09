@@ -10,7 +10,6 @@ import javax.swing.LayoutStyle.ComponentPlacement;
  */
 public class MonsterQuestCellRenderer extends JPanel implements ListCellRenderer<MonsterQuestData> {
     private static final long serialVersionUID = 1L;
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private JLabel jLabel1;
     private JLabel jLabel2;
 
@@ -70,6 +69,5 @@ public class MonsterQuestCellRenderer extends JPanel implements ListCellRenderer
                                 .addComponent(jLabel1)
                                 .addComponent(jLabel2))
         );
-    }// </editor-fold>//GEN-END:initComponents
-    // End of variables declaration//GEN-END:variables
+    }
 }

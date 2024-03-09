@@ -15,92 +15,44 @@ import java.awt.*;
 
 public class FormPlunder extends WinformForm {
     private final Game game = Game.CurrentGame();
-    private Button btnPlunderAll9;
-    private Button btnPlunderQty9;
-    private Button btnPlunderAll8;
-    private Button btnPlunderQty8;
-    private Button btnPlunderAll7;
-    private Button btnPlunderQty7;
-    private Button btnPlunderAll6;
-    private Button btnPlunderQty6;
-    private Button btnPlunderAll5;
-    private Button btnPlunderQty5;
-    private Button btnPlunderAll4;
-    private Button btnPlunderQty4;
-    private Button btnPlunderAll3;
-    private Button btnPlunderQty3;
-    private Button btnPlunderAll2;
-    private Button btnPlunderQty2;
-    private Button btnPlunderAll1;
-    private Button btnPlunderQty1;
-    private Button btnPlunderAll0;
-    private Button btnPlunderQty0;
-    private Button btnDone;
-    private Button btnJettison;
     private Button[] btnPlunderQty;
-    private Button[] btnPlunderAll;
-    private Label lblTradeCommodity9;
-    private Label lblTradeCommodity8;
-    private Label lblTradeCommodity2;
-    private Label lblTradeCommodity0;
-    private Label lblTradeCommodity1;
-    private Label lblTradeCommodity6;
-    private Label lblTradeCommodity5;
-    private Label lblTradeCommodity4;
-    private Label lblTradeCommodity3;
-    private Label lblTradeCommodity7;
-    private Label lblBaysLabel;
     private Label lblBays;
 
     public FormPlunder() {
-        InitializeComponent();
-        btnPlunderQty = new Button[]{
-                btnPlunderQty0, btnPlunderQty1, btnPlunderQty2, btnPlunderQty3, btnPlunderQty4,
-                btnPlunderQty5, btnPlunderQty6, btnPlunderQty7, btnPlunderQty8, btnPlunderQty9
-        };
-        btnPlunderAll = new Button[]{
-                btnPlunderAll0, btnPlunderAll1, btnPlunderAll2, btnPlunderAll3, btnPlunderAll4,
-                btnPlunderAll5, btnPlunderAll6, btnPlunderAll7, btnPlunderAll8, btnPlunderAll9
-        };
-        UpdateAll();
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
-        btnPlunderAll9 = new Button();
-        btnPlunderQty9 = new Button();
-        btnPlunderAll8 = new Button();
-        btnPlunderQty8 = new Button();
-        btnPlunderAll7 = new Button();
-        btnPlunderQty7 = new Button();
-        btnPlunderAll6 = new Button();
-        btnPlunderQty6 = new Button();
-        btnPlunderAll5 = new Button();
-        btnPlunderQty5 = new Button();
-        btnPlunderAll4 = new Button();
-        btnPlunderQty4 = new Button();
-        btnPlunderAll3 = new Button();
-        btnPlunderQty3 = new Button();
-        btnPlunderAll2 = new Button();
-        btnPlunderQty2 = new Button();
-        btnPlunderAll1 = new Button();
-        btnPlunderQty1 = new Button();
-        btnPlunderAll0 = new Button();
-        btnPlunderQty0 = new Button();
-        lblTradeCommodity9 = new Label();
-        lblTradeCommodity8 = new Label();
-        lblTradeCommodity2 = new Label();
-        lblTradeCommodity0 = new Label();
-        lblTradeCommodity1 = new Label();
-        lblTradeCommodity6 = new Label();
-        lblTradeCommodity5 = new Label();
-        lblTradeCommodity4 = new Label();
-        lblTradeCommodity3 = new Label();
-        lblTradeCommodity7 = new Label();
-        lblBaysLabel = new Label();
+        Button btnPlunderAll9 = new Button();
+        Button btnPlunderQty9 = new Button();
+        Button btnPlunderAll8 = new Button();
+        Button btnPlunderQty8 = new Button();
+        Button btnPlunderAll7 = new Button();
+        Button btnPlunderQty7 = new Button();
+        Button btnPlunderAll6 = new Button();
+        Button btnPlunderQty6 = new Button();
+        Button btnPlunderAll5 = new Button();
+        Button btnPlunderQty5 = new Button();
+        Button btnPlunderAll4 = new Button();
+        Button btnPlunderQty4 = new Button();
+        Button btnPlunderAll3 = new Button();
+        Button btnPlunderQty3 = new Button();
+        Button btnPlunderAll2 = new Button();
+        Button btnPlunderQty2 = new Button();
+        Button btnPlunderAll1 = new Button();
+        Button btnPlunderQty1 = new Button();
+        Button btnPlunderAll0 = new Button();
+        Button btnPlunderQty0 = new Button();
+        Label lblTradeCommodity9 = new Label();
+        Label lblTradeCommodity8 = new Label();
+        Label lblTradeCommodity2 = new Label();
+        Label lblTradeCommodity0 = new Label();
+        Label lblTradeCommodity1 = new Label();
+        Label lblTradeCommodity6 = new Label();
+        Label lblTradeCommodity5 = new Label();
+        Label lblTradeCommodity4 = new Label();
+        Label lblTradeCommodity3 = new Label();
+        Label lblTradeCommodity7 = new Label();
+        Label lblBaysLabel = new Label();
         lblBays = new Label();
-        btnDone = new Button();
-        btnJettison = new Button();
+        Button btnDone = new Button();
+        Button btnJettison = new Button();
         SuspendLayout();
         // btnPlunderAll9
         btnPlunderAll9.setFlatStyle(FlatStyle.Flat);
@@ -514,7 +466,17 @@ public class FormPlunder extends WinformForm {
         setText("Plunder Cargo");
         ResumeLayout(false);
         PerformLayout();
+        btnPlunderQty = new Button[]{
+                btnPlunderQty0, btnPlunderQty1, btnPlunderQty2, btnPlunderQty3, btnPlunderQty4,
+                btnPlunderQty5, btnPlunderQty6, btnPlunderQty7, btnPlunderQty8, btnPlunderQty9
+        };
+        Button[] btnPlunderAll = new Button[]{
+                btnPlunderAll0, btnPlunderAll1, btnPlunderAll2, btnPlunderAll3, btnPlunderAll4,
+                btnPlunderAll5, btnPlunderAll6, btnPlunderAll7, btnPlunderAll8, btnPlunderAll9
+        };
+        UpdateAll();
     }
+
 
     private void Plunder(int tradeItem, boolean all) {
         game.CargoPlunder(tradeItem, all, this);

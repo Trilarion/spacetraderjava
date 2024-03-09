@@ -1,98 +1,36 @@
 package org.spacetrader;
 
-import java.awt.Color;
-import java.awt.Point;
-import java.util.Arrays;
-import java.util.Iterator;
-import javax.swing.UIManager;
-
-import org.jwinforms.Brush;
 import org.jwinforms.Button;
-import org.jwinforms.CancelEventArgs;
 import org.jwinforms.Container;
-import org.jwinforms.EventArgs;
-import org.jwinforms.EventHandler;
 import org.jwinforms.Font;
-import org.jwinforms.FormSize;
-import org.jwinforms.GraphicsUnit;
-import org.jwinforms.GroupBox;
-import org.jwinforms.IContainer;
-import org.jwinforms.ISupportInitialize;
 import org.jwinforms.Icon;
-import org.jwinforms.ImageList;
-import org.jwinforms.ImageListStreamer;
 import org.jwinforms.Label;
-import org.jwinforms.MainMenu;
 import org.jwinforms.MenuItem;
-import org.jwinforms.MouseButtons;
-import org.jwinforms.MouseEventArgs;
-import org.jwinforms.OpenFileDialog;
-import org.jwinforms.PaintEventArgs;
-import org.jwinforms.Pen;
-import org.jwinforms.PictureBox;
-import org.jwinforms.ResourceManager;
-import org.jwinforms.SaveFileDialog;
-import org.jwinforms.Shortcut;
-import org.jwinforms.SizeF;
-import org.jwinforms.SolidBrush;
-import org.jwinforms.StatusBar;
-import org.jwinforms.StatusBarPanel;
-import org.jwinforms.StatusBarPanelClickEventArgs;
-import org.jwinforms.SubMenu;
-import org.jwinforms.SystemColors;
-import org.jwinforms.ToolTip;
-import org.jwinforms.WfImage;
-import org.jwinforms.WinformWindow;
+import org.jwinforms.*;
 import org.jwinforms.enums.*;
 import org.spacetrader.crew.CrewMemberId;
 import org.spacetrader.events.VeryRareEncounter;
-import org.spacetrader.ship.ShipType;
-import org.spacetrader.ship.equip.Gadget;
-import org.spacetrader.ship.equip.Shield;
-import org.spacetrader.ship.equip.Weapon;
-import org.spacetrader.main.Commander;
-import org.spacetrader.main.Constants;
-import org.spacetrader.main.CrewMember;
-import org.spacetrader.main.Functions;
-import org.spacetrader.main.FutureVersionException;
-import org.spacetrader.main.Game;
-import org.spacetrader.main.GameEndException;
-import org.spacetrader.main.HighScoreRecord;
-import org.spacetrader.main.STSerializableObject;
-import org.spacetrader.main.Ship;
-import org.spacetrader.main.SpecialEvent;
-import org.spacetrader.main.StarSystem;
-import org.spacetrader.main.Strings;
+import org.spacetrader.main.*;
 import org.spacetrader.main.enums.AlertType;
 import org.spacetrader.main.enums.GameEndType;
 import org.spacetrader.main.enums.StarSystemId;
-import org.spacetrader.main.gui.FormAbout;
-import org.spacetrader.main.gui.FormAlert;
-import org.spacetrader.main.gui.FormBuyFuel;
-import org.spacetrader.main.gui.FormBuyRepairs;
-import org.spacetrader.main.gui.FormCosts;
-import org.spacetrader.main.gui.FormEquipment;
-import org.spacetrader.main.gui.FormFind;
-import org.spacetrader.main.gui.FormMonster;
-import org.spacetrader.main.gui.FormNewCommander;
-import org.spacetrader.main.gui.FormOptions;
-import org.spacetrader.main.gui.FormShipList;
-import org.spacetrader.main.gui.FormShipyard;
-import org.spacetrader.main.gui.FormTest;
-import org.spacetrader.main.gui.FormViewBank;
-import org.spacetrader.main.gui.FormViewCommander;
-import org.spacetrader.main.gui.FormViewHighScores;
-import org.spacetrader.main.gui.FormViewPersonnel;
-import org.spacetrader.main.gui.FormViewQuests;
-import org.spacetrader.main.gui.FormViewShip;
-import org.spacetrader.main.gui.SomeStringsForSwitch;
+import org.spacetrader.main.gui.*;
 import org.spacetrader.main.stub.Directory;
 import org.spacetrader.main.stub.RegistryKey;
 import org.spacetrader.main.util.Hashtable;
 import org.spacetrader.main.util.Util;
+import org.spacetrader.ship.ShipType;
+import org.spacetrader.ship.equip.Gadget;
+import org.spacetrader.ship.equip.Shield;
+import org.spacetrader.ship.equip.Weapon;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Arrays;
 
 
 public class Main extends WinformWindow {
+
     private final Label[] lblSellPrice;
     private final Label[] lblBuyPrice;
     private final Label[] lblTargetPrice;
@@ -107,14 +45,6 @@ public class Main extends WinformWindow {
     private final int OFF_X = 3;
     private final int OFF_Y = 3;
     private final int OFF_X_WORM = OFF_X + 1;
-    private final int IMG_G_N = 0;
-    private final int IMG_G_V = 1;
-    private final int IMG_G_W = 2;
-    private final int IMG_S_N = 3;
-    //  private final int IMG_S_NS = 4;
-    private final int IMG_S_V = 5;
-    //  private final int IMG_S_VS = 6;
-    private final int IMG_S_W = 7;
     private final Pen DEFAULT_PEN = new Pen(Color.black);
     private final Brush DEFAULT_BRUSH = new SolidBrush(Color.white);
     private Button btnDesign;
@@ -126,46 +56,6 @@ public class Main extends WinformWindow {
     private Button btnBuyShip;
     private Button btnEquip;
     private Button btnPod;
-    private Button btnBuyMax0;
-    private Button btnBuyQty0;
-    private Button btnSellQty0;
-    private Button btnSellAll0;
-    private Button btnBuyMax1;
-    private Button btnBuyQty1;
-    private Button btnSellQty1;
-    private Button btnSellAll1;
-    private Button btnSellQty2;
-    private Button btnSellAll2;
-    private Button btnBuyQty2;
-    private Button btnBuyMax2;
-    private Button btnSellQty3;
-    private Button btnSellAll3;
-    private Button btnBuyQty3;
-    private Button btnBuyMax3;
-    private Button btnSellQty4;
-    private Button btnSellAll4;
-    private Button btnBuyQty4;
-    private Button btnBuyMax4;
-    private Button btnSellQty5;
-    private Button btnSellAll5;
-    private Button btnBuyQty5;
-    private Button btnBuyMax5;
-    private Button btnSellQty6;
-    private Button btnSellAll6;
-    private Button btnBuyQty6;
-    private Button btnBuyMax6;
-    private Button btnSellQty7;
-    private Button btnSellAll7;
-    private Button btnBuyQty7;
-    private Button btnBuyMax7;
-    private Button btnSellQty8;
-    private Button btnSellAll8;
-    private Button btnBuyQty8;
-    private Button btnBuyMax8;
-    private Button btnSellQty9;
-    private Button btnSellAll9;
-    private Button btnBuyQty9;
-    private Button btnBuyMax9;
     private Button btnJump;
     private Button btnFind;
     private Button btnPrevSystem;
@@ -177,16 +67,6 @@ public class Main extends WinformWindow {
     private ImageList ilEquipmentImages;
     private ImageList ilShipImages;
     private Label lblBuy;
-    private Label lblBuyPrice0;
-    private Label lblBuyPrice1;
-    private Label lblBuyPrice2;
-    private Label lblBuyPrice3;
-    private Label lblBuyPrice4;
-    private Label lblBuyPrice5;
-    private Label lblBuyPrice6;
-    private Label lblBuyPrice7;
-    private Label lblBuyPrice8;
-    private Label lblBuyPrice9;
     private Label lblEquipForSale;
     private Label lblEscapePod;
     private Label lblFuelCost;
@@ -194,239 +74,90 @@ public class Main extends WinformWindow {
     private Label lblHullStatus;
     private Label lblRepairCost;
     private Label lblSell;
-    private Label lblSellPrice0;
-    private Label lblSellPrice1;
-    private Label lblSellPrice2;
-    private Label lblSellPrice3;
-    private Label lblSellPrice4;
-    private Label lblSellPrice5;
-    private Label lblSellPrice6;
-    private Label lblSellPrice7;
-    private Label lblSellPrice8;
-    private Label lblSellPrice9;
     private Label lblShipsForSale;
-    private Label lblSystemGovtLabel;
     private Label lblSystemName;
     private Label lblSystemNameLabel;
     private Label lblSystemPirates;
-    private Label lblSystemPiratesLabel;
     private Label lblSystemPolice;
-    private Label lblSystemPoliceLabel;
     private Label lblSystemPolSys;
     private Label lblSystemPressure;
     private Label lblSystemPressurePre;
     private Label lblSystemResource;
-    private Label lblSystemResourseLabel;
     private Label lblSystemSize;
-    private Label lblSystemSizeLabel;
     private Label lblSystemTech;
-    private Label lblSystemTechLabel;
-    private Label lblTargetDiff0;
-    private Label lblTargetDiff1;
-    private Label lblTargetDiff2;
-    private Label lblTargetDiff3;
-    private Label lblTargetDiff4;
-    private Label lblTargetDiff5;
-    private Label lblTargetDiff6;
-    private Label lblTargetDiff7;
-    private Label lblTargetDiff8;
-    private Label lblTargetDiff9;
-    private Label lblTargetDiffLabel;
     private Label lblTargetDistance;
-    private Label lblTargetDistanceLabel;
-    private Label lblTargetGovtLabel;
     private Label lblTargetName;
-    private Label lblTargetNameLabel;
     private Label lblTargetOutOfRange;
-    private Label lblTargetPct0;
-    private Label lblTargetPct1;
-    private Label lblTargetPct2;
-    private Label lblTargetPct3;
-    private Label lblTargetPct4;
-    private Label lblTargetPct5;
-    private Label lblTargetPct6;
-    private Label lblTargetPct7;
-    private Label lblTargetPct8;
-    private Label lblTargetPct9;
-    private Label lblTargetPctLabel;
     private Label lblTargetPirates;
-    private Label lblTargetPiratesLabel;
     private Label lblTargetPolice;
-    private Label lblTargetPoliceLabel;
     private Label lblTargetPolSys;
-    private Label lblTargetPrice0;
-    private Label lblTargetPrice1;
-    private Label lblTargetPrice2;
-    private Label lblTargetPrice3;
-    private Label lblTargetPrice4;
-    private Label lblTargetPrice5;
-    private Label lblTargetPrice6;
-    private Label lblTargetPrice7;
-    private Label lblTargetPrice8;
-    private Label lblTargetPrice9;
-    private Label lblTargetPriceLabel;
     private Label lblTargetResource;
-    private Label lblTargetResourceLabel;
     private Label lblTargetSize;
     private Label lblTargetTech;
-    private Label lblTargetTechLabel;
-    private Label lblTargetSizeLabel;
-    private Label lblTradeCommodity0;
-    private Label lblTradeCommodity1;
-    private Label lblTradeCommodity2;
-    private Label lblTradeCommodity3;
-    private Label lblTradeCommodity4;
-    private Label lblTradeCommodity5;
-    private Label lblTradeCommodity6;
-    private Label lblTradeCommodity7;
-    private Label lblTradeCommodity8;
-    private Label lblTradeCommodity9;
-    private Label lblTradeTarget;
     private Label lblWormhole;
     private Label lblWormholeLabel;
-    private GroupBox boxCargo;
-    private GroupBox boxDock;
-    private GroupBox boxGalacticChart;
-    private GroupBox boxShipYard;
-    private GroupBox boxShortRangeChart;
-    private GroupBox boxSystem;
-    private GroupBox boxTargetSystem;
-    private MainMenu mnuMain;
-    private SubMenu mnuGame;
-    private MenuItem mnuGameExit;
-    private MenuItem mnuGameLine1;
-    private MenuItem mnuGameLine2;
-    private MenuItem mnuGameLoad;
-    private MenuItem mnuGameNew;
     private MenuItem mnuGameSave;
     private MenuItem mnuGameSaveAs;
-    private SubMenu mnuHelp;
-    private MenuItem mnuHelpAbout;
-    private MenuItem mnuHighScores;
-    private MenuItem mnuOptions;
     private MenuItem mnuRetire;
-    private SubMenu mnuView;
     private MenuItem mnuViewBank;
     private MenuItem mnuViewCommander;
-    private MenuItem mnuViewLine1;
-    private MenuItem mnuViewLine2;
     private MenuItem mnuViewPersonnel;
     private MenuItem mnuViewQuests;
     private MenuItem mnuViewShip;
     private OpenFileDialog dlgOpen;
-    private PictureBox picCargoLine0;
-    private PictureBox picCargoLine1;
-    private PictureBox picCargoLine2;
-    private PictureBox picCargoLine3;
     private PictureBox picGalacticChart;
-    private PictureBox picLine;
     private PictureBox picShortRangeChart;
     private SaveFileDialog dlgSave;
-    private StatusBar statusBar;
     private StatusBarPanel statusBarPanelBays;
     private StatusBarPanel statusBarPanelCash;
     private StatusBarPanel statusBarPanelCosts;
     private StatusBarPanel statusBarPanelExtra;
     private ToolTip tipSpecial;
     private ToolTip tipMerc;
-    private IContainer components;
     private Game game = null;
     private Commander cmdr = null;
     private String SaveGameFile = null;
     private int SaveGameDays = -1;
 
-    public Main(String s) {
-        InitializeComponent();
-        InitFileStructure();
-        lblSellPrice = new Label[]{
-                lblSellPrice0, lblSellPrice1, lblSellPrice2, lblSellPrice3, lblSellPrice4,
-                lblSellPrice5, lblSellPrice6, lblSellPrice7, lblSellPrice8, lblSellPrice9
-        };
-        lblBuyPrice = new Label[]{
-                lblBuyPrice0, lblBuyPrice1, lblBuyPrice2, lblBuyPrice3, lblBuyPrice4,
-                lblBuyPrice5, lblBuyPrice6, lblBuyPrice7, lblBuyPrice8, lblBuyPrice9
-        };
-        lblTargetPrice = new Label[]{
-                lblTargetPrice0, lblTargetPrice1, lblTargetPrice2, lblTargetPrice3, lblTargetPrice4,
-                lblTargetPrice5, lblTargetPrice6, lblTargetPrice7, lblTargetPrice8, lblTargetPrice9
-        };
-        lblTargetDiff = new Label[]{
-                lblTargetDiff0, lblTargetDiff1, lblTargetDiff2, lblTargetDiff3, lblTargetDiff4,
-                lblTargetDiff5, lblTargetDiff6, lblTargetDiff7, lblTargetDiff8, lblTargetDiff9
-        };
-        lblTargetPct = new Label[]{
-                lblTargetPct0, lblTargetPct1, lblTargetPct2, lblTargetPct3, lblTargetPct4,
-                lblTargetPct5, lblTargetPct6, lblTargetPct7, lblTargetPct8, lblTargetPct9
-        };
-        btnSellQty = new Button[]{
-                btnSellQty0, btnSellQty1, btnSellQty2, btnSellQty3, btnSellQty4,
-                btnSellQty5, btnSellQty6, btnSellQty7, btnSellQty8, btnSellQty9
-        };
-        btnSellAll = new Button[]{
-                btnSellAll0, btnSellAll1, btnSellAll2, btnSellAll3, btnSellAll4,
-                btnSellAll5, btnSellAll6, btnSellAll7, btnSellAll8, btnSellAll9
-        };
-        btnBuyQty = new Button[]{
-                btnBuyQty0, btnBuyQty1, btnBuyQty2, btnBuyQty3, btnBuyQty4,
-                btnBuyQty5, btnBuyQty6, btnBuyQty7, btnBuyQty8, btnBuyQty9
-        };
-        btnBuyMax = new Button[]{
-                btnBuyMax0, btnBuyMax1, btnBuyMax2, btnBuyMax3, btnBuyMax4,
-                btnBuyMax5, btnBuyMax6, btnBuyMax7, btnBuyMax8, btnBuyMax9
-        };
-        if (s != null) {
-            LoadGame(s);
-        }
-        Main.this.UpdateAll();
-    }
-
-    public static void main(String[] s) throws Exception {
-        UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        UIManager.put("swing.boldMetal", Boolean.FALSE);
-        Main st = new Main(s.length > 0 ? s[0] : null);
-        st.ShowWindow();
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
-        components = new Container();
+    public Main() {
+        IContainer components = new Container();
         ResourceManager resources = new ResourceManager(Main.class);
-        mnuMain = new MainMenu();
-        mnuGame = new SubMenu();
-        mnuGameNew = new MenuItem();
-        mnuGameLoad = new MenuItem();
+        MainMenu mnuMain = new MainMenu();
+        SubMenu mnuGame = new SubMenu();
+        MenuItem mnuGameNew = new MenuItem();
+        MenuItem mnuGameLoad = new MenuItem();
         mnuGameSave = new MenuItem();
         mnuGameSaveAs = new MenuItem();
-        mnuGameLine1 = new MenuItem();
+        MenuItem mnuGameLine1 = new MenuItem();
         mnuRetire = new MenuItem();
-        mnuGameLine2 = new MenuItem();
-        mnuGameExit = new MenuItem();
-        mnuView = new SubMenu();
+        MenuItem mnuGameLine2 = new MenuItem();
+        MenuItem mnuGameExit = new MenuItem();
+        SubMenu mnuView = new SubMenu();
         mnuViewCommander = new MenuItem();
         mnuViewShip = new MenuItem();
         mnuViewPersonnel = new MenuItem();
         mnuViewQuests = new MenuItem();
         mnuViewBank = new MenuItem();
-        mnuViewLine1 = new MenuItem();
-        mnuHighScores = new MenuItem();
-        mnuViewLine2 = new MenuItem();
-        mnuOptions = new MenuItem();
-        mnuHelp = new SubMenu();
-        mnuHelpAbout = new MenuItem();
+        MenuItem mnuViewLine1 = new MenuItem();
+        MenuItem mnuHighScores = new MenuItem();
+        MenuItem mnuViewLine2 = new MenuItem();
+        MenuItem mnuOptions = new MenuItem();
+        SubMenu mnuHelp = new SubMenu();
+        MenuItem mnuHelpAbout = new MenuItem();
         picGalacticChart = new PictureBox();
         picShortRangeChart = new PictureBox();
-        statusBar = new StatusBar();
+        StatusBar statusBar = new StatusBar();
         statusBarPanelCash = new StatusBarPanel();
         statusBarPanelBays = new StatusBarPanel();
         statusBarPanelCosts = new StatusBarPanel();
         statusBarPanelExtra = new StatusBarPanel(StatusBarPanelAutoSize.Spring);
-        boxShortRangeChart = new GroupBox();
-        boxGalacticChart = new GroupBox();
+        GroupBox boxShortRangeChart = new GroupBox();
+        GroupBox boxGalacticChart = new GroupBox();
         lblWormhole = new Label();
         lblWormholeLabel = new Label();
         btnJump = new Button();
         btnFind = new Button();
-        boxTargetSystem = new GroupBox();
+        GroupBox boxTargetSystem = new GroupBox();
         btnTrack = new Button();
         btnNextSystem = new Button();
         btnPrevSystem = new Button();
@@ -439,127 +170,127 @@ public class Main extends WinformWindow {
         lblTargetPirates = new Label();
         lblTargetPolice = new Label();
         lblTargetResource = new Label();
-        lblTargetDistanceLabel = new Label();
-        lblTargetPiratesLabel = new Label();
-        lblTargetPoliceLabel = new Label();
-        lblTargetResourceLabel = new Label();
-        lblTargetGovtLabel = new Label();
-        lblTargetTechLabel = new Label();
-        lblTargetSizeLabel = new Label();
+        Label lblTargetDistanceLabel = new Label();
+        Label lblTargetPiratesLabel = new Label();
+        Label lblTargetPoliceLabel = new Label();
+        Label lblTargetResourceLabel = new Label();
+        Label lblTargetGovtLabel = new Label();
+        Label lblTargetTechLabel = new Label();
+        Label lblTargetSizeLabel = new Label();
         lblTargetName = new Label();
-        lblTargetNameLabel = new Label();
-        boxCargo = new GroupBox();
-        picCargoLine3 = new PictureBox();
-        picCargoLine2 = new PictureBox();
-        picCargoLine0 = new PictureBox();
-        picCargoLine1 = new PictureBox();
-        lblTargetPct9 = new Label();
-        lblTargetDiff9 = new Label();
-        lblTargetPrice9 = new Label();
-        btnBuyMax9 = new Button();
-        btnBuyQty9 = new Button();
-        lblBuyPrice9 = new Label();
-        btnSellAll9 = new Button();
-        btnSellQty9 = new Button();
-        lblSellPrice9 = new Label();
-        lblTargetPct8 = new Label();
-        lblTargetDiff8 = new Label();
-        lblTargetPrice8 = new Label();
-        btnBuyMax8 = new Button();
-        btnBuyQty8 = new Button();
-        lblBuyPrice8 = new Label();
-        btnSellAll8 = new Button();
-        btnSellQty8 = new Button();
-        lblSellPrice8 = new Label();
-        lblTargetPct7 = new Label();
-        lblTargetDiff7 = new Label();
-        lblTargetPrice7 = new Label();
-        btnBuyMax7 = new Button();
-        btnBuyQty7 = new Button();
-        lblBuyPrice7 = new Label();
-        btnSellAll7 = new Button();
-        btnSellQty7 = new Button();
-        lblSellPrice7 = new Label();
-        lblTargetPct6 = new Label();
-        lblTargetDiff6 = new Label();
-        lblTargetPrice6 = new Label();
-        btnBuyMax6 = new Button();
-        btnBuyQty6 = new Button();
-        lblBuyPrice6 = new Label();
-        btnSellAll6 = new Button();
-        btnSellQty6 = new Button();
-        lblSellPrice6 = new Label();
-        lblTargetPct5 = new Label();
-        lblTargetDiff5 = new Label();
-        lblTargetPrice5 = new Label();
-        btnBuyMax5 = new Button();
-        btnBuyQty5 = new Button();
-        lblBuyPrice5 = new Label();
-        btnSellAll5 = new Button();
-        btnSellQty5 = new Button();
-        lblSellPrice5 = new Label();
-        lblTargetPct4 = new Label();
-        lblTargetDiff4 = new Label();
-        lblTargetPrice4 = new Label();
-        btnBuyMax4 = new Button();
-        btnBuyQty4 = new Button();
-        lblBuyPrice4 = new Label();
-        btnSellAll4 = new Button();
-        btnSellQty4 = new Button();
-        lblSellPrice4 = new Label();
-        lblTargetPct3 = new Label();
-        lblTargetDiff3 = new Label();
-        lblTargetPrice3 = new Label();
-        btnBuyMax3 = new Button();
-        btnBuyQty3 = new Button();
-        lblBuyPrice3 = new Label();
-        btnSellAll3 = new Button();
-        btnSellQty3 = new Button();
-        lblSellPrice3 = new Label();
-        lblTargetPct2 = new Label();
-        lblTargetDiff2 = new Label();
-        lblTargetPrice2 = new Label();
-        btnBuyMax2 = new Button();
-        btnBuyQty2 = new Button();
-        lblBuyPrice2 = new Label();
-        btnSellAll2 = new Button();
-        btnSellQty2 = new Button();
-        lblSellPrice2 = new Label();
-        lblTargetPct1 = new Label();
-        lblTargetDiff1 = new Label();
-        lblTargetPrice1 = new Label();
-        btnBuyMax1 = new Button();
-        btnBuyQty1 = new Button();
-        lblBuyPrice1 = new Label();
-        lblTargetPctLabel = new Label();
-        lblTargetDiffLabel = new Label();
-        lblTargetPriceLabel = new Label();
-        lblTargetPct0 = new Label();
-        lblTargetDiff0 = new Label();
-        lblTargetPrice0 = new Label();
-        btnBuyMax0 = new Button();
-        btnBuyQty0 = new Button();
-        lblBuyPrice0 = new Label();
-        btnSellAll1 = new Button();
-        btnSellQty1 = new Button();
-        lblSellPrice1 = new Label();
-        btnSellAll0 = new Button();
-        btnSellQty0 = new Button();
-        lblSellPrice0 = new Label();
-        lblTradeTarget = new Label();
+        Label lblTargetNameLabel = new Label();
+        GroupBox boxCargo = new GroupBox();
+        PictureBox picCargoLine3 = new PictureBox();
+        PictureBox picCargoLine2 = new PictureBox();
+        PictureBox picCargoLine0 = new PictureBox();
+        PictureBox picCargoLine1 = new PictureBox();
+        Label lblTargetPct9 = new Label();
+        Label lblTargetDiff9 = new Label();
+        Label lblTargetPrice9 = new Label();
+        Button btnBuyMax9 = new Button();
+        Button btnBuyQty9 = new Button();
+        Label lblBuyPrice9 = new Label();
+        Button btnSellAll9 = new Button();
+        Button btnSellQty9 = new Button();
+        Label lblSellPrice9 = new Label();
+        Label lblTargetPct8 = new Label();
+        Label lblTargetDiff8 = new Label();
+        Label lblTargetPrice8 = new Label();
+        Button btnBuyMax8 = new Button();
+        Button btnBuyQty8 = new Button();
+        Label lblBuyPrice8 = new Label();
+        Button btnSellAll8 = new Button();
+        Button btnSellQty8 = new Button();
+        Label lblSellPrice8 = new Label();
+        Label lblTargetPct7 = new Label();
+        Label lblTargetDiff7 = new Label();
+        Label lblTargetPrice7 = new Label();
+        Button btnBuyMax7 = new Button();
+        Button btnBuyQty7 = new Button();
+        Label lblBuyPrice7 = new Label();
+        Button btnSellAll7 = new Button();
+        Button btnSellQty7 = new Button();
+        Label lblSellPrice7 = new Label();
+        Label lblTargetPct6 = new Label();
+        Label lblTargetDiff6 = new Label();
+        Label lblTargetPrice6 = new Label();
+        Button btnBuyMax6 = new Button();
+        Button btnBuyQty6 = new Button();
+        Label lblBuyPrice6 = new Label();
+        Button btnSellAll6 = new Button();
+        Button btnSellQty6 = new Button();
+        Label lblSellPrice6 = new Label();
+        Label lblTargetPct5 = new Label();
+        Label lblTargetDiff5 = new Label();
+        Label lblTargetPrice5 = new Label();
+        Button btnBuyMax5 = new Button();
+        Button btnBuyQty5 = new Button();
+        Label lblBuyPrice5 = new Label();
+        Button btnSellAll5 = new Button();
+        Button btnSellQty5 = new Button();
+        Label lblSellPrice5 = new Label();
+        Label lblTargetPct4 = new Label();
+        Label lblTargetDiff4 = new Label();
+        Label lblTargetPrice4 = new Label();
+        Button btnBuyMax4 = new Button();
+        Button btnBuyQty4 = new Button();
+        Label lblBuyPrice4 = new Label();
+        Button btnSellAll4 = new Button();
+        Button btnSellQty4 = new Button();
+        Label lblSellPrice4 = new Label();
+        Label lblTargetPct3 = new Label();
+        Label lblTargetDiff3 = new Label();
+        Label lblTargetPrice3 = new Label();
+        Button btnBuyMax3 = new Button();
+        Button btnBuyQty3 = new Button();
+        Label lblBuyPrice3 = new Label();
+        Button btnSellAll3 = new Button();
+        Button btnSellQty3 = new Button();
+        Label lblSellPrice3 = new Label();
+        Label lblTargetPct2 = new Label();
+        Label lblTargetDiff2 = new Label();
+        Label lblTargetPrice2 = new Label();
+        Button btnBuyMax2 = new Button();
+        Button btnBuyQty2 = new Button();
+        Label lblBuyPrice2 = new Label();
+        Button btnSellAll2 = new Button();
+        Button btnSellQty2 = new Button();
+        Label lblSellPrice2 = new Label();
+        Label lblTargetPct1 = new Label();
+        Label lblTargetDiff1 = new Label();
+        Label lblTargetPrice1 = new Label();
+        Button btnBuyMax1 = new Button();
+        Button btnBuyQty1 = new Button();
+        Label lblBuyPrice1 = new Label();
+        Label lblTargetPctLabel = new Label();
+        Label lblTargetDiffLabel = new Label();
+        Label lblTargetPriceLabel = new Label();
+        Label lblTargetPct0 = new Label();
+        Label lblTargetDiff0 = new Label();
+        Label lblTargetPrice0 = new Label();
+        Button btnBuyMax0 = new Button();
+        Button btnBuyQty0 = new Button();
+        Label lblBuyPrice0 = new Label();
+        Button btnSellAll1 = new Button();
+        Button btnSellQty1 = new Button();
+        Label lblSellPrice1 = new Label();
+        Button btnSellAll0 = new Button();
+        Button btnSellQty0 = new Button();
+        Label lblSellPrice0 = new Label();
+        Label lblTradeTarget = new Label();
         lblBuy = new Label();
         lblSell = new Label();
-        lblTradeCommodity9 = new Label();
-        lblTradeCommodity8 = new Label();
-        lblTradeCommodity2 = new Label();
-        lblTradeCommodity0 = new Label();
-        lblTradeCommodity1 = new Label();
-        lblTradeCommodity6 = new Label();
-        lblTradeCommodity5 = new Label();
-        lblTradeCommodity4 = new Label();
-        lblTradeCommodity3 = new Label();
-        lblTradeCommodity7 = new Label();
-        boxSystem = new GroupBox();
+        Label lblTradeCommodity9 = new Label();
+        Label lblTradeCommodity8 = new Label();
+        Label lblTradeCommodity2 = new Label();
+        Label lblTradeCommodity0 = new Label();
+        Label lblTradeCommodity1 = new Label();
+        Label lblTradeCommodity6 = new Label();
+        Label lblTradeCommodity5 = new Label();
+        Label lblTradeCommodity4 = new Label();
+        Label lblTradeCommodity3 = new Label();
+        Label lblTradeCommodity7 = new Label();
+        GroupBox boxSystem = new GroupBox();
         btnMerc = new Button();
         btnSpecial = new Button();
         btnNews = new Button();
@@ -571,15 +302,15 @@ public class Main extends WinformWindow {
         lblSystemPirates = new Label();
         lblSystemPolice = new Label();
         lblSystemResource = new Label();
-        lblSystemPiratesLabel = new Label();
-        lblSystemPoliceLabel = new Label();
-        lblSystemResourseLabel = new Label();
-        lblSystemGovtLabel = new Label();
-        lblSystemTechLabel = new Label();
-        lblSystemSizeLabel = new Label();
+        Label lblSystemPiratesLabel = new Label();
+        Label lblSystemPoliceLabel = new Label();
+        Label lblSystemResourceLabel = new Label();
+        Label lblSystemGovtLabel = new Label();
+        Label lblSystemTechLabel = new Label();
+        Label lblSystemSizeLabel = new Label();
         lblSystemName = new Label();
         lblSystemNameLabel = new Label();
-        boxShipYard = new GroupBox();
+        GroupBox boxShipYard = new GroupBox();
         btnDesign = new Button();
         btnPod = new Button();
         lblEscapePod = new Label();
@@ -587,14 +318,14 @@ public class Main extends WinformWindow {
         btnBuyShip = new Button();
         lblEquipForSale = new Label();
         lblShipsForSale = new Label();
-        boxDock = new GroupBox();
+        GroupBox boxDock = new GroupBox();
         btnRepair = new Button();
         btnFuel = new Button();
         lblFuelStatus = new Label();
         lblFuelCost = new Label();
         lblHullStatus = new Label();
         lblRepairCost = new Label();
-        picLine = new PictureBox();
+        PictureBox picLine = new PictureBox();
         dlgOpen = new OpenFileDialog();
         dlgSave = new SaveFileDialog();
         ilChartImages = new ImageList(components);
@@ -2271,7 +2002,7 @@ public class Main extends WinformWindow {
         boxSystem.Controls.add(lblSystemResource);
         boxSystem.Controls.add(lblSystemPiratesLabel);
         boxSystem.Controls.add(lblSystemPoliceLabel);
-        boxSystem.Controls.add(lblSystemResourseLabel);
+        boxSystem.Controls.add(lblSystemResourceLabel);
         boxSystem.Controls.add(lblSystemGovtLabel);
         boxSystem.Controls.add(lblSystemTechLabel);
         boxSystem.Controls.add(lblSystemSizeLabel);
@@ -2390,15 +2121,15 @@ public class Main extends WinformWindow {
         lblSystemPoliceLabel.setSize(new FormSize(40, 16));
         lblSystemPoliceLabel.setTabIndex(6);
         lblSystemPoliceLabel.setText("Police:");
-        // lblSystemResourseLabel
-        lblSystemResourseLabel.setAutoSize(true);
-        lblSystemResourseLabel.setFont(
+        // lblSystemResourceLabel
+        lblSystemResourceLabel.setAutoSize(true);
+        lblSystemResourceLabel.setFont(
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblSystemResourseLabel.setLocation(new Point(8, 80));
-        lblSystemResourseLabel.setName("lblSystemResourseLabel");
-        lblSystemResourseLabel.setSize(new FormSize(58, 16));
-        lblSystemResourseLabel.setTabIndex(5);
-        lblSystemResourseLabel.setText("Resource:");
+        lblSystemResourceLabel.setLocation(new Point(8, 80));
+        lblSystemResourceLabel.setName("lblSystemResourceLabel");
+        lblSystemResourceLabel.setSize(new FormSize(58, 16));
+        lblSystemResourceLabel.setTabIndex(5);
+        lblSystemResourceLabel.setText("Resource:");
         // lblSystemGovtLabel
         lblSystemGovtLabel.setAutoSize(true);
         lblSystemGovtLabel.setFont(
@@ -2660,6 +2391,60 @@ public class Main extends WinformWindow {
         boxShipYard.ResumeLayout(false);
         boxDock.ResumeLayout(false);
         ResumeLayout(false);
+        InitFileStructure();
+        lblSellPrice = new Label[]{
+                lblSellPrice0, lblSellPrice1, lblSellPrice2, lblSellPrice3, lblSellPrice4,
+                lblSellPrice5, lblSellPrice6, lblSellPrice7, lblSellPrice8, lblSellPrice9
+        };
+        lblBuyPrice = new Label[]{
+                lblBuyPrice0, lblBuyPrice1, lblBuyPrice2, lblBuyPrice3, lblBuyPrice4,
+                lblBuyPrice5, lblBuyPrice6, lblBuyPrice7, lblBuyPrice8, lblBuyPrice9
+        };
+        lblTargetPrice = new Label[]{
+                lblTargetPrice0, lblTargetPrice1, lblTargetPrice2, lblTargetPrice3, lblTargetPrice4,
+                lblTargetPrice5, lblTargetPrice6, lblTargetPrice7, lblTargetPrice8, lblTargetPrice9
+        };
+        lblTargetDiff = new Label[]{
+                lblTargetDiff0, lblTargetDiff1, lblTargetDiff2, lblTargetDiff3, lblTargetDiff4,
+                lblTargetDiff5, lblTargetDiff6, lblTargetDiff7, lblTargetDiff8, lblTargetDiff9
+        };
+        lblTargetPct = new Label[]{
+                lblTargetPct0, lblTargetPct1, lblTargetPct2, lblTargetPct3, lblTargetPct4,
+                lblTargetPct5, lblTargetPct6, lblTargetPct7, lblTargetPct8, lblTargetPct9
+        };
+        btnSellQty = new Button[]{
+                btnSellQty0, btnSellQty1, btnSellQty2, btnSellQty3, btnSellQty4,
+                btnSellQty5, btnSellQty6, btnSellQty7, btnSellQty8, btnSellQty9
+        };
+        btnSellAll = new Button[]{
+                btnSellAll0, btnSellAll1, btnSellAll2, btnSellAll3, btnSellAll4,
+                btnSellAll5, btnSellAll6, btnSellAll7, btnSellAll8, btnSellAll9
+        };
+        btnBuyQty = new Button[]{
+                btnBuyQty0, btnBuyQty1, btnBuyQty2, btnBuyQty3, btnBuyQty4,
+                btnBuyQty5, btnBuyQty6, btnBuyQty7, btnBuyQty8, btnBuyQty9
+        };
+        btnBuyMax = new Button[]{
+                btnBuyMax0, btnBuyMax1, btnBuyMax2, btnBuyMax3, btnBuyMax4,
+                btnBuyMax5, btnBuyMax6, btnBuyMax7, btnBuyMax8, btnBuyMax9
+        };
+        Main.this.UpdateAll();
+    }
+
+    /**
+     * Main entry point for the game.
+     */
+    public static void main(String[] args) throws Exception {
+
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                 UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+
+        Main mainWindow = new Main();
+        mainWindow.ShowWindow();
     }
 
     private void AddHighScore(HighScoreRecord highScore) {
@@ -3560,13 +3345,16 @@ public class Main extends WinformWindow {
             }
             int index = game.SelectedSystemId().CastToInt();
             if (game.TargetWormhole()) {
-                int dest = wormholes[(Util.BruteSeek(wormholes, index) + 1) % wormholes.length];
-                StarSystem destSys = universe[dest];
+                int destination = wormholes[(Util.BruteSeek(wormholes, index) + 1) % wormholes.length];
+                StarSystem destinationSystem = universe[destination];
                 e.Graphics.DrawLine(
                         DEFAULT_PEN, targetSys.X() + OFF_X_WORM + OFF_X,
-                        targetSys.Y() + OFF_Y, destSys.X() + OFF_X, destSys.Y() + OFF_Y);
+                        targetSys.Y() + OFF_Y, destinationSystem.X() + OFF_X, destinationSystem.Y() + OFF_Y);
             }
             for (int i = 0; i < universe.length; i++) {
+                //  private final int IMG_S_NS = 4;
+                int IMG_S_V = 5;
+                int IMG_S_N = 3;
                 int imageIndex = universe[i].Visited() ? IMG_S_V : IMG_S_N;
                 if (universe[i] == game.WarpSystem()) {
                     imageIndex++;
@@ -3582,6 +3370,8 @@ public class Main extends WinformWindow {
                 }
                 ilChartImages.Draw(e.Graphics, universe[i].X(), universe[i].Y(), imageIndex);
                 if (Functions.WormholeExists(i, -1)) {
+                    //  private final int IMG_S_VS = 6;
+                    int IMG_S_W = 7;
                     ilChartImages.Draw(e.Graphics, universe[i].X() + OFF_X_WORM, universe[i].Y(), IMG_S_W);
                 }
             }
@@ -3673,6 +3463,8 @@ public class Main extends WinformWindow {
                                 e.Graphics.DrawLine(DEFAULT_PEN, x - 5, y - 5, x + 5, y + 5);
                                 e.Graphics.DrawLine(DEFAULT_PEN, x - 5, y + 5, x + 5, y - 5);
                             }
+                            int IMG_G_N = 0;
+                            int IMG_G_V = 1;
                             ilChartImages.Draw(e.Graphics, x - OFF_X, y - OFF_Y, universe[i].Visited() ? IMG_G_V : IMG_G_N);
                             if (Functions.WormholeExists(i, -1)) {
                                 int xW = x + 9;
@@ -3680,6 +3472,7 @@ public class Main extends WinformWindow {
                                     e.Graphics.DrawLine(DEFAULT_PEN, xW - 6, y, xW + 6, y);
                                     e.Graphics.DrawLine(DEFAULT_PEN, xW, y - 6, xW, y + 6);
                                 }
+                                int IMG_G_W = 2;
                                 ilChartImages.Draw(e.Graphics, xW - OFF_X, y - OFF_Y, IMG_G_W);
                             }
                         } else {

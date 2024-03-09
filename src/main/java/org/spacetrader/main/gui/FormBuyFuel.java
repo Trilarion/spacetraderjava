@@ -16,26 +16,14 @@ import java.util.Arrays;
 
 public class FormBuyFuel extends WinformForm {
     private final Game game = Game.CurrentGame();
-    private final Commander cmdr = game.Commander();
-    private Button btnOk;
-    private Button btnMax;
-    private Button btnNothing;
-    private Label lblQuestion;
     private NumericUpDown numAmount;
 
     public FormBuyFuel() {
-        InitializeComponent();
-        numAmount.setMaximum(Math.min(cmdr.getCash(), (cmdr.getShip().FuelTanks() - cmdr.getShip().getFuel()) * cmdr.getShip().getFuelCost()));
-        numAmount.setValue(numAmount.getMaximum());
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
-        lblQuestion = new Label();
+        Label lblQuestion = new Label();
         numAmount = new NumericUpDown();
-        btnOk = new Button();
-        btnMax = new Button();
-        btnNothing = new Button();
+        Button btnOk = new Button();
+        Button btnMax = new Button();
+        Button btnNothing = new Button();
         ((ISupportInitialize) (numAmount)).BeginInit();
         SuspendLayout();
         // lblQuestion
@@ -97,7 +85,11 @@ public class FormBuyFuel extends WinformForm {
         setText("Buy Fuel");
         ((ISupportInitialize) (numAmount)).EndInit();
         ResumeLayout(false);
+        Commander cmdr = game.Commander();
+        numAmount.setMaximum(Math.min(cmdr.getCash(), (cmdr.getShip().FuelTanks() - cmdr.getShip().getFuel()) * cmdr.getShip().getFuelCost()));
+        numAmount.setValue(numAmount.getMaximum());
     }
+
 
     private void btnMax_Click() {
         numAmount.setValue(numAmount.getMaximum());

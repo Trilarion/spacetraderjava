@@ -15,28 +15,15 @@ import java.util.Arrays;
 
 
 public class FormGetLoan extends WinformForm {
-    private Button btnOk;
-    private Button btnMax;
-    private Button btnNothing;
-    private Label lblQuestion;
-    private Label lblStatement;
     private NumericUpDown numAmount;
 
     public FormGetLoan(int max) {
-        InitializeComponent();
-        numAmount.setMaximum(max);
-        numAmount.setValue(numAmount.getMinimum());
-        lblStatement.setText(Functions.StringVars("You can borrow up to ^1.", Functions.Multiples(max, Strings.MoneyUnit)));
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
-        lblQuestion = new Label();
+        Label lblQuestion = new Label();
         numAmount = new NumericUpDown();
-        btnOk = new Button();
-        btnMax = new Button();
-        btnNothing = new Button();
-        lblStatement = new Label();
+        Button btnOk = new Button();
+        Button btnMax = new Button();
+        Button btnNothing = new Button();
+        Label lblStatement = new Label();
         ((ISupportInitialize) (numAmount)).BeginInit();
         SuspendLayout();
         // lblQuestion
@@ -105,7 +92,11 @@ public class FormGetLoan extends WinformForm {
         setText("Get Loan");
         ((ISupportInitialize) (numAmount)).EndInit();
         ResumeLayout(false);
+        numAmount.setMaximum(max);
+        numAmount.setValue(numAmount.getMinimum());
+        lblStatement.setText(Functions.StringVars("You can borrow up to ^1.", Functions.Multiples(max, Strings.MoneyUnit)));
     }
+
 
     private void btnMax_Click() {
         numAmount.setValue(numAmount.getMaximum());

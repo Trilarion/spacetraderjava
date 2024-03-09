@@ -23,7 +23,7 @@ public class PictureBox extends WinformControl implements ISupportInitialize {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
+
     public void setBorderStyle(BorderStyle borderStyle) {
         switch (borderStyle) {
             case FixedSingle:

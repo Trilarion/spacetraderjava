@@ -1,110 +1,52 @@
 package org.spacetrader.main.gui;
 
-import java.awt.Point;
-import java.util.Arrays;
-
 import org.jwinforms.Button;
 import org.jwinforms.Font;
-import org.jwinforms.FormSize;
-import org.jwinforms.GraphicsUnit;
-import org.jwinforms.GroupBox;
 import org.jwinforms.Label;
-import org.jwinforms.WinformControl;
-import org.jwinforms.WinformForm;
-import org.jwinforms.enums.ContentAlignment;
-import org.jwinforms.enums.DialogResult;
-import org.jwinforms.enums.FontStyle;
-import org.jwinforms.enums.FormBorderStyle;
-import org.jwinforms.enums.FormStartPosition;
-import org.spacetrader.main.Commander;
-import org.spacetrader.main.Constants;
-import org.spacetrader.main.Functions;
-import org.spacetrader.main.Game;
-import org.spacetrader.main.PoliceRecord;
-import org.spacetrader.main.Reputation;
-import org.spacetrader.main.Strings;
+import org.jwinforms.*;
+import org.jwinforms.enums.*;
+import org.spacetrader.main.*;
+
+import java.awt.*;
+import java.util.Arrays;
 
 
 public class FormViewCommander extends WinformForm {
     private final Game game = Game.CurrentGame();
-    private final Commander cmdr = game.Commander();
-    private Button btnClose;
-    private GroupBox boxSkills;
-    private GroupBox boxFinances;
-    private GroupBox boxNotoriety;
-    private Label lblNameLabel;
-    private Label lblName;
-    private Label lblDifficulty;
-    private Label lblTimeLabel;
-    private Label lblCashLabel;
-    private Label lblDebtLabel;
-    private Label lblNetWorthLabel;
-    private Label lblDifficultyLabel;
-    private Label lblTime;
-    private Label lblEngineer;
-    private Label lblTrader;
-    private Label lblFighter;
-    private Label lblPilot;
-    private Label lblEngineerLabel;
-    private Label lblTraderLabel;
-    private Label lblFighterLabel;
-    private Label lblPilotLabel;
-    private Label lblNetWorth;
-    private Label lblDebt;
-    private Label lblCash;
-    private Label lblKills;
-    private Label lblReputation;
-    private Label lblRecord;
-    private Label lblPoliceLabel;
-    private Label lblReputationLabel;
-    private Label lblKillsLabel;
-    private Label lblBountyLabel;
-    private Label lblBounty;
 
     public FormViewCommander() {
-        InitializeComponent();
-        InitializeScreen();
-    }
-
-    public static void main(String[] args) throws Exception {
-        FormViewCommander form = new FormViewCommander();
-        Launcher.runForm(form);
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
-        lblNameLabel = new Label();
-        lblName = new Label();
-        lblDifficulty = new Label();
-        btnClose = new Button();
-        lblTimeLabel = new Label();
-        lblCashLabel = new Label();
-        lblDebtLabel = new Label();
-        lblNetWorthLabel = new Label();
-        lblDifficultyLabel = new Label();
-        lblTime = new Label();
-        boxSkills = new GroupBox();
-        lblEngineer = new Label();
-        lblTrader = new Label();
-        lblFighter = new Label();
-        lblPilot = new Label();
-        lblEngineerLabel = new Label();
-        lblTraderLabel = new Label();
-        lblFighterLabel = new Label();
-        lblPilotLabel = new Label();
-        boxFinances = new GroupBox();
-        lblCash = new Label();
-        lblDebt = new Label();
-        lblNetWorth = new Label();
-        boxNotoriety = new GroupBox();
-        lblPoliceLabel = new Label();
-        lblReputationLabel = new Label();
-        lblKillsLabel = new Label();
-        lblKills = new Label();
-        lblReputation = new Label();
-        lblRecord = new Label();
-        lblBountyLabel = new Label();
-        lblBounty = new Label();
+        Label lblNameLabel = new Label();
+        Label lblName = new Label();
+        Label lblDifficulty = new Label();
+        Button btnClose = new Button();
+        Label lblTimeLabel = new Label();
+        Label lblCashLabel = new Label();
+        Label lblDebtLabel = new Label();
+        Label lblNetWorthLabel = new Label();
+        Label lblDifficultyLabel = new Label();
+        Label lblTime = new Label();
+        GroupBox boxSkills = new GroupBox();
+        Label lblEngineer = new Label();
+        Label lblTrader = new Label();
+        Label lblFighter = new Label();
+        Label lblPilot = new Label();
+        Label lblEngineerLabel = new Label();
+        Label lblTraderLabel = new Label();
+        Label lblFighterLabel = new Label();
+        Label lblPilotLabel = new Label();
+        GroupBox boxFinances = new GroupBox();
+        Label lblCash = new Label();
+        Label lblDebt = new Label();
+        Label lblNetWorth = new Label();
+        GroupBox boxNotoriety = new GroupBox();
+        Label lblPoliceLabel = new Label();
+        Label lblReputationLabel = new Label();
+        Label lblKillsLabel = new Label();
+        Label lblKills = new Label();
+        Label lblReputation = new Label();
+        Label lblRecord = new Label();
+        Label lblBountyLabel = new Label();
+        Label lblBounty = new Label();
         boxSkills.SuspendLayout();
         boxFinances.SuspendLayout();
         boxNotoriety.SuspendLayout();
@@ -360,9 +302,7 @@ public class FormViewCommander extends WinformForm {
         boxFinances.ResumeLayout(false);
         boxNotoriety.ResumeLayout(false);
         ResumeLayout(false);
-    }
-
-    private void InitializeScreen() {
+        Commander cmdr = game.Commander();
         lblName.setText(cmdr.Name());
         lblDifficulty.setText(Strings.DifficultyLevels[game.Difficulty().CastToInt()]);
         lblTime.setText(Functions.Multiples(cmdr.getDays(), Strings.TimeUnit));
@@ -392,4 +332,5 @@ public class FormViewCommander extends WinformForm {
             lblBounty.setVisible(false);
         }
     }
+
 }

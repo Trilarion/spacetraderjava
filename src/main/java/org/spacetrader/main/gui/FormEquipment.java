@@ -1,60 +1,27 @@
 package org.spacetrader.main.gui;
 
-import java.awt.Color;
-import java.awt.Point;
-
 import org.jwinforms.Button;
-import org.jwinforms.EventArgs;
-import org.jwinforms.EventHandler;
 import org.jwinforms.Font;
-import org.jwinforms.FormSize;
-import org.jwinforms.GraphicsUnit;
-import org.jwinforms.GroupBox;
 import org.jwinforms.Label;
-import org.jwinforms.ListBox;
-import org.jwinforms.PictureBox;
-import org.jwinforms.WinformForm;
-import org.jwinforms.enums.BorderStyle;
-import org.jwinforms.enums.DialogResult;
-import org.jwinforms.enums.FlatStyle;
-import org.jwinforms.enums.FontStyle;
-import org.jwinforms.enums.FormBorderStyle;
-import org.jwinforms.enums.FormStartPosition;
+import org.jwinforms.*;
+import org.jwinforms.enums.*;
+import org.spacetrader.main.*;
 import org.spacetrader.main.enums.AlertType;
-import org.spacetrader.ship.equip.Equipment;
-import org.spacetrader.ship.equip.EquipmentType;
-import org.spacetrader.ship.equip.Gadget;
-import org.spacetrader.ship.equip.GadgetType;
-import org.spacetrader.ship.equip.Shield;
-import org.spacetrader.ship.equip.Weapon;
-import org.spacetrader.main.Commander;
-import org.spacetrader.main.Constants;
-import org.spacetrader.main.Functions;
-import org.spacetrader.main.Game;
-import org.spacetrader.main.Ship;
-import org.spacetrader.main.Strings;
+import org.spacetrader.ship.equip.*;
+
+import java.awt.*;
 
 
 public class FormEquipment extends WinformForm {
     private final Game game = Game.CurrentGame();
     private final Commander cmdr = game.Commander();
     private final Ship ship = cmdr.getShip();
-    private Button btnClose;
     private Button btnBuy;
     private Button btnSell;
-    private GroupBox boxSell;
-    private GroupBox boxBuy;
-    private GroupBox boxShipInfo;
     private Label lblName;
     private Label lblDescription;
     private Label lblSellPrice;
     private Label lblBuyPrice;
-    private Label lblSellGadgets;
-    private Label lblSellShields;
-    private Label lblSellWeapons;
-    private Label lblBuyGadgets;
-    private Label lblBuyShields;
-    private Label lblBuyWeapons;
     private Label lblBuyPriceLabel;
     private Label lblSellPriceLabel;
     private Label lblNameLabel;
@@ -83,40 +50,28 @@ public class FormEquipment extends WinformForm {
     private boolean handlingSelect = false;
 
     public FormEquipment() {
-        InitializeComponent();
-        UpdateBuy();
-        UpdateSell();
-    }
-
-    public static void main(String[] args) throws Exception {
-        FormEquipment fe = new FormEquipment();
-        Launcher.runForm(fe);
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
-        btnClose = new Button();
-        boxSell = new GroupBox();
+        Button btnClose = new Button();
+        GroupBox boxSell = new GroupBox();
         lblSellGadgetNoSlots = new Label();
         lblSellShieldNoSlots = new Label();
         lblSellWeaponNoSlots = new Label();
-        lblSellGadgets = new Label();
-        lblSellShields = new Label();
-        lblSellWeapons = new Label();
+        Label lblSellGadgets = new Label();
+        Label lblSellShields = new Label();
+        Label lblSellWeapons = new Label();
         lstSellGadget = new ListBox();
         lstSellShield = new ListBox();
         lstSellWeapon = new ListBox();
-        boxBuy = new GroupBox();
+        GroupBox boxBuy = new GroupBox();
         lblBuyGadgetNone = new Label();
         lblBuyShieldNone = new Label();
         lblBuyWeaponNone = new Label();
-        lblBuyGadgets = new Label();
-        lblBuyShields = new Label();
-        lblBuyWeapons = new Label();
+        Label lblBuyGadgets = new Label();
+        Label lblBuyShields = new Label();
+        Label lblBuyWeapons = new Label();
         lstBuyGadget = new ListBox();
         lstBuyShield = new ListBox();
         lstBuyWeapon = new ListBox();
-        boxShipInfo = new GroupBox();
+        GroupBox boxShipInfo = new GroupBox();
         lblCharge = new Label();
         lblPower = new Label();
         lblChargeLabel = new Label();
@@ -535,6 +490,8 @@ public class FormEquipment extends WinformForm {
         boxBuy.ResumeLayout(false);
         boxShipInfo.ResumeLayout(false);
         ResumeLayout(false);
+        UpdateBuy();
+        UpdateSell();
     }
 
     private void Buy() {

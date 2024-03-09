@@ -12,43 +12,20 @@ import java.awt.*;
 
 
 public class FormCosts extends WinformForm {
-    private final Game game = Game.CurrentGame();
-    private Button btnClose;
-    private Label lblMerc;
-    private Label lblIns;
-    private Label lblInt;
-    private Label lblTax;
-    private Label lblTotal;
-    private Label lblTotalLabel;
-    private Label lblTaxLabel;
-    private Label lblIntLabel;
-    private Label lblMercLabel;
-    private Label lblInsLabel;
-    private PictureBox picLine;
 
     public FormCosts() {
-        InitializeComponent();
-        lblMerc.setText(Functions.FormatMoney(game.MercenaryCosts()));
-        lblIns.setText(Functions.FormatMoney(game.InsuranceCosts()));
-        lblInt.setText(Functions.FormatMoney(game.InterestCosts()));
-        lblTax.setText(Functions.FormatMoney(game.WormholeCosts()));
-        lblTotal.setText(Functions.FormatMoney(game.CurrentCosts()));
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
-        btnClose = new Button();
-        lblMerc = new Label();
-        lblIns = new Label();
-        lblInt = new Label();
-        lblTax = new Label();
-        lblTotal = new Label();
-        lblTotalLabel = new Label();
-        lblTaxLabel = new Label();
-        lblIntLabel = new Label();
-        lblMercLabel = new Label();
-        lblInsLabel = new Label();
-        picLine = new PictureBox();
+        Button btnClose = new Button();
+        Label lblMerc = new Label();
+        Label lblIns = new Label();
+        Label lblInt = new Label();
+        Label lblTax = new Label();
+        Label lblTotal = new Label();
+        Label lblTotalLabel = new Label();
+        Label lblTaxLabel = new Label();
+        Label lblIntLabel = new Label();
+        Label lblMercLabel = new Label();
+        Label lblInsLabel = new Label();
+        PictureBox picLine = new PictureBox();
         SuspendLayout();
         // btnClose
         btnClose.setDialogResult(DialogResult.Cancel);
@@ -153,5 +130,12 @@ public class FormCosts extends WinformForm {
         setStartPosition(FormStartPosition.CenterParent);
         setText("Cost Specification");
         ResumeLayout(false);
+        Game game = Game.CurrentGame();
+        lblMerc.setText(Functions.FormatMoney(game.MercenaryCosts()));
+        lblIns.setText(Functions.FormatMoney(game.InsuranceCosts()));
+        lblInt.setText(Functions.FormatMoney(game.InterestCosts()));
+        lblTax.setText(Functions.FormatMoney(game.WormholeCosts()));
+        lblTotal.setText(Functions.FormatMoney(game.CurrentCosts()));
     }
+
 }

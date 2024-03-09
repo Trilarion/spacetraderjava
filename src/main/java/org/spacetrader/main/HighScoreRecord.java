@@ -1,8 +1,8 @@
 package org.spacetrader.main;
 
-import org.spacetrader.main.util.Hashtable;
 import org.spacetrader.difficulty.Difficulty;
 import org.spacetrader.main.enums.GameEndType;
+import org.spacetrader.main.util.Hashtable;
 
 
 public class HighScoreRecord extends STSerializableObject implements Comparable<HighScoreRecord> {

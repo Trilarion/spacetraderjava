@@ -19,107 +19,44 @@ import java.util.Arrays;
 public class FormJettison extends WinformForm {
     private final Game game = Game.CurrentGame();
     private final Commander cmdr = game.Commander();
-    private Button btnJettisonAll9;
-    private Button btnJettisonQty9;
-    private Button btnJettisonAll8;
-    private Button btnJettisonQty8;
-    private Button btnJettisonAll7;
-    private Button btnJettisonQty7;
-    private Button btnJettisonAll6;
-    private Button btnJettisonQty6;
-    private Button btnJettisonAll5;
-    private Button btnJettisonQty5;
-    private Button btnJettisonAll4;
-    private Button btnJettisonQty4;
-    private Button btnJettisonAll3;
-    private Button btnJettisonQty3;
-    private Button btnJettisonAll2;
-    private Button btnJettisonQty2;
-    private Button btnJettisonAll1;
-    private Button btnJettisonQty1;
-    private Button btnJettisonAll0;
-    private Button btnJettisonQty0;
-    private Label lblTradeCommodity9;
-    private Label lblTradeCommodity8;
-    private Label lblTradeCommodity2;
-    private Label lblTradeCommodity0;
-    private Label lblTradeCommodity1;
-    private Label lblTradeCommodity6;
-    private Label lblTradeCommodity5;
-    private Label lblTradeCommodity4;
-    private Label lblTradeCommodity3;
-    private Label lblTradeCommodity7;
-    private Label lblBaysLabel;
     private Label lblBays;
-    private Button btnDone;
     private Container components = null;
     private Button[] btnJettisonQty;
-    private Button[] btnJettisonAll;
 
     public FormJettison() {
-        InitializeComponent();
-        btnJettisonQty = new Button[]{
-                btnJettisonQty0,
-                btnJettisonQty1,
-                btnJettisonQty2,
-                btnJettisonQty3,
-                btnJettisonQty4,
-                btnJettisonQty5,
-                btnJettisonQty6,
-                btnJettisonQty7,
-                btnJettisonQty8,
-                btnJettisonQty9
-        };
-        btnJettisonAll = new Button[]{
-                btnJettisonAll0,
-                btnJettisonAll1,
-                btnJettisonAll2,
-                btnJettisonAll3,
-                btnJettisonAll4,
-                btnJettisonAll5,
-                btnJettisonAll6,
-                btnJettisonAll7,
-                btnJettisonAll8,
-                btnJettisonAll9
-        };
-        UpdateAll();
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
-        btnJettisonAll9 = new Button();
-        btnJettisonQty9 = new Button();
-        btnJettisonAll8 = new Button();
-        btnJettisonQty8 = new Button();
-        btnJettisonAll7 = new Button();
-        btnJettisonQty7 = new Button();
-        btnJettisonAll6 = new Button();
-        btnJettisonQty6 = new Button();
-        btnJettisonAll5 = new Button();
-        btnJettisonQty5 = new Button();
-        btnJettisonAll4 = new Button();
-        btnJettisonQty4 = new Button();
-        btnJettisonAll3 = new Button();
-        btnJettisonQty3 = new Button();
-        btnJettisonAll2 = new Button();
-        btnJettisonQty2 = new Button();
-        btnJettisonAll1 = new Button();
-        btnJettisonQty1 = new Button();
-        btnJettisonAll0 = new Button();
-        btnJettisonQty0 = new Button();
-        lblTradeCommodity9 = new Label();
-        lblTradeCommodity8 = new Label();
-        lblTradeCommodity2 = new Label();
-        lblTradeCommodity0 = new Label();
-        lblTradeCommodity1 = new Label();
-        lblTradeCommodity6 = new Label();
-        lblTradeCommodity5 = new Label();
-        lblTradeCommodity4 = new Label();
-        lblTradeCommodity3 = new Label();
-        lblTradeCommodity7 = new Label();
-        lblBaysLabel = new Label();
+        Button btnJettisonAll9 = new Button();
+        Button btnJettisonQty9 = new Button();
+        Button btnJettisonAll8 = new Button();
+        Button btnJettisonQty8 = new Button();
+        Button btnJettisonAll7 = new Button();
+        Button btnJettisonQty7 = new Button();
+        Button btnJettisonAll6 = new Button();
+        Button btnJettisonQty6 = new Button();
+        Button btnJettisonAll5 = new Button();
+        Button btnJettisonQty5 = new Button();
+        Button btnJettisonAll4 = new Button();
+        Button btnJettisonQty4 = new Button();
+        Button btnJettisonAll3 = new Button();
+        Button btnJettisonQty3 = new Button();
+        Button btnJettisonAll2 = new Button();
+        Button btnJettisonQty2 = new Button();
+        Button btnJettisonAll1 = new Button();
+        Button btnJettisonQty1 = new Button();
+        Button btnJettisonAll0 = new Button();
+        Button btnJettisonQty0 = new Button();
+        Label lblTradeCommodity9 = new Label();
+        Label lblTradeCommodity8 = new Label();
+        Label lblTradeCommodity2 = new Label();
+        Label lblTradeCommodity0 = new Label();
+        Label lblTradeCommodity1 = new Label();
+        Label lblTradeCommodity6 = new Label();
+        Label lblTradeCommodity5 = new Label();
+        Label lblTradeCommodity4 = new Label();
+        Label lblTradeCommodity3 = new Label();
+        Label lblTradeCommodity7 = new Label();
+        Label lblBaysLabel = new Label();
         lblBays = new Label();
-        btnDone = new Button();
+        Button btnDone = new Button();
         SuspendLayout();
         // btnJettisonAll9
         btnJettisonAll9.setFlatStyle(FlatStyle.Flat);
@@ -519,7 +456,33 @@ public class FormJettison extends WinformForm {
         setStartPosition(FormStartPosition.CenterParent);
         setText("Jettison Cargo");
         ResumeLayout(false);
+        btnJettisonQty = new Button[]{
+                btnJettisonQty0,
+                btnJettisonQty1,
+                btnJettisonQty2,
+                btnJettisonQty3,
+                btnJettisonQty4,
+                btnJettisonQty5,
+                btnJettisonQty6,
+                btnJettisonQty7,
+                btnJettisonQty8,
+                btnJettisonQty9
+        };
+        Button[] btnJettisonAll = new Button[]{
+                btnJettisonAll0,
+                btnJettisonAll1,
+                btnJettisonAll2,
+                btnJettisonAll3,
+                btnJettisonAll4,
+                btnJettisonAll5,
+                btnJettisonAll6,
+                btnJettisonAll7,
+                btnJettisonAll8,
+                btnJettisonAll9
+        };
+        UpdateAll();
     }
+
 
     private void Jettison(int tradeItem, boolean all) {
         game.CargoJettison(tradeItem, all, this);

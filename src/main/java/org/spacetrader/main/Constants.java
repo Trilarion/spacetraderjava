@@ -1,30 +1,15 @@
 package org.spacetrader.main;
 
 import org.jwinforms.Rectangle;
-import org.spacetrader.main.util.Environment;
 import org.spacetrader.cargo.TradeItem;
 import org.spacetrader.cargo.TradeItemType;
 import org.spacetrader.crew.CrewMemberId;
 import org.spacetrader.events.SpecialEventType;
+import org.spacetrader.main.enums.*;
+import org.spacetrader.main.util.Environment;
 import org.spacetrader.ship.ShipSize;
 import org.spacetrader.ship.ShipType;
-import org.spacetrader.ship.equip.Equipment;
-import org.spacetrader.ship.equip.Gadget;
-import org.spacetrader.ship.equip.GadgetType;
-import org.spacetrader.ship.equip.Shield;
-import org.spacetrader.ship.equip.ShieldType;
-import org.spacetrader.ship.equip.Weapon;
-import org.spacetrader.ship.equip.WeaponType;
-import org.spacetrader.main.enums.Activity;
-import org.spacetrader.main.enums.PoliceRecordType;
-import org.spacetrader.main.enums.PoliticalSystemType;
-import org.spacetrader.main.enums.ReputationType;
-import org.spacetrader.main.enums.ShipyardId;
-import org.spacetrader.main.enums.ShipyardSkill;
-import org.spacetrader.main.enums.SkillType;
-import org.spacetrader.main.enums.SpecialResource;
-import org.spacetrader.main.enums.SystemPressure;
-import org.spacetrader.main.enums.TechLevel;
+import org.spacetrader.ship.equip.*;
 import org.spacetrader.util.Path;
 
 

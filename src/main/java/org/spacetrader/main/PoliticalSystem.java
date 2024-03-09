@@ -1,12 +1,12 @@
 package org.spacetrader.main;
 
+import org.spacetrader.cargo.TradeItemType;
+import org.spacetrader.difficulty.Difficulty;
 import org.spacetrader.main.enums.Activity;
 import org.spacetrader.main.enums.OpponentType;
 import org.spacetrader.main.enums.PoliticalSystemType;
-import org.spacetrader.cargo.TradeItemType;
-import org.spacetrader.difficulty.Difficulty;
-import org.spacetrader.ship.ShipType;
 import org.spacetrader.main.enums.TechLevel;
+import org.spacetrader.ship.ShipType;
 
 
 public class PoliticalSystem {

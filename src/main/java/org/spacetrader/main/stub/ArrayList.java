@@ -19,7 +19,7 @@ public class ArrayList<T> extends java.util.ArrayList<T> {
         super(list);
     }
 
-    @SuppressWarnings("unchecked")
+
     public void Sort() {
         Object ob = this;
         Collections.sort((java.util.List<Comparable<Object>>) ob);

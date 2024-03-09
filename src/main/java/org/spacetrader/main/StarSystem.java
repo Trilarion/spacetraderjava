@@ -1,18 +1,13 @@
 package org.spacetrader.main;
 
-import java.util.ArrayList;
-
-import org.spacetrader.main.enums.PoliticalSystemType;
-import org.spacetrader.main.enums.StarSystemId;
-import org.spacetrader.main.util.Hashtable;
 import org.spacetrader.cargo.TradeItem;
 import org.spacetrader.cargo.TradeItemType;
 import org.spacetrader.events.SpecialEventType;
+import org.spacetrader.main.enums.*;
+import org.spacetrader.main.util.Hashtable;
 import org.spacetrader.ship.ShipSize;
-import org.spacetrader.main.enums.ShipyardId;
-import org.spacetrader.main.enums.SpecialResource;
-import org.spacetrader.main.enums.SystemPressure;
-import org.spacetrader.main.enums.TechLevel;
+
+import java.util.ArrayList;
 
 
 public class StarSystem extends STSerializableObject {

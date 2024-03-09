@@ -14,51 +14,27 @@ import java.util.Arrays;
 
 
 public class FormTest extends WinformForm {
-    private Button btnTestAlert;
-    private Button btnTestSpecialEvent;
     private ComboBox selAlertType;
     private ComboBox selSpecialEvent;
-    private GroupBox boxAlert;
-    private GroupBox groupBox1;
-    private Label lblAlertType;
-    private Label lblValue2;
-    private Label lblValue1;
-    private Label lblValue3;
-    private Label lblSpecialEvent;
     private TextBox txtValue1;
     private TextBox txtValue2;
     private TextBox txtValue3;
 
     public FormTest() {
-        InitializeComponent();
-        AlertType[] alerts = Arrays.copyOfRange(AlertType.values(), AlertType.Alert.ordinal(), AlertType.WildWontStayAboardReactor.ordinal());
-        for (AlertType type : alerts) {
-            selAlertType.Items.add(type);
-        }
-        selAlertType.setSelectedIndex(0);
-        SpecialEventType[] events = Arrays.copyOfRange(SpecialEventType.values(), SpecialEventType.Artifact.ordinal(), SpecialEventType.WildGetsOut.ordinal());
-        for (SpecialEventType type : events) {
-            selSpecialEvent.Items.add(type);
-        }
-        selSpecialEvent.setSelectedIndex(0);
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
-        lblAlertType = new Label();
-        boxAlert = new GroupBox();
-        btnTestAlert = new Button();
+        Label lblAlertType = new Label();
+        GroupBox boxAlert = new GroupBox();
+        Button btnTestAlert = new Button();
         txtValue3 = new TextBox();
         txtValue2 = new TextBox();
         txtValue1 = new TextBox();
         selAlertType = new ComboBox();
-        lblValue3 = new Label();
-        lblValue1 = new Label();
-        lblValue2 = new Label();
-        groupBox1 = new GroupBox();
-        btnTestSpecialEvent = new Button();
+        Label lblValue3 = new Label();
+        Label lblValue1 = new Label();
+        Label lblValue2 = new Label();
+        GroupBox groupBox1 = new GroupBox();
+        Button btnTestSpecialEvent = new Button();
         selSpecialEvent = new ComboBox();
-        lblSpecialEvent = new Label();
+        Label lblSpecialEvent = new Label();
         boxAlert.SuspendLayout();
         groupBox1.SuspendLayout();
         SuspendLayout();
@@ -183,7 +159,18 @@ public class FormTest extends WinformForm {
         boxAlert.ResumeLayout(false);
         groupBox1.ResumeLayout(false);
         ResumeLayout(false);
+        AlertType[] alerts = Arrays.copyOfRange(AlertType.values(), AlertType.Alert.ordinal(), AlertType.WildWontStayAboardReactor.ordinal());
+        for (AlertType type : alerts) {
+            selAlertType.Items.add(type);
+        }
+        selAlertType.setSelectedIndex(0);
+        SpecialEventType[] events = Arrays.copyOfRange(SpecialEventType.values(), SpecialEventType.Artifact.ordinal(), SpecialEventType.WildGetsOut.ordinal());
+        for (SpecialEventType type : events) {
+            selSpecialEvent.Items.add(type);
+        }
+        selSpecialEvent.setSelectedIndex(0);
     }
+
 
     private void btnTestAlert_Click() {
         FormAlert.Alert(AlertType.Alert, this, "Result", "The result was " + FormAlert.Alert((AlertType) selAlertType.getSelectedItem(),

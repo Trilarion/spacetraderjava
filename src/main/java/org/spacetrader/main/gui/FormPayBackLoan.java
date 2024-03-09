@@ -1,15 +1,8 @@
 package org.spacetrader.main.gui;
 
-import java.awt.Point;
-
 import org.jwinforms.Button;
-import org.jwinforms.EventArgs;
-import org.jwinforms.EventHandler;
-import org.jwinforms.FormSize;
-import org.jwinforms.ISupportInitialize;
 import org.jwinforms.Label;
-import org.jwinforms.NumericUpDown;
-import org.jwinforms.WinformForm;
+import org.jwinforms.*;
 import org.jwinforms.enums.DialogResult;
 import org.jwinforms.enums.FlatStyle;
 import org.jwinforms.enums.FormBorderStyle;
@@ -19,39 +12,20 @@ import org.spacetrader.main.Functions;
 import org.spacetrader.main.Game;
 import org.spacetrader.main.Strings;
 
+import java.awt.*;
+
 
 public class FormPayBackLoan extends WinformForm {
     private final Game game = Game.CurrentGame();
-    private final Commander cmdr = game.Commander();
-    private Button btnOk;
-    private Button btnMax;
-    private Button btnNothing;
-    private Label lblQuestion;
-    private Label lblStatement;
     private NumericUpDown numAmount;
 
     public FormPayBackLoan() {
-        InitializeComponent();
-        int max = Math.min(cmdr.getDebt(), cmdr.getCash());
-        numAmount.setMaximum(max);
-        numAmount.setValue(numAmount.getMinimum());
-        lblStatement.setText(Functions.StringVars("You have a debt of ^1.", Functions.Multiples(cmdr.getDebt(), Strings.MoneyUnit)));
-    }
-
-    public static void main(String[] args) throws Exception {
-        FormPayBackLoan form = new FormPayBackLoan();
-        Launcher.runForm(form);
-        System.out.println(form.Amount());
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
-        lblQuestion = new Label();
+        Label lblQuestion = new Label();
         numAmount = new NumericUpDown();
-        btnOk = new Button();
-        btnMax = new Button();
-        btnNothing = new Button();
-        lblStatement = new Label();
+        Button btnOk = new Button();
+        Button btnMax = new Button();
+        Button btnNothing = new Button();
+        Label lblStatement = new Label();
         ((ISupportInitialize) (numAmount)).BeginInit();
         SuspendLayout();
         // lblQuestion
@@ -120,7 +94,13 @@ public class FormPayBackLoan extends WinformForm {
         setText("Pay Back Loan");
         ((ISupportInitialize) (numAmount)).EndInit();
         ResumeLayout(false);
+        Commander cmdr = game.Commander();
+        int max = Math.min(cmdr.getDebt(), cmdr.getCash());
+        numAmount.setMaximum(max);
+        numAmount.setValue(numAmount.getMinimum());
+        lblStatement.setText(Functions.StringVars("You have a debt of ^1.", Functions.Multiples(cmdr.getDebt(), Strings.MoneyUnit)));
     }
+
 
     private void btnMax_Click() {
         numAmount.setValue(numAmount.getMaximum());

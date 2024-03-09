@@ -17,47 +17,32 @@ public class FormViewBank extends WinformForm {
     private final Commander cmdr = game.Commander();
     private final int MaxLoan = cmdr.getPoliceRecordScore() >= Constants.PoliceRecordScoreClean
             ? Math.min(25000, Math.max(1000, cmdr.Worth() / 5000 * 500)) : 500;
-    private Button btnGetLoan;
     private Button btnBuyInsurance;
     private Button btnPayBack;
-    private Button btnClose;
-    private Label lblLoan;
-    private Label lblCurrentDebtLabel;
-    private Label lblMaxLoanLabel;
     private Label lblCurrentDebt;
     private Label lblMaxLoan;
     private Label lblNoClaim;
     private Label lblShipValue;
-    private Label lblNoClaimLabel;
-    private Label lblShipValueLabel;
-    private Label lblInsurance;
     private Label lblInsAmt;
-    private Label lblInsAmtLabel;
     private Label lblMaxNoClaim;
 
     public FormViewBank() {
-        InitializeComponent();
-        UpdateAll();
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
-        lblLoan = new Label();
-        lblCurrentDebtLabel = new Label();
-        lblMaxLoanLabel = new Label();
+        Label lblLoan = new Label();
+        Label lblCurrentDebtLabel = new Label();
+        Label lblMaxLoanLabel = new Label();
         lblCurrentDebt = new Label();
         lblMaxLoan = new Label();
-        btnGetLoan = new Button();
+        Button btnGetLoan = new Button();
         btnBuyInsurance = new Button();
         lblNoClaim = new Label();
         lblShipValue = new Label();
-        lblNoClaimLabel = new Label();
-        lblShipValueLabel = new Label();
-        lblInsurance = new Label();
+        Label lblNoClaimLabel = new Label();
+        Label lblShipValueLabel = new Label();
+        Label lblInsurance = new Label();
         lblInsAmt = new Label();
-        lblInsAmtLabel = new Label();
+        Label lblInsAmtLabel = new Label();
         btnPayBack = new Button();
-        btnClose = new Button();
+        Button btnClose = new Button();
         lblMaxNoClaim = new Label();
         SuspendLayout();
         // lblLoan
@@ -236,7 +221,9 @@ public class FormViewBank extends WinformForm {
         setStartPosition(FormStartPosition.CenterParent);
         setText("Bank");
         ResumeLayout(false);
+        UpdateAll();
     }
+
 
     private void UpdateAll() {
         // Loan Info

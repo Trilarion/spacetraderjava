@@ -15,11 +15,6 @@ import java.awt.*;
 
 
 public class FormOptions extends WinformForm {
-    private final Game game = Game.CurrentGame();
-    private Button btnOk;
-    private Button btnCancel;
-    private Button btnSave;
-    private Button btnLoad;
     private CheckBox chkFuel;
     private CheckBox chkContinuousAttack;
     private CheckBox chkAttackFleeing;
@@ -35,29 +30,14 @@ public class FormOptions extends WinformForm {
     private CheckBox chkIgnorePirates;
     private CheckBox chkIgnorePolice;
     private CheckBox chkRepair;
-    private Label lblEmpty;
-    private Label lblIgnore;
     private NumericUpDown numEmpty;
     private boolean initializing = true;
     private GameOptions opts = new GameOptions(false);
 
     public FormOptions() {
-        InitializeComponent();
-        if (game != null) {
-            opts.CopyValues(game.Options());
-        } else {
-            opts.LoadFromDefaults(false, this);
-            btnOk.setEnabled(false);
-            FormAlert.Alert(AlertType.OptionsNoGame, this);
-        }
-        UpdateAll();
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
-        btnOk = new Button();
-        btnCancel = new Button();
-        lblEmpty = new Label();
+        Button btnOk = new Button();
+        Button btnCancel = new Button();
+        Label lblEmpty = new Label();
         chkFuel = new CheckBox();
         chkContinuousAttack = new CheckBox();
         chkAttackFleeing = new CheckBox();
@@ -71,10 +51,10 @@ public class FormOptions extends WinformForm {
         chkIgnorePirates = new CheckBox();
         chkIgnorePolice = new CheckBox();
         chkRepair = new CheckBox();
-        lblIgnore = new Label();
+        Label lblIgnore = new Label();
         numEmpty = new NumericUpDown();
-        btnSave = new Button();
-        btnLoad = new Button();
+        Button btnSave = new Button();
+        Button btnLoad = new Button();
         chkNewspaperShow = new CheckBox();
         chkDisable = new CheckBox();
         ((ISupportInitialize) (numEmpty)).BeginInit();
@@ -364,7 +344,17 @@ public class FormOptions extends WinformForm {
         setText("Options");
         ((ISupportInitialize) (numEmpty)).EndInit();
         ResumeLayout(false);
+        Game game = Game.CurrentGame();
+        if (game != null) {
+            opts.CopyValues(game.Options());
+        } else {
+            opts.LoadFromDefaults(false, this);
+            btnOk.setEnabled(false);
+            FormAlert.Alert(AlertType.OptionsNoGame, this);
+        }
+        UpdateAll();
     }
+
 
     private void UpdateAll() {
         initializing = true;

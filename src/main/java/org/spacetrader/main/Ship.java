@@ -1,22 +1,15 @@
 package org.spacetrader.main;
 
+import org.spacetrader.crew.CrewMemberId;
+import org.spacetrader.difficulty.Difficulty;
 import org.spacetrader.main.enums.OpponentType;
 import org.spacetrader.main.enums.SkillType;
 import org.spacetrader.main.enums.StarSystemId;
 import org.spacetrader.main.stub.ArrayList;
 import org.spacetrader.main.util.Hashtable;
 import org.spacetrader.main.util.Util;
-import org.spacetrader.crew.CrewMemberId;
-import org.spacetrader.difficulty.Difficulty;
 import org.spacetrader.ship.ShipType;
-import org.spacetrader.ship.equip.Equipment;
-import org.spacetrader.ship.equip.EquipmentType;
-import org.spacetrader.ship.equip.Gadget;
-import org.spacetrader.ship.equip.GadgetType;
-import org.spacetrader.ship.equip.Shield;
-import org.spacetrader.ship.equip.ShieldType;
-import org.spacetrader.ship.equip.Weapon;
-import org.spacetrader.ship.equip.WeaponType;
+import org.spacetrader.ship.equip.*;
 
 
 public class Ship extends ShipSpec {
@@ -69,7 +62,7 @@ public class Ship extends ShipSpec {
         }
     }
 
-    @SuppressWarnings("unchecked")
+
     public Ship(Hashtable hash) {
         super(hash);
         _fuel = GetValueFromHash(hash, "_fuel", Integer.class);

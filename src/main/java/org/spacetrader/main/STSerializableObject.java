@@ -118,7 +118,7 @@ abstract public class STSerializableObject {
         return list;
     }
 
-    @SuppressWarnings("unchecked")
+
     public static <U> U GetValueFromHash(Hashtable hash, String key, Class<U> requstedType) {
         if (!hash.containsKey(key)) {
             return null;
@@ -131,12 +131,12 @@ abstract public class STSerializableObject {
         }
     }
 
-    @SuppressWarnings("unchecked")
+
     public static <T> T GetValueFromHash(Hashtable hash, String key, T defaultValue) {
         return GetValueFromHash(hash, key, defaultValue, (Class<T>) defaultValue.getClass());
     }
 
-    @SuppressWarnings("unchecked")
+
     public static <U, T extends U> U GetValueFromHash(Hashtable hash, String key, T defaultValue, Class<U> requstedType) {
         if (!hash.containsKey(key)) {
             return defaultValue;

@@ -100,7 +100,6 @@ public class WinformControl implements ISupportInitialize {
 
     /**
      * I think this is nothing.
-     *
      */
     public void setName(String name) {
         Name = name;

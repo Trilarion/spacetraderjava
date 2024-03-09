@@ -1,14 +1,14 @@
 package org.spacetrader.main;
 
-import java.util.Arrays;
-
+import org.spacetrader.crew.CrewMemberId;
+import org.spacetrader.difficulty.Difficulty;
 import org.spacetrader.main.enums.SkillType;
 import org.spacetrader.main.enums.StarSystemId;
 import org.spacetrader.main.stub.ArrayList;
 import org.spacetrader.main.util.Hashtable;
 import org.spacetrader.main.util.Util;
-import org.spacetrader.crew.CrewMemberId;
-import org.spacetrader.difficulty.Difficulty;
+
+import java.util.Arrays;
 
 
 public class CrewMember extends STSerializableObject {

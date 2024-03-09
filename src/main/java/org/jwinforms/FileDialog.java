@@ -12,11 +12,8 @@ public class FileDialog {
     protected final JFileChooser chooser = new JFileChooser();
     private String buttonText;
     private String Filter;
-    private String DefaultExt;
-    private String title;
 
     public void setTitle(String title) {
-        this.title = title;
     }
 
     protected void setButtonText(String text) {
@@ -55,7 +52,6 @@ public class FileDialog {
     }
 
     public void setDefaultExt(String defaultExt) {
-        DefaultExt = defaultExt;
     }
 
     public String getFileName() {

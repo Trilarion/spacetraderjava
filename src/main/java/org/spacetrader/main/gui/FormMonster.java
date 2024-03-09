@@ -18,10 +18,6 @@ public class FormMonster extends WinformForm {
     private final Game game = Game.CurrentGame();
     private final Commander cmdr = game.Commander();
     private final int SplitSystems = 31;
-    private Button btnClose;
-    private Label lblMercLabel;
-    private Label lblQuestsLabel;
-    private Label lblShipyardsLabel;
     private Label lblMercIds;
     private Label lblMercNames;
     private Label lblMercSkillsPilot;
@@ -30,59 +26,33 @@ public class FormMonster extends WinformForm {
     private Label lblMercSkillsEngineer;
     private Label lblQuests;
     private Label lblShipyards;
-    private LinkLabel lblMercIDLabel;
-    private LinkLabel lblMercNameLabel;
-    private LinkLabel lblMercSkillLabelPilot;
-    private LinkLabel lblMercSkillLabelFighter;
-    private LinkLabel lblMercSkillLabelTrader;
-    private LinkLabel lblMercSkillLabelEngineer;
-    private LinkLabel lblMercSystemLabel;
-    private LinkLabel lblQuestSystemLabel;
-    private LinkLabel lblQuestDescLabel;
-    private LinkLabel lblShipyardsSystemLabel;
-    private LinkLabel lblShipyardsDescLabel;
     private LinkLabel lblMercSystems;
     private LinkLabel lblMercSystems2;
     private LinkLabel lblQuestSystems;
     private LinkLabel lblShipyardSystems;
-    private Panel pnlMercs;
-    private Panel pnlQuests;
-    private Panel pnlShipyards;
-    private PictureBox picLine1;
-    private PictureBox picLine0;
-    private PictureBox picLine2;
     private Integer[] mercIds;
     private Integer[] questSystemIds;
     private Integer[] shipyardSystemIds;
 
     public FormMonster() {
-        InitializeComponent();
-        PopulateIdArrays();
-        SetLabelHeights();
-        UpdateAll();
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    @SuppressWarnings("deprecation")
-    private void InitializeComponent() {
-        btnClose = new Button();
-        picLine1 = new PictureBox();
-        picLine0 = new PictureBox();
-        lblQuestsLabel = new Label();
-        lblMercLabel = new Label();
-        lblMercSkillLabelPilot = new LinkLabel();
-        lblMercSkillLabelFighter = new LinkLabel();
-        lblMercSkillLabelTrader = new LinkLabel();
-        lblMercSkillLabelEngineer = new LinkLabel();
-        lblMercSystemLabel = new LinkLabel();
-        lblQuestSystemLabel = new LinkLabel();
-        lblQuestDescLabel = new LinkLabel();
-        lblMercIDLabel = new LinkLabel();
-        lblMercNameLabel = new LinkLabel();
-        lblShipyardsDescLabel = new LinkLabel();
-        lblShipyardsSystemLabel = new LinkLabel();
-        lblShipyardsLabel = new Label();
-        pnlMercs = new Panel();
+        Button btnClose = new Button();
+        PictureBox picLine1 = new PictureBox();
+        PictureBox picLine0 = new PictureBox();
+        Label lblQuestsLabel = new Label();
+        Label lblMercLabel = new Label();
+        LinkLabel lblMercSkillLabelPilot = new LinkLabel();
+        LinkLabel lblMercSkillLabelFighter = new LinkLabel();
+        LinkLabel lblMercSkillLabelTrader = new LinkLabel();
+        LinkLabel lblMercSkillLabelEngineer = new LinkLabel();
+        LinkLabel lblMercSystemLabel = new LinkLabel();
+        LinkLabel lblQuestSystemLabel = new LinkLabel();
+        LinkLabel lblQuestDescLabel = new LinkLabel();
+        LinkLabel lblMercIDLabel = new LinkLabel();
+        LinkLabel lblMercNameLabel = new LinkLabel();
+        LinkLabel lblShipyardsDescLabel = new LinkLabel();
+        LinkLabel lblShipyardsSystemLabel = new LinkLabel();
+        Label lblShipyardsLabel = new Label();
+        Panel pnlMercs = new Panel();
         lblMercSkillsPilot = new Label();
         lblMercSkillsFighter = new Label();
         lblMercSkillsTrader = new Label();
@@ -91,13 +61,13 @@ public class FormMonster extends WinformForm {
         lblMercIds = new Label();
         lblMercNames = new Label();
         lblMercSystems2 = new LinkLabel();
-        pnlQuests = new Panel();
+        Panel pnlQuests = new Panel();
         lblQuests = new Label();
         lblQuestSystems = new LinkLabel();
-        pnlShipyards = new Panel();
+        Panel pnlShipyards = new Panel();
         lblShipyards = new Label();
         lblShipyardSystems = new LinkLabel();
-        picLine2 = new PictureBox();
+        PictureBox picLine2 = new PictureBox();
         pnlMercs.SuspendLayout();
         pnlQuests.SuspendLayout();
         pnlShipyards.SuspendLayout();
@@ -452,7 +422,11 @@ public class FormMonster extends WinformForm {
         pnlQuests.ResumeLayout(false);
         pnlShipyards.ResumeLayout(false);
         ResumeLayout(false);
+        PopulateIdArrays();
+        SetLabelHeights();
+        UpdateAll();
     }
+
 
     private int Compare(int a, int b, String sortWhat, String sortBy) {
         int compareVal = 0;

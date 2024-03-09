@@ -14,43 +14,22 @@ import java.awt.*;
 
 
 public class FormEncounter extends WinformForm {
-    private final int ATTACK = 0;
-    private final int BOARD = 1;
-    private final int BRIBE = 2;
-    private final int DRINK = 3;
-    private final int FLEE = 4;
-    private final int IGNORE = 5;
-    private final int INT = 6;
-    private final int MEET = 7;
-    private final int PLUNDER = 8;
-    private final int SUBMIT = 9;
-    private final int SURRENDER = 10;
-    private final int TRADE = 11;
-    private final int YIELD = 12;
     private final Game game = Game.CurrentGame();
     private final Commander cmdr = game.Commander();
     private final Ship cmdrship = cmdr.getShip();
     private final Ship opponent = game.getOpponent();
-    private Button btnAttack;
     private Button btnFlee;
-    private Button btnSubmit;
     private Button btnBribe;
     private Button btnSurrender;
     private Button btnIgnore;
-    private Button btnTrade;
-    private Button btnPlunder;
     private Button btnBoard;
-    private Button btnMeet;
     private Button btnDrink;
     private Button btnInt;
     private Button btnYield;
     private Button[] buttons;
     private ImageList ilContinuous;
-    private ImageList ilEncounterType;
     private ImageList ilTribbles;
     private Label lblEncounter;
-    private Label lblOpponentLabel;
-    private Label lblYouLabel;
     private Label lblOpponentShip;
     private Label lblYouShip;
     private Label lblYouHull;
@@ -61,7 +40,6 @@ public class FormEncounter extends WinformForm {
     private PictureBox picShipYou;
     private PictureBox picShipOpponent;
     private PictureBox picContinuous;
-    private PictureBox picEncounterType;
     private PictureBox picTribbles00;
     private PictureBox picTribbles50;
     private PictureBox picTribbles10;
@@ -99,66 +77,41 @@ public class FormEncounter extends WinformForm {
     private PictureBox picTribbles54;
     private PictureBox picTribbles55;
     private Timer tmrTick;
-    private IContainer components;
     private int contImg = 1;
     private EncounterResult _result = EncounterResult.Continue;
 
     public FormEncounter() {
-        InitializeComponent();
-        // Set up the Game encounter variables.
-        game.EncounterBegin();
-        // Enable the control box (the X button) if cheats are enabled.
-        if (game.getEasyEncounters()) {
-            setControlBox(true);
-        }
-        buttons = new Button[]{
-                btnAttack, btnBoard, btnBribe, btnDrink, btnFlee, btnIgnore, btnInt, btnMeet, btnPlunder, btnSubmit, btnSurrender, btnTrade, btnYield
-        };
-        UpdateShipInfo();
-        UpdateTribbles();
-        UpdateButtons();
-        if (game.EncounterImageIndex() >= 0) {
-            picEncounterType.setImage(ilEncounterType.getImages()[game.EncounterImageIndex()]);
-        } else {
-            picEncounterType.setVisible(false);
-        }
-        lblEncounter.setText(game.EncounterTextInitial());
-        lblAction.setText(game.EncounterActionInitial());
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
-        components = new Container();
+        IContainer components = new Container();
         ResourceManager resources = new ResourceManager(FormEncounter.class);
         lblEncounter = new Label();
         picShipYou = new PictureBox();
         picShipOpponent = new PictureBox();
         lblAction = new Label();
-        lblOpponentLabel = new Label();
-        lblYouLabel = new Label();
+        Label lblOpponentLabel = new Label();
+        Label lblYouLabel = new Label();
         lblOpponentShip = new Label();
         lblYouShip = new Label();
         lblYouHull = new Label();
         lblYouShields = new Label();
         lblOpponentShields = new Label();
         lblOpponentHull = new Label();
-        btnAttack = new Button();
+        Button btnAttack = new Button();
         btnFlee = new Button();
-        btnSubmit = new Button();
+        Button btnSubmit = new Button();
         btnBribe = new Button();
         btnSurrender = new Button();
         btnIgnore = new Button();
-        btnTrade = new Button();
-        btnPlunder = new Button();
+        Button btnTrade = new Button();
+        Button btnPlunder = new Button();
         btnBoard = new Button();
-        btnMeet = new Button();
+        Button btnMeet = new Button();
         btnDrink = new Button();
         btnInt = new Button();
         btnYield = new Button();
         picContinuous = new PictureBox();
         ilContinuous = new ImageList(components);
-        picEncounterType = new PictureBox();
-        ilEncounterType = new ImageList(components);
+        PictureBox picEncounterType = new PictureBox();
+        ImageList ilEncounterType = new ImageList(components);
         picTribbles00 = new PictureBox();
         ilTribbles = new ImageList(components);
         picTribbles50 = new PictureBox();
@@ -1084,7 +1037,27 @@ public class FormEncounter extends WinformForm {
         setStartPosition(FormStartPosition.CenterParent);
         setText("Encounter");
         ResumeLayout(false);
+        // Set up the Game encounter variables.
+        game.EncounterBegin();
+        // Enable the control box (the X button) if cheats are enabled.
+        if (game.getEasyEncounters()) {
+            setControlBox(true);
+        }
+        buttons = new Button[]{
+                btnAttack, btnBoard, btnBribe, btnDrink, btnFlee, btnIgnore, btnInt, btnMeet, btnPlunder, btnSubmit, btnSurrender, btnTrade, btnYield
+        };
+        UpdateShipInfo();
+        UpdateTribbles();
+        UpdateButtons();
+        if (game.EncounterImageIndex() >= 0) {
+            picEncounterType.setImage(ilEncounterType.getImages()[game.EncounterImageIndex()]);
+        } else {
+            picEncounterType.setVisible(false);
+        }
+        lblEncounter.setText(game.EncounterTextInitial());
+        lblAction.setText(game.EncounterActionInitial());
     }
+
 
     private void DisableAuto() {
         tmrTick.Stop();
@@ -1116,6 +1089,18 @@ public class FormEncounter extends WinformForm {
 
     private void UpdateButtons() {
         boolean[] visible = new boolean[buttons.length];
+        int YIELD = 12;
+        int TRADE = 11;
+        int SURRENDER = 10;
+        int SUBMIT = 9;
+        int PLUNDER = 8;
+        int MEET = 7;
+        int IGNORE = 5;
+        int FLEE = 4;
+        int DRINK = 3;
+        int BRIBE = 2;
+        int BOARD = 1;
+        int ATTACK = 0;
         switch (game.getEncounterType()) {
             case BottleGood:
             case BottleOld:
@@ -1195,6 +1180,7 @@ public class FormEncounter extends WinformForm {
                 visible[TRADE] = true;
                 break;
         }
+        int INT = 6;
         if (game.getEncounterContinueAttacking() || game.getEncounterContinueFleeing()) {
             visible[INT] = true;
         }

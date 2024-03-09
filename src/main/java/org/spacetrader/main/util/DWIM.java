@@ -1,9 +1,9 @@
 package org.spacetrader.main.util;
 
+import org.spacetrader.main.enums.SpaceTraderEnum;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
-
-import org.spacetrader.main.enums.SpaceTraderEnum;
 
 
 public class DWIM {
@@ -17,9 +17,8 @@ public class DWIM {
      * boolean equals = MyEnum.value(val); // true
      * boolean same = MyEnum.value == val; // false.
      * </code>
-     *
      */
-    @SuppressWarnings("unchecked")
+
     public static <T extends SpaceTraderEnum> T dwim(Object ob, Class<T> cls) {
         int value;
         if (ob instanceof Integer) {
@@ -36,7 +35,7 @@ public class DWIM {
         }
     }
 
-    @SuppressWarnings("unchecked")
+
     public static <T extends SpaceTraderEnum> T[] dwim(Object[] ob, Class<T> cls) {
         try {
             T[] arrayVal = (T[]) Array.newInstance(cls, ob.length);

@@ -1,17 +1,8 @@
 package org.spacetrader.main.gui;
 
-import java.awt.Point;
-import java.util.Arrays;
-import javax.swing.UnsupportedLookAndFeelException;
-
 import org.jwinforms.Button;
-import org.jwinforms.EventArgs;
-import org.jwinforms.FormSize;
-import org.jwinforms.ISupportInitialize;
 import org.jwinforms.Label;
-import org.jwinforms.NumericUpDown;
-import org.jwinforms.WinformControl;
-import org.jwinforms.WinformForm;
+import org.jwinforms.*;
 import org.jwinforms.enums.DialogResult;
 import org.jwinforms.enums.FlatStyle;
 import org.jwinforms.enums.FormBorderStyle;
@@ -19,35 +10,20 @@ import org.jwinforms.enums.FormStartPosition;
 import org.spacetrader.main.Commander;
 import org.spacetrader.main.Game;
 
+import java.awt.*;
+import java.util.Arrays;
+
 
 public class FormBuyRepairs extends WinformForm {
     private final Game game = Game.CurrentGame();
-    private final Commander cmdr = game.Commander();
-    private Button btnOk;
-    private Button btnMax;
-    private Button btnNothing;
-    private Label lblQuestion;
     private NumericUpDown numAmount;
 
     public FormBuyRepairs() {
-        InitializeComponent();
-        numAmount.setMaximum(Math.min(cmdr.getCash(), (cmdr.getShip().HullStrength() - cmdr.getShip().getHull()) * cmdr.getShip().getRepairCost()));
-        numAmount.setValue(numAmount.getMaximum());
-    }
-
-    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-        FormBuyRepairs form = new FormBuyRepairs();
-        Launcher.runForm(form);
-        System.out.println(form.Amount());
-    }
-
-    // Required method for Designer support - do not modify the contents of this method with the code editor.
-    private void InitializeComponent() {
-        lblQuestion = new Label();
+        Label lblQuestion = new Label();
         numAmount = new NumericUpDown();
-        btnOk = new Button();
-        btnMax = new Button();
-        btnNothing = new Button();
+        Button btnOk = new Button();
+        Button btnMax = new Button();
+        Button btnNothing = new Button();
         ((ISupportInitialize) (numAmount)).BeginInit();
         SuspendLayout();
         // lblQuestion
@@ -103,9 +79,12 @@ public class FormBuyRepairs extends WinformForm {
         setText("Hull Repair");
         ((ISupportInitialize) (numAmount)).EndInit();
         ResumeLayout(false);
+        Commander cmdr = game.Commander();
+        numAmount.setMaximum(Math.min(cmdr.getCash(), (cmdr.getShip().HullStrength() - cmdr.getShip().getHull()) * cmdr.getShip().getRepairCost()));
+        numAmount.setValue(numAmount.getMaximum());
     }
 
-    // This action is not connected in the .NET version either.
+    // TODO This action is not connected in the .NET version either.
     private void btnMax_Click(Object sender, EventArgs e) {
         numAmount.setValue(numAmount.getMaximum());
     }
