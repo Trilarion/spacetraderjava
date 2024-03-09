@@ -5,155 +5,155 @@ import org.spacetrader.ship.equip.WeaponType;
 
 
 public interface Strings {
-    public static final String newline = String.format("\n");
-    public static final String CargoSellStatementDump = "You can ^1 up to ^2.";
-    public static final String CargoTitle = "^1 ^2";
-    public static final String CargoUnit = "unit";
+    String newline = "\n";
+    String CargoSellStatementDump = "You can ^1 up to ^2.";
+    String CargoTitle = "^1 ^2";
+    String CargoUnit = "unit";
     // TODO fix this line.
-    public static final String DistanceUnit = "parsec";
-    public static final String EncounterActionOppAttacks = "The ^1 attacks.";
-    public static final String EncounterHidePrincess = "the Princess";
-    public static final String EncounterHideSculpture = "the stolen sculpture";
-    public static final String EncounterHullStrength = "Hull at ^1%";
-    public static final String EncounterPiratesDestroyed = "destroyed";
-    public static final String EncounterPiratesDisabled = "disabled";
-    public static final String EncounterPiratesLocation = " (informing the police of the pirate's location)";
-    public static final String EncounterPoliceSubmitArrested = "You will be arrested!";
-    public static final String EncounterPoliceSubmitGoods = "illegal goods";
-    public static final String EncounterPoliceSubmitReactor = "an illegal Ion Reactor";
-    public static final String EncounterPoliceSubmitSculpture = "a stolen sculpture";
-    public static final String EncounterPoliceSubmitWild = "Jonathan Wild";
-    public static final String EncounterPoliceSurrenderCargo = "You have ^1 on board! ";
-    public static final String EncounterPoliceSurrenderAction = "They will ^1. ";
-    public static final String EncounterPoliceSurrenderReactor = "destroy the reactor";
-    public static final String EncounterPoliceSurrenderSculpt = "confiscate the sculpture";
-    public static final String EncounterPoliceSurrenderWild = "arrest Wild, too";
-    public static final String EncounterPretextAlien = "an alien";
-    public static final String EncounterPretextBottle = "a floating";
-    public static final String EncounterPretextCaptainAhab = "the famous Captain Ahab in a";
-    public static final String EncounterPretextCaptainConrad = "the famous Captain Conrad in a";
-    public static final String EncounterPretextCaptainHuie = "the famous Captain Huie in a";
-    public static final String EncounterPretextMarie = "a drifting";
-    public static final String EncounterPretextMariePolice = "the Customs Police in a";
-    public static final String EncounterPretextPirate = "a pirate";
-    public static final String EncounterPretextPolice = "a police";
-    public static final String EncounterPretextScorpion = "the kidnappers in a";
-    public static final String EncounterPretextSpaceMonster = "a horrifying";
-    public static final String EncounterPretextStolen = "a stolen";
-    public static final String EncounterPretextTrader = "a trader";
-    public static final String EncounterPrincessRescued = newline + newline + "You land your ship near where the Space Corps has landed with the Scorpion in tow. The Princess is revived from hibernation and you get to see her for the first time. Instead of the spoiled child you were expecting, Ziyal is possible the most beautiful woman you've ever seen. \"What took you so long?\" she demands. You notice a twinkle in her eye, and then she smiles. Not only is she beautiful, but she's got a sense of humor. She says, \"Thank you for freeing me. I am in your debt.\" With that she give you a kiss on the cheek, then leaves. You hear her mumble, \"Now about a ride home.\"";
-    public static final String EncounterShieldStrength = "Shields at ^1%";
-    public static final String EncounterShieldNone = "No Shields";
-    public static final String EncounterShipCaptain = "Captain";
-    public static final String EncounterShipMantis = "alien ship";
-    public static final String EncounterShipPirate = "pirate ship";
-    public static final String EncounterShipPolice = "police ship";
-    public static final String EncounterShipTrader = "trader ship";
-    public static final String EncounterText = "At ^1 from ^2 you encounter ^3 ^4.";
-    public static final String EncounterTextBottle = "It appears to be a rare bottle of Captain Marmoset's Skill Tonic!";
-    public static final String EncounterTextFamousCaptain = "The Captain requests a brief meeting with you.";
-    public static final String EncounterTextMarieCeleste = "The Marie Celeste appears to be completely abandoned.";
-    public static final String EncounterTextOpponentAttack = "Your opponent attacks.";
-    public static final String EncounterTextOpponentFlee = "Your opponent is fleeing.";
-    public static final String EncounterTextOpponentIgnore = "It ignores you.";
-    public static final String EncounterTextOpponentNoNotice = "It doesn't notice you.";
-    public static final String EncounterTextPoliceInspection = "The police summon you to submit to an inspection.";
-    public static final String EncounterTextPolicePostMarie = "\"We know you removed illegal goods from the Marie Celeste. You must give them up at once!\"";
-    public static final String EncounterTextPoliceSurrender = "The police hail they want you to surrender.";
-    public static final String EncounterTextTrader = "You are hailed with an offer to trade goods.";
-    public static final String EquipmentNoneForSale = "None for sale";
-    public static final String EquipmentNoSlots = "No slots";
-    public static final String EquipmentFreeSlot = " - FREE SLOT - ";
-    public static final String FileFormatBad = "The file is not a Space Trader for Windows file, or is the wrong version or has been corrupted.";
-    public static final String FileFutureVersion = "The version of the file is greater than the current version. You should upgrade to the latest version of Space Trader for Windows.";
-    public static final String HighScoreStatus = "^1 in ^2, worth ^3 on ^4 level.";
-    public static final String Mercenaries = " mercenaries";
-    public static final String MercenariesForHire = "^1 available for hire.";
-    public static final String MercenaryFire = "Fire";
-    public static final String MercenaryHire = "Hire";
-    public static final String MercOnBoard = "Member of Crew (^1)";
-    public static final String MoneyRateSuffix = "^1 daily";
-    public static final String MoneyUnit = "credit";
-    public static final String NA = "N/A";
-    public static final String NewsMoonForSale = "Seller in ^1 System has Utopian Moon available.";
-    public static final String NewsShipyard = "Shipyard in ^1 System offers to design custom ships.";
-    public static final String NewsTribbleBuyer = "Collector in ^1 System seeks to purchase Tribbles.";
-    public static final String PersonnelNoMercenaries = "No one for hire";
-    public static final String PersonnelNoQuarters = "No quarters available";
-    public static final String PersonnelVacancy = "Vacancy";
-    public static final String QuestNone = "There are no open quests.";
-    public static final String QuestArtifact = "Deliver the alien artifact to Professor Berger at some hi-tech system.";
-    public static final String QuestDragonflyBaratas = "Follow the Dragonfly to Baratas.";
-    public static final String QuestDragonflyMelina = "Follow the Dragonfly to Melina.";
-    public static final String QuestDragonflyRegulas = "Follow the Dragonfly to Regulas.";
-    public static final String QuestDragonflyShield = "Get your lightning shield at Zalkon.";
-    public static final String QuestDragonflyZalkon = "Follow the Dragonfly to Zalkon.";
-    public static final String QuestExperimentInformDays = "Stop Dr. Fehler's experiment at Daled within ^1.";
-    public static final String QuestExperimentInformTomorrow = "Stop Dr. Fehler's experiment at Daled by tomorrow.";
-    public static final String QuestGemulonFuel = "Get your fuel compactor at Gemulon.";
-    public static final String QuestGemulonInformDays = "Inform Gemulon about alien invasion within ^1.";
-    public static final String QuestGemulonInformTomorrow = "Inform Gemulon about alien invasion by tomorrow.";
-    public static final String QuestJarek = "Take ambassador Jarek to Devidia.";
-    public static final String QuestJarekImpatient = QuestJarek + newline + "Jarek is wondering why the journey is taking so long, and is no longer of much help in negotiating trades.";
-    public static final String QuestJaporiDeliver = "Deliver antidote to Japori.";
-    public static final String QuestMoon = "Claim your moon at Utopia.";
-    public static final String QuestPrincessCentauri = "Follow the Scorpion to Centauri.";
-    public static final String QuestPrincessInthara = "Follow the Scorpion to Inthara.";
-    public static final String QuestPrincessQonos = "Follow the Scorpion to Qonos.";
-    public static final String QuestPrincessQuantum = "Get your Quantum Disruptor at Galvon.";
-    public static final String QuestPrincessReturn = "Transport ^1 from Qonos to Galvon.";
-    public static final String QuestPrincessReturning = "Return ^1 to Galvon.";
-    public static final String QuestPrincessReturningImpatient = QuestPrincessReturning + newline + "She is becoming anxious to arrive at home, and is no longer of any help in engineering functions.";
-    public static final String QuestReactor = "Deliver the unstable reactor to Nix for Henry Morgan.";
-    public static final String QuestReactorFuel = "Deliver the unstable reactor to Nix before it consumes all its fuel.";
-    public static final String QuestReactorLaser = "Get your special laser at Nix.";
-    public static final String QuestScarabFind = "Find and destroy the Scarab (which is hiding at the exit to a wormhole).";
-    public static final String QuestScarabHull = "Get your hull upgraded at ^1.";
-    public static final String QuestScarabNotify = "Notify the authorities at ^1 that the Scarab has been destroyed.";
-    public static final String QuestSculpture = "Deliver the stolen sculpture to Endor.";
-    public static final String QuestSculptureHiddenBays = "Have hidden compartments installed at Endor.";
-    public static final String QuestSpaceMonsterKill = "Kill the space monster at Acamar.";
-    public static final String QuestTribbles = "Get rid of those pesky tribbles.";
-    public static final String QuestWild = "Smuggle Jonathan Wild to Kravat.";
-    public static final String QuestWildImpatient = QuestWild + newline + "Wild is getting impatient, and will no longer aid your crew along the way.";
-    public static final String ShipBuyGotOne = "got one";
-    public static final String ShipBuyTransfer = ", and transfer your unique equipment to the new ship";
-    public static final String ShipInfoEscapePod = "Escape Pod";
-    public static final String ShipNameCurrentShip = "<current ship>";
-    public static final String ShipNameCustomShip = "Custom Ship";
-    public static final String ShipNameModified = "<modified>";
-    public static final String ShipNameTemplateSuffixDefault = " (Default)";
-    public static final String ShipNameTemplateSuffixMinimum = " (Minimum)";
-    public static final String ShipyardEquipForSale = "There is equipment for sale.";
-    public static final String ShipyardEquipNoSale = "No equipment for sale.";
-    public static final String ShipyardPodCost = "You can buy an escape pod for 2,000 cr.";
-    public static final String ShipyardPodIF = "You need 2,000 cr. to buy an escape pod.";
-    public static final String ShipyardPodInstalled = "You have an escape pod installed.";
-    public static final String ShipyardPodNoSale = "No escape pods for sale.";
-    public static final String ShipyardShipForSale = "There are ships for sale.";
-    public static final String ShipyardShipNoSale = "No ships for sale.";
-    public static final String ShipyardSizeItem = "^1 (Max ^2)";
-    public static final String ShipyardTitle = "Ship Design at ^1 Shipyards";
-    public static final String ShipyardUnit = "Unit";
-    public static final String ShipyardWarning = "Bear in mind that getting too close to the maximum number of units will result in a \"Crowding Penalty\" due to the engineering difficulty of squeezing everything in.  There is a modest penalty at 80%, and a more severe one at 90%.";
-    public static final String ShipyardWelcome = "Welcome to ^1 Shipyards! Our best engineer, ^2, is at your service.";
-    public static final String SpecialCargoArtifact = "An alien artifact.";
-    public static final String SpecialCargoExperiment = "A portable singularity.";
-    public static final String SpecialCargoJapori = "10 bays of antidote.";
-    public static final String SpecialCargoJarek = "A haggling computer.";
-    public static final String SpecialCargoNone = "No special items.";
-    public static final String SpecialCargoReactor = "An unstable reactor taking up 5 bays.";
-    public static final String SpecialCargoSculpture = "A stolen plastic sculpture of a man holding some kind of light sword.";
-    public static final String SpecialCargoReactorBays = " of enriched fuel.";
-    public static final String SpecialCargoTribblesInfest = "An infestation of tribbles.";
-    public static final String SpecialCargoTribblesCute = "cute, furry tribble";
-    public static final String TimeUnit = "day";
-    public static final String TribbleDangerousNumber = "a dangerous number of";
-    public static final String Unknown = "Unknown";
-    public static final String[] ActivityLevels = new String[]{"Absent", "Minimal", "Few", "Some", "Moderate", "Many", "Abundant", "Swarms"};
-    public static final String[] CargoBuyOps = new String[]{"Buy", "Buy", "Steal"};
-    public static final String[] CargoSellOps = new String[]{"Sell", "Sell", "Dump", "Jettison"};
-    public static final String[] CrewMemberNames = new String[]{"Commander",
+    String DistanceUnit = "parsec";
+    String EncounterActionOppAttacks = "The ^1 attacks.";
+    String EncounterHidePrincess = "the Princess";
+    String EncounterHideSculpture = "the stolen sculpture";
+    String EncounterHullStrength = "Hull at ^1%";
+    String EncounterPiratesDestroyed = "destroyed";
+    String EncounterPiratesDisabled = "disabled";
+    String EncounterPiratesLocation = " (informing the police of the pirate's location)";
+    String EncounterPoliceSubmitArrested = "You will be arrested!";
+    String EncounterPoliceSubmitGoods = "illegal goods";
+    String EncounterPoliceSubmitReactor = "an illegal Ion Reactor";
+    String EncounterPoliceSubmitSculpture = "a stolen sculpture";
+    String EncounterPoliceSubmitWild = "Jonathan Wild";
+    String EncounterPoliceSurrenderCargo = "You have ^1 on board! ";
+    String EncounterPoliceSurrenderAction = "They will ^1. ";
+    String EncounterPoliceSurrenderReactor = "destroy the reactor";
+    String EncounterPoliceSurrenderSculpt = "confiscate the sculpture";
+    String EncounterPoliceSurrenderWild = "arrest Wild, too";
+    String EncounterPretextAlien = "an alien";
+    String EncounterPretextBottle = "a floating";
+    String EncounterPretextCaptainAhab = "the famous Captain Ahab in a";
+    String EncounterPretextCaptainConrad = "the famous Captain Conrad in a";
+    String EncounterPretextCaptainHuie = "the famous Captain Huie in a";
+    String EncounterPretextMarie = "a drifting";
+    String EncounterPretextMariePolice = "the Customs Police in a";
+    String EncounterPretextPirate = "a pirate";
+    String EncounterPretextPolice = "a police";
+    String EncounterPretextScorpion = "the kidnappers in a";
+    String EncounterPretextSpaceMonster = "a horrifying";
+    String EncounterPretextStolen = "a stolen";
+    String EncounterPretextTrader = "a trader";
+    String EncounterPrincessRescued = newline + newline + "You land your ship near where the Space Corps has landed with the Scorpion in tow. The Princess is revived from hibernation and you get to see her for the first time. Instead of the spoiled child you were expecting, Ziyal is possible the most beautiful woman you've ever seen. \"What took you so long?\" she demands. You notice a twinkle in her eye, and then she smiles. Not only is she beautiful, but she's got a sense of humor. She says, \"Thank you for freeing me. I am in your debt.\" With that she give you a kiss on the cheek, then leaves. You hear her mumble, \"Now about a ride home.\"";
+    String EncounterShieldStrength = "Shields at ^1%";
+    String EncounterShieldNone = "No Shields";
+    String EncounterShipCaptain = "Captain";
+    String EncounterShipMantis = "alien ship";
+    String EncounterShipPirate = "pirate ship";
+    String EncounterShipPolice = "police ship";
+    String EncounterShipTrader = "trader ship";
+    String EncounterText = "At ^1 from ^2 you encounter ^3 ^4.";
+    String EncounterTextBottle = "It appears to be a rare bottle of Captain Marmoset's Skill Tonic!";
+    String EncounterTextFamousCaptain = "The Captain requests a brief meeting with you.";
+    String EncounterTextMarieCeleste = "The Marie Celeste appears to be completely abandoned.";
+    String EncounterTextOpponentAttack = "Your opponent attacks.";
+    String EncounterTextOpponentFlee = "Your opponent is fleeing.";
+    String EncounterTextOpponentIgnore = "It ignores you.";
+    String EncounterTextOpponentNoNotice = "It doesn't notice you.";
+    String EncounterTextPoliceInspection = "The police summon you to submit to an inspection.";
+    String EncounterTextPolicePostMarie = "\"We know you removed illegal goods from the Marie Celeste. You must give them up at once!\"";
+    String EncounterTextPoliceSurrender = "The police hail they want you to surrender.";
+    String EncounterTextTrader = "You are hailed with an offer to trade goods.";
+    String EquipmentNoneForSale = "None for sale";
+    String EquipmentNoSlots = "No slots";
+    String EquipmentFreeSlot = " - FREE SLOT - ";
+    String FileFormatBad = "The file is not a Space Trader for Windows file, or is the wrong version or has been corrupted.";
+    String FileFutureVersion = "The version of the file is greater than the current version. You should upgrade to the latest version of Space Trader for Windows.";
+    String HighScoreStatus = "^1 in ^2, worth ^3 on ^4 level.";
+    String Mercenaries = " mercenaries";
+    String MercenariesForHire = "^1 available for hire.";
+    String MercenaryFire = "Fire";
+    String MercenaryHire = "Hire";
+    String MercOnBoard = "Member of Crew (^1)";
+    String MoneyRateSuffix = "^1 daily";
+    String MoneyUnit = "credit";
+    String NA = "N/A";
+    String NewsMoonForSale = "Seller in ^1 System has Utopian Moon available.";
+    String NewsShipyard = "Shipyard in ^1 System offers to design custom ships.";
+    String NewsTribbleBuyer = "Collector in ^1 System seeks to purchase Tribbles.";
+    String PersonnelNoMercenaries = "No one for hire";
+    String PersonnelNoQuarters = "No quarters available";
+    String PersonnelVacancy = "Vacancy";
+    String QuestNone = "There are no open quests.";
+    String QuestArtifact = "Deliver the alien artifact to Professor Berger at some hi-tech system.";
+    String QuestDragonflyBaratas = "Follow the Dragonfly to Baratas.";
+    String QuestDragonflyMelina = "Follow the Dragonfly to Melina.";
+    String QuestDragonflyRegulas = "Follow the Dragonfly to Regulas.";
+    String QuestDragonflyShield = "Get your lightning shield at Zalkon.";
+    String QuestDragonflyZalkon = "Follow the Dragonfly to Zalkon.";
+    String QuestExperimentInformDays = "Stop Dr. Fehler's experiment at Daled within ^1.";
+    String QuestExperimentInformTomorrow = "Stop Dr. Fehler's experiment at Daled by tomorrow.";
+    String QuestGemulonFuel = "Get your fuel compactor at Gemulon.";
+    String QuestGemulonInformDays = "Inform Gemulon about alien invasion within ^1.";
+    String QuestGemulonInformTomorrow = "Inform Gemulon about alien invasion by tomorrow.";
+    String QuestJarek = "Take ambassador Jarek to Devidia.";
+    String QuestJarekImpatient = QuestJarek + newline + "Jarek is wondering why the journey is taking so long, and is no longer of much help in negotiating trades.";
+    String QuestJaporiDeliver = "Deliver antidote to Japori.";
+    String QuestMoon = "Claim your moon at Utopia.";
+    String QuestPrincessCentauri = "Follow the Scorpion to Centauri.";
+    String QuestPrincessInthara = "Follow the Scorpion to Inthara.";
+    String QuestPrincessQonos = "Follow the Scorpion to Qonos.";
+    String QuestPrincessQuantum = "Get your Quantum Disruptor at Galvon.";
+    String QuestPrincessReturn = "Transport ^1 from Qonos to Galvon.";
+    String QuestPrincessReturning = "Return ^1 to Galvon.";
+    String QuestPrincessReturningImpatient = QuestPrincessReturning + newline + "She is becoming anxious to arrive at home, and is no longer of any help in engineering functions.";
+    String QuestReactor = "Deliver the unstable reactor to Nix for Henry Morgan.";
+    String QuestReactorFuel = "Deliver the unstable reactor to Nix before it consumes all its fuel.";
+    String QuestReactorLaser = "Get your special laser at Nix.";
+    String QuestScarabFind = "Find and destroy the Scarab (which is hiding at the exit to a wormhole).";
+    String QuestScarabHull = "Get your hull upgraded at ^1.";
+    String QuestScarabNotify = "Notify the authorities at ^1 that the Scarab has been destroyed.";
+    String QuestSculpture = "Deliver the stolen sculpture to Endor.";
+    String QuestSculptureHiddenBays = "Have hidden compartments installed at Endor.";
+    String QuestSpaceMonsterKill = "Kill the space monster at Acamar.";
+    String QuestTribbles = "Get rid of those pesky tribbles.";
+    String QuestWild = "Smuggle Jonathan Wild to Kravat.";
+    String QuestWildImpatient = QuestWild + newline + "Wild is getting impatient, and will no longer aid your crew along the way.";
+    String ShipBuyGotOne = "got one";
+    String ShipBuyTransfer = ", and transfer your unique equipment to the new ship";
+    String ShipInfoEscapePod = "Escape Pod";
+    String ShipNameCurrentShip = "<current ship>";
+    String ShipNameCustomShip = "Custom Ship";
+    String ShipNameModified = "<modified>";
+    String ShipNameTemplateSuffixDefault = " (Default)";
+    String ShipNameTemplateSuffixMinimum = " (Minimum)";
+    String ShipyardEquipForSale = "There is equipment for sale.";
+    String ShipyardEquipNoSale = "No equipment for sale.";
+    String ShipyardPodCost = "You can buy an escape pod for 2,000 cr.";
+    String ShipyardPodIF = "You need 2,000 cr. to buy an escape pod.";
+    String ShipyardPodInstalled = "You have an escape pod installed.";
+    String ShipyardPodNoSale = "No escape pods for sale.";
+    String ShipyardShipForSale = "There are ships for sale.";
+    String ShipyardShipNoSale = "No ships for sale.";
+    String ShipyardSizeItem = "^1 (Max ^2)";
+    String ShipyardTitle = "Ship Design at ^1 Shipyards";
+    String ShipyardUnit = "Unit";
+    String ShipyardWarning = "Bear in mind that getting too close to the maximum number of units will result in a \"Crowding Penalty\" due to the engineering difficulty of squeezing everything in.  There is a modest penalty at 80%, and a more severe one at 90%.";
+    String ShipyardWelcome = "Welcome to ^1 Shipyards! Our best engineer, ^2, is at your service.";
+    String SpecialCargoArtifact = "An alien artifact.";
+    String SpecialCargoExperiment = "A portable singularity.";
+    String SpecialCargoJapori = "10 bays of antidote.";
+    String SpecialCargoJarek = "A haggling computer.";
+    String SpecialCargoNone = "No special items.";
+    String SpecialCargoReactor = "An unstable reactor taking up 5 bays.";
+    String SpecialCargoSculpture = "A stolen plastic sculpture of a man holding some kind of light sword.";
+    String SpecialCargoReactorBays = " of enriched fuel.";
+    String SpecialCargoTribblesInfest = "An infestation of tribbles.";
+    String SpecialCargoTribblesCute = "cute, furry tribble";
+    String TimeUnit = "day";
+    String TribbleDangerousNumber = "a dangerous number of";
+    String Unknown = "Unknown";
+    String[] ActivityLevels = new String[]{"Absent", "Minimal", "Few", "Some", "Moderate", "Many", "Abundant", "Swarms"};
+    String[] CargoBuyOps = new String[]{"Buy", "Buy", "Steal"};
+    String[] CargoSellOps = new String[]{"Sell", "Sell", "Dump", "Jettison"};
+    String[] CrewMemberNames = new String[]{"Commander",
             "Alyssa", "Armatur", "Bentos", "C2U2", "Chi'Ti", "Crystal", "Dane",
             "Deirdre", "Doc", "Draco", "Iranda", "Jeremiah", "Jujubal",
             "Krydon", "Luis", "Mercedez", "Milete", "Muri-L", "Mystyc",
@@ -185,9 +185,9 @@ public interface Strings {
             "Ziyal", // From ST: Deep Space 9
             "Scorpion" // dummy crew member used in opponent ship
     };
-    public static final String[] DifficultyLevels = new String[]{"Beginner",
+    String[] DifficultyLevels = new String[]{"Beginner",
             "Easy", "Normal", "Hard", "Impossible"};
-    public static final String[][] EquipmentDescriptions = new String[][]{
+    String[][] EquipmentDescriptions = new String[][]{
             new String[]{
                     "The Pulse Laser is the weakest weapon available. It's small size allows only enough energy to build up to emit pulses of light.",
                     "The Beam Laser is larger than the Pulse Laser, so can build up enough charge to power what are essentially two Pulse Lasers. The resulting effect appears more like a constant beam.",
@@ -207,19 +207,19 @@ public interface Strings {
                     "The Cloaking Device can enable your ship to evade detection by an opponent, but only if the Engineer skill of your ship is greater than that of your opponent. It also makes your ship harder to hit in battle.",
                     "The Fuel Compactor that you got as a reward for warning Gemulon of the invasion will increase the range of your ship by 3 parsecs.",
                     "These extra bays will not be detected during routine police searches. They may be detected if you are arrested and the police perform a more thorough search."}};
-    public static final String[] EquipmentTypes = new String[]{"Weapon", "Shield", "Gadget"};
-    public static final String[] GadgetNames = new String[]{"5 Extra Cargo Bays",
+    String[] EquipmentTypes = new String[]{"Weapon", "Shield", "Gadget"};
+    String[] GadgetNames = new String[]{"5 Extra Cargo Bays",
             "Auto-Repair System", "Navigating System", "Targeting System",
             "Cloaking Device", "Fuel Compactor", "5 Hidden Cargo Bays"};
-    public static final String[] GameCompletionTypes = new String[]{"Was killed",
+    String[] GameCompletionTypes = new String[]{"Was killed",
             "Retired", "Claimed moon"};
-    public static final String[] ListStrings = new String[]{"", "^1", "^1 and ^2",
+    String[] ListStrings = new String[]{"", "^1", "^1 and ^2",
             "^1, ^2, and ^3", "^1, ^2, ^3, and ^4"};
     /*
      * In News Events, the following variables can be used: ^1 Commander Name ^2
      * Current System ^3 Commander's Ship Type
      */
-    public static final String[] NewsEvent = new String[]{
+    String[] NewsEvent = new String[]{
             "Scientist Adds Alien Artifact to Museum Collection.",
             "Police Trace Orbiting Space Litter to ^1.",
             "Experimental Craft Stolen! Critics Demand Security Review.",
@@ -229,7 +229,7 @@ public interface Strings {
             "Strange Ship Observed in Regulas Orbit.",
             "Unidentified Ship: A Threat to Zalkon?",
             "Huge Explosion Reported at Research Facility.",
-            "Travelers Report Timespace Damage, Warp Problems!",
+            "Travelers Report Spacetime Damage, Warp Problems!",
             "Scientists Cancel High-profile Test! Committee to Investigate Design.",
             "Travelers Claim Sighting of Ship Materializing in Orbit!",
             "Editorial: Who Will Warn Gemulon?",
@@ -259,7 +259,7 @@ public interface Strings {
             "Kidnappers Holding Out at Qonos",
             "Scorpion Defeated! Kidnapped Member of Galvon Royal Family Freed!",
             "Beloved Royal Returns Home!"};
-    public static final String[][] NewsHeadlines = new String[][]{
+    String[][] NewsHeadlines = new String[][]{
             new String[]{"Riots, Looting Mar Factional Negotiations.",
                     "Communities Seek Consensus.",
                     "Successful Bakunin Day Rally!",
@@ -327,7 +327,7 @@ public interface Strings {
                     "Temple Restoration Fund at 81%.",
                     "Sacred Texts on Public Display.",
                     "Dozen Blasphemers Excommunicated!"}};
-    public static final String[][] NewsMastheads = new String[][]{
+    String[][] NewsMastheads = new String[][]{
             new String[]{"The ^1 Arsenal", "The Grassroot", "Kick It!"},
             new String[]{"The Objectivist", "The ^1 Market", "The Invisible Hand"},
             new String[]{"The Daily Worker", "The People's Voice", "The ^1 Proletariat"},
@@ -346,62 +346,62 @@ public interface Strings {
             new String[]{"The Future", "Hardware Dispatch", "TechNews"},
             new String[]{"The Spiritual Advisor", "Church Tidings", "The Temple Tribune"}
     };
-    public static final String[] NewsPoliceRecordHero = new String[]{
+    String[] NewsPoliceRecordHero = new String[]{
             "Locals Welcome Visiting Hero ^1!",
             "Famed Hero ^1 to Visit System!",
             "Large Turnout At Spaceport to Welcome ^1!"};
-    public static final String[] NewsPoliceRecordPsychopath = new String[]{
+    String[] NewsPoliceRecordPsychopath = new String[]{
             "Police Warning: ^1 Will Dock At ^2!",
             "Notorious Criminal ^1 Sighted in ^2!",
             "Locals Rally to Deny Spaceport Access to ^1!",
             "Terror Strikes Locals on Arrival of ^1!"};
-    public static final String[] NewsPressureExternal = new String[]{
+    String[] NewsPressureExternal = new String[]{
             "Reports of ^1 in the ^2 System.", "News of ^1 in the ^2 System.",
             "New Rumors of ^1 in the ^2 System.",
             "Sources report ^1 in the ^2 System.",
             "Notice: ^1 in the ^2 System.",
             "Evidence Suggests ^1 in the ^2 System."};
-    public static final String[] NewsPressureExternalPressures = new String[]{"",
+    String[] NewsPressureExternalPressures = new String[]{"",
             "Strife and War", "Plague Outbreaks", "Severe Drought",
             "Terrible Boredom", "Cold Weather", "Crop Failures",
             "Labor Shortages"};
-    public static final String[] NewsPressureInternal = new String[]{"",
+    String[] NewsPressureInternal = new String[]{"",
             "War News: Offensives Continue!", "Plague Spreads! Outlook Grim.",
             "No Rain in Sight!", "Editors: Won't Someone Entertain Us?",
             "Cold Snap Continues!", "Serious Crop Failure! Must We Ration?",
             "Jobless Rate at All-Time Low!"};
-    public static final String[] PoliceRecordNames = new String[]{"Psychopath",
+    String[] PoliceRecordNames = new String[]{"Psychopath",
             "Villain", "Criminal", "Crook", "Dubious", "Clean", "Lawful",
             "Trusted", "Liked", "Hero"};
-    public static final String[] PoliticalSystemNames = new String[]{"Anarchy",
+    String[] PoliticalSystemNames = new String[]{"Anarchy",
             "Capitalist State", "Communist State", "Confederacy",
             "Corporate State", "Cybernetic State", "Democracy", "Dictatorship",
             "Fascist State", "Feudal State", "Military State", "Monarchy",
             "Pacifist State", "Socialist State", "State of Satori",
             "Technocracy", "Theocracy"};
-    public static final String[] ReputationNames = new String[]{"Harmless",
+    String[] ReputationNames = new String[]{"Harmless",
             "Mostly harmless", "Poor", "Average", "Above average", "Competent",
             "Dangerous", "Deadly", "Elite"};
-    public static final String[] ShieldNames = new String[]{"Energy Shield",
+    String[] ShieldNames = new String[]{"Energy Shield",
             "Reflective Shield", "Lightning Shield"};
-    public static final String[] ShipNames = new String[]{"Flea", "Gnat",
+    String[] ShipNames = new String[]{"Flea", "Gnat",
             "Firefly", "Mosquito", "Bumblebee", "Beetle", "Hornet",
             "Grasshopper", "Termite", "Wasp", "Space Monster", "Dragonfly",
             "Mantis", "Scarab", "Bottle", ShipNameCustomShip, "Scorpion"};
-    public static final String[] ShipyardEngineers = new String[]{"Wedge", "Luke",
+    String[] ShipyardEngineers = new String[]{"Wedge", "Luke",
             "Lando", "Mara", "Obi-Wan"};
-    public static final String[] ShipyardNames = new String[]{
+    String[] ShipyardNames = new String[]{
             "Corellian Engineering", "Incom Corporation", "Kuat Drive Yards",
             "Sienar Fleet Systems", "Sorosuub Engineering"};
-    public static final String[] ShipyardSkillDescriptions = new String[]{
+    String[] ShipyardSkillDescriptions = new String[]{
             "All ships constructed at this shipyard use 2 fewer units per crew quarter.",
             "All ships constructed at this shipyard have 2 extra base fuel tanks.",
             "All ships constructed at this shipyard have the hull points increment by 5 more than usual.",
             "All ships constructed at this shipyard get shield slots for 2 fewer units.",
             "All ships constructed at this shipyard get weapon slots for 2 fewer units."};
-    public static final String[] ShipyardSkills = new String[]{"Crew Quartering", "Fuel Efficienty", "Hull Strength", "Shielding", "Weaponry"};
-    public static final String[] Sizes = new String[]{"Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"};
-    public static final String[] SpecialEventStrings = new String[]{
+    String[] ShipyardSkills = new String[]{"Crew Quartering", "Fuel Efficienty", "Hull Strength", "Shielding", "Weaponry"};
+    String[] Sizes = new String[]{"Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"};
+    String[] SpecialEventStrings = new String[]{
             "This alien artifact should be delivered to professor Berger, who is currently traveling. You can probably find him at a hi-tech solar system. The alien race which produced this artifact seems keen on getting it back, however, and may hinder the carrier. Are you, for a price, willing to deliver it?",
             "This is professor Berger. I thank you for delivering the alien artifact to me. I hope the aliens weren't too much of a nuisance. I have transferred 20000 credits to your account, which I assume compensates for your troubles.",
             "A trader in second-hand goods offers you 3 sealed cargo canisters for the sum of 1000 credits. It could be a good deal: they could contain robots. Then again, it might just be water. Do you want the canisters?",
@@ -449,7 +449,7 @@ public interface Strings {
             "His Majesty's Shipyard: Do you want us to install a quantum disruptor on your current ship?",
             "The King and Queen are extremely grateful to you for returning their daughter to them. The King says, \"Ziyal is priceless to us, but we feel we must offer you something as a reward. Visit my shipyard captain and he'll install one of our new Quantum Disruptors.\""
     };
-    public static final String[] SpecialEventTitles = new String[]{
+    String[] SpecialEventTitles = new String[]{
             "Alien Artifact", "Artifact Delivery", "Cargo For Sale", "Dragonfly", "Dragonfly Destroyed", "Weird Ship", "Lightning Ship",
             "Lightning Shield", "Strange Ship", "Erase Record", "Dangerous Experiment", "Experiment Failed", "Disaster Averted",
             "Alien Invasion", "Fuel Compactor", "Gemulon Invaded", "Gemulon Rescued", "Japori Disease", "Medicine Delivery",
@@ -461,7 +461,7 @@ public interface Strings {
     };
     // Many of these names are from Star Trek: The Next Generation, or are small changes to names of this series. A few have different origins.
     // JAF - Except where noted these comments are the previous author's.
-    public static final String[] SystemNames = new String[]{
+    String[] SystemNames = new String[]{
             "Acamar", // JAF - TNG "The Vengeance Factor (Acamar III)"
             "Adahn", // The alternate personality for The Nameless One in "Planescape: Torment"
             "Aldea", // JAF - TNG "When the Bough Breaks"
@@ -577,12 +577,12 @@ public interface Strings {
             "Weytahn", // Star Trek: Enterprise "Cease Fire"
             "Zonama" // From the Star Wars: New Jedi Order series (and Rogue Planet)
     };
-    public static final String[] VeryRareEncounters = new String[]{
+    String[] VeryRareEncounters = new String[]{
             //TODO: Only used in SpaceTrader.btnFind_Click(Object,EventArgs)
             VeryRareEncounter.MarieCeleste.name, VeryRareEncounter.CaptainAhab.name, VeryRareEncounter.CaptainConrad.name,
             VeryRareEncounter.CaptainHuie.name, VeryRareEncounter.BottleOld.name, VeryRareEncounter.BottleGood.name
     };
-    public static final String[] WeaponNames = new String[]{
+    String[] WeaponNames = new String[]{
             //TODO: Only used in Equipment.BaseImageIndex()
             WeaponType.PulseLaser.name, WeaponType.BeamLaser.name, WeaponType.MilitaryLaser.name,
             WeaponType.MorgansLaser.name, WeaponType.PhotonDisruptor.name, WeaponType.QuantumDistruptor.name

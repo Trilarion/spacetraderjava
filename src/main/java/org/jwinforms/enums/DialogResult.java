@@ -6,5 +6,5 @@ public enum DialogResult {
     Cancel,
     Yes,
     No,
-    None;
+    None
 }

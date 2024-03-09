@@ -60,7 +60,7 @@ public enum SomeStringsForSwitch {
     Q,
     M,
     __void__;
-    static Hashtable<String, SomeStringsForSwitch> specialStrings = new Hashtable<>();
+    static final Hashtable<String, SomeStringsForSwitch> specialStrings = new Hashtable<>();
 
     static {
         specialStrings.put("Monster.com", MonsterCom);

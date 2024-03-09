@@ -2,13 +2,13 @@ package org.jwinforms;
 
 
 public class Rectangle {
-    public int X, Y, Width, Hight;
+    public int X, Y, Width, Height;
 
-    public Rectangle(int x, int y, int width, int hight) {
+    public Rectangle(int x, int y, int width, int height) {
         super();
         this.X = x;
         this.Y = y;
         this.Width = width;
-        this.Hight = hight;
+        this.Height = height;
     }
 }

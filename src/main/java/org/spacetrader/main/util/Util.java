@@ -21,7 +21,7 @@ public class Util {
     }
 
     public static String StringsJoin(String seperator, String[] values) {
-        StringBuilder sb = new StringBuilder("");
+        StringBuilder sb = new StringBuilder();
         for (String string : values) {
             sb.append(string);
             sb.append(seperator);

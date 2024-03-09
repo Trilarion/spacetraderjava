@@ -93,7 +93,7 @@ public class Functions {
 
     public static HighScoreRecord[] GetHighScores(WinformPane owner) {
         HighScoreRecord[] highScores = new HighScoreRecord[3];
-        Object obj = LoadFile(Consts.HighScoreFile, true, owner);
+        Object obj = LoadFile(Constants.HighScoreFile, true, owner);
         if (obj != null) {
             highScores = (HighScoreRecord[]) STSerializableObject.ArrayListToArray((ArrayList<Hashtable>) obj, "HighScoreRecord");
         }
@@ -159,8 +159,8 @@ public class Functions {
     }
 
     public static void PaintShipImage(Ship ship, Graphics graphics, Color backgroundColor) {
-        int x = Consts.ShipImageOffsets[ship.Type().CastToInt()].X;
-        int width = Consts.ShipImageOffsets[ship.Type().CastToInt()].Width;
+        int x = Constants.ShipImageOffsets[ship.Type().CastToInt()].X;
+        int width = Constants.ShipImageOffsets[ship.Type().CastToInt()].Width;
         int startDamage = x + width - ship.getHull() * width / ship.HullStrength();
         int startShield = x + width + 2 - (ship.ShieldStrength() > 0 ? ship.ShieldCharge() * (width + 4) / ship.ShieldStrength() : 0);
         graphics.clear(backgroundColor);

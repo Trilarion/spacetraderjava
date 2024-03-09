@@ -14,9 +14,9 @@ public class PoliceRecord {
 
     public static PoliceRecord GetPoliceRecordFromScore(int PoliceRecordScore) {
         int i;
-        for (i = 0; i < Consts.PoliceRecords.length && Game.CurrentGame().Commander().getPoliceRecordScore() >= Consts.PoliceRecords[i].MinScore(); i++) {
+        for (i = 0; i < Constants.PoliceRecords.length && Game.CurrentGame().Commander().getPoliceRecordScore() >= Constants.PoliceRecords[i].MinScore(); i++) {
         }
-        return Consts.PoliceRecords[Math.max(0, i - 1)];
+        return Constants.PoliceRecords[Math.max(0, i - 1)];
     }
 
     public int MinScore() {

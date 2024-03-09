@@ -166,7 +166,7 @@ public enum AlertType implements SpaceTraderEnum {
     SpecialPassengerOnBoard,
     SpecialSealedCanisters,
     SpecialSkillIncrease,
-    SpecialTimespaceFabricRip,
+    SpecialSpacetimeFabricRip,
     SpecialTrainingCompleted,
     TravelArrival,
     TravelUneventfulTrip,

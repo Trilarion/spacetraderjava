@@ -6,5 +6,5 @@ public enum ContentAlignment {
     TopCenter,
     MiddleLeft,
     MiddleCenter,
-    MiddleRight;
+    MiddleRight
 }

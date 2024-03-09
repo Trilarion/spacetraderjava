@@ -24,7 +24,7 @@ public class Directory {
             System.out.println("getFiles rets null!");
             return new String[0];
         }
-        List<String> names = Lisp.map(files, new Convertor<String, File>() {
+        List<String> names = Lisp.map(files, new Convertor<>() {
             @Override
             public String convert(File file) {
                 return file.getPath();

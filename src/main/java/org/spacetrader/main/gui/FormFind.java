@@ -81,7 +81,7 @@ public class FormFind extends WinformForm {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Find System");
-        Closed = new EventHandler<Object, EventArgs>() {
+        Closed = new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 FormFind_Closed(sender, e);

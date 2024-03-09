@@ -143,7 +143,7 @@ public class GameOptions extends STSerializableObject {
 
     public void LoadFromDefaults(boolean errorIfFileNotFound, WinformPane owner) {
         GameOptions defaults = null;
-        Object obj = Functions.LoadFile(Consts.DefaultSettingsFile, !errorIfFileNotFound, owner);
+        Object obj = Functions.LoadFile(Constants.DefaultSettingsFile, !errorIfFileNotFound, owner);
         if (obj == null) {
             defaults = new GameOptions(false);
         } else {
@@ -153,7 +153,7 @@ public class GameOptions extends STSerializableObject {
     }
 
     public void SaveAsDefaults(WinformPane owner) {
-        Functions.SaveFile(Consts.DefaultSettingsFile, Serialize(), owner);
+        Functions.SaveFile(Constants.DefaultSettingsFile, Serialize(), owner);
     }
 
     public boolean getAlwaysIgnorePirates() {

@@ -11,7 +11,7 @@ package org.spacetrader.events.quests;
 public enum QuestWild {
     q0,// day 0: not delivered
     q1,// day 1 - 11: Wild on board
-    q2;// day 12: Wild delivered
+    q2// day 12: Wild delivered
 }
 //private int _questStatusWild = 0; // 0 = not delivered, 1-11 = on board, 12 = delivered
 /*

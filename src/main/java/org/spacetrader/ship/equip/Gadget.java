@@ -50,7 +50,7 @@ public class Gadget extends Equipment {
     public boolean TypeEquals(Object type) {
         boolean equal = false;
         try {
-            if (Type() == (GadgetType) type) {
+            if (Type() == type) {
                 equal = true;
             }
         } catch (Exception e) {

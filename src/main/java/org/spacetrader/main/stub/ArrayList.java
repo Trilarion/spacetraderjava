@@ -5,7 +5,7 @@ import java.util.Collections;
 
 
 public class ArrayList<T> extends java.util.ArrayList<T> {
-    private static final long serialVersionUID = -537394628993404338l;
+    private static final long serialVersionUID = -537394628993404338L;
 
     public ArrayList(int i) {
         super(i);

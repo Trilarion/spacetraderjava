@@ -11,7 +11,7 @@ public enum Difficulty implements SpaceTraderEnum {
     Impossible(-2);
     private final int skillAdjust;
 
-    private Difficulty(int skillAdjust) {
+    Difficulty(int skillAdjust) {
         this.skillAdjust = skillAdjust;
     }
 

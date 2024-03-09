@@ -182,7 +182,7 @@ public class Shipyard {
     }
 
     public ShipSpec ShipSpec() {
-        return Consts.ShipSpecs[ShipType.Custom.CastToInt()];
+        return Constants.ShipSpecs[ShipType.Custom.CastToInt()];
     }
 
     public ShipyardSkill Skill() {

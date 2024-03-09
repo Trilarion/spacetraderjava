@@ -13,7 +13,7 @@ public class ComboBox extends WinformControl {
     public ComboBoxStyle DropDownStyle;
 
     public ComboBox() {
-        super(new JComboBox<Object>());
+        super(new JComboBox<>());
         ComboBox.this.asJComboBox().setModel(Items);
     }
 

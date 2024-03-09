@@ -50,7 +50,7 @@ public class ShipTemplate extends STSerializableObject implements Comparable<Shi
         _crewQuarters = s.getCrewQuarters();
         _fuelTanks = s.FuelTanks();
         _hullStrength = s.HullStrength();
-        if (_imageIndex == Consts.ShipImgUseDefault) {
+        if (_imageIndex == Constants.ShipImgUseDefault) {
             _images = Game.CurrentGame().getParentWindow().CustomShipImages();
         }
     }

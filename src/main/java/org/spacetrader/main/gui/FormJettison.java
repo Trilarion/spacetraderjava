@@ -39,16 +39,16 @@ public class FormJettison extends WinformForm {
     private Button btnJettisonQty1;
     private Button btnJettisonAll0;
     private Button btnJettisonQty0;
-    private Label lblTradeCmdty9;
-    private Label lblTradeCmdty8;
-    private Label lblTradeCmdty2;
-    private Label lblTradeCmdty0;
-    private Label lblTradeCmdty1;
-    private Label lblTradeCmdty6;
-    private Label lblTradeCmdty5;
-    private Label lblTradeCmdty4;
-    private Label lblTradeCmdty3;
-    private Label lblTradeCmdty7;
+    private Label lblTradeCommodity9;
+    private Label lblTradeCommodity8;
+    private Label lblTradeCommodity2;
+    private Label lblTradeCommodity0;
+    private Label lblTradeCommodity1;
+    private Label lblTradeCommodity6;
+    private Label lblTradeCommodity5;
+    private Label lblTradeCommodity4;
+    private Label lblTradeCommodity3;
+    private Label lblTradeCommodity7;
     private Label lblBaysLabel;
     private Label lblBays;
     private Button btnDone;
@@ -107,16 +107,16 @@ public class FormJettison extends WinformForm {
         btnJettisonQty1 = new Button();
         btnJettisonAll0 = new Button();
         btnJettisonQty0 = new Button();
-        lblTradeCmdty9 = new Label();
-        lblTradeCmdty8 = new Label();
-        lblTradeCmdty2 = new Label();
-        lblTradeCmdty0 = new Label();
-        lblTradeCmdty1 = new Label();
-        lblTradeCmdty6 = new Label();
-        lblTradeCmdty5 = new Label();
-        lblTradeCmdty4 = new Label();
-        lblTradeCmdty3 = new Label();
-        lblTradeCmdty7 = new Label();
+        lblTradeCommodity9 = new Label();
+        lblTradeCommodity8 = new Label();
+        lblTradeCommodity2 = new Label();
+        lblTradeCommodity0 = new Label();
+        lblTradeCommodity1 = new Label();
+        lblTradeCommodity6 = new Label();
+        lblTradeCommodity5 = new Label();
+        lblTradeCommodity4 = new Label();
+        lblTradeCommodity3 = new Label();
+        lblTradeCommodity7 = new Label();
         lblBaysLabel = new Label();
         lblBays = new Label();
         btnDone = new Button();
@@ -128,7 +128,7 @@ public class FormJettison extends WinformForm {
         btnJettisonAll9.setSize(new FormSize(32, 22));
         btnJettisonAll9.setTabIndex(141);
         btnJettisonAll9.setText("All");
-        btnJettisonAll9.setClick(new EventHandler<Object, EventArgs>() {
+        btnJettisonAll9.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnJettison_Click(sender, e);
@@ -141,7 +141,7 @@ public class FormJettison extends WinformForm {
         btnJettisonQty9.setSize(new FormSize(28, 22));
         btnJettisonQty9.setTabIndex(140);
         btnJettisonQty9.setText("88");
-        btnJettisonQty9.setClick(new EventHandler<Object, EventArgs>() {
+        btnJettisonQty9.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnJettison_Click(sender, e);
@@ -154,7 +154,7 @@ public class FormJettison extends WinformForm {
         btnJettisonAll8.setSize(new FormSize(32, 22));
         btnJettisonAll8.setTabIndex(139);
         btnJettisonAll8.setText("All");
-        btnJettisonAll8.setClick(new EventHandler<Object, EventArgs>() {
+        btnJettisonAll8.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnJettison_Click(sender, e);
@@ -167,7 +167,7 @@ public class FormJettison extends WinformForm {
         btnJettisonQty8.setSize(new FormSize(28, 22));
         btnJettisonQty8.setTabIndex(138);
         btnJettisonQty8.setText("88");
-        btnJettisonQty8.setClick(new EventHandler<Object, EventArgs>() {
+        btnJettisonQty8.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnJettison_Click(sender, e);
@@ -180,7 +180,7 @@ public class FormJettison extends WinformForm {
         btnJettisonAll7.setSize(new FormSize(32, 22));
         btnJettisonAll7.setTabIndex(137);
         btnJettisonAll7.setText("All");
-        btnJettisonAll7.setClick(new EventHandler<Object, EventArgs>() {
+        btnJettisonAll7.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnJettison_Click(sender, e);
@@ -193,7 +193,7 @@ public class FormJettison extends WinformForm {
         btnJettisonQty7.setSize(new FormSize(28, 22));
         btnJettisonQty7.setTabIndex(136);
         btnJettisonQty7.setText("88");
-        btnJettisonQty7.setClick(new EventHandler<Object, EventArgs>() {
+        btnJettisonQty7.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnJettison_Click(sender, e);
@@ -206,7 +206,7 @@ public class FormJettison extends WinformForm {
         btnJettisonAll6.setSize(new FormSize(32, 22));
         btnJettisonAll6.setTabIndex(135);
         btnJettisonAll6.setText("All");
-        btnJettisonAll6.setClick(new EventHandler<Object, EventArgs>() {
+        btnJettisonAll6.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnJettison_Click(sender, e);
@@ -219,7 +219,7 @@ public class FormJettison extends WinformForm {
         btnJettisonQty6.setSize(new FormSize(28, 22));
         btnJettisonQty6.setTabIndex(134);
         btnJettisonQty6.setText("88");
-        btnJettisonQty6.setClick(new EventHandler<Object, EventArgs>() {
+        btnJettisonQty6.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnJettison_Click(sender, e);
@@ -232,7 +232,7 @@ public class FormJettison extends WinformForm {
         btnJettisonAll5.setSize(new FormSize(32, 22));
         btnJettisonAll5.setTabIndex(133);
         btnJettisonAll5.setText("All");
-        btnJettisonAll5.setClick(new EventHandler<Object, EventArgs>() {
+        btnJettisonAll5.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnJettison_Click(sender, e);
@@ -245,7 +245,7 @@ public class FormJettison extends WinformForm {
         btnJettisonQty5.setSize(new FormSize(28, 22));
         btnJettisonQty5.setTabIndex(132);
         btnJettisonQty5.setText("88");
-        btnJettisonQty5.setClick(new EventHandler<Object, EventArgs>() {
+        btnJettisonQty5.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnJettison_Click(sender, e);
@@ -258,7 +258,7 @@ public class FormJettison extends WinformForm {
         btnJettisonAll4.setSize(new FormSize(32, 22));
         btnJettisonAll4.setTabIndex(131);
         btnJettisonAll4.setText("All");
-        btnJettisonAll4.setClick(new EventHandler<Object, EventArgs>() {
+        btnJettisonAll4.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnJettison_Click(sender, e);
@@ -271,7 +271,7 @@ public class FormJettison extends WinformForm {
         btnJettisonQty4.setSize(new FormSize(28, 22));
         btnJettisonQty4.setTabIndex(130);
         btnJettisonQty4.setText("88");
-        btnJettisonQty4.setClick(new EventHandler<Object, EventArgs>() {
+        btnJettisonQty4.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnJettison_Click(sender, e);
@@ -284,7 +284,7 @@ public class FormJettison extends WinformForm {
         btnJettisonAll3.setSize(new FormSize(32, 22));
         btnJettisonAll3.setTabIndex(129);
         btnJettisonAll3.setText("All");
-        btnJettisonAll3.setClick(new EventHandler<Object, EventArgs>() {
+        btnJettisonAll3.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnJettison_Click(sender, e);
@@ -297,7 +297,7 @@ public class FormJettison extends WinformForm {
         btnJettisonQty3.setSize(new FormSize(28, 22));
         btnJettisonQty3.setTabIndex(128);
         btnJettisonQty3.setText("88");
-        btnJettisonQty3.setClick(new EventHandler<Object, EventArgs>() {
+        btnJettisonQty3.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnJettison_Click(sender, e);
@@ -310,7 +310,7 @@ public class FormJettison extends WinformForm {
         btnJettisonAll2.setSize(new FormSize(32, 22));
         btnJettisonAll2.setTabIndex(127);
         btnJettisonAll2.setText("All");
-        btnJettisonAll2.setClick(new EventHandler<Object, EventArgs>() {
+        btnJettisonAll2.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnJettison_Click(sender, e);
@@ -323,7 +323,7 @@ public class FormJettison extends WinformForm {
         btnJettisonQty2.setSize(new FormSize(28, 22));
         btnJettisonQty2.setTabIndex(126);
         btnJettisonQty2.setText("88");
-        btnJettisonQty2.setClick(new EventHandler<Object, EventArgs>() {
+        btnJettisonQty2.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnJettison_Click(sender, e);
@@ -336,7 +336,7 @@ public class FormJettison extends WinformForm {
         btnJettisonAll1.setSize(new FormSize(32, 22));
         btnJettisonAll1.setTabIndex(125);
         btnJettisonAll1.setText("All");
-        btnJettisonAll1.setClick(new EventHandler<Object, EventArgs>() {
+        btnJettisonAll1.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnJettison_Click(sender, e);
@@ -349,7 +349,7 @@ public class FormJettison extends WinformForm {
         btnJettisonQty1.setSize(new FormSize(28, 22));
         btnJettisonQty1.setTabIndex(124);
         btnJettisonQty1.setText("88");
-        btnJettisonQty1.setClick(new EventHandler<Object, EventArgs>() {
+        btnJettisonQty1.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnJettison_Click(sender, e);
@@ -362,7 +362,7 @@ public class FormJettison extends WinformForm {
         btnJettisonAll0.setSize(new FormSize(32, 22));
         btnJettisonAll0.setTabIndex(123);
         btnJettisonAll0.setText("All");
-        btnJettisonAll0.setClick(new EventHandler<Object, EventArgs>() {
+        btnJettisonAll0.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnJettison_Click(sender, e);
@@ -375,82 +375,82 @@ public class FormJettison extends WinformForm {
         btnJettisonQty0.setSize(new FormSize(28, 22));
         btnJettisonQty0.setTabIndex(122);
         btnJettisonQty0.setText("88");
-        btnJettisonQty0.setClick(new EventHandler<Object, EventArgs>() {
+        btnJettisonQty0.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnJettison_Click(sender, e);
             }
         });
-        // lblTradeCmdty9
-        lblTradeCmdty9.setAutoSize(true);
-        lblTradeCmdty9.setLocation(new Point(8, 224));
-        lblTradeCmdty9.setName("lblTradeCmdty9");
-        lblTradeCmdty9.setSize(new FormSize(40, 13));
-        lblTradeCmdty9.setTabIndex(151);
-        lblTradeCmdty9.setText("Robots");
-        // lblTradeCmdty8
-        lblTradeCmdty8.setAutoSize(true);
-        lblTradeCmdty8.setLocation(new Point(8, 200));
-        lblTradeCmdty8.setName("lblTradeCmdty8");
-        lblTradeCmdty8.setSize(new FormSize(51, 13));
-        lblTradeCmdty8.setTabIndex(150);
-        lblTradeCmdty8.setText("Narcotics");
-        // lblTradeCmdty2
-        lblTradeCmdty2.setAutoSize(true);
-        lblTradeCmdty2.setLocation(new Point(8, 56));
-        lblTradeCmdty2.setName("lblTradeCmdty2");
-        lblTradeCmdty2.setSize(new FormSize(30, 13));
-        lblTradeCmdty2.setTabIndex(149);
-        lblTradeCmdty2.setText("Food");
-        // lblTradeCmdty0
-        lblTradeCmdty0.setAutoSize(true);
-        lblTradeCmdty0.setLocation(new Point(8, 8));
-        lblTradeCmdty0.setName("lblTradeCmdty0");
-        lblTradeCmdty0.setSize(new FormSize(34, 13));
-        lblTradeCmdty0.setTabIndex(148);
-        lblTradeCmdty0.setText("Water");
-        // lblTradeCmdty1
-        lblTradeCmdty1.setAutoSize(true);
-        lblTradeCmdty1.setLocation(new Point(8, 32));
-        lblTradeCmdty1.setName("lblTradeCmdty1");
-        lblTradeCmdty1.setSize(new FormSize(27, 13));
-        lblTradeCmdty1.setTabIndex(147);
-        lblTradeCmdty1.setText("Furs");
-        // lblTradeCmdty6
-        lblTradeCmdty6.setAutoSize(true);
-        lblTradeCmdty6.setLocation(new Point(8, 152));
-        lblTradeCmdty6.setName("lblTradeCmdty6");
-        lblTradeCmdty6.setSize(new FormSize(50, 13));
-        lblTradeCmdty6.setTabIndex(146);
-        lblTradeCmdty6.setText("Medicine");
-        // lblTradeCmdty5
-        lblTradeCmdty5.setAutoSize(true);
-        lblTradeCmdty5.setLocation(new Point(8, 128));
-        lblTradeCmdty5.setName("lblTradeCmdty5");
-        lblTradeCmdty5.setSize(new FormSize(49, 13));
-        lblTradeCmdty5.setTabIndex(145);
-        lblTradeCmdty5.setText("Firearms");
-        // lblTradeCmdty4
-        lblTradeCmdty4.setAutoSize(true);
-        lblTradeCmdty4.setLocation(new Point(8, 104));
-        lblTradeCmdty4.setName("lblTradeCmdty4");
-        lblTradeCmdty4.setSize(new FormSize(41, 13));
-        lblTradeCmdty4.setTabIndex(144);
-        lblTradeCmdty4.setText("Games");
-        // lblTradeCmdty3
-        lblTradeCmdty3.setAutoSize(true);
-        lblTradeCmdty3.setLocation(new Point(8, 80));
-        lblTradeCmdty3.setName("lblTradeCmdty3");
-        lblTradeCmdty3.setSize(new FormSize(23, 13));
-        lblTradeCmdty3.setTabIndex(143);
-        lblTradeCmdty3.setText("Ore");
-        // lblTradeCmdty7
-        lblTradeCmdty7.setAutoSize(true);
-        lblTradeCmdty7.setLocation(new Point(8, 176));
-        lblTradeCmdty7.setName("lblTradeCmdty7");
-        lblTradeCmdty7.setSize(new FormSize(53, 13));
-        lblTradeCmdty7.setTabIndex(142);
-        lblTradeCmdty7.setText("Machines");
+        // lblTradeCommodity9
+        lblTradeCommodity9.setAutoSize(true);
+        lblTradeCommodity9.setLocation(new Point(8, 224));
+        lblTradeCommodity9.setName("lblTradeCommodity9");
+        lblTradeCommodity9.setSize(new FormSize(40, 13));
+        lblTradeCommodity9.setTabIndex(151);
+        lblTradeCommodity9.setText("Robots");
+        // lblTradeCommodity8
+        lblTradeCommodity8.setAutoSize(true);
+        lblTradeCommodity8.setLocation(new Point(8, 200));
+        lblTradeCommodity8.setName("lblTradeCommodity8");
+        lblTradeCommodity8.setSize(new FormSize(51, 13));
+        lblTradeCommodity8.setTabIndex(150);
+        lblTradeCommodity8.setText("Narcotics");
+        // lblTradeCommodity2
+        lblTradeCommodity2.setAutoSize(true);
+        lblTradeCommodity2.setLocation(new Point(8, 56));
+        lblTradeCommodity2.setName("lblTradeCommodity2");
+        lblTradeCommodity2.setSize(new FormSize(30, 13));
+        lblTradeCommodity2.setTabIndex(149);
+        lblTradeCommodity2.setText("Food");
+        // lblTradeCommodity0
+        lblTradeCommodity0.setAutoSize(true);
+        lblTradeCommodity0.setLocation(new Point(8, 8));
+        lblTradeCommodity0.setName("lblTradeCommodity0");
+        lblTradeCommodity0.setSize(new FormSize(34, 13));
+        lblTradeCommodity0.setTabIndex(148);
+        lblTradeCommodity0.setText("Water");
+        // lblTradeCommodity1
+        lblTradeCommodity1.setAutoSize(true);
+        lblTradeCommodity1.setLocation(new Point(8, 32));
+        lblTradeCommodity1.setName("lblTradeCommodity1");
+        lblTradeCommodity1.setSize(new FormSize(27, 13));
+        lblTradeCommodity1.setTabIndex(147);
+        lblTradeCommodity1.setText("Furs");
+        // lblTradeCommodity6
+        lblTradeCommodity6.setAutoSize(true);
+        lblTradeCommodity6.setLocation(new Point(8, 152));
+        lblTradeCommodity6.setName("lblTradeCommodity6");
+        lblTradeCommodity6.setSize(new FormSize(50, 13));
+        lblTradeCommodity6.setTabIndex(146);
+        lblTradeCommodity6.setText("Medicine");
+        // lblTradeCommodity5
+        lblTradeCommodity5.setAutoSize(true);
+        lblTradeCommodity5.setLocation(new Point(8, 128));
+        lblTradeCommodity5.setName("lblTradeCommodity5");
+        lblTradeCommodity5.setSize(new FormSize(49, 13));
+        lblTradeCommodity5.setTabIndex(145);
+        lblTradeCommodity5.setText("Firearms");
+        // lblTradeCommodity4
+        lblTradeCommodity4.setAutoSize(true);
+        lblTradeCommodity4.setLocation(new Point(8, 104));
+        lblTradeCommodity4.setName("lblTradeCommodity4");
+        lblTradeCommodity4.setSize(new FormSize(41, 13));
+        lblTradeCommodity4.setTabIndex(144);
+        lblTradeCommodity4.setText("Games");
+        // lblTradeCommodity3
+        lblTradeCommodity3.setAutoSize(true);
+        lblTradeCommodity3.setLocation(new Point(8, 80));
+        lblTradeCommodity3.setName("lblTradeCommodity3");
+        lblTradeCommodity3.setSize(new FormSize(23, 13));
+        lblTradeCommodity3.setTabIndex(143);
+        lblTradeCommodity3.setText("Ore");
+        // lblTradeCommodity7
+        lblTradeCommodity7.setAutoSize(true);
+        lblTradeCommodity7.setLocation(new Point(8, 176));
+        lblTradeCommodity7.setName("lblTradeCommodity7");
+        lblTradeCommodity7.setSize(new FormSize(53, 13));
+        lblTradeCommodity7.setTabIndex(142);
+        lblTradeCommodity7.setText("Machines");
         // lblBaysLabel
         lblBaysLabel.setAutoSize(true);
         lblBaysLabel.setLocation(new Point(144, 8));
@@ -481,16 +481,16 @@ public class FormJettison extends WinformForm {
                 btnDone,
                 lblBays,
                 lblBaysLabel,
-                lblTradeCmdty9,
-                lblTradeCmdty8,
-                lblTradeCmdty2,
-                lblTradeCmdty0,
-                lblTradeCmdty1,
-                lblTradeCmdty6,
-                lblTradeCmdty5,
-                lblTradeCmdty4,
-                lblTradeCmdty3,
-                lblTradeCmdty7,
+                lblTradeCommodity9,
+                lblTradeCommodity8,
+                lblTradeCommodity2,
+                lblTradeCommodity0,
+                lblTradeCommodity1,
+                lblTradeCommodity6,
+                lblTradeCommodity5,
+                lblTradeCommodity4,
+                lblTradeCommodity3,
+                lblTradeCommodity7,
                 btnJettisonAll9,
                 btnJettisonQty9,
                 btnJettisonAll8,
@@ -536,7 +536,7 @@ public class FormJettison extends WinformForm {
 
     private void btnJettison_Click(Object sender, EventArgs e) {
         String name = ((Button) sender).getName();
-        boolean all = name.indexOf("Qty") < 0;
+        boolean all = !name.contains("Qty");
         int index = Integer.parseInt(name.substring(name.length() - 1));
         Jettison(index, all);
     }

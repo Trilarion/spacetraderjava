@@ -144,7 +144,7 @@ public class FormMonster extends WinformForm {
         lblMercSkillLabelPilot.setTabStop(true);
         lblMercSkillLabelPilot.setText("P");
         lblMercSkillLabelPilot.TextAlign = ContentAlignment.TopRight;
-        lblMercSkillLabelPilot.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
+        lblMercSkillLabelPilot.LinkClicked = new EventHandler<>() {
             @Override
             public void handle(Object sender, LinkLabelLinkClickedEventArgs e) {
                 SortLinkClicked(sender, e);
@@ -159,7 +159,7 @@ public class FormMonster extends WinformForm {
         lblMercSkillLabelFighter.setTabStop(true);
         lblMercSkillLabelFighter.setText("F");
         lblMercSkillLabelFighter.TextAlign = ContentAlignment.TopRight;
-        lblMercSkillLabelFighter.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
+        lblMercSkillLabelFighter.LinkClicked = new EventHandler<>() {
             @Override
             public void handle(Object sender, LinkLabelLinkClickedEventArgs e) {
                 SortLinkClicked(sender, e);
@@ -174,7 +174,7 @@ public class FormMonster extends WinformForm {
         lblMercSkillLabelTrader.setTabStop(true);
         lblMercSkillLabelTrader.setText("T");
         lblMercSkillLabelTrader.TextAlign = ContentAlignment.TopRight;
-        lblMercSkillLabelTrader.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
+        lblMercSkillLabelTrader.LinkClicked = new EventHandler<>() {
             @Override
             public void handle(Object sender, LinkLabelLinkClickedEventArgs e) {
                 SortLinkClicked(sender, e);
@@ -189,7 +189,7 @@ public class FormMonster extends WinformForm {
         lblMercSkillLabelEngineer.setTabStop(true);
         lblMercSkillLabelEngineer.setText("E");
         lblMercSkillLabelEngineer.TextAlign = ContentAlignment.TopRight;
-        lblMercSkillLabelEngineer.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
+        lblMercSkillLabelEngineer.LinkClicked = new EventHandler<>() {
             @Override
             public void handle(Object sender, LinkLabelLinkClickedEventArgs e) {
                 SortLinkClicked(sender, e);
@@ -203,7 +203,7 @@ public class FormMonster extends WinformForm {
         lblMercSystemLabel.setTabIndex(11);
         lblMercSystemLabel.setTabStop(true);
         lblMercSystemLabel.setText("System");
-        lblMercSystemLabel.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
+        lblMercSystemLabel.LinkClicked = new EventHandler<>() {
             @Override
             public void handle(Object sender, LinkLabelLinkClickedEventArgs e) {
                 SortLinkClicked(sender, e);
@@ -217,7 +217,7 @@ public class FormMonster extends WinformForm {
         lblQuestSystemLabel.setTabIndex(1);
         lblQuestSystemLabel.setTabStop(true);
         lblQuestSystemLabel.setText("System");
-        lblQuestSystemLabel.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
+        lblQuestSystemLabel.LinkClicked = new EventHandler<>() {
             @Override
             public void handle(Object sender, LinkLabelLinkClickedEventArgs e) {
                 SortLinkClicked(sender, e);
@@ -231,7 +231,7 @@ public class FormMonster extends WinformForm {
         lblQuestDescLabel.setTabIndex(2);
         lblQuestDescLabel.setTabStop(true);
         lblQuestDescLabel.setText("Description");
-        lblQuestDescLabel.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
+        lblQuestDescLabel.LinkClicked = new EventHandler<>() {
             @Override
             public void handle(Object sender, LinkLabelLinkClickedEventArgs e) {
                 SortLinkClicked(sender, e);
@@ -246,7 +246,7 @@ public class FormMonster extends WinformForm {
         lblMercIDLabel.setTabStop(true);
         lblMercIDLabel.setText("ID");
         lblMercIDLabel.TextAlign = ContentAlignment.TopRight;
-        lblMercIDLabel.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
+        lblMercIDLabel.LinkClicked = new EventHandler<>() {
             @Override
             public void handle(Object sender, LinkLabelLinkClickedEventArgs e) {
                 SortLinkClicked(sender, e);
@@ -260,7 +260,7 @@ public class FormMonster extends WinformForm {
         lblMercNameLabel.setTabIndex(6);
         lblMercNameLabel.setTabStop(true);
         lblMercNameLabel.setText("Name");
-        lblMercNameLabel.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
+        lblMercNameLabel.LinkClicked = new EventHandler<>() {
             @Override
             public void handle(Object sender, LinkLabelLinkClickedEventArgs e) {
                 SortLinkClicked(sender, e);
@@ -274,7 +274,7 @@ public class FormMonster extends WinformForm {
         lblShipyardsDescLabel.setTabIndex(4);
         lblShipyardsDescLabel.setTabStop(true);
         lblShipyardsDescLabel.setText("Description");
-        lblShipyardsDescLabel.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
+        lblShipyardsDescLabel.LinkClicked = new EventHandler<>() {
             @Override
             public void handle(Object sender, LinkLabelLinkClickedEventArgs e) {
                 SortLinkClicked(sender, e);
@@ -288,7 +288,7 @@ public class FormMonster extends WinformForm {
         lblShipyardsSystemLabel.setTabIndex(3);
         lblShipyardsSystemLabel.setTabStop(true);
         lblShipyardsSystemLabel.setText("System");
-        lblShipyardsSystemLabel.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
+        lblShipyardsSystemLabel.LinkClicked = new EventHandler<>() {
             @Override
             public void handle(Object sender, LinkLabelLinkClickedEventArgs e) {
                 SortLinkClicked(sender, e);
@@ -340,7 +340,7 @@ public class FormMonster extends WinformForm {
         lblMercSystems.setLocation(new Point(185, 4));
         lblMercSystems.setSize(new FormSize(160, 387));
         lblMercSystems.setTabIndex(14);
-        lblMercSystems.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
+        lblMercSystems.LinkClicked = new EventHandler<>() {
             @Override
             public void handle(Object sender, LinkLabelLinkClickedEventArgs e) {
                 SystemLinkClicked(sender, e);
@@ -360,7 +360,7 @@ public class FormMonster extends WinformForm {
         lblMercSystems2.setLocation(new Point(185, 391));
         lblMercSystems2.setSize(new FormSize(160, 175));
         lblMercSystems2.setTabIndex(148);
-        lblMercSystems2.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
+        lblMercSystems2.LinkClicked = new EventHandler<>() {
             @Override
             public void handle(Object sender, LinkLabelLinkClickedEventArgs e) {
                 SystemLinkClicked(sender, e);
@@ -383,7 +383,7 @@ public class FormMonster extends WinformForm {
         lblQuestSystems.setLocation(new Point(4, 4));
         lblQuestSystems.setSize(new FormSize(68, 350));
         lblQuestSystems.setTabIndex(12);
-        lblQuestSystems.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
+        lblQuestSystems.LinkClicked = new EventHandler<>() {
             @Override
             public void handle(Object sender, LinkLabelLinkClickedEventArgs e) {
                 SystemLinkClicked(sender, e);
@@ -405,7 +405,7 @@ public class FormMonster extends WinformForm {
         lblShipyardSystems.setLocation(new Point(4, 4));
         lblShipyardSystems.setSize(new FormSize(68, 63));
         lblShipyardSystems.setTabIndex(13);
-        lblShipyardSystems.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
+        lblShipyardSystems.LinkClicked = new EventHandler<>() {
             @Override
             public void handle(Object sender, LinkLabelLinkClickedEventArgs e) {
                 SystemLinkClicked(sender, e);
@@ -538,7 +538,7 @@ public class FormMonster extends WinformForm {
         // Populate the mercenary ids array.
         ArrayList<Integer> ids = new ArrayList<>();
         for (CrewMember merc : game.Mercenaries()) {
-            if (!Util.ArrayContains(Consts.SpecialCrewMemberIds, merc.Id())) {
+            if (!Util.ArrayContains(Constants.SpecialCrewMemberIds, merc.Id())) {
                 ids.add(merc.Id().CastToInt());
             }
         }
@@ -665,8 +665,8 @@ public class FormMonster extends WinformForm {
         lblQuestSystems.setText("");
         lblQuests.setText("");
         lblQuestSystems.Links.clear();
-        for (int i = 0; i < questSystemIds.length; i++) {
-            StarSystem system = game.Universe()[questSystemIds[i]];
+        for (Integer questSystemId : questSystemIds) {
+            StarSystem system = game.Universe()[questSystemId];
             int start = lblQuestSystems.getText().length();
             lblQuestSystems.setText(lblQuestSystems.getText() + (system.Name() + Strings.newline));
             lblQuests.setText(lblQuests.getText() + (system.SpecialEvent().Title() + Strings.newline));
@@ -680,8 +680,8 @@ public class FormMonster extends WinformForm {
         lblShipyardSystems.setText("");
         lblShipyards.setText("");
         lblShipyardSystems.Links.clear();
-        for (int i = 0; i < shipyardSystemIds.length; i++) {
-            StarSystem system = game.Universe()[shipyardSystemIds[i]];
+        for (Integer shipyardSystemId : shipyardSystemIds) {
+            StarSystem system = game.Universe()[shipyardSystemId];
             int start = lblShipyardSystems.getText().length();
             lblShipyardSystems.setText(lblShipyardSystems.getText() + (system.Name() + Strings.newline));
             lblShipyards.setText(lblShipyards.getText() + (system.Shipyard().Name() + Strings.newline));

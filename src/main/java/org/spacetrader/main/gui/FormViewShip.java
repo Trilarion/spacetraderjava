@@ -77,11 +77,11 @@ public class FormViewShip extends WinformForm {
         lblEquip.setLocation(new Point(80, 34));
         lblEquip.setSize(new FormSize(120, 176));
         lblEquip.setTabIndex(44);
-        lblEquip.setText("Hardened\r\n\r\n1 Military Laser\r\n1 Morgan\'s Laser\r\n1 Energy Shield\r\n1 Reflective Shi"
+        lblEquip.setText("Hardened\r\n\r\n1 Military Laser\r\n1 Morgan's Laser\r\n1 Energy Shield\r\n1 Reflective Shi"
                 + "eld\r\n1 Lightning Shield\r\nNavigating System\r\nAuto-Repair System\r\n10 Extra Cargo Bays\r\nAn Escape Pod\r\n"
                 + "\r\n1 weapon slot\r\n1 gadget slot");
         // boxSpecialCargo
-        boxSpecialCargo.Controls.addAll((new WinformControl[]{lblSpecialCargo}));
+        boxSpecialCargo.Controls.addAll(lblSpecialCargo);
         boxSpecialCargo.setLocation(new Point(192, 8));
         boxSpecialCargo.setSize(new FormSize(200, 204));
         boxSpecialCargo.setTabIndex(64);
@@ -113,36 +113,36 @@ public class FormViewShip extends WinformForm {
             lblEquip.setText(lblEquip.getText() + ("Hardened" + Strings.newline + Strings.newline));
         }
         boolean equipPrinted = false;
-        for (int i = 0; i < Consts.WeapObjs.length; i++) {
+        for (int i = 0; i < Constants.WeaponObjects.length; i++) {
             int count = 0;
             for (int j = 0; j < ship.Weapons().length; j++) {
-                if (ship.Weapons()[j] != null && ship.Weapons()[j].Type() == Consts.WeapObjs[i].Type()) {
+                if (ship.Weapons()[j] != null && ship.Weapons()[j].Type() == Constants.WeaponObjects[i].Type()) {
                     count++;
                 }
             }
             if (count > 0) {
                 lblEquipLabel.setText(lblEquipLabel.getText() + (equipPrinted ? Strings.newline : "Equipment:" + Strings.newline));
-                lblEquip.setText(lblEquip.getText() + (Functions.Multiples(count, Consts.WeapObjs[i].Name()) + Strings.newline));
+                lblEquip.setText(lblEquip.getText() + (Functions.Multiples(count, Constants.WeaponObjects[i].Name()) + Strings.newline));
                 equipPrinted = true;
             }
         }
-        for (int i = 0; i < Consts.Shields.length; i++) {
+        for (int i = 0; i < Constants.Shields.length; i++) {
             int count = 0;
             for (int j = 0; j < ship.Shields().length; j++) {
-                if (ship.Shields()[j] != null && ship.Shields()[j].Type() == Consts.Shields[i].Type()) {
+                if (ship.Shields()[j] != null && ship.Shields()[j].Type() == Constants.Shields[i].Type()) {
                     count++;
                 }
             }
             if (count > 0) {
                 lblEquipLabel.setText(lblEquipLabel.getText() + (equipPrinted ? Strings.newline : "Equipment:" + Strings.newline));
-                lblEquip.setText(lblEquip.getText() + (Functions.Multiples(count, Consts.Shields[i].Name()) + Strings.newline));
+                lblEquip.setText(lblEquip.getText() + (Functions.Multiples(count, Constants.Shields[i].Name()) + Strings.newline));
                 equipPrinted = true;
             }
         }
-        for (int i = 0; i < Consts.Gadgets.length; i++) {
+        for (int i = 0; i < Constants.Gadgets.length; i++) {
             int count = 0;
             for (int j = 0; j < ship.Gadgets().length; j++) {
-                if (ship.Gadgets()[j] != null && ship.Gadgets()[j].Type() == Consts.Gadgets[i].Type()) {
+                if (ship.Gadgets()[j] != null && ship.Gadgets()[j].Type() == Constants.Gadgets[i].Type()) {
                     count++;
                 }
             }
@@ -150,9 +150,9 @@ public class FormViewShip extends WinformForm {
                 lblEquipLabel.setText(lblEquipLabel.getText() + (equipPrinted ? Strings.newline : "Equipment:" + Strings.newline));
                 if (i == GadgetType.ExtraCargoBays.asInteger() || i == GadgetType.HiddenCargoBays.asInteger()) {
                     count *= 5;
-                    lblEquip.setText(lblEquip.getText() + (Functions.FormatNumber(count) + Consts.Gadgets[i].Name().substring(1) + Strings.newline));
+                    lblEquip.setText(lblEquip.getText() + (Functions.FormatNumber(count) + Constants.Gadgets[i].Name().substring(1) + Strings.newline));
                 } else {
-                    lblEquip.setText(lblEquip.getText() + (Functions.Multiples(count, Consts.Gadgets[i].Name()) + Strings.newline));
+                    lblEquip.setText(lblEquip.getText() + (Functions.Multiples(count, Constants.Gadgets[i].Name()) + Strings.newline));
                 }
                 equipPrinted = true;
             }
@@ -180,7 +180,7 @@ public class FormViewShip extends WinformForm {
     private void DisplaySpecialCargo() {
         ArrayList<String> specialCargo = new ArrayList<>(12);
         if (ship.getTribbles() > 0) {
-            if (ship.getTribbles() == Consts.MaxTribbles) {
+            if (ship.getTribbles() == Constants.MaxTribbles) {
                 specialCargo.add(Strings.SpecialCargoTribblesInfest);
             } else {
                 specialCargo.add(Functions.Multiples(ship.getTribbles(), Strings.SpecialCargoTribblesCute) + ".");
@@ -205,7 +205,7 @@ public class FormViewShip extends WinformForm {
         if (game.getCanSuperWarp()) {
             specialCargo.add(Strings.SpecialCargoExperiment);
         }
-        lblSpecialCargo.setText(specialCargo.size() == 0
+        lblSpecialCargo.setText(specialCargo.isEmpty()
                 ? Strings.SpecialCargoNone
                 : Util.StringsJoin(Strings.newline + Strings.newline, Functions.ArrayListtoStringArray(specialCargo)));
     }

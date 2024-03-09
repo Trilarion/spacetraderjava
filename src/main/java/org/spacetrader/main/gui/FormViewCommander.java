@@ -17,7 +17,7 @@ import org.jwinforms.enums.FontStyle;
 import org.jwinforms.enums.FormBorderStyle;
 import org.jwinforms.enums.FormStartPosition;
 import org.spacetrader.main.Commander;
-import org.spacetrader.main.Consts;
+import org.spacetrader.main.Constants;
 import org.spacetrader.main.Functions;
 import org.spacetrader.main.Game;
 import org.spacetrader.main.PoliceRecord;
@@ -184,9 +184,7 @@ public class FormViewCommander extends WinformForm {
         lblTime.setTabIndex(44);
         lblTime.setText("88,888 days");
         // boxSkills
-        boxSkills.Controls.addAll((new WinformControl[]{
-                lblEngineer, lblTrader, lblFighter, lblPilot, lblEngineerLabel, lblTraderLabel, lblFighterLabel, lblPilotLabel
-        }));
+        boxSkills.Controls.addAll(lblEngineer, lblTrader, lblFighter, lblPilot, lblEngineerLabel, lblTraderLabel, lblFighterLabel, lblPilotLabel);
         boxSkills.setLocation(new Point(8, 64));
         boxSkills.setName("boxSkills");
         boxSkills.setSize(new FormSize(216, 56));
@@ -279,9 +277,7 @@ public class FormViewCommander extends WinformForm {
         lblNetWorth.setText("8,888,888 cr.");
         lblNetWorth.TextAlign = ContentAlignment.TopRight;
         // boxNotoriety
-        boxNotoriety.Controls.addAll((new WinformControl[]{
-                lblBountyLabel, lblBounty, lblPoliceLabel, lblReputationLabel, lblKillsLabel, lblKills, lblReputation, lblRecord
-        }));
+        boxNotoriety.Controls.addAll(lblBountyLabel, lblBounty, lblPoliceLabel, lblReputationLabel, lblKillsLabel, lblKills, lblReputation, lblRecord);
         boxNotoriety.setLocation(new Point(8, 208));
         boxNotoriety.setName("boxNotoriety");
         boxNotoriety.setSize(new FormSize(216, 88));
@@ -381,12 +377,12 @@ public class FormViewCommander extends WinformForm {
         lblRecord.setText(PoliceRecord.GetPoliceRecordFromScore(cmdr.getPoliceRecordScore()).Name());
         lblReputation.setText(Reputation.GetReputationFromScore(cmdr.getReputationScore()).Name());
         int score = cmdr.getPoliceRecordScore();
-        if (score <= Consts.PoliceRecordScoreCrook) {
+        if (score <= Constants.PoliceRecordScoreCrook) {
             lblBountyLabel.setVisible(true);
             lblBountyLabel.setText("Bounty offered:");
             lblBounty.setVisible(true);
             lblBounty.setText(Functions.FormatMoney(-1000 * score));
-        } else if (score >= Consts.PoliceRecordScoreTrusted) {
+        } else if (score >= Constants.PoliceRecordScoreTrusted) {
             lblBountyLabel.setVisible(true);
             lblBountyLabel.setText("Angry kingpins:");
             lblBounty.setVisible(true);

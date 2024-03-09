@@ -6,7 +6,7 @@ import org.spacetrader.main.util.Log;
 
 
 public class Weapon extends Equipment {
-    private static final String ss[] = {
+    private static final String[] ss = {
             "_type", "_power", "_disabling"
     };
     private WeaponType _type;
@@ -56,7 +56,7 @@ public class Weapon extends Equipment {
     public boolean TypeEquals(Object type) {
         boolean equal = false;
         try {
-            if (_type == (WeaponType) type) {
+            if (_type == type) {
                 equal = true;
             }
         } catch (Exception e) {

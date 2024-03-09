@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class FormViewBank extends WinformForm {
     private final Game game = Game.CurrentGame();
     private final Commander cmdr = game.Commander();
-    private final int MaxLoan = cmdr.getPoliceRecordScore() >= Consts.PoliceRecordScoreClean
+    private final int MaxLoan = cmdr.getPoliceRecordScore() >= Constants.PoliceRecordScoreClean
             ? Math.min(25000, Math.max(1000, cmdr.Worth() / 5000 * 500)) : 500;
     private Button btnGetLoan;
     private Button btnBuyInsurance;
@@ -105,7 +105,7 @@ public class FormViewBank extends WinformForm {
         btnGetLoan.setSize(new FormSize(61, 22));
         btnGetLoan.setTabIndex(1);
         btnGetLoan.setText("Get Loan");
-        btnGetLoan.setClick(new EventHandler<Object, EventArgs>() {
+        btnGetLoan.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnGetLoan_Click(sender, e);
@@ -118,7 +118,7 @@ public class FormViewBank extends WinformForm {
         btnBuyInsurance.setSize(new FormSize(90, 22));
         btnBuyInsurance.setTabIndex(3);
         btnBuyInsurance.setText("Stop Insurance");
-        btnBuyInsurance.setClick(new EventHandler<Object, EventArgs>() {
+        btnBuyInsurance.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnBuyInsurance_Click(sender, e);
@@ -184,7 +184,7 @@ public class FormViewBank extends WinformForm {
         btnPayBack.setSize(new FormSize(90, 22));
         btnPayBack.setTabIndex(2);
         btnPayBack.setText("Pay Back Loan");
-        btnPayBack.setClick(new EventHandler<Object, EventArgs>() {
+        btnPayBack.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnPayBack_Click(sender, e);
@@ -246,7 +246,7 @@ public class FormViewBank extends WinformForm {
         // Insurance Info
         lblShipValue.setText(Functions.FormatMoney(cmdr.getShip().BaseWorth(true)));
         lblNoClaim.setText(Functions.FormatPercent(cmdr.NoClaim()));
-        lblMaxNoClaim.setVisible((cmdr.NoClaim() == Consts.MaxNoClaim));
+        lblMaxNoClaim.setVisible((cmdr.NoClaim() == Constants.MaxNoClaim));
         lblInsAmt.setText(Functions.StringVars(Strings.MoneyRateSuffix, Functions.FormatMoney(game.InsuranceCosts())));
         btnBuyInsurance.setText(Functions.StringVars("^1 Insurance", cmdr.getInsurance() ? "Stop" : "Buy"));
     }

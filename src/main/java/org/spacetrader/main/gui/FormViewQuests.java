@@ -17,7 +17,7 @@ import org.spacetrader.main.stub.ArrayList;
 import org.spacetrader.main.util.Util;
 import org.spacetrader.crew.CrewMemberId;
 import org.spacetrader.events.SpecialEventType;
-import org.spacetrader.main.Consts;
+import org.spacetrader.main.Constants;
 import org.spacetrader.main.Functions;
 import org.spacetrader.main.Game;
 import org.spacetrader.main.SpecialEvent;
@@ -65,7 +65,7 @@ public class FormViewQuests extends WinformForm {
                 + "Smuggle Jonathan Wild to Kravat. Wild is getting impatient, and will no longer aid your crew along the way.\n\n"
                 + "Get rid of those pesky tribbles.\n\n"
                 + "Claim your moon at Utopia.");
-        lblQuests.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
+        lblQuests.LinkClicked = new EventHandler<>() {
             @Override
             public void handle(Object sender, LinkLabelLinkClickedEventArgs e) {
                 lblQuests_LinkClicked(sender, e);
@@ -164,10 +164,10 @@ public class FormViewQuests extends WinformForm {
         if (game.getQuestStatusScarab() == SpecialEvent.StatusScarabHunting) {
             quests.add(Strings.QuestScarabFind);
         } else if (game.getQuestStatusScarab() == SpecialEvent.StatusScarabDestroyed) {
-            if (Consts.SpecialEvents[SpecialEventType.ScarabUpgradeHull.CastToInt()].Location() == null) {
-                quests.add(Functions.StringVars(Strings.QuestScarabNotify, Consts.SpecialEvents[SpecialEventType.ScarabDestroyed.CastToInt()].Location().Name()));
+            if (Constants.SpecialEvents[SpecialEventType.ScarabUpgradeHull.CastToInt()].Location() == null) {
+                quests.add(Functions.StringVars(Strings.QuestScarabNotify, Constants.SpecialEvents[SpecialEventType.ScarabDestroyed.CastToInt()].Location().Name()));
             } else {
-                quests.add(Functions.StringVars(Strings.QuestScarabHull, Consts.SpecialEvents[SpecialEventType.ScarabUpgradeHull.CastToInt()].Location().Name()));
+                quests.add(Functions.StringVars(Strings.QuestScarabHull, Constants.SpecialEvents[SpecialEventType.ScarabUpgradeHull.CastToInt()].Location().Name()));
             }
         }
         if (game.Commander().getShip().SculptureOnBoard()) {

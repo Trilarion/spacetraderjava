@@ -9,7 +9,7 @@ public enum FontStyle {
     Regular(Font.PLAIN);
     public final int awtFontstyle;
 
-    private FontStyle(int i) {
+    FontStyle(int i) {
         awtFontstyle = i;
     }
 }

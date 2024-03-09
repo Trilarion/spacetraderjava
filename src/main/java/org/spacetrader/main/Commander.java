@@ -31,7 +31,7 @@ public class Commander extends CrewMember {
         super(cm);
         // Start off with a crew of only the commander and a Pulse Laser.
         _ship.Crew()[0] = this;
-        _ship.AddEquipment(Consts.WeapObjs[WeaponType.PulseLaser.id]);
+        _ship.AddEquipment(Constants.WeaponObjects[WeaponType.PulseLaser.id]);
     }
 
     public Commander(Hashtable hash) {
@@ -54,7 +54,7 @@ public class Commander extends CrewMember {
 
     public void PayInterest() {
         if (getDebt() > 0) {
-            int interest = Math.max(1, (int) (getDebt() * Consts.IntRate));
+            int interest = Math.max(1, (int) (getDebt() * Constants.IntRate));
             if (getCash() > interest) {
                 setCash(getCash() - interest);
             } else {
@@ -105,11 +105,11 @@ public class Commander extends CrewMember {
             FormAlert.Alert(AlertType.ShipBuyReactor, owner);
         } else {
             Equipment[] special = new Equipment[]{
-                    Consts.WeapObjs[WeaponType.MorgansLaser.id],
-                    Consts.WeapObjs[WeaponType.QuantumDistruptor.id],
-                    Consts.Shields[ShieldType.Lightning.id],
-                    Consts.Gadgets[GadgetType.FuelCompactor.asInteger()],
-                    Consts.Gadgets[GadgetType.HiddenCargoBays.asInteger()]
+                    Constants.WeaponObjects[WeaponType.MorgansLaser.id],
+                    Constants.WeaponObjects[WeaponType.QuantumDistruptor.id],
+                    Constants.Shields[ShieldType.Lightning.id],
+                    Constants.Gadgets[GadgetType.FuelCompactor.asInteger()],
+                    Constants.Gadgets[GadgetType.HiddenCargoBays.asInteger()]
             };
             boolean[] add = new boolean[special.length];
             boolean addPod = false;
@@ -126,7 +126,7 @@ public class Commander extends CrewMember {
             }
             if (getShip().getEscapePod()) {
                 addPod = true;
-                extraCost += Consts.PodTransferCost;
+                extraCost += Constants.PodTransferCost;
             }
             if (netPrice + extraCost > CashToSpend()) {
                 FormAlert.Alert(AlertType.ShipBuyIFTransfer, owner);
@@ -144,11 +144,11 @@ public class Commander extends CrewMember {
                 }
             }
             if (addPod) {
-                if (netPrice + extraCost + Consts.PodTransferCost > CashToSpend()) {
+                if (netPrice + extraCost + Constants.PodTransferCost > CashToSpend()) {
                     FormAlert.Alert(AlertType.ShipBuyNoTransfer, owner, Strings.ShipInfoEscapePod);
                 } else if (FormAlert.Alert(AlertType.ShipBuyTransfer, owner, Strings.ShipInfoEscapePod,
-                        Strings.ShipInfoEscapePod.toLowerCase(), Functions.FormatNumber(Consts.PodTransferCost)) == DialogResult.Yes) {
-                    extraCost += Consts.PodTransferCost;
+                        Strings.ShipInfoEscapePod.toLowerCase(), Functions.FormatNumber(Constants.PodTransferCost)) == DialogResult.Yes) {
+                    extraCost += Constants.PodTransferCost;
                 } else {
                     addPod = false;
                 }
@@ -185,7 +185,7 @@ public class Commander extends CrewMember {
     }
 
     public void NoClaim(int value) {
-        _noclaim = Math.max(0, Math.min(Consts.MaxNoClaim, value));
+        _noclaim = Math.max(0, Math.min(Constants.MaxNoClaim, value));
     }
 
     public int[] PriceCargo() {

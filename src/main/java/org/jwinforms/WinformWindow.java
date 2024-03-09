@@ -139,7 +139,7 @@ public class WinformWindow extends WinformControl implements WinformPane {
     }
 
     public void setClientSize(Dimension clientSize) {
-        // heigher, cause decorations count in swing.
+        // higher, cause decorations count in swing.
         frame.setSize(new Dimension(clientSize.width, clientSize.height + 45));
     }
 

@@ -754,8 +754,8 @@ public class FormAlert extends WinformForm {
                 dr = (new FormAlert("Skill Increase", "The alien increases one of your skills.",
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
-            case SpecialTimespaceFabricRip:
-                dr = (new FormAlert("Timespace Fabric Rip", "You have flown through a tear in the timespace continuum caused by Dr. Fehler's failed experiment. You may not have reached your planned destination!",
+            case SpecialSpacetimeFabricRip:
+                dr = (new FormAlert("Spacetime Fabric Rip", "You have flown through a tear in the spacetime continuum caused by Dr. Fehler's failed experiment. You may not have reached your planned destination!",
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case SpecialTrainingCompleted:
@@ -900,7 +900,7 @@ public class FormAlert extends WinformForm {
         ilImages.setTransparentColor(null);
         // tmrTick
         tmrTick.setInterval(4000);
-        tmrTick.Tick = new EventHandler<Object, EventArgs>() {
+        tmrTick.Tick = new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 tmrTick_Tick();
@@ -918,7 +918,7 @@ public class FormAlert extends WinformForm {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Title");
-        setClick(new EventHandler<Object, EventArgs>() {
+        setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 FormAlert_Click(sender, e);

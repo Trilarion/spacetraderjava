@@ -79,7 +79,7 @@ public class FormShipList extends WinformForm {
     private Label lblCrew;
     private Label[] lblPrice;
     private Button[] btnBuy;
-    private int[] prices = new int[Consts.ShipSpecs.length];
+    private int[] prices = new int[Constants.ShipSpecs.length];
 
     public FormShipList() {
         InitializeComponent();
@@ -194,7 +194,7 @@ public class FormShipList extends WinformForm {
         btnBuy0.setTabIndex(1);
         btnBuy0.setText("Buy");
         btnBuy0.setVisible(false);
-        btnBuy0.setClick(new EventHandler<Object, EventArgs>() {
+        btnBuy0.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnBuyInfo_Click(sender, e);
@@ -213,7 +213,7 @@ public class FormShipList extends WinformForm {
         btnInfo0.setSize(new FormSize(34, 22));
         btnInfo0.setTabIndex(11);
         btnInfo0.setText("Info");
-        btnInfo0.setClick(new EventHandler<Object, EventArgs>() {
+        btnInfo0.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnBuyInfo_Click(sender, e);
@@ -240,7 +240,7 @@ public class FormShipList extends WinformForm {
         btnInfo1.setSize(new FormSize(34, 22));
         btnInfo1.setTabIndex(12);
         btnInfo1.setText("Info");
-        btnInfo1.setClick(new EventHandler<Object, EventArgs>() {
+        btnInfo1.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnBuyInfo_Click(sender, e);
@@ -260,7 +260,7 @@ public class FormShipList extends WinformForm {
         btnBuy1.setTabIndex(2);
         btnBuy1.setText("Buy");
         btnBuy1.setVisible(false);
-        btnBuy1.setClick(new EventHandler<Object, EventArgs>() {
+        btnBuy1.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnBuyInfo_Click(sender, e);
@@ -280,7 +280,7 @@ public class FormShipList extends WinformForm {
         btnInfo2.setSize(new FormSize(34, 22));
         btnInfo2.setTabIndex(13);
         btnInfo2.setText("Info");
-        btnInfo2.setClick(new EventHandler<Object, EventArgs>() {
+        btnInfo2.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnBuyInfo_Click(sender, e);
@@ -300,7 +300,7 @@ public class FormShipList extends WinformForm {
         btnBuy2.setTabIndex(3);
         btnBuy2.setText("Buy");
         btnBuy2.setVisible(false);
-        btnBuy2.setClick(new EventHandler<Object, EventArgs>() {
+        btnBuy2.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnBuyInfo_Click(sender, e);
@@ -320,7 +320,7 @@ public class FormShipList extends WinformForm {
         btnInfo3.setSize(new FormSize(34, 22));
         btnInfo3.setTabIndex(14);
         btnInfo3.setText("Info");
-        btnInfo3.setClick(new EventHandler<Object, EventArgs>() {
+        btnInfo3.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnBuyInfo_Click(sender, e);
@@ -340,7 +340,7 @@ public class FormShipList extends WinformForm {
         btnBuy3.setTabIndex(4);
         btnBuy3.setText("Buy");
         btnBuy3.setVisible(false);
-        btnBuy3.setClick(new EventHandler<Object, EventArgs>() {
+        btnBuy3.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnBuyInfo_Click(sender, e);
@@ -360,7 +360,7 @@ public class FormShipList extends WinformForm {
         btnInfo4.setSize(new FormSize(34, 22));
         btnInfo4.setTabIndex(15);
         btnInfo4.setText("Info");
-        btnInfo4.setClick(new EventHandler<Object, EventArgs>() {
+        btnInfo4.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnBuyInfo_Click(sender, e);
@@ -380,7 +380,7 @@ public class FormShipList extends WinformForm {
         btnBuy4.setTabIndex(5);
         btnBuy4.setText("Buy");
         btnBuy4.setVisible(false);
-        btnBuy4.setClick(new EventHandler<Object, EventArgs>() {
+        btnBuy4.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnBuyInfo_Click(sender, e);
@@ -400,7 +400,7 @@ public class FormShipList extends WinformForm {
         btnInfo5.setSize(new FormSize(34, 22));
         btnInfo5.setTabIndex(16);
         btnInfo5.setText("Info");
-        btnInfo5.setClick(new EventHandler<Object, EventArgs>() {
+        btnInfo5.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnBuyInfo_Click(sender, e);
@@ -420,7 +420,7 @@ public class FormShipList extends WinformForm {
         btnBuy5.setTabIndex(6);
         btnBuy5.setText("Buy");
         btnBuy5.setVisible(false);
-        btnBuy5.setClick(new EventHandler<Object, EventArgs>() {
+        btnBuy5.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnBuyInfo_Click(sender, e);
@@ -440,7 +440,7 @@ public class FormShipList extends WinformForm {
         btnInfo6.setSize(new FormSize(34, 22));
         btnInfo6.setTabIndex(17);
         btnInfo6.setText("Info");
-        btnInfo6.setClick(new EventHandler<Object, EventArgs>() {
+        btnInfo6.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnBuyInfo_Click(sender, e);
@@ -460,7 +460,7 @@ public class FormShipList extends WinformForm {
         btnBuy6.setTabIndex(7);
         btnBuy6.setText("Buy");
         btnBuy6.setVisible(false);
-        btnBuy6.setClick(new EventHandler<Object, EventArgs>() {
+        btnBuy6.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnBuyInfo_Click(sender, e);
@@ -480,7 +480,7 @@ public class FormShipList extends WinformForm {
         btnInfo7.setSize(new FormSize(34, 22));
         btnInfo7.setTabIndex(18);
         btnInfo7.setText("Info");
-        btnInfo7.setClick(new EventHandler<Object, EventArgs>() {
+        btnInfo7.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnBuyInfo_Click(sender, e);
@@ -500,7 +500,7 @@ public class FormShipList extends WinformForm {
         btnBuy7.setTabIndex(8);
         btnBuy7.setText("Buy");
         btnBuy7.setVisible(false);
-        btnBuy7.setClick(new EventHandler<Object, EventArgs>() {
+        btnBuy7.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnBuyInfo_Click(sender, e);
@@ -520,7 +520,7 @@ public class FormShipList extends WinformForm {
         btnInfo8.setSize(new FormSize(34, 22));
         btnInfo8.setTabIndex(19);
         btnInfo8.setText("Info");
-        btnInfo8.setClick(new EventHandler<Object, EventArgs>() {
+        btnInfo8.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnBuyInfo_Click(sender, e);
@@ -540,7 +540,7 @@ public class FormShipList extends WinformForm {
         btnBuy8.setTabIndex(9);
         btnBuy8.setText("Buy");
         btnBuy8.setVisible(false);
-        btnBuy8.setClick(new EventHandler<Object, EventArgs>() {
+        btnBuy8.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnBuyInfo_Click(sender, e);
@@ -560,7 +560,7 @@ public class FormShipList extends WinformForm {
         btnInfo9.setSize(new FormSize(34, 22));
         btnInfo9.setTabIndex(20);
         btnInfo9.setText("Info");
-        btnInfo9.setClick(new EventHandler<Object, EventArgs>() {
+        btnInfo9.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnBuyInfo_Click(sender, e);
@@ -580,15 +580,14 @@ public class FormShipList extends WinformForm {
         btnBuy9.setTabIndex(10);
         btnBuy9.setText("Buy");
         btnBuy9.setVisible(false);
-        btnBuy9.setClick(new EventHandler<Object, EventArgs>() {
+        btnBuy9.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnBuyInfo_Click(sender, e);
             }
         });
         // boxShipInfo
-        boxShipInfo.Controls.addAll((new WinformControl[]{
-                lblCrew,
+        boxShipInfo.Controls.addAll(lblCrew,
                 lblGadget,
                 lblShield,
                 lblWeapon,
@@ -606,7 +605,7 @@ public class FormShipList extends WinformForm {
                 lblRangeLabel,
                 lblBaysLabel,
                 lblNameLabel,
-                lblSizeLabel}));
+                lblSizeLabel);
         boxShipInfo.setLocation(new Point(232, 0));
         boxShipInfo.setName("boxShipInfo");
         boxShipInfo.setSize(new FormSize(200, 248));
@@ -807,7 +806,7 @@ public class FormShipList extends WinformForm {
 
     private void Buy(int id) {
         Info(id);
-        if (cmdr.TradeShip(Consts.ShipSpecs[id], prices[id], this)) {
+        if (cmdr.TradeShip(Constants.ShipSpecs[id], prices[id], this)) {
             if (game.getQuestStatusScarab() == SpecialEvent.StatusScarabDone) {
                 game.setQuestStatusScarab(SpecialEvent.StatusScarabNotStarted);
             }
@@ -817,7 +816,7 @@ public class FormShipList extends WinformForm {
     }
 
     private void Info(int id) {
-        ShipSpec spec = Consts.ShipSpecs[id];
+        ShipSpec spec = Constants.ShipSpecs[id];
         picShip.setImage(spec.Image());
         lblName.setText(spec.Name());
         lblSize.setText(Strings.Sizes[spec.getSize().CastToInt()]);
@@ -833,13 +832,13 @@ public class FormShipList extends WinformForm {
     private void UpdateAll() {
         for (int i = 0; i < lblPrice.length; i++) {
             btnBuy[i].setVisible(false);
-            if (Consts.ShipSpecs[i].MinimumTechLevel().ordinal() > cmdr.CurrentSystem().TechLevel().ordinal()) {
+            if (Constants.ShipSpecs[i].MinimumTechLevel().ordinal() > cmdr.CurrentSystem().TechLevel().ordinal()) {
                 lblPrice[i].setText("not sold");
-            } else if (Consts.ShipSpecs[i].Type() == ship.Type()) {
+            } else if (Constants.ShipSpecs[i].Type() == ship.Type()) {
                 lblPrice[i].setText(Strings.ShipBuyGotOne);
             } else {
                 btnBuy[i].setVisible(true);
-                prices[i] = Consts.ShipSpecs[i].getPrice() - ship.Worth(false);
+                prices[i] = Constants.ShipSpecs[i].getPrice() - ship.Worth(false);
                 lblPrice[i].setText(Functions.FormatMoney(prices[i]));
             }
         }
@@ -848,7 +847,7 @@ public class FormShipList extends WinformForm {
     private void btnBuyInfo_Click(Object sender, EventArgs e) {
         String name = ((Button) sender).getName();
         int index = Integer.parseInt(name.substring(name.length() - 1));
-        if (name.indexOf("Buy") < 0) {
+        if (!name.contains("Buy")) {
             Info(index);
         } else {
             Buy(index);

@@ -42,12 +42,12 @@ public class FormShipyard extends WinformForm {
     private GroupBox boxWelcome;
     private GroupBox boxInfo;
     private IContainer components;
-    private WfImage[] customImages = new WfImage[Consts.ImagesPerShip];
+    private WfImage[] customImages = new WfImage[Constants.ImagesPerShip];
     private ImageList ilShipyardLogos;
     private Label lblWelcome;
     private Label lblName;
     private Label lblDesignFee;
-    private Label lblHullStrenghLabel;
+    private Label lblHullStrengthLabel;
     private Label lblCargoBays;
     private Label lblFuelTanks;
     private Label lblCrewQuarters;
@@ -105,10 +105,10 @@ public class FormShipyard extends WinformForm {
         lblSkill.setText(Strings.ShipyardSkills[yard.Skill().CastToInt()]);
         lblSkillDescription.setText(Strings.ShipyardSkillDescriptions[yard.Skill().CastToInt()]);
         lblWarning.setText(Functions.StringVars(Strings.ShipyardWarning, "" + Shipyard.PENALTY_FIRST_PCT, "" + Shipyard.PENALTY_SECOND_PCT));
-        dlgOpen.setInitialDirectory(Consts.CustomImagesDirectory);
-        dlgSave.setInitialDirectory(Consts.CustomTemplatesDirectory);
-        lblDisabledName.setImage(game.getParentWindow().DirectionImages().getImages()[Consts.DirectionDown]);
-        lblDisabledPct.setImage(game.getParentWindow().DirectionImages().getImages()[Consts.DirectionDown]);
+        dlgOpen.setInitialDirectory(Constants.CustomImagesDirectory);
+        dlgSave.setInitialDirectory(Constants.CustomTemplatesDirectory);
+        lblDisabledName.setImage(game.getParentWindow().DirectionImages().getImages()[Constants.DirectionDown]);
+        lblDisabledPct.setImage(game.getParentWindow().DirectionImages().getImages()[Constants.DirectionDown]);
         LoadSizes();
         LoadTemplateList();
         LoadSelectedTemplate();
@@ -164,7 +164,7 @@ public class FormShipyard extends WinformForm {
         lblPct = new Label();
         lblPctLabel = new Label();
         numHullStrength = new NumericUpDown();
-        lblHullStrenghLabel = new Label();
+        lblHullStrengthLabel = new Label();
         numCargoBays = new NumericUpDown();
         numCrewQuarters = new NumericUpDown();
         numFuelTanks = new NumericUpDown();
@@ -195,9 +195,7 @@ public class FormShipyard extends WinformForm {
         ((ISupportInitialize) (numWeaponSlots)).BeginInit();
         SuspendLayout();
         // boxWelcome
-        boxWelcome.Controls.addAll((new WinformControl[]{
-                lblSkillDescription, lblSkill, lblSizeSpecialty, lblSkillLabel, lblSizeSpecialtyLabel, lblWarning, picLogo, lblWelcome
-        }));
+        boxWelcome.Controls.addAll(lblSkillDescription, lblSkill, lblSizeSpecialty, lblSkillLabel, lblSizeSpecialtyLabel, lblWarning, picLogo, lblWelcome);
         boxWelcome.setLocation(new Point(8, 0));
         boxWelcome.setName("boxWelcome");
         boxWelcome.setSize(new FormSize(270, 204));
@@ -258,10 +256,8 @@ public class FormShipyard extends WinformForm {
         picLogo.setTabIndex(22);
         picLogo.setTabStop(false);
         // boxInfo
-        boxInfo.Controls.addAll((new WinformControl[]{
-                btnSave, btnLoad, picInfoLine, btnPrevImage, btnNextImage, lblImage, lblImageLabel, selTemplate,
-                lblTemplate, selSize, lblSize, btnSetCustomImage, picShip, txtName, lblName
-        }));
+        boxInfo.Controls.addAll(btnSave, btnLoad, picInfoLine, btnPrevImage, btnNextImage, lblImage, lblImageLabel, selTemplate,
+                lblTemplate, selSize, lblSize, btnSetCustomImage, picShip, txtName, lblName);
         boxInfo.setLocation(new Point(8, 208));
         boxInfo.setName("boxInfo");
         boxInfo.setSize(new FormSize(270, 160));
@@ -276,21 +272,21 @@ public class FormShipyard extends WinformForm {
         btnSave.setTabIndex(4);
         btnSave.setText("Save");
         btnSave.setClick(
-                new EventHandler<Object, EventArgs>() {
+                new EventHandler<>() {
                     @Override
                     public void handle(Object sender, EventArgs e) {
                         btnSave_Click(sender, e);
                     }
                 });
         btnSave.setMouseEnter(
-                new EventHandler<Object, EventArgs>() {
+                new EventHandler<>() {
                     @Override
                     public void handle(Object sender, EventArgs e) {
                         btnSave_MouseEnter(sender, e);
                     }
                 });
         btnSave.setMouseLeave(
-                new EventHandler<Object, EventArgs>() {
+                new EventHandler<>() {
                     @Override
                     public void handle(Object sender, EventArgs e) {
                         btnSave_MouseLeave(sender, e);
@@ -303,7 +299,7 @@ public class FormShipyard extends WinformForm {
         btnLoad.setSize(new FormSize(44, 20));
         btnLoad.setTabIndex(2);
         btnLoad.setText("Load");
-        btnLoad.setClick(new EventHandler<Object, EventArgs>() {
+        btnLoad.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnLoad_Click(sender, e);
@@ -323,7 +319,7 @@ public class FormShipyard extends WinformForm {
         btnPrevImage.setSize(new FormSize(18, 18));
         btnPrevImage.setTabIndex(6);
         btnPrevImage.setText("<");
-        btnPrevImage.setClick(new EventHandler<Object, EventArgs>() {
+        btnPrevImage.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnPrevImage_Click(sender, e);
@@ -336,7 +332,7 @@ public class FormShipyard extends WinformForm {
         btnNextImage.setSize(new FormSize(18, 18));
         btnNextImage.setTabIndex(7);
         btnNextImage.setText(">");
-        btnNextImage.setClick(new EventHandler<Object, EventArgs>() {
+        btnNextImage.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnNextImage_Click(sender, e);
@@ -375,7 +371,7 @@ public class FormShipyard extends WinformForm {
         selSize.setName("selSize");
         selSize.setSize(new FormSize(180, 21));
         selSize.setTabIndex(5);
-        selSize.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
+        selSize.setSelectedIndexChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 selSize_SelectedIndexChanged(sender, e);
@@ -395,7 +391,7 @@ public class FormShipyard extends WinformForm {
         btnSetCustomImage.setSize(new FormSize(106, 22));
         btnSetCustomImage.setTabIndex(8);
         btnSetCustomImage.setText("Set Custom...");
-        btnSetCustomImage.setClick(new EventHandler<Object, EventArgs>() {
+        btnSetCustomImage.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnSetCustomImage_Click(sender, e);
@@ -415,7 +411,7 @@ public class FormShipyard extends WinformForm {
         txtName.setSize(new FormSize(132, 20));
         txtName.setTabIndex(3);
         txtName.setText("");
-        txtName.setTextChanged(new EventHandler<Object, EventArgs>() {
+        txtName.setTextChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 txtName_TextChanged(sender, e);
@@ -443,9 +439,8 @@ public class FormShipyard extends WinformForm {
         lblUnitsUsedLabel.setTabIndex(16);
         lblUnitsUsedLabel.setText("Units Used:");
         // boxCosts
-        boxCosts.Controls.addAll((new WinformControl[]{
-                lblTradeIn, lblTradeInLabel, picCostsLine, lblPenalty, lblPenaltyLabel,
-                lblShipCost, lblTotalCost, lblTotalCostLabel, lblShipCostLabel, lblDesignFee, lblDesignFeeLabel}));
+        boxCosts.Controls.addAll(lblTradeIn, lblTradeInLabel, picCostsLine, lblPenalty, lblPenaltyLabel,
+                lblShipCost, lblTotalCost, lblTotalCostLabel, lblShipCostLabel, lblDesignFee, lblDesignFeeLabel);
         boxCosts.setLocation(new Point(286, 230));
         boxCosts.setName("boxCosts");
         boxCosts.setSize(new FormSize(184, 106));
@@ -537,19 +532,19 @@ public class FormShipyard extends WinformForm {
         btnConstruct.setSize(new FormSize(88, 22));
         btnConstruct.setTabIndex(6);
         btnConstruct.setText("Construct Ship");
-        btnConstruct.setClick(new EventHandler<Object, EventArgs>() {
+        btnConstruct.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnConstruct_Click(sender, e);
             }
         });
-        btnConstruct.setMouseEnter(new EventHandler<Object, EventArgs>() {
+        btnConstruct.setMouseEnter(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnConstruct_MouseEnter(sender, e);
             }
         });
-        btnConstruct.setMouseLeave(new EventHandler<Object, EventArgs>() {
+        btnConstruct.setMouseLeave(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnConstruct_MouseLeave(sender, e);
@@ -564,11 +559,9 @@ public class FormShipyard extends WinformForm {
         btnCancel.setTabIndex(5);
         btnCancel.setText("Cancel Design");
         // boxAllocation
-        boxAllocation.Controls.addAll((new WinformControl[]{
-                lblPct, lblPctLabel, numHullStrength, lblHullStrenghLabel, numCargoBays, numCrewQuarters, numFuelTanks,
+        boxAllocation.Controls.addAll(lblPct, lblPctLabel, numHullStrength, lblHullStrengthLabel, numCargoBays, numCrewQuarters, numFuelTanks,
                 numShieldSlots, numGadgetSlots, numWeaponSlots, lblCargoBays, lblFuelTanks, lblCrewQuarters,
-                lblShieldSlots, lblGadgetSlots, lblWeaponsSlots, lblUnitsUsedLabel, lblUnitsUsed
-        }));
+                lblShieldSlots, lblGadgetSlots, lblWeaponsSlots, lblUnitsUsedLabel, lblUnitsUsed);
         boxAllocation.setLocation(new Point(286, 0));
         boxAllocation.setName("boxAllocation");
         boxAllocation.setSize(new FormSize(184, 226));
@@ -600,25 +593,25 @@ public class FormShipyard extends WinformForm {
         numHullStrength.setSize(new FormSize(64, 20));
         numHullStrength.setTabIndex(1);
         numHullStrength.TextAlign = HorizontalAlignment.Right;
-        numHullStrength.setEnter(new EventHandler<Object, EventArgs>() {
+        numHullStrength.setEnter(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueEnter(sender, e);
             }
         });
-        numHullStrength.setValueChanged(new EventHandler<Object, EventArgs>() {
+        numHullStrength.setValueChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueChanged(sender, e);
             }
         });
-        // lblHullStrenghLabel
-        lblHullStrenghLabel.setAutoSize(true);
-        lblHullStrenghLabel.setLocation(new Point(8, 66));
-        lblHullStrenghLabel.setName("lblHullStrenghLabel");
-        lblHullStrenghLabel.setSize(new FormSize(70, 13));
-        lblHullStrenghLabel.setTabIndex(13);
-        lblHullStrenghLabel.setText("Hull Strengh:");
+        // lblHullStrengthLabel
+        lblHullStrengthLabel.setAutoSize(true);
+        lblHullStrengthLabel.setLocation(new Point(8, 66));
+        lblHullStrengthLabel.setName("lblHullStrengthLabel");
+        lblHullStrengthLabel.setSize(new FormSize(70, 13));
+        lblHullStrengthLabel.setTabIndex(13);
+        lblHullStrengthLabel.setText("Hull Strength:");
         // numCargoBays
         numCargoBays.setBackColor(Color.white);
         numCargoBays.setLocation(new Point(110, 16));
@@ -628,13 +621,13 @@ public class FormShipyard extends WinformForm {
         numCargoBays.setSize(new FormSize(64, 20));
         numCargoBays.setTabIndex(3);
         numCargoBays.TextAlign = HorizontalAlignment.Right;
-        numCargoBays.setEnter(new EventHandler<Object, EventArgs>() {
+        numCargoBays.setEnter(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueEnter(sender, e);
             }
         });
-        numCargoBays.setValueChanged(new EventHandler<Object, EventArgs>() {
+        numCargoBays.setValueChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueChanged(sender, e);
@@ -650,13 +643,13 @@ public class FormShipyard extends WinformForm {
         numCrewQuarters.setTabIndex(4);
         numCrewQuarters.TextAlign = HorizontalAlignment.Right;
         numCrewQuarters.setValue(1);
-        numCrewQuarters.setEnter(new EventHandler<Object, EventArgs>() {
+        numCrewQuarters.setEnter(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueEnter(sender, e);
             }
         });
-        numCrewQuarters.setValueChanged(new EventHandler<Object, EventArgs>() {
+        numCrewQuarters.setValueChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueChanged(sender, e);
@@ -670,13 +663,13 @@ public class FormShipyard extends WinformForm {
         numFuelTanks.setSize(new FormSize(64, 20));
         numFuelTanks.setTabIndex(2);
         numFuelTanks.TextAlign = HorizontalAlignment.Right;
-        numFuelTanks.setEnter(new EventHandler<Object, EventArgs>() {
+        numFuelTanks.setEnter(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueEnter(sender, e);
             }
         });
-        numFuelTanks.setValueChanged(new EventHandler<Object, EventArgs>() {
+        numFuelTanks.setValueChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueChanged(sender, e);
@@ -690,13 +683,13 @@ public class FormShipyard extends WinformForm {
         numShieldSlots.setSize(new FormSize(64, 20));
         numShieldSlots.setTabIndex(6);
         numShieldSlots.TextAlign = HorizontalAlignment.Right;
-        numShieldSlots.setEnter(new EventHandler<Object, EventArgs>() {
+        numShieldSlots.setEnter(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueEnter(sender, e);
             }
         });
-        numShieldSlots.setValueChanged(new EventHandler<Object, EventArgs>() {
+        numShieldSlots.setValueChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueChanged(sender, e);
@@ -710,13 +703,13 @@ public class FormShipyard extends WinformForm {
         numGadgetSlots.setSize(new FormSize(64, 20));
         numGadgetSlots.setTabIndex(7);
         numGadgetSlots.TextAlign = HorizontalAlignment.Right;
-        numGadgetSlots.setEnter(new EventHandler<Object, EventArgs>() {
+        numGadgetSlots.setEnter(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueEnter(sender, e);
             }
         });
-        numGadgetSlots.setValueChanged(new EventHandler<Object, EventArgs>() {
+        numGadgetSlots.setValueChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueChanged(sender, e);
@@ -730,13 +723,13 @@ public class FormShipyard extends WinformForm {
         numWeaponSlots.setSize(new FormSize(64, 20));
         numWeaponSlots.setTabIndex(5);
         numWeaponSlots.TextAlign = HorizontalAlignment.Right;
-        numWeaponSlots.setEnter(new EventHandler<Object, EventArgs>() {
+        numWeaponSlots.setEnter(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueEnter(sender, e);
             }
         });
-        numWeaponSlots.setValueChanged(new EventHandler<Object, EventArgs>() {
+        numWeaponSlots.setValueChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueChanged(sender, e);
@@ -847,7 +840,7 @@ public class FormShipyard extends WinformForm {
     }
 
     private boolean ConstructButtonEnabled() {
-        return yard.PercentOfMaxUnits() <= 100 && txtName.getText().length() > 0;
+        return yard.PercentOfMaxUnits() <= 100 && !txtName.getText().isEmpty();
     }
 
     private WfBitmap GetImageFile(String fileName) {
@@ -907,22 +900,22 @@ public class FormShipyard extends WinformForm {
     private void LoadTemplateList() {
         ShipTemplate currentShip = new ShipTemplate(cmdr.getShip(), Strings.ShipNameCurrentShip);
         selTemplate.Items.add(currentShip);
-        selTemplate.Items.add(Consts.ShipTemplateSeparator);
+        selTemplate.Items.add(Constants.ShipTemplateSeparator);
         // Add the minimal sizes templates.
         for (ShipSize size : sizes) {
             selTemplate.Items.add(new ShipTemplate(size, Strings.Sizes[size.CastToInt()] + Strings.ShipNameTemplateSuffixMinimum));
         }
-        selTemplate.Items.add(Consts.ShipTemplateSeparator);
+        selTemplate.Items.add(Constants.ShipTemplateSeparator);
         // Add the buyable ship spec templates.
-        for (ShipSpec spec : Consts.ShipSpecs) {
-            if (sizes.contains(spec.getSize()) && spec.Type().CastToInt() <= Consts.MaxShip) {
+        for (ShipSpec spec : Constants.ShipSpecs) {
+            if (sizes.contains(spec.getSize()) && spec.Type().CastToInt() <= Constants.MaxShip) {
                 selTemplate.Items.add(new ShipTemplate(spec, spec.Name() + Strings.ShipNameTemplateSuffixDefault));
             }
         }
-        selTemplate.Items.add(Consts.ShipTemplateSeparator);
+        selTemplate.Items.add(Constants.ShipTemplateSeparator);
         // Add the user-created templates.
         ArrayList<ShipTemplate> userTemplates = new ArrayList<>();
-        for (String fileName : Directory.GetFiles(Consts.CustomTemplatesDirectory, "*.sst")) {
+        for (String fileName : Directory.GetFiles(Constants.CustomTemplatesDirectory, "*.sst")) {
             ShipTemplate template = new ShipTemplate((Hashtable) Functions.LoadFile(fileName, true, this));
             if (sizes.contains(template.Size())) {
                 userTemplates.add(template);
@@ -934,7 +927,7 @@ public class FormShipyard extends WinformForm {
     }
 
     private boolean SaveButtonEnabled() {
-        return (txtName.getText().length() > 0);
+        return (!txtName.getText().isEmpty());
     }
 
     private void SetTemplateModified() {
@@ -951,7 +944,7 @@ public class FormShipyard extends WinformForm {
         boolean hullMinimum = numHullStrength.getValue() == numHullStrength.getMinimum();
         numFuelTanks.setMinimum(yard.BaseFuel());
         numFuelTanks.setIncrement(yard.PerUnitFuel());
-        numFuelTanks.setMaximum(Consts.MaxFuelTanks);
+        numFuelTanks.setMaximum(Constants.MaxFuelTanks);
         if (fuelMinimum) {
             numFuelTanks.setValue(numFuelTanks.getMinimum());
         }
@@ -960,10 +953,10 @@ public class FormShipyard extends WinformForm {
         if (hullMinimum) {
             numHullStrength.setValue(numHullStrength.getMinimum());
         }
-        numWeaponSlots.setMaximum(Consts.MaxSlots);
-        numShieldSlots.setMaximum(Consts.MaxSlots);
-        numGadgetSlots.setMaximum(Consts.MaxSlots);
-        numCrewQuarters.setMaximum(Consts.MaxSlots);
+        numWeaponSlots.setMaximum(Constants.MaxSlots);
+        numShieldSlots.setMaximum(Constants.MaxSlots);
+        numGadgetSlots.setMaximum(Constants.MaxSlots);
+        numCrewQuarters.setMaximum(Constants.MaxSlots);
     }
 
     private void UpdateCalculatedFigures() {
@@ -973,7 +966,7 @@ public class FormShipyard extends WinformForm {
             numFuelTanks.setValue(Math.max(numFuelTanks.getMinimum(),
                     Math.min(numFuelTanks.getMaximum(), (extraFuel + yard.PerUnitFuel()) / yard.PerUnitFuel() * yard.PerUnitFuel() + yard.BaseFuel())));
         }
-        // Fix the hull value to be a multiple of the unit value value less the super.
+        // Fix the hull value to be a multiple of the unit value less the super.
         int extraHull = numHullStrength.getValue() - yard.BaseHull();
         if (extraHull % yard.PerUnitHull() > 0) {
             numHullStrength.setValue(Math.max(numHullStrength.getMinimum(), (extraHull + yard.PerUnitHull()) / yard.PerUnitHull() * yard.PerUnitHull() + yard.BaseHull()));
@@ -1017,8 +1010,8 @@ public class FormShipyard extends WinformForm {
 
     private void UpdateShip() {
         yard.ShipSpec().ImageIndex(imgTypes[imgIndex].CastToInt());
-        picShip.setImage((imgIndex > Consts.MaxShip ? customImages[0] : Consts.ShipSpecs[imgTypes[imgIndex].CastToInt()].Image()));
-        lblImage.setText((imgIndex > Consts.MaxShip ? Strings.ShipNameCustomShip : Consts.ShipSpecs[imgTypes[imgIndex].CastToInt()].Name()));
+        picShip.setImage((imgIndex > Constants.MaxShip ? customImages[0] : Constants.ShipSpecs[imgTypes[imgIndex].CastToInt()].Image()));
+        lblImage.setText((imgIndex > Constants.MaxShip ? Strings.ShipNameCustomShip : Constants.ShipSpecs[imgTypes[imgIndex].CastToInt()].Name()));
     }
 
     private void btnConstruct_Click(Object sender, EventArgs e) {
@@ -1040,7 +1033,7 @@ public class FormShipyard extends WinformForm {
     }
 
     private void btnConstruct_MouseEnter(Object sender, EventArgs e) {
-        lblDisabledName.setVisible(txtName.getText().length() == 0);
+        lblDisabledName.setVisible(txtName.getText().isEmpty());
         lblDisabledPct.setVisible(yard.PercentOfMaxUnits() > 100);
     }
 
@@ -1069,7 +1062,7 @@ public class FormShipyard extends WinformForm {
         if (SaveButtonEnabled()) {
             if (dlgSave.ShowDialog(this) == DialogResult.OK) {
                 ShipTemplate template = new ShipTemplate(yard.ShipSpec(), txtName.getText());
-                if (imgIndex > Consts.MaxShip) {
+                if (imgIndex > Constants.MaxShip) {
                     template.ImageIndex(ShipType.Custom.CastToInt());
                     template.Images(customImages);
                 } else {
@@ -1082,7 +1075,7 @@ public class FormShipyard extends WinformForm {
     }
 
     private void btnSave_MouseEnter(Object sender, EventArgs e) {
-        lblDisabledName.setVisible(txtName.getText().length() == 0);
+        lblDisabledName.setVisible(txtName.getText().isEmpty());
     }
 
     private void btnSave_MouseLeave(Object sender, EventArgs e) {
@@ -1098,10 +1091,10 @@ public class FormShipyard extends WinformForm {
             WfBitmap imageShields = GetImageFile(baseFileName + "s" + ext);
             WfBitmap imageShieldsDamaged = GetImageFile(baseFileName + "sd" + ext);
             if (image != null && imageDamaged != null && imageShields != null && imageShieldsDamaged != null) {
-                customImages[Consts.ShipImgOffsetNormal] = image;
-                customImages[Consts.ShipImgOffsetDamage] = imageDamaged;
-                customImages[Consts.ShipImgOffsetShield] = imageShields;
-                customImages[Consts.ShipImgOffsetSheildDamage] = imageShieldsDamaged;
+                customImages[Constants.ShipImgOffsetNormal] = image;
+                customImages[Constants.ShipImgOffsetDamage] = imageDamaged;
+                customImages[Constants.ShipImgOffsetShield] = imageShields;
+                customImages[Constants.ShipImgOffsetShieldDamage] = imageShieldsDamaged;
             }
             imgIndex = imgTypes.length - 1;
             UpdateShip();

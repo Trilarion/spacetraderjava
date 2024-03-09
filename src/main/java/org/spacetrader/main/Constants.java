@@ -28,8 +28,8 @@ import org.spacetrader.main.enums.TechLevel;
 import org.spacetrader.util.Path;
 
 
-public class Consts {
-    // Directory structure and File Constsants.
+public class Constants {
+    // Directory structure and File Constants.
     public static final String BaseDirectory = Environment.CurrentDirectory;
     public static final String CustomDirectory = Path.Combine(BaseDirectory, "custom");
     public static final String CustomImagesDirectory = Path.Combine(CustomDirectory, "images");
@@ -63,7 +63,7 @@ public class Consts {
     public static final int ShipImgOffsetNormal = 0;
     public static final int ShipImgOffsetDamage = 1;
     public static final int ShipImgOffsetShield = 2;
-    public static final int ShipImgOffsetSheildDamage = 3;
+    public static final int ShipImgOffsetShieldDamage = 3;
     public static final int ShipImgUseDefault = -1;
     public static final int EncounterImgAlien = 0;
     public static final int EncounterImgPirate = 1;
@@ -110,7 +110,7 @@ public class Consts {
     public static final int ScorePlunderTrader = -2;
     public static final int ScoreTrafficking = -1;
     public static final String ShipTemplateSeparator = "----------------------------";
-    public static final Weapon[] WeapObjs = new Weapon[]{
+    public static final Weapon[] WeaponObjects = new Weapon[]{
             new Weapon(WeaponType.PulseLaser, 15, false, 2000, TechLevel.t5, 50),
             new Weapon(WeaponType.BeamLaser, 25, false, 12500, TechLevel.t6, 35),
             new Weapon(WeaponType.MilitaryLaser, 35, false, 35000, TechLevel.t7, 15),
@@ -308,10 +308,10 @@ public class Consts {
     };
     // This comes at the end because it depends on other Constant Arrays
     public static Equipment[] EquipmentForSale = new Equipment[]{
-            WeapObjs[WeaponType.PulseLaser.id],
-            WeapObjs[WeaponType.BeamLaser.id],
-            WeapObjs[WeaponType.MilitaryLaser.id],
-            WeapObjs[WeaponType.PhotonDisruptor.id],
+            WeaponObjects[WeaponType.PulseLaser.id],
+            WeaponObjects[WeaponType.BeamLaser.id],
+            WeaponObjects[WeaponType.MilitaryLaser.id],
+            WeaponObjects[WeaponType.PhotonDisruptor.id],
             Shields[ShieldType.Energy.id],
             Shields[ShieldType.Reflective.id],
             Gadgets[GadgetType.ExtraCargoBays.asInteger()],

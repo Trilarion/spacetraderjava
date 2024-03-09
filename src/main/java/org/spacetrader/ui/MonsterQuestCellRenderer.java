@@ -28,7 +28,7 @@ public class MonsterQuestCellRenderer extends JPanel implements ListCellRenderer
         setBackground((isSelected) ? list.getSelectionBackground() : list.getBackground());
         setForeground((isSelected) ? list.getSelectionForeground() : list.getForeground());
         jLabel1.setText(value.system);
-        jLabel2.setText(String.format("{0}. {1}", String.valueOf(index), value.quest));
+        jLabel2.setText(String.format("{0}. {1}", index, value.quest));
         return this;
     }
 

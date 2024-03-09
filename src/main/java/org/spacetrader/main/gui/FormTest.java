@@ -5,7 +5,7 @@ import org.jwinforms.Label;
 import org.jwinforms.*;
 import org.jwinforms.enums.*;
 import org.spacetrader.events.SpecialEventType;
-import org.spacetrader.main.Consts;
+import org.spacetrader.main.Constants;
 import org.spacetrader.main.SpecialEvent;
 import org.spacetrader.main.enums.AlertType;
 
@@ -70,9 +70,7 @@ public class FormTest extends WinformForm {
         lblAlertType.setTabIndex(0);
         lblAlertType.setText("Alert Type");
         // boxAlert
-        boxAlert.Controls.addAll((new WinformControl[]{
-                btnTestAlert, txtValue3, txtValue2, txtValue1, selAlertType, lblValue3, lblValue1, lblValue2, lblAlertType
-        }));
+        boxAlert.Controls.addAll(btnTestAlert, txtValue3, txtValue2, txtValue1, selAlertType, lblValue3, lblValue1, lblValue2, lblAlertType);
         boxAlert.setLocation(new Point(8, 8));
         boxAlert.setName("boxAlert");
         boxAlert.setSize(new FormSize(200, 152));
@@ -86,7 +84,7 @@ public class FormTest extends WinformForm {
         btnTestAlert.setSize(new FormSize(41, 22));
         btnTestAlert.setTabIndex(8);
         btnTestAlert.setText("Test");
-        btnTestAlert.setClick(new EventHandler<Object, EventArgs>() {
+        btnTestAlert.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnTestAlert_Click();
@@ -138,9 +136,7 @@ public class FormTest extends WinformForm {
         lblValue2.setTabIndex(1);
         lblValue2.setText("Value 2");
         // groupBox1
-        groupBox1.Controls.addAll((new WinformControl[]{
-                btnTestSpecialEvent, selSpecialEvent, lblSpecialEvent
-        }));
+        groupBox1.Controls.addAll(btnTestSpecialEvent, selSpecialEvent, lblSpecialEvent);
         groupBox1.setLocation(new Point(8, 168));
         groupBox1.setName("groupBox1");
         groupBox1.setSize(new FormSize(200, 80));
@@ -154,7 +150,7 @@ public class FormTest extends WinformForm {
         btnTestSpecialEvent.setSize(new FormSize(41, 22));
         btnTestSpecialEvent.setTabIndex(8);
         btnTestSpecialEvent.setText("Test");
-        btnTestSpecialEvent.setClick(new EventHandler<Object, EventArgs>() {
+        btnTestSpecialEvent.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnTestSpecialEvent_Click();
@@ -195,7 +191,7 @@ public class FormTest extends WinformForm {
     }
 
     private void btnTestSpecialEvent_Click() {
-        SpecialEvent se = Consts.SpecialEvents[((SpecialEventType) selSpecialEvent.getSelectedItem()).CastToInt()];
+        SpecialEvent se = Constants.SpecialEvents[((SpecialEventType) selSpecialEvent.getSelectedItem()).CastToInt()];
         String btn1, btn2;
         DialogResult res1, res2;
         if (se.MessageOnly()) {

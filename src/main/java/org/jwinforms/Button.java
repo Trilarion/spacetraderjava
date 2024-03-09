@@ -17,11 +17,11 @@ public class Button extends WinformControl {
     }
 
     public String getText() {
-        return asJButtton().getText();
+        return asJButton().getText();
     }
 
     public void setText(String text) {
-        asJButtton().setText(text);
+        asJButton().setText(text);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class Button extends WinformControl {
         super.setSize(new Dimension(size.width, size.height));
     }
 
-    public JButton asJButtton() {
+    public JButton asJButton() {
         return (JButton) swingVersion;
     }
 
@@ -50,14 +50,14 @@ public class Button extends WinformControl {
             }
         };
         userAction.putValue(AbstractAction.NAME, getText());
-        asJButtton().setAction(userAction);
+        asJButton().setAction(userAction);
         super.setClick(click);
     }
 
     public void setFlatStyle(FlatStyle flatStyle) {
         switch (flatStyle) {
             case Flat:
-                asJButtton().setBorder(BorderFactory.createLineBorder(Color.black));
+                asJButton().setBorder(BorderFactory.createLineBorder(Color.black));
                 return;
             default:
                 throw new Error("Unknown FlatStyle");

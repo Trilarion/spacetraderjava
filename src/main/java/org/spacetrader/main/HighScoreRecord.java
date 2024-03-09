@@ -37,22 +37,21 @@ public class HighScoreRecord extends STSerializableObject implements Comparable<
     }
 
     @Override
-    public int compareTo(HighScoreRecord value) {
+    public int compareTo(HighScoreRecord record) {
         int compared;
-        HighScoreRecord highScore = value;
-        if (value == null) {
+        if (record == null) {
             compared = 1;
-        } else if (highScore.Score() < Score()) {
+        } else if (record.Score() < Score()) {
             compared = 1;
-        } else if (highScore.Score() > Score()) {
+        } else if (record.Score() > Score()) {
             compared = -1;
-        } else if (highScore.Worth() < Worth()) {
+        } else if (record.Worth() < Worth()) {
             compared = 1;
-        } else if (highScore.Worth() > Worth()) {
+        } else if (record.Worth() > Worth()) {
             compared = -1;
-        } else if (highScore.Days() < Days()) {
+        } else if (record.Days() < Days()) {
             compared = 1;
-        } else if (highScore.Days() > Days()) {
+        } else if (record.Days() > Days()) {
             compared = -1;
         } else {
             compared = 0;

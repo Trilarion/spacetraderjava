@@ -44,11 +44,11 @@ public class CrewMember extends STSerializableObject {
     private void ChangeRandomSkill(int amount) {
         ArrayList<Integer> skillIdList = new ArrayList<>(4);
         for (int i = 0; i < Skills().length; i++) {
-            if (Skills()[i] + amount > 0 && Skills()[i] + amount < Consts.MaxSkill) {
+            if (Skills()[i] + amount > 0 && Skills()[i] + amount < Constants.MaxSkill) {
                 skillIdList.add(i);
             }
         }
-        if (skillIdList.size() > 0) {
+        if (!skillIdList.isEmpty()) {
             int skill = skillIdList.get(Functions.GetRandom(skillIdList.size()));
             int curTrader = Game.CurrentGame().Commander().getShip().Trader();
             Skills()[skill] += amount;
@@ -66,7 +66,7 @@ public class CrewMember extends STSerializableObject {
     }
 
     // *************************************************************************
-    // NthLowest Skill. Returns skill with the nth lowest score (i.e., 2 is the second worst skill).
+    // NthLowest Skill. Returns skill with the nth lowest score (i.e., 2 is the second-worst skill).
     // If there is a tie, it will return in the order of Pilot, Fighter, Trader, Engineer.
     // JAF - rewrote this to be more efficient.
     // *************************************************************************
@@ -166,7 +166,7 @@ public class CrewMember extends STSerializableObject {
     }
 
     public int Rate() {
-        return Util.ArrayContains(Consts.SpecialCrewMemberIds, Id()) || Id() == CrewMemberId.Zeethibal
+        return Util.ArrayContains(Constants.SpecialCrewMemberIds, Id()) || Id() == CrewMemberId.Zeethibal
                 ? 0 : (Pilot() + Fighter() + Trader() + Engineer()) * 3;
     }
 

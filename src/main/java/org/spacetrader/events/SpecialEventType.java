@@ -63,7 +63,7 @@ public enum SpecialEventType implements SpaceTraderEnum {
     PrincessReturned(""); // = 45
     public final String name;
 
-    private SpecialEventType(String s) {
+    SpecialEventType(String s) {
         name = s;
     }
 

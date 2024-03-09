@@ -28,7 +28,7 @@ import org.spacetrader.ship.equip.GadgetType;
 import org.spacetrader.ship.equip.Shield;
 import org.spacetrader.ship.equip.Weapon;
 import org.spacetrader.main.Commander;
-import org.spacetrader.main.Consts;
+import org.spacetrader.main.Constants;
 import org.spacetrader.main.Functions;
 import org.spacetrader.main.Game;
 import org.spacetrader.main.Ship;
@@ -78,7 +78,7 @@ public class FormEquipment extends WinformForm {
     private ListBox lstBuyWeapon;
     private PictureBox picEquipment;
     private Equipment selectedEquipment = null;
-    private Equipment[] equipBuy = Consts.EquipmentForSale;
+    private Equipment[] equipBuy = Constants.EquipmentForSale;
     private boolean sellSideSelected = false;
     private boolean handlingSelect = false;
 
@@ -209,13 +209,13 @@ public class FormEquipment extends WinformForm {
         lstSellGadget.setName("lstSellGadget");
         lstSellGadget.setSize(new FormSize(128, 67));
         lstSellGadget.setTabIndex(3);
-        lstSellGadget.setDoubleClick(new EventHandler<Object, EventArgs>() {
+        lstSellGadget.setDoubleClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 SellClick();
             }
         });
-        lstSellGadget.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
+        lstSellGadget.setSelectedIndexChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 SelectedIndexChanged(sender, e);
@@ -227,13 +227,13 @@ public class FormEquipment extends WinformForm {
         lstSellShield.setName("lstSellShield");
         lstSellShield.setSize(new FormSize(128, 67));
         lstSellShield.setTabIndex(2);
-        lstSellShield.setDoubleClick(new EventHandler<Object, EventArgs>() {
+        lstSellShield.setDoubleClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 SellClick();
             }
         });
-        lstSellShield.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
+        lstSellShield.setSelectedIndexChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 SelectedIndexChanged(sender, e);
@@ -245,13 +245,13 @@ public class FormEquipment extends WinformForm {
         lstSellWeapon.setName("lstSellWeapon");
         lstSellWeapon.setSize(new FormSize(128, 67));
         lstSellWeapon.setTabIndex(1);
-        lstSellWeapon.setDoubleClick(new EventHandler<Object, EventArgs>() {
+        lstSellWeapon.setDoubleClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 SellClick();
             }
         });
-        lstSellWeapon.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
+        lstSellWeapon.setSelectedIndexChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 SelectedIndexChanged(sender, e);
@@ -321,13 +321,13 @@ public class FormEquipment extends WinformForm {
         lstBuyGadget.setName("lstBuyGadget");
         lstBuyGadget.setSize(new FormSize(128, 67));
         lstBuyGadget.setTabIndex(6);
-        lstBuyGadget.setDoubleClick(new EventHandler<Object, EventArgs>() {
+        lstBuyGadget.setDoubleClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 BuyClick(sender, e);
             }
         });
-        lstBuyGadget.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
+        lstBuyGadget.setSelectedIndexChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 SelectedIndexChanged(sender, e);
@@ -339,13 +339,13 @@ public class FormEquipment extends WinformForm {
         lstBuyShield.setName("lstBuyShield");
         lstBuyShield.setSize(new FormSize(128, 67));
         lstBuyShield.setTabIndex(5);
-        lstBuyShield.setDoubleClick(new EventHandler<Object, EventArgs>() {
+        lstBuyShield.setDoubleClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 BuyClick(sender, e);
             }
         });
-        lstBuyShield.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
+        lstBuyShield.setSelectedIndexChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 SelectedIndexChanged(sender, e);
@@ -357,13 +357,13 @@ public class FormEquipment extends WinformForm {
         lstBuyWeapon.setName("lstBuyWeapon");
         lstBuyWeapon.setSize(new FormSize(128, 67));
         lstBuyWeapon.setTabIndex(4);
-        lstBuyWeapon.setDoubleClick(new EventHandler<Object, EventArgs>() {
+        lstBuyWeapon.setDoubleClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 BuyClick(sender, e);
             }
         });
-        lstBuyWeapon.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
+        lstBuyWeapon.setSelectedIndexChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 SelectedIndexChanged(sender, e);
@@ -449,7 +449,7 @@ public class FormEquipment extends WinformForm {
         btnSell.setSize(new FormSize(58, 22));
         btnSell.setTabIndex(8);
         btnSell.setText("Sell");
-        btnSell.setClick(new EventHandler<Object, EventArgs>() {
+        btnSell.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 SellClick();
@@ -462,7 +462,7 @@ public class FormEquipment extends WinformForm {
         btnBuy.setSize(new FormSize(58, 22));
         btnBuy.setTabIndex(7);
         btnBuy.setText("Buy");
-        btnBuy.setClick(new EventHandler<Object, EventArgs>() {
+        btnBuy.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 BuyClick(sender, e);
@@ -590,17 +590,17 @@ public class FormEquipment extends WinformForm {
     }
 
     private void UpdateBuy() {
-        for (int i = 0; i < equipBuy.length; i++) {
-            if (equipBuy[i].Price() > 0) {
-                switch (equipBuy[i].EquipmentType()) {
+        for (Equipment equipment : equipBuy) {
+            if (equipment.Price() > 0) {
+                switch (equipment.EquipmentType()) {
                     case Weapon:
-                        lstBuyWeapon.Items.add(equipBuy[i]);
+                        lstBuyWeapon.Items.add(equipment);
                         break;
                     case Shield:
-                        lstBuyShield.Items.add(equipBuy[i]);
+                        lstBuyShield.Items.add(equipment);
                         break;
                     case Gadget:
-                        lstBuyGadget.Items.add(equipBuy[i]);
+                        lstBuyGadget.Items.add(equipment);
                         break;
                 }
             }
@@ -608,7 +608,7 @@ public class FormEquipment extends WinformForm {
         ListBox[] buyBoxes = new ListBox[]{lstBuyWeapon, lstBuyShield, lstBuyGadget};
         Label[] buyLabels = new Label[]{lblBuyWeaponNone, lblBuyShieldNone, lblBuyGadgetNone};
         for (int i = 0; i < buyBoxes.length; i++) {
-            boolean entries = (buyBoxes[i].Items.size() > 0);
+            boolean entries = (!buyBoxes[i].Items.isEmpty());
             buyBoxes[i].setVisible(entries);
             buyLabels[i].setVisible(!entries);
             if (entries) {
@@ -677,20 +677,20 @@ public class FormEquipment extends WinformForm {
         int index;
         equipSell = ship.EquipmentByType(EquipmentType.Weapon);
         for (index = 0; index < equipSell.length; index++) {
-            lstSellWeapon.Items.add(equipSell[index] == null ? (Object) Strings.EquipmentFreeSlot : equipSell[index]);
+            lstSellWeapon.Items.add(equipSell[index] == null ? Strings.EquipmentFreeSlot : equipSell[index]);
         }
         equipSell = ship.EquipmentByType(EquipmentType.Shield);
         for (index = 0; index < equipSell.length; index++) {
-            lstSellShield.Items.add(equipSell[index] == null ? (Object) Strings.EquipmentFreeSlot : equipSell[index]);
+            lstSellShield.Items.add(equipSell[index] == null ? Strings.EquipmentFreeSlot : equipSell[index]);
         }
         equipSell = ship.EquipmentByType(EquipmentType.Gadget);
         for (index = 0; index < equipSell.length; index++) {
-            lstSellGadget.Items.add(equipSell[index] == null ? (Object) Strings.EquipmentFreeSlot : equipSell[index]);
+            lstSellGadget.Items.add(equipSell[index] == null ? Strings.EquipmentFreeSlot : equipSell[index]);
         }
         ListBox[] sellBoxes = new ListBox[]{lstSellWeapon, lstSellShield, lstSellGadget};
         Label[] sellLabels = new Label[]{lblSellWeaponNoSlots, lblSellShieldNoSlots, lblSellGadgetNoSlots};
         for (int i = 0; i < sellBoxes.length; i++) {
-            boolean entries = (sellBoxes[i].Items.size() > 0);
+            boolean entries = (!sellBoxes[i].Items.isEmpty());
             sellBoxes[i].setVisible(entries);
             sellLabels[i].setVisible(!entries);
             if (entries) {
@@ -711,7 +711,7 @@ public class FormEquipment extends WinformForm {
             Object obj = ((ListBox) sender).getSelectedItem();
             DeselectAll();
             ((ListBox) sender).setSelectedItem(obj);
-            sellSideSelected = (((ListBox) sender).getName().indexOf("Sell") >= 0);
+            sellSideSelected = (((ListBox) sender).getName().contains("Sell"));
             if (obj instanceof Equipment) {
                 selectedEquipment = (Equipment) obj;
             } else {

@@ -22,7 +22,7 @@ public class ImageList {
     }
 
     public void setImageStream(ImageListStreamer imageStream) {
-        ArrayList<WfImage> al = new ArrayList<WfImage>();
+        ArrayList<WfImage> al = new ArrayList<>();
         for (WfImage image : imageStream.images) {
             al.add(image);
         }

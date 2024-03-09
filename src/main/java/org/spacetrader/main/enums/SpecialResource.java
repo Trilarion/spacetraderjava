@@ -19,7 +19,7 @@ public enum SpecialResource implements SpaceTraderEnum {
     ;
     public final String name;
 
-    private SpecialResource(String s) {
+    SpecialResource(String s) {
         name = s;
     }
 

@@ -51,7 +51,7 @@ public class Graphics {
     }
 
     public void DrawImage(WfImage img, int x, int y, Rectangle rect, @Deprecated int pixel) {
-        impl.drawImage(img.asSwingImage(), x, y, x + rect.Width, y + rect.Hight, rect.X, rect.Y, rect.X + rect.Width, rect.Y + rect.Hight, null);
+        impl.drawImage(img.asSwingImage(), x, y, x + rect.Width, y + rect.Height, rect.X, rect.Y, rect.X + rect.Width, rect.Y + rect.Height, null);
     }
 
     public SizeF MeasureString(String text, java.awt.Font font) {

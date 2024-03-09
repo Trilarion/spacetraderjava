@@ -18,23 +18,19 @@ public class DWIM {
      * boolean same = MyEnum.value == val; // false.
      * </code>
      *
-     * @param <T>
-     * @param ob
-     * @param cls
-     * @return
      */
     @SuppressWarnings("unchecked")
     public static <T extends SpaceTraderEnum> T dwim(Object ob, Class<T> cls) {
-        int intvalue;
+        int value;
         if (ob instanceof Integer) {
-            intvalue = (Integer) ob;
+            value = (Integer) ob;
         } else if (ob instanceof SpaceTraderEnum) {
-            intvalue = ((SpaceTraderEnum) ob).CastToInt();
+            value = ((SpaceTraderEnum) ob).CastToInt();
         } else {
-            throw new Error("Unknown value: type is " + ob.getClass() + " tostring is " + ob);
+            throw new Error("Unknown value: type is " + ob.getClass() + " toString is " + ob);
         }
         try {
-            return (T) getFromInt(cls).invoke(null, intvalue);
+            return (T) getFromInt(cls).invoke(null, value);
         } catch (Exception e) {
             throw new Error("dwim(" + ob.getClass() + ", " + cls + ") ", e);
         }

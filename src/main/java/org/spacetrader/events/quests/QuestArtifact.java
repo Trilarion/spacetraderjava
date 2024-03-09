@@ -11,7 +11,7 @@ public enum QuestArtifact {
     public final String name;
     public final int id;
 
-    private QuestArtifact(String s) {
+    QuestArtifact(String s) {
         name = s;
         id = ordinal();
     }

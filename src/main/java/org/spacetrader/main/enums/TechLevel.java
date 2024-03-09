@@ -18,7 +18,7 @@ public enum TechLevel {
     public final int id;
     public final int tl;
 
-    private TechLevel(int i, String s, String t) {
+    TechLevel(int i, String s, String t) {
         tl = i;
         abbr = s;
         name = t;

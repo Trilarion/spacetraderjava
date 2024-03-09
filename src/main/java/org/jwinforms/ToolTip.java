@@ -6,6 +6,6 @@ public class ToolTip {
     }
 
     public void SetToolTip(Button item, String text) {
-        item.asJButtton().setToolTipText(text);
+        item.asJButton().setToolTipText(text);
     }
 }

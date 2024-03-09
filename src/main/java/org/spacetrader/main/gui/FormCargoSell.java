@@ -32,7 +32,7 @@ public class FormCargoSell extends WinformForm {
         int cost = cmdr.PriceCargo()[item] / cmdr.getShip().Cargo()[item];
         numAmount.setMaximum(maxAmount);
         numAmount.setValue(numAmount.getMinimum());
-        setText(Functions.StringVars(Strings.CargoTitle, Strings.CargoSellOps[op.CastToInt()], Consts.TradeItems[item].Name()));
+        setText(Functions.StringVars(Strings.CargoTitle, Strings.CargoSellOps[op.CastToInt()], Constants.TradeItems[item].Name()));
         lblQuestion.setText(Functions.StringVars("How many do you want to ^1?", Strings.CargoSellOps[op.CastToInt()].toLowerCase()));
         lblPaid.setText(Functions.StringVars(op == CargoSellOp.SellTrader
                 ? "You paid about ^1 per unit, and can sell ^2." : "You paid about ^1 per unit.", Functions.FormatMoney(cost), Functions.Multiples(maxAmount, Strings.CargoUnit)));
@@ -51,7 +51,7 @@ public class FormCargoSell extends WinformForm {
                 lblStatement.setText(Functions.StringVars("You can sell up to ^1 at ^2 each.", Functions.FormatNumber(maxAmount), Functions.FormatMoney(price)));
                 break;
             case SellTrader:
-                lblStatement.setText(Functions.StringVars("The trader wants to buy ^1 and offers ^2 each.", Consts.TradeItems[item].Name(), Functions.FormatMoney(price)));
+                lblStatement.setText(Functions.StringVars("The trader wants to buy ^1 and offers ^2 each.", Constants.TradeItems[item].Name(), Functions.FormatMoney(price)));
                 break;
         }
     }
@@ -103,7 +103,7 @@ public class FormCargoSell extends WinformForm {
         btnAll.setSize(new FormSize(41, 22));
         btnAll.setTabIndex(3);
         btnAll.setText("All");
-        btnAll.setClick(new EventHandler<Object, EventArgs>() {
+        btnAll.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnAll_Click(sender, e);

@@ -84,7 +84,7 @@ public class FormNewCommander extends WinformForm {
         txtName.setSize(new FormSize(120, 20));
         txtName.setTabIndex(1);
         txtName.setText("");
-        txtName.setTextChanged(new EventHandler<Object, EventArgs>() {
+        txtName.setTextChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 txtName_TextChanged(sender, e);
@@ -142,7 +142,7 @@ public class FormNewCommander extends WinformForm {
         lblEngineer.setText("Engineer:");
         // selDifficulty
         selDifficulty.DropDownStyle = ComboBoxStyle.DropDownList;
-        selDifficulty.Items.AddRange(new Object[]{"Beginner", "Easy", "Normal", "Hard", "Impossible"});
+        selDifficulty.Items.AddRange("Beginner", "Easy", "Normal", "Hard", "Impossible");
         selDifficulty.setLocation(new Point(72, 37));
         selDifficulty.setName("selDifficulty");
         selDifficulty.setSize(new FormSize(120, 21));
@@ -156,19 +156,19 @@ public class FormNewCommander extends WinformForm {
         numPilot.setTabIndex(3);
         numPilot.TextAlign = HorizontalAlignment.Center;
         numPilot.setValue(1);
-        numPilot.setEnter(new EventHandler<Object, EventArgs>() {
+        numPilot.setEnter(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueEnter(sender, e);
             }
         });
-        numPilot.setValueChanged(new EventHandler<Object, EventArgs>() {
+        numPilot.setValueChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueChanged(sender, e);
             }
         });
-        numPilot.setLeave(new EventHandler<Object, EventArgs>() {
+        numPilot.setLeave(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueChanged(sender, e);
@@ -183,19 +183,19 @@ public class FormNewCommander extends WinformForm {
         numFighter.setTabIndex(4);
         numFighter.TextAlign = HorizontalAlignment.Center;
         numFighter.setValue(1);
-        numFighter.setEnter(new EventHandler<Object, EventArgs>() {
+        numFighter.setEnter(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueEnter(sender, e);
             }
         });
-        numFighter.setValueChanged(new EventHandler<Object, EventArgs>() {
+        numFighter.setValueChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueChanged(sender, e);
             }
         });
-        numFighter.setLeave(new EventHandler<Object, EventArgs>() {
+        numFighter.setLeave(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueChanged(sender, e);
@@ -210,19 +210,19 @@ public class FormNewCommander extends WinformForm {
         numTrader.setTabIndex(5);
         numTrader.TextAlign = HorizontalAlignment.Center;
         numTrader.setValue(1);
-        numTrader.setEnter(new EventHandler<Object, EventArgs>() {
+        numTrader.setEnter(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueEnter(sender, e);
             }
         });
-        numTrader.setValueChanged(new EventHandler<Object, EventArgs>() {
+        numTrader.setValueChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueChanged(sender, e);
             }
         });
-        numTrader.setLeave(new EventHandler<Object, EventArgs>() {
+        numTrader.setLeave(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueChanged(sender, e);
@@ -237,19 +237,19 @@ public class FormNewCommander extends WinformForm {
         numEngineer.setTabIndex(6);
         numEngineer.TextAlign = HorizontalAlignment.Center;
         numEngineer.setValue(1);
-        numEngineer.setEnter(new EventHandler<Object, EventArgs>() {
+        numEngineer.setEnter(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueEnter(sender, e);
             }
         });
-        numEngineer.setValueChanged(new EventHandler<Object, EventArgs>() {
+        numEngineer.setValueChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueChanged(sender, e);
             }
         });
-        numEngineer.setLeave(new EventHandler<Object, EventArgs>() {
+        numEngineer.setLeave(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 num_ValueChanged(sender, e);
@@ -302,7 +302,7 @@ public class FormNewCommander extends WinformForm {
     }
 
     private void UpdateOkEnabled() {
-        btnOk.setEnabled(lblPoints.getText().equals("0") && txtName.getText().length() > 0);
+        btnOk.setEnabled(lblPoints.getText().equals("0") && !txtName.getText().isEmpty());
     }
 
     private void num_ValueChanged(Object sender, EventArgs e) {

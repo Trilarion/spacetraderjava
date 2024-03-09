@@ -108,7 +108,7 @@ public class FormOptions extends WinformForm {
         chkFuel.setSize(new FormSize(160, 16));
         chkFuel.setTabIndex(1);
         chkFuel.setText("Get full fuel tanks on arrival");
-        chkFuel.setCheckedChanged(new EventHandler<Object, EventArgs>() {
+        chkFuel.setCheckedChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 controlChanged();
@@ -120,7 +120,7 @@ public class FormOptions extends WinformForm {
         chkContinuousAttack.setSize(new FormSize(163, 16));
         chkContinuousAttack.setTabIndex(13);
         chkContinuousAttack.setText("Continuous attack and flight");
-        chkContinuousAttack.setCheckedChanged(new EventHandler<Object, EventArgs>() {
+        chkContinuousAttack.setCheckedChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 controlChanged();
@@ -132,7 +132,7 @@ public class FormOptions extends WinformForm {
         chkAttackFleeing.setSize(new FormSize(177, 16));
         chkAttackFleeing.setTabIndex(14);
         chkAttackFleeing.setText("Continue attacking fleeing ship");
-        chkAttackFleeing.setCheckedChanged(new EventHandler<Object, EventArgs>() {
+        chkAttackFleeing.setCheckedChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 controlChanged();
@@ -144,7 +144,7 @@ public class FormOptions extends WinformForm {
         chkNewspaper.setSize(new FormSize(155, 16));
         chkNewspaper.setTabIndex(3);
         chkNewspaper.setText("Always pay for newspaper");
-        chkNewspaper.setCheckedChanged(new EventHandler<Object, EventArgs>() {
+        chkNewspaper.setCheckedChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 controlChanged();
@@ -156,7 +156,7 @@ public class FormOptions extends WinformForm {
         chkRange.setSize(new FormSize(175, 16));
         chkRange.setTabIndex(5);
         chkRange.setText("Show range to tracked system");
-        chkRange.setCheckedChanged(new EventHandler<Object, EventArgs>() {
+        chkRange.setCheckedChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 controlChanged();
@@ -168,7 +168,7 @@ public class FormOptions extends WinformForm {
         chkStopTracking.setSize(new FormSize(139, 16));
         chkStopTracking.setTabIndex(6);
         chkStopTracking.setText("Stop tracking on arrival");
-        chkStopTracking.setCheckedChanged(new EventHandler<Object, EventArgs>() {
+        chkStopTracking.setCheckedChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 controlChanged();
@@ -180,7 +180,7 @@ public class FormOptions extends WinformForm {
         chkLoan.setSize(new FormSize(124, 16));
         chkLoan.setTabIndex(4);
         chkLoan.setText("Remind about loans");
-        chkLoan.setCheckedChanged(new EventHandler<Object, EventArgs>() {
+        chkLoan.setCheckedChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 controlChanged();
@@ -192,7 +192,7 @@ public class FormOptions extends WinformForm {
         chkIgnoreTradersDealing.setSize(new FormSize(133, 16));
         chkIgnoreTradersDealing.setTabIndex(12);
         chkIgnoreTradersDealing.setText("Ignore dealing traders");
-        chkIgnoreTradersDealing.setCheckedChanged(new EventHandler<Object, EventArgs>() {
+        chkIgnoreTradersDealing.setCheckedChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 controlChanged();
@@ -204,7 +204,7 @@ public class FormOptions extends WinformForm {
         chkReserveMoney.setSize(new FormSize(176, 16));
         chkReserveMoney.setTabIndex(7);
         chkReserveMoney.setText("Reserve money for warp costs");
-        chkReserveMoney.setCheckedChanged(new EventHandler<Object, EventArgs>() {
+        chkReserveMoney.setCheckedChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 controlChanged();
@@ -216,7 +216,7 @@ public class FormOptions extends WinformForm {
         chkIgnoreTraders.setSize(new FormSize(62, 16));
         chkIgnoreTraders.setTabIndex(11);
         chkIgnoreTraders.setText("Traders");
-        chkIgnoreTraders.setCheckedChanged(new EventHandler<Object, EventArgs>() {
+        chkIgnoreTraders.setCheckedChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 controlChanged();
@@ -228,7 +228,7 @@ public class FormOptions extends WinformForm {
         chkIgnorePirates.setSize(new FormSize(58, 16));
         chkIgnorePirates.setTabIndex(9);
         chkIgnorePirates.setText("Pirates");
-        chkIgnorePirates.setCheckedChanged(new EventHandler<Object, EventArgs>() {
+        chkIgnorePirates.setCheckedChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 controlChanged();
@@ -240,7 +240,7 @@ public class FormOptions extends WinformForm {
         chkIgnorePolice.setSize(new FormSize(54, 16));
         chkIgnorePolice.setTabIndex(10);
         chkIgnorePolice.setText("Police");
-        chkIgnorePolice.setCheckedChanged(new EventHandler<Object, EventArgs>() {
+        chkIgnorePolice.setCheckedChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 controlChanged();
@@ -252,7 +252,7 @@ public class FormOptions extends WinformForm {
         chkRepair.setSize(new FormSize(167, 16));
         chkRepair.setTabIndex(2);
         chkRepair.setText("Get full hull repairs on arrival");
-        chkRepair.setCheckedChanged(new EventHandler<Object, EventArgs>() {
+        chkRepair.setCheckedChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 controlChanged();
@@ -272,7 +272,7 @@ public class FormOptions extends WinformForm {
         numEmpty.setSize(new FormSize(40, 20));
         numEmpty.setTabIndex(8);
         numEmpty.setValue(88);
-        numEmpty.setValueChanged(new EventHandler<Object, EventArgs>() {
+        numEmpty.setValueChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 controlChanged();
@@ -285,7 +285,7 @@ public class FormOptions extends WinformForm {
         btnSave.setSize(new FormSize(107, 22));
         btnSave.setTabIndex(17);
         btnSave.setText("Save As Defaults");
-        btnSave.setClick(new EventHandler<Object, EventArgs>() {
+        btnSave.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnSave_Click();
@@ -298,7 +298,7 @@ public class FormOptions extends WinformForm {
         btnLoad.setSize(new FormSize(114, 22));
         btnLoad.setTabIndex(18);
         btnLoad.setText("Load from Defaults");
-        btnLoad.setClick(new EventHandler<Object, EventArgs>() {
+        btnLoad.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnLoad_Click();
@@ -310,7 +310,7 @@ public class FormOptions extends WinformForm {
         chkNewspaperShow.setSize(new FormSize(160, 16));
         chkNewspaperShow.setTabIndex(53);
         chkNewspaperShow.setText("Show newspaper on arrival");
-        chkNewspaperShow.setCheckedChanged(new EventHandler<Object, EventArgs>() {
+        chkNewspaperShow.setCheckedChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 controlChanged();
@@ -322,7 +322,7 @@ public class FormOptions extends WinformForm {
         chkDisable.setSize(new FormSize(244, 16));
         chkDisable.setTabIndex(54);
         chkDisable.setText("Attempt to disable opponents when possible");
-        chkDisable.setCheckedChanged(new EventHandler<Object, EventArgs>() {
+        chkDisable.setCheckedChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 controlChanged();

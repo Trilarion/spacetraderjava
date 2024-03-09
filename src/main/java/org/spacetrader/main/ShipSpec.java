@@ -28,7 +28,7 @@ public class ShipSpec extends STSerializableObject {
     private int _repairCost = 0;
     private int _price = 0;
     private int _occurrence = 0;
-    private int _imageIndex = Consts.ShipImgUseDefault;
+    private int _imageIndex = Constants.ShipImgUseDefault;
 
     public ShipSpec() {
     }
@@ -74,7 +74,7 @@ public class ShipSpec extends STSerializableObject {
         _traders = Activity.FromInt(GetValueFromHash(hash, "_traders", _traders, Integer.class));
         _minTech = TechLevel.FromInt(GetValueFromHash(hash, "_minTech", /*_minTech*/0, Integer.class));
         _hullUpgraded = GetValueFromHash(hash, "_hullUpgraded", _hullUpgraded);
-        _imageIndex = GetValueFromHash(hash, "_imageIndex", Consts.ShipImgUseDefault);
+        _imageIndex = GetValueFromHash(hash, "_imageIndex", Constants.ShipImgUseDefault);
         // Get the images if the ship uses the custom images.
         if (_imageIndex == ShipType.Custom.CastToInt()) {
             Game.CurrentGame().getParentWindow().setCustomShipImages(GetValueFromHash(hash, "_images", Game.CurrentGame().getParentWindow().CustomShipImages()));
@@ -82,7 +82,7 @@ public class ShipSpec extends STSerializableObject {
         // Get the name if the ship is a custom design.
         if (_type == ShipType.Custom) {
             Strings.ShipNames[ShipType.Custom.CastToInt()] = GetValueFromHash(hash, "_name", Strings.ShipNames[ShipType.Custom.CastToInt()]);
-            Consts.ShipSpecs[ShipType.Custom.CastToInt()] = new ShipSpec(
+            Constants.ShipSpecs[ShipType.Custom.CastToInt()] = new ShipSpec(
                     _type, _size, _cargoBays, _weaponSlots, _shieldSlots, _gadgetSlots, _crewQuarters, _fuelTanks,
                     _fuelCost, _hullStrength, _repairCost, _price, _occurrence, _police, _pirates, _traders, _minTech);
             UpdateCustomImageOffsetConstants();
@@ -111,7 +111,7 @@ public class ShipSpec extends STSerializableObject {
         hash.add("_minTech", _minTech.ordinal());
         hash.add("_hullUpgraded", _hullUpgraded);
         // Only save image index if it's not the default.
-        if (_imageIndex != Consts.ShipImgUseDefault) {
+        if (_imageIndex != Constants.ShipImgUseDefault) {
             hash.add("_imageIndex", _imageIndex);
         }
         // Save the name if the ship is a custom design.
@@ -128,24 +128,24 @@ public class ShipSpec extends STSerializableObject {
     protected void SetValues(ShipType type) {
         int typeInt = type.CastToInt();
         _type = type;
-        _size = Consts.ShipSpecs[typeInt]._size;
-        _cargoBays = Consts.ShipSpecs[typeInt]._cargoBays;
-        _weaponSlots = Consts.ShipSpecs[typeInt]._weaponSlots;
-        _shieldSlots = Consts.ShipSpecs[typeInt]._shieldSlots;
-        _gadgetSlots = Consts.ShipSpecs[typeInt]._gadgetSlots;
-        _crewQuarters = Consts.ShipSpecs[typeInt]._crewQuarters;
-        _fuelTanks = Consts.ShipSpecs[typeInt]._fuelTanks;
-        _fuelCost = Consts.ShipSpecs[typeInt]._fuelCost;
-        _hullStrength = Consts.ShipSpecs[typeInt]._hullStrength;
-        _repairCost = Consts.ShipSpecs[typeInt]._repairCost;
-        _price = Consts.ShipSpecs[typeInt]._price;
-        _occurrence = Consts.ShipSpecs[typeInt]._occurrence;
-        _police = Consts.ShipSpecs[typeInt]._police;
-        _pirates = Consts.ShipSpecs[typeInt]._pirates;
-        _traders = Consts.ShipSpecs[typeInt]._traders;
-        _minTech = Consts.ShipSpecs[typeInt]._minTech;
-        _hullUpgraded = Consts.ShipSpecs[typeInt]._hullUpgraded;
-        _imageIndex = Consts.ShipSpecs[typeInt]._imageIndex;
+        _size = Constants.ShipSpecs[typeInt]._size;
+        _cargoBays = Constants.ShipSpecs[typeInt]._cargoBays;
+        _weaponSlots = Constants.ShipSpecs[typeInt]._weaponSlots;
+        _shieldSlots = Constants.ShipSpecs[typeInt]._shieldSlots;
+        _gadgetSlots = Constants.ShipSpecs[typeInt]._gadgetSlots;
+        _crewQuarters = Constants.ShipSpecs[typeInt]._crewQuarters;
+        _fuelTanks = Constants.ShipSpecs[typeInt]._fuelTanks;
+        _fuelCost = Constants.ShipSpecs[typeInt]._fuelCost;
+        _hullStrength = Constants.ShipSpecs[typeInt]._hullStrength;
+        _repairCost = Constants.ShipSpecs[typeInt]._repairCost;
+        _price = Constants.ShipSpecs[typeInt]._price;
+        _occurrence = Constants.ShipSpecs[typeInt]._occurrence;
+        _police = Constants.ShipSpecs[typeInt]._police;
+        _pirates = Constants.ShipSpecs[typeInt]._pirates;
+        _traders = Constants.ShipSpecs[typeInt]._traders;
+        _minTech = Constants.ShipSpecs[typeInt]._minTech;
+        _hullUpgraded = Constants.ShipSpecs[typeInt]._hullUpgraded;
+        _imageIndex = Constants.ShipSpecs[typeInt]._imageIndex;
     }
 
     public int Slots(EquipmentType type) {
@@ -170,8 +170,8 @@ public class ShipSpec extends STSerializableObject {
         // Find the first column of pixels that has a non-white pixel for the X value, and the last column for the width.
         int x = Functions.GetColumnOfFirstNonWhitePixel(image, 1);
         int width = Functions.GetColumnOfFirstNonWhitePixel(image, -1) - x + 1;
-        Consts.ShipImageOffsets[custIndex].X = Math.max(2, x);
-        Consts.ShipImageOffsets[custIndex].Width = Math.min(62 - Consts.ShipImageOffsets[custIndex].X, width);
+        Constants.ShipImageOffsets[custIndex].X = Math.max(2, x);
+        Constants.ShipImageOffsets[custIndex].Width = Math.min(62 - Constants.ShipImageOffsets[custIndex].X, width);
     }
 
     public int CargoBays() {
@@ -263,7 +263,7 @@ public class ShipSpec extends STSerializableObject {
     }
 
     public int HullStrength() {
-        return _hullStrength + (getHullUpgraded() ? Consts.HullUpgrade : 0);
+        return _hullStrength + (getHullUpgraded() ? Constants.HullUpgrade : 0);
     }
 
     public void HullStrength(int value) {
@@ -271,27 +271,27 @@ public class ShipSpec extends STSerializableObject {
     }
 
     public WfImage Image() {
-        return Game.CurrentGame().getParentWindow().ShipImages().getImages()[ImageIndex() * Consts.ImagesPerShip + Consts.ShipImgOffsetNormal];
+        return Game.CurrentGame().getParentWindow().ShipImages().getImages()[ImageIndex() * Constants.ImagesPerShip + Constants.ShipImgOffsetNormal];
     }
 
     public WfImage ImageDamaged() {
-        return Game.CurrentGame().getParentWindow().ShipImages().getImages()[ImageIndex() * Consts.ImagesPerShip + Consts.ShipImgOffsetDamage];
+        return Game.CurrentGame().getParentWindow().ShipImages().getImages()[ImageIndex() * Constants.ImagesPerShip + Constants.ShipImgOffsetDamage];
     }
 
     public WfImage ImageDamagedWithShields() {
-        return Game.CurrentGame().getParentWindow().ShipImages().getImages()[ImageIndex() * Consts.ImagesPerShip + Consts.ShipImgOffsetSheildDamage];
+        return Game.CurrentGame().getParentWindow().ShipImages().getImages()[ImageIndex() * Constants.ImagesPerShip + Constants.ShipImgOffsetShieldDamage];
     }
 
     public int ImageIndex() {
-        return (_imageIndex == Consts.ShipImgUseDefault ? Type().CastToInt() : _imageIndex);
+        return (_imageIndex == Constants.ShipImgUseDefault ? Type().CastToInt() : _imageIndex);
     }
 
     public void ImageIndex(int value) {
-        _imageIndex = (value == Type().CastToInt() ? Consts.ShipImgUseDefault : value);
+        _imageIndex = (value == Type().CastToInt() ? Constants.ShipImgUseDefault : value);
     }
 
     public WfImage ImageWithShields() {
-        return Game.CurrentGame().getParentWindow().ShipImages().getImages()[ImageIndex() * Consts.ImagesPerShip + Consts.ShipImgOffsetShield];
+        return Game.CurrentGame().getParentWindow().ShipImages().getImages()[ImageIndex() * Constants.ImagesPerShip + Constants.ShipImgOffsetShield];
     }
 
     public TechLevel MinimumTechLevel() {

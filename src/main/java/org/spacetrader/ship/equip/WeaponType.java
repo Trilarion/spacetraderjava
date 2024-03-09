@@ -20,7 +20,7 @@ public enum WeaponType implements SpaceTraderEnum, EquipmentSubType {
     public final int id;
     public final int power;
 
-    private WeaponType(TechLevel t, boolean b, int i, int j, int k, String s, String u) {
+    WeaponType(TechLevel t, boolean b, int i, int j, int k, String s, String u) {
         tl = t;
         disabler = b;
         chance = i;

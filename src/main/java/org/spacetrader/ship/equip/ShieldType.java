@@ -9,7 +9,7 @@ public enum ShieldType implements SpaceTraderEnum, EquipmentSubType {
     Lightning;
     public final int id;
 
-    private ShieldType() {
+    ShieldType() {
         id = ordinal();
     }
 

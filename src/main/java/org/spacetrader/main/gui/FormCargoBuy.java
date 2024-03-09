@@ -29,7 +29,7 @@ public class FormCargoBuy extends WinformForm {
         InitializeComponent();
         numAmount.setMaximum(maxAmount);
         numAmount.setValue(numAmount.getMinimum());
-        setText(Functions.StringVars(Strings.CargoTitle, Strings.CargoBuyOps[op.id], Consts.TradeItems[item].Name()));
+        setText(Functions.StringVars(Strings.CargoTitle, Strings.CargoBuyOps[op.id], Constants.TradeItems[item].Name()));
         lblQuestion.setText(Functions.StringVars("How many do you want to ^1?", Strings.CargoBuyOps[op.id].toLowerCase()));
         switch (op) {
             case BuySystem:
@@ -41,7 +41,7 @@ public class FormCargoBuy extends WinformForm {
                 if (afford < maxAmount) {
                     numAmount.setMaximum(afford);
                 }
-                lblStatement.setText(Functions.StringVars("The trader wants to sell ^1 for the price of ^2 each.", Consts.TradeItems[item].Name(), Functions.FormatMoney(game.PriceCargoBuy()[item])));
+                lblStatement.setText(Functions.StringVars("The trader wants to sell ^1 for the price of ^2 each.", Constants.TradeItems[item].Name(), Functions.FormatMoney(game.PriceCargoBuy()[item])));
                 lblAvailable.setText(Functions.StringVars("The trader has ^1 for sale.", Functions.Multiples(game.getOpponent().Cargo()[item], Strings.CargoUnit)));
                 lblAfford.setText(Functions.StringVars("You can afford to buy ^1.", Functions.Multiples(afford, Strings.CargoUnit)));
                 lblAvailable.setVisible(true);
@@ -108,7 +108,7 @@ public class FormCargoBuy extends WinformForm {
         btnAll.setSize(new FormSize(41, 22));
         btnAll.setTabIndex(3);
         btnAll.setText("All");
-        btnAll.setClick(new EventHandler<Object, EventArgs>() {
+        btnAll.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnAll_Click(sender, e);

@@ -15,12 +15,12 @@ public class PoliticalSystem {
     private Activity _activityPolice; // Activity level of police force 0 = no police (determines occurrence rate)
     private Activity _activityPirates; // Activity level of pirates 0 = no pirates
     private Activity _activityTraders; // Activity level of traders 0 = no traders
-    private TechLevel _minTech; // Mininum tech level needed
+    private TechLevel _minTech; // Minimum tech level needed
     private TechLevel _maxTech; // Maximum tech level where this is found
     private int _bribeLevel; // Indicates how easily someone can be bribed 0 = unbribable/high bribe costs
-    private boolean _drugsOk; // Drugs can be traded (if not, people aren't interested or the governemnt is too strict)
-    private boolean _firearmsOk; // Firearms can be traded (if not, people aren't interested or the governemnt is too strict)
-    private TradeItemType _wanted; // Tradeitem requested in particular in this type of government
+    private boolean _drugsOk; // Drugs can be traded (if not, people aren't interested or the government is too strict)
+    private boolean _firearmsOk; // Firearms can be traded (if not, people aren't interested or the government is too strict)
+    private TradeItemType _wanted; // Trade item requested in particular in this type of government
 
     public PoliticalSystem(PoliticalSystemType type, int reactionIllegal, Activity activityPolice,
                            Activity activityPirates, Activity activityTraders, TechLevel minTechLevel, TechLevel maxTechLevel,
@@ -43,13 +43,13 @@ public class PoliticalSystem {
         int diffMod = Math.max(0, Game.CurrentGame().Difficulty().CastToInt() - Difficulty.Normal.CastToInt());
         switch (oppType) {
             case Pirate:
-                likely = ActivityPirates().CastToInt() + diffMod >= Consts.ShipSpecs[shipType.CastToInt()].Pirates().CastToInt();
+                likely = ActivityPirates().CastToInt() + diffMod >= Constants.ShipSpecs[shipType.CastToInt()].Pirates().CastToInt();
                 break;
             case Police:
-                likely = ActivityPolice().CastToInt() + diffMod >= Consts.ShipSpecs[shipType.CastToInt()].Police().CastToInt();
+                likely = ActivityPolice().CastToInt() + diffMod >= Constants.ShipSpecs[shipType.CastToInt()].Police().CastToInt();
                 break;
             case Trader:
-                likely = ActivityTraders().CastToInt() + diffMod >= Consts.ShipSpecs[shipType.CastToInt()].Traders().CastToInt();
+                likely = ActivityTraders().CastToInt() + diffMod >= Constants.ShipSpecs[shipType.CastToInt()].Traders().CastToInt();
                 break;
         }
         return likely;

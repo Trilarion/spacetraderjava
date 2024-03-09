@@ -12,13 +12,13 @@ import java.util.Map;
 public class WinformJPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private final WinformPane form;
-    Map<Component, Integer> tabOrderMap = new HashMap<Component, Integer>(0);
+    Map<Component, Integer> tabOrderMap = new HashMap<>(0);
     WfImage BackgroundImage = null;
 
     public WinformJPanel(WinformPane wp) {
         super(null); // That's what winforms use.
         form = wp;
-        setFocusTraversalPolicy(new SortingFocusTraversalPolicy(new Comparator<Component>() {
+        setFocusTraversalPolicy(new SortingFocusTraversalPolicy(new Comparator<>() {
             @Override
             public int compare(Component o1, Component o2) {
                 return tabOrderMap.get(o1).compareTo(tabOrderMap.get(o2));
@@ -71,7 +71,7 @@ public class WinformJPanel extends JPanel {
 
     void handleDialogResult(final Button b) {
         if (b.DialogResult != null) {
-            b.setClick(new ChainedEventHandler<Object, EventArgs>(b.click) {
+            b.setClick(new ChainedEventHandler<>(b.click) {
                 @Override
                 public void instanceHandle(Object sender, EventArgs e) {
                     form.setResult(b.DialogResult);

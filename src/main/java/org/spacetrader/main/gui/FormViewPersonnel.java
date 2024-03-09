@@ -107,13 +107,13 @@ public class FormViewPersonnel extends WinformForm {
         lstCrew.setName("lstCrew");
         lstCrew.setSize(new FormSize(126, 80));
         lstCrew.setTabIndex(6);
-        lstCrew.setDoubleClick(new EventHandler<Object, EventArgs>() {
+        lstCrew.setDoubleClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 HireFire(sender, e);
             }
         });
-        lstCrew.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
+        lstCrew.setSelectedIndexChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 SelectedIndexChanged(sender, e);
@@ -134,13 +134,13 @@ public class FormViewPersonnel extends WinformForm {
         lstForHire.setName("lstForHire");
         lstForHire.setSize(new FormSize(126, 80));
         lstForHire.setTabIndex(5);
-        lstForHire.setDoubleClick(new EventHandler<Object, EventArgs>() {
+        lstForHire.setDoubleClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 HireFire(sender, e);
             }
         });
-        lstForHire.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
+        lstForHire.setSelectedIndexChanged(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 SelectedIndexChanged(sender, e);
@@ -171,7 +171,7 @@ public class FormViewPersonnel extends WinformForm {
         btnHireFire.setSize(new FormSize(36, 22));
         btnHireFire.setTabIndex(4);
         btnHireFire.setText("Hire");
-        btnHireFire.setClick(new EventHandler<Object, EventArgs>() {
+        btnHireFire.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 HireFire(sender, e);
@@ -299,7 +299,7 @@ public class FormViewPersonnel extends WinformForm {
                 lstCrew.Items.add(crew[i]);
             }
         }
-        boolean entries = (lstCrew.Items.size() > 0);
+        boolean entries = (!lstCrew.Items.isEmpty());
         lstCrew.setVisible(entries);
         lblCrewNoQuarters.setVisible(!entries);
         if (entries) {
@@ -312,10 +312,10 @@ public class FormViewPersonnel extends WinformForm {
     private void UpdateForHire() {
         CrewMember[] mercs = cmdr.CurrentSystem().MercenariesForHire();
         lstForHire.Items.clear();
-        for (int i = 0; i < mercs.length; i++) {
-            lstForHire.Items.add(mercs[i]);
+        for (CrewMember merc : mercs) {
+            lstForHire.Items.add(merc);
         }
-        boolean entries = (lstForHire.Items.size() > 0);
+        boolean entries = (!lstForHire.Items.isEmpty());
         lstForHire.setVisible(entries);
         lblForHireNone.setVisible(!entries);
         if (entries) {

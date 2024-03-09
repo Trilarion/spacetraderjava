@@ -12,7 +12,7 @@ public class ListBox extends WinformControl {
     public final MyListModel Items = new MyListModel();
 
     public ListBox() {
-        super(new JList<Object>());
+        super(new JList<>());
         ListBox.this.asJList().setModel(Items);
     }
 

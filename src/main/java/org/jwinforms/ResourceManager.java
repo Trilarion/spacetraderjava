@@ -48,7 +48,7 @@ public class ResourceManager {
                 String imageName = properties.getProperty(s);
                 return getImage(imageName);
             default:
-                throw new Error("Uknown object type " + objectType);
+                throw new Error("Unknown object type " + objectType);
         }
     }
 

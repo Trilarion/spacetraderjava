@@ -51,8 +51,7 @@ public class WinformControl implements ISupportInitialize {
     }
 
     /**
-     * @param backColor
-     * @todo not really deprecated, just doesn't work.
+     * TODO not really deprecated, just doesn't work.
      */
     public void setBackColor(Color backColor) {
         BackColor = backColor;
@@ -102,7 +101,6 @@ public class WinformControl implements ISupportInitialize {
     /**
      * I think this is nothing.
      *
-     * @param name
      */
     public void setName(String name) {
         Name = name;

@@ -92,7 +92,7 @@ abstract public class STSerializableObject {
 
     public static Integer[] ArrayListToIntArray(ArrayList<? extends SpaceTraderEnum> list) {
         Integer[] array = new Integer[list.size()];
-        if (list.size() == 0) {
+        if (list.isEmpty()) {
             return array;
         }
         {
@@ -173,12 +173,12 @@ abstract public class STSerializableObject {
         return new Hashtable();
     }
 
-    private static enum SupportedTypesOfSomethingST {
+    private enum SupportedTypesOfSomethingST {
         CrewMember,
         Gadget,
         HighScoreRecord,
         Shield,
         StarSystem,
-        Weapon;
+        Weapon
     }
 }

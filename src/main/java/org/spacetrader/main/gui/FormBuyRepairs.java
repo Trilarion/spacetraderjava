@@ -95,7 +95,7 @@ public class FormBuyRepairs extends WinformForm {
         setCancelButton(btnNothing);
         setClientSize(new FormSize(286, 63));
         setControlBox(false);
-        Controls.addAll(Arrays.asList(new WinformControl[]{btnNothing, btnMax, btnOk, numAmount, lblQuestion}));
+        Controls.addAll(Arrays.asList(btnNothing, btnMax, btnOk, numAmount, lblQuestion));
         setFormBorderStyle(FormBorderStyle.FixedDialog);
         setName("FormBuyRepairs");
         setShowInTaskbar(false);

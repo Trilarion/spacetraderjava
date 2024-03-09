@@ -55,7 +55,7 @@ public class Shield extends Equipment {
     @Override
     public boolean TypeEquals(Object type) {
         try {
-            return (Type() == (ShieldType) type);
+            return (Type() == type);
         } catch (Exception e) {
             Log.write("Ignored exception: " + e);
             return false;

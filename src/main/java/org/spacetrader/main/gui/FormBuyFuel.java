@@ -69,7 +69,7 @@ public class FormBuyFuel extends WinformForm {
         btnMax.setSize(new FormSize(41, 22));
         btnMax.setTabIndex(3);
         btnMax.setText("Max");
-        btnMax.setClick(new EventHandler<Object, EventArgs>() {
+        btnMax.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
                 btnMax_Click();

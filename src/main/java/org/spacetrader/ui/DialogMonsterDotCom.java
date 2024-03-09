@@ -25,8 +25,6 @@ public class DialogMonsterDotCom extends JDialog {
     /**
      * Creates new form DialogMonsterDotCom
      *
-     * @param parent
-     * @param modal
      */
     public DialogMonsterDotCom(Frame parent, boolean modal) {
         super(parent, modal);
@@ -36,7 +34,7 @@ public class DialogMonsterDotCom extends JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -80,7 +78,7 @@ public class DialogMonsterDotCom extends JDialog {
 
         jPanel1 = new JPanel();
         jScrollPane1 = new JScrollPane();
-        jList1 = new JList<String>();
+        jList1 = new JList<>();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("The Monster-Dot-Com Jobs Board");

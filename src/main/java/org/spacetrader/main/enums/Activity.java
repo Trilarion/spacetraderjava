@@ -21,5 +21,5 @@ public enum Activity implements SpaceTraderEnum {
         return (this == NA) ? 100 : ordinal();
     }
 }
-//TODO go over all NAs, see if can use null, or atleast normalize.
+//TODO go over all NAs, see if can use null, or at least normalize.
 //TODO go over all CastToInt, see if needed.

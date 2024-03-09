@@ -108,7 +108,7 @@ public class WinformForm extends WinformControl implements WinformPane {
     }
 
     public void setAcceptButton(Button acceptButton) {
-        jdialog.getRootPane().setDefaultButton(acceptButton.asJButtton());
+        jdialog.getRootPane().setDefaultButton(acceptButton.asJButton());
     }
 
     public Button getCancelButton() {

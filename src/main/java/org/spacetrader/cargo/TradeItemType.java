@@ -17,7 +17,7 @@ public enum TradeItemType implements SpaceTraderEnum {
     Robots("Robots");//			= 9
     public final String name;
 
-    private TradeItemType(String s) {
+    TradeItemType(String s) {
         name = s;
     }
 

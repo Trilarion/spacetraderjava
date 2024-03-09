@@ -61,23 +61,23 @@ public class StarSystem extends STSerializableObject {
     }
 
     public void InitializeTradeItems() {
-        for (int i = 0; i < Consts.TradeItems.length; i++) {
-            if (!ItemTraded(Consts.TradeItems[i])) {
+        for (int i = 0; i < Constants.TradeItems.length; i++) {
+            if (!ItemTraded(Constants.TradeItems[i])) {
                 _tradeItems[i] = 0;
             } else {
                 _tradeItems[i] = (this.Size().CastToInt() + 1)
-                        * (Functions.GetRandom(9, 14) - Math.abs(Consts.TradeItems[i].TechTopProduction().ordinal() - this.TechLevel().ordinal()));
+                        * (Functions.GetRandom(9, 14) - Math.abs(Constants.TradeItems[i].TechTopProduction().ordinal() - this.TechLevel().ordinal()));
                 // Because of the enormous profits possible, there shouldn't be too many robots or narcotics available.
                 if (i >= TradeItemType.Narcotics.CastToInt()) {
                     _tradeItems[i] = ((_tradeItems[i] * (5 - Game.CurrentGame().Difficulty().CastToInt())) / (6 - Game.CurrentGame().Difficulty().CastToInt())) + 1;
                 }
-                if (this.SpecialResource() == Consts.TradeItems[i].ResourceLowPrice()) {
+                if (this.SpecialResource() == Constants.TradeItems[i].ResourceLowPrice()) {
                     _tradeItems[i] = _tradeItems[i] * 4 / 3;
                 }
-                if (this.SpecialResource() == Consts.TradeItems[i].ResourceHighPrice()) {
+                if (this.SpecialResource() == Constants.TradeItems[i].ResourceHighPrice()) {
                     _tradeItems[i] = _tradeItems[i] * 3 / 4;
                 }
-                if (this.SystemPressure() == Consts.TradeItems[i].PressurePriceHike()) {
+                if (this.SystemPressure() == Constants.TradeItems[i].PressurePriceHike()) {
                     _tradeItems[i] /= 5;
                 }
                 _tradeItems[i] = _tradeItems[i] - Functions.GetRandom(10) + Functions.GetRandom(10);
@@ -125,7 +125,7 @@ public class StarSystem extends STSerializableObject {
             case Dragonfly:
             case Experiment:
             case Jarek:
-                show = game.Commander().getPoliceRecordScore() >= Consts.PoliceRecordScoreDubious;
+                show = game.Commander().getPoliceRecordScore() >= Constants.PoliceRecordScoreDubious;
                 break;
             case ArtifactDelivery:
                 show = game.Commander().getShip().ArtifactOnBoard();
@@ -164,7 +164,7 @@ public class StarSystem extends STSerializableObject {
                 break;
             case EraseRecord:
             case Wild:
-                show = game.Commander().getPoliceRecordScore() < Consts.PoliceRecordScoreDubious;
+                show = game.Commander().getPoliceRecordScore() < Constants.PoliceRecordScoreDubious;
                 break;
             case ExperimentStopped:
                 show = game.getQuestStatusExperiment() > SpecialEvent.StatusExperimentNotStarted
@@ -176,7 +176,7 @@ public class StarSystem extends STSerializableObject {
                 break;
             case Japori:
                 show = game.getQuestStatusJapori() == SpecialEvent.StatusJaporiNotStarted
-                        && game.Commander().getPoliceRecordScore() >= Consts.PoliceRecordScoreDubious;
+                        && game.Commander().getPoliceRecordScore() >= Constants.PoliceRecordScoreDubious;
                 break;
             case JaporiDelivery:
                 show = game.getQuestStatusJapori() == SpecialEvent.StatusJaporiInTransit;
@@ -192,8 +192,8 @@ public class StarSystem extends STSerializableObject {
                 show = game.getQuestStatusMoon() == SpecialEvent.StatusMoonBought;
                 break;
             case Princess:
-                show = game.Commander().getPoliceRecordScore() >= Consts.PoliceRecordScoreLawful
-                        && game.Commander().getReputationScore() >= Consts.ReputationScoreAverage;
+                show = game.Commander().getPoliceRecordScore() >= Constants.PoliceRecordScoreLawful
+                        && game.Commander().getReputationScore() >= Constants.ReputationScoreAverage;
                 break;
             case PrincessCentauri:
                 show = game.getQuestStatusPrincess() >= SpecialEvent.StatusPrincessFlyCentauri
@@ -212,15 +212,15 @@ public class StarSystem extends STSerializableObject {
                 break;
             case Reactor:
                 show = game.getQuestStatusReactor() == SpecialEvent.StatusReactorNotStarted
-                        && game.Commander().getPoliceRecordScore() < Consts.PoliceRecordScoreDubious
-                        && game.Commander().getReputationScore() >= Consts.ReputationScoreAverage;
+                        && game.Commander().getPoliceRecordScore() < Constants.PoliceRecordScoreDubious
+                        && game.Commander().getReputationScore() >= Constants.ReputationScoreAverage;
                 break;
             case ReactorDelivered:
                 show = game.Commander().getShip().ReactorOnBoard();
                 break;
             case Scarab:
                 show = game.getQuestStatusScarab() == SpecialEvent.StatusScarabNotStarted
-                        && game.Commander().getReputationScore() >= Consts.ReputationScoreAverage;
+                        && game.Commander().getReputationScore() >= Constants.ReputationScoreAverage;
                 break;
             case ScarabDestroyed:
             case ScarabUpgradeHull:
@@ -228,8 +228,8 @@ public class StarSystem extends STSerializableObject {
                 break;
             case Sculpture:
                 show = game.getQuestStatusSculpture() == SpecialEvent.StatusSculptureNotStarted
-                        && game.Commander().getPoliceRecordScore() < Consts.PoliceRecordScoreDubious
-                        && game.Commander().getReputationScore() >= Consts.ReputationScoreAverage;
+                        && game.Commander().getPoliceRecordScore() < Constants.PoliceRecordScoreDubious
+                        && game.Commander().getReputationScore() >= Constants.ReputationScoreAverage;
                 break;
             case SculptureDelivered:
                 show = game.getQuestStatusSculpture() == SpecialEvent.StatusSculptureInTransit;
@@ -287,7 +287,7 @@ public class StarSystem extends STSerializableObject {
     }
 
     public PoliticalSystem PoliticalSystem() {
-        return Consts.PoliticalSystems[_politicalSystemType.CastToInt()];
+        return Constants.PoliticalSystems[_politicalSystemType.CastToInt()];
     }
 
     public PoliticalSystemType PoliticalSystemType() {
@@ -300,7 +300,7 @@ public class StarSystem extends STSerializableObject {
 
     public Shipyard Shipyard() {
         ShipyardId();
-        return (_shipyardId == ShipyardId.NA ? null : Consts.Shipyards[_shipyardId.CastToInt()]);
+        return (_shipyardId == ShipyardId.NA ? null : Constants.Shipyards[_shipyardId.CastToInt()]);
     }
 
     public ShipyardId ShipyardId() {
@@ -317,7 +317,7 @@ public class StarSystem extends STSerializableObject {
 
     public SpecialEvent SpecialEvent() {
         SpecialEventType();
-        return (_specialEventType == SpecialEventType.NA ? null : Consts.SpecialEvents[_specialEventType.CastToInt()]);
+        return (_specialEventType == SpecialEventType.NA ? null : Constants.SpecialEvents[_specialEventType.CastToInt()]);
     }
 
     public SpecialEventType SpecialEventType() {

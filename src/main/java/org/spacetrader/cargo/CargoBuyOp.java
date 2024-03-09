@@ -8,7 +8,7 @@ public enum CargoBuyOp {
     public final String name;
     public final int id;
 
-    private CargoBuyOp(int i, String s) {
+    CargoBuyOp(int i, String s) {
         name = s;
         id = i;
     }

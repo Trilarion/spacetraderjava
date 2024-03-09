@@ -18,7 +18,7 @@ public class ImageStreamResourceManager extends ResourceManager {
 
     public ImageListStreamer getStream() {
         List<Entry<Object, Object>> ls = new ArrayList<>(properties.entrySet());
-        Collections.sort(ls, new Comparator<Entry<Object, Object>>() {
+        Collections.sort(ls, new Comparator<>() {
             @Override
             public int compare(Entry<Object, Object> arg0, Entry<Object, Object> arg1) {
                 String left = (String) arg0.getKey();
@@ -26,7 +26,7 @@ public class ImageStreamResourceManager extends ResourceManager {
                 return left.compareTo(right);
             }
         });
-        Iterable<WfImage> images = Lisp.map(ls, new Convertor<WfImage, Entry<Object, Object>>() {
+        Iterable<WfImage> images = Lisp.map(ls, new Convertor<>() {
             @Override
             public WfImage convert(Entry<Object, Object> entry) {
                 return (WfImage) getImage((String) entry.getValue());

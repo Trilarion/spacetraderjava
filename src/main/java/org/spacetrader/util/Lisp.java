@@ -9,7 +9,7 @@ public class Lisp {
     }
 
     public static <To, From> List<To> map(Iterable<From> k, Convertor<To, From> conv) {
-        LinkedList<To> fname = new LinkedList<To>();
+        LinkedList<To> fname = new LinkedList<>();
         for (From from : k) {
             fname.addLast(conv.convert(from));
         }
@@ -17,7 +17,7 @@ public class Lisp {
     }
 
     public static <To, From> List<To> map(From[] k, Convertor<To, From> conv) {
-        LinkedList<To> fname = new LinkedList<To>();
+        LinkedList<To> fname = new LinkedList<>();
         for (From from : k) {
             fname.addLast(conv.convert(from));
         }
@@ -25,7 +25,7 @@ public class Lisp {
     }
 
     public static <T> List<T> filter(T[] k, Predicate<T> pred) {
-        LinkedList<T> fname = new LinkedList<T>();
+        LinkedList<T> fname = new LinkedList<>();
         for (T t : k) {
             if (pred.consider(t)) {
                 fname.addLast(t);
@@ -35,7 +35,7 @@ public class Lisp {
     }
 
     public static <T> List<T> filter(Iterable<T> k, Predicate<T> pred) {
-        LinkedList<T> fname = new LinkedList<T>();
+        LinkedList<T> fname = new LinkedList<>();
         for (T t : k) {
             if (pred.consider(t)) {
                 fname.addLast(t);
