@@ -8,11 +8,11 @@ import org.spacetrader.model.Difficulty;
 import org.spacetrader.model.ship.ShipType;
 import org.spacetrader.model.ship.equipment.*;
 import org.spacetrader.ui.Strings;
-import java.util.ArrayList;
+import org.spacetrader.util.Util;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Hashtable;
-import org.spacetrader.util.Util;
 
 // part of the model
 public class Ship extends ShipSpec {
@@ -511,7 +511,7 @@ public class Ship extends ShipSpec {
             // Criminals can only buy or sell illegal goods, Noncriminals cannot buy or sell such items.
             // Simplified this - JAF
             if (Cargo()[i] > 0
-                    && !(criminal ^ Constants.TradeItems[i].Illegal())
+                    && criminal == Constants.TradeItems[i].Illegal()
                     && ((!CommandersShip() && Game.getCurrentGame().PriceCargoBuy()[i] > 0) || (CommandersShip() && Game.getCurrentGame().PriceCargoSell()[i] > 0))) {
                 found = true;
                 _tradeableItems[i] = true;

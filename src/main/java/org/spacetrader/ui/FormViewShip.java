@@ -2,7 +2,6 @@ package org.spacetrader.ui;
 
 import org.spacetrader.controller.*;
 import org.spacetrader.model.ship.equipment.GadgetType;
-import java.util.ArrayList;
 import org.spacetrader.util.Util;
 import org.winforms.Button;
 import org.winforms.Font;
@@ -14,15 +13,16 @@ import org.winforms.enums.FormBorderStyle;
 import org.winforms.enums.FormStartPosition;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
 public class FormViewShip extends wfForm {
-    private Label labelSpecialCargo;
-    private Label labelEquipLabel;
-    private Label labelEquip;
-    private Game game = Game.getCurrentGame();
-    private Ship ship = game.Commander().getShip();
+    private final Label labelSpecialCargo;
+    private final Label labelEquipLabel;
+    private final Label labelEquip;
+    private final Game game = Game.getCurrentGame();
+    private final Ship ship = game.Commander().getShip();
 
     public FormViewShip() {
         Label labelTypeLabel = new Label();

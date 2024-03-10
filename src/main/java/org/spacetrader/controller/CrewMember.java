@@ -5,15 +5,15 @@ import org.spacetrader.controller.enums.StarSystemId;
 import org.spacetrader.model.CrewMemberId;
 import org.spacetrader.model.Difficulty;
 import org.spacetrader.ui.Strings;
-import java.util.ArrayList;
-import java.util.Hashtable;
 import org.spacetrader.util.Util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Hashtable;
 
 // TODO part of model
 public class CrewMember extends SerializableObject {
-    private CrewMemberId crewMemberId;
+    private final CrewMemberId crewMemberId;
     private StarSystemId currentSystemId = StarSystemId.NA;
     private int[] skills = new int[4];
 

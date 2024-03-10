@@ -15,7 +15,7 @@ import java.util.Arrays;
 
 
 public class FormBuyRepairs extends wfForm {
-    private NumericUpDown numAmount;
+    private final NumericUpDown numAmount;
 
     public FormBuyRepairs() {
         Label labelQuestion = new Label();

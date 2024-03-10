@@ -14,24 +14,24 @@ import java.awt.*;
 
 
 public class FormOptions extends wfForm {
-    private CheckBox checkBoxFuel;
-    private CheckBox checkBoxContinuousAttack;
-    private CheckBox checkBoxAttackFleeing;
-    private CheckBox checkBoxDisable;
-    private CheckBox checkBoxNewspaper;
-    private CheckBox checkBoxNewspaperShow;
-    private CheckBox checkBoxRange;
-    private CheckBox checkBoxStopTracking;
-    private CheckBox checkBoxLoan;
-    private CheckBox checkBoxIgnoreTradersDealing;
-    private CheckBox checkBoxReserveMoney;
-    private CheckBox checkBoxIgnoreTraders;
-    private CheckBox checkBoxIgnorePirates;
-    private CheckBox checkBoxIgnorePolice;
-    private CheckBox checkBoxRepair;
-    private NumericUpDown numEmpty;
+    private final CheckBox checkBoxFuel;
+    private final CheckBox checkBoxContinuousAttack;
+    private final CheckBox checkBoxAttackFleeing;
+    private final CheckBox checkBoxDisable;
+    private final CheckBox checkBoxNewspaper;
+    private final CheckBox checkBoxNewspaperShow;
+    private final CheckBox checkBoxRange;
+    private final CheckBox checkBoxStopTracking;
+    private final CheckBox checkBoxLoan;
+    private final CheckBox checkBoxIgnoreTradersDealing;
+    private final CheckBox checkBoxReserveMoney;
+    private final CheckBox checkBoxIgnoreTraders;
+    private final CheckBox checkBoxIgnorePirates;
+    private final CheckBox checkBoxIgnorePolice;
+    private final CheckBox checkBoxRepair;
+    private final NumericUpDown numEmpty;
+    private final GameOptions opts = new GameOptions(false);
     private boolean initializing = true;
-    private GameOptions opts = new GameOptions(false);
 
     public FormOptions() {
         Button buttonOk = new Button();

@@ -3,8 +3,8 @@ package org.spacetrader.controller;
 import org.spacetrader.controller.enums.Activity;
 import org.spacetrader.controller.enums.OpponentType;
 import org.spacetrader.controller.enums.PoliticalSystemType;
-import org.spacetrader.model.TechLevel;
 import org.spacetrader.model.Difficulty;
+import org.spacetrader.model.TechLevel;
 import org.spacetrader.model.cargo.TradeItemType;
 import org.spacetrader.model.ship.ShipType;
 import org.spacetrader.ui.Strings;
@@ -12,17 +12,17 @@ import org.spacetrader.ui.Strings;
 
 // TODO part of the model
 public class PoliticalSystem {
-    private PoliticalSystemType _type;
-    private int _reactionIllegal; // Reaction level of illegal goods 0 = total acceptance (determines how police reacts if they find you carry them)
-    private Activity _activityPolice; // Activity level of police force 0 = no police (determines occurrentrence rate)
-    private Activity _activityPirates; // Activity level of pirates 0 = no pirates
-    private Activity _activityTraders; // Activity level of traders 0 = no traders
-    private TechLevel _minTech; // Minimum tech level needed
-    private TechLevel _maxTech; // Maximum tech level where this is found
-    private int _bribeLevel; // Indicates how easily someone can be bribed 0 = unbribable/high bribe costs
-    private boolean _drugsOk; // Drugs can be traded (if not, people aren't interested or the government is too strict)
-    private boolean _firearmsOk; // Firearms can be traded (if not, people aren't interested or the government is too strict)
-    private TradeItemType _wanted; // Trade item requested in particular in this type of government
+    private final PoliticalSystemType _type;
+    private final int _reactionIllegal; // Reaction level of illegal goods 0 = total acceptance (determines how police reacts if they find you carry them)
+    private final Activity _activityPolice; // Activity level of police force 0 = no police (determines occurrentrence rate)
+    private final Activity _activityPirates; // Activity level of pirates 0 = no pirates
+    private final Activity _activityTraders; // Activity level of traders 0 = no traders
+    private final TechLevel _minTech; // Minimum tech level needed
+    private final TechLevel _maxTech; // Maximum tech level where this is found
+    private final int _bribeLevel; // Indicates how easily someone can be bribed 0 = unbribable/high bribe costs
+    private final boolean _drugsOk; // Drugs can be traded (if not, people aren't interested or the government is too strict)
+    private final boolean _firearmsOk; // Firearms can be traded (if not, people aren't interested or the government is too strict)
+    private final TradeItemType _wanted; // Trade item requested in particular in this type of government
 
     public PoliticalSystem(PoliticalSystemType type, int reactionIllegal, Activity activityPolice,
                            Activity activityPirates, Activity activityTraders, TechLevel minTechLevel, TechLevel maxTechLevel,

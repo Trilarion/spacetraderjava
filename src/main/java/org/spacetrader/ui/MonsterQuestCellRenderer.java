@@ -10,8 +10,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
  */
 public class MonsterQuestCellRenderer extends JPanel implements ListCellRenderer<MonsterQuestData> {
     private static final long serialVersionUID = 1L;
-    private JLabel label1;
-    private JLabel label2;
+    private final JLabel label1;
+    private final JLabel label2;
 
     /**
      * Creates new form MonsterQuestCellRenderer

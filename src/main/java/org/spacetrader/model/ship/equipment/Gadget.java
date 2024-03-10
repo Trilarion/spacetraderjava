@@ -1,15 +1,16 @@
 package org.spacetrader.model.ship.equipment;
 
-import org.spacetrader.ui.Strings;
 import org.spacetrader.controller.enums.SkillType;
 import org.spacetrader.model.TechLevel;
-import java.util.Hashtable;
+import org.spacetrader.ui.Strings;
 import org.spacetrader.util.Log;
+
+import java.util.Hashtable;
 
 
 public class Gadget extends Equipment {
-    private GadgetType _type;
-    private SkillType _skillBonus;
+    private final GadgetType _type;
+    private final SkillType _skillBonus;
 
     public Gadget(GadgetType type, SkillType skillBonus, int price, TechLevel minTechLevel, int chance) {
         super(EquipmentType.Gadget, price, minTechLevel, chance);

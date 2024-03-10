@@ -15,7 +15,7 @@ import java.awt.*;
 
 
 public class FormPayBackLoan extends wfForm {
-    private NumericUpDown numAmount;
+    private final NumericUpDown numAmount;
 
     public FormPayBackLoan() {
         Label labelQuestion = new Label();

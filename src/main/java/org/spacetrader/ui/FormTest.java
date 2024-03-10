@@ -14,11 +14,11 @@ import java.util.Arrays;
 
 
 public class FormTest extends wfForm {
-    private ComboBox selAlertType;
-    private ComboBox selSpecialEvent;
-    private TextBox txtValue1;
-    private TextBox txtValue2;
-    private TextBox txtValue3;
+    private final ComboBox selAlertType;
+    private final ComboBox selSpecialEvent;
+    private final TextBox txtValue1;
+    private final TextBox txtValue2;
+    private final TextBox txtValue3;
 
     public FormTest() {
         Label labelAlertType = new Label();

@@ -2,16 +2,17 @@ package org.spacetrader.controller;
 
 import org.spacetrader.controller.enums.GameEndType;
 import org.spacetrader.model.Difficulty;
+
 import java.util.Hashtable;
 
 
 public class HighScoreRecord extends SerializableObject implements Comparable<HighScoreRecord> {
-    private Difficulty difficulty;
-    private GameEndType gameEndType;
-    private String name;
-    private int score;
-    private int days;
-    private int worth;
+    private final Difficulty difficulty;
+    private final GameEndType gameEndType;
+    private final String name;
+    private final int score;
+    private final int days;
+    private final int worth;
 
     public HighScoreRecord(String name, int score, GameEndType gameEndType, int days, int worth, Difficulty difficulty) {
         this.name = name;

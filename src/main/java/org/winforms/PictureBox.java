@@ -8,8 +8,8 @@ import java.awt.*;
 
 // TODO documentation of usage
 public class PictureBox extends wfControl implements ISupportInitialize {
+    private final ImageMouseListener mouseListener;
     public PictureBoxSizeMode SizeMode;
-    private ImageMouseListener mouseListener;
 
     public PictureBox() {
         super(new SpecialImageJLabel());

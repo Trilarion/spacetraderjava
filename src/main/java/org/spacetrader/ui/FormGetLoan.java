@@ -14,7 +14,7 @@ import java.util.Arrays;
 
 
 public class FormGetLoan extends wfForm {
-    private NumericUpDown numAmount;
+    private final NumericUpDown numAmount;
 
     public FormGetLoan(int max) {
         Label labelQuestion = new Label();

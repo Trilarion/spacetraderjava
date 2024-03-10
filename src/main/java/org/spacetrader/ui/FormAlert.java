@@ -11,11 +11,11 @@ import org.winforms.enums.*;
 public class FormAlert extends wfForm {
     private static final String _80_CHARS = "01234567890123456789012345678901234567890123456789012345678901234567890123456789";
     private static final int SPLASH_INDEX = 4;
-    private Button button1;
-    private Button button2;
-    private ImageList ilImages;
-    private Label labelText;
-    private Timer timerTick;
+    private final Button button1;
+    private final Button button2;
+    private final ImageList ilImages;
+    private final Label labelText;
+    private final Timer timerTick;
 
     private FormAlert() {
 

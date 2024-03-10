@@ -66,10 +66,10 @@ public class SpecialEvent {
     public final static int StatusWildStarted = 1;
     public final static int StatusWildImpatient = 11;
     public final static int StatusWildDone = 12;
-    private SpecialEventType _type;
-    private int _price;
-    private int _occurrentrence;
-    private boolean _messageOnly;
+    private final SpecialEventType _type;
+    private final int _price;
+    private final int _occurrentrence;
+    private final boolean _messageOnly;
 
     public SpecialEvent(SpecialEventType type, int price, int occurrentrence, boolean messageOnly) {
         _type = type;

@@ -7,6 +7,7 @@ import org.spacetrader.model.ship.ShipType;
 import org.spacetrader.ui.Strings;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 // TODo part of model
 // Represents a shipyard orbiting a solar system in the universe.
@@ -42,9 +43,9 @@ public class Shipyard {
     public static final int PENALTY_FIRST_FEE = 25;
     public static final int PENALTY_SECOND_PCT = 90;
     public static final int PENALTY_SECOND_FEE = 75;
-    private ShipyardId _id;
-    private ShipSize _specialtySize;
-    private ShipyardSkill _skill;
+    private final ShipyardId _id;
+    private final ShipSize _specialtySize;
+    private final ShipyardSkill _skill;
     // Internal Variables
     private int modCrew = 0;
     private int modFuel = 0;
@@ -98,9 +99,7 @@ public class Shipyard {
         ArrayList<ShipSize> list = new ArrayList<>(6);
         int begin = Math.max(ShipSize.Tiny.CastToInt(), _specialtySize.CastToInt() - 2);
         int end = Math.min(ShipSize.Gargantuan.CastToInt(), _specialtySize.CastToInt() + 2);
-        for (int index = begin; index <= end; index++) {
-            list.add(ShipSize.values()[index]);
-        }
+        list.addAll(Arrays.asList(ShipSize.values()).subList(begin, end + 1));
         return list;
     }
 

@@ -7,19 +7,19 @@ import org.spacetrader.model.cargo.TradeItemType;
 import org.spacetrader.model.events.SpecialEventType;
 import org.spacetrader.model.ship.ShipSize;
 import org.spacetrader.ui.Strings;
-import java.util.Hashtable;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 
 // TODO part of the model?
 public class StarSystem extends SerializableObject {
+    private final StarSystemId _id;
     private PoliticalSystemType _politicalSystemType;
     private ShipyardId _shipyardId = ShipyardId.NA;
     private ShipSize _size;
     private SpecialEventType _specialEventType = SpecialEventType.NA;
     private SpecialResource _specialResource;
-    private StarSystemId _id;
     private SystemPressure _systemPressure;
     private TechLevel _techLevel;
     private boolean _visited = false;

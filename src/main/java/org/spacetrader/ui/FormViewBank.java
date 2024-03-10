@@ -1,6 +1,9 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.*;
+import org.spacetrader.controller.Commander;
+import org.spacetrader.controller.Constants;
+import org.spacetrader.controller.Functions;
+import org.spacetrader.controller.Game;
 import org.spacetrader.controller.enums.AlertType;
 import org.winforms.Button;
 import org.winforms.Font;
@@ -17,14 +20,14 @@ public class FormViewBank extends wfForm {
     private final Commander commander = game.Commander();
     private final int MaxLoan = commander.getPoliceRecordScore() >= Constants.PoliceRecordScoreClean
             ? Math.min(25000, Math.max(1000, commander.Worth() / 5000 * 500)) : 500;
-    private Button buttonBuyInsurance;
-    private Button buttonPayBack;
-    private Label labelCurrentDebt;
-    private Label labelMaxLoan;
-    private Label labelNoClaim;
-    private Label labelShipValue;
-    private Label labelInsAmt;
-    private Label labelMaxNoClaim;
+    private final Button buttonBuyInsurance;
+    private final Button buttonPayBack;
+    private final Label labelCurrentDebt;
+    private final Label labelMaxLoan;
+    private final Label labelNoClaim;
+    private final Label labelShipValue;
+    private final Label labelInsAmt;
+    private final Label labelMaxNoClaim;
 
     public FormViewBank() {
         Label labelLoan = new Label();

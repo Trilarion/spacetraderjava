@@ -7,7 +7,7 @@ import java.awt.*;
 // TODO documentation of usage
 public class StatusBarPanel implements ISupportInitialize {
     public final StatusBarPanelAutoSize AutoSize;
-    private JStatusBarSection jpanel = new JStatusBarSection(" ");
+    private final JStatusBarSection jpanel = new JStatusBarSection(" ");
 
     public StatusBarPanel() {
         this(StatusBarPanelAutoSize.None);

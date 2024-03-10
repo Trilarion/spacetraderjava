@@ -15,7 +15,7 @@ import java.util.Arrays;
 
 
 public class FormBuyFuel extends wfForm {
-    private NumericUpDown numAmount;
+    private final NumericUpDown numAmount;
 
     public FormBuyFuel() {
         Label labelQuestion = new Label();

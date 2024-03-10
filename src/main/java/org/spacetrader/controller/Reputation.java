@@ -6,8 +6,8 @@ import org.spacetrader.ui.Strings;
 
 // TODO part of the model
 public class Reputation {
-    private ReputationType _type;
-    private int _minScore;
+    private final ReputationType _type;
+    private final int _minScore;
 
     public Reputation(ReputationType type, int minScore) {
         _type = type;

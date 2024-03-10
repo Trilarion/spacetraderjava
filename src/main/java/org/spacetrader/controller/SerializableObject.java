@@ -4,8 +4,9 @@ import org.spacetrader.controller.enums.SpaceTraderEnum;
 import org.spacetrader.model.ship.equipment.Gadget;
 import org.spacetrader.model.ship.equipment.Shield;
 import org.spacetrader.model.ship.equipment.Weapon;
-import java.util.ArrayList;
 import org.spacetrader.util.DWIM;
+
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 // TODO part of io?

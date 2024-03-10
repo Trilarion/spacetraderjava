@@ -14,8 +14,8 @@ import java.awt.*;
 public class FormFind extends wfForm {
     private static String text = "";
     private static boolean boxChecked = false;
-    private CheckBox checkBoxTrack;
-    private TextBox txtSystem;
+    private final CheckBox checkBoxTrack;
+    private final TextBox txtSystem;
 
     public FormFind() {
         Label labelText = new Label();

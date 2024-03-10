@@ -17,13 +17,13 @@ import org.spacetrader.model.ship.equipment.GadgetType;
 import org.spacetrader.model.ship.equipment.ShieldType;
 import org.spacetrader.model.ship.equipment.WeaponType;
 import org.spacetrader.ui.*;
-import java.util.ArrayList;
-import java.util.Hashtable;
 import org.spacetrader.util.Util;
 import org.winforms.enums.DialogResult;
 import org.winforms.wfPane;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Hashtable;
 
 // TODO this should not have a reference to the parent window, it's part of the model, not the controller
 public class Game extends SerializableObject {
@@ -96,7 +96,8 @@ public class Game extends SerializableObject {
     private boolean _encounterOppFleeing = false;
     private boolean _encounterOppHit = false;
 
-    public Game() {}
+    public Game() {
+    }
 
     public Game(String name, Difficulty difficulty, int pilot, int fighter, int trader, int engineer, Main parentWin) {
         Game.setCurrentGame(this);

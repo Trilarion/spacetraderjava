@@ -7,19 +7,19 @@ import org.spacetrader.model.TechLevel;
 
 
 public class TradeItem implements Comparable<TradeItem> {
-    private SpecialResource _resourceLowPrice; // When this resource is available, this trade item is cheap
-    private SpecialResource _resourceHighPrice;// When this resource is available, this trade item is expensive
-    private SystemPressure _pressurePriceHike; // Price increases considerably when this event occurrents
-    private TechLevel _techProduction;         // Tech level needed for production
-    private TechLevel _techUsage;              // Tech level needed to use
-    private TechLevel _techTopProduction;      // Tech level which produces this item the most
-    private TradeItemType _type;
-    private int _pictureeLowTech;   // Medium price at lowest tech level
-    private int _priceInc;      // Price increase per tech level
-    private int _priceVariance; // Max percentage above or below calculated price
-    private int _minTradePrice; // Minimum price to buy/sell in orbit
-    private int _maxTradePrice; // Minimum price to buy/sell in orbit
-    private int _roundOff;      // Roundoff price for trade in orbit
+    private final SpecialResource _resourceLowPrice; // When this resource is available, this trade item is cheap
+    private final SpecialResource _resourceHighPrice;// When this resource is available, this trade item is expensive
+    private final SystemPressure _pressurePriceHike; // Price increases considerably when this event occurrents
+    private final TechLevel _techProduction;         // Tech level needed for production
+    private final TechLevel _techUsage;              // Tech level needed to use
+    private final TechLevel _techTopProduction;      // Tech level which produces this item the most
+    private final TradeItemType _type;
+    private final int _pictureeLowTech;   // Medium price at lowest tech level
+    private final int _priceInc;      // Price increase per tech level
+    private final int _priceVariance; // Max percentage above or below calculated price
+    private final int _minTradePrice; // Minimum price to buy/sell in orbit
+    private final int _maxTradePrice; // Minimum price to buy/sell in orbit
+    private final int _roundOff;      // Roundoff price for trade in orbit
 
     public TradeItem(TradeItemType type, TechLevel techProduction, TechLevel techUsage, TechLevel techTopProduction, int pictureeLowTech,
                      int priceInc, int priceVariance, SystemPressure pressurePriceHike, SpecialResource resourceLowPrice,

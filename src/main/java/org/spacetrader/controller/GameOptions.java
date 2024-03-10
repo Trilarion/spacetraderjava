@@ -1,7 +1,8 @@
 package org.spacetrader.controller;
 
-import java.util.Hashtable;
 import org.winforms.wfPane;
+
+import java.util.Hashtable;
 
 
 public class GameOptions extends SerializableObject {

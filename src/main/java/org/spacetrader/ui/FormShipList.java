@@ -16,19 +16,19 @@ public class FormShipList extends wfForm {
     private final Game game = Game.getCurrentGame();
     private final Commander commander = game.Commander();
     private final Ship ship = commander.getShip();
-    private PictureBox pictureShip;
-    private Label labelName;
-    private Label labelSize;
-    private Label labelBays;
-    private Label labelRange;
-    private Label labelHull;
-    private Label labelWeapon;
-    private Label labelShield;
-    private Label labelGadget;
-    private Label labelCrew;
-    private Label[] labelPrice;
-    private Button[] buttonBuy;
-    private int[] prices = new int[Constants.ShipSpecs.length];
+    private final PictureBox pictureShip;
+    private final Label labelName;
+    private final Label labelSize;
+    private final Label labelBays;
+    private final Label labelRange;
+    private final Label labelHull;
+    private final Label labelWeapon;
+    private final Label labelShield;
+    private final Label labelGadget;
+    private final Label labelCrew;
+    private final Label[] labelPrice;
+    private final Button[] buttonBuy;
+    private final int[] prices = new int[Constants.ShipSpecs.length];
 
     public FormShipList() {
         Button buttonClose = new Button();

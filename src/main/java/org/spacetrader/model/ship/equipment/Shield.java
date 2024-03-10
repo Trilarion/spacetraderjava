@@ -1,15 +1,16 @@
 package org.spacetrader.model.ship.equipment;
 
-import org.spacetrader.ui.Strings;
 import org.spacetrader.model.TechLevel;
-import java.util.Hashtable;
+import org.spacetrader.ui.Strings;
 import org.spacetrader.util.Log;
+
+import java.util.Hashtable;
 
 
 public class Shield extends Equipment {
-    private ShieldType _type;
-    private int _charge;
-    private int _power;
+    private final ShieldType _type;
+    private final int _charge;
+    private final int _power;
     private int Charge;
 
     public Shield(Hashtable hash) {

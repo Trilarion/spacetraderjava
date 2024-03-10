@@ -11,14 +11,14 @@ import java.util.Arrays;
 
 
 public class FormNewCommander extends wfForm {
-    private Button buttonOk;
-    private ComboBox selDifficulty;
-    private Label labelPoints;
-    private NumericUpDown numFighter;
-    private NumericUpDown numTrader;
-    private NumericUpDown numEngineer;
-    private NumericUpDown numPilot;
-    private TextBox txtName;
+    private final Button buttonOk;
+    private final ComboBox selDifficulty;
+    private final Label labelPoints;
+    private final NumericUpDown numFighter;
+    private final NumericUpDown numTrader;
+    private final NumericUpDown numEngineer;
+    private final NumericUpDown numPilot;
+    private final TextBox txtName;
 
     public FormNewCommander() {
         Label labelName = new Label();

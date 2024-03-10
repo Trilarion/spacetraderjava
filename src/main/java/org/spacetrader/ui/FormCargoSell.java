@@ -1,6 +1,9 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.*;
+import org.spacetrader.controller.Commander;
+import org.spacetrader.controller.Constants;
+import org.spacetrader.controller.Functions;
+import org.spacetrader.controller.Game;
 import org.spacetrader.model.cargo.CargoSellOp;
 import org.winforms.Button;
 import org.winforms.Label;
@@ -14,7 +17,7 @@ import java.awt.*;
 
 
 public class FormCargoSell extends wfForm {
-    private NumericUpDown numAmount;
+    private final NumericUpDown numAmount;
 
     public FormCargoSell(int item, int maxAmount, CargoSellOp op, int price) {
         Label labelQuestion = new Label();

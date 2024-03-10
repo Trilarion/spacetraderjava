@@ -5,8 +5,8 @@ import org.spacetrader.ui.Strings;
 
 // TODO part of the model
 public class PoliceRecord {
-    private PoliceRecordType _type;
-    private int _minScore;
+    private final PoliceRecordType _type;
+    private final int _minScore;
 
     public PoliceRecord(PoliceRecordType type, int minScore) {
         _type = type;

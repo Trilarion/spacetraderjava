@@ -19,9 +19,9 @@ import java.util.Arrays;
 public class FormJettison extends wfForm {
     private final Game game = Game.getCurrentGame();
     private final Commander commander = game.Commander();
-    private Label labelBays;
-    private Container components = null;
-    private Button[] buttonJettisonQty;
+    private final Label labelBays;
+    private final Container components = null;
+    private final Button[] buttonJettisonQty;
 
     public FormJettison() {
         Button buttonJettisonAll9 = new Button();

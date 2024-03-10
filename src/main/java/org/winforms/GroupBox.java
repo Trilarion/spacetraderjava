@@ -8,8 +8,8 @@ import javax.swing.border.TitledBorder;
 
 public class GroupBox extends wfControl {
     public final wfPanel Controls;
+    private final TitledBorder border;
     public AnchorStyles Anchor;
-    private TitledBorder border;
 
     public GroupBox() {
         super(new wfPanel(null));

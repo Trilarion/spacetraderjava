@@ -2,8 +2,9 @@ package org.spacetrader.controller;
 
 import org.spacetrader.model.ship.ShipSize;
 import org.spacetrader.model.ship.ShipType;
-import java.util.Hashtable;
 import org.winforms.wfImage;
+
+import java.util.Hashtable;
 
 // TODO part of the model
 public class ShipTemplate extends SerializableObject implements Comparable<ShipTemplate> {

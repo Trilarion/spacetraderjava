@@ -3,10 +3,11 @@ package org.spacetrader.model.ship.equipment;
 import org.spacetrader.controller.Commander;
 import org.spacetrader.controller.Game;
 import org.spacetrader.controller.SerializableObject;
-import org.spacetrader.ui.Strings;
 import org.spacetrader.model.TechLevel;
-import java.util.Hashtable;
+import org.spacetrader.ui.Strings;
 import org.winforms.wfImage;
+
+import java.util.Hashtable;
 
 
 abstract public class Equipment extends SerializableObject implements Cloneable {

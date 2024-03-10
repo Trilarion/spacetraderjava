@@ -15,8 +15,8 @@ import java.awt.*;
 
 public class FormPlunder extends wfForm {
     private final Game game = Game.getCurrentGame();
-    private Button[] buttonPlunderQty;
-    private Label labelBays;
+    private final Button[] buttonPlunderQty;
+    private final Label labelBays;
 
     public FormPlunder() {
         Button buttonPlunderAll9 = new Button();

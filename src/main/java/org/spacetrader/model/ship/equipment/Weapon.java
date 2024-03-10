@@ -1,17 +1,18 @@
 package org.spacetrader.model.ship.equipment;
 
 import org.spacetrader.model.TechLevel;
-import java.util.Hashtable;
 import org.spacetrader.util.Log;
+
+import java.util.Hashtable;
 
 
 public class Weapon extends Equipment {
     private static final String[] ss = {
             "_type", "_power", "_disabling"
     };
-    private WeaponType _type;
-    private boolean _disabling;
-    private int _power;
+    private final WeaponType _type;
+    private final boolean _disabling;
+    private final int _power;
 
     public Weapon(Hashtable ht) {
         super(ht);

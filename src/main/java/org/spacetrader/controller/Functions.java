@@ -20,7 +20,7 @@ public class Functions {
     private final static long DEFSEEDX = 521288629;
     private final static long DEFSEEDY = 362436069;
     private final static int MAX_WORD = 65535;
-    private static Random rand = new Random();
+    private static final Random rand = new Random();
     private static long SeedX = DEFSEEDX;
     private static long SeedY = DEFSEEDY;
 

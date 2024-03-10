@@ -9,9 +9,10 @@ import org.spacetrader.model.ship.equipment.ShieldType;
 import org.spacetrader.model.ship.equipment.WeaponType;
 import org.spacetrader.ui.FormAlert;
 import org.spacetrader.ui.Strings;
-import java.util.Hashtable;
 import org.winforms.enums.DialogResult;
 import org.winforms.wfPane;
+
+import java.util.Hashtable;
 
 // TODO part of model
 public class Commander extends CrewMember {

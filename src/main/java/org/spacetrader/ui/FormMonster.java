@@ -2,7 +2,6 @@ package org.spacetrader.ui;
 
 import org.spacetrader.controller.*;
 import org.spacetrader.controller.enums.ShipyardId;
-import java.util.ArrayList;
 import org.spacetrader.util.Util;
 import org.winforms.Button;
 import org.winforms.Font;
@@ -12,24 +11,25 @@ import org.winforms.*;
 import org.winforms.enums.*;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 
 public class FormMonster extends wfForm {
     private final Game game = Game.getCurrentGame();
     private final Commander commander = game.Commander();
     private final int SplitSystems = 31;
-    private Label labelMercIds;
-    private Label labelMercNames;
-    private Label labelMercSkillsPilot;
-    private Label labelMercSkillsFighter;
-    private Label labelMercSkillsTrader;
-    private Label labelMercSkillsEngineer;
-    private Label labelQuests;
-    private Label labelShipyards;
-    private LinkLabel labelMercSystems;
-    private LinkLabel labelMercSystems2;
-    private LinkLabel labelQuestSystems;
-    private LinkLabel labelShipyardSystems;
+    private final Label labelMercIds;
+    private final Label labelMercNames;
+    private final Label labelMercSkillsPilot;
+    private final Label labelMercSkillsFighter;
+    private final Label labelMercSkillsTrader;
+    private final Label labelMercSkillsEngineer;
+    private final Label labelQuests;
+    private final Label labelShipyards;
+    private final LinkLabel labelMercSystems;
+    private final LinkLabel labelMercSystems2;
+    private final LinkLabel labelQuestSystems;
+    private final LinkLabel labelShipyardSystems;
     private Integer[] mercIds;
     private Integer[] questSystemIds;
     private Integer[] shipyardSystemIds;

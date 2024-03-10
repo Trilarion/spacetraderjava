@@ -6,8 +6,9 @@ import org.spacetrader.model.ship.ShipSize;
 import org.spacetrader.model.ship.ShipType;
 import org.spacetrader.model.ship.equipment.EquipmentType;
 import org.spacetrader.ui.Strings;
-import java.util.Hashtable;
 import org.winforms.wfImage;
+
+import java.util.Hashtable;
 
 // TODO part of the model
 public class ShipSpec extends SerializableObject {

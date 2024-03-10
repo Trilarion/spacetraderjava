@@ -1,9 +1,11 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.*;
+import org.spacetrader.controller.Constants;
+import org.spacetrader.controller.Functions;
+import org.spacetrader.controller.Game;
+import org.spacetrader.controller.SpecialEvent;
 import org.spacetrader.model.CrewMemberId;
 import org.spacetrader.model.events.SpecialEventType;
-import java.util.ArrayList;
 import org.spacetrader.util.Util;
 import org.winforms.Button;
 import org.winforms.*;
@@ -12,12 +14,13 @@ import org.winforms.enums.FormBorderStyle;
 import org.winforms.enums.FormStartPosition;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
 public class FormViewQuests extends wfForm {
     private final Game game = Game.getCurrentGame();
-    private LinkLabel labelQuests;
+    private final LinkLabel labelQuests;
 
     public FormViewQuests() {
         Button buttonClose = new Button();

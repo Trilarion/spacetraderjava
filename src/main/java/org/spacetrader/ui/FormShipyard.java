@@ -4,11 +4,7 @@ import org.spacetrader.controller.*;
 import org.spacetrader.controller.enums.AlertType;
 import org.spacetrader.model.ship.ShipSize;
 import org.spacetrader.model.ship.ShipType;
-import java.util.ArrayList;
 import org.spacetrader.util.Directory;
-
-import java.util.Collections;
-import java.util.Hashtable;
 import org.spacetrader.util.Path;
 import org.winforms.Button;
 import org.winforms.Container;
@@ -18,7 +14,10 @@ import org.winforms.*;
 import org.winforms.enums.*;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Hashtable;
 
 
 public class FormShipyard extends wfForm {
@@ -29,35 +28,35 @@ public class FormShipyard extends wfForm {
             ShipType.Flea, ShipType.Gnat, ShipType.Firefly, ShipType.Mosquito, ShipType.Bumblebee, ShipType.Beetle,
             ShipType.Hornet, ShipType.Grasshopper, ShipType.Termite, ShipType.Wasp, ShipType.Custom
     };
+    private final Button buttonConstruct;
+    private final Button buttonSave;
+    private final ComboBox selSize;
+    private final ComboBox selTemplate;
+    private final Label labelDesignFee;
+    private final Label labelShipCost;
+    private final Label labelTotalCost;
+    private final Label labelImage;
+    private final Label labelPctLabel;
+    private final Label labelPct;
+    private final Label labelPenalty;
+    private final Label labelSkillLabel;
+    private final Label labelTradeIn;
+    private final Label labelUnitsUsed;
+    private final Label labelDisabledPct;
+    private final Label labelDisabledName;
+    private final NumericUpDown numHullStrength;
+    private final NumericUpDown numCargoBays;
+    private final NumericUpDown numCrewQuarters;
+    private final NumericUpDown numFuelTanks;
+    private final NumericUpDown numShieldSlots;
+    private final NumericUpDown numGadgetSlots;
+    private final NumericUpDown numWeaponSlots;
+    private final OpenFileDialog dlgOpen;
+    private final PictureBox pictureShip;
+    private final SaveFileDialog dlgSave;
+    private final TextBox txtName;
     private ArrayList<ShipSize> sizes = null;
-    private Button buttonConstruct;
-    private Button buttonSave;
-    private ComboBox selSize;
-    private ComboBox selTemplate;
     private wfImage[] customImages = new wfImage[Constants.ImagesPerShip];
-    private Label labelDesignFee;
-    private Label labelShipCost;
-    private Label labelTotalCost;
-    private Label labelImage;
-    private Label labelPctLabel;
-    private Label labelPct;
-    private Label labelPenalty;
-    private Label labelSkillLabel;
-    private Label labelTradeIn;
-    private Label labelUnitsUsed;
-    private Label labelDisabledPct;
-    private Label labelDisabledName;
-    private NumericUpDown numHullStrength;
-    private NumericUpDown numCargoBays;
-    private NumericUpDown numCrewQuarters;
-    private NumericUpDown numFuelTanks;
-    private NumericUpDown numShieldSlots;
-    private NumericUpDown numGadgetSlots;
-    private NumericUpDown numWeaponSlots;
-    private OpenFileDialog dlgOpen;
-    private PictureBox pictureShip;
-    private SaveFileDialog dlgSave;
-    private TextBox txtName;
     private boolean loading = false;
     private int imgIndex = 0;
 
