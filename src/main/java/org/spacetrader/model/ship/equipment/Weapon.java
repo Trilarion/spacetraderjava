@@ -1,7 +1,7 @@
 package org.spacetrader.model.ship.equipment;
 
 import org.spacetrader.model.TechLevel;
-import org.spacetrader.util.Hashtable;
+import java.util.Hashtable;
 import org.spacetrader.util.Log;
 
 
@@ -40,11 +40,11 @@ public class Weapon extends Equipment {
 
     @Override
     public Hashtable Serialize() {
-        Hashtable ht = super.Serialize();
-        ht.add(ss[0], _type.id);
-        ht.add(ss[1], _power);
-        ht.add(ss[2], _disabling);
-        return ht;
+        Hashtable hash = super.Serialize();
+        hash.put(ss[0], _type.id);
+        hash.put(ss[1], _power);
+        hash.put(ss[2], _disabling);
+        return hash;
     }
 
     @Override

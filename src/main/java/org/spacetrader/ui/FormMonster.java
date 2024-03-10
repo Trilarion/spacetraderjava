@@ -2,7 +2,7 @@ package org.spacetrader.ui;
 
 import org.spacetrader.controller.*;
 import org.spacetrader.controller.enums.ShipyardId;
-import org.spacetrader.util.ArrayList;
+import java.util.ArrayList;
 import org.spacetrader.util.Util;
 import org.winforms.Button;
 import org.winforms.Font;
@@ -512,7 +512,7 @@ public class FormMonster extends wfForm {
         // Populate the mercenary ids array.
         ArrayList<Integer> ids = new ArrayList<>();
         for (CrewMember merc : game.Mercenaries()) {
-            if (!Util.ArrayContains(Constants.SpecialCrewMemberIds, merc.Id())) {
+            if (!Util.arrayContains(Constants.SpecialCrewMemberIds, merc.Id())) {
                 ids.add(merc.Id().CastToInt());
             }
         }

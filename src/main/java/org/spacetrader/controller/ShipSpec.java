@@ -6,7 +6,7 @@ import org.spacetrader.model.ship.ShipSize;
 import org.spacetrader.model.ship.ShipType;
 import org.spacetrader.model.ship.equipment.EquipmentType;
 import org.spacetrader.ui.Strings;
-import org.spacetrader.util.Hashtable;
+import java.util.Hashtable;
 import org.winforms.wfImage;
 
 // TODO part of the model
@@ -98,30 +98,30 @@ public class ShipSpec extends SerializableObject {
         hash.put("_cargoBays", _cargoBays);
         hash.put("_weaponSlots", _weaponSlots);
         hash.put("_shieldSlots", _shieldSlots);
-        hash.add("_gadgetSlots", _gadgetSlots);
-        hash.add("_crewQuarters", _crewQuarters);
-        hash.add("_fuelTanks", _fuelTanks);
-        hash.add("_fuelCost", _fuelCost);
-        hash.add("_hullStrength", _hullStrength);
-        hash.add("_repairCost", _repairCost);
-        hash.add("_price", _price);
-        hash.add("_occurrentrence", _occurrentrence);
-        hash.add("_police", _police.CastToInt());
-        hash.add("_pirates", _pirates.CastToInt());
-        hash.add("_traders", _traders.CastToInt());
-        hash.add("_minTech", _minTech.ordinal());
-        hash.add("_hullUpgraded", _hullUpgraded);
+        hash.put("_gadgetSlots", _gadgetSlots);
+        hash.put("_crewQuarters", _crewQuarters);
+        hash.put("_fuelTanks", _fuelTanks);
+        hash.put("_fuelCost", _fuelCost);
+        hash.put("_hullStrength", _hullStrength);
+        hash.put("_repairCost", _repairCost);
+        hash.put("_price", _price);
+        hash.put("_occurrentrence", _occurrentrence);
+        hash.put("_police", _police.CastToInt());
+        hash.put("_pirates", _pirates.CastToInt());
+        hash.put("_traders", _traders.CastToInt());
+        hash.put("_minTech", _minTech.ordinal());
+        hash.put("_hullUpgraded", _hullUpgraded);
         // Only save image index if it's not the default.
         if (_imageIndex != Constants.ShipImgUseDefault) {
-            hash.add("_imageIndex", _imageIndex);
+            hash.put("_imageIndex", _imageIndex);
         }
         // Save the name if the ship is a custom design.
         if (Type() == ShipType.Custom) {
-            hash.add("_name", Name());
+            hash.put("_name", Name());
         }
         // Save the images if the ship uses the custom images.
         if (ImageIndex() == ShipType.Custom.CastToInt()) {
-            hash.add("_images", Game.getCurrentGame().getParentWindow().CustomShipImages());
+            hash.put("_images", Game.getCurrentGame().getParentWindow().CustomShipImages());
         }
         return hash;
     }

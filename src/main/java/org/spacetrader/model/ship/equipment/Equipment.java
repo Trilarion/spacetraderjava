@@ -5,7 +5,7 @@ import org.spacetrader.controller.Game;
 import org.spacetrader.controller.SerializableObject;
 import org.spacetrader.ui.Strings;
 import org.spacetrader.model.TechLevel;
-import org.spacetrader.util.Hashtable;
+import java.util.Hashtable;
 import org.winforms.wfImage;
 
 

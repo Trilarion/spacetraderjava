@@ -8,8 +8,10 @@ import org.spacetrader.model.Difficulty;
 import org.spacetrader.model.ship.ShipType;
 import org.spacetrader.model.ship.equipment.*;
 import org.spacetrader.ui.Strings;
-import org.spacetrader.util.ArrayList;
-import org.spacetrader.util.Hashtable;
+import java.util.ArrayList;
+
+import java.util.Collections;
+import java.util.Hashtable;
 import org.spacetrader.util.Util;
 
 // part of the model
@@ -173,7 +175,7 @@ public class Ship extends ShipSpec {
         if (Trader() != skill) {
             Game.getCurrentGame().RecalculateBuyPrices(Game.getCurrentGame().Commander().CurrentSystem());
         }
-        if (merc != null && !Util.ArrayContains(Constants.SpecialCrewMemberIds, (merc.Id()))) {
+        if (merc != null && !Util.arrayContains(Constants.SpecialCrewMemberIds, (merc.Id()))) {
             StarSystem[] universe = Game.getCurrentGame().Universe();
             // The leaving Mercenary travels to a nearby random system.
             merc.setCurrentSystemId(StarSystemId.NA);
@@ -231,7 +233,7 @@ public class Ship extends ShipSpec {
         }
         for (int i = 1; i < numCrew; i++) {
             // Keep getting a new random mercenary until we have a non-special one.
-            while (Crew()[i] == null || Util.ArrayContains(Constants.SpecialCrewMemberIds, Crew()[i].Id())) {
+            while (Crew()[i] == null || Util.arrayContains(Constants.SpecialCrewMemberIds, Crew()[i].Id())) {
                 Crew()[i] = mercs[Functions.GetRandom(mercs.length)];
             }
         }
@@ -640,15 +642,15 @@ public class Ship extends ShipSpec {
         for (int i = 0; i < crewIds.length; i++) {
             crewIds[i] = (_crew[i] == null ? CrewMemberId.NA : _crew[i].Id()).CastToInt();
         }
-        hash.add("_fuel", _fuel);
-        hash.add("_hull", _hull);
-        hash.add("_tribbles", _tribbles);
-        hash.add("_cargo", _cargo);
-        hash.add("_weapons", ArrayToArrayList(_weapons));
-        hash.add("_shields", ArrayToArrayList(_shields));
-        hash.add("_gadgets", ArrayToArrayList(_gadgets));
-        hash.add("_crewIds", crewIds);
-        hash.add("_pod", _pod);
+        hash.put("_fuel", _fuel);
+        hash.put("_hull", _hull);
+        hash.put("_tribbles", _tribbles);
+        hash.put("_cargo", _cargo);
+        hash.put("_weapons", ArrayToArrayList(_weapons));
+        hash.put("_shields", ArrayToArrayList(_shields));
+        hash.put("_gadgets", ArrayToArrayList(_gadgets));
+        hash.put("_crewIds", crewIds);
+        hash.put("_pod", _pod);
         return hash;
     }
 
@@ -952,7 +954,7 @@ public class Ship extends ShipSpec {
     public CrewMember[] SpecialCrew() {
         ArrayList<CrewMember> list = new ArrayList<>();
         for (int i = 0; i < Crew().length; i++) {
-            if (Crew()[i] != null && Util.ArrayContains(Constants.SpecialCrewMemberIds, Crew()[i].Id())) {
+            if (Crew()[i] != null && Util.arrayContains(Constants.SpecialCrewMemberIds, Crew()[i].Id())) {
                 list.add(Crew()[i]);
             }
         }
@@ -965,15 +967,15 @@ public class Ship extends ShipSpec {
 
     // Sort all cargo based on value and put some of it in hidden bays, if they are present.
     public ArrayList<Integer> StealableCargo() {
-        // Put all of the cargo items in a list and sort it. Reverse it so the most expensive items are first.
+        // Put all the cargo items in a list and sort it. Reverse it so the most expensive items are first.
         ArrayList<Integer> tradeItems = new ArrayList<>();
         for (int tradeItem = 0; tradeItem < Cargo().length; tradeItem++) {
             for (int count = 0; count < Cargo()[tradeItem]; count++) {
                 tradeItems.add(tradeItem);
             }
         }
-        tradeItems.Sort();
-        tradeItems.Reverse();
+        Collections.sort(tradeItems);
+        Collections.reverse(tradeItems);
         int hidden = HiddenCargoBays();
         if (PrincessOnBoard()) {
             hidden--;
@@ -982,7 +984,7 @@ public class Ship extends ShipSpec {
             hidden--;
         }
         if (hidden > 0) {
-            tradeItems.RemoveRange(0, hidden);
+            tradeItems.subList(0, hidden).clear();
         }
         return tradeItems;
     }

@@ -12,7 +12,7 @@ import org.spacetrader.model.ship.equipment.Shield;
 import org.spacetrader.model.ship.equipment.Weapon;
 import org.spacetrader.ui.*;
 import org.spacetrader.util.Directory;
-import org.spacetrader.util.Hashtable;
+import java.util.Hashtable;
 import org.spacetrader.util.RegistryKey;
 import org.spacetrader.util.Util;
 import org.winforms.Button;
@@ -2981,7 +2981,7 @@ public class Main extends wfWindow {
                         break;
                     case Posse:
                         if (num1 > 0 && num1 < ship.Crew().length && num2 > 0 && num2 < game.Mercenaries().length
-                                && !Util.ArrayContains(Constants.SpecialCrewMemberIds, (CrewMemberId.FromInt(num2)))) {
+                                && !Util.arrayContains(Constants.SpecialCrewMemberIds, (CrewMemberId.FromInt(num2)))) {
                             int skill = ship.Trader();
                             ship.Crew()[num1] = game.Mercenaries()[num2];
                             if (ship.Trader() != skill) {
@@ -3233,7 +3233,6 @@ public class Main extends wfWindow {
         if ((game == null || commander.getDays() == SaveGameDays
                 || FormAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes)
                 && form.ShowDialog(this) == DialogResult.OK) {
-            Game.setCurrentGame(new Game());  // TODO quick fix to get a current game, hopefully that helps, but
             game = new Game(
                     form.CommanderName(), form.Difficulty(), form.Pilot(),
                     form.Fighter(), form.Trader(), form.Engineer(), this);
@@ -3353,7 +3352,7 @@ public class Main extends wfWindow {
             }
             int index = game.SelectedSystemId().CastToInt();
             if (game.TargetWormhole()) {
-                int destination = wormholes[(Util.BruteSeek(wormholes, index) + 1) % wormholes.length];
+                int destination = wormholes[(Util.bruteSeek(wormholes, index) + 1) % wormholes.length];
                 StarSystem destinationSystem = universe[destination];
                 e.Graphics.DrawLine(
                         DEFAULT_PEN, targetSys.X() + OFF_X_WORM + OFF_X,

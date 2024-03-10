@@ -9,7 +9,7 @@ import org.spacetrader.model.ship.equipment.ShieldType;
 import org.spacetrader.model.ship.equipment.WeaponType;
 import org.spacetrader.ui.FormAlert;
 import org.spacetrader.ui.Strings;
-import org.spacetrader.util.Hashtable;
+import java.util.Hashtable;
 import org.winforms.enums.DialogResult;
 import org.winforms.wfPane;
 
@@ -68,19 +68,19 @@ public class Commander extends CrewMember {
     @Override
     public Hashtable Serialize() {
         Hashtable hash = super.Serialize();
-        hash.add("_cash", cash);
-        hash.add("_debt", debt);
-        hash.add("_killsPirate", killsPirate);
-        hash.add("_killsPolice", killsPolice);
-        hash.add("_killsTrader", killsTrader);
-        hash.add("_policeRecordScore", policeRecordScore);
-        hash.add("_reputationScore", reputationScore);
-        hash.add("_days", days);
-        hash.add("_insurance", insurance);
-        hash.add("_noclaim", noclaim);
-        hash.add("_ship", ship.Serialize());
-        hash.add("_priceCargo", priceCargo);
-        hash.add("_name", Name());
+        hash.put("_cash", cash);
+        hash.put("_debt", debt);
+        hash.put("_killsPirate", killsPirate);
+        hash.put("_killsPolice", killsPolice);
+        hash.put("_killsTrader", killsTrader);
+        hash.put("_policeRecordScore", policeRecordScore);
+        hash.put("_reputationScore", reputationScore);
+        hash.put("_days", days);
+        hash.put("_insurance", insurance);
+        hash.put("_noclaim", noclaim);
+        hash.put("_ship", ship.Serialize());
+        hash.put("_priceCargo", priceCargo);
+        hash.put("_name", Name());
         return hash;
     }
 

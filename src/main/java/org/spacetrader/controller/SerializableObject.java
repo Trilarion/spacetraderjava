@@ -4,9 +4,9 @@ import org.spacetrader.controller.enums.SpaceTraderEnum;
 import org.spacetrader.model.ship.equipment.Gadget;
 import org.spacetrader.model.ship.equipment.Shield;
 import org.spacetrader.model.ship.equipment.Weapon;
-import org.spacetrader.util.ArrayList;
+import java.util.ArrayList;
 import org.spacetrader.util.DWIM;
-import org.spacetrader.util.Hashtable;
+import java.util.Hashtable;
 
 // TODO part of io?
 abstract public class SerializableObject {

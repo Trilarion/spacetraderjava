@@ -3,7 +3,7 @@ package org.spacetrader.ui;
 import org.spacetrader.controller.*;
 import org.spacetrader.model.CrewMemberId;
 import org.spacetrader.model.events.SpecialEventType;
-import org.spacetrader.util.ArrayList;
+import java.util.ArrayList;
 import org.spacetrader.util.Util;
 import org.winforms.Button;
 import org.winforms.*;
@@ -192,7 +192,7 @@ public class FormViewQuests extends wfForm {
         if (quests.length == 0) {
             labelQuests.setText(Strings.QuestNone);
         } else {
-            labelQuests.setText(Util.StringsJoin(Strings.newline + Strings.newline, quests));
+            labelQuests.setText(Util.stringsJoin(Strings.newline + Strings.newline, quests));
             for (int i = 0; i < Strings.SystemNames.length; i++) {
                 String systemName = Strings.SystemNames[i];
                 int start = 0;

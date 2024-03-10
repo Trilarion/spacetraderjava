@@ -17,8 +17,8 @@ import org.spacetrader.model.ship.equipment.GadgetType;
 import org.spacetrader.model.ship.equipment.ShieldType;
 import org.spacetrader.model.ship.equipment.WeaponType;
 import org.spacetrader.ui.*;
-import org.spacetrader.util.ArrayList;
-import org.spacetrader.util.Hashtable;
+import java.util.ArrayList;
+import java.util.Hashtable;
 import org.spacetrader.util.Util;
 import org.winforms.enums.DialogResult;
 import org.winforms.wfPane;
@@ -99,7 +99,7 @@ public class Game extends SerializableObject {
     public Game() {}
 
     public Game(String name, Difficulty difficulty, int pilot, int fighter, int trader, int engineer, Main parentWin) {
-        game = Game.getCurrentGame();
+        Game.setCurrentGame(this);
         _parentWin = parentWin;
         _difficulty = difficulty;
         // Keep Generating a new universe until PlaceSpecialEvents and PlaceShipyards return true, indicating all special events and shipyards were placed.
@@ -165,7 +165,7 @@ public class Game extends SerializableObject {
                     _universe[i].Y(_universe[j].Y());
                     _universe[j].X(x);
                     _universe[j].Y(y);
-                    int w = Util.BruteSeek(_wormholes, i);
+                    int w = Util.bruteSeek(_wormholes, i);
                     if (w >= 0) {
                         _wormholes[w] = j;
                     }
@@ -246,7 +246,7 @@ public class Game extends SerializableObject {
         _arrivedViaWormhole = GetValueFromHash(hash, "_arrivedViaWormhole", _arrivedViaWormhole);
         _paidForNewspaper = GetValueFromHash(hash, "_paidForNewspaper", _paidForNewspaper);
         _litterWarning = GetValueFromHash(hash, "_litterWarning", _litterWarning);
-        _newsEvents = new ArrayList<>(Arrays.asList(GetValueFromHash(hash, "_newsEvents", _newsEvents.ToArray(new Integer[0]))));
+        _newsEvents = new ArrayList<>(Arrays.asList(GetValueFromHash(hash, "_newsEvents", _newsEvents.toArray(new Integer[0]))));
         _difficulty = Difficulty.FromInt(GetValueFromHash(hash, "_difficulty", _difficulty, Integer.class));
         _cheatEnabled = GetValueFromHash(hash, "_cheatEnabled", _cheatEnabled);
         _autoSave = GetValueFromHash(hash, "_autoSave", _autoSave);
@@ -277,7 +277,7 @@ public class Game extends SerializableObject {
         _canSuperWarp = GetValueFromHash(hash, "_canSuperWarp", _canSuperWarp);
         _chanceOfVeryRareEncounter = GetValueFromHash(hash, "_chanceOfVeryRareEncounter", _chanceOfVeryRareEncounter);
         _veryRareEncounters = new ArrayList(
-                Arrays.asList(GetValueFromHash(hash, "_veryRareEncounters", _veryRareEncounters.ToArray(new Integer[0]))));
+                Arrays.asList(GetValueFromHash(hash, "_veryRareEncounters", _veryRareEncounters.toArray(new Integer[0]))));
         _options = new GameOptions(GetValueFromHash(hash, "_options", _options.Serialize(), Hashtable.class));
     }
 
@@ -291,58 +291,58 @@ public class Game extends SerializableObject {
 
     @Override
     public Hashtable Serialize() {
-        Hashtable ht = super.Serialize();
-        ht.add("_version", "2.00");
-        ht.add("_universe", ArrayToArrayList(_universe));
-        ht.add("_commander", commander.Serialize());
-        ht.add("_wormholes", _wormholes);
-        ht.add("_mercenaries", ArrayToArrayList(_mercenaries));
-        ht.add("_dragonfly", _dragonfly.Serialize());
-        ht.add("_scarab", _scarab.Serialize());
-        ht.add("_scorpion", _scorpion.Serialize());
-        ht.add("_spaceMonster", _spaceMonster.Serialize());
-        ht.add("_opponent", _opponent.Serialize());
-        ht.add("_chanceOfTradeInOrbit", _chanceOfTradeInOrbit);
-        ht.add("_clicks", _clicks);
-        ht.add("_raided", _raided);
-        ht.add("_inspected", _inspected);
-        ht.add("_tribbleMessage", _tribbleMessage);
-        ht.add("_arrivedViaWormhole", _arrivedViaWormhole);
-        ht.add("_paidForNewspaper", _paidForNewspaper);
-        ht.add("_litterWarning", _litterWarning);
-        ht.add("_newsEvents", _newsEvents);
-        ht.add("_difficulty", _difficulty.CastToInt());
-        ht.add("_cheatEnabled", _cheatEnabled);
-        ht.add("_autoSave", _autoSave);
-        ht.add("_easyEncounters", _easyEncounters);
-        ht.add("_endStatus", _endStatus.CastToInt());
-        ht.add("_encounterType", _encounterType.CastToInt());
-        ht.add("_selectedSystemId", _selectedSystemId.CastToInt());
-        ht.add("_warpSystemId", _warpSystemId.CastToInt());
-        ht.add("_trackedSystemId", _trackedSystemId.CastToInt());
-        ht.add("_targetWormhole", _targetWormhole);
-        ht.add("_priceCargoBuy", _priceCargoBuy);
-        ht.add("_priceCargoSell", _priceCargoSell);
-        ht.add("_questStatusArtifact", _questStatusArtifact);
-        ht.add("_questStatusDragonfly", _questStatusDragonfly);
-        ht.add("_questStatusExperiment", _questStatusExperiment);
-        ht.add("_questStatusGemulon", _questStatusGemulon);
-        ht.add("_questStatusJapori", _questStatusJapori);
-        ht.add("_questStatusJarek", _questStatusJarek);
-        ht.add("_questStatusMoon", _questStatusMoon);
-        ht.add("_questStatusPrincess", _questStatusPrincess);
-        ht.add("_questStatusReactor", _questStatusReactor);
-        ht.add("_questStatusScarab", _questStatusScarab);
-        ht.add("_questStatusSculpture", _questStatusSculpture);
-        ht.add("_questStatusSpaceMonster", _questStatusSpaceMonster);
-        ht.add("_questStatusWild", _questStatusWild);
-        ht.add("_fabricRipProbability", _fabricRipProbability);
-        ht.add("_justLootedMarie", _justLootedMarie);
-        ht.add("_canSuperWarp", _canSuperWarp);
-        ht.add("_chanceOfVeryRareEncounter", _chanceOfVeryRareEncounter);
-        ht.add("_veryRareEncounters", ArrayListToIntArray(_veryRareEncounters));
-        ht.add("_options", _options.Serialize());
-        return ht;
+        Hashtable hash = super.Serialize();
+        hash.put("_version", "2.00");
+        hash.put("_universe", ArrayToArrayList(_universe));
+        hash.put("_commander", commander.Serialize());
+        hash.put("_wormholes", _wormholes);
+        hash.put("_mercenaries", ArrayToArrayList(_mercenaries));
+        hash.put("_dragonfly", _dragonfly.Serialize());
+        hash.put("_scarab", _scarab.Serialize());
+        hash.put("_scorpion", _scorpion.Serialize());
+        hash.put("_spaceMonster", _spaceMonster.Serialize());
+        hash.put("_opponent", _opponent.Serialize());
+        hash.put("_chanceOfTradeInOrbit", _chanceOfTradeInOrbit);
+        hash.put("_clicks", _clicks);
+        hash.put("_raided", _raided);
+        hash.put("_inspected", _inspected);
+        hash.put("_tribbleMessage", _tribbleMessage);
+        hash.put("_arrivedViaWormhole", _arrivedViaWormhole);
+        hash.put("_paidForNewspaper", _paidForNewspaper);
+        hash.put("_litterWarning", _litterWarning);
+        hash.put("_newsEvents", _newsEvents);
+        hash.put("_difficulty", _difficulty.CastToInt());
+        hash.put("_cheatEnabled", _cheatEnabled);
+        hash.put("_autoSave", _autoSave);
+        hash.put("_easyEncounters", _easyEncounters);
+        hash.put("_endStatus", _endStatus.CastToInt());
+        hash.put("_encounterType", _encounterType.CastToInt());
+        hash.put("_selectedSystemId", _selectedSystemId.CastToInt());
+        hash.put("_warpSystemId", _warpSystemId.CastToInt());
+        hash.put("_trackedSystemId", _trackedSystemId.CastToInt());
+        hash.put("_targetWormhole", _targetWormhole);
+        hash.put("_priceCargoBuy", _priceCargoBuy);
+        hash.put("_priceCargoSell", _priceCargoSell);
+        hash.put("_questStatusArtifact", _questStatusArtifact);
+        hash.put("_questStatusDragonfly", _questStatusDragonfly);
+        hash.put("_questStatusExperiment", _questStatusExperiment);
+        hash.put("_questStatusGemulon", _questStatusGemulon);
+        hash.put("_questStatusJapori", _questStatusJapori);
+        hash.put("_questStatusJarek", _questStatusJarek);
+        hash.put("_questStatusMoon", _questStatusMoon);
+        hash.put("_questStatusPrincess", _questStatusPrincess);
+        hash.put("_questStatusReactor", _questStatusReactor);
+        hash.put("_questStatusScarab", _questStatusScarab);
+        hash.put("_questStatusSculpture", _questStatusSculpture);
+        hash.put("_questStatusSpaceMonster", _questStatusSpaceMonster);
+        hash.put("_questStatusWild", _questStatusWild);
+        hash.put("_fabricRipProbability", _fabricRipProbability);
+        hash.put("_justLootedMarie", _justLootedMarie);
+        hash.put("_canSuperWarp", _canSuperWarp);
+        hash.put("_chanceOfVeryRareEncounter", _chanceOfVeryRareEncounter);
+        hash.put("_veryRareEncounters", ArrayListToIntArray(_veryRareEncounters));
+        hash.put("_options", _options.Serialize());
+        return hash;
     }
 
     private boolean DetermineEncounter() {
@@ -1928,7 +1928,7 @@ public class Game extends SerializableObject {
                 }
             }
         }
-        return Util.StringsJoin(Strings.newline + Strings.newline, Functions.ArrayListtoStringArray(items));
+        return Util.stringsJoin(Strings.newline + Strings.newline, Functions.ArrayListtoStringArray(items));
     }
 
     @SuppressWarnings("fallthrough")
@@ -3375,7 +3375,7 @@ public class Game extends SerializableObject {
     public void SelectNextSystemWithinRange(boolean forward) {
         int[] destinations = Destinations();
         if (destinations.length > 0) {
-            int index = Util.BruteSeek(destinations, _warpSystemId.CastToInt());
+            int index = Util.bruteSeek(destinations, _warpSystemId.CastToInt());
             if (index < 0) {
                 index = forward ? 0 : destinations.length - 1;
             } else {
@@ -3416,7 +3416,7 @@ public class Game extends SerializableObject {
     public void TargetWormhole(boolean b) {
         _targetWormhole = b;
         if (_targetWormhole) {
-            int wormIndex = Util.BruteSeek(_wormholes, _selectedSystemId.CastToInt());
+            int wormIndex = Util.bruteSeek(_wormholes, _selectedSystemId.CastToInt());
             _warpSystemId = StarSystemId.FromInt(_wormholes[(wormIndex + 1) % _wormholes.length]);
         }
     }

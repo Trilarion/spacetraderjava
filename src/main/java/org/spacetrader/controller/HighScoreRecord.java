@@ -2,7 +2,7 @@ package org.spacetrader.controller;
 
 import org.spacetrader.controller.enums.GameEndType;
 import org.spacetrader.model.Difficulty;
-import org.spacetrader.util.Hashtable;
+import java.util.Hashtable;
 
 
 public class HighScoreRecord extends SerializableObject implements Comparable<HighScoreRecord> {
@@ -62,12 +62,12 @@ public class HighScoreRecord extends SerializableObject implements Comparable<Hi
     @Override
     public Hashtable Serialize() {
         Hashtable hash = super.Serialize();
-        hash.add("_name", name);
-        hash.add("_score", score);
-        hash.add("_type", gameEndType.CastToInt());
-        hash.add("_days", days);
-        hash.add("_worth", worth);
-        hash.add("_difficulty", difficulty.CastToInt());
+        hash.put("_name", name);
+        hash.put("_score", score);
+        hash.put("_type", gameEndType.CastToInt());
+        hash.put("_days", days);
+        hash.put("_worth", worth);
+        hash.put("_difficulty", difficulty.CastToInt());
         return hash;
     }
 

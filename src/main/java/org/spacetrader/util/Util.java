@@ -4,7 +4,7 @@ package org.spacetrader.util;
 // TODO document and maybe merge with others
 public class Util {
 
-    public static <T> boolean ArrayContains(T[] array, T item) {
+    public static <T> boolean arrayContains(T[] array, T item) {
         for (T t : array) {
             if (t == item) {
                 return true;
@@ -13,7 +13,7 @@ public class Util {
         return false;
     }
 
-    public static int BruteSeek(int[] array, int a) {
+    public static int bruteSeek(int[] array, int a) {
         for (int i = 0; i < array.length; i++) {
             if (array[i] == a) {
                 return i;
@@ -22,12 +22,12 @@ public class Util {
         return -1;
     }
 
-    public static String StringsJoin(String seperator, String[] values) {
-        StringBuilder sb = new StringBuilder();
+    public static String stringsJoin(String separator, String[] values) {
+        StringBuilder builder = new StringBuilder();
         for (String string : values) {
-            sb.append(string);
-            sb.append(seperator);
+            builder.append(string);
+            builder.append(separator);
         }
-        return sb.toString();
+        return builder.toString();
     }
 }

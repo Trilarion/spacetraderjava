@@ -5,8 +5,8 @@ import org.spacetrader.controller.enums.StarSystemId;
 import org.spacetrader.model.CrewMemberId;
 import org.spacetrader.model.Difficulty;
 import org.spacetrader.ui.Strings;
-import org.spacetrader.util.ArrayList;
-import org.spacetrader.util.Hashtable;
+import java.util.ArrayList;
+import java.util.Hashtable;
 import org.spacetrader.util.Util;
 
 import java.util.Arrays;
@@ -88,9 +88,9 @@ public class CrewMember extends SerializableObject {
     @Override
     public Hashtable Serialize() {
         Hashtable hash = super.Serialize();
-        hash.add("_id", crewMemberId);
-        hash.add("_skills", skills);
-        hash.add("_currentSystemId", currentSystemId);
+        hash.put("_id", crewMemberId);
+        hash.put("_skills", skills);
+        hash.put("_currentSystemId", currentSystemId);
         return hash;
     }
 
@@ -167,7 +167,7 @@ public class CrewMember extends SerializableObject {
     }
 
     public int Rate() {
-        return Util.ArrayContains(Constants.SpecialCrewMemberIds, Id()) || Id() == CrewMemberId.Zeethibal
+        return Util.arrayContains(Constants.SpecialCrewMemberIds, Id()) || Id() == CrewMemberId.Zeethibal
                 ? 0 : (Pilot() + Fighter() + Trader() + Engineer()) * 3;
     }
 

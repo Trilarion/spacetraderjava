@@ -11,6 +11,8 @@ import org.winforms.*;
 
 import java.awt.*;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Random;
 
 // TODO this is a random collection of things class, split it up
@@ -237,20 +239,20 @@ public class Functions {
     // If b < 0, then return true if there exists a wormhole at all from a.
     public static boolean WormholeExists(int a, int b) {
         int[] wormholes = Game.getCurrentGame().Wormholes();
-        int i = Util.BruteSeek(wormholes, a);
+        int i = Util.bruteSeek(wormholes, a);
         return (i >= 0 && (b < 0 || wormholes[(i + 1) % wormholes.length] == b));
     }
 
     public static boolean WormholeExists(StarSystem a, StarSystem b) {
         StarSystem[] universe = Game.getCurrentGame().Universe();
         int[] wormholes = Game.getCurrentGame().Wormholes();
-        int i = Util.BruteSeek(wormholes, a.Id().CastToInt());
+        int i = Util.bruteSeek(wormholes, a.Id().CastToInt());
         return (i >= 0 && (universe[wormholes[(i + 1) % wormholes.length]] == b));
     }
 
     public static StarSystem WormholeTarget(int a) {
         int[] wormholes = Game.getCurrentGame().Wormholes();
-        int i = Util.BruteSeek(wormholes, a);
+        int i = Util.bruteSeek(wormholes, a);
         return (i >= 0 ? (Game.getCurrentGame().Universe()[wormholes[(i + 1) % wormholes.length]]) : null);
     }
 }

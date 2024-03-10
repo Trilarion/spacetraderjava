@@ -4,9 +4,11 @@ import org.spacetrader.controller.*;
 import org.spacetrader.controller.enums.AlertType;
 import org.spacetrader.model.ship.ShipSize;
 import org.spacetrader.model.ship.ShipType;
-import org.spacetrader.util.ArrayList;
+import java.util.ArrayList;
 import org.spacetrader.util.Directory;
-import org.spacetrader.util.Hashtable;
+
+import java.util.Collections;
+import java.util.Hashtable;
 import org.spacetrader.util.Path;
 import org.winforms.Button;
 import org.winforms.Container;
@@ -879,7 +881,7 @@ public class FormShipyard extends wfForm {
                 userTemplates.add(template);
             }
         }
-        userTemplates.Sort();
+        Collections.sort(userTemplates);
         selTemplate.Items.AddRange(userTemplates.toArray(new ShipTemplate[0]));
         selTemplate.setSelectedIndex(0);
     }

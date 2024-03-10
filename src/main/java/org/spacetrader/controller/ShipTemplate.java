@@ -2,7 +2,7 @@ package org.spacetrader.controller;
 
 import org.spacetrader.model.ship.ShipSize;
 import org.spacetrader.model.ship.ShipType;
-import org.spacetrader.util.Hashtable;
+import java.util.Hashtable;
 import org.winforms.wfImage;
 
 // TODO part of the model
@@ -66,21 +66,21 @@ public class ShipTemplate extends SerializableObject implements Comparable<ShipT
 
     @Override
     public Hashtable Serialize() {
-        Hashtable ht = super.Serialize();
-        ht.add("_name", _name);
-        ht.add("_size", _size.CastToInt());
-        ht.add("_imageIndex", _imageIndex);
-        ht.add("_cargoBays", _cargoBays);
-        ht.add("_weaponSlots", _weaponSlots);
-        ht.add("_shieldSlots", _shieldSlots);
-        ht.add("_gadgetSlots", _gadgetSlots);
-        ht.add("_crewQuarters", _crewQuarters);
-        ht.add("_fuelTanks", _fuelTanks);
-        ht.add("_hullStrength", _hullStrength);
+        Hashtable hash = super.Serialize();
+        hash.put("_name", _name);
+        hash.put("_size", _size.CastToInt());
+        hash.put("_imageIndex", _imageIndex);
+        hash.put("_cargoBays", _cargoBays);
+        hash.put("_weaponSlots", _weaponSlots);
+        hash.put("_shieldSlots", _shieldSlots);
+        hash.put("_gadgetSlots", _gadgetSlots);
+        hash.put("_crewQuarters", _crewQuarters);
+        hash.put("_fuelTanks", _fuelTanks);
+        hash.put("_hullStrength", _hullStrength);
         if (_images != null) {
-            ht.add("_images", _images);
+            hash.put("_images", _images);
         }
-        return ht;
+        return hash;
     }
 
     @Override

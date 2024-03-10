@@ -7,7 +7,7 @@ import org.spacetrader.model.cargo.TradeItemType;
 import org.spacetrader.model.events.SpecialEventType;
 import org.spacetrader.model.ship.ShipSize;
 import org.spacetrader.ui.Strings;
-import org.spacetrader.util.Hashtable;
+import java.util.Hashtable;
 
 import java.util.ArrayList;
 
@@ -98,21 +98,21 @@ public class StarSystem extends SerializableObject {
 
     @Override
     public Hashtable Serialize() {
-        Hashtable ht = super.Serialize();
-        ht.add("_id", _id.CastToInt());
-        ht.add("_x", _x);
-        ht.add("_y", _y);
-        ht.add("_size", _size.CastToInt());
-        ht.add("_techLevel", _techLevel.ordinal());
-        ht.add("_politicalSystemType", _politicalSystemType.CastToInt());
-        ht.add("_systemPressure", _systemPressure.CastToInt());
-        ht.add("_specialResource", _specialResource.CastToInt());
-        ht.add("_specialEventType", _specialEventType.CastToInt());
-        ht.add("_tradeItems", _tradeItems);
-        ht.add("_countDown", _countDown);
-        ht.add("_visited", _visited);
-        ht.add("_shipyardId", _shipyardId.CastToInt());
-        return ht;
+        Hashtable hash = super.Serialize();
+        hash.put("_id", _id.CastToInt());
+        hash.put("_x", _x);
+        hash.put("_y", _y);
+        hash.put("_size", _size.CastToInt());
+        hash.put("_techLevel", _techLevel.ordinal());
+        hash.put("_politicalSystemType", _politicalSystemType.CastToInt());
+        hash.put("_systemPressure", _systemPressure.CastToInt());
+        hash.put("_specialResource", _specialResource.CastToInt());
+        hash.put("_specialEventType", _specialEventType.CastToInt());
+        hash.put("_tradeItems", _tradeItems);
+        hash.put("_countDown", _countDown);
+        hash.put("_visited", _visited);
+        hash.put("_shipyardId", _shipyardId.CastToInt());
+        return hash;
     }
 
     public boolean ShowSpecialButton() {

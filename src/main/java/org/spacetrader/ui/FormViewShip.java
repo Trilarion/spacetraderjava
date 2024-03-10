@@ -2,7 +2,7 @@ package org.spacetrader.ui;
 
 import org.spacetrader.controller.*;
 import org.spacetrader.model.ship.equipment.GadgetType;
-import org.spacetrader.util.ArrayList;
+import java.util.ArrayList;
 import org.spacetrader.util.Util;
 import org.winforms.Button;
 import org.winforms.Font;
@@ -199,6 +199,6 @@ public class FormViewShip extends wfForm {
         }
         labelSpecialCargo.setText(specialCargo.isEmpty()
                 ? Strings.SpecialCargoNone
-                : Util.StringsJoin(Strings.newline + Strings.newline, Functions.ArrayListtoStringArray(specialCargo)));
+                : Util.stringsJoin(Strings.newline + Strings.newline, Functions.ArrayListtoStringArray(specialCargo)));
     }
 }

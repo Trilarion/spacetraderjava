@@ -1,6 +1,6 @@
 package org.spacetrader.controller;
 
-import org.spacetrader.util.Hashtable;
+import java.util.Hashtable;
 import org.winforms.wfPane;
 
 
@@ -99,22 +99,22 @@ public class GameOptions extends SerializableObject {
     @Override
     public Hashtable Serialize() {
         Hashtable hash = super.Serialize();
-        hash.add("_alwaysIgnorePirates", alwaysIgnorePirates);
-        hash.add("_alwaysIgnorePolice", alwaysIgnorePolice);
-        hash.add("_alwaysIgnoreTradeInOrbit", alwaysIgnoreTradeInOrbit);
-        hash.add("_alwaysIgnoreTraders", alwaysIgnoreTraders);
-        hash.add("_autoFuel", autoFuel);
-        hash.add("_autoRepair", autoRepair);
-        hash.add("_continuousAttack", continuousAttack);
-        hash.add("_continuousAttackFleeing", continuousAttackFleeing);
-        hash.add("_disableOpponents", disableOpponents);
-        hash.add("_newsAutoPay", newsAutoPay);
-        hash.add("_newsAutoShow", newsAutoShow);
-        hash.add("_remindLoans", remindLoans);
-        hash.add("_reserveMoney", reserveMoney);
-        hash.add("_showTrackedRange", showTrackedRange);
-        hash.add("_trackAutoOff", trackAutoOff);
-        hash.add("_leaveEmpty", leaveEmpty);
+        hash.put("_alwaysIgnorePirates", alwaysIgnorePirates);
+        hash.put("_alwaysIgnorePolice", alwaysIgnorePolice);
+        hash.put("_alwaysIgnoreTradeInOrbit", alwaysIgnoreTradeInOrbit);
+        hash.put("_alwaysIgnoreTraders", alwaysIgnoreTraders);
+        hash.put("_autoFuel", autoFuel);
+        hash.put("_autoRepair", autoRepair);
+        hash.put("_continuousAttack", continuousAttack);
+        hash.put("_continuousAttackFleeing", continuousAttackFleeing);
+        hash.put("_disableOpponents", disableOpponents);
+        hash.put("_newsAutoPay", newsAutoPay);
+        hash.put("_newsAutoShow", newsAutoShow);
+        hash.put("_remindLoans", remindLoans);
+        hash.put("_reserveMoney", reserveMoney);
+        hash.put("_showTrackedRange", showTrackedRange);
+        hash.put("_trackAutoOff", trackAutoOff);
+        hash.put("_leaveEmpty", leaveEmpty);
         return hash;
     }
 

@@ -3,7 +3,7 @@ package org.spacetrader.model.ship.equipment;
 import org.spacetrader.ui.Strings;
 import org.spacetrader.controller.enums.SkillType;
 import org.spacetrader.model.TechLevel;
-import org.spacetrader.util.Hashtable;
+import java.util.Hashtable;
 import org.spacetrader.util.Log;
 
 
@@ -36,8 +36,8 @@ public class Gadget extends Equipment {
     @Override
     public Hashtable Serialize() {
         Hashtable hash = super.Serialize();
-        hash.add("_type", _type.asInteger());
-        hash.add("_skillBonus", _skillBonus.CastToInt());
+        hash.put("_type", _type.asInteger());
+        hash.put("_skillBonus", _skillBonus.CastToInt());
         return hash;
     }
 
