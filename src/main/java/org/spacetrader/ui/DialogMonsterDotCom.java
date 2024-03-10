@@ -19,10 +19,6 @@ public class DialogMonsterDotCom extends JDialog {
      */
     public DialogMonsterDotCom(Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
-    }
-
-    private void initComponents() {
 
         JPanel jPanel1 = new JPanel();
         JScrollPane jScrollPane1 = new JScrollPane();
@@ -76,4 +72,5 @@ public class DialogMonsterDotCom extends JDialog {
 
         pack();
     }
+
 }

@@ -1,45 +1,45 @@
 package org.spacetrader;
 
-import org.jwinforms.Button;
-import org.jwinforms.Container;
-import org.jwinforms.Font;
-import org.jwinforms.Icon;
-import org.jwinforms.Label;
-import org.jwinforms.MenuItem;
-import org.jwinforms.*;
-import org.jwinforms.enums.*;
-import org.spacetrader.crew.CrewMemberId;
-import org.spacetrader.events.VeryRareEncounter;
-import org.spacetrader.main.*;
-import org.spacetrader.main.enums.AlertType;
-import org.spacetrader.main.enums.GameEndType;
-import org.spacetrader.main.enums.StarSystemId;
-import org.spacetrader.main.gui.*;
-import org.spacetrader.main.stub.Directory;
-import org.spacetrader.main.stub.RegistryKey;
-import org.spacetrader.main.util.Hashtable;
-import org.spacetrader.main.util.Util;
-import org.spacetrader.ship.ShipType;
-import org.spacetrader.ship.equip.Gadget;
-import org.spacetrader.ship.equip.Shield;
-import org.spacetrader.ship.equip.Weapon;
+import org.spacetrader.controller.*;
+import org.spacetrader.controller.enums.AlertType;
+import org.spacetrader.controller.enums.GameEndType;
+import org.spacetrader.controller.enums.StarSystemId;
+import org.spacetrader.model.CrewMemberId;
+import org.spacetrader.model.events.VeryRareEncounter;
+import org.spacetrader.model.ship.ShipType;
+import org.spacetrader.model.ship.equip.Gadget;
+import org.spacetrader.model.ship.equip.Shield;
+import org.spacetrader.model.ship.equip.Weapon;
+import org.spacetrader.ui.*;
+import org.spacetrader.util.Directory;
+import org.spacetrader.util.Hashtable;
+import org.spacetrader.util.RegistryKey;
+import org.spacetrader.util.Util;
+import org.winforms.Button;
+import org.winforms.Container;
+import org.winforms.Font;
+import org.winforms.Icon;
+import org.winforms.Label;
+import org.winforms.MenuItem;
+import org.winforms.*;
+import org.winforms.enums.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
 
 
-public class Main extends WinformWindow {
+public class Main extends wfWindow {
 
     private final Label[] lblSellPrice;
     private final Label[] lblBuyPrice;
     private final Label[] lblTargetPrice;
     private final Label[] lblTargetDiff;
     private final Label[] lblTargetPct;
-    private final Button[] btnSellQty;
-    private final Button[] btnSellAll;
-    private final Button[] btnBuyQty;
-    private final Button[] btnBuyMax;
+    private final Button[] buttonSellQty;
+    private final Button[] buttonSellAll;
+    private final Button[] buttonBuyQty;
+    private final Button[] buttonBuyMax;
     private final String SAVE_ARRIVAL = "autosave_arrival.sav";
     private final String SAVE_DEPARTURE = "autosave_departure.sav";
     private final int OFF_X = 3;
@@ -47,21 +47,21 @@ public class Main extends WinformWindow {
     private final int OFF_X_WORM = OFF_X + 1;
     private final Pen DEFAULT_PEN = new Pen(Color.black);
     private final Brush DEFAULT_BRUSH = new SolidBrush(Color.white);
-    private Button btnDesign;
-    private Button btnNews;
-    private Button btnSpecial;
-    private Button btnMerc;
-    private Button btnFuel;
-    private Button btnRepair;
-    private Button btnBuyShip;
-    private Button btnEquip;
-    private Button btnPod;
-    private Button btnJump;
-    private Button btnFind;
-    private Button btnPrevSystem;
-    private Button btnNextSystem;
-    private Button btnTrack;
-    private Button btnWarp;
+    private Button buttonDesign;
+    private Button buttonNews;
+    private Button buttonSpecial;
+    private Button buttonMerc;
+    private Button buttonFuel;
+    private Button buttonRepair;
+    private Button buttonBuyShip;
+    private Button buttonEquip;
+    private Button buttonPod;
+    private Button buttonJump;
+    private Button buttonFind;
+    private Button buttonPrevSystem;
+    private Button buttonNextSystem;
+    private Button buttonTrack;
+    private Button buttonWarp;
     private ImageList ilChartImages;
     private ImageList ilDirectionImages;
     private ImageList ilEquipmentImages;
@@ -155,14 +155,14 @@ public class Main extends WinformWindow {
         GroupBox boxGalacticChart = new GroupBox();
         lblWormhole = new Label();
         lblWormholeLabel = new Label();
-        btnJump = new Button();
-        btnFind = new Button();
+        buttonJump = new Button();
+        buttonFind = new Button();
         GroupBox boxTargetSystem = new GroupBox();
-        btnTrack = new Button();
-        btnNextSystem = new Button();
-        btnPrevSystem = new Button();
+        buttonTrack = new Button();
+        buttonNextSystem = new Button();
+        buttonPrevSystem = new Button();
         lblTargetOutOfRange = new Label();
-        btnWarp = new Button();
+        buttonWarp = new Button();
         lblTargetPolSys = new Label();
         lblTargetSize = new Label();
         lblTargetTech = new Label();
@@ -187,80 +187,80 @@ public class Main extends WinformWindow {
         Label lblTargetPct9 = new Label();
         Label lblTargetDiff9 = new Label();
         Label lblTargetPrice9 = new Label();
-        Button btnBuyMax9 = new Button();
-        Button btnBuyQty9 = new Button();
+        Button buttonBuyMax9 = new Button();
+        Button buttonBuyQty9 = new Button();
         Label lblBuyPrice9 = new Label();
-        Button btnSellAll9 = new Button();
-        Button btnSellQty9 = new Button();
+        Button buttonSellAll9 = new Button();
+        Button buttonSellQty9 = new Button();
         Label lblSellPrice9 = new Label();
         Label lblTargetPct8 = new Label();
         Label lblTargetDiff8 = new Label();
         Label lblTargetPrice8 = new Label();
-        Button btnBuyMax8 = new Button();
-        Button btnBuyQty8 = new Button();
+        Button buttonBuyMax8 = new Button();
+        Button buttonBuyQty8 = new Button();
         Label lblBuyPrice8 = new Label();
-        Button btnSellAll8 = new Button();
-        Button btnSellQty8 = new Button();
+        Button buttonSellAll8 = new Button();
+        Button buttonSellQty8 = new Button();
         Label lblSellPrice8 = new Label();
         Label lblTargetPct7 = new Label();
         Label lblTargetDiff7 = new Label();
         Label lblTargetPrice7 = new Label();
-        Button btnBuyMax7 = new Button();
-        Button btnBuyQty7 = new Button();
+        Button buttonBuyMax7 = new Button();
+        Button buttonBuyQty7 = new Button();
         Label lblBuyPrice7 = new Label();
-        Button btnSellAll7 = new Button();
-        Button btnSellQty7 = new Button();
+        Button buttonSellAll7 = new Button();
+        Button buttonSellQty7 = new Button();
         Label lblSellPrice7 = new Label();
         Label lblTargetPct6 = new Label();
         Label lblTargetDiff6 = new Label();
         Label lblTargetPrice6 = new Label();
-        Button btnBuyMax6 = new Button();
-        Button btnBuyQty6 = new Button();
+        Button buttonBuyMax6 = new Button();
+        Button buttonBuyQty6 = new Button();
         Label lblBuyPrice6 = new Label();
-        Button btnSellAll6 = new Button();
-        Button btnSellQty6 = new Button();
+        Button buttonSellAll6 = new Button();
+        Button buttonSellQty6 = new Button();
         Label lblSellPrice6 = new Label();
         Label lblTargetPct5 = new Label();
         Label lblTargetDiff5 = new Label();
         Label lblTargetPrice5 = new Label();
-        Button btnBuyMax5 = new Button();
-        Button btnBuyQty5 = new Button();
+        Button buttonBuyMax5 = new Button();
+        Button buttonBuyQty5 = new Button();
         Label lblBuyPrice5 = new Label();
-        Button btnSellAll5 = new Button();
-        Button btnSellQty5 = new Button();
+        Button buttonSellAll5 = new Button();
+        Button buttonSellQty5 = new Button();
         Label lblSellPrice5 = new Label();
         Label lblTargetPct4 = new Label();
         Label lblTargetDiff4 = new Label();
         Label lblTargetPrice4 = new Label();
-        Button btnBuyMax4 = new Button();
-        Button btnBuyQty4 = new Button();
+        Button buttonBuyMax4 = new Button();
+        Button buttonBuyQty4 = new Button();
         Label lblBuyPrice4 = new Label();
-        Button btnSellAll4 = new Button();
-        Button btnSellQty4 = new Button();
+        Button buttonSellAll4 = new Button();
+        Button buttonSellQty4 = new Button();
         Label lblSellPrice4 = new Label();
         Label lblTargetPct3 = new Label();
         Label lblTargetDiff3 = new Label();
         Label lblTargetPrice3 = new Label();
-        Button btnBuyMax3 = new Button();
-        Button btnBuyQty3 = new Button();
+        Button buttonBuyMax3 = new Button();
+        Button buttonBuyQty3 = new Button();
         Label lblBuyPrice3 = new Label();
-        Button btnSellAll3 = new Button();
-        Button btnSellQty3 = new Button();
+        Button buttonSellAll3 = new Button();
+        Button buttonSellQty3 = new Button();
         Label lblSellPrice3 = new Label();
         Label lblTargetPct2 = new Label();
         Label lblTargetDiff2 = new Label();
         Label lblTargetPrice2 = new Label();
-        Button btnBuyMax2 = new Button();
-        Button btnBuyQty2 = new Button();
+        Button buttonBuyMax2 = new Button();
+        Button buttonBuyQty2 = new Button();
         Label lblBuyPrice2 = new Label();
-        Button btnSellAll2 = new Button();
-        Button btnSellQty2 = new Button();
+        Button buttonSellAll2 = new Button();
+        Button buttonSellQty2 = new Button();
         Label lblSellPrice2 = new Label();
         Label lblTargetPct1 = new Label();
         Label lblTargetDiff1 = new Label();
         Label lblTargetPrice1 = new Label();
-        Button btnBuyMax1 = new Button();
-        Button btnBuyQty1 = new Button();
+        Button buttonBuyMax1 = new Button();
+        Button buttonBuyQty1 = new Button();
         Label lblBuyPrice1 = new Label();
         Label lblTargetPctLabel = new Label();
         Label lblTargetDiffLabel = new Label();
@@ -268,14 +268,14 @@ public class Main extends WinformWindow {
         Label lblTargetPct0 = new Label();
         Label lblTargetDiff0 = new Label();
         Label lblTargetPrice0 = new Label();
-        Button btnBuyMax0 = new Button();
-        Button btnBuyQty0 = new Button();
+        Button buttonBuyMax0 = new Button();
+        Button buttonBuyQty0 = new Button();
         Label lblBuyPrice0 = new Label();
-        Button btnSellAll1 = new Button();
-        Button btnSellQty1 = new Button();
+        Button buttonSellAll1 = new Button();
+        Button buttonSellQty1 = new Button();
         Label lblSellPrice1 = new Label();
-        Button btnSellAll0 = new Button();
-        Button btnSellQty0 = new Button();
+        Button buttonSellAll0 = new Button();
+        Button buttonSellQty0 = new Button();
         Label lblSellPrice0 = new Label();
         Label lblTradeTarget = new Label();
         lblBuy = new Label();
@@ -291,9 +291,9 @@ public class Main extends WinformWindow {
         Label lblTradeCommodity3 = new Label();
         Label lblTradeCommodity7 = new Label();
         GroupBox boxSystem = new GroupBox();
-        btnMerc = new Button();
-        btnSpecial = new Button();
-        btnNews = new Button();
+        buttonMerc = new Button();
+        buttonSpecial = new Button();
+        buttonNews = new Button();
         lblSystemPressure = new Label();
         lblSystemPressurePre = new Label();
         lblSystemPolSys = new Label();
@@ -311,16 +311,16 @@ public class Main extends WinformWindow {
         lblSystemName = new Label();
         lblSystemNameLabel = new Label();
         GroupBox boxShipYard = new GroupBox();
-        btnDesign = new Button();
-        btnPod = new Button();
+        buttonDesign = new Button();
+        buttonPod = new Button();
         lblEscapePod = new Label();
-        btnEquip = new Button();
-        btnBuyShip = new Button();
+        buttonEquip = new Button();
+        buttonBuyShip = new Button();
         lblEquipForSale = new Label();
         lblShipsForSale = new Label();
         GroupBox boxDock = new GroupBox();
-        btnRepair = new Button();
-        btnFuel = new Button();
+        buttonRepair = new Button();
+        buttonFuel = new Button();
         lblFuelStatus = new Label();
         lblFuelCost = new Label();
         lblHullStatus = new Label();
@@ -601,8 +601,8 @@ public class Main extends WinformWindow {
         boxGalacticChart.setBackColor(SystemColors.Control);
         boxGalacticChart.Controls.add(lblWormhole);
         boxGalacticChart.Controls.add(lblWormholeLabel);
-        boxGalacticChart.Controls.add(btnJump);
-        boxGalacticChart.Controls.add(btnFind);
+        boxGalacticChart.Controls.add(buttonJump);
+        boxGalacticChart.Controls.add(buttonFind);
         boxGalacticChart.Controls.add(picGalacticChart);
         boxGalacticChart.setLocation(new Point(180, 306));
         boxGalacticChart.setName("boxGalacticChart");
@@ -622,39 +622,39 @@ public class Main extends WinformWindow {
         lblWormholeLabel.setSize(new FormSize(72, 13));
         lblWormholeLabel.setTabIndex(28);
         lblWormholeLabel.setText("Wormhole to");
-        // btnJump
-        btnJump.setFlatStyle(FlatStyle.Flat);
-        btnJump.setLocation(new Point(81, 138));
-        btnJump.setName("btnJump");
-        btnJump.setSize(new FormSize(42, 22));
-        btnJump.setTabIndex(55);
-        btnJump.setText("Jump");
-        btnJump.setClick(new EventHandler<>() {
+        // buttonJump
+        buttonJump.setFlatStyle(FlatStyle.Flat);
+        buttonJump.setLocation(new Point(81, 138));
+        buttonJump.setName("buttonJump");
+        buttonJump.setSize(new FormSize(42, 22));
+        buttonJump.setTabIndex(55);
+        buttonJump.setText("Jump");
+        buttonJump.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnJump_Click(sender, e);
+                buttonJump_Click(sender, e);
             }
         });
-        // btnFind
-        btnFind.setFlatStyle(FlatStyle.Flat);
-        btnFind.setLocation(new Point(132, 138));
-        btnFind.setName("btnFind");
-        btnFind.setSize(new FormSize(36, 22));
-        btnFind.setTabIndex(56);
-        btnFind.setText("Find");
-        btnFind.setClick(new EventHandler<>() {
+        // buttonFind
+        buttonFind.setFlatStyle(FlatStyle.Flat);
+        buttonFind.setLocation(new Point(132, 138));
+        buttonFind.setName("buttonFind");
+        buttonFind.setSize(new FormSize(36, 22));
+        buttonFind.setTabIndex(56);
+        buttonFind.setText("Find");
+        buttonFind.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnFind_Click(sender, e);
+                buttonFind_Click(sender, e);
             }
         });
         // boxTargetSystem
         boxTargetSystem.Anchor = AnchorStyles.Top_Right;
-        boxTargetSystem.Controls.add(btnTrack);
-        boxTargetSystem.Controls.add(btnNextSystem);
-        boxTargetSystem.Controls.add(btnPrevSystem);
+        boxTargetSystem.Controls.add(buttonTrack);
+        boxTargetSystem.Controls.add(buttonNextSystem);
+        boxTargetSystem.Controls.add(buttonPrevSystem);
         boxTargetSystem.Controls.add(lblTargetOutOfRange);
-        boxTargetSystem.Controls.add(btnWarp);
+        boxTargetSystem.Controls.add(buttonWarp);
         boxTargetSystem.Controls.add(lblTargetPolSys);
         boxTargetSystem.Controls.add(lblTargetSize);
         boxTargetSystem.Controls.add(lblTargetTech);
@@ -677,44 +677,44 @@ public class Main extends WinformWindow {
         boxTargetSystem.setTabIndex(7);
         boxTargetSystem.setTabStop(false);
         boxTargetSystem.setText("Target System");
-        // btnTrack
-        btnTrack.setFlatStyle(FlatStyle.Flat);
-        btnTrack.setLocation(new Point(160, 140));
-        btnTrack.setName("btnTrack");
-        btnTrack.setSize(new FormSize(44, 22));
-        btnTrack.setTabIndex(60);
-        btnTrack.setText("Track");
-        btnTrack.setVisible(false);
-        btnTrack.setClick(new EventHandler<>() {
+        // buttonTrack
+        buttonTrack.setFlatStyle(FlatStyle.Flat);
+        buttonTrack.setLocation(new Point(160, 140));
+        buttonTrack.setName("buttonTrack");
+        buttonTrack.setSize(new FormSize(44, 22));
+        buttonTrack.setTabIndex(60);
+        buttonTrack.setText("Track");
+        buttonTrack.setVisible(false);
+        buttonTrack.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnTrack_Click(sender, e);
+                buttonTrack_Click(sender, e);
             }
         });
-        // btnNextSystem
-        btnNextSystem.setFlatStyle(FlatStyle.Flat);
-        btnNextSystem.setLocation(new Point(186, 16));
-        btnNextSystem.setName("btnNextSystem");
-        btnNextSystem.setSize(new FormSize(18, 18));
-        btnNextSystem.setTabIndex(58);
-        btnNextSystem.setText(">");
-        btnNextSystem.setClick(new EventHandler<>() {
+        // buttonNextSystem
+        buttonNextSystem.setFlatStyle(FlatStyle.Flat);
+        buttonNextSystem.setLocation(new Point(186, 16));
+        buttonNextSystem.setName("buttonNextSystem");
+        buttonNextSystem.setSize(new FormSize(18, 18));
+        buttonNextSystem.setTabIndex(58);
+        buttonNextSystem.setText(">");
+        buttonNextSystem.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnNextSystem_Click(sender, e);
+                buttonNextSystem_Click(sender, e);
             }
         });
-        // btnPrevSystem
-        btnPrevSystem.setFlatStyle(FlatStyle.Flat);
-        btnPrevSystem.setLocation(new Point(160, 16));
-        btnPrevSystem.setName("btnPrevSystem");
-        btnPrevSystem.setSize(new FormSize(18, 18));
-        btnPrevSystem.setTabIndex(57);
-        btnPrevSystem.setText("<");
-        btnPrevSystem.setClick(new EventHandler<>() {
+        // buttonPrevSystem
+        buttonPrevSystem.setFlatStyle(FlatStyle.Flat);
+        buttonPrevSystem.setLocation(new Point(160, 16));
+        buttonPrevSystem.setName("buttonPrevSystem");
+        buttonPrevSystem.setSize(new FormSize(18, 18));
+        buttonPrevSystem.setTabIndex(57);
+        buttonPrevSystem.setText("<");
+        buttonPrevSystem.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnPrevSystem_Click(sender, e);
+                buttonPrevSystem_Click(sender, e);
             }
         });
         // lblTargetOutOfRange
@@ -723,17 +723,17 @@ public class Main extends WinformWindow {
         lblTargetOutOfRange.setSize(new FormSize(144, 13));
         lblTargetOutOfRange.setTabIndex(17);
         lblTargetOutOfRange.setText("This system is out of range.");
-        // btnWarp
-        btnWarp.setFlatStyle(FlatStyle.Flat);
-        btnWarp.setLocation(new Point(160, 98));
-        btnWarp.setName("btnWarp");
-        btnWarp.setSize(new FormSize(44, 44));
-        btnWarp.setTabIndex(59);
-        btnWarp.setText("Warp");
-        btnWarp.setClick(new EventHandler<>() {
+        // buttonWarp
+        buttonWarp.setFlatStyle(FlatStyle.Flat);
+        buttonWarp.setLocation(new Point(160, 98));
+        buttonWarp.setName("buttonWarp");
+        buttonWarp.setSize(new FormSize(44, 44));
+        buttonWarp.setTabIndex(59);
+        buttonWarp.setText("Warp");
+        buttonWarp.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnWarp_Click(sender, e);
+                buttonWarp_Click(sender, e);
             }
         });
         // lblTargetPolSys
@@ -865,80 +865,80 @@ public class Main extends WinformWindow {
         boxCargo.Controls.add(lblTargetPct9);
         boxCargo.Controls.add(lblTargetDiff9);
         boxCargo.Controls.add(lblTargetPrice9);
-        boxCargo.Controls.add(btnBuyMax9);
-        boxCargo.Controls.add(btnBuyQty9);
+        boxCargo.Controls.add(buttonBuyMax9);
+        boxCargo.Controls.add(buttonBuyQty9);
         boxCargo.Controls.add(lblBuyPrice9);
-        boxCargo.Controls.add(btnSellAll9);
-        boxCargo.Controls.add(btnSellQty9);
+        boxCargo.Controls.add(buttonSellAll9);
+        boxCargo.Controls.add(buttonSellQty9);
         boxCargo.Controls.add(lblSellPrice9);
         boxCargo.Controls.add(lblTargetPct8);
         boxCargo.Controls.add(lblTargetDiff8);
         boxCargo.Controls.add(lblTargetPrice8);
-        boxCargo.Controls.add(btnBuyMax8);
-        boxCargo.Controls.add(btnBuyQty8);
+        boxCargo.Controls.add(buttonBuyMax8);
+        boxCargo.Controls.add(buttonBuyQty8);
         boxCargo.Controls.add(lblBuyPrice8);
-        boxCargo.Controls.add(btnSellAll8);
-        boxCargo.Controls.add(btnSellQty8);
+        boxCargo.Controls.add(buttonSellAll8);
+        boxCargo.Controls.add(buttonSellQty8);
         boxCargo.Controls.add(lblSellPrice8);
         boxCargo.Controls.add(lblTargetPct7);
         boxCargo.Controls.add(lblTargetDiff7);
         boxCargo.Controls.add(lblTargetPrice7);
-        boxCargo.Controls.add(btnBuyMax7);
-        boxCargo.Controls.add(btnBuyQty7);
+        boxCargo.Controls.add(buttonBuyMax7);
+        boxCargo.Controls.add(buttonBuyQty7);
         boxCargo.Controls.add(lblBuyPrice7);
-        boxCargo.Controls.add(btnSellAll7);
-        boxCargo.Controls.add(btnSellQty7);
+        boxCargo.Controls.add(buttonSellAll7);
+        boxCargo.Controls.add(buttonSellQty7);
         boxCargo.Controls.add(lblSellPrice7);
         boxCargo.Controls.add(lblTargetPct6);
         boxCargo.Controls.add(lblTargetDiff6);
         boxCargo.Controls.add(lblTargetPrice6);
-        boxCargo.Controls.add(btnBuyMax6);
-        boxCargo.Controls.add(btnBuyQty6);
+        boxCargo.Controls.add(buttonBuyMax6);
+        boxCargo.Controls.add(buttonBuyQty6);
         boxCargo.Controls.add(lblBuyPrice6);
-        boxCargo.Controls.add(btnSellAll6);
-        boxCargo.Controls.add(btnSellQty6);
+        boxCargo.Controls.add(buttonSellAll6);
+        boxCargo.Controls.add(buttonSellQty6);
         boxCargo.Controls.add(lblSellPrice6);
         boxCargo.Controls.add(lblTargetPct5);
         boxCargo.Controls.add(lblTargetDiff5);
         boxCargo.Controls.add(lblTargetPrice5);
-        boxCargo.Controls.add(btnBuyMax5);
-        boxCargo.Controls.add(btnBuyQty5);
+        boxCargo.Controls.add(buttonBuyMax5);
+        boxCargo.Controls.add(buttonBuyQty5);
         boxCargo.Controls.add(lblBuyPrice5);
-        boxCargo.Controls.add(btnSellAll5);
-        boxCargo.Controls.add(btnSellQty5);
+        boxCargo.Controls.add(buttonSellAll5);
+        boxCargo.Controls.add(buttonSellQty5);
         boxCargo.Controls.add(lblSellPrice5);
         boxCargo.Controls.add(lblTargetPct4);
         boxCargo.Controls.add(lblTargetDiff4);
         boxCargo.Controls.add(lblTargetPrice4);
-        boxCargo.Controls.add(btnBuyMax4);
-        boxCargo.Controls.add(btnBuyQty4);
+        boxCargo.Controls.add(buttonBuyMax4);
+        boxCargo.Controls.add(buttonBuyQty4);
         boxCargo.Controls.add(lblBuyPrice4);
-        boxCargo.Controls.add(btnSellAll4);
-        boxCargo.Controls.add(btnSellQty4);
+        boxCargo.Controls.add(buttonSellAll4);
+        boxCargo.Controls.add(buttonSellQty4);
         boxCargo.Controls.add(lblSellPrice4);
         boxCargo.Controls.add(lblTargetPct3);
         boxCargo.Controls.add(lblTargetDiff3);
         boxCargo.Controls.add(lblTargetPrice3);
-        boxCargo.Controls.add(btnBuyMax3);
-        boxCargo.Controls.add(btnBuyQty3);
+        boxCargo.Controls.add(buttonBuyMax3);
+        boxCargo.Controls.add(buttonBuyQty3);
         boxCargo.Controls.add(lblBuyPrice3);
-        boxCargo.Controls.add(btnSellAll3);
-        boxCargo.Controls.add(btnSellQty3);
+        boxCargo.Controls.add(buttonSellAll3);
+        boxCargo.Controls.add(buttonSellQty3);
         boxCargo.Controls.add(lblSellPrice3);
         boxCargo.Controls.add(lblTargetPct2);
         boxCargo.Controls.add(lblTargetDiff2);
         boxCargo.Controls.add(lblTargetPrice2);
-        boxCargo.Controls.add(btnBuyMax2);
-        boxCargo.Controls.add(btnBuyQty2);
+        boxCargo.Controls.add(buttonBuyMax2);
+        boxCargo.Controls.add(buttonBuyQty2);
         boxCargo.Controls.add(lblBuyPrice2);
-        boxCargo.Controls.add(btnSellAll2);
-        boxCargo.Controls.add(btnSellQty2);
+        boxCargo.Controls.add(buttonSellAll2);
+        boxCargo.Controls.add(buttonSellQty2);
         boxCargo.Controls.add(lblSellPrice2);
         boxCargo.Controls.add(lblTargetPct1);
         boxCargo.Controls.add(lblTargetDiff1);
         boxCargo.Controls.add(lblTargetPrice1);
-        boxCargo.Controls.add(btnBuyMax1);
-        boxCargo.Controls.add(btnBuyQty1);
+        boxCargo.Controls.add(buttonBuyMax1);
+        boxCargo.Controls.add(buttonBuyQty1);
         boxCargo.Controls.add(lblBuyPrice1);
         boxCargo.Controls.add(lblTargetPctLabel);
         boxCargo.Controls.add(lblTargetDiffLabel);
@@ -946,14 +946,14 @@ public class Main extends WinformWindow {
         boxCargo.Controls.add(lblTargetPct0);
         boxCargo.Controls.add(lblTargetDiff0);
         boxCargo.Controls.add(lblTargetPrice0);
-        boxCargo.Controls.add(btnBuyMax0);
-        boxCargo.Controls.add(btnBuyQty0);
+        boxCargo.Controls.add(buttonBuyMax0);
+        boxCargo.Controls.add(buttonBuyQty0);
         boxCargo.Controls.add(lblBuyPrice0);
-        boxCargo.Controls.add(btnSellAll1);
-        boxCargo.Controls.add(btnSellQty1);
+        boxCargo.Controls.add(buttonSellAll1);
+        boxCargo.Controls.add(buttonSellQty1);
         boxCargo.Controls.add(lblSellPrice1);
-        boxCargo.Controls.add(btnSellAll0);
-        boxCargo.Controls.add(btnSellQty0);
+        boxCargo.Controls.add(buttonSellAll0);
+        boxCargo.Controls.add(buttonSellQty0);
         boxCargo.Controls.add(lblSellPrice0);
         boxCargo.Controls.add(lblTradeTarget);
         boxCargo.Controls.add(lblBuy);
@@ -1023,30 +1023,30 @@ public class Main extends WinformWindow {
         lblTargetPrice9.setTabIndex(125);
         lblTargetPrice9.setText("-----------");
         lblTargetPrice9.TextAlign = ContentAlignment.TopRight;
-        // btnBuyMax9
-        btnBuyMax9.setFlatStyle(FlatStyle.Flat);
-        btnBuyMax9.setLocation(new Point(262, 272));
-        btnBuyMax9.setName("btnBuyMax9");
-        btnBuyMax9.setSize(new FormSize(36, 22));
-        btnBuyMax9.setTabIndex(51);
-        btnBuyMax9.setText("Max");
-        btnBuyMax9.setClick(new EventHandler<>() {
+        // buttonBuyMax9
+        buttonBuyMax9.setFlatStyle(FlatStyle.Flat);
+        buttonBuyMax9.setLocation(new Point(262, 272));
+        buttonBuyMax9.setName("buttonBuyMax9");
+        buttonBuyMax9.setSize(new FormSize(36, 22));
+        buttonBuyMax9.setTabIndex(51);
+        buttonBuyMax9.setText("Max");
+        buttonBuyMax9.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
-        // btnBuyQty9
-        btnBuyQty9.setFlatStyle(FlatStyle.Flat);
-        btnBuyQty9.setLocation(new Point(227, 272));
-        btnBuyQty9.setName("btnBuyQty9");
-        btnBuyQty9.setSize(new FormSize(28, 22));
-        btnBuyQty9.setTabIndex(50);
-        btnBuyQty9.setText("88");
-        btnBuyQty9.setClick(new EventHandler<>() {
+        // buttonBuyQty9
+        buttonBuyQty9.setFlatStyle(FlatStyle.Flat);
+        buttonBuyQty9.setLocation(new Point(227, 272));
+        buttonBuyQty9.setName("buttonBuyQty9");
+        buttonBuyQty9.setSize(new FormSize(28, 22));
+        buttonBuyQty9.setTabIndex(50);
+        buttonBuyQty9.setText("88");
+        buttonBuyQty9.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
         // lblBuyPrice9
@@ -1056,30 +1056,30 @@ public class Main extends WinformWindow {
         lblBuyPrice9.setTabIndex(122);
         lblBuyPrice9.setText("not sold");
         lblBuyPrice9.TextAlign = ContentAlignment.TopRight;
-        // btnSellAll9
-        btnSellAll9.setFlatStyle(FlatStyle.Flat);
-        btnSellAll9.setLocation(new Point(115, 272));
-        btnSellAll9.setName("btnSellAll9");
-        btnSellAll9.setSize(new FormSize(44, 22));
-        btnSellAll9.setTabIndex(49);
-        btnSellAll9.setText("Dump");
-        btnSellAll9.setClick(new EventHandler<>() {
+        // buttonSellAll9
+        buttonSellAll9.setFlatStyle(FlatStyle.Flat);
+        buttonSellAll9.setLocation(new Point(115, 272));
+        buttonSellAll9.setName("buttonSellAll9");
+        buttonSellAll9.setSize(new FormSize(44, 22));
+        buttonSellAll9.setTabIndex(49);
+        buttonSellAll9.setText("Dump");
+        buttonSellAll9.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
-        // btnSellQty9
-        btnSellQty9.setFlatStyle(FlatStyle.Flat);
-        btnSellQty9.setLocation(new Point(80, 272));
-        btnSellQty9.setName("btnSellQty9");
-        btnSellQty9.setSize(new FormSize(28, 22));
-        btnSellQty9.setTabIndex(48);
-        btnSellQty9.setText("88");
-        btnSellQty9.setClick(new EventHandler<>() {
+        // buttonSellQty9
+        buttonSellQty9.setFlatStyle(FlatStyle.Flat);
+        buttonSellQty9.setLocation(new Point(80, 272));
+        buttonSellQty9.setName("buttonSellQty9");
+        buttonSellQty9.setSize(new FormSize(28, 22));
+        buttonSellQty9.setTabIndex(48);
+        buttonSellQty9.setText("88");
+        buttonSellQty9.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
         // lblSellPrice9
@@ -1110,30 +1110,30 @@ public class Main extends WinformWindow {
         lblTargetPrice8.setTabIndex(116);
         lblTargetPrice8.setText("8,888 cr.");
         lblTargetPrice8.TextAlign = ContentAlignment.TopRight;
-        // btnBuyMax8
-        btnBuyMax8.setFlatStyle(FlatStyle.Flat);
-        btnBuyMax8.setLocation(new Point(262, 248));
-        btnBuyMax8.setName("btnBuyMax8");
-        btnBuyMax8.setSize(new FormSize(36, 22));
-        btnBuyMax8.setTabIndex(47);
-        btnBuyMax8.setText("Max");
-        btnBuyMax8.setClick(new EventHandler<>() {
+        // buttonBuyMax8
+        buttonBuyMax8.setFlatStyle(FlatStyle.Flat);
+        buttonBuyMax8.setLocation(new Point(262, 248));
+        buttonBuyMax8.setName("buttonBuyMax8");
+        buttonBuyMax8.setSize(new FormSize(36, 22));
+        buttonBuyMax8.setTabIndex(47);
+        buttonBuyMax8.setText("Max");
+        buttonBuyMax8.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
-        // btnBuyQty8
-        btnBuyQty8.setFlatStyle(FlatStyle.Flat);
-        btnBuyQty8.setLocation(new Point(227, 248));
-        btnBuyQty8.setName("btnBuyQty8");
-        btnBuyQty8.setSize(new FormSize(28, 22));
-        btnBuyQty8.setTabIndex(46);
-        btnBuyQty8.setText("88");
-        btnBuyQty8.setClick(new EventHandler<>() {
+        // buttonBuyQty8
+        buttonBuyQty8.setFlatStyle(FlatStyle.Flat);
+        buttonBuyQty8.setLocation(new Point(227, 248));
+        buttonBuyQty8.setName("buttonBuyQty8");
+        buttonBuyQty8.setSize(new FormSize(28, 22));
+        buttonBuyQty8.setTabIndex(46);
+        buttonBuyQty8.setText("88");
+        buttonBuyQty8.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
         // lblBuyPrice8
@@ -1143,30 +1143,30 @@ public class Main extends WinformWindow {
         lblBuyPrice8.setTabIndex(113);
         lblBuyPrice8.setText("8,888 cr.");
         lblBuyPrice8.TextAlign = ContentAlignment.TopRight;
-        // btnSellAll8
-        btnSellAll8.setFlatStyle(FlatStyle.Flat);
-        btnSellAll8.setLocation(new Point(115, 248));
-        btnSellAll8.setName("btnSellAll8");
-        btnSellAll8.setSize(new FormSize(44, 22));
-        btnSellAll8.setTabIndex(45);
-        btnSellAll8.setText("All");
-        btnSellAll8.setClick(new EventHandler<>() {
+        // buttonSellAll8
+        buttonSellAll8.setFlatStyle(FlatStyle.Flat);
+        buttonSellAll8.setLocation(new Point(115, 248));
+        buttonSellAll8.setName("buttonSellAll8");
+        buttonSellAll8.setSize(new FormSize(44, 22));
+        buttonSellAll8.setTabIndex(45);
+        buttonSellAll8.setText("All");
+        buttonSellAll8.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
-        // btnSellQty8
-        btnSellQty8.setFlatStyle(FlatStyle.Flat);
-        btnSellQty8.setLocation(new Point(80, 248));
-        btnSellQty8.setName("btnSellQty8");
-        btnSellQty8.setSize(new FormSize(28, 22));
-        btnSellQty8.setTabIndex(44);
-        btnSellQty8.setText("88");
-        btnSellQty8.setClick(new EventHandler<>() {
+        // buttonSellQty8
+        buttonSellQty8.setFlatStyle(FlatStyle.Flat);
+        buttonSellQty8.setLocation(new Point(80, 248));
+        buttonSellQty8.setName("buttonSellQty8");
+        buttonSellQty8.setSize(new FormSize(28, 22));
+        buttonSellQty8.setTabIndex(44);
+        buttonSellQty8.setText("88");
+        buttonSellQty8.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
         // lblSellPrice8
@@ -1199,30 +1199,30 @@ public class Main extends WinformWindow {
         lblTargetPrice7.setTabIndex(107);
         lblTargetPrice7.setText("8,888 cr.");
         lblTargetPrice7.TextAlign = ContentAlignment.TopRight;
-        // btnBuyMax7
-        btnBuyMax7.setFlatStyle(FlatStyle.Flat);
-        btnBuyMax7.setLocation(new Point(262, 224));
-        btnBuyMax7.setName("btnBuyMax7");
-        btnBuyMax7.setSize(new FormSize(36, 22));
-        btnBuyMax7.setTabIndex(43);
-        btnBuyMax7.setText("Max");
-        btnBuyMax7.setClick(new EventHandler<>() {
+        // buttonBuyMax7
+        buttonBuyMax7.setFlatStyle(FlatStyle.Flat);
+        buttonBuyMax7.setLocation(new Point(262, 224));
+        buttonBuyMax7.setName("buttonBuyMax7");
+        buttonBuyMax7.setSize(new FormSize(36, 22));
+        buttonBuyMax7.setTabIndex(43);
+        buttonBuyMax7.setText("Max");
+        buttonBuyMax7.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
-        // btnBuyQty7
-        btnBuyQty7.setFlatStyle(FlatStyle.Flat);
-        btnBuyQty7.setLocation(new Point(227, 224));
-        btnBuyQty7.setName("btnBuyQty7");
-        btnBuyQty7.setSize(new FormSize(28, 22));
-        btnBuyQty7.setTabIndex(42);
-        btnBuyQty7.setText("88");
-        btnBuyQty7.setClick(new EventHandler<>() {
+        // buttonBuyQty7
+        buttonBuyQty7.setFlatStyle(FlatStyle.Flat);
+        buttonBuyQty7.setLocation(new Point(227, 224));
+        buttonBuyQty7.setName("buttonBuyQty7");
+        buttonBuyQty7.setSize(new FormSize(28, 22));
+        buttonBuyQty7.setTabIndex(42);
+        buttonBuyQty7.setText("88");
+        buttonBuyQty7.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
         // lblBuyPrice7
@@ -1232,30 +1232,30 @@ public class Main extends WinformWindow {
         lblBuyPrice7.setTabIndex(104);
         lblBuyPrice7.setText("8,888 cr.");
         lblBuyPrice7.TextAlign = ContentAlignment.TopRight;
-        // btnSellAll7
-        btnSellAll7.setFlatStyle(FlatStyle.Flat);
-        btnSellAll7.setLocation(new Point(115, 224));
-        btnSellAll7.setName("btnSellAll7");
-        btnSellAll7.setSize(new FormSize(44, 22));
-        btnSellAll7.setTabIndex(41);
-        btnSellAll7.setText("All");
-        btnSellAll7.setClick(new EventHandler<>() {
+        // buttonSellAll7
+        buttonSellAll7.setFlatStyle(FlatStyle.Flat);
+        buttonSellAll7.setLocation(new Point(115, 224));
+        buttonSellAll7.setName("buttonSellAll7");
+        buttonSellAll7.setSize(new FormSize(44, 22));
+        buttonSellAll7.setTabIndex(41);
+        buttonSellAll7.setText("All");
+        buttonSellAll7.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
-        // btnSellQty7
-        btnSellQty7.setFlatStyle(FlatStyle.Flat);
-        btnSellQty7.setLocation(new Point(80, 224));
-        btnSellQty7.setName("btnSellQty7");
-        btnSellQty7.setSize(new FormSize(28, 22));
-        btnSellQty7.setTabIndex(40);
-        btnSellQty7.setText("88");
-        btnSellQty7.setClick(new EventHandler<>() {
+        // buttonSellQty7
+        buttonSellQty7.setFlatStyle(FlatStyle.Flat);
+        buttonSellQty7.setLocation(new Point(80, 224));
+        buttonSellQty7.setName("buttonSellQty7");
+        buttonSellQty7.setSize(new FormSize(28, 22));
+        buttonSellQty7.setTabIndex(40);
+        buttonSellQty7.setText("88");
+        buttonSellQty7.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
         // lblSellPrice7
@@ -1286,30 +1286,30 @@ public class Main extends WinformWindow {
         lblTargetPrice6.setTabIndex(98);
         lblTargetPrice6.setText("8,888 cr.");
         lblTargetPrice6.TextAlign = ContentAlignment.TopRight;
-        // btnBuyMax6
-        btnBuyMax6.setFlatStyle(FlatStyle.Flat);
-        btnBuyMax6.setLocation(new Point(262, 200));
-        btnBuyMax6.setName("btnBuyMax6");
-        btnBuyMax6.setSize(new FormSize(36, 22));
-        btnBuyMax6.setTabIndex(39);
-        btnBuyMax6.setText("Max");
-        btnBuyMax6.setClick(new EventHandler<>() {
+        // buttonBuyMax6
+        buttonBuyMax6.setFlatStyle(FlatStyle.Flat);
+        buttonBuyMax6.setLocation(new Point(262, 200));
+        buttonBuyMax6.setName("buttonBuyMax6");
+        buttonBuyMax6.setSize(new FormSize(36, 22));
+        buttonBuyMax6.setTabIndex(39);
+        buttonBuyMax6.setText("Max");
+        buttonBuyMax6.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
-        // btnBuyQty6
-        btnBuyQty6.setFlatStyle(FlatStyle.Flat);
-        btnBuyQty6.setLocation(new Point(227, 200));
-        btnBuyQty6.setName("btnBuyQty6");
-        btnBuyQty6.setSize(new FormSize(28, 22));
-        btnBuyQty6.setTabIndex(38);
-        btnBuyQty6.setText("88");
-        btnBuyQty6.setClick(new EventHandler<>() {
+        // buttonBuyQty6
+        buttonBuyQty6.setFlatStyle(FlatStyle.Flat);
+        buttonBuyQty6.setLocation(new Point(227, 200));
+        buttonBuyQty6.setName("buttonBuyQty6");
+        buttonBuyQty6.setSize(new FormSize(28, 22));
+        buttonBuyQty6.setTabIndex(38);
+        buttonBuyQty6.setText("88");
+        buttonBuyQty6.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
         // lblBuyPrice6
@@ -1319,30 +1319,30 @@ public class Main extends WinformWindow {
         lblBuyPrice6.setTabIndex(95);
         lblBuyPrice6.setText("8,888 cr.");
         lblBuyPrice6.TextAlign = ContentAlignment.TopRight;
-        // btnSellAll6
-        btnSellAll6.setFlatStyle(FlatStyle.Flat);
-        btnSellAll6.setLocation(new Point(115, 200));
-        btnSellAll6.setName("btnSellAll6");
-        btnSellAll6.setSize(new FormSize(44, 22));
-        btnSellAll6.setTabIndex(37);
-        btnSellAll6.setText("All");
-        btnSellAll6.setClick(new EventHandler<>() {
+        // buttonSellAll6
+        buttonSellAll6.setFlatStyle(FlatStyle.Flat);
+        buttonSellAll6.setLocation(new Point(115, 200));
+        buttonSellAll6.setName("buttonSellAll6");
+        buttonSellAll6.setSize(new FormSize(44, 22));
+        buttonSellAll6.setTabIndex(37);
+        buttonSellAll6.setText("All");
+        buttonSellAll6.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
-        // btnSellQty6
-        btnSellQty6.setFlatStyle(FlatStyle.Flat);
-        btnSellQty6.setLocation(new Point(80, 200));
-        btnSellQty6.setName("btnSellQty6");
-        btnSellQty6.setSize(new FormSize(28, 22));
-        btnSellQty6.setTabIndex(36);
-        btnSellQty6.setText("88");
-        btnSellQty6.setClick(new EventHandler<>() {
+        // buttonSellQty6
+        buttonSellQty6.setFlatStyle(FlatStyle.Flat);
+        buttonSellQty6.setLocation(new Point(80, 200));
+        buttonSellQty6.setName("buttonSellQty6");
+        buttonSellQty6.setSize(new FormSize(28, 22));
+        buttonSellQty6.setTabIndex(36);
+        buttonSellQty6.setText("88");
+        buttonSellQty6.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
         // lblSellPrice6
@@ -1373,30 +1373,30 @@ public class Main extends WinformWindow {
         lblTargetPrice5.setTabIndex(89);
         lblTargetPrice5.setText("8,888 cr.");
         lblTargetPrice5.TextAlign = ContentAlignment.TopRight;
-        // btnBuyMax5
-        btnBuyMax5.setFlatStyle(FlatStyle.Flat);
-        btnBuyMax5.setLocation(new Point(262, 176));
-        btnBuyMax5.setName("btnBuyMax5");
-        btnBuyMax5.setSize(new FormSize(36, 22));
-        btnBuyMax5.setTabIndex(35);
-        btnBuyMax5.setText("Max");
-        btnBuyMax5.setClick(new EventHandler<>() {
+        // buttonBuyMax5
+        buttonBuyMax5.setFlatStyle(FlatStyle.Flat);
+        buttonBuyMax5.setLocation(new Point(262, 176));
+        buttonBuyMax5.setName("buttonBuyMax5");
+        buttonBuyMax5.setSize(new FormSize(36, 22));
+        buttonBuyMax5.setTabIndex(35);
+        buttonBuyMax5.setText("Max");
+        buttonBuyMax5.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
-        // btnBuyQty5
-        btnBuyQty5.setFlatStyle(FlatStyle.Flat);
-        btnBuyQty5.setLocation(new Point(227, 176));
-        btnBuyQty5.setName("btnBuyQty5");
-        btnBuyQty5.setSize(new FormSize(28, 22));
-        btnBuyQty5.setTabIndex(34);
-        btnBuyQty5.setText("88");
-        btnBuyQty5.setClick(new EventHandler<>() {
+        // buttonBuyQty5
+        buttonBuyQty5.setFlatStyle(FlatStyle.Flat);
+        buttonBuyQty5.setLocation(new Point(227, 176));
+        buttonBuyQty5.setName("buttonBuyQty5");
+        buttonBuyQty5.setSize(new FormSize(28, 22));
+        buttonBuyQty5.setTabIndex(34);
+        buttonBuyQty5.setText("88");
+        buttonBuyQty5.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
         // lblBuyPrice5
@@ -1406,30 +1406,30 @@ public class Main extends WinformWindow {
         lblBuyPrice5.setTabIndex(86);
         lblBuyPrice5.setText("8,888 cr.");
         lblBuyPrice5.TextAlign = ContentAlignment.TopRight;
-        // btnSellAll5
-        btnSellAll5.setFlatStyle(FlatStyle.Flat);
-        btnSellAll5.setLocation(new Point(115, 176));
-        btnSellAll5.setName("btnSellAll5");
-        btnSellAll5.setSize(new FormSize(44, 22));
-        btnSellAll5.setTabIndex(33);
-        btnSellAll5.setText("All");
-        btnSellAll5.setClick(new EventHandler<>() {
+        // buttonSellAll5
+        buttonSellAll5.setFlatStyle(FlatStyle.Flat);
+        buttonSellAll5.setLocation(new Point(115, 176));
+        buttonSellAll5.setName("buttonSellAll5");
+        buttonSellAll5.setSize(new FormSize(44, 22));
+        buttonSellAll5.setTabIndex(33);
+        buttonSellAll5.setText("All");
+        buttonSellAll5.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
-        // btnSellQty5
-        btnSellQty5.setFlatStyle(FlatStyle.Flat);
-        btnSellQty5.setLocation(new Point(80, 176));
-        btnSellQty5.setName("btnSellQty5");
-        btnSellQty5.setSize(new FormSize(28, 22));
-        btnSellQty5.setTabIndex(32);
-        btnSellQty5.setText("88");
-        btnSellQty5.setClick(new EventHandler<>() {
+        // buttonSellQty5
+        buttonSellQty5.setFlatStyle(FlatStyle.Flat);
+        buttonSellQty5.setLocation(new Point(80, 176));
+        buttonSellQty5.setName("buttonSellQty5");
+        buttonSellQty5.setSize(new FormSize(28, 22));
+        buttonSellQty5.setTabIndex(32);
+        buttonSellQty5.setText("88");
+        buttonSellQty5.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
         // lblSellPrice5
@@ -1460,30 +1460,30 @@ public class Main extends WinformWindow {
         lblTargetPrice4.setTabIndex(80);
         lblTargetPrice4.setText("8,888 cr.");
         lblTargetPrice4.TextAlign = ContentAlignment.TopRight;
-        // btnBuyMax4
-        btnBuyMax4.setFlatStyle(FlatStyle.Flat);
-        btnBuyMax4.setLocation(new Point(262, 152));
-        btnBuyMax4.setName("btnBuyMax4");
-        btnBuyMax4.setSize(new FormSize(36, 22));
-        btnBuyMax4.setTabIndex(31);
-        btnBuyMax4.setText("Max");
-        btnBuyMax4.setClick(new EventHandler<>() {
+        // buttonBuyMax4
+        buttonBuyMax4.setFlatStyle(FlatStyle.Flat);
+        buttonBuyMax4.setLocation(new Point(262, 152));
+        buttonBuyMax4.setName("buttonBuyMax4");
+        buttonBuyMax4.setSize(new FormSize(36, 22));
+        buttonBuyMax4.setTabIndex(31);
+        buttonBuyMax4.setText("Max");
+        buttonBuyMax4.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
-        // btnBuyQty4
-        btnBuyQty4.setFlatStyle(FlatStyle.Flat);
-        btnBuyQty4.setLocation(new Point(227, 152));
-        btnBuyQty4.setName("btnBuyQty4");
-        btnBuyQty4.setSize(new FormSize(28, 22));
-        btnBuyQty4.setTabIndex(30);
-        btnBuyQty4.setText("88");
-        btnBuyQty4.setClick(new EventHandler<>() {
+        // buttonBuyQty4
+        buttonBuyQty4.setFlatStyle(FlatStyle.Flat);
+        buttonBuyQty4.setLocation(new Point(227, 152));
+        buttonBuyQty4.setName("buttonBuyQty4");
+        buttonBuyQty4.setSize(new FormSize(28, 22));
+        buttonBuyQty4.setTabIndex(30);
+        buttonBuyQty4.setText("88");
+        buttonBuyQty4.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
         // lblBuyPrice4
@@ -1493,30 +1493,30 @@ public class Main extends WinformWindow {
         lblBuyPrice4.setTabIndex(77);
         lblBuyPrice4.setText("8,888 cr.");
         lblBuyPrice4.TextAlign = ContentAlignment.TopRight;
-        // btnSellAll4
-        btnSellAll4.setFlatStyle(FlatStyle.Flat);
-        btnSellAll4.setLocation(new Point(115, 152));
-        btnSellAll4.setName("btnSellAll4");
-        btnSellAll4.setSize(new FormSize(44, 22));
-        btnSellAll4.setTabIndex(29);
-        btnSellAll4.setText("All");
-        btnSellAll4.setClick(new EventHandler<>() {
+        // buttonSellAll4
+        buttonSellAll4.setFlatStyle(FlatStyle.Flat);
+        buttonSellAll4.setLocation(new Point(115, 152));
+        buttonSellAll4.setName("buttonSellAll4");
+        buttonSellAll4.setSize(new FormSize(44, 22));
+        buttonSellAll4.setTabIndex(29);
+        buttonSellAll4.setText("All");
+        buttonSellAll4.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
-        // btnSellQty4
-        btnSellQty4.setFlatStyle(FlatStyle.Flat);
-        btnSellQty4.setLocation(new Point(80, 152));
-        btnSellQty4.setName("btnSellQty4");
-        btnSellQty4.setSize(new FormSize(28, 22));
-        btnSellQty4.setTabIndex(28);
-        btnSellQty4.setText("88");
-        btnSellQty4.setClick(new EventHandler<>() {
+        // buttonSellQty4
+        buttonSellQty4.setFlatStyle(FlatStyle.Flat);
+        buttonSellQty4.setLocation(new Point(80, 152));
+        buttonSellQty4.setName("buttonSellQty4");
+        buttonSellQty4.setSize(new FormSize(28, 22));
+        buttonSellQty4.setTabIndex(28);
+        buttonSellQty4.setText("88");
+        buttonSellQty4.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
         // lblSellPrice4
@@ -1547,30 +1547,30 @@ public class Main extends WinformWindow {
         lblTargetPrice3.setTabIndex(71);
         lblTargetPrice3.setText("8,888 cr.");
         lblTargetPrice3.TextAlign = ContentAlignment.TopRight;
-        // btnBuyMax3
-        btnBuyMax3.setFlatStyle(FlatStyle.Flat);
-        btnBuyMax3.setLocation(new Point(262, 128));
-        btnBuyMax3.setName("btnBuyMax3");
-        btnBuyMax3.setSize(new FormSize(36, 22));
-        btnBuyMax3.setTabIndex(27);
-        btnBuyMax3.setText("Max");
-        btnBuyMax3.setClick(new EventHandler<>() {
+        // buttonBuyMax3
+        buttonBuyMax3.setFlatStyle(FlatStyle.Flat);
+        buttonBuyMax3.setLocation(new Point(262, 128));
+        buttonBuyMax3.setName("buttonBuyMax3");
+        buttonBuyMax3.setSize(new FormSize(36, 22));
+        buttonBuyMax3.setTabIndex(27);
+        buttonBuyMax3.setText("Max");
+        buttonBuyMax3.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
-        // btnBuyQty3
-        btnBuyQty3.setFlatStyle(FlatStyle.Flat);
-        btnBuyQty3.setLocation(new Point(227, 128));
-        btnBuyQty3.setName("btnBuyQty3");
-        btnBuyQty3.setSize(new FormSize(28, 22));
-        btnBuyQty3.setTabIndex(26);
-        btnBuyQty3.setText("88");
-        btnBuyQty3.setClick(new EventHandler<>() {
+        // buttonBuyQty3
+        buttonBuyQty3.setFlatStyle(FlatStyle.Flat);
+        buttonBuyQty3.setLocation(new Point(227, 128));
+        buttonBuyQty3.setName("buttonBuyQty3");
+        buttonBuyQty3.setSize(new FormSize(28, 22));
+        buttonBuyQty3.setTabIndex(26);
+        buttonBuyQty3.setText("88");
+        buttonBuyQty3.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
         // lblBuyPrice3
@@ -1580,30 +1580,30 @@ public class Main extends WinformWindow {
         lblBuyPrice3.setTabIndex(68);
         lblBuyPrice3.setText("8,888 cr.");
         lblBuyPrice3.TextAlign = ContentAlignment.TopRight;
-        // btnSellAll3
-        btnSellAll3.setFlatStyle(FlatStyle.Flat);
-        btnSellAll3.setLocation(new Point(115, 128));
-        btnSellAll3.setName("btnSellAll3");
-        btnSellAll3.setSize(new FormSize(44, 22));
-        btnSellAll3.setTabIndex(25);
-        btnSellAll3.setText("All");
-        btnSellAll3.setClick(new EventHandler<>() {
+        // buttonSellAll3
+        buttonSellAll3.setFlatStyle(FlatStyle.Flat);
+        buttonSellAll3.setLocation(new Point(115, 128));
+        buttonSellAll3.setName("buttonSellAll3");
+        buttonSellAll3.setSize(new FormSize(44, 22));
+        buttonSellAll3.setTabIndex(25);
+        buttonSellAll3.setText("All");
+        buttonSellAll3.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
-        // btnSellQty3
-        btnSellQty3.setFlatStyle(FlatStyle.Flat);
-        btnSellQty3.setLocation(new Point(80, 128));
-        btnSellQty3.setName("btnSellQty3");
-        btnSellQty3.setSize(new FormSize(28, 22));
-        btnSellQty3.setTabIndex(24);
-        btnSellQty3.setText("88");
-        btnSellQty3.setClick(new EventHandler<>() {
+        // buttonSellQty3
+        buttonSellQty3.setFlatStyle(FlatStyle.Flat);
+        buttonSellQty3.setLocation(new Point(80, 128));
+        buttonSellQty3.setName("buttonSellQty3");
+        buttonSellQty3.setSize(new FormSize(28, 22));
+        buttonSellQty3.setTabIndex(24);
+        buttonSellQty3.setText("88");
+        buttonSellQty3.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
         // lblSellPrice3
@@ -1634,30 +1634,30 @@ public class Main extends WinformWindow {
         lblTargetPrice2.setTabIndex(62);
         lblTargetPrice2.setText("8,888 cr.");
         lblTargetPrice2.TextAlign = ContentAlignment.TopRight;
-        // btnBuyMax2
-        btnBuyMax2.setFlatStyle(FlatStyle.Flat);
-        btnBuyMax2.setLocation(new Point(262, 104));
-        btnBuyMax2.setName("btnBuyMax2");
-        btnBuyMax2.setSize(new FormSize(36, 22));
-        btnBuyMax2.setTabIndex(23);
-        btnBuyMax2.setText("Max");
-        btnBuyMax2.setClick(new EventHandler<>() {
+        // buttonBuyMax2
+        buttonBuyMax2.setFlatStyle(FlatStyle.Flat);
+        buttonBuyMax2.setLocation(new Point(262, 104));
+        buttonBuyMax2.setName("buttonBuyMax2");
+        buttonBuyMax2.setSize(new FormSize(36, 22));
+        buttonBuyMax2.setTabIndex(23);
+        buttonBuyMax2.setText("Max");
+        buttonBuyMax2.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
-        // btnBuyQty2
-        btnBuyQty2.setFlatStyle(FlatStyle.Flat);
-        btnBuyQty2.setLocation(new Point(227, 104));
-        btnBuyQty2.setName("btnBuyQty2");
-        btnBuyQty2.setSize(new FormSize(28, 22));
-        btnBuyQty2.setTabIndex(22);
-        btnBuyQty2.setText("88");
-        btnBuyQty2.setClick(new EventHandler<>() {
+        // buttonBuyQty2
+        buttonBuyQty2.setFlatStyle(FlatStyle.Flat);
+        buttonBuyQty2.setLocation(new Point(227, 104));
+        buttonBuyQty2.setName("buttonBuyQty2");
+        buttonBuyQty2.setSize(new FormSize(28, 22));
+        buttonBuyQty2.setTabIndex(22);
+        buttonBuyQty2.setText("88");
+        buttonBuyQty2.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
         // lblBuyPrice2
@@ -1667,30 +1667,30 @@ public class Main extends WinformWindow {
         lblBuyPrice2.setTabIndex(59);
         lblBuyPrice2.setText("8,888 cr.");
         lblBuyPrice2.TextAlign = ContentAlignment.TopRight;
-        // btnSellAll2
-        btnSellAll2.setFlatStyle(FlatStyle.Flat);
-        btnSellAll2.setLocation(new Point(115, 104));
-        btnSellAll2.setName("btnSellAll2");
-        btnSellAll2.setSize(new FormSize(44, 22));
-        btnSellAll2.setTabIndex(21);
-        btnSellAll2.setText("All");
-        btnSellAll2.setClick(new EventHandler<>() {
+        // buttonSellAll2
+        buttonSellAll2.setFlatStyle(FlatStyle.Flat);
+        buttonSellAll2.setLocation(new Point(115, 104));
+        buttonSellAll2.setName("buttonSellAll2");
+        buttonSellAll2.setSize(new FormSize(44, 22));
+        buttonSellAll2.setTabIndex(21);
+        buttonSellAll2.setText("All");
+        buttonSellAll2.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
-        // btnSellQty2
-        btnSellQty2.setFlatStyle(FlatStyle.Flat);
-        btnSellQty2.setLocation(new Point(80, 104));
-        btnSellQty2.setName("btnSellQty2");
-        btnSellQty2.setSize(new FormSize(28, 22));
-        btnSellQty2.setTabIndex(20);
-        btnSellQty2.setText("88");
-        btnSellQty2.setClick(new EventHandler<>() {
+        // buttonSellQty2
+        buttonSellQty2.setFlatStyle(FlatStyle.Flat);
+        buttonSellQty2.setLocation(new Point(80, 104));
+        buttonSellQty2.setName("buttonSellQty2");
+        buttonSellQty2.setSize(new FormSize(28, 22));
+        buttonSellQty2.setTabIndex(20);
+        buttonSellQty2.setText("88");
+        buttonSellQty2.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
         // lblSellPrice2
@@ -1721,30 +1721,30 @@ public class Main extends WinformWindow {
         lblTargetPrice1.setTabIndex(53);
         lblTargetPrice1.setText("8,888 cr.");
         lblTargetPrice1.TextAlign = ContentAlignment.TopRight;
-        // btnBuyMax1
-        btnBuyMax1.setFlatStyle(FlatStyle.Flat);
-        btnBuyMax1.setLocation(new Point(262, 80));
-        btnBuyMax1.setName("btnBuyMax1");
-        btnBuyMax1.setSize(new FormSize(36, 22));
-        btnBuyMax1.setTabIndex(19);
-        btnBuyMax1.setText("Max");
-        btnBuyMax1.setClick(new EventHandler<>() {
+        // buttonBuyMax1
+        buttonBuyMax1.setFlatStyle(FlatStyle.Flat);
+        buttonBuyMax1.setLocation(new Point(262, 80));
+        buttonBuyMax1.setName("buttonBuyMax1");
+        buttonBuyMax1.setSize(new FormSize(36, 22));
+        buttonBuyMax1.setTabIndex(19);
+        buttonBuyMax1.setText("Max");
+        buttonBuyMax1.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
-        // btnBuyQty1
-        btnBuyQty1.setFlatStyle(FlatStyle.Flat);
-        btnBuyQty1.setLocation(new Point(227, 80));
-        btnBuyQty1.setName("btnBuyQty1");
-        btnBuyQty1.setSize(new FormSize(28, 22));
-        btnBuyQty1.setTabIndex(18);
-        btnBuyQty1.setText("88");
-        btnBuyQty1.setClick(new EventHandler<>() {
+        // buttonBuyQty1
+        buttonBuyQty1.setFlatStyle(FlatStyle.Flat);
+        buttonBuyQty1.setLocation(new Point(227, 80));
+        buttonBuyQty1.setName("buttonBuyQty1");
+        buttonBuyQty1.setSize(new FormSize(28, 22));
+        buttonBuyQty1.setTabIndex(18);
+        buttonBuyQty1.setText("88");
+        buttonBuyQty1.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
         // lblBuyPrice1
@@ -1796,30 +1796,30 @@ public class Main extends WinformWindow {
         lblTargetPrice0.setTabIndex(44);
         lblTargetPrice0.setText("8,888 cr.");
         lblTargetPrice0.TextAlign = ContentAlignment.TopRight;
-        // btnBuyMax0
-        btnBuyMax0.setFlatStyle(FlatStyle.Flat);
-        btnBuyMax0.setLocation(new Point(262, 56));
-        btnBuyMax0.setName("btnBuyMax0");
-        btnBuyMax0.setSize(new FormSize(36, 22));
-        btnBuyMax0.setTabIndex(15);
-        btnBuyMax0.setText("Max");
-        btnBuyMax0.setClick(new EventHandler<>() {
+        // buttonBuyMax0
+        buttonBuyMax0.setFlatStyle(FlatStyle.Flat);
+        buttonBuyMax0.setLocation(new Point(262, 56));
+        buttonBuyMax0.setName("buttonBuyMax0");
+        buttonBuyMax0.setSize(new FormSize(36, 22));
+        buttonBuyMax0.setTabIndex(15);
+        buttonBuyMax0.setText("Max");
+        buttonBuyMax0.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
-        // btnBuyQty0
-        btnBuyQty0.setFlatStyle(FlatStyle.Flat);
-        btnBuyQty0.setLocation(new Point(227, 56));
-        btnBuyQty0.setName("btnBuyQty0");
-        btnBuyQty0.setSize(new FormSize(28, 22));
-        btnBuyQty0.setTabIndex(14);
-        btnBuyQty0.setText("88");
-        btnBuyQty0.setClick(new EventHandler<>() {
+        // buttonBuyQty0
+        buttonBuyQty0.setFlatStyle(FlatStyle.Flat);
+        buttonBuyQty0.setLocation(new Point(227, 56));
+        buttonBuyQty0.setName("buttonBuyQty0");
+        buttonBuyQty0.setSize(new FormSize(28, 22));
+        buttonBuyQty0.setTabIndex(14);
+        buttonBuyQty0.setText("88");
+        buttonBuyQty0.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
         // lblBuyPrice0
@@ -1829,30 +1829,30 @@ public class Main extends WinformWindow {
         lblBuyPrice0.setTabIndex(41);
         lblBuyPrice0.setText("8,888 cr.");
         lblBuyPrice0.TextAlign = ContentAlignment.TopRight;
-        // btnSellAll1
-        btnSellAll1.setFlatStyle(FlatStyle.Flat);
-        btnSellAll1.setLocation(new Point(115, 80));
-        btnSellAll1.setName("btnSellAll1");
-        btnSellAll1.setSize(new FormSize(44, 22));
-        btnSellAll1.setTabIndex(17);
-        btnSellAll1.setText("All");
-        btnSellAll1.setClick(new EventHandler<>() {
+        // buttonSellAll1
+        buttonSellAll1.setFlatStyle(FlatStyle.Flat);
+        buttonSellAll1.setLocation(new Point(115, 80));
+        buttonSellAll1.setName("buttonSellAll1");
+        buttonSellAll1.setSize(new FormSize(44, 22));
+        buttonSellAll1.setTabIndex(17);
+        buttonSellAll1.setText("All");
+        buttonSellAll1.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
-        // btnSellQty1
-        btnSellQty1.setFlatStyle(FlatStyle.Flat);
-        btnSellQty1.setLocation(new Point(80, 80));
-        btnSellQty1.setName("btnSellQty1");
-        btnSellQty1.setSize(new FormSize(28, 22));
-        btnSellQty1.setTabIndex(16);
-        btnSellQty1.setText("88");
-        btnSellQty1.setClick(new EventHandler<>() {
+        // buttonSellQty1
+        buttonSellQty1.setFlatStyle(FlatStyle.Flat);
+        buttonSellQty1.setLocation(new Point(80, 80));
+        buttonSellQty1.setName("buttonSellQty1");
+        buttonSellQty1.setSize(new FormSize(28, 22));
+        buttonSellQty1.setTabIndex(16);
+        buttonSellQty1.setText("88");
+        buttonSellQty1.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
         // lblSellPrice1
@@ -1862,30 +1862,30 @@ public class Main extends WinformWindow {
         lblSellPrice1.setTabIndex(38);
         lblSellPrice1.setText("8,888 cr.");
         lblSellPrice1.TextAlign = ContentAlignment.TopRight;
-        // btnSellAll0
-        btnSellAll0.setFlatStyle(FlatStyle.Flat);
-        btnSellAll0.setLocation(new Point(115, 56));
-        btnSellAll0.setName("btnSellAll0");
-        btnSellAll0.setSize(new FormSize(44, 22));
-        btnSellAll0.setTabIndex(13);
-        btnSellAll0.setText("All");
-        btnSellAll0.setClick(new EventHandler<>() {
+        // buttonSellAll0
+        buttonSellAll0.setFlatStyle(FlatStyle.Flat);
+        buttonSellAll0.setLocation(new Point(115, 56));
+        buttonSellAll0.setName("buttonSellAll0");
+        buttonSellAll0.setSize(new FormSize(44, 22));
+        buttonSellAll0.setTabIndex(13);
+        buttonSellAll0.setText("All");
+        buttonSellAll0.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
-        // btnSellQty0
-        btnSellQty0.setFlatStyle(FlatStyle.Flat);
-        btnSellQty0.setLocation(new Point(80, 56));
-        btnSellQty0.setName("btnSellQty0");
-        btnSellQty0.setSize(new FormSize(28, 22));
-        btnSellQty0.setTabIndex(12);
-        btnSellQty0.setText("88");
-        btnSellQty0.setClick(new EventHandler<>() {
+        // buttonSellQty0
+        buttonSellQty0.setFlatStyle(FlatStyle.Flat);
+        buttonSellQty0.setLocation(new Point(80, 56));
+        buttonSellQty0.setName("buttonSellQty0");
+        buttonSellQty0.setSize(new FormSize(28, 22));
+        buttonSellQty0.setTabIndex(12);
+        buttonSellQty0.setText("88");
+        buttonSellQty0.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuySell_Click(sender, e);
+                buttonBuySell_Click(sender, e);
             }
         });
         // lblSellPrice0
@@ -1989,9 +1989,9 @@ public class Main extends WinformWindow {
         lblTradeCommodity7.setTabIndex(16);
         lblTradeCommodity7.setText("Machines");
         // boxSystem
-        boxSystem.Controls.add(btnMerc);
-        boxSystem.Controls.add(btnSpecial);
-        boxSystem.Controls.add(btnNews);
+        boxSystem.Controls.add(buttonMerc);
+        boxSystem.Controls.add(buttonSpecial);
+        boxSystem.Controls.add(buttonNews);
         boxSystem.Controls.add(lblSystemPressure);
         boxSystem.Controls.add(lblSystemPressurePre);
         boxSystem.Controls.add(lblSystemPolSys);
@@ -2014,44 +2014,44 @@ public class Main extends WinformWindow {
         boxSystem.setTabIndex(1);
         boxSystem.setTabStop(false);
         boxSystem.setText("System Info");
-        // btnMerc
-        btnMerc.setFlatStyle(FlatStyle.Flat);
-        btnMerc.setLocation(new Point(118, 174));
-        btnMerc.setName("btnMerc");
-        btnMerc.setSize(new FormSize(112, 22));
-        btnMerc.setTabIndex(3);
-        btnMerc.setText("Mercenary For Hire");
-        btnMerc.setClick(new EventHandler<>() {
+        // buttonMerc
+        buttonMerc.setFlatStyle(FlatStyle.Flat);
+        buttonMerc.setLocation(new Point(118, 174));
+        buttonMerc.setName("buttonMerc");
+        buttonMerc.setSize(new FormSize(112, 22));
+        buttonMerc.setTabIndex(3);
+        buttonMerc.setText("Mercenary For Hire");
+        buttonMerc.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnMerc_Click(sender, e);
+                buttonMerc_Click(sender, e);
             }
         });
-        // btnSpecial
-        btnSpecial.setBackColor(new Color(255, 255, 128));
-        btnSpecial.setFlatStyle(FlatStyle.Flat);
-        btnSpecial.setLocation(new Point(58, 174));
-        btnSpecial.setName("btnSpecial");
-        btnSpecial.setSize(new FormSize(52, 22));
-        btnSpecial.setTabIndex(2);
-        btnSpecial.setText("Special");
-        btnSpecial.setClick(new EventHandler<>() {
+        // buttonSpecial
+        buttonSpecial.setBackColor(new Color(255, 255, 128));
+        buttonSpecial.setFlatStyle(FlatStyle.Flat);
+        buttonSpecial.setLocation(new Point(58, 174));
+        buttonSpecial.setName("buttonSpecial");
+        buttonSpecial.setSize(new FormSize(52, 22));
+        buttonSpecial.setTabIndex(2);
+        buttonSpecial.setText("Special");
+        buttonSpecial.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnSpecial_Click(sender, e);
+                buttonSpecial_Click(sender, e);
             }
         });
-        // btnNews
-        btnNews.setFlatStyle(FlatStyle.Flat);
-        btnNews.setLocation(new Point(8, 174));
-        btnNews.setName("btnNews");
-        btnNews.setSize(new FormSize(42, 22));
-        btnNews.setTabIndex(1);
-        btnNews.setText("News");
-        btnNews.setClick(new EventHandler<>() {
+        // buttonNews
+        buttonNews.setFlatStyle(FlatStyle.Flat);
+        buttonNews.setLocation(new Point(8, 174));
+        buttonNews.setName("buttonNews");
+        buttonNews.setSize(new FormSize(42, 22));
+        buttonNews.setTabIndex(1);
+        buttonNews.setText("News");
+        buttonNews.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnNews_Click(sender, e);
+                buttonNews_Click(sender, e);
             }
         });
         // lblSystemPressure
@@ -2173,11 +2173,11 @@ public class Main extends WinformWindow {
         lblSystemNameLabel.setTabIndex(0);
         lblSystemNameLabel.setText("Name:");
         // boxShipYard
-        boxShipYard.Controls.add(btnDesign);
-        boxShipYard.Controls.add(btnPod);
+        boxShipYard.Controls.add(buttonDesign);
+        boxShipYard.Controls.add(buttonPod);
         boxShipYard.Controls.add(lblEscapePod);
-        boxShipYard.Controls.add(btnEquip);
-        boxShipYard.Controls.add(btnBuyShip);
+        boxShipYard.Controls.add(buttonEquip);
+        boxShipYard.Controls.add(buttonBuyShip);
         boxShipYard.Controls.add(lblEquipForSale);
         boxShipYard.Controls.add(lblShipsForSale);
         boxShipYard.setLocation(new Point(4, 306));
@@ -2186,30 +2186,30 @@ public class Main extends WinformWindow {
         boxShipYard.setTabIndex(4);
         boxShipYard.setTabStop(false);
         boxShipYard.setText("Shipyard");
-        // btnDesign
-        btnDesign.setFlatStyle(FlatStyle.Flat);
-        btnDesign.setLocation(new Point(8, 32));
-        btnDesign.setName("btnDesign");
-        btnDesign.setSize(new FormSize(54, 22));
-        btnDesign.setTabIndex(55);
-        btnDesign.setText("Design");
-        btnDesign.setClick(new EventHandler<>() {
+        // buttonDesign
+        buttonDesign.setFlatStyle(FlatStyle.Flat);
+        buttonDesign.setLocation(new Point(8, 32));
+        buttonDesign.setName("buttonDesign");
+        buttonDesign.setSize(new FormSize(54, 22));
+        buttonDesign.setTabIndex(55);
+        buttonDesign.setText("Design");
+        buttonDesign.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnDesign_Click(sender, e);
+                buttonDesign_Click(sender, e);
             }
         });
-        // btnPod
-        btnPod.setFlatStyle(FlatStyle.Flat);
-        btnPod.setLocation(new Point(98, 138));
-        btnPod.setName("btnPod");
-        btnPod.setSize(new FormSize(58, 22));
-        btnPod.setTabIndex(54);
-        btnPod.setText("Buy Pod");
-        btnPod.setClick(new EventHandler<>() {
+        // buttonPod
+        buttonPod.setFlatStyle(FlatStyle.Flat);
+        buttonPod.setLocation(new Point(98, 138));
+        buttonPod.setName("buttonPod");
+        buttonPod.setSize(new FormSize(58, 22));
+        buttonPod.setTabIndex(54);
+        buttonPod.setText("Buy Pod");
+        buttonPod.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnPod_Click(sender, e);
+                buttonPod_Click(sender, e);
             }
         });
         // lblEscapePod
@@ -2218,30 +2218,30 @@ public class Main extends WinformWindow {
         lblEscapePod.setSize(new FormSize(152, 26));
         lblEscapePod.setTabIndex(27);
         lblEscapePod.setText("You can buy an escape pod for  2,000 cr.");
-        // btnEquip
-        btnEquip.setFlatStyle(FlatStyle.Flat);
-        btnEquip.setLocation(new Point(43, 85));
-        btnEquip.setName("btnEquip");
-        btnEquip.setSize(new FormSize(113, 22));
-        btnEquip.setTabIndex(53);
-        btnEquip.setText("Buy/Sell Equipment");
-        btnEquip.setClick(new EventHandler<>() {
+        // buttonEquip
+        buttonEquip.setFlatStyle(FlatStyle.Flat);
+        buttonEquip.setLocation(new Point(43, 85));
+        buttonEquip.setName("buttonEquip");
+        buttonEquip.setSize(new FormSize(113, 22));
+        buttonEquip.setTabIndex(53);
+        buttonEquip.setText("Buy/Sell Equipment");
+        buttonEquip.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnEquip_Click(sender, e);
+                buttonEquip_Click(sender, e);
             }
         });
-        // btnBuyShip
-        btnBuyShip.setFlatStyle(FlatStyle.Flat);
-        btnBuyShip.setLocation(new Point(70, 32));
-        btnBuyShip.setName("btnBuyShip");
-        btnBuyShip.setSize(new FormSize(86, 22));
-        btnBuyShip.setTabIndex(52);
-        btnBuyShip.setText("View Ship Info");
-        btnBuyShip.setClick(new EventHandler<>() {
+        // buttonBuyShip
+        buttonBuyShip.setFlatStyle(FlatStyle.Flat);
+        buttonBuyShip.setLocation(new Point(70, 32));
+        buttonBuyShip.setName("buttonBuyShip");
+        buttonBuyShip.setSize(new FormSize(86, 22));
+        buttonBuyShip.setTabIndex(52);
+        buttonBuyShip.setText("View Ship Info");
+        buttonBuyShip.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnBuyShip_Click(sender, e);
+                buttonBuyShip_Click(sender, e);
             }
         });
         // lblEquipForSale
@@ -2257,8 +2257,8 @@ public class Main extends WinformWindow {
         lblShipsForSale.setTabIndex(20);
         lblShipsForSale.setText("There are new ships for sale.");
         // boxDock
-        boxDock.Controls.add(btnRepair);
-        boxDock.Controls.add(btnFuel);
+        boxDock.Controls.add(buttonRepair);
+        boxDock.Controls.add(buttonFuel);
         boxDock.Controls.add(lblFuelStatus);
         boxDock.Controls.add(lblFuelCost);
         boxDock.Controls.add(lblHullStatus);
@@ -2269,30 +2269,30 @@ public class Main extends WinformWindow {
         boxDock.setTabIndex(2);
         boxDock.setTabStop(false);
         boxDock.setText("Dock");
-        // btnRepair
-        btnRepair.setFlatStyle(FlatStyle.Flat);
-        btnRepair.setLocation(new Point(180, 56));
-        btnRepair.setName("btnRepair");
-        btnRepair.setSize(new FormSize(48, 22));
-        btnRepair.setTabIndex(5);
-        btnRepair.setText("Repair");
-        btnRepair.setClick(new EventHandler<>() {
+        // buttonRepair
+        buttonRepair.setFlatStyle(FlatStyle.Flat);
+        buttonRepair.setLocation(new Point(180, 56));
+        buttonRepair.setName("buttonRepair");
+        buttonRepair.setSize(new FormSize(48, 22));
+        buttonRepair.setTabIndex(5);
+        buttonRepair.setText("Repair");
+        buttonRepair.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnRepair_Click(sender, e);
+                buttonRepair_Click(sender, e);
             }
         });
-        // btnFuel
-        btnFuel.setFlatStyle(FlatStyle.Flat);
-        btnFuel.setLocation(new Point(192, 18));
-        btnFuel.setName("btnFuel");
-        btnFuel.setSize(new FormSize(36, 22));
-        btnFuel.setTabIndex(4);
-        btnFuel.setText("Fuel");
-        btnFuel.setClick(new EventHandler<>() {
+        // buttonFuel
+        buttonFuel.setFlatStyle(FlatStyle.Flat);
+        buttonFuel.setLocation(new Point(192, 18));
+        buttonFuel.setName("buttonFuel");
+        buttonFuel.setSize(new FormSize(36, 22));
+        buttonFuel.setTabIndex(4);
+        buttonFuel.setText("Fuel");
+        buttonFuel.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventArgs e) {
-                btnFuel_Click(sender, e);
+                buttonFuel_Click(sender, e);
             }
         });
         // lblFuelStatus
@@ -2412,21 +2412,21 @@ public class Main extends WinformWindow {
                 lblTargetPct0, lblTargetPct1, lblTargetPct2, lblTargetPct3, lblTargetPct4,
                 lblTargetPct5, lblTargetPct6, lblTargetPct7, lblTargetPct8, lblTargetPct9
         };
-        btnSellQty = new Button[]{
-                btnSellQty0, btnSellQty1, btnSellQty2, btnSellQty3, btnSellQty4,
-                btnSellQty5, btnSellQty6, btnSellQty7, btnSellQty8, btnSellQty9
+        buttonSellQty = new Button[]{
+                buttonSellQty0, buttonSellQty1, buttonSellQty2, buttonSellQty3, buttonSellQty4,
+                buttonSellQty5, buttonSellQty6, buttonSellQty7, buttonSellQty8, buttonSellQty9
         };
-        btnSellAll = new Button[]{
-                btnSellAll0, btnSellAll1, btnSellAll2, btnSellAll3, btnSellAll4,
-                btnSellAll5, btnSellAll6, btnSellAll7, btnSellAll8, btnSellAll9
+        buttonSellAll = new Button[]{
+                buttonSellAll0, buttonSellAll1, buttonSellAll2, buttonSellAll3, buttonSellAll4,
+                buttonSellAll5, buttonSellAll6, buttonSellAll7, buttonSellAll8, buttonSellAll9
         };
-        btnBuyQty = new Button[]{
-                btnBuyQty0, btnBuyQty1, btnBuyQty2, btnBuyQty3, btnBuyQty4,
-                btnBuyQty5, btnBuyQty6, btnBuyQty7, btnBuyQty8, btnBuyQty9
+        buttonBuyQty = new Button[]{
+                buttonBuyQty0, buttonBuyQty1, buttonBuyQty2, buttonBuyQty3, buttonBuyQty4,
+                buttonBuyQty5, buttonBuyQty6, buttonBuyQty7, buttonBuyQty8, buttonBuyQty9
         };
-        btnBuyMax = new Button[]{
-                btnBuyMax0, btnBuyMax1, btnBuyMax2, btnBuyMax3, btnBuyMax4,
-                btnBuyMax5, btnBuyMax6, btnBuyMax7, btnBuyMax8, btnBuyMax9
+        buttonBuyMax = new Button[]{
+                buttonBuyMax0, buttonBuyMax1, buttonBuyMax2, buttonBuyMax3, buttonBuyMax4,
+                buttonBuyMax5, buttonBuyMax6, buttonBuyMax7, buttonBuyMax8, buttonBuyMax9
         };
         Main.this.UpdateAll();
     }
@@ -2434,7 +2434,7 @@ public class Main extends WinformWindow {
     /**
      * Main entry point for the game.
      */
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -2447,11 +2447,18 @@ public class Main extends WinformWindow {
         mainWindow.ShowWindow();
     }
 
+    public static void runForm(wfForm wf) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+        UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        SwingUtilities.updateComponentTreeUI(wf.asSwingObject());
+        DialogResult res = wf.ShowDialog(null);
+        System.out.println("Dialog result: " + res);
+    }
+
     private void AddHighScore(HighScoreRecord highScore) {
         HighScoreRecord[] highScores = Functions.GetHighScores(this);
         highScores[0] = highScore;
         Arrays.sort(highScores);
-        Functions.SaveFile(Constants.HighScoreFile, STSerializableObject.ArrayToArrayList(highScores), this);
+        Functions.SaveFile(Constants.HighScoreFile, SerializableObject.ArrayToArrayList(highScores), this);
     }
 
     private void CargoBuy(int tradeItem, boolean max) {
@@ -2470,7 +2477,7 @@ public class Main extends WinformWindow {
 
     private void ClearHighScores() {
         HighScoreRecord[] highScores = new HighScoreRecord[3];
-        Functions.SaveFile(Constants.HighScoreFile, STSerializableObject.ArrayToArrayList(highScores), this);
+        Functions.SaveFile(Constants.HighScoreFile, SerializableObject.ArrayToArrayList(highScores), this);
     }
 
     private void GameEnd() {
@@ -2601,10 +2608,10 @@ public class Main extends WinformWindow {
                 lblTargetPrice[i].setText("");
                 lblTargetDiff[i].setText("");
                 lblTargetPct[i].setText("");
-                btnSellQty[i].setVisible(false);
-                btnSellAll[i].setVisible(false);
-                btnBuyQty[i].setVisible(false);
-                btnBuyMax[i].setVisible(false);
+                buttonSellQty[i].setVisible(false);
+                buttonSellAll[i].setVisible(false);
+                buttonBuyQty[i].setVisible(false);
+                buttonBuyMax[i].setVisible(false);
             }
         } else {
             int[] buy = game.PriceCargoBuy();
@@ -2614,14 +2621,14 @@ public class Main extends WinformWindow {
             for (int i = 0; i < lblSellPrice.length; i++) {
                 int price = warpSys == null ? 0 : Constants.TradeItems[i].StandardPrice(warpSys);
                 lblSellPrice[i].setText(sell[i] > 0 ? Functions.FormatMoney(sell[i]) : "no trade");
-                btnSellQty[i].setText("" + cmdr.getShip().Cargo()[i]);
-                btnSellQty[i].setVisible(true);
-                btnSellAll[i].setText(sell[i] > 0 ? "All" : "Dump");
-                btnSellAll[i].setVisible(true);
+                buttonSellQty[i].setText("" + cmdr.getShip().Cargo()[i]);
+                buttonSellQty[i].setVisible(true);
+                buttonSellAll[i].setText(sell[i] > 0 ? "All" : "Dump");
+                buttonSellAll[i].setVisible(true);
                 lblBuyPrice[i].setText(buy[i] > 0 ? Functions.FormatMoney(buy[i]) : "not sold");
-                btnBuyQty[i].setText("" + cmdr.CurrentSystem().TradeItems()[i]);
-                btnBuyQty[i].setVisible(buy[i] > 0);
-                btnBuyMax[i].setVisible(buy[i] > 0);
+                buttonBuyQty[i].setText("" + cmdr.CurrentSystem().TradeItems()[i]);
+                buttonBuyQty[i].setVisible(buy[i] > 0);
+                buttonBuyMax[i].setVisible(buy[i] > 0);
                 if (sell[i] * cmdr.getShip().Cargo()[i] > cmdr.PriceCargo()[i]) {
                     lblSellPrice[i].setFont(lblSystemNameLabel.getFont());
                 } else {
@@ -2657,8 +2664,8 @@ public class Main extends WinformWindow {
         if (game == null) {
             lblWormholeLabel.setVisible(false);
             lblWormhole.setVisible(false);
-            btnJump.setVisible(false);
-            btnFind.setVisible(false);
+            buttonJump.setVisible(false);
+            buttonFind.setVisible(false);
         } else {
             if (game.TargetWormhole()) {
                 lblWormholeLabel.setVisible(true);
@@ -2668,8 +2675,8 @@ public class Main extends WinformWindow {
                 lblWormholeLabel.setVisible(false);
                 lblWormhole.setVisible(false);
             }
-            btnJump.setVisible(game.getCanSuperWarp());
-            btnFind.setVisible(true);
+            buttonJump.setVisible(game.getCanSuperWarp());
+            buttonFind.setVisible(true);
         }
     }
 
@@ -2677,10 +2684,10 @@ public class Main extends WinformWindow {
         if (game == null) {
             lblFuelStatus.setText("");
             lblFuelCost.setText("");
-            btnFuel.setVisible(false);
+            buttonFuel.setVisible(false);
             lblHullStatus.setText("");
             lblRepairCost.setText("");
-            btnRepair.setVisible(false);
+            buttonRepair.setVisible(false);
         } else {
             Ship ship = cmdr.getShip();
             lblFuelStatus.setText(
@@ -2689,7 +2696,7 @@ public class Main extends WinformWindow {
             lblFuelCost.setText(tanksEmpty > 0
                     ? Functions.StringVars("A full tank costs ^1", Functions.FormatMoney(tanksEmpty * ship.getFuelCost()))
                     : "Your tank is full.");
-            btnFuel.setVisible(tanksEmpty > 0);
+            buttonFuel.setVisible(tanksEmpty > 0);
             lblHullStatus.setText(
                     Functions.StringVars("Your hull strength is at ^1%.",
                             Functions.FormatNumber((int) Math.floor((double) 100 * ship.getHull() / ship.HullStrength()))));
@@ -2697,7 +2704,7 @@ public class Main extends WinformWindow {
             lblRepairCost.setText(hullLoss > 0
                     ? Functions.StringVars("Full repairs will cost ^1", Functions.FormatMoney(hullLoss * ship.getRepairCost()))
                     : "No repairs are needed.");
-            btnRepair.setVisible(hullLoss > 0);
+            buttonRepair.setVisible(hullLoss > 0);
         }
     }
 
@@ -2706,20 +2713,20 @@ public class Main extends WinformWindow {
             lblShipsForSale.setText("");
             lblEquipForSale.setText("");
             lblEscapePod.setText("");
-            btnPod.setVisible(false);
-            btnBuyShip.setVisible(false);
-            btnDesign.setVisible(false);
-            btnEquip.setVisible(false);
+            buttonPod.setVisible(false);
+            buttonBuyShip.setVisible(false);
+            buttonDesign.setVisible(false);
+            buttonEquip.setVisible(false);
         } else {
             boolean noTech =
                     cmdr.CurrentSystem().TechLevel().ordinal()
                             < Constants.ShipSpecs[ShipType.Flea.CastToInt()].MinimumTechLevel().ordinal();
             lblShipsForSale.setText(noTech ? Strings.ShipyardShipNoSale : Strings.ShipyardShipForSale);
-            btnBuyShip.setVisible(true);
-            btnDesign.setVisible((cmdr.CurrentSystem().Shipyard() != null));
+            buttonBuyShip.setVisible(true);
+            buttonDesign.setVisible((cmdr.CurrentSystem().Shipyard() != null));
             lblEquipForSale.setText(noTech ? Strings.ShipyardEquipNoSale : Strings.ShipyardEquipForSale);
-            btnEquip.setVisible(true);
-            btnPod.setVisible(false);
+            buttonEquip.setVisible(true);
+            buttonPod.setVisible(false);
             if (cmdr.getShip().getEscapePod()) {
                 lblEscapePod.setText(Strings.ShipyardPodInstalled);
             } else if (noTech) {
@@ -2728,7 +2735,7 @@ public class Main extends WinformWindow {
                 lblEscapePod.setText(Strings.ShipyardPodIF);
             } else {
                 lblEscapePod.setText(Strings.ShipyardPodCost);
-                btnPod.setVisible(true);
+                buttonPod.setVisible(true);
             }
         }
     }
@@ -2759,9 +2766,9 @@ public class Main extends WinformWindow {
             lblSystemPirates.setText("");
             lblSystemPressure.setText("");
             lblSystemPressurePre.setVisible(false);
-            btnNews.setVisible(false);
-            btnMerc.setVisible(false);
-            btnSpecial.setVisible(false);
+            buttonNews.setVisible(false);
+            buttonMerc.setVisible(false);
+            buttonSpecial.setVisible(false);
         } else {
             StarSystem system = cmdr.CurrentSystem();
             CrewMember[] mercs = system.MercenariesForHire();
@@ -2774,23 +2781,23 @@ public class Main extends WinformWindow {
             lblSystemPirates.setText(Strings.ActivityLevels[system.PoliticalSystem().ActivityPirates().CastToInt()]);
             lblSystemPressure.setText(system.SystemPressure().name);
             lblSystemPressurePre.setVisible(true);
-            btnNews.setVisible(true);
-            btnMerc.setVisible(mercs.length > 0);
-            if (btnMerc.getVisible()) {
-                tipMerc.SetToolTip(btnMerc, Functions.StringVars(
+            buttonNews.setVisible(true);
+            buttonMerc.setVisible(mercs.length > 0);
+            if (buttonMerc.getVisible()) {
+                tipMerc.SetToolTip(buttonMerc, Functions.StringVars(
                         Strings.MercenariesForHire,
                         mercs.length == 1 ? mercs[0].Name() : mercs.length + Strings.Mercenaries));
             }
-            btnSpecial.setVisible(system.ShowSpecialButton());
-            if (btnSpecial.getVisible()) {
-                tipSpecial.SetToolTip(btnSpecial, system.SpecialEvent().Title());
+            buttonSpecial.setVisible(system.ShowSpecialButton());
+            if (buttonSpecial.getVisible()) {
+                tipSpecial.SetToolTip(buttonSpecial, system.SpecialEvent().Title());
             }
         }
     }
 
     private void UpdateTargetSystemInfo() {
-        btnNextSystem.setVisible(game != null);
-        btnPrevSystem.setVisible(game != null);
+        buttonNextSystem.setVisible(game != null);
+        buttonPrevSystem.setVisible(game != null);
         if (game == null || game.WarpSystem() == null) {
             lblTargetName.setText("");
             lblTargetSize.setText("");
@@ -2801,8 +2808,8 @@ public class Main extends WinformWindow {
             lblTargetPirates.setText("");
             lblTargetDistance.setText("");
             lblTargetOutOfRange.setVisible(false);
-            btnWarp.setVisible(false);
-            btnTrack.setVisible(false);
+            buttonWarp.setVisible(false);
+            buttonTrack.setVisible(false);
         } else {
             StarSystem system = game.WarpSystem();
             int distance = Functions.Distance(cmdr.CurrentSystem(), system);
@@ -2815,8 +2822,8 @@ public class Main extends WinformWindow {
             lblTargetPirates.setText(Strings.ActivityLevels[system.PoliticalSystem().ActivityPirates().CastToInt()]);
             lblTargetDistance.setText("" + distance);
             lblTargetOutOfRange.setVisible(!system.DestOk() && system != cmdr.CurrentSystem());
-            btnWarp.setVisible(system.DestOk());
-            btnTrack.setVisible(lblTargetOutOfRange.getVisible() && system != game.TrackedSystem());
+            buttonWarp.setVisible(system.DestOk());
+            buttonTrack.setVisible(lblTargetOutOfRange.getVisible() && system != game.TrackedSystem());
         }
     }
 
@@ -2838,7 +2845,7 @@ public class Main extends WinformWindow {
         FormAlert.Alert(AlertType.AppStart, this);
     }
 
-    private void btnBuySell_Click(Object sender, EventArgs e) {
+    private void buttonBuySell_Click(Object sender, EventArgs e) {
         String name = ((Button) sender).getName();
         boolean all = !name.contains("Qty");
         int index = Integer.parseInt(name.substring(name.length() - 1));
@@ -2849,22 +2856,22 @@ public class Main extends WinformWindow {
         }
     }
 
-    private void btnBuyShip_Click(Object sender, EventArgs e) {
+    private void buttonBuyShip_Click(Object sender, EventArgs e) {
         (new FormShipList()).ShowDialog(this);
         UpdateAll();
     }
 
-    private void btnDesign_Click(Object sender, EventArgs e) {
+    private void buttonDesign_Click(Object sender, EventArgs e) {
         (new FormShipyard()).ShowDialog(this);
         UpdateAll();
     }
 
-    private void btnEquip_Click(Object sender, EventArgs e) {
+    private void buttonEquip_Click(Object sender, EventArgs e) {
         (new FormEquipment()).ShowDialog(this);
         UpdateAll();
     }
 
-    private void btnFind_Click(Object sender, EventArgs e) {
+    private void buttonFind_Click(Object sender, EventArgs e) {
         FormFind form = new FormFind();
         if (form.ShowDialog(this) == DialogResult.OK) {
             Ship ship = cmdr.getShip();
@@ -3098,7 +3105,7 @@ public class Main extends WinformWindow {
         }
     }
 
-    private void btnFuel_Click(Object sender, EventArgs e) {
+    private void buttonFuel_Click(Object sender, EventArgs e) {
         FormBuyFuel form = new FormBuyFuel();
         if (form.ShowDialog(this) == DialogResult.OK) {
             int toAdd = form.Amount() / cmdr.getShip().getFuelCost();
@@ -3108,7 +3115,7 @@ public class Main extends WinformWindow {
         }
     }
 
-    private void btnJump_Click(Object sender, EventArgs e) {
+    private void buttonJump_Click(Object sender, EventArgs e) {
         if (game.WarpSystem() == null) {
             FormAlert.Alert(AlertType.ChartJumpNoSystemSelected, this);
         } else if (game.WarpSystem() == cmdr.CurrentSystem()) {
@@ -3130,21 +3137,21 @@ public class Main extends WinformWindow {
         }
     }
 
-    private void btnMerc_Click(Object sender, EventArgs e) {
+    private void buttonMerc_Click(Object sender, EventArgs e) {
         (new FormViewPersonnel()).ShowDialog(this);
         UpdateAll();
     }
 
-    private void btnNews_Click(Object sender, EventArgs e) {
+    private void buttonNews_Click(Object sender, EventArgs e) {
         game.ShowNewspaper();
     }
 
-    private void btnNextSystem_Click(Object sender, EventArgs e) {
+    private void buttonNextSystem_Click(Object sender, EventArgs e) {
         game.SelectNextSystemWithinRange(true);
         UpdateAll();
     }
 
-    private void btnPod_Click(Object sender, EventArgs e) {
+    private void buttonPod_Click(Object sender, EventArgs e) {
         if (FormAlert.Alert(AlertType.EquipmentEscapePod, this) == DialogResult.Yes) {
             cmdr.setCash(cmdr.getCash() - 2000);
             cmdr.getShip().setEscapePod(true);
@@ -3152,12 +3159,12 @@ public class Main extends WinformWindow {
         }
     }
 
-    private void btnPrevSystem_Click(Object sender, EventArgs e) {
+    private void buttonPrevSystem_Click(Object sender, EventArgs e) {
         game.SelectNextSystemWithinRange(false);
         UpdateAll();
     }
 
-    private void btnRepair_Click(Object sender, EventArgs e) {
+    private void buttonRepair_Click(Object sender, EventArgs e) {
         FormBuyRepairs form = new FormBuyRepairs();
         if (form.ShowDialog(this) == DialogResult.OK) {
             int toAdd = form.Amount() / cmdr.getShip().getRepairCost();
@@ -3167,22 +3174,22 @@ public class Main extends WinformWindow {
         }
     }
 
-    private void btnSpecial_Click(Object sender, EventArgs e) {
+    private void buttonSpecial_Click(Object sender, EventArgs e) {
         SpecialEvent specEvent = cmdr.CurrentSystem().SpecialEvent();
-        String btn1, btn2;
+        String button1, button2;
         DialogResult res1, res2;
         if (specEvent.MessageOnly()) {
-            btn1 = "Ok";
-            btn2 = null;
+            button1 = "Ok";
+            button2 = null;
             res1 = DialogResult.OK;
             res2 = DialogResult.None;
         } else {
-            btn1 = "Yes";
-            btn2 = "No";
+            button1 = "Yes";
+            button2 = "No";
             res1 = DialogResult.Yes;
             res2 = DialogResult.No;
         }
-        FormAlert alert = new FormAlert(specEvent.Title(), specEvent.String(), btn1, res1, btn2, res2, null);
+        FormAlert alert = new FormAlert(specEvent.Title(), specEvent.String(), button1, res1, button2, res2, null);
         if (alert.ShowDialog() != DialogResult.No) {
             if (cmdr.CashToSpend() < specEvent.Price()) {
                 FormAlert.Alert(AlertType.SpecialIF, this);
@@ -3197,12 +3204,12 @@ public class Main extends WinformWindow {
         UpdateAll();
     }
 
-    private void btnTrack_Click(Object sender, EventArgs e) {
+    private void buttonTrack_Click(Object sender, EventArgs e) {
         game.setTrackedSystemId(game.SelectedSystemId());
         UpdateAll();
     }
 
-    private void btnWarp_Click(Object sender, EventArgs e) {
+    private void buttonWarp_Click(Object sender, EventArgs e) {
         try {
             if (game.getAutoSave()) {
                 SaveGame(SAVE_DEPARTURE, false);
@@ -3359,7 +3366,7 @@ public class Main extends WinformWindow {
                 if (universe[i] == game.WarpSystem()) {
                     imageIndex++;
                 }
-                WfImage image = ilChartImages.getImages()[imageIndex];
+                wfImage image = ilChartImages.getImages()[imageIndex];
                 if (universe[i] == game.TrackedSystem()) {
                     e.Graphics.DrawLine(
                             DEFAULT_PEN, universe[i].X(), universe[i].Y(),
@@ -3498,8 +3505,8 @@ public class Main extends WinformWindow {
         }
     }
 
-    public WfImage[] CustomShipImages() {
-        WfImage[] images = new WfImage[Constants.ImagesPerShip];
+    public wfImage[] CustomShipImages() {
+        wfImage[] images = new wfImage[Constants.ImagesPerShip];
         int baseIndex = ShipType.Custom.CastToInt() * Constants.ImagesPerShip;
         for (int index = 0; index < Constants.ImagesPerShip; index++) {
             images[index] = ilShipImages.getImages()[baseIndex + index];
@@ -3507,7 +3514,7 @@ public class Main extends WinformWindow {
         return images;
     }
 
-    public void CustomShipImages(WfImage[] value) {
+    public void CustomShipImages(wfImage[] value) {
         int baseIndex = ShipType.Custom.CastToInt() * Constants.ImagesPerShip;
         System.arraycopy(value, 0, ilShipImages.getImages(), baseIndex, Constants.ImagesPerShip);
     }
@@ -3524,8 +3531,8 @@ public class Main extends WinformWindow {
         return ilShipImages;
     }
 
-    public WfImage[] getCustomShipImages() {
-        WfImage[] images = new WfImage[Constants.ImagesPerShip];
+    public wfImage[] getCustomShipImages() {
+        wfImage[] images = new wfImage[Constants.ImagesPerShip];
         int baseIndex = ShipType.Custom.CastToInt() * Constants.ImagesPerShip;
         for (int index = 0; index < Constants.ImagesPerShip; index++) {
             images[index] = ilShipImages.getImages()[baseIndex + index];
@@ -3533,7 +3540,7 @@ public class Main extends WinformWindow {
         return images;
     }
 
-    public void setCustomShipImages(WfImage[] value) {
+    public void setCustomShipImages(wfImage[] value) {
         int baseIndex = ShipType.Custom.CastToInt() * Constants.ImagesPerShip;
         System.arraycopy(value, 0, ilShipImages.getImages(), baseIndex, Constants.ImagesPerShip);
     }
