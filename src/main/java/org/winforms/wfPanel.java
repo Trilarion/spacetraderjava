@@ -8,8 +8,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-
+// TODO documentation of usage
 public class wfPanel extends JPanel {
+
     private static final long serialVersionUID = 1L;
     private final wfPane form;
     Map<Component, Integer> tabOrderMap = new HashMap<>(0);
@@ -73,7 +74,7 @@ public class wfPanel extends JPanel {
         if (b.DialogResult != null) {
             b.setClick(new ChainedEventHandler<>(b.click) {
                 @Override
-                public void instanceHandle(Object sender, EventArgs e) {
+                public void instanceHandle(Object sender, EventData e) {
                     form.setResult(b.DialogResult);
                     form.dispose();
                 }

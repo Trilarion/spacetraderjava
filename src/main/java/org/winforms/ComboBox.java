@@ -18,7 +18,7 @@ public class ComboBox extends wfControl {
     }
 
     public JComboBox<Object> asJComboBox() {
-        return (JComboBox<Object>) swingVersion;
+        return (JComboBox<Object>) swingComponent;
     }
 
     public Object getSelectedItem() {
@@ -33,7 +33,7 @@ public class ComboBox extends wfControl {
         asJComboBox().setSelectedIndex(index);
     }
 
-    public void setSelectedIndexChanged(final EventHandler<Object, EventArgs> handler) {
+    public void setSelectedIndexChanged(final EventHandler<Object, EventData> handler) {
         asJComboBox().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

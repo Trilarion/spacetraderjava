@@ -7,7 +7,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 
-
+// TODO documentation of properties and usage
 public class ListBox extends wfControl {
     public final MyListModel Items = new MyListModel();
 
@@ -30,10 +30,10 @@ public class ListBox extends wfControl {
     }
 
     public JList<Object> asJList() {
-        return (JList<Object>) swingVersion;
+        return (JList<Object>) swingComponent;
     }
 
-    public void setSelectedIndexChanged(final EventHandler<Object, EventArgs> handler) {
+    public void setSelectedIndexChanged(final EventHandler<Object, EventData> handler) {
         asJList().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {

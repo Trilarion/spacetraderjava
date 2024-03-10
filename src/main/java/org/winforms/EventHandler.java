@@ -1,6 +1,6 @@
 package org.winforms;
 
-
-abstract public class EventHandler<Sender, Args> {
-    abstract public void handle(Sender sender, Args e);
+// TODO what is this good for
+abstract public class EventHandler<Sender, Data> {
+    abstract public void handle(Sender sender, Data e);
 }

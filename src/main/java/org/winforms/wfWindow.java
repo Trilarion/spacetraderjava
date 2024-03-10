@@ -7,8 +7,9 @@ import org.winforms.enums.FormStartPosition;
 import javax.swing.*;
 import java.awt.*;
 
-
+// TODO documentation of usage
 public class wfWindow extends wfControl implements wfPane {
+
     protected final wfPanel Controls;
     private final JFrame frame;
     protected Integer Left, Top;
@@ -20,14 +21,14 @@ public class wfWindow extends wfControl implements wfPane {
     private boolean ControlBox;
     private boolean MinimizeBox;
     private boolean MaximizeBox;
-    private EventHandler<Object, CancelEventArgs> Closing;
+    private EventHandler<Object, CancelEventData> Closing;
     private String Title;
-    private EventHandler<Object, EventArgs> onLoad;
+    private EventHandler<Object, EventData> onLoad;
 
     public wfWindow() {
         // super(new WinformJPanel());
         super(new JFrame());
-        frame = (JFrame) swingVersion;
+        frame = (JFrame) swingComponent;
         // panel = (WinformJPanel)swingVersion;
         wfPanel panel = new wfPanel(this);
         frame.getContentPane().add(panel, BorderLayout.CENTER);
@@ -39,7 +40,7 @@ public class wfWindow extends wfControl implements wfPane {
     // ///////////// implementation ends here.
 
     public void ShowWindow() {
-        EventHandler<Object, EventArgs> loadHandler = onLoad;
+        EventHandler<Object, EventData> loadHandler = onLoad;
         if (loadHandler != null) {
             loadHandler.handle(this, null);
         }
@@ -74,15 +75,15 @@ public class wfWindow extends wfControl implements wfPane {
         Title = title;
     }
 
-    public void setLoad(EventHandler<Object, EventArgs> load) {
+    public void setLoad(EventHandler<Object, EventData> load) {
         onLoad = load;
     }
 
-    public EventHandler<Object, CancelEventArgs> getClosing() {
+    public EventHandler<Object, CancelEventData> getClosing() {
         return Closing;
     }
 
-    public void setClosing(EventHandler<Object, CancelEventArgs> closing) {
+    public void setClosing(EventHandler<Object, CancelEventData> closing) {
         Closing = closing;
     }
 

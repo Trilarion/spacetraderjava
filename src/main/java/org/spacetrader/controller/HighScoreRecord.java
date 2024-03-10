@@ -6,30 +6,30 @@ import org.spacetrader.util.Hashtable;
 
 
 public class HighScoreRecord extends SerializableObject implements Comparable<HighScoreRecord> {
-    private Difficulty _difficulty;
-    private GameEndType _type;
-    private String _name;
-    private int _score;
-    private int _days;
-    private int _worth;
+    private Difficulty difficulty;
+    private GameEndType gameEndType;
+    private String name;
+    private int score;
+    private int days;
+    private int worth;
 
-    public HighScoreRecord(String name, int score, GameEndType type, int days, int worth, Difficulty difficulty) {
-        _name = name;
-        _score = score;
-        _type = type;
-        _days = days;
-        _worth = worth;
-        _difficulty = difficulty;
+    public HighScoreRecord(String name, int score, GameEndType gameEndType, int days, int worth, Difficulty difficulty) {
+        this.name = name;
+        this.score = score;
+        this.gameEndType = gameEndType;
+        this.days = days;
+        this.worth = worth;
+        this.difficulty = difficulty;
     }
 
     public HighScoreRecord(Hashtable hash) {
         super(hash);
-        _name = GetValueFromHash(hash, "_name", String.class);
-        _score = GetValueFromHash(hash, "_score", Integer.class);
-        _type = GetValueFromHash(hash, "_type", GameEndType.class);
-        _days = GetValueFromHash(hash, "_days", Integer.class);
-        _worth = GetValueFromHash(hash, "_worth", Integer.class);
-        _difficulty = GetValueFromHash(hash, "_difficulty", Difficulty.class);
+        name = GetValueFromHash(hash, "_name", String.class);
+        score = GetValueFromHash(hash, "_score", Integer.class);
+        gameEndType = GetValueFromHash(hash, "_type", GameEndType.class);
+        days = GetValueFromHash(hash, "_days", Integer.class);
+        worth = GetValueFromHash(hash, "_worth", Integer.class);
+        difficulty = GetValueFromHash(hash, "_difficulty", Difficulty.class);
     }
 
     public int CompareTo(HighScoreRecord value) {
@@ -62,36 +62,36 @@ public class HighScoreRecord extends SerializableObject implements Comparable<Hi
     @Override
     public Hashtable Serialize() {
         Hashtable hash = super.Serialize();
-        hash.add("_name", _name);
-        hash.add("_score", _score);
-        hash.add("_type", _type.CastToInt());
-        hash.add("_days", _days);
-        hash.add("_worth", _worth);
-        hash.add("_difficulty", _difficulty.CastToInt());
+        hash.add("_name", name);
+        hash.add("_score", score);
+        hash.add("_type", gameEndType.CastToInt());
+        hash.add("_days", days);
+        hash.add("_worth", worth);
+        hash.add("_difficulty", difficulty.CastToInt());
         return hash;
     }
 
     public int Days() {
-        return _days;
+        return days;
     }
 
     public Difficulty Difficulty() {
-        return _difficulty;
+        return difficulty;
     }
 
     public String Name() {
-        return _name;
+        return name;
     }
 
     public int Score() {
-        return _score;
+        return score;
     }
 
     public GameEndType Type() {
-        return _type;
+        return gameEndType;
     }
 
     public int Worth() {
-        return _worth;
+        return worth;
     }
 }

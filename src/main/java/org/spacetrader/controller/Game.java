@@ -4,6 +4,7 @@ import org.spacetrader.Main;
 import org.spacetrader.controller.enums.*;
 import org.spacetrader.model.CrewMemberId;
 import org.spacetrader.model.Difficulty;
+import org.spacetrader.model.TechLevel;
 import org.spacetrader.model.cargo.CargoBuyOp;
 import org.spacetrader.model.cargo.CargoSellOp;
 import org.spacetrader.model.cargo.TradeItem;
@@ -11,10 +12,10 @@ import org.spacetrader.model.cargo.TradeItemType;
 import org.spacetrader.model.events.*;
 import org.spacetrader.model.ship.ShipSize;
 import org.spacetrader.model.ship.ShipType;
-import org.spacetrader.model.ship.equip.EquipmentType;
-import org.spacetrader.model.ship.equip.GadgetType;
-import org.spacetrader.model.ship.equip.ShieldType;
-import org.spacetrader.model.ship.equip.WeaponType;
+import org.spacetrader.model.ship.equipment.EquipmentType;
+import org.spacetrader.model.ship.equipment.GadgetType;
+import org.spacetrader.model.ship.equipment.ShieldType;
+import org.spacetrader.model.ship.equipment.WeaponType;
 import org.spacetrader.ui.*;
 import org.spacetrader.util.ArrayList;
 import org.spacetrader.util.Hashtable;
@@ -31,7 +32,7 @@ public class Game extends SerializableObject {
     public static final int GalaxyWidth = 154;
     public static final int MinDistance = 7;
     private static Game game; // TODO this doesn't work, is a singleton pattern intended, than how to serialize, better have a even bigger singleton (World)
-    private Commander cmdr;
+    private Commander commander;
     // Game Data
     private StarSystem[] _universe;
     private int[] _wormholes = new int[6];
@@ -46,8 +47,8 @@ public class Game extends SerializableObject {
     private int _clicks = 0; // Distance from target system, 0 = arrived
     private boolean _raided = false; // True when the commander has been raided during the trip
     private boolean _inspected = false; // True when the commander has been inspected during the trip
-    private boolean _tribbleMessage = false; // Is true if the Ship Yard on the current system informed you about the tribbles
-    private boolean _arrivedViaWormhole = false; // flag to indicate whether player arrived on current planet via wormhole
+    private boolean _tribbleMessage = false; // Is true if the Ship Yard on the currentrent system informed you about the tribbles
+    private boolean _arrivedViaWormhole = false; // flag to indicate whether player arrived on currentrent planet via wormhole
     private boolean _paidForNewspaper = false; // once you buy a paper on a system, you don't have to pay again.
     private boolean _litterWarning = false; // Warning against littering has been issued.
     private ArrayList<Integer> _newsEvents = new ArrayList<>(30);
@@ -57,7 +58,7 @@ public class Game extends SerializableObject {
     private boolean _autoSave = false;
     private boolean _easyEncounters = false;
     private GameEndType _endStatus = GameEndType.NA;
-    private EncounterType _encounterType = EncounterType.FromInt(0); // Type of current encounter
+    private EncounterType _encounterType = EncounterType.FromInt(0); // Type of currentrent encounter
     private StarSystemId _selectedSystemId = StarSystemId.NA; // Current system on chart
     private StarSystemId _warpSystemId = StarSystemId.NA; // Target system for warp
     private StarSystemId _trackedSystemId = StarSystemId.NA; // The short-range chart will display an arrow towards this system if the value is not null
@@ -95,27 +96,124 @@ public class Game extends SerializableObject {
     private boolean _encounterOppFleeing = false;
     private boolean _encounterOppHit = false;
 
+    public Game() {}
+
     public Game(String name, Difficulty difficulty, int pilot, int fighter, int trader, int engineer, Main parentWin) {
-        game = Game.CurrentGame();
+        game = Game.getCurrentGame();
         _parentWin = parentWin;
         _difficulty = difficulty;
         // Keep Generating a new universe until PlaceSpecialEvents and PlaceShipyards return true, indicating all special events and shipyards were placed.
         do {
-            GenerateUniverse();
+            // generate universe
+            _universe = new StarSystem[Strings.SystemNames.length];
+            int i, j;
+            for (i = 0; i < _universe.length; i++) {
+                StarSystemId id = (StarSystemId.FromInt(i));
+                SystemPressure pressure = SystemPressure.None;
+                SpecialResource specRes = SpecialResource.Nothing;
+                ShipSize size = ShipSize.FromInt(Functions.GetRandom(ShipSize.Huge.CastToInt() + 1));
+                PoliticalSystem polSys = Constants.PoliticalSystems[Functions.GetRandom(Constants.PoliticalSystems.length)];
+                TechLevel tech = TechLevel.FromInt(Functions.GetRandom(polSys.MinimumTechLevel().ordinal(), polSys.MaximumTechLevel().ordinal() + 1));
+                // Galvon must be a Monarchy.
+                if (id == StarSystemId.Galvon) {
+                    size = ShipSize.Large;
+                    polSys = Constants.PoliticalSystems[PoliticalSystemType.Monarchy.CastToInt()];
+                    tech = TechLevel.t7;
+                }
+                if (Functions.GetRandom(100) < 15) {
+                    pressure = SystemPressure.FromInt(Functions.GetRandom(SystemPressure.War.CastToInt(), SystemPressure.Employment.CastToInt() + 1));
+                }
+                if (Functions.GetRandom(5) >= 3) {
+                    specRes = SpecialResource.FromInt(Functions.GetRandom(SpecialResource.MineralRich.CastToInt(), SpecialResource.Warlike.CastToInt() + 1));
+                }
+                int x = 0;
+                int y = 0;
+                if (i < _wormholes.length) {
+                    // Place the first systems somewhere in the center.
+                    x = ((GalaxyWidth * (1 + 2 * (i % 3))) / 6) - Functions.GetRandom(-Constants.CloseDistance + 1, Constants.CloseDistance);
+                    y = ((GalaxyHeight * (i < 3 ? 1 : 3)) / 4) - Functions.GetRandom(-Constants.CloseDistance + 1, Constants.CloseDistance);
+                    _wormholes[i] = i;
+                } else {
+                    boolean ok = false;
+                    while (!ok) {
+                        x = Functions.GetRandom(1, GalaxyWidth);
+                        y = Functions.GetRandom(1, GalaxyHeight);
+                        boolean closeFound = false;
+                        boolean tooClose = false;
+                        for (j = 0; j < i && !tooClose; j++) {
+                            // Minimum distance between any two systems not to be accepted.
+                            if (Functions.Distance(_universe[j], x, y) < MinDistance) {
+                                tooClose = true;
+                            }
+                            // There should be at least one system which is close enough.
+                            if (Functions.Distance(_universe[j], x, y) < Constants.CloseDistance) {
+                                closeFound = true;
+                            }
+                        }
+                        ok = (closeFound && !tooClose);
+                    }
+                }
+                _universe[i] = new StarSystem(id, x, y, size, tech, polSys.Type(), pressure, specRes);
+            }
+            // Randomize the system locations a bit more, otherwise the systems with the first names in the alphabet are all in the center.
+            for (i = 0; i < _universe.length; i++) {
+                j = Functions.GetRandom(_universe.length);
+                if (!Functions.WormholeExists(j, -1)) {
+                    int x = _universe[i].X();
+                    int y = _universe[i].Y();
+                    _universe[i].X(_universe[j].X());
+                    _universe[i].Y(_universe[j].Y());
+                    _universe[j].X(x);
+                    _universe[j].Y(y);
+                    int w = Util.BruteSeek(_wormholes, i);
+                    if (w >= 0) {
+                        _wormholes[w] = j;
+                    }
+                }
+            }
+            // Randomize wormhole order
+            for (i = 0; i < _wormholes.length; i++) {
+                j = Functions.GetRandom(_wormholes.length);
+                int w = _wormholes[i];
+                _wormholes[i] = _wormholes[j];
+                _wormholes[j] = w;
+            }
         } while (!(PlaceSpecialEvents() && PlaceShipyards()));
-        InitializeCommander(name, new CrewMember(CrewMemberId.Commander, pilot, fighter, trader, engineer, StarSystemId.NA));
+        // initialize commander
+        CrewMember commanderCrewMember = new CrewMember(CrewMemberId.Commander, pilot, fighter, trader, engineer, StarSystemId.NA);
+        commander = new Commander(commanderCrewMember);
+        Mercenaries()[CrewMemberId.Commander.CastToInt()] = Commander();
+        Strings.CrewMemberNames[CrewMemberId.Commander.CastToInt()] = name;
+        while (commander.CurrentSystem() == null) {
+            StarSystem system = _universe[Functions.GetRandom(_universe.length)];
+            if (system.SpecialEventType() == SpecialEventType.NA
+                    && system.TechLevel().ordinal() > TechLevel.t0.ordinal()
+                    && system.TechLevel().ordinal() < TechLevel.t7.ordinal()) {
+                // Make sure at least three other systems can be reached
+                int close = 0;
+                for (int i = 0; i < _universe.length && close < 3; i++) {
+                    if (i != system.Id().CastToInt() && Functions.Distance(_universe[i], system) <= commander.getShip().FuelTanks()) {
+                        close++;
+                    }
+                }
+                if (close >= 3) {
+                    commander.CurrentSystem(system);
+                }
+            }
+        }
+        commander.CurrentSystem().Visited(true);
         GenerateCrewMemberList();
         CreateShips();
-        CalculatePrices(cmdr.CurrentSystem());
+        CalculatePrices(commander.CurrentSystem());
         Game.this.ResetVeryRareEncounters();
         if (_difficulty.CastToInt() < Difficulty.Normal.CastToInt()) {
-            cmdr.CurrentSystem().SpecialEventType(SpecialEventType.Lottery);
+            commander.CurrentSystem().SpecialEventType(SpecialEventType.Lottery);
         }
         //TODO: The following code block is run if the commander name is left blank
         // You get $1M, cheat mode on, easy encounters, can super-warp...
         {
             // TODO: JAF - DEBUG
-            cmdr.setCash(1000000);
+            commander.setCash(1000000);
             _cheatEnabled = true;
             _easyEncounters = true;
             _canSuperWarp = true;
@@ -125,7 +223,7 @@ public class Game extends SerializableObject {
 
     public Game(Hashtable hash, Main parentWin) {
         super(hash);
-        game = Game.CurrentGame();
+        game = Game.getCurrentGame();
         _parentWin = parentWin;
         String version = GetValueFromHash(hash, "_version", String.class);
         if (version.compareTo(Constants.CurrentVersion) > 0) {
@@ -134,7 +232,7 @@ public class Game extends SerializableObject {
         _universe = (StarSystem[]) ArrayListToArray(GetValueFromHash(hash, "_universe", ArrayList.class), "StarSystem");
         _wormholes = GetValueFromHash(hash, "_wormholes", _wormholes, int[].class);
         _mercenaries = (CrewMember[]) ArrayListToArray(GetValueFromHash(hash, "_mercenaries", ArrayList.class), "CrewMember");
-        cmdr = new Commander(GetValueFromHash(hash, "_commander", Hashtable.class));
+        commander = new Commander(GetValueFromHash(hash, "_commander", Hashtable.class));
         _dragonfly = new Ship(GetValueFromHash(hash, "_dragonfly", _dragonfly.Serialize(), Hashtable.class));
         _scarab = new Ship(GetValueFromHash(hash, "_scarab", _scarab.Serialize(), Hashtable.class));
         _scorpion = new Ship(GetValueFromHash(hash, "_scorpion", _scorpion.Serialize(), Hashtable.class));
@@ -183,12 +281,12 @@ public class Game extends SerializableObject {
         _options = new GameOptions(GetValueFromHash(hash, "_options", _options.Serialize(), Hashtable.class));
     }
 
-    public static Game CurrentGame() {
+    public static Game getCurrentGame() {
         return game;
     }
 
-    public static void CurrentGame(Game g) {
-        game = g;
+    public static void setCurrentGame(Game game) {
+        Game.game = game;
     }
 
     @Override
@@ -196,7 +294,7 @@ public class Game extends SerializableObject {
         Hashtable ht = super.Serialize();
         ht.add("_version", "2.00");
         ht.add("_universe", ArrayToArrayList(_universe));
-        ht.add("_commander", cmdr.Serialize());
+        ht.add("_commander", commander.Serialize());
         ht.add("_wormholes", _wormholes);
         ht.add("_mercenaries", ArrayToArrayList(_mercenaries));
         ht.add("_dragonfly", _dragonfly.Serialize());
@@ -257,24 +355,24 @@ public class Game extends SerializableObject {
         // Encounter with space monster
         if (getClicks() == 1 && WarpSystem().Id() == StarSystemId.Acamar && getQuestStatusSpaceMonster() == SpecialEvent.StatusSpaceMonsterAtAcamar) {
             setOpponent(_spaceMonster);
-            setEncounterType(cmdr.getShip().Cloaked() ? EncounterType.SpaceMonsterIgnore : EncounterType.SpaceMonsterAttack);
+            setEncounterType(commander.getShip().Cloaked() ? EncounterType.SpaceMonsterIgnore : EncounterType.SpaceMonsterAttack);
             showEncounter = true;
         } else if (getArrivedViaWormhole() && getClicks() == 20 && WarpSystem().SpecialEventType() != SpecialEventType.NA
                 && WarpSystem().SpecialEvent().Type() == SpecialEventType.ScarabDestroyed
                 && getQuestStatusScarab() == SpecialEvent.StatusScarabHunting) {
             // Encounter with the stolen Scarab
             setOpponent(_scarab);
-            setEncounterType(cmdr.getShip().Cloaked() ? EncounterType.ScarabIgnore : EncounterType.ScarabAttack);
+            setEncounterType(commander.getShip().Cloaked() ? EncounterType.ScarabIgnore : EncounterType.ScarabAttack);
             showEncounter = true;
         } else if (getClicks() == 1 && WarpSystem().Id() == StarSystemId.Zalkon && getQuestStatusDragonfly() == SpecialEvent.StatusDragonflyFlyZalkon) {
             // Encounter with stolen Dragonfly
             setOpponent(Dragonfly());
-            setEncounterType(cmdr.getShip().Cloaked() ? EncounterType.DragonflyIgnore : EncounterType.DragonflyAttack);
+            setEncounterType(commander.getShip().Cloaked() ? EncounterType.DragonflyIgnore : EncounterType.DragonflyAttack);
             showEncounter = true;
         } else if (getClicks() == 1 && WarpSystem().Id() == StarSystemId.Qonos && getQuestStatusPrincess() == SpecialEvent.StatusPrincessFlyQonos) {
             // Encounter with kidnappers in the Scorpion
             setOpponent(_scorpion);
-            setEncounterType(cmdr.getShip().Cloaked() ? EncounterType.ScorpionIgnore : EncounterType.ScorpionAttack);
+            setEncounterType(commander.getShip().Cloaked() ? EncounterType.ScorpionIgnore : EncounterType.ScorpionAttack);
             showEncounter = true;
         } else if (getClicks() == 1 && getJustLootedMarie()) {
             // ah, just when you thought you were going to get get away with it...
@@ -294,11 +392,11 @@ public class Game extends SerializableObject {
         } else {
             GenerateOpponent(OpponentType.Pirate);
             // If you have a cloak, they don't see you
-            if (cmdr.getShip().Cloaked()) {
+            if (commander.getShip().Cloaked()) {
                 setEncounterType(EncounterType.PirateIgnore);
-            } else if (getOpponent().Type().CastToInt() > cmdr.getShip().Type().CastToInt()
+            } else if (getOpponent().Type().CastToInt() > commander.getShip().Type().CastToInt()
                     || getOpponent().Type().CastToInt() >= ShipType.Grasshopper.CastToInt()
-                    || Functions.GetRandom(Constants.ReputationScoreElite) > (cmdr.getReputationScore() * 4)
+                    || Functions.GetRandom(Constants.ReputationScoreElite) > (commander.getReputationScore() * 4)
                     / (1 + getOpponent().Type().CastToInt())) {
                 // Pirates will mostly attack, but they are cowardly: if your rep is too high, they tend to flee
                 // if Pirates are in a better ship, they won't flee, even if you have a very scary reputation.
@@ -320,16 +418,16 @@ public class Game extends SerializableObject {
         GenerateOpponent(OpponentType.Police);
         // If you are cloaked, they don't see you
         setEncounterType(EncounterType.PoliceIgnore);
-        if (!cmdr.getShip().Cloaked()) {
-            if (cmdr.getPoliceRecordScore() < Constants.PoliceRecordScoreDubious) {
+        if (!commander.getShip().Cloaked()) {
+            if (commander.getPoliceRecordScore() < Constants.PoliceRecordScoreDubious) {
                 // If you're a criminal, the police will tend to attack
                 // JAF - fixed this; there was code that didn't do anything.
                 // if you're suddenly stuck in a lousy ship, Police won't flee even if you have a fearsome reputation.
                 if (getOpponent().WeaponStrength() > 0
-                        && (cmdr.getReputationScore() < Constants.ReputationScoreAverage
-                        || Functions.GetRandom(Constants.ReputationScoreElite) > (cmdr.getReputationScore() / (1 + getOpponent().Type().CastToInt())))
-                        || getOpponent().Type().CastToInt() > cmdr.getShip().Type().CastToInt()) {
-                    if (cmdr.getPoliceRecordScore() >= Constants.PoliceRecordScoreCriminal) {
+                        && (commander.getReputationScore() < Constants.ReputationScoreAverage
+                        || Functions.GetRandom(Constants.ReputationScoreElite) > (commander.getReputationScore() / (1 + getOpponent().Type().CastToInt())))
+                        || getOpponent().Type().CastToInt() > commander.getShip().Type().CastToInt()) {
+                    if (commander.getPoliceRecordScore() >= Constants.PoliceRecordScoreCriminal) {
                         getEncounterType();
                         setEncounterType(EncounterType.PoliceSurrender);
                     } else {
@@ -341,9 +439,9 @@ public class Game extends SerializableObject {
                     setEncounterType(EncounterType.PoliceFlee);
                 }
             } else if (!getInspected()
-                    && (cmdr.getPoliceRecordScore() < Constants.PoliceRecordScoreClean
-                    || (cmdr.getPoliceRecordScore() < Constants.PoliceRecordScoreLawful && Functions.GetRandom(12 - _difficulty.CastToInt()) < 1)
-                    || (cmdr.getPoliceRecordScore() >= Constants.PoliceRecordScoreLawful && Functions.GetRandom(40) == 0))) {
+                    && (commander.getPoliceRecordScore() < Constants.PoliceRecordScoreClean
+                    || (commander.getPoliceRecordScore() < Constants.PoliceRecordScoreLawful && Functions.GetRandom(12 - _difficulty.CastToInt()) < 1)
+                    || (commander.getPoliceRecordScore() >= Constants.PoliceRecordScoreLawful && Functions.GetRandom(40) == 0))) {
                 // If you're reputation is dubious, the police will inspect you
                 // If your record is clean, the police will inspect you with a chance of 10% on Normal
                 // If your record indicates you are a lawful trader, the chance on inspection drops to 2.5%
@@ -373,9 +471,9 @@ public class Game extends SerializableObject {
         } else {
             // Check if it is time for an encounter
             int encounter = Functions.GetRandom(44 - (2 * _difficulty.CastToInt()));
-            int policeModifier = Math.max(1, 3 - PoliceRecord.GetPoliceRecordFromScore(cmdr.getPoliceRecordScore()).Type().CastToInt());
+            int policeModifier = Math.max(1, 3 - PoliceRecord.GetPoliceRecordFromScore(commander.getPoliceRecordScore()).Type().CastToInt());
             // encounters are half as likely if you're in a flea.
-            if (cmdr.getShip().Type() == ShipType.Flea) {
+            if (commander.getShip().Type() == ShipType.Flea) {
                 encounter *= 2;
             }
             if (encounter < WarpSystem().PoliticalSystem().ActivityPirates().CastToInt()) { // When you are already raided, other pirates have little to gain
@@ -388,10 +486,10 @@ public class Game extends SerializableObject {
                     + WarpSystem().PoliticalSystem().ActivityPolice().CastToInt() * policeModifier
                     + WarpSystem().PoliticalSystem().ActivityTraders().CastToInt()) {
                 trader = true;
-            } else if (cmdr.getShip().WildOnBoard() && WarpSystem().Id() == StarSystemId.Kravat) {
+            } else if (commander.getShip().WildOnBoard() && WarpSystem().Id() == StarSystemId.Kravat) {
                 // if you're coming in to Kravat & you have Wild onboard, there'll be swarms o' cops.
                 police = Functions.GetRandom(100) < 100 / Math.max(2, Math.min(4, 5 - _difficulty.CastToInt()));
-            } else if (cmdr.getShip().ArtifactOnBoard() && Functions.GetRandom(20) <= 3) {
+            } else if (commander.getShip().ArtifactOnBoard() && Functions.GetRandom(20) <= 3) {
                 mantis = true;
             }
         }
@@ -401,7 +499,7 @@ public class Game extends SerializableObject {
             showEncounter = DeterminePirateEncounter(mantis);
         } else if (trader) {
             showEncounter = DetermineTraderEncounter();
-        } else if (cmdr.getDays() > 10 && Functions.GetRandom(1000) < getChanceOfVeryRareEncounter() && !_veryRareEncounters.isEmpty()) {
+        } else if (commander.getDays() > 10 && Functions.GetRandom(1000) < getChanceOfVeryRareEncounter() && !_veryRareEncounters.isEmpty()) {
             showEncounter = DetermineVeryRareEncounter();
         }
         return showEncounter;
@@ -412,15 +510,15 @@ public class Game extends SerializableObject {
         GenerateOpponent(OpponentType.Trader);
         // If you are cloaked, they don't see you
         setEncounterType(EncounterType.TraderIgnore);
-        if (!cmdr.getShip().Cloaked()) {
+        if (!commander.getShip().Cloaked()) {
             // If you're a criminal, traders tend to flee if you've got at least some reputation
-            if (!cmdr.getShip().Cloaked() && cmdr.getPoliceRecordScore() <= Constants.PoliceRecordScoreCriminal
-                    && Functions.GetRandom(Constants.ReputationScoreElite) <= (cmdr.getReputationScore() * 10) / (1 + getOpponent().Type().CastToInt())) {
+            if (!commander.getShip().Cloaked() && commander.getPoliceRecordScore() <= Constants.PoliceRecordScoreCriminal
+                    && Functions.GetRandom(Constants.ReputationScoreElite) <= (commander.getReputationScore() * 10) / (1 + getOpponent().Type().CastToInt())) {
                 setEncounterType(EncounterType.TraderFlee);
             } else if (Functions.GetRandom(1000) < getChanceOfTradeInOrbit()) { // Will there be trade in orbit?
-                if (cmdr.getShip().FreeCargoBays() > 0 && getOpponent().HasTradeableItems()) {
+                if (commander.getShip().FreeCargoBays() > 0 && getOpponent().HasTradeableItems()) {
                     setEncounterType(EncounterType.TraderSell);
-                } else if (cmdr.getShip().HasTradeableItems()) {
+                } else if (commander.getShip().HasTradeableItems()) {
                     // we fudge on whether the trader has capacity to carry the stuff he's buying.
                     setEncounterType(EncounterType.TraderBuy);
                 }
@@ -448,9 +546,9 @@ public class Game extends SerializableObject {
         switch (_veryRareEncounters.get(Functions.GetRandom(_veryRareEncounters.size()))) {
             case MarieCeleste:
                 // Marie Celeste cannot be at Acamar, Qonos, or Zalkon as it may cause problems with the Space Monster, Scorpion, or Dragonfly
-                if (getClicks() > 1 && cmdr.getCurrentSystemId() != StarSystemId.Acamar
-                        && cmdr.getCurrentSystemId() != StarSystemId.Zalkon
-                        && cmdr.getCurrentSystemId() != StarSystemId.Qonos) {
+                if (getClicks() > 1 && commander.getCurrentSystemId() != StarSystemId.Acamar
+                        && commander.getCurrentSystemId() != StarSystemId.Zalkon
+                        && commander.getCurrentSystemId() != StarSystemId.Qonos) {
                     _veryRareEncounters.remove(VeryRareEncounter.MarieCeleste);
                     setEncounterType(EncounterType.MarieCeleste);
                     GenerateOpponent(OpponentType.Trader);
@@ -460,8 +558,8 @@ public class Game extends SerializableObject {
                 }
                 break;
             case CaptainAhab:
-                if (cmdr.getShip().HasShield(ShieldType.Reflective) && cmdr.Pilot() < 10
-                        && cmdr.getPoliceRecordScore() > Constants.PoliceRecordScoreCriminal) {
+                if (commander.getShip().HasShield(ShieldType.Reflective) && commander.Pilot() < 10
+                        && commander.getPoliceRecordScore() > Constants.PoliceRecordScoreCriminal) {
                     _veryRareEncounters.remove(VeryRareEncounter.CaptainAhab);
                     getEncounterType();
                     setEncounterType(EncounterType.CaptainAhab);
@@ -470,8 +568,8 @@ public class Game extends SerializableObject {
                 }
                 break;
             case CaptainConrad:
-                if (cmdr.getShip().HasWeapon(WeaponType.MilitaryLaser, true) && cmdr.Engineer() < 10
-                        && cmdr.getPoliceRecordScore() > Constants.PoliceRecordScoreCriminal) {
+                if (commander.getShip().HasWeapon(WeaponType.MilitaryLaser, true) && commander.Engineer() < 10
+                        && commander.getPoliceRecordScore() > Constants.PoliceRecordScoreCriminal) {
                     _veryRareEncounters.remove(VeryRareEncounter.CaptainConrad);
                     getEncounterType();
                     setEncounterType(EncounterType.CaptainConrad);
@@ -481,8 +579,8 @@ public class Game extends SerializableObject {
                 }
                 break;
             case CaptainHuie:
-                if (cmdr.getShip().HasWeapon(WeaponType.MilitaryLaser, true) && cmdr.Trader() < 10
-                        && cmdr.getPoliceRecordScore() > Constants.PoliceRecordScoreCriminal) {
+                if (commander.getShip().HasWeapon(WeaponType.MilitaryLaser, true) && commander.Trader() < 10
+                        && commander.getPoliceRecordScore() > Constants.PoliceRecordScoreCriminal) {
                     _veryRareEncounters.remove(VeryRareEncounter.CaptainHuie);
                     getEncounterType();
                     setEncounterType(EncounterType.CaptainHuie);
@@ -520,7 +618,7 @@ public class Game extends SerializableObject {
                 defender.setHull(0);
             } else {
                 int attackerLasers = attacker.WeaponStrength(WeaponType.PulseLaser, WeaponType.MorgansLaser);
-                int attackerDisruptors = attacker.WeaponStrength(WeaponType.PhotonDisruptor, WeaponType.QuantumDistruptor);
+                int attackerDisruptors = attacker.WeaponStrength(WeaponType.PhotonDisruptor, WeaponType.QuantumDisruptor);
                 if (defender.Type() == ShipType.Scarab) {
                     attackerLasers -= attacker.WeaponStrength(WeaponType.BeamLaser, WeaponType.MilitaryLaser);
                     attackerDisruptors -= attacker.WeaponStrength(WeaponType.PhotonDisruptor, WeaponType.PhotonDisruptor);
@@ -670,7 +768,7 @@ public class Game extends SerializableObject {
         // Assign the rest of the events randomly.
         if (goodUniverse) {
             for (int i = 0; i < Constants.SpecialEvents.length; i++) {
-                for (int j = 0; j < Constants.SpecialEvents[i].Occurrence(); j++) {
+                for (int j = 0; j < Constants.SpecialEvents[i].Occurrentrence(); j++) {
                     do {
                         system = Functions.GetRandom(_universe.length);
                     } while (_universe[system].SpecialEventType() != SpecialEventType.NA);
@@ -682,10 +780,10 @@ public class Game extends SerializableObject {
     }
 
     private void Arrival() {
-        cmdr.CurrentSystem(WarpSystem());
-        cmdr.CurrentSystem().Visited(true);
+        commander.CurrentSystem(WarpSystem());
+        commander.CurrentSystem().Visited(true);
         setPaidForNewspaper(false);
-        if (TrackedSystem() == cmdr.CurrentSystem() && _options.getTrackAutoOff()) {
+        if (TrackedSystem() == commander.CurrentSystem() && _options.getTrackAutoOff()) {
             setTrackedSystemId(StarSystemId.NA);
         }
         ArrivalCheckReactor();
@@ -694,7 +792,7 @@ public class Game extends SerializableObject {
         ArrivalPerformRepairs();
         ArrivalUpdatePressuresAndQuantities();
         ArrivalCheckEasterEgg();
-        CalculatePrices(cmdr.CurrentSystem());
+        CalculatePrices(commander.CurrentSystem());
         NewsAddEventsOnArrival();
         if (_options.getNewsAutoShow()) {
             ShowNewspaper();
@@ -703,28 +801,28 @@ public class Game extends SerializableObject {
 
     private void ArrivalCheckDebt() {
         // Check for Large Debt - 06/30/01 SRA
-        if (cmdr.getDebt() >= Constants.DebtWarning) {
+        if (commander.getDebt() >= Constants.DebtWarning) {
             FormAlert.Alert(AlertType.DebtWarning, getParentWindow());
-        } else if (cmdr.getDebt() > 0 && _options.getRemindLoans() && cmdr.getDays() % 5 == 0) { // Debt Reminder
-            FormAlert.Alert(AlertType.DebtReminder, getParentWindow(), Functions.Multiples(cmdr.getDebt(), Strings.MoneyUnit));
+        } else if (commander.getDebt() > 0 && _options.getRemindLoans() && commander.getDays() % 5 == 0) { // Debt Reminder
+            FormAlert.Alert(AlertType.DebtReminder, getParentWindow(), Functions.Multiples(commander.getDebt(), Strings.MoneyUnit));
         }
     }
 
     private void ArrivalCheckEasterEgg() {
         /* This Easter Egg gives the commander a Lighting Shield */
-        if (cmdr.CurrentSystem().Id() == StarSystemId.Og) {
+        if (commander.CurrentSystem().Id() == StarSystemId.Og) {
             boolean egg = true;
-            for (int i = 0; i < cmdr.getShip().Cargo().length && egg; i++) {
-                if (cmdr.getShip().Cargo()[i] != 1) {
+            for (int i = 0; i < commander.getShip().Cargo().length && egg; i++) {
+                if (commander.getShip().Cargo()[i] != 1) {
                     egg = false;
                 }
             }
-            if (egg && cmdr.getShip().FreeSlotsShield() > 0) {
+            if (egg && commander.getShip().FreeSlotsShield() > 0) {
                 FormAlert.Alert(AlertType.Egg, getParentWindow());
-                cmdr.getShip().AddEquipment(Constants.Shields[ShieldType.Lightning.id]);
-                for (int i = 0; i < cmdr.getShip().Cargo().length; i++) {
-                    cmdr.getShip().Cargo()[i] = 0;
-                    cmdr.PriceCargo()[i] = 0;
+                commander.getShip().AddEquipment(Constants.Shields[ShieldType.Lightning.id]);
+                for (int i = 0; i < commander.getShip().Cargo().length; i++) {
+                    commander.getShip().Cargo()[i] = 0;
+                    commander.PriceCargo()[i] = 0;
                 }
             }
         }
@@ -734,7 +832,7 @@ public class Game extends SerializableObject {
         if (getQuestStatusReactor() == SpecialEvent.StatusReactorDate) {
             FormAlert.Alert(AlertType.ReactorMeltdown, getParentWindow());
             setQuestStatusReactor(SpecialEvent.StatusReactorNotStarted);
-            if (cmdr.getShip().getEscapePod()) {
+            if (commander.getShip().getEscapePod()) {
                 EscapeWithPod();
             } else {
                 FormAlert.Alert(AlertType.ReactorDestroyed, getParentWindow());
@@ -753,7 +851,7 @@ public class Game extends SerializableObject {
     }
 
     private void ArrivalCheckTribbles() {
-        Ship ship = cmdr.getShip();
+        Ship ship = commander.getShip();
         if (ship.getTribbles() > 0) {
             int previousTribbles = ship.getTribbles();
             int narc = TradeItemType.Narcotics.CastToInt();
@@ -768,7 +866,7 @@ public class Game extends SerializableObject {
                 }
             } else if (ship.Cargo()[narc] > 0) {
                 int dead = Math.min(1 + Functions.GetRandom(3), ship.Cargo()[narc]);
-                cmdr.PriceCargo()[narc] = cmdr.PriceCargo()[narc] * (ship.Cargo()[narc] - dead) / ship.Cargo()[narc];
+                commander.PriceCargo()[narc] = commander.PriceCargo()[narc] * (ship.Cargo()[narc] - dead) / ship.Cargo()[narc];
                 ship.Cargo()[narc] -= dead;
                 ship.Cargo()[TradeItemType.Furs.CastToInt()] += dead;
                 ship.setTribbles(ship.getTribbles() - Math.min(dead * (Functions.GetRandom(5) + 98), ship.getTribbles() - 1));
@@ -776,7 +874,7 @@ public class Game extends SerializableObject {
             } else {
                 if (ship.Cargo()[food] > 0 && ship.getTribbles() < Constants.MaxTribbles) {
                     int eaten = ship.Cargo()[food] - Functions.GetRandom(ship.Cargo()[food]);
-                    cmdr.PriceCargo()[food] -= cmdr.PriceCargo()[food] * eaten / ship.Cargo()[food];
+                    commander.PriceCargo()[food] -= commander.PriceCargo()[food] * eaten / ship.Cargo()[food];
                     ship.Cargo()[food] -= eaten;
                     ship.setTribbles(ship.getTribbles() + (eaten * 100));
                     FormAlert.Alert(AlertType.TribblesAteFood, getParentWindow());
@@ -801,7 +899,7 @@ public class Game extends SerializableObject {
     }
 
     private void ArrivalPerformRepairs() {
-        Ship ship = cmdr.getShip();
+        Ship ship = commander.getShip();
         if (ship.getHull() < ship.HullStrength()) {
             ship.setHull(ship.getHull() + Math.min(ship.HullStrength() - ship.getHull(), Functions.GetRandom(ship.Engineer())));
         }
@@ -813,9 +911,9 @@ public class Game extends SerializableObject {
         boolean fuelOk = true;
         int toAdd = ship.FuelTanks() - ship.getFuel();
         if (_options.getAutoFuel() && toAdd > 0) {
-            if (cmdr.getCash() >= toAdd * ship.getFuelCost()) {
+            if (commander.getCash() >= toAdd * ship.getFuelCost()) {
                 ship.setFuel(ship.getFuel() + toAdd);
-                cmdr.setCash(cmdr.getCash() - (toAdd * ship.getFuelCost()));
+                commander.setCash(commander.getCash() - (toAdd * ship.getFuelCost()));
             } else {
                 fuelOk = false;
             }
@@ -823,9 +921,9 @@ public class Game extends SerializableObject {
         boolean repairOk = true;
         toAdd = ship.HullStrength() - ship.getHull();
         if (_options.getAutoRepair() && toAdd > 0) {
-            if (cmdr.getCash() >= toAdd * ship.getRepairCost()) {
+            if (commander.getCash() >= toAdd * ship.getRepairCost()) {
                 ship.setHull(ship.getHull() + toAdd);
-                cmdr.setCash(cmdr.getCash() - (toAdd * ship.getRepairCost()));
+                commander.setCash(commander.getCash() - (toAdd * ship.getRepairCost()));
             } else {
                 repairOk = false;
             }
@@ -874,7 +972,7 @@ public class Game extends SerializableObject {
                 int variance = Math.min(Constants.TradeItems[i].PriceVariance(), price - 1);
                 price += Functions.GetRandom(-variance, variance + 1);
                 // Criminals have to pay off an intermediary
-                if (cmdr.getPoliceRecordScore() < Constants.PoliceRecordScoreDubious) {
+                if (commander.getPoliceRecordScore() < Constants.PoliceRecordScoreDubious) {
                     price = price * 90 / 100;
                 }
             }
@@ -884,16 +982,16 @@ public class Game extends SerializableObject {
     }
 
     private void CargoBuy(int tradeItem, boolean max, wfPane owner, CargoBuyOp op) {
-        int freeBays = cmdr.getShip().FreeCargoBays();
+        int freeBays = commander.getShip().FreeCargoBays();
         int[] items = null;
         int unitPrice = 0;
-        int cashToSpend = cmdr.getCash();
+        int cashToSpend = commander.getCash();
         switch (op) {
             case BuySystem:
-                freeBays = Math.max(0, cmdr.getShip().FreeCargoBays() - _options.getLeaveEmpty());
-                items = cmdr.CurrentSystem().TradeItems();
+                freeBays = Math.max(0, commander.getShip().FreeCargoBays() - _options.getLeaveEmpty());
+                items = commander.CurrentSystem().TradeItems();
                 unitPrice = _priceCargoBuy[tradeItem];
-                cashToSpend = cmdr.CashToSpend();
+                cashToSpend = commander.CashToSpend();
                 break;
             case BuyTrader:
                 items = getOpponent().Cargo();
@@ -906,7 +1004,7 @@ public class Game extends SerializableObject {
                 items = getOpponent().Cargo();
                 break;
         }
-        if (op == CargoBuyOp.BuySystem && cmdr.getDebt() > Constants.DebtTooLarge) {
+        if (op == CargoBuyOp.BuySystem && commander.getDebt() > Constants.DebtTooLarge) {
             FormAlert.Alert(AlertType.DebtTooLargeTrade, owner);
         } else if (op == CargoBuyOp.BuySystem && (items[tradeItem] <= 0 || unitPrice <= 0)) {
             FormAlert.Alert(AlertType.CargoNoneAvailable, owner);
@@ -918,7 +1016,7 @@ public class Game extends SerializableObject {
             int qty = 0;
             int maxAmount = Math.min(freeBays, items[tradeItem]);
             if (op == CargoBuyOp.BuySystem) {
-                maxAmount = Math.min(maxAmount, cmdr.CashToSpend() / unitPrice);
+                maxAmount = Math.min(maxAmount, commander.CashToSpend() / unitPrice);
             }
             if (max) {
                 qty = maxAmount;
@@ -930,16 +1028,16 @@ public class Game extends SerializableObject {
             }
             if (qty > 0) {
                 int totalPrice = qty * unitPrice;
-                cmdr.getShip().Cargo()[tradeItem] += qty;
+                commander.getShip().Cargo()[tradeItem] += qty;
                 items[tradeItem] -= qty;
-                cmdr.setCash(cmdr.getCash() - totalPrice);
-                cmdr.PriceCargo()[tradeItem] += totalPrice;
+                commander.setCash(commander.getCash() - totalPrice);
+                commander.PriceCargo()[tradeItem] += totalPrice;
             }
         }
     }
 
     private void CargoSell(int tradeItem, boolean all, wfPane owner, CargoSellOp op) {
-        int qtyInHand = cmdr.getShip().Cargo()[tradeItem];
+        int qtyInHand = commander.getShip().Cargo()[tradeItem];
         int unitPrice;
         switch (op) {
             case SellSystem:
@@ -960,13 +1058,13 @@ public class Game extends SerializableObject {
         } else if (op == CargoSellOp.SellSystem && unitPrice <= 0) {
             FormAlert.Alert(AlertType.CargoNotInterested, owner);
         } else {
-            if (op != CargoSellOp.Jettison || getLitterWarning() || cmdr.getPoliceRecordScore() <= Constants.PoliceRecordScoreDubious
+            if (op != CargoSellOp.Jettison || getLitterWarning() || commander.getPoliceRecordScore() <= Constants.PoliceRecordScoreDubious
                     || FormAlert.Alert(AlertType.EncounterDumpWarning, owner) == DialogResult.Yes) {
                 int unitCost = 0;
                 int maxAmount = (op == CargoSellOp.SellTrader) ? Math.min(qtyInHand, getOpponent().FreeCargoBays()) : qtyInHand;
                 if (op == CargoSellOp.Dump) {
                     unitCost = 5 * (_difficulty.CastToInt() + 1);
-                    maxAmount = Math.min(maxAmount, cmdr.CashToSpend() / unitCost);
+                    maxAmount = Math.min(maxAmount, commander.CashToSpend() / unitCost);
                 }
                 int price = unitPrice > 0 ? unitPrice : -unitCost;
                 int qty = 0;
@@ -980,15 +1078,15 @@ public class Game extends SerializableObject {
                 }
                 if (qty > 0) {
                     int totalPrice = qty * price;
-                    cmdr.getShip().Cargo()[tradeItem] -= qty;
-                    cmdr.PriceCargo()[tradeItem] = (cmdr.PriceCargo()[tradeItem] * (qtyInHand - qty)) / qtyInHand;
-                    cmdr.setCash(cmdr.getCash() + totalPrice);
+                    commander.getShip().Cargo()[tradeItem] -= qty;
+                    commander.PriceCargo()[tradeItem] = (commander.PriceCargo()[tradeItem] * (qtyInHand - qty)) / qtyInHand;
+                    commander.setCash(commander.getCash() + totalPrice);
                     if (op == CargoSellOp.Jettison) {
                         if (Functions.GetRandom(10) < _difficulty.CastToInt() + 1) {
-                            if (cmdr.getPoliceRecordScore() > Constants.PoliceRecordScoreDubious) {
-                                cmdr.setPoliceRecordScore(Constants.PoliceRecordScoreDubious);
+                            if (commander.getPoliceRecordScore() > Constants.PoliceRecordScoreDubious) {
+                                commander.setPoliceRecordScore(Constants.PoliceRecordScoreDubious);
                             } else {
-                                cmdr.setPoliceRecordScore(cmdr.getPoliceRecordScore() - 1);
+                                commander.setPoliceRecordScore(commander.getPoliceRecordScore() - 1);
                             }
                             NewsAddEvent(NewsEvent.CaughtLittering);
                         }
@@ -1028,40 +1126,40 @@ public class Game extends SerializableObject {
     }
 
     private void EncounterDefeatDragonfly() {
-        cmdr.setKillsPirate(cmdr.getKillsPirate() + 1);
-        cmdr.setPoliceRecordScore(cmdr.getPoliceRecordScore() + Constants.ScoreKillPirate);
+        commander.setKillsPirate(commander.getKillsPirate() + 1);
+        commander.setPoliceRecordScore(commander.getPoliceRecordScore() + Constants.ScoreKillPirate);
         setQuestStatusDragonfly(SpecialEvent.StatusDragonflyDestroyed);
     }
 
     private void EncounterDefeatScarab() {
-        cmdr.setKillsPirate(cmdr.getKillsPirate() + 1);
-        cmdr.setPoliceRecordScore(cmdr.getPoliceRecordScore() + Constants.ScoreKillPirate);
+        commander.setKillsPirate(commander.getKillsPirate() + 1);
+        commander.setPoliceRecordScore(commander.getPoliceRecordScore() + Constants.ScoreKillPirate);
         setQuestStatusScarab(SpecialEvent.StatusScarabDestroyed);
     }
 
     private void EncounterDefeatScorpion() {
-        cmdr.setKillsPirate(cmdr.getKillsPirate() + 1);
-        cmdr.setPoliceRecordScore(cmdr.getPoliceRecordScore() + Constants.ScoreKillPirate);
+        commander.setKillsPirate(commander.getKillsPirate() + 1);
+        commander.setPoliceRecordScore(commander.getPoliceRecordScore() + Constants.ScoreKillPirate);
         setQuestStatusPrincess(SpecialEvent.StatusPrincessRescued);
     }
 
     private void EncounterScoop(wfPane owner) {
-        // Chance 50% to pick something up on Normal level, 33% on Hard level, 25% on Impossible level, and 100% on Easy or Beginner.
+        // Chance 50% to picturek something up on Normal level, 33% on Hard level, 25% on Impossible level, and 100% on Easy or Beginner.
         if ((_difficulty.CastToInt() < Difficulty.Normal.CastToInt() || Functions.GetRandom(_difficulty.CastToInt()) == 0)
                 && getOpponent().FilledCargoBays() > 0) {
-            // Changed this to actually pick a good that was in the opponent's cargo hold - JAF.
+            // Changed this to actually picturek a good that was in the opponent's cargo hold - JAF.
             int index = Functions.GetRandom(getOpponent().FilledCargoBays());
             int tradeItem = -1;
             for (int sum = 0; sum <= index; sum += getOpponent().Cargo()[++tradeItem]) {
             }
             if (FormAlert.Alert(AlertType.EncounterScoop, owner, Constants.TradeItems[tradeItem].Name()) == DialogResult.Yes) {
                 boolean jettisoned = false;
-                if (cmdr.getShip().FreeCargoBays() == 0 && FormAlert.Alert(AlertType.EncounterScoopNoRoom, owner) == DialogResult.Yes) {
+                if (commander.getShip().FreeCargoBays() == 0 && FormAlert.Alert(AlertType.EncounterScoopNoRoom, owner) == DialogResult.Yes) {
                     (new FormJettison()).ShowDialog(owner);
                     jettisoned = true;
                 }
-                if (cmdr.getShip().FreeCargoBays() > 0) {
-                    cmdr.getShip().Cargo()[tradeItem]++;
+                if (commander.getShip().FreeCargoBays() > 0) {
+                    commander.getShip().Cargo()[tradeItem]++;
                 } else if (jettisoned) {
                     FormAlert.Alert(AlertType.EncounterScoopNoScoop, owner);
                 }
@@ -1084,7 +1182,7 @@ public class Game extends SerializableObject {
                     if (getOpponentDisabled()) {
                         setEncounterType(EncounterType.PirateDisabled);
                     } else if (getOpponent().getHull() < (prevOppHull * 2) / 3) {
-                        if (cmdr.getShip().getHull() < (prevCmdrHull * 2) / 3) {
+                        if (commander.getShip().getHull() < (prevCmdrHull * 2) / 3) {
                             if (chance < 60) {
                                 getEncounterType();
                                 setEncounterType(EncounterType.PirateFlee);
@@ -1102,7 +1200,7 @@ public class Game extends SerializableObject {
                 case PoliceFlee:
                     if (getOpponentDisabled()) {
                         setEncounterType(EncounterType.PoliceDisabled);
-                    } else if (getOpponent().getHull() < prevOppHull / 2 && (cmdr.getShip().getHull() >= prevCmdrHull / 2 || chance < 40)) {
+                    } else if (getOpponent().getHull() < prevOppHull / 2 && (commander.getShip().getHull() >= prevCmdrHull / 2 || chance < 40)) {
                         setEncounterType(EncounterType.PoliceFlee);
                     }
                     break;
@@ -1117,8 +1215,8 @@ public class Game extends SerializableObject {
                         } else {
                             setEncounterType(EncounterType.TraderFlee);
                         }
-                    } else if (getOpponent().getHull() < (prevOppHull * 9) / 10 && (cmdr.getShip().getHull() < (prevCmdrHull * 2) / 3 && chance < 20
-                            || cmdr.getShip().getHull() < (prevCmdrHull * 9) / 10 && chance < 60 || cmdr.getShip().getHull() >= (prevCmdrHull * 9) / 10)) {
+                    } else if (getOpponent().getHull() < (prevOppHull * 9) / 10 && (commander.getShip().getHull() < (prevCmdrHull * 2) / 3 && chance < 20
+                            || commander.getShip().getHull() < (prevCmdrHull * 9) / 10 && chance < 60 || commander.getShip().getHull() >= (prevCmdrHull * 9) / 10)) {
                         // If you get damaged a lot, the trader tends to keep shooting;
                         // if you get damaged a little, the trader may keep shooting;
                         // if you get damaged very little or not at all, the trader will flee.
@@ -1135,18 +1233,18 @@ public class Game extends SerializableObject {
         if (getEncounterType().CastToInt() >= EncounterType.PirateAttack.CastToInt()
                 && getEncounterType().CastToInt() <= EncounterType.PirateDisabled.CastToInt()
                 && getOpponent().Type() != ShipType.Mantis
-                && cmdr.getPoliceRecordScore() >= Constants.PoliceRecordScoreDubious) {
+                && commander.getPoliceRecordScore() >= Constants.PoliceRecordScoreDubious) {
             FormAlert.Alert(AlertType.EncounterPiratesBounty, owner, Strings.EncounterPiratesDestroyed, "", Functions.Multiples(getOpponent().Bounty(), Strings.MoneyUnit));
         } else {
             FormAlert.Alert(AlertType.EncounterYouWin, owner);
         }
         switch (getEncounterType()) {
             case FamousCaptainAttack:
-                cmdr.setKillsTrader(cmdr.getKillsTrader() + 1);
-                if (cmdr.getReputationScore() < Constants.ReputationScoreDangerous) {
-                    cmdr.setReputationScore(Constants.ReputationScoreDangerous);
+                commander.setKillsTrader(commander.getKillsTrader() + 1);
+                if (commander.getReputationScore() < Constants.ReputationScoreDangerous) {
+                    commander.setReputationScore(Constants.ReputationScoreDangerous);
                 } else {
-                    cmdr.setReputationScore(cmdr.getReputationScore() + Constants.ScoreKillCaptain);
+                    commander.setReputationScore(commander.getReputationScore() + Constants.ScoreKillCaptain);
                 }
                 // bump news flag from attacked to ship destroyed
                 NewsReplaceEvent(NewsLatestEvent(), NewsEvent.FromInt(NewsLatestEvent() + 1).CastToInt());
@@ -1157,39 +1255,39 @@ public class Game extends SerializableObject {
             case PirateAttack:
             case PirateFlee:
             case PirateSurrender:
-                cmdr.setKillsPirate(cmdr.getKillsPirate() + 1);
+                commander.setKillsPirate(commander.getKillsPirate() + 1);
                 if (getOpponent().Type() != ShipType.Mantis) {
-                    if (cmdr.getPoliceRecordScore() >= Constants.PoliceRecordScoreDubious) {
-                        cmdr.setCash(cmdr.getCash() + getOpponent().Bounty());
+                    if (commander.getPoliceRecordScore() >= Constants.PoliceRecordScoreDubious) {
+                        commander.setCash(commander.getCash() + getOpponent().Bounty());
                     }
-                    cmdr.setPoliceRecordScore(cmdr.getPoliceRecordScore() + Constants.ScoreKillPirate);
+                    commander.setPoliceRecordScore(commander.getPoliceRecordScore() + Constants.ScoreKillPirate);
                     EncounterScoop(owner);
                 }
                 break;
             case PoliceAttack:
             case PoliceFlee:
-                cmdr.setKillsPolice(cmdr.getKillsPolice() + 1);
-                cmdr.setPoliceRecordScore(cmdr.getPoliceRecordScore() + Constants.ScoreKillPolice);
+                commander.setKillsPolice(commander.getKillsPolice() + 1);
+                commander.setPoliceRecordScore(commander.getPoliceRecordScore() + Constants.ScoreKillPolice);
                 break;
             case ScarabAttack:
                 EncounterDefeatScarab();
                 break;
             case SpaceMonsterAttack:
-                cmdr.setKillsPirate(cmdr.getKillsPirate() + 1);
-                cmdr.setPoliceRecordScore(cmdr.getPoliceRecordScore() + Constants.ScoreKillPirate);
+                commander.setKillsPirate(commander.getKillsPirate() + 1);
+                commander.setPoliceRecordScore(commander.getPoliceRecordScore() + Constants.ScoreKillPirate);
                 setQuestStatusSpaceMonster(SpecialEvent.StatusSpaceMonsterDestroyed);
                 break;
             case TraderAttack:
             case TraderFlee:
             case TraderSurrender:
-                cmdr.setKillsTrader(cmdr.getKillsTrader() + 1);
-                cmdr.setPoliceRecordScore(cmdr.getPoliceRecordScore() + Constants.ScoreKillTrader);
+                commander.setKillsTrader(commander.getKillsTrader() + 1);
+                commander.setPoliceRecordScore(commander.getPoliceRecordScore() + Constants.ScoreKillTrader);
                 EncounterScoop(owner);
                 break;
             default:
                 break;
         }
-        cmdr.setReputationScore(cmdr.getReputationScore() + (getOpponent().Type().CastToInt() / 2 + 1));
+        commander.setReputationScore(commander.getReputationScore() + (getOpponent().Type().CastToInt() / 2 + 1));
     }
 
     private void GenerateCrewMemberList() {
@@ -1234,110 +1332,10 @@ public class Game extends SerializableObject {
         setOpponent(new Ship(oppType));
     }
 
-    private void GenerateUniverse() {
-        _universe = new StarSystem[Strings.SystemNames.length];
-        int i, j;
-        for (i = 0; i < _universe.length; i++) {
-            StarSystemId id = (StarSystemId.FromInt(i));
-            SystemPressure pressure = SystemPressure.None;
-            SpecialResource specRes = SpecialResource.Nothing;
-            ShipSize size = ShipSize.FromInt(Functions.GetRandom(ShipSize.Huge.CastToInt() + 1));
-            PoliticalSystem polSys = Constants.PoliticalSystems[Functions.GetRandom(Constants.PoliticalSystems.length)];
-            TechLevel tech = TechLevel.FromInt(Functions.GetRandom(polSys.MinimumTechLevel().ordinal(), polSys.MaximumTechLevel().ordinal() + 1));
-            // Galvon must be a Monarchy.
-            if (id == StarSystemId.Galvon) {
-                size = ShipSize.Large;
-                polSys = Constants.PoliticalSystems[PoliticalSystemType.Monarchy.CastToInt()];
-                tech = TechLevel.t7;
-            }
-            if (Functions.GetRandom(100) < 15) {
-                pressure = SystemPressure.FromInt(Functions.GetRandom(SystemPressure.War.CastToInt(), SystemPressure.Employment.CastToInt() + 1));
-            }
-            if (Functions.GetRandom(5) >= 3) {
-                specRes = SpecialResource.FromInt(Functions.GetRandom(SpecialResource.MineralRich.CastToInt(), SpecialResource.Warlike.CastToInt() + 1));
-            }
-            int x = 0;
-            int y = 0;
-            if (i < _wormholes.length) {
-                // Place the first systems somewhere in the center.
-                x = ((GalaxyWidth * (1 + 2 * (i % 3))) / 6) - Functions.GetRandom(-Constants.CloseDistance + 1, Constants.CloseDistance);
-                y = ((GalaxyHeight * (i < 3 ? 1 : 3)) / 4) - Functions.GetRandom(-Constants.CloseDistance + 1, Constants.CloseDistance);
-                _wormholes[i] = i;
-            } else {
-                boolean ok = false;
-                while (!ok) {
-                    x = Functions.GetRandom(1, GalaxyWidth);
-                    y = Functions.GetRandom(1, GalaxyHeight);
-                    boolean closeFound = false;
-                    boolean tooClose = false;
-                    for (j = 0; j < i && !tooClose; j++) {
-                        // Minimum distance between any two systems not to be accepted.
-                        if (Functions.Distance(_universe[j], x, y) < MinDistance) {
-                            tooClose = true;
-                        }
-                        // There should be at least one system which is close enough.
-                        if (Functions.Distance(_universe[j], x, y) < Constants.CloseDistance) {
-                            closeFound = true;
-                        }
-                    }
-                    ok = (closeFound && !tooClose);
-                }
-            }
-            _universe[i] = new StarSystem(id, x, y, size, tech, polSys.Type(), pressure, specRes);
-        }
-        // Randomize the system locations a bit more, otherwise the systems with the first names in the alphabet are all in the center.
-        for (i = 0; i < _universe.length; i++) {
-            j = Functions.GetRandom(_universe.length);
-            if (!Functions.WormholeExists(j, -1)) {
-                int x = _universe[i].X();
-                int y = _universe[i].Y();
-                _universe[i].X(_universe[j].X());
-                _universe[i].Y(_universe[j].Y());
-                _universe[j].X(x);
-                _universe[j].Y(y);
-                int w = Util.BruteSeek(_wormholes, i);
-                if (w >= 0) {
-                    _wormholes[w] = j;
-                }
-            }
-        }
-        // Randomize wormhole order
-        for (i = 0; i < _wormholes.length; i++) {
-            j = Functions.GetRandom(_wormholes.length);
-            int w = _wormholes[i];
-            _wormholes[i] = _wormholes[j];
-            _wormholes[j] = w;
-        }
-    }
-
-    private void InitializeCommander(String name, CrewMember commanderCrewMember) {
-        cmdr = new Commander(commanderCrewMember);
-        Mercenaries()[CrewMemberId.Commander.CastToInt()] = Commander();
-        Strings.CrewMemberNames[CrewMemberId.Commander.CastToInt()] = name;
-        while (cmdr.CurrentSystem() == null) {
-            StarSystem system = _universe[Functions.GetRandom(_universe.length)];
-            if (system.SpecialEventType() == SpecialEventType.NA
-                    && system.TechLevel().ordinal() > TechLevel.t0.ordinal()
-                    && system.TechLevel().ordinal() < TechLevel.t7.ordinal()) {
-                // Make sure at least three other systems can be reached
-                int close = 0;
-                for (int i = 0; i < _universe.length && close < 3; i++) {
-                    if (i != system.Id().CastToInt() && Functions.Distance(_universe[i], system) <= cmdr.getShip().FuelTanks()) {
-                        close++;
-                    }
-                }
-                if (close >= 3) {
-                    cmdr.CurrentSystem(system);
-                }
-            }
-        }
-        cmdr.CurrentSystem().Visited(true);
-    }
-
     private void NormalDeparture(int fuel) {
-        cmdr.setCash(cmdr.getCash() - (MercenaryCosts() + InsuranceCosts() + WormholeCosts()));
-        cmdr.getShip().setFuel(cmdr.getShip().getFuel() - fuel);
-        cmdr.PayInterest();
+        commander.setCash(commander.getCash() - (MercenaryCosts() + InsuranceCosts() + WormholeCosts()));
+        commander.getShip().setFuel(commander.getShip().getFuel() - fuel);
+        commander.PayInterest();
         IncDays(1, getParentWindow());
     }
 
@@ -1350,7 +1348,7 @@ public class Game extends SerializableObject {
     }
 
     public Commander Commander() {
-        return cmdr;
+        return commander;
     }
 
     public CrewMember[] Mercenaries() {
@@ -1363,7 +1361,7 @@ public class Game extends SerializableObject {
 
     public EncounterResult EncounterExecuteAction(wfPane owner) {
         EncounterResult result = EncounterResult.Continue;
-        int prevCmdrHull = cmdr.getShip().getHull();
+        int prevCmdrHull = commander.getShip().getHull();
         int prevOppHull = getOpponent().getHull();
         setEncounterCmdrHit(false);
         setEncounterOppHit(false);
@@ -1380,24 +1378,24 @@ public class Game extends SerializableObject {
             case ScorpionAttack:
             case SpaceMonsterAttack:
             case TraderAttack:
-                setEncounterCmdrHit(EncounterExecuteAttack(getOpponent(), cmdr.getShip(), getEncounterCmdrFleeing()));
-                setEncounterOppHit(!getEncounterCmdrFleeing() && EncounterExecuteAttack(cmdr.getShip(), getOpponent(), false));
+                setEncounterCmdrHit(EncounterExecuteAttack(getOpponent(), commander.getShip(), getEncounterCmdrFleeing()));
+                setEncounterOppHit(!getEncounterCmdrFleeing() && EncounterExecuteAttack(commander.getShip(), getOpponent(), false));
                 break;
             case PirateFlee:
             case PirateSurrender:
             case PoliceFlee:
             case TraderFlee:
             case TraderSurrender:
-                setEncounterOppHit(!getEncounterCmdrFleeing() && EncounterExecuteAttack(cmdr.getShip(), getOpponent(), true));
+                setEncounterOppHit(!getEncounterCmdrFleeing() && EncounterExecuteAttack(commander.getShip(), getOpponent(), true));
                 setEncounterOppFleeing(true);
                 break;
             default:
-                setEncounterOppHit(!getEncounterCmdrFleeing() && EncounterExecuteAttack(cmdr.getShip(), getOpponent(), false));
+                setEncounterOppHit(!getEncounterCmdrFleeing() && EncounterExecuteAttack(commander.getShip(), getOpponent(), false));
                 break;
         }
         // Determine whether someone gets destroyed
-        if (cmdr.getShip().getHull() <= 0) {
-            if (cmdr.getShip().getEscapePod()) {
+        if (commander.getShip().getHull() <= 0) {
+            if (commander.getShip().getEscapePod()) {
                 result = EncounterResult.EscapePod;
             } else {
                 FormAlert.Alert(getOpponent().getHull() <= 0 ? AlertType.EncounterBothDestroyed : AlertType.EncounterYouLose, owner);
@@ -1419,7 +1417,7 @@ public class Game extends SerializableObject {
                         break;
                 }
                 FormAlert.Alert(AlertType.EncounterDisabledOpponent, owner, EncounterShipText(), str2);
-                cmdr.setReputationScore(cmdr.getReputationScore() + (getOpponent().Type().CastToInt() / 2 + 1));
+                commander.setReputationScore(commander.getReputationScore() + (getOpponent().Type().CastToInt() / 2 + 1));
                 result = EncounterResult.Normal;
             } else {
                 EncounterUpdateEncounterType(prevCmdrHull, prevOppHull);
@@ -1432,11 +1430,11 @@ public class Game extends SerializableObject {
             boolean escaped = false;
             // Determine whether someone gets away.
             if (getEncounterCmdrFleeing()
-                    && (_difficulty == Difficulty.Beginner || (Functions.GetRandom(7) + cmdr.getShip().Pilot() / 3) * 2 >= Functions.GetRandom(getOpponent().Pilot())
+                    && (_difficulty == Difficulty.Beginner || (Functions.GetRandom(7) + commander.getShip().Pilot() / 3) * 2 >= Functions.GetRandom(getOpponent().Pilot())
                     * (2 + _difficulty.CastToInt()))) {
                 FormAlert.Alert(getEncounterCmdrHit() ? AlertType.EncounterEscapedHit : AlertType.EncounterEscaped, owner);
                 escaped = true;
-            } else if (getEncounterOppFleeing() && Functions.GetRandom(cmdr.getShip().Pilot()) * 4 <= Functions.GetRandom(7 + getOpponent().Pilot() / 3) * 2) {
+            } else if (getEncounterOppFleeing() && Functions.GetRandom(commander.getShip().Pilot()) * 4 <= Functions.GetRandom(7 + getOpponent().Pilot() / 3) * 2) {
                 FormAlert.Alert(AlertType.EncounterOpponentEscaped, owner);
                 escaped = true;
             }
@@ -1478,7 +1476,7 @@ public class Game extends SerializableObject {
     public EncounterResult EncounterVerifySurrender(wfPane owner) {
         EncounterResult result = EncounterResult.Continue;
         if (getOpponent().Type() == ShipType.Mantis) {
-            if (cmdr.getShip().ArtifactOnBoard()) {
+            if (commander.getShip().ArtifactOnBoard()) {
                 if (FormAlert.Alert(AlertType.EncounterAliensSurrender, owner) == DialogResult.Yes) {
                     FormAlert.Alert(AlertType.ArtifactRelinquished, owner);
                     setQuestStatusArtifact(SpecialEvent.StatusArtifactNotStarted);
@@ -1488,36 +1486,36 @@ public class Game extends SerializableObject {
                 FormAlert.Alert(AlertType.EncounterSurrenderRefused, owner);
             }
         } else if (getEncounterType() == EncounterType.PoliceAttack || getEncounterType() == EncounterType.PoliceSurrender) {
-            if (cmdr.getPoliceRecordScore() <= Constants.PoliceRecordScorePsychopath) {
+            if (commander.getPoliceRecordScore() <= Constants.PoliceRecordScorePsychopath) {
                 FormAlert.Alert(AlertType.EncounterSurrenderRefused, owner);
             } else if (FormAlert.Alert(AlertType.EncounterPoliceSurrender, owner, new String[]{
-                    cmdr.getShip().IllegalSpecialCargoDescription(Strings.EncounterPoliceSurrenderCargo, true, false),
-                    cmdr.getShip().IllegalSpecialCargoActions()}) == DialogResult.Yes) {
+                    commander.getShip().IllegalSpecialCargoDescription(Strings.EncounterPoliceSurrenderCargo, true, false),
+                    commander.getShip().IllegalSpecialCargoActions()}) == DialogResult.Yes) {
                 result = EncounterResult.Arrested;
             }
-        } else if (cmdr.getShip().PrincessOnBoard() && !cmdr.getShip().HasGadget(GadgetType.HiddenCargoBays)) {
+        } else if (commander.getShip().PrincessOnBoard() && !commander.getShip().HasGadget(GadgetType.HiddenCargoBays)) {
             FormAlert.Alert(AlertType.EncounterPiratesSurrenderPrincess, owner);
         } else {
             setRaided(true);
-            if (cmdr.getShip().HasGadget(GadgetType.HiddenCargoBays)) {
+            if (commander.getShip().HasGadget(GadgetType.HiddenCargoBays)) {
                 ArrayList<String> precious = new ArrayList<>();
-                if (cmdr.getShip().PrincessOnBoard()) {
+                if (commander.getShip().PrincessOnBoard()) {
                     precious.add(Strings.EncounterHidePrincess);
                 }
-                if (cmdr.getShip().SculptureOnBoard()) {
+                if (commander.getShip().SculptureOnBoard()) {
                     precious.add(Strings.EncounterHideSculpture);
                 }
                 FormAlert.Alert(AlertType.PreciousHidden, owner, Functions.StringVars(Strings.ListStrings[precious.size()], precious.toArray(new String[0])));
-            } else if (cmdr.getShip().SculptureOnBoard()) {
+            } else if (commander.getShip().SculptureOnBoard()) {
                 setQuestStatusSculpture(SpecialEvent.StatusSculptureNotStarted);
                 FormAlert.Alert(AlertType.EncounterPiratesTakeSculpture, owner);
             }
-            ArrayList<Integer> cargoToSteal = cmdr.getShip().StealableCargo();
+            ArrayList<Integer> cargoToSteal = commander.getShip().StealableCargo();
             if (cargoToSteal.isEmpty()) {
-                int blackmail = Math.min(25000, Math.max(500, cmdr.Worth() / 20));
-                int cashPayment = Math.min(cmdr.getCash(), blackmail);
-                cmdr.setDebt(cmdr.getDebt() + (blackmail - cashPayment));
-                cmdr.setCash(cmdr.getCash() - cashPayment);
+                int blackmail = Math.min(25000, Math.max(500, commander.Worth() / 20));
+                int cashPayment = Math.min(commander.getCash(), blackmail);
+                commander.setDebt(commander.getDebt() + (blackmail - cashPayment));
+                commander.setCash(commander.getCash() - cashPayment);
                 FormAlert.Alert(AlertType.EncounterPiratesFindNoCargo, owner, Functions.Multiples(blackmail, Strings.MoneyUnit));
             } else {
                 FormAlert.Alert(AlertType.EncounterLooting, owner);
@@ -1525,13 +1523,13 @@ public class Game extends SerializableObject {
                 // Take most high-priced items - JAF.
                 while (getOpponent().FreeCargoBays() > 0 && !cargoToSteal.isEmpty()) {
                     int item = cargoToSteal.get(0);
-                    cmdr.PriceCargo()[item] -= cmdr.PriceCargo()[item] / cmdr.getShip().Cargo()[item];
-                    cmdr.getShip().Cargo()[item]--;
+                    commander.PriceCargo()[item] -= commander.PriceCargo()[item] / commander.getShip().Cargo()[item];
+                    commander.getShip().Cargo()[item]--;
                     getOpponent().Cargo()[item]++;
                     cargoToSteal.remove(0);
                 }
             }
-            if (cmdr.getShip().WildOnBoard()) {
+            if (commander.getShip().WildOnBoard()) {
                 if (getOpponent().getCrewQuarters() > 1) { // Wild hops onto Pirate Ship
                     setQuestStatusWild(SpecialEvent.StatusWildNotStarted);
                     FormAlert.Alert(AlertType.WildGoesPirates, owner);
@@ -1540,7 +1538,7 @@ public class Game extends SerializableObject {
                 }
             }
             // pirates puzzled by reactor
-            if (cmdr.getShip().ReactorOnBoard()) {
+            if (commander.getShip().ReactorOnBoard()) {
                 FormAlert.Alert(AlertType.EncounterPiratesExamineReactor, owner);
             }
             result = EncounterResult.Normal;
@@ -1550,20 +1548,20 @@ public class Game extends SerializableObject {
 
     public EncounterResult EncounterVerifyYield(wfPane owner) {
         EncounterResult result = EncounterResult.Continue;
-        if (cmdr.getShip().IllegalSpecialCargo()) {
+        if (commander.getShip().IllegalSpecialCargo()) {
             if (FormAlert.Alert(AlertType.EncounterPoliceSurrender, owner, new String[]{
-                    cmdr.getShip().IllegalSpecialCargoDescription(Strings.EncounterPoliceSurrenderCargo, true, true),
-                    cmdr.getShip().IllegalSpecialCargoActions()}) == DialogResult.Yes) {
+                    commander.getShip().IllegalSpecialCargoDescription(Strings.EncounterPoliceSurrenderCargo, true, true),
+                    commander.getShip().IllegalSpecialCargoActions()}) == DialogResult.Yes) {
                 result = EncounterResult.Arrested;
             }
         } else {
-            String str1 = cmdr.getShip().IllegalSpecialCargoDescription("", false, true);
+            String str1 = commander.getShip().IllegalSpecialCargoDescription("", false, true);
             if (FormAlert.Alert(AlertType.EncounterPoliceSubmit, owner, str1, "") == DialogResult.Yes) {
                 // Police Record becomes dubious, if it wasn't already.
-                if (cmdr.getPoliceRecordScore() > Constants.PoliceRecordScoreDubious) {
-                    cmdr.setPoliceRecordScore(Constants.PoliceRecordScoreDubious);
+                if (commander.getPoliceRecordScore() > Constants.PoliceRecordScoreDubious) {
+                    commander.setPoliceRecordScore(Constants.PoliceRecordScoreDubious);
                 }
-                cmdr.getShip().RemoveIllegalGoods();
+                commander.getShip().RemoveIllegalGoods();
                 result = EncounterResult.Normal;
             }
         }
@@ -1703,7 +1701,7 @@ public class Game extends SerializableObject {
             case ScorpionIgnore:
             case SpaceMonsterIgnore:
             case TraderIgnore:
-                text = cmdr.getShip().Cloaked() ? Strings.EncounterTextOpponentNoNotice : Strings.EncounterTextOpponentIgnore;
+                text = commander.getShip().Cloaked() ? Strings.EncounterTextOpponentNoNotice : Strings.EncounterTextOpponentIgnore;
                 break;
             case MarieCeleste:
                 text = Strings.EncounterTextMarieCeleste;
@@ -1772,13 +1770,13 @@ public class Game extends SerializableObject {
     }
 
     public String EncounterText() {
-        String cmdrStatus;
+        String commanderStatus;
         if (getEncounterCmdrFleeing()) {
-            cmdrStatus = Functions.StringVars("The ^1 is still following you.", EncounterShipText());
+            commanderStatus = Functions.StringVars("The ^1 is still following you.", EncounterShipText());
         } else if (getEncounterOppHit()) {
-            cmdrStatus = Functions.StringVars("You hit the ^1.", EncounterShipText());
+            commanderStatus = Functions.StringVars("You hit the ^1.", EncounterShipText());
         } else {
-            cmdrStatus = Functions.StringVars("You missed the ^1.", EncounterShipText());
+            commanderStatus = Functions.StringVars("You missed the ^1.", EncounterShipText());
         }
         String oppStatus;
         if (getEncounterOppFleeingPrev()) {
@@ -1788,7 +1786,7 @@ public class Game extends SerializableObject {
         } else {
             oppStatus = Functions.StringVars("The ^1 missed you.", EncounterShipText());
         }
-        return cmdrStatus + Strings.newline + oppStatus;
+        return commanderStatus + Strings.newline + oppStatus;
     }
 
     public String EncounterTextInitial() {
@@ -1865,36 +1863,36 @@ public class Game extends SerializableObject {
     }
 
     public String NewspaperHead() {
-        String[] heads = Strings.NewsMastheads[cmdr.CurrentSystem().PoliticalSystemType().CastToInt()];
-        String head = heads[cmdr.CurrentSystem().Id().CastToInt() % heads.length];
-        return Functions.StringVars(head, cmdr.CurrentSystem().Name());
+        String[] heads = Strings.NewsMastheads[commander.CurrentSystem().PoliticalSystemType().CastToInt()];
+        String head = heads[commander.CurrentSystem().Id().CastToInt() % heads.length];
+        return Functions.StringVars(head, commander.CurrentSystem().Name());
     }
 
     public String NewspaperText() {
-        StarSystem curSys = cmdr.CurrentSystem();
+        StarSystem currentSys = commander.CurrentSystem();
         ArrayList<String> items = new ArrayList<>();
         // We're using the GetRandom2 function so that the same number is generated each time for the same "version" of the newspaper. -JAF
-        Functions.RandSeed(curSys.Id().CastToInt(), cmdr.getDays());
+        Functions.RandSeed(currentSys.Id().CastToInt(), commander.getDays());
         for (Integer newsEvent : _newsEvents) {
             items.add(Functions.StringVars(Strings.NewsEvent[newsEvent], new String[]{
-                    cmdr.Name(), cmdr.CurrentSystem().Name(), cmdr.getShip().Name()}));
+                    commander.Name(), commander.CurrentSystem().Name(), commander.getShip().Name()}));
         }
-        if (curSys.SystemPressure() != SystemPressure.None) {
-            items.add(Strings.NewsPressureInternal[curSys.SystemPressure().CastToInt()]);
+        if (currentSys.SystemPressure() != SystemPressure.None) {
+            items.add(Strings.NewsPressureInternal[currentSys.SystemPressure().CastToInt()]);
         }
-        if (cmdr.getPoliceRecordScore() <= Constants.PoliceRecordScoreVillain) {
+        if (commander.getPoliceRecordScore() <= Constants.PoliceRecordScoreVillain) {
             String baseStr = Strings.NewsPoliceRecordPsychopath[Functions.GetRandom2(Strings.NewsPoliceRecordPsychopath.length)];
-            items.add(Functions.StringVars(baseStr, cmdr.Name(), curSys.Name()));
-        } else if (cmdr.getPoliceRecordScore() >= Constants.PoliceRecordScoreHero) {
+            items.add(Functions.StringVars(baseStr, commander.Name(), currentSys.Name()));
+        } else if (commander.getPoliceRecordScore() >= Constants.PoliceRecordScoreHero) {
             String baseStr = Strings.NewsPoliceRecordHero[Functions.GetRandom2(Strings.NewsPoliceRecordHero.length)];
-            items.add(Functions.StringVars(baseStr, cmdr.Name(), curSys.Name()));
+            items.add(Functions.StringVars(baseStr, commander.Name(), currentSys.Name()));
         }
         // and now, finally, useful news (if any); base probability of a story showing up is (50 / MAXTECHLEVEL) * Current Tech Level
         // This is then modified by adding 10% for every level of play less than Impossible
         boolean realNews = false;
-        int minProbability = Constants.StoryProbability * curSys.TechLevel().ordinal() + 10 * (5 - _difficulty.CastToInt());
+        int minProbability = Constants.StoryProbability * currentSys.TechLevel().ordinal() + 10 * (5 - _difficulty.CastToInt());
         for (StarSystem starSystem : _universe) {
-            if (starSystem.DestOk() && starSystem != curSys) {
+            if (starSystem.DestOk() && starSystem != currentSys) {
                 // Special stories that always get shown: moon, millionaire, shipyard
                 if (starSystem.SpecialEventType() != SpecialEventType.NA) {
                     if (starSystem.SpecialEventType() == SpecialEventType.Moon) {
@@ -1908,7 +1906,7 @@ public class Game extends SerializableObject {
                 }
                 // And not-always-shown stories
                 if (starSystem.SystemPressure() != SystemPressure.None
-                        && Functions.GetRandom2(100) <= Constants.StoryProbability * curSys.TechLevel().ordinal() + 10 * (5 - _difficulty.CastToInt())) {
+                        && Functions.GetRandom2(100) <= Constants.StoryProbability * currentSys.TechLevel().ordinal() + 10 * (5 - _difficulty.CastToInt())) {
                     int index = Functions.GetRandom2(Strings.NewsPressureExternal.length);
                     String baseStr = Strings.NewsPressureExternal[index];
                     String pressure = Strings.NewsPressureExternalPressures[starSystem.SystemPressure().CastToInt()];
@@ -1919,7 +1917,7 @@ public class Game extends SerializableObject {
         }
         // if there's no useful news, we throw up at least one headline from our canned news list.
         if (!realNews) {
-            String[] headlines = Strings.NewsHeadlines[curSys.PoliticalSystemType().CastToInt()];
+            String[] headlines = Strings.NewsHeadlines[currentSys.PoliticalSystemType().CastToInt()];
             boolean[] shown = new boolean[headlines.length];
             int toShow = Functions.GetRandom2(headlines.length);
             for (int i = 0; i <= toShow; i++) {
@@ -1936,13 +1934,13 @@ public class Game extends SerializableObject {
     @SuppressWarnings("fallthrough")
     public boolean EncounterVerifyAttack(wfPane owner) {
         boolean attack = true;
-        if (cmdr.getShip().WeaponStrength() == 0) {
+        if (commander.getShip().WeaponStrength() == 0) {
             FormAlert.Alert(AlertType.EncounterAttackNoWeapons, owner);
             attack = false;
-        } else if (!getOpponent().Disableable() && cmdr.getShip().WeaponStrength(WeaponType.PulseLaser, WeaponType.MorgansLaser) == 0) {
+        } else if (!getOpponent().Disableable() && commander.getShip().WeaponStrength(WeaponType.PulseLaser, WeaponType.MorgansLaser) == 0) {
             FormAlert.Alert(AlertType.EncounterAttackNoLasers, owner);
             attack = false;
-        } else if (getOpponent().Type() == ShipType.Scorpion && cmdr.getShip().WeaponStrength(WeaponType.PhotonDisruptor, WeaponType.QuantumDistruptor) == 0) {
+        } else if (getOpponent().Type() == ShipType.Scorpion && commander.getShip().WeaponStrength(WeaponType.PhotonDisruptor, WeaponType.QuantumDisruptor) == 0) {
             FormAlert.Alert(AlertType.EncounterAttackNoDisruptors, owner);
             attack = false;
         } else {
@@ -1955,7 +1953,7 @@ public class Game extends SerializableObject {
                     setEncounterType(EncounterType.FromInt(getEncounterType().CastToInt() - 1));
                     break;
                 case PoliceInspect:
-                    if (!cmdr.getShip().DetectableIllegalCargoOrPassengers() && FormAlert.Alert(AlertType.EncounterPoliceNothingIllegal, owner) != DialogResult.Yes) {
+                    if (!commander.getShip().DetectableIllegalCargoOrPassengers() && FormAlert.Alert(AlertType.EncounterPoliceNothingIllegal, owner) != DialogResult.Yes) {
                         attack = false;
                     }
                     // Fall through...
@@ -1966,11 +1964,11 @@ public class Game extends SerializableObject {
                 case PoliceFlee:
                 case PoliceIgnore:
                 case PoliceSurrender:
-                    if (cmdr.getPoliceRecordScore() <= Constants.PoliceRecordScoreCriminal || FormAlert.Alert(AlertType.EncounterAttackPolice, owner) == DialogResult.Yes) {
-                        if (cmdr.getPoliceRecordScore() > Constants.PoliceRecordScoreCriminal) {
-                            cmdr.setPoliceRecordScore(Constants.PoliceRecordScoreCriminal);
+                    if (commander.getPoliceRecordScore() <= Constants.PoliceRecordScoreCriminal || FormAlert.Alert(AlertType.EncounterAttackPolice, owner) == DialogResult.Yes) {
+                        if (commander.getPoliceRecordScore() > Constants.PoliceRecordScoreCriminal) {
+                            commander.setPoliceRecordScore(Constants.PoliceRecordScoreCriminal);
                         }
-                        cmdr.setPoliceRecordScore(cmdr.getPoliceRecordScore() + Constants.ScoreAttackPolice);
+                        commander.setPoliceRecordScore(commander.getPoliceRecordScore() + Constants.ScoreAttackPolice);
                         if (getEncounterType() != EncounterType.PoliceFlee) {
                             setEncounterType(EncounterType.PoliceAttack);
                         }
@@ -1981,10 +1979,10 @@ public class Game extends SerializableObject {
                 case TraderBuy:
                 case TraderIgnore:
                 case TraderSell:
-                    if (cmdr.getPoliceRecordScore() < Constants.PoliceRecordScoreClean) {
-                        cmdr.setPoliceRecordScore(cmdr.getPoliceRecordScore() + Constants.ScoreAttackTrader);
+                    if (commander.getPoliceRecordScore() < Constants.PoliceRecordScoreClean) {
+                        commander.setPoliceRecordScore(commander.getPoliceRecordScore() + Constants.ScoreAttackTrader);
                     } else if (FormAlert.Alert(AlertType.EncounterAttackTrader, owner) == DialogResult.Yes) {
-                        cmdr.setPoliceRecordScore(Constants.PoliceRecordScoreDubious);
+                        commander.setPoliceRecordScore(Constants.PoliceRecordScoreDubious);
                     } else {
                         attack = false;
                     }
@@ -1994,7 +1992,7 @@ public class Game extends SerializableObject {
                     }// else goto case TraderAttack;
                 case TraderAttack:
                 case TraderSurrender:
-                    if (Functions.GetRandom(Constants.ReputationScoreElite) <= cmdr.getReputationScore() * 10 / (getOpponent().Type().CastToInt() + 1)
+                    if (Functions.GetRandom(Constants.ReputationScoreElite) <= commander.getReputationScore() * 10 / (getOpponent().Type().CastToInt() + 1)
                             || getOpponent().WeaponStrength() == 0) {
                         setEncounterType(EncounterType.TraderFlee);
                     } else {
@@ -2005,10 +2003,10 @@ public class Game extends SerializableObject {
                 case CaptainConrad:
                 case CaptainHuie:
                     if (FormAlert.Alert(AlertType.EncounterAttackCaptain, owner) == DialogResult.Yes) {
-                        if (cmdr.getPoliceRecordScore() > Constants.PoliceRecordScoreVillain) {
-                            cmdr.setPoliceRecordScore(Constants.PoliceRecordScoreVillain);
+                        if (commander.getPoliceRecordScore() > Constants.PoliceRecordScoreVillain) {
+                            commander.setPoliceRecordScore(Constants.PoliceRecordScoreVillain);
                         }
-                        cmdr.setPoliceRecordScore(cmdr.getPoliceRecordScore() + Constants.ScoreAttackTrader);
+                        commander.setPoliceRecordScore(commander.getPoliceRecordScore() + Constants.ScoreAttackTrader);
                         switch (getEncounterType()) {
                             case CaptainAhab:
                                 NewsAddEvent(NewsEvent.CaptAhabAttacked);
@@ -2038,9 +2036,9 @@ public class Game extends SerializableObject {
         boolean board = false;
         if (FormAlert.Alert(AlertType.EncounterMarieCeleste, owner) == DialogResult.Yes) {
             board = true;
-            int narcs = cmdr.getShip().Cargo()[TradeItemType.Narcotics.CastToInt()];
+            int narcs = commander.getShip().Cargo()[TradeItemType.Narcotics.CastToInt()];
             (new FormPlunder()).ShowDialog(owner);
-            if (cmdr.getShip().Cargo()[TradeItemType.Narcotics.CastToInt()] > narcs) {
+            if (commander.getShip().Cargo()[TradeItemType.Narcotics.CastToInt()] > narcs) {
                 setJustLootedMarie(true);
             }
         }
@@ -2053,14 +2051,14 @@ public class Game extends SerializableObject {
             FormAlert.Alert(AlertType.EncounterMarieCelesteNoBribe, owner);
         } else if (WarpSystem().PoliticalSystem().BribeLevel() <= 0) {
             FormAlert.Alert(AlertType.EncounterPoliceBribeCant, owner);
-        } else if (cmdr.getShip().DetectableIllegalCargoOrPassengers() || FormAlert.Alert(AlertType.EncounterPoliceNothingIllegal, owner) == DialogResult.Yes) {
-            // Bribe depends on how easy it is to bribe the police and commander's current worth
+        } else if (commander.getShip().DetectableIllegalCargoOrPassengers() || FormAlert.Alert(AlertType.EncounterPoliceNothingIllegal, owner) == DialogResult.Yes) {
+            // Bribe depends on how easy it is to bribe the police and commander's currentrent worth
             int diffMod = 10 + 5 * (Difficulty.Impossible.CastToInt() - _difficulty.CastToInt());
-            int passMod = cmdr.getShip().IllegalSpecialCargo() ? (_difficulty.CastToInt() <= Difficulty.Normal.CastToInt() ? 2 : 3) : 1;
-            int bribe = Math.max(100, Math.min(10000, (int) Math.ceil((double) cmdr.Worth() / WarpSystem().PoliticalSystem().BribeLevel() / diffMod / 100) * 100 * passMod));
+            int passMod = commander.getShip().IllegalSpecialCargo() ? (_difficulty.CastToInt() <= Difficulty.Normal.CastToInt() ? 2 : 3) : 1;
+            int bribe = Math.max(100, Math.min(10000, (int) Math.ceil((double) commander.Worth() / WarpSystem().PoliticalSystem().BribeLevel() / diffMod / 100) * 100 * passMod));
             if (FormAlert.Alert(AlertType.EncounterPoliceBribe, owner, Functions.Multiples(bribe, Strings.MoneyUnit)) == DialogResult.Yes) {
-                if (cmdr.getCash() >= bribe) {
-                    cmdr.setCash(cmdr.getCash() - bribe);
+                if (commander.getCash() >= bribe) {
+                    commander.setCash(commander.getCash() - bribe);
                     bribed = true;
                 } else {
                     FormAlert.Alert(AlertType.EncounterPoliceBribeLowCash, owner);
@@ -2072,7 +2070,7 @@ public class Game extends SerializableObject {
 
     public boolean EncounterVerifyFlee(wfPane owner) {
         setEncounterCmdrFleeing(false);
-        if (getEncounterType() != EncounterType.PoliceInspect || cmdr.getShip().DetectableIllegalCargoOrPassengers()
+        if (getEncounterType() != EncounterType.PoliceInspect || commander.getShip().DetectableIllegalCargoOrPassengers()
                 || FormAlert.Alert(AlertType.EncounterPoliceNothingIllegal, owner) == DialogResult.Yes) {
             setEncounterCmdrFleeing(true);
             if (getEncounterType() == EncounterType.MarieCelestePolice && FormAlert.Alert(AlertType.EncounterPostMarieFlee, owner) == DialogResult.No) {
@@ -2082,7 +2080,7 @@ public class Game extends SerializableObject {
                 int scoreMin = getEncounterType() == EncounterType.PoliceInspect
                         ? Constants.PoliceRecordScoreDubious - (_difficulty.CastToInt() < Difficulty.Normal.CastToInt() ? 0 : 1) : Constants.PoliceRecordScoreCriminal;
                 setEncounterType(EncounterType.PoliceAttack);
-                cmdr.setPoliceRecordScore(Math.min(cmdr.getPoliceRecordScore() + scoreMod, scoreMin));
+                commander.setPoliceRecordScore(Math.min(commander.getPoliceRecordScore() + scoreMod, scoreMin));
             }
         }
         return getEncounterCmdrFleeing();
@@ -2090,28 +2088,28 @@ public class Game extends SerializableObject {
 
     public boolean EncounterVerifySubmit(wfPane owner) {
         boolean submit = false;
-        if (cmdr.getShip().DetectableIllegalCargoOrPassengers()) {
-            String str1 = cmdr.getShip().IllegalSpecialCargoDescription("", true, true);
-            String str2 = cmdr.getShip().IllegalSpecialCargo() ? Strings.EncounterPoliceSubmitArrested : "";
+        if (commander.getShip().DetectableIllegalCargoOrPassengers()) {
+            String str1 = commander.getShip().IllegalSpecialCargoDescription("", true, true);
+            String str2 = commander.getShip().IllegalSpecialCargo() ? Strings.EncounterPoliceSubmitArrested : "";
             if (FormAlert.Alert(AlertType.EncounterPoliceSubmit, owner, str1, str2) == DialogResult.Yes) {
                 submit = true;
                 // If you carry illegal goods, they are impounded and you are fined
-                if (cmdr.getShip().DetectableIllegalCargo()) {
-                    cmdr.getShip().RemoveIllegalGoods();
+                if (commander.getShip().DetectableIllegalCargo()) {
+                    commander.getShip().RemoveIllegalGoods();
                     int fine = (int) Math.max(100, Math.min(10000,
-                            Math.ceil((double) cmdr.Worth() / ((Difficulty.Impossible.CastToInt() - _difficulty.CastToInt() + 2) * 10) / 50) * 50));
-                    int cashPayment = Math.min(cmdr.getCash(), fine);
-                    cmdr.setDebt(cmdr.getDebt() + (fine - cashPayment));
-                    cmdr.setCash(cmdr.getCash() - cashPayment);
+                            Math.ceil((double) commander.Worth() / ((Difficulty.Impossible.CastToInt() - _difficulty.CastToInt() + 2) * 10) / 50) * 50));
+                    int cashPayment = Math.min(commander.getCash(), fine);
+                    commander.setDebt(commander.getDebt() + (fine - cashPayment));
+                    commander.setCash(commander.getCash() - cashPayment);
                     FormAlert.Alert(AlertType.EncounterPoliceFine, owner, Functions.Multiples(fine, Strings.MoneyUnit));
-                    cmdr.setPoliceRecordScore(cmdr.getPoliceRecordScore() + Constants.ScoreTrafficking);
+                    commander.setPoliceRecordScore(commander.getPoliceRecordScore() + Constants.ScoreTrafficking);
                 }
             }
         } else {
             submit = true;
             // If you aren't carrying illegal cargo or passengers, the police will increase your lawfulness record
             FormAlert.Alert(AlertType.EncounterPoliceNothingFound, owner);
-            cmdr.setPoliceRecordScore(cmdr.getPoliceRecordScore() - Constants.ScoreTrafficking);
+            commander.setPoliceRecordScore(commander.getPoliceRecordScore() - Constants.ScoreTrafficking);
         }
         return submit;
     }
@@ -2275,7 +2273,7 @@ public class Game extends SerializableObject {
     }
 
     public boolean Travel() {
-        // Returns true if an encounter occurred.
+        // Returns true if an encounter occurrentred.
         // if spacetime is ripped, we may switch the warp system here.
         if (getQuestStatusExperiment() == SpecialEvent.StatusExperimentPerformed && getFabricRipProbability() > 0
                 && (getFabricRipProbability() == Constants.FabricRipInitialProbability || Functions.GetRandom(100) < getFabricRipProbability())) {
@@ -2288,7 +2286,7 @@ public class Game extends SerializableObject {
         setLitterWarning(false);
         setClicks(Constants.StartClicks);
         while (getClicks() > 0) {
-            cmdr.getShip().PerformRepairs();
+            commander.getShip().PerformRepairs();
             if (DetermineEncounter()) {
                 uneventful = false;
                 FormEncounter form = new FormEncounter();
@@ -2517,23 +2515,23 @@ public class Game extends SerializableObject {
     }
 
     public int InsuranceCosts() {
-        return cmdr.getInsurance() ? (int) Math.max(1, cmdr.getShip().BaseWorth(true) * Constants.InsRate * (100 - cmdr.NoClaim()) / 100) : 0;
+        return commander.getInsurance() ? (int) Math.max(1, commander.getShip().BaseWorth(true) * Constants.InsRate * (100 - commander.NoClaim()) / 100) : 0;
     }
 
     public int InterestCosts() {
-        return cmdr.getDebt() > 0 ? (int) Math.max(1, cmdr.getDebt() * Constants.IntRate) : 0;
+        return commander.getDebt() > 0 ? (int) Math.max(1, commander.getDebt() * Constants.IntRate) : 0;
     }
 
     public int MercenaryCosts() {
         int total = 0;
-        for (int i = 1; i < cmdr.getShip().Crew().length && cmdr.getShip().Crew()[i] != null; i++) {
-            total += cmdr.getShip().Crew()[i].Rate();
+        for (int i = 1; i < commander.getShip().Crew().length && commander.getShip().Crew()[i] != null; i++) {
+            total += commander.getShip().Crew()[i].Rate();
         }
         return total;
     }
 
     public int Score() {
-        int worth = cmdr.Worth() < 1000000 ? cmdr.Worth() : 1000000 + ((cmdr.Worth() - 1000000) / 10);
+        int worth = commander.Worth() < 1000000 ? commander.Worth() : 1000000 + ((commander.Worth() - 1000000) / 10);
         int daysMoon = 0;
         int modifier = 0;
         switch (getEndStatus()) {
@@ -2544,7 +2542,7 @@ public class Game extends SerializableObject {
                 modifier = 95;
                 break;
             case BoughtMoon:
-                daysMoon = Math.max(0, (_difficulty.CastToInt() + 1) * 100 - cmdr.getDays());
+                daysMoon = Math.max(0, (_difficulty.CastToInt() + 1) * 100 - commander.getDays());
                 modifier = 100;
                 break;
         }
@@ -2552,7 +2550,7 @@ public class Game extends SerializableObject {
     }
 
     public int WormholeCosts() {
-        return Functions.WormholeExists(cmdr.CurrentSystem(), WarpSystem()) ? Constants.WormDist * cmdr.getShip().getFuelCost() : 0;
+        return Functions.WormholeExists(commander.CurrentSystem(), WarpSystem()) ? Constants.WormDist * commander.getShip().getFuelCost() : 0;
     }
 
     public int[] Destinations() {
@@ -2582,52 +2580,52 @@ public class Game extends SerializableObject {
     }
 
     public void Arrested() {
-        int term = Math.max(30, -cmdr.getPoliceRecordScore());
-        int fine = (1 + cmdr.Worth() * Math.min(80, -cmdr.getPoliceRecordScore()) / 50000) * 500;
-        if (cmdr.getShip().WildOnBoard()) {
+        int term = Math.max(30, -commander.getPoliceRecordScore());
+        int fine = (1 + commander.Worth() * Math.min(80, -commander.getPoliceRecordScore()) / 50000) * 500;
+        if (commander.getShip().WildOnBoard()) {
             fine = (int) (fine * 1.05);
         }
         FormAlert.Alert(AlertType.EncounterArrested, getParentWindow());
         FormAlert.Alert(AlertType.JailConvicted, getParentWindow(), Functions.Multiples(term, Strings.TimeUnit), Functions.Multiples(fine, Strings.MoneyUnit));
-        if (cmdr.getShip().HasGadget(GadgetType.HiddenCargoBays)) {
-            while (cmdr.getShip().HasGadget(GadgetType.HiddenCargoBays)) {
-                cmdr.getShip().RemoveEquipment(EquipmentType.Gadget, GadgetType.HiddenCargoBays);
+        if (commander.getShip().HasGadget(GadgetType.HiddenCargoBays)) {
+            while (commander.getShip().HasGadget(GadgetType.HiddenCargoBays)) {
+                commander.getShip().RemoveEquipment(EquipmentType.Gadget, GadgetType.HiddenCargoBays);
             }
             FormAlert.Alert(AlertType.JailHiddenCargoBaysRemoved, getParentWindow());
         }
-        if (cmdr.getShip().ReactorOnBoard()) {
+        if (commander.getShip().ReactorOnBoard()) {
             FormAlert.Alert(AlertType.ReactorConfiscated, getParentWindow());
             setQuestStatusReactor(SpecialEvent.StatusReactorNotStarted);
         }
-        if (cmdr.getShip().SculptureOnBoard()) {
+        if (commander.getShip().SculptureOnBoard()) {
             FormAlert.Alert(AlertType.SculptureConfiscated, getParentWindow());
             setQuestStatusSculpture(SpecialEvent.StatusSculptureNotStarted);
         }
-        if (cmdr.getShip().WildOnBoard()) {
+        if (commander.getShip().WildOnBoard()) {
             FormAlert.Alert(AlertType.WildArrested, getParentWindow());
             NewsAddEvent(NewsEvent.WildArrested);
             setQuestStatusWild(SpecialEvent.StatusWildNotStarted);
         }
-        if (cmdr.getShip().AnyIllegalCargo()) {
+        if (commander.getShip().AnyIllegalCargo()) {
             FormAlert.Alert(AlertType.JailIllegalGoodsImpounded, getParentWindow());
-            cmdr.getShip().RemoveIllegalGoods();
+            commander.getShip().RemoveIllegalGoods();
         }
-        if (cmdr.getInsurance()) {
+        if (commander.getInsurance()) {
             FormAlert.Alert(AlertType.JailInsuranceLost, getParentWindow());
-            cmdr.setInsurance(false);
-            cmdr.NoClaim(0);
+            commander.setInsurance(false);
+            commander.NoClaim(0);
         }
-        if (cmdr.getShip().CrewCount() - cmdr.getShip().SpecialCrew().length > 1) {
+        if (commander.getShip().CrewCount() - commander.getShip().SpecialCrew().length > 1) {
             FormAlert.Alert(AlertType.JailMercenariesLeave, getParentWindow());
-            for (int i = 1; i < cmdr.getShip().Crew().length; i++) {
-                cmdr.getShip().Crew()[i] = null;
+            for (int i = 1; i < commander.getShip().Crew().length; i++) {
+                commander.getShip().Crew()[i] = null;
             }
         }
-        if (cmdr.getShip().JarekOnBoard()) {
+        if (commander.getShip().JarekOnBoard()) {
             FormAlert.Alert(AlertType.JarekTakenHome, getParentWindow());
             setQuestStatusJarek(SpecialEvent.StatusJarekNotStarted);
         }
-        if (cmdr.getShip().PrincessOnBoard()) {
+        if (commander.getShip().PrincessOnBoard()) {
             FormAlert.Alert(AlertType.PrincessTakenHome, getParentWindow());
             setQuestStatusPrincess(SpecialEvent.StatusPrincessNotStarted);
         }
@@ -2635,28 +2633,28 @@ public class Game extends SerializableObject {
             FormAlert.Alert(AlertType.AntidoteTaken, getParentWindow());
             setQuestStatusJapori(SpecialEvent.StatusJaporiDone);
         }
-        if (cmdr.getCash() >= fine) {
-            cmdr.setCash(cmdr.getCash() - fine);
+        if (commander.getCash() >= fine) {
+            commander.setCash(commander.getCash() - fine);
         } else {
-            cmdr.setCash(Math.max(0, cmdr.getCash() + cmdr.getShip().Worth(true) - fine));
+            commander.setCash(Math.max(0, commander.getCash() + commander.getShip().Worth(true) - fine));
             FormAlert.Alert(AlertType.JailShipSold, getParentWindow());
-            if (cmdr.getShip().getTribbles() > 0) {
+            if (commander.getShip().getTribbles() > 0) {
                 FormAlert.Alert(AlertType.TribblesRemoved, getParentWindow());
             }
             FormAlert.Alert(AlertType.FleaBuilt, getParentWindow());
             CreateFlea();
         }
-        if (cmdr.getDebt() > 0) {
-            int paydown = Math.min(cmdr.getCash(), cmdr.getDebt());
-            cmdr.setDebt(cmdr.getDebt() - paydown);
-            cmdr.setCash(cmdr.getCash() - paydown);
-            if (cmdr.getDebt() > 0) {
+        if (commander.getDebt() > 0) {
+            int paydown = Math.min(commander.getCash(), commander.getDebt());
+            commander.setDebt(commander.getDebt() - paydown);
+            commander.setCash(commander.getCash() - paydown);
+            if (commander.getDebt() > 0) {
                 for (int i = 0; i < term; i++) {
-                    cmdr.PayInterest();
+                    commander.PayInterest();
                 }
             }
         }
-        cmdr.setPoliceRecordScore(Constants.PoliceRecordScoreDubious);
+        commander.setPoliceRecordScore(Constants.PoliceRecordScoreDubious);
         IncDays(term, getParentWindow());
     }
 
@@ -2689,10 +2687,10 @@ public class Game extends SerializableObject {
     }
 
     public void CreateFlea() {
-        cmdr.setShip(new Ship(ShipType.Flea));
-        cmdr.getShip().Crew()[0] = Commander();
-        cmdr.setInsurance(false);
-        cmdr.NoClaim(0);
+        commander.setShip(new Ship(ShipType.Flea));
+        commander.getShip().Crew()[0] = Commander();
+        commander.setInsurance(false);
+        commander.NoClaim(0);
     }
 
     public void EncounterBegin() {
@@ -2704,13 +2702,13 @@ public class Game extends SerializableObject {
         if (FormAlert.Alert(AlertType.EncounterDrinkContents, owner) == DialogResult.Yes) {
             if (getEncounterType() == EncounterType.BottleGood) {
                 // two points if you're on beginner-normal, one otherwise
-                cmdr.IncreaseRandomSkill();
+                commander.IncreaseRandomSkill();
                 if (_difficulty.CastToInt() <= Difficulty.Normal.CastToInt()) {
-                    cmdr.IncreaseRandomSkill();
+                    commander.IncreaseRandomSkill();
                 }
                 FormAlert.Alert(AlertType.EncounterTonicConsumedGood, owner);
             } else {
-                cmdr.TonicTweakRandomSkill();
+                commander.TonicTweakRandomSkill();
                 FormAlert.Alert(AlertType.EncounterTonicConsumedStrange, owner);
             }
         }
@@ -2747,9 +2745,9 @@ public class Game extends SerializableObject {
         }
         if (FormAlert.Alert(initialAlert, owner) == DialogResult.Yes) {
             // Remove the equipment we're trading.
-            cmdr.getShip().RemoveEquipment(equipType, equipSubType);
+            commander.getShip().RemoveEquipment(equipType, equipSubType);
             // Add points to the appropriate skill - two points if beginner-normal, one otherwise.
-            cmdr.Skills()[skill] = Math.min(Constants.MaxSkill, cmdr.Skills()[skill] + (_difficulty.CastToInt() <= Difficulty.Normal.CastToInt() ? 2 : 1));
+            commander.Skills()[skill] = Math.min(Constants.MaxSkill, commander.Skills()[skill] + (_difficulty.CastToInt() <= Difficulty.Normal.CastToInt() ? 2 : 1));
             FormAlert.Alert(AlertType.SpecialTrainingCompleted, owner);
         }
     }
@@ -2757,49 +2755,49 @@ public class Game extends SerializableObject {
     public void EncounterPlunder(wfPane owner) {
         (new FormPlunder()).ShowDialog(owner);
         if (getEncounterType().CastToInt() >= EncounterType.TraderAttack.CastToInt()) {
-            cmdr.setPoliceRecordScore(cmdr.getPoliceRecordScore() + Constants.ScorePlunderTrader);
+            commander.setPoliceRecordScore(commander.getPoliceRecordScore() + Constants.ScorePlunderTrader);
             if (getOpponentDisabled()) {
-                cmdr.setKillsTrader(cmdr.getKillsTrader() + 1);
+                commander.setKillsTrader(commander.getKillsTrader() + 1);
             }
         } else if (getOpponentDisabled()) {
-            if (cmdr.getPoliceRecordScore() >= Constants.PoliceRecordScoreDubious) {
+            if (commander.getPoliceRecordScore() >= Constants.PoliceRecordScoreDubious) {
                 FormAlert.Alert(AlertType.EncounterPiratesBounty, owner, Strings.EncounterPiratesDisabled,
                         Strings.EncounterPiratesLocation, Functions.Multiples(getOpponent().Bounty(), Strings.MoneyUnit));
-                cmdr.setCash(cmdr.getCash() + getOpponent().Bounty());
+                commander.setCash(commander.getCash() + getOpponent().Bounty());
             }
-            cmdr.setKillsPirate(cmdr.getKillsPirate() + 1);
-            cmdr.setPoliceRecordScore(cmdr.getPoliceRecordScore() + Constants.ScoreKillPirate);
+            commander.setKillsPirate(commander.getKillsPirate() + 1);
+            commander.setPoliceRecordScore(commander.getPoliceRecordScore() + Constants.ScoreKillPirate);
         } else {
-            cmdr.setPoliceRecordScore(cmdr.getPoliceRecordScore() + Constants.ScorePlunderPirate);
+            commander.setPoliceRecordScore(commander.getPoliceRecordScore() + Constants.ScorePlunderPirate);
         }
-        cmdr.setReputationScore(cmdr.getReputationScore() + (getOpponent().Type().CastToInt() / 2 + 1));
+        commander.setReputationScore(commander.getReputationScore() + (getOpponent().Type().CastToInt() / 2 + 1));
     }
 
     public void EncounterTrade(wfPane owner) {
         boolean buy = (getEncounterType() == EncounterType.TraderBuy);
-        int item = (buy ? cmdr.getShip() : getOpponent()).GetRandomTradeableItem();
+        int item = (buy ? commander.getShip() : getOpponent()).GetRandomTradeableItem();
         String alertStr = buy ? "selling" : "buying";
-        int cash = cmdr.getCash();
+        int cash = commander.getCash();
         if (getEncounterType() == EncounterType.TraderBuy) {
             CargoSellTrader(item, owner);
         } else { // EncounterType.TraderSell
             CargoBuyTrader(item, owner);
         }
-        if (cmdr.getCash() != cash) {
+        if (commander.getCash() != cash) {
             FormAlert.Alert(AlertType.EncounterTradeCompleted, owner, alertStr, Constants.TradeItems[item].Name());
         }
     }
 
     public void EscapeWithPod() {
         FormAlert.Alert(AlertType.EncounterEscapePodActivated, getParentWindow());
-        if (cmdr.getShip().SculptureOnBoard()) {
+        if (commander.getShip().SculptureOnBoard()) {
             FormAlert.Alert(AlertType.SculptureSaved, getParentWindow());
         }
-        if (cmdr.getShip().ReactorOnBoard()) {
+        if (commander.getShip().ReactorOnBoard()) {
             FormAlert.Alert(AlertType.ReactorDestroyed, getParentWindow());
             setQuestStatusReactor(SpecialEvent.StatusReactorDone);
         }
-        if (cmdr.getShip().getTribbles() > 0) {
+        if (commander.getShip().getTribbles() > 0) {
             FormAlert.Alert(AlertType.TribblesKilled, getParentWindow());
         }
         if (getQuestStatusJapori() == SpecialEvent.StatusJaporiInTransit) {
@@ -2809,33 +2807,33 @@ public class Game extends SerializableObject {
             FormAlert.Alert(AlertType.AntidoteDestroyed, getParentWindow(), _universe[system].Name());
             setQuestStatusJapori(SpecialEvent.StatusJaporiNotStarted);
         }
-        if (cmdr.getShip().ArtifactOnBoard()) {
+        if (commander.getShip().ArtifactOnBoard()) {
             FormAlert.Alert(AlertType.ArtifactLost, getParentWindow());
             setQuestStatusArtifact(SpecialEvent.StatusArtifactDone);
         }
-        if (cmdr.getShip().JarekOnBoard()) {
+        if (commander.getShip().JarekOnBoard()) {
             FormAlert.Alert(AlertType.JarekTakenHome, getParentWindow());
             setQuestStatusJarek(SpecialEvent.StatusJarekNotStarted);
         }
-        if (cmdr.getShip().PrincessOnBoard()) {
+        if (commander.getShip().PrincessOnBoard()) {
             FormAlert.Alert(AlertType.PrincessTakenHome, getParentWindow());
             setQuestStatusPrincess(SpecialEvent.StatusPrincessNotStarted);
         }
-        if (cmdr.getShip().WildOnBoard()) {
+        if (commander.getShip().WildOnBoard()) {
             FormAlert.Alert(AlertType.WildArrested, getParentWindow());
-            cmdr.setPoliceRecordScore(cmdr.getPoliceRecordScore() + Constants.ScoreCaughtWithWild);
+            commander.setPoliceRecordScore(commander.getPoliceRecordScore() + Constants.ScoreCaughtWithWild);
             NewsAddEvent(NewsEvent.WildArrested);
             setQuestStatusWild(SpecialEvent.StatusWildNotStarted);
         }
-        if (cmdr.getInsurance()) {
+        if (commander.getInsurance()) {
             FormAlert.Alert(AlertType.InsurancePayoff, getParentWindow());
-            cmdr.setCash(cmdr.getCash() + cmdr.getShip().BaseWorth(true));
+            commander.setCash(commander.getCash() + commander.getShip().BaseWorth(true));
         }
-        if (cmdr.getCash() > Constants.FleaConversionCost) {
-            cmdr.setCash(cmdr.getCash() - Constants.FleaConversionCost);
+        if (commander.getCash() > Constants.FleaConversionCost) {
+            commander.setCash(commander.getCash() - Constants.FleaConversionCost);
         } else {
-            cmdr.setDebt(cmdr.getDebt() + (Constants.FleaConversionCost - cmdr.getCash()));
-            cmdr.setCash(0);
+            commander.setDebt(commander.getDebt() + (Constants.FleaConversionCost - commander.getCash()));
+            commander.setCash(0);
         }
         FormAlert.Alert(AlertType.FleaBuilt, getParentWindow());
         IncDays(3, getParentWindow());
@@ -2843,10 +2841,10 @@ public class Game extends SerializableObject {
     }
 
     public void HandleSpecialEvent() {
-        StarSystem curSys = cmdr.CurrentSystem();
-        Ship ship = cmdr.getShip();
+        StarSystem currentSys = commander.CurrentSystem();
+        Ship ship = commander.getShip();
         boolean remove = true;
-        switch (curSys.SpecialEventType()) {
+        switch (currentSys.SpecialEventType()) {
             case Artifact:
                 setQuestStatusArtifact(SpecialEvent.StatusArtifactOnBoard);
                 break;
@@ -2857,7 +2855,7 @@ public class Game extends SerializableObject {
                 FormAlert.Alert(AlertType.SpecialSealedCanisters, getParentWindow());
                 int tradeItem = Functions.GetRandom(Constants.TradeItems.length);
                 ship.Cargo()[tradeItem] += 3;
-                cmdr.PriceCargo()[tradeItem] += cmdr.CurrentSystem().SpecialEvent().Price();
+                commander.PriceCargo()[tradeItem] += commander.CurrentSystem().SpecialEvent().Price();
                 break;
             case Dragonfly:
             case DragonflyBaratas:
@@ -2866,7 +2864,7 @@ public class Game extends SerializableObject {
                 setQuestStatusDragonfly(getQuestStatusDragonfly() + 1);
                 break;
             case DragonflyDestroyed:
-                curSys.SpecialEventType(SpecialEventType.DragonflyShield);
+                currentSys.SpecialEventType(SpecialEventType.DragonflyShield);
                 remove = false;
                 break;
             case DragonflyShield:
@@ -2881,8 +2879,8 @@ public class Game extends SerializableObject {
                 break;
             case EraseRecord:
                 FormAlert.Alert(AlertType.SpecialCleanRecord, getParentWindow());
-                cmdr.setPoliceRecordScore(Constants.PoliceRecordScoreClean);
-                RecalculateSellPrices(curSys);
+                commander.setPoliceRecordScore(Constants.PoliceRecordScoreClean);
+                RecalculateSellPrices(currentSys);
                 break;
             case Experiment:
                 setQuestStatusExperiment(SpecialEvent.StatusExperimentStarted);
@@ -2907,7 +2905,7 @@ public class Game extends SerializableObject {
                 }
                 break;
             case GemulonRescued:
-                curSys.SpecialEventType(SpecialEventType.GemulonFuel);
+                currentSys.SpecialEventType(SpecialEventType.GemulonFuel);
                 setQuestStatusGemulon(SpecialEvent.StatusGemulonFuel);
                 remove = false;
                 break;
@@ -2923,8 +2921,8 @@ public class Game extends SerializableObject {
                 break;
             case JaporiDelivery:
                 setQuestStatusJapori(SpecialEvent.StatusJaporiDone);
-                cmdr.IncreaseRandomSkill();
-                cmdr.IncreaseRandomSkill();
+                commander.IncreaseRandomSkill();
+                commander.IncreaseRandomSkill();
                 break;
             case Jarek:
                 if (ship.FreeCrewQuarters() == 0) {
@@ -2951,7 +2949,7 @@ public class Game extends SerializableObject {
                 setQuestStatusMoon(SpecialEvent.StatusMoonDone);
                 throw new GameEndException(GameEndType.BoughtMoon);
             case Princess:
-                curSys.SpecialEventType(SpecialEventType.PrincessReturned);
+                currentSys.SpecialEventType(SpecialEventType.PrincessReturned);
                 remove = false;
                 setQuestStatusPrincess(getQuestStatusPrincess() + 1);
                 break;
@@ -2975,13 +2973,13 @@ public class Game extends SerializableObject {
                     remove = false;
                 } else {
                     FormAlert.Alert(AlertType.EquipmentQuantumDisruptor, getParentWindow());
-                    ship.AddEquipment(Constants.WeaponObjects[WeaponType.QuantumDistruptor.id]);
+                    ship.AddEquipment(Constants.WeaponObjects[WeaponType.QuantumDisruptor.id]);
                     setQuestStatusPrincess(SpecialEvent.StatusPrincessDone);
                 }
                 break;
             case PrincessReturned:
                 ship.Fire(CrewMemberId.Princess);
-                curSys.SpecialEventType(SpecialEventType.PrincessQuantum);
+                currentSys.SpecialEventType(SpecialEventType.PrincessQuantum);
                 setQuestStatusPrincess(SpecialEvent.StatusPrincessReturned);
                 remove = false;
                 break;
@@ -2991,8 +2989,8 @@ public class Game extends SerializableObject {
                     remove = false;
                 } else {
                     if (ship.WildOnBoard()) {
-                        if (FormAlert.Alert(AlertType.WildWontStayAboardReactor, getParentWindow(), curSys.Name()) == DialogResult.OK) {
-                            FormAlert.Alert(AlertType.WildLeavesShip, getParentWindow(), curSys.Name());
+                        if (FormAlert.Alert(AlertType.WildWontStayAboardReactor, getParentWindow(), currentSys.Name()) == DialogResult.OK) {
+                            FormAlert.Alert(AlertType.WildLeavesShip, getParentWindow(), currentSys.Name());
                             setQuestStatusWild(SpecialEvent.StatusWildNotStarted);
                         } else {
                             remove = false;
@@ -3005,7 +3003,7 @@ public class Game extends SerializableObject {
                 }
                 break;
             case ReactorDelivered:
-                curSys.SpecialEventType(SpecialEventType.ReactorLaser);
+                currentSys.SpecialEventType(SpecialEventType.ReactorLaser);
                 setQuestStatusReactor(SpecialEvent.StatusReactorDelivered);
                 remove = false;
                 break;
@@ -3024,7 +3022,7 @@ public class Game extends SerializableObject {
                 break;
             case ScarabDestroyed:
                 setQuestStatusScarab(SpecialEvent.StatusScarabDestroyed);
-                curSys.SpecialEventType(SpecialEventType.ScarabUpgradeHull);
+                currentSys.SpecialEventType(SpecialEventType.ScarabUpgradeHull);
                 remove = false;
                 break;
             case ScarabUpgradeHull:
@@ -3039,7 +3037,7 @@ public class Game extends SerializableObject {
                 break;
             case SculptureDelivered:
                 setQuestStatusSculpture(SpecialEvent.StatusSculptureDelivered);
-                curSys.SpecialEventType(SpecialEventType.SculptureHiddenBays);
+                currentSys.SpecialEventType(SpecialEventType.SculptureHiddenBays);
                 remove = false;
                 break;
             case SculptureHiddenBays:
@@ -3055,7 +3053,7 @@ public class Game extends SerializableObject {
                 break;
             case Skill:
                 FormAlert.Alert(AlertType.SpecialSkillIncrease, getParentWindow());
-                cmdr.IncreaseRandomSkill();
+                commander.IncreaseRandomSkill();
                 break;
             case SpaceMonster:
                 setQuestStatusSpaceMonster(SpecialEvent.StatusSpaceMonsterAtAcamar);
@@ -3069,7 +3067,7 @@ public class Game extends SerializableObject {
                 break;
             case TribbleBuyer:
                 FormAlert.Alert(AlertType.TribblesGone, getParentWindow());
-                cmdr.setCash(cmdr.getCash() + (ship.getTribbles() / 2));
+                commander.setCash(commander.getCash() + (ship.getTribbles() / 2));
                 ship.setTribbles(0);
                 break;
             case Wild:
@@ -3096,35 +3094,35 @@ public class Game extends SerializableObject {
                 // Zeethibal has a 10 in player's lowest score, an 8 in the next lowest score, and 5 elsewhere.
                 CrewMember zeethibal = Mercenaries()[CrewMemberId.Zeethibal.CastToInt()];
                 zeethibal.CurrentSystem(_universe[StarSystemId.Kravat.CastToInt()]);
-                int lowest1 = cmdr.NthLowestSkill(1);
-                int lowest2 = cmdr.NthLowestSkill(2);
+                int lowest1 = commander.NthLowestSkill(1);
+                int lowest2 = commander.NthLowestSkill(2);
                 for (int i = 0; i < zeethibal.Skills().length; i++) {
                     zeethibal.Skills()[i] = (i == lowest1 ? 10 : (i == lowest2 ? 8 : 5));
                 }
                 setQuestStatusWild(SpecialEvent.StatusWildDone);
-                cmdr.setPoliceRecordScore(Constants.PoliceRecordScoreClean);
+                commander.setPoliceRecordScore(Constants.PoliceRecordScoreClean);
                 ship.Fire(CrewMemberId.Wild);
-                RecalculateSellPrices(curSys);
+                RecalculateSellPrices(currentSys);
                 break;
         }
-        if (curSys.SpecialEvent().Price() != 0) {
-            cmdr.setCash(cmdr.getCash() - curSys.SpecialEvent().Price());
+        if (currentSys.SpecialEvent().Price() != 0) {
+            commander.setCash(commander.getCash() - currentSys.SpecialEvent().Price());
         }
         if (remove) {
-            curSys.SpecialEventType(SpecialEventType.NA);
+            currentSys.SpecialEventType(SpecialEventType.NA);
         }
     }
 
     public void IncDays(int num, wfPane owner) {
-        cmdr.setDays(cmdr.getDays() + num);
-        if (cmdr.getInsurance()) {
-            cmdr.NoClaim(cmdr.NoClaim() + num);
+        commander.setDays(commander.getDays() + num);
+        if (commander.getInsurance()) {
+            commander.NoClaim(commander.NoClaim() + num);
         }
         // Police Record will gravitate towards neutral (0).
-        if (cmdr.getPoliceRecordScore() > Constants.PoliceRecordScoreClean) {
-            cmdr.setPoliceRecordScore(Math.max(Constants.PoliceRecordScoreClean, cmdr.getPoliceRecordScore() - num / 3));
-        } else if (cmdr.getPoliceRecordScore() < Constants.PoliceRecordScoreDubious) {
-            cmdr.setPoliceRecordScore(Math.min(Constants.PoliceRecordScoreDubious, cmdr.getPoliceRecordScore()
+        if (commander.getPoliceRecordScore() > Constants.PoliceRecordScoreClean) {
+            commander.setPoliceRecordScore(Math.max(Constants.PoliceRecordScoreClean, commander.getPoliceRecordScore() - num / 3));
+        } else if (commander.getPoliceRecordScore() < Constants.PoliceRecordScoreDubious) {
+            commander.setPoliceRecordScore(Math.min(Constants.PoliceRecordScoreDubious, commander.getPoliceRecordScore()
                     + num / (_difficulty.CastToInt() <= Difficulty.Normal.CastToInt() ? 1 : _difficulty.CastToInt())));
         }
         // The Space Monster's strength increases 5% per day until it is back to full strength.
@@ -3140,7 +3138,7 @@ public class Game extends SerializableObject {
                 gemulon.PoliticalSystemType(PoliticalSystemType.Anarchy);
             }
         }
-        if (cmdr.getShip().ReactorOnBoard()) {
+        if (commander.getShip().ReactorOnBoard()) {
             setQuestStatusReactor(Math.min(getQuestStatusReactor() + num, SpecialEvent.StatusReactorDate));
         }
         if (getQuestStatusExperiment() > SpecialEvent.StatusExperimentNotStarted
@@ -3155,7 +3153,7 @@ public class Game extends SerializableObject {
         } else if (getQuestStatusExperiment() == SpecialEvent.StatusExperimentPerformed && getFabricRipProbability() > 0) {
             setFabricRipProbability(getFabricRipProbability() - num);
         }
-        if (cmdr.getShip().JarekOnBoard()) {
+        if (commander.getShip().JarekOnBoard()) {
             if (getQuestStatusJarek() == SpecialEvent.StatusJarekImpatient / 2) {
                 FormAlert.Alert(AlertType.SpecialPassengerConcernedJarek, owner);
             } else if (getQuestStatusJarek() == SpecialEvent.StatusJarekImpatient - 1) {
@@ -3169,7 +3167,7 @@ public class Game extends SerializableObject {
                 setQuestStatusJarek(getQuestStatusJarek() + 1);
             }
         }
-        if (cmdr.getShip().PrincessOnBoard()) {
+        if (commander.getShip().PrincessOnBoard()) {
             if (getQuestStatusPrincess() == (SpecialEvent.StatusPrincessImpatient + SpecialEvent.StatusPrincessRescued) / 2) {
                 FormAlert.Alert(AlertType.SpecialPassengerConcernedPrincess, owner);
             } else if (getQuestStatusPrincess() == SpecialEvent.StatusPrincessImpatient - 1) {
@@ -3183,7 +3181,7 @@ public class Game extends SerializableObject {
                 setQuestStatusPrincess(getQuestStatusPrincess() + 1);
             }
         }
-        if (cmdr.getShip().WildOnBoard()) {
+        if (commander.getShip().WildOnBoard()) {
             if (getQuestStatusWild() == SpecialEvent.StatusWildImpatient / 2) {
                 FormAlert.Alert(AlertType.SpecialPassengerConcernedWild, owner);
             } else if (getQuestStatusWild() == SpecialEvent.StatusWildImpatient - 1) {
@@ -3204,10 +3202,10 @@ public class Game extends SerializableObject {
     }
 
     public void NewsAddEventsOnArrival() {
-        if (cmdr.CurrentSystem().SpecialEventType() != SpecialEventType.NA) {
-            switch (cmdr.CurrentSystem().SpecialEventType()) {
+        if (commander.CurrentSystem().SpecialEventType() != SpecialEventType.NA) {
+            switch (commander.CurrentSystem().SpecialEventType()) {
                 case ArtifactDelivery:
-                    if (cmdr.getShip().ArtifactOnBoard()) {
+                    if (commander.getShip().ArtifactOnBoard()) {
                         NewsAddEvent(NewsEvent.ArtifactDelivery);
                     }
                     break;
@@ -3268,7 +3266,7 @@ public class Game extends SerializableObject {
                     }
                     break;
                 case JarekGetsOut:
-                    if (cmdr.getShip().JarekOnBoard()) {
+                    if (commander.getShip().JarekOnBoard()) {
                         NewsAddEvent(NewsEvent.JarekGetsOut);
                     }
                     break;
@@ -3321,7 +3319,7 @@ public class Game extends SerializableObject {
                     }
                     break;
                 case WildGetsOut:
-                    if (cmdr.getShip().WildOnBoard()) {
+                    if (commander.getShip().WildOnBoard()) {
                         NewsAddEvent(NewsEvent.WildGetsOut);
                     }
                     break;
@@ -3346,11 +3344,11 @@ public class Game extends SerializableObject {
                 _priceCargoBuy[i] = 0;
             } else {
                 _priceCargoBuy[i] = _priceCargoSell[i];
-                if (cmdr.getPoliceRecordScore() < Constants.PoliceRecordScoreDubious) {
+                if (commander.getPoliceRecordScore() < Constants.PoliceRecordScoreDubious) {
                     _priceCargoBuy[i] = _priceCargoBuy[i] * 100 / 90;
                 }
                 // BuyPrice = SellPrice + 1 to 12% (depending on trader skill (minimum is 1, max 12))
-                _priceCargoBuy[i] = _priceCargoBuy[i] * (103 + Constants.MaxSkill - cmdr.getShip().Trader()) / 100;
+                _priceCargoBuy[i] = _priceCargoBuy[i] * (103 + Constants.MaxSkill - commander.getShip().Trader()) / 100;
                 if (_priceCargoBuy[i] <= _priceCargoSell[i]) {
                     _priceCargoBuy[i] = _priceCargoSell[i] + 1;
                 }
@@ -3383,8 +3381,8 @@ public class Game extends SerializableObject {
             } else {
                 index = (destinations.length + index + (forward ? 1 : -1)) % destinations.length;
             }
-            if (Functions.WormholeExists(cmdr.CurrentSystem(), _universe[destinations[index]])) {
-                SelectedSystemId(cmdr.getCurrentSystemId());
+            if (Functions.WormholeExists(commander.CurrentSystem(), _universe[destinations[index]])) {
+                SelectedSystemId(commander.getCurrentSystemId());
                 TargetWormhole(true);
             } else {
                 SelectedSystemId(StarSystemId.FromInt(destinations[index]));
@@ -3401,11 +3399,11 @@ public class Game extends SerializableObject {
     public void ShowNewspaper() {
         if (!getPaidForNewspaper()) {
             int cost = _difficulty.CastToInt() + 1;
-            if (cmdr.getCash() < cost) {
+            if (commander.getCash() < cost) {
                 FormAlert.Alert(AlertType.ArrivalIFNewspaper, getParentWindow(), Functions.Multiples(cost, "credit"));
             } else if (_options.getNewsAutoPay()
                     || FormAlert.Alert(AlertType.ArrivalBuyNewspaper, getParentWindow(), Functions.Multiples(cost, "credit")) == DialogResult.Yes) {
-                cmdr.setCash(cmdr.getCash() - cost);
+                commander.setCash(commander.getCash() - cost);
                 setPaidForNewspaper(true);
                 getParentWindow().UpdateAll();
             }
@@ -3424,33 +3422,33 @@ public class Game extends SerializableObject {
     }
 
     public void Warp(boolean viaSingularity) {
-        if (cmdr.getDebt() > Constants.DebtTooLarge) {
+        if (commander.getDebt() > Constants.DebtTooLarge) {
             FormAlert.Alert(AlertType.DebtTooLargeGrounded, getParentWindow());
-        } else if (cmdr.getCash() < MercenaryCosts()) {
+        } else if (commander.getCash() < MercenaryCosts()) {
             FormAlert.Alert(AlertType.LeavingIFMercenaries, getParentWindow());
-        } else if (cmdr.getCash() < MercenaryCosts() + InsuranceCosts()) {
+        } else if (commander.getCash() < MercenaryCosts() + InsuranceCosts()) {
             FormAlert.Alert(AlertType.LeavingIFInsurance, getParentWindow());
-        } else if (cmdr.getCash() < MercenaryCosts() + InsuranceCosts() + WormholeCosts()) {
+        } else if (commander.getCash() < MercenaryCosts() + InsuranceCosts() + WormholeCosts()) {
             FormAlert.Alert(AlertType.LeavingIFWormholeTax, getParentWindow());
         } else {
             boolean wildOk = true;
             // if Wild is aboard, make sure ship is armed!
-            if (cmdr.getShip().WildOnBoard() && !cmdr.getShip().HasWeapon(WeaponType.BeamLaser, false)) {
-                if (FormAlert.Alert(AlertType.WildWontStayAboardLaser, getParentWindow(), cmdr.CurrentSystem().Name()) == DialogResult.Cancel) {
+            if (commander.getShip().WildOnBoard() && !commander.getShip().HasWeapon(WeaponType.BeamLaser, false)) {
+                if (FormAlert.Alert(AlertType.WildWontStayAboardLaser, getParentWindow(), commander.CurrentSystem().Name()) == DialogResult.Cancel) {
                     wildOk = false;
                 } else {
-                    FormAlert.Alert(AlertType.WildLeavesShip, getParentWindow(), cmdr.CurrentSystem().Name());
+                    FormAlert.Alert(AlertType.WildLeavesShip, getParentWindow(), commander.CurrentSystem().Name());
                     setQuestStatusWild(SpecialEvent.StatusWildNotStarted);
                 }
             }
             if (wildOk) {
-                setArrivedViaWormhole(Functions.WormholeExists(cmdr.CurrentSystem(), WarpSystem()));
+                setArrivedViaWormhole(Functions.WormholeExists(commander.CurrentSystem(), WarpSystem()));
                 if (viaSingularity) {
                     NewsAddEvent(NewsEvent.ExperimentArrival);
                 } else {
-                    NormalDeparture(viaSingularity || getArrivedViaWormhole() ? 0 : Functions.Distance(cmdr.CurrentSystem(), WarpSystem()));
+                    NormalDeparture(viaSingularity || getArrivedViaWormhole() ? 0 : Functions.Distance(commander.CurrentSystem(), WarpSystem()));
                 }
-                cmdr.CurrentSystem().CountDown(CountDownStart());
+                commander.CurrentSystem().CountDown(CountDownStart());
                 NewsResetEvents();
                 CalculatePrices(WarpSystem());
                 if (Travel()) {
@@ -3468,7 +3466,7 @@ public class Game extends SerializableObject {
 
     public void WarpDirect() {
         _warpSystemId = _selectedSystemId;
-        cmdr.CurrentSystem().CountDown(CountDownStart());
+        commander.CurrentSystem().CountDown(CountDownStart());
         NewsResetEvents();
         CalculatePrices(WarpSystem());
         Arrival();

@@ -26,7 +26,7 @@ public class MenuItem {
         asJMenuItem().setText(text);
     }
 
-    public void setClick(final EventHandler<Object, EventArgs> eventHandler) {
+    public void setClick(final EventHandler<Object, EventData> eventHandler) {
         asJMenuItem().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {

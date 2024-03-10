@@ -24,6 +24,7 @@ public enum Difficulty implements SpaceTraderEnum {
         return ordinal();
     }
 
+    // TODO since this is a simple addition, it might be somewhere else
     public int adjustSkill(int skill) {
         return skill + skillAdjust;
     }

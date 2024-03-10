@@ -4,7 +4,7 @@ import org.winforms.enums.StatusBarPanelAutoSize;
 
 import java.awt.*;
 
-
+// TODO documentation of usage
 public class StatusBarPanel implements ISupportInitialize {
     public final StatusBarPanelAutoSize AutoSize;
     private JStatusBarSection jpanel = new JStatusBarSection(" ");
@@ -40,12 +40,12 @@ public class StatusBarPanel implements ISupportInitialize {
     }
 
     @Override
-    public void BeginInit() {
+    public void beginInit() {
         // TODO Auto-generated method stub
     }
 
     @Override
-    public void EndInit() {
+    public void endInit() {
         // TODO Auto-generated method stub
     }
 }

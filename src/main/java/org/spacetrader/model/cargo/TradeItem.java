@@ -3,32 +3,32 @@ package org.spacetrader.model.cargo;
 import org.spacetrader.controller.StarSystem;
 import org.spacetrader.controller.enums.SpecialResource;
 import org.spacetrader.controller.enums.SystemPressure;
-import org.spacetrader.controller.enums.TechLevel;
+import org.spacetrader.model.TechLevel;
 
 
 public class TradeItem implements Comparable<TradeItem> {
     private SpecialResource _resourceLowPrice; // When this resource is available, this trade item is cheap
     private SpecialResource _resourceHighPrice;// When this resource is available, this trade item is expensive
-    private SystemPressure _pressurePriceHike; // Price increases considerably when this event occurs
+    private SystemPressure _pressurePriceHike; // Price increases considerably when this event occurrents
     private TechLevel _techProduction;         // Tech level needed for production
     private TechLevel _techUsage;              // Tech level needed to use
     private TechLevel _techTopProduction;      // Tech level which produces this item the most
     private TradeItemType _type;
-    private int _piceLowTech;   // Medium price at lowest tech level
+    private int _pictureeLowTech;   // Medium price at lowest tech level
     private int _priceInc;      // Price increase per tech level
     private int _priceVariance; // Max percentage above or below calculated price
     private int _minTradePrice; // Minimum price to buy/sell in orbit
     private int _maxTradePrice; // Minimum price to buy/sell in orbit
     private int _roundOff;      // Roundoff price for trade in orbit
 
-    public TradeItem(TradeItemType type, TechLevel techProduction, TechLevel techUsage, TechLevel techTopProduction, int piceLowTech,
+    public TradeItem(TradeItemType type, TechLevel techProduction, TechLevel techUsage, TechLevel techTopProduction, int pictureeLowTech,
                      int priceInc, int priceVariance, SystemPressure pressurePriceHike, SpecialResource resourceLowPrice,
                      SpecialResource resourceHighPrice, int minTradePrice, int maxTradePrice, int roundOff) {
         _type = type;
         _techProduction = techProduction;
         _techUsage = techUsage;
         _techTopProduction = techTopProduction;
-        _piceLowTech = piceLowTech;
+        _pictureeLowTech = pictureeLowTech;
         _priceInc = priceInc;
         _priceVariance = priceVariance;
         _pressurePriceHike = pressurePriceHike;
@@ -49,7 +49,7 @@ public class TradeItem implements Comparable<TradeItem> {
         if (value == null) {
             compared = 1;
         } else {
-            compared = ((Integer) _piceLowTech).compareTo(((TradeItem) value)._piceLowTech);
+            compared = ((Integer) _pictureeLowTech).compareTo(((TradeItem) value)._pictureeLowTech);
             if (compared == 0) {
                 compared = -((Integer) _priceInc).compareTo(((TradeItem) value)._priceInc);
             }
@@ -61,7 +61,7 @@ public class TradeItem implements Comparable<TradeItem> {
         int price = 0;
         if (target.ItemUsed(this)) {
             // Determine base price on techlevel of system
-            price = _piceLowTech + target.TechLevel().ordinal() * _priceInc;
+            price = _pictureeLowTech + target.TechLevel().ordinal() * _priceInc;
             // If a good is highly requested, increase the price
             if (target.PoliticalSystem().Wanted() == _type) {
                 price = price * 4 / 3;
@@ -105,7 +105,7 @@ public class TradeItem implements Comparable<TradeItem> {
     }
 
     public int PriceLowTech() {
-        return _piceLowTech;
+        return _pictureeLowTech;
     }
 
     public int PriceVariance() {

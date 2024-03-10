@@ -1,8 +1,9 @@
 package org.spacetrader.controller;
 
 import org.spacetrader.controller.enums.PoliceRecordType;
+import org.spacetrader.ui.Strings;
 
-
+// TODO part of the model
 public class PoliceRecord {
     private PoliceRecordType _type;
     private int _minScore;
@@ -14,7 +15,7 @@ public class PoliceRecord {
 
     public static PoliceRecord GetPoliceRecordFromScore(int PoliceRecordScore) {
         int i;
-        for (i = 0; i < Constants.PoliceRecords.length && Game.CurrentGame().Commander().getPoliceRecordScore() >= Constants.PoliceRecords[i].MinScore(); i++) {
+        for (i = 0; i < Constants.PoliceRecords.length && Game.getCurrentGame().Commander().getPoliceRecordScore() >= Constants.PoliceRecords[i].MinScore(); i++) {
         }
         return Constants.PoliceRecords[Math.max(0, i - 1)];
     }

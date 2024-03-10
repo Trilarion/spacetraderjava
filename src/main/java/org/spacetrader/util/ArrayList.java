@@ -3,7 +3,7 @@ package org.spacetrader.util;
 import java.util.Collection;
 import java.util.Collections;
 
-
+// TODO what is the advantage over the java.util.ArrayList, can we use the inbuilt Arraylist instead
 public class ArrayList<T> extends java.util.ArrayList<T> {
     private static final long serialVersionUID = -537394628993404338L;
 

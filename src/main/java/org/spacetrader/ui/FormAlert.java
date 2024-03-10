@@ -2,7 +2,6 @@ package org.spacetrader.ui;
 
 import org.spacetrader.controller.Functions;
 import org.spacetrader.controller.Game;
-import org.spacetrader.controller.Strings;
 import org.spacetrader.controller.enums.AlertType;
 import org.spacetrader.controller.enums.GameEndType;
 import org.winforms.*;
@@ -15,24 +14,24 @@ public class FormAlert extends wfForm {
     private Button button1;
     private Button button2;
     private ImageList ilImages;
-    private Label lblText;
-    private Timer tmrTick;
+    private Label labelText;
+    private Timer timerTick;
 
     private FormAlert() {
 
         IContainer components = new Container();
         ResourceManager resources = new ResourceManager(FormAlert.class);
-        lblText = new Label();
+        labelText = new Label();
         button1 = new Button();
         button2 = new Button();
         ilImages = new ImageList(components);
-        tmrTick = new Timer(components);
+        timerTick = new Timer(components);
         SuspendLayout();
-        // lblText
-        lblText.setLocation(new java.awt.Point(8, 8));
-        lblText.setName("lblText");
-        lblText.setTabIndex(3);
-        lblText.setText("X");
+        // labelText
+        labelText.setLocation(new java.awt.Point(8, 8));
+        labelText.setName("labelText");
+        labelText.setTabIndex(3);
+        labelText.setText("X");
         // button1
         button1.setDialogResult(DialogResult.OK);
         button1.setFlatStyle(FlatStyle.Flat);
@@ -55,12 +54,12 @@ public class FormAlert extends wfForm {
         ilImages.setImageSize(new FormSize(160, 160));
         ilImages.setImageStream(((ImageListStreamer) (resources.GetObject("ilImages.ImageStream"))));
         ilImages.setTransparentColor(null);
-        // tmrTick
-        tmrTick.setInterval(4000);
-        tmrTick.Tick = new EventHandler<>() {
+        // timerTick
+        timerTick.setInterval(4000);
+        timerTick.Tick = new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                tmrTick_Tick();
+            public void handle(Object sender, EventData e) {
+                timerTick_Tick();
             }
         };
         // FormAlert
@@ -69,7 +68,7 @@ public class FormAlert extends wfForm {
         setControlBox(false);
         Controls.add(button2);
         Controls.add(button1);
-        Controls.add(lblText);
+        Controls.add(labelText);
         setFormBorderStyle(FormBorderStyle.FixedDialog);
         setName("FormAlert");
         setShowInTaskbar(false);
@@ -77,7 +76,7 @@ public class FormAlert extends wfForm {
         setText("Title");
         setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 FormAlert_Click(sender, e);
             }
         });
@@ -92,9 +91,9 @@ public class FormAlert extends wfForm {
             title = Functions.StringVars(title, args);
             text = Functions.StringVars(text, args);
         }
-        lblText.setWidth(g.MeasureString((text.length() > 80 ? _80_CHARS : text), getFont()).width + 25);
-        lblText.setText(text);
-        lblText.setHeight(30 + 30 * text.length() / 80);
+        labelText.setWidth(g.MeasureString((text.length() > 80 ? _80_CHARS : text), getFont()).width + 25);
+        labelText.setText(text);
+        labelText.setHeight(30 + 30 * text.length() / 80);
         // Size the buttons.
         button1.setText(button1Text);
         button1.setDialogResult(button1Result);
@@ -108,11 +107,11 @@ public class FormAlert extends wfForm {
             buttonWidth += button2.getWidth() + 6;
         }
         // Size the form.
-        setWidth(Math.max(buttonWidth, lblText.getWidth()) + 16);
-        setHeight(lblText.getHeight() + 75);
+        setWidth(Math.max(buttonWidth, labelText.getWidth()) + 16);
+        setHeight(labelText.getHeight() + 75);
         // Locate the controls.
-        lblText.setLeft((getWidth() - lblText.getWidth()) / 2);
-        button1.setTop(lblText.getHeight() + 19);
+        labelText.setLeft((getWidth() - labelText.getWidth()) / 2);
+        button1.setTop(labelText.getHeight() + 19);
         button1.setLeft((getWidth() - buttonWidth) / 2);
         button2.setTop(button1.getTop());
         button2.setLeft(button1.getLeft() + button1.getWidth() + 6);
@@ -123,7 +122,7 @@ public class FormAlert extends wfForm {
     public FormAlert(String title, int imageIndex) {
         this();
         // Make sure the extra controls are hidden.
-        lblText.setVisible(false);
+        labelText.setVisible(false);
         button2.setVisible(false);
         // Move button1 off-screen.
         button1.setLeft(-button1.getWidth());
@@ -138,7 +137,7 @@ public class FormAlert extends wfForm {
         // If this is the splash screen, get rid of the title bar and start the timer.
         if (imageIndex == SPLASH_INDEX) {
             setFormBorderStyle(FormBorderStyle.None);
-            tmrTick.Start();
+            timerTick.Start();
         }
     }
 
@@ -239,7 +238,7 @@ public class FormAlert extends wfForm {
                         "Use Singularity", DialogResult.Yes, "Don't use it", DialogResult.No, ss)).ShowDialog(wp);
                 break;
             case ChartJumpCurrent:
-                dr = (new FormAlert("Cannot Jump", "You are tracking the system where you are currently located. It's useless to jump to your current location.",
+                dr = (new FormAlert("Cannot Jump", "You are tracking the system where you are currentrently located. It's useless to jump to your currentrent location.",
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case ChartJumpNoSystemSelected:
@@ -275,7 +274,7 @@ public class FormAlert extends wfForm {
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case DebtReminder:
-                dr = (new FormAlert("Loan Notification", "The Bank's Loan Officer reminds you that your debt continues to accrue interest. You currently owe ^1.",
+                dr = (new FormAlert("Loan Notification", "The Bank's Loan Officer reminds you that your debt continues to accrue interest. You currentrently owe ^1.",
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case DebtTooLargeGrounded:
@@ -347,7 +346,7 @@ public class FormAlert extends wfForm {
                         "Yes", DialogResult.Yes, "No", DialogResult.No, ss)).ShowDialog(wp);
                 break;
             case EncounterDumpWarning:
-                Game.CurrentGame().setLitterWarning(true);
+                Game.getCurrentGame().setLitterWarning(true);
                 dr = (new FormAlert("Space Littering", "Dumping cargo in space is considered littering. If the police find your dumped goods and track them to you, this will influence your record. Do you really wish to dump?",
                         "Yes", DialogResult.Yes, "No", DialogResult.No, ss)).ShowDialog(wp);
                 break;
@@ -360,7 +359,7 @@ public class FormAlert extends wfForm {
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case EncounterEscapePodActivated:
-                dr = (new FormAlert("Escape Pod Activated", "Just before the final demise of your ship, your escape pod activates and ejects you. After a few days, Space Corps picks you up and drops you off at a nearby space port.",
+                dr = (new FormAlert("Escape Pod Activated", "Just before the final demise of your ship, your escape pod activates and ejects you. After a few days, Space Corps pictureks you up and drops you off at a nearby space port.",
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case EncounterLooting:
@@ -388,7 +387,7 @@ public class FormAlert extends wfForm {
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case EncounterPiratesFindNoCargo:
-                dr = (new FormAlert("Pirates Find No Cargo", "The pirates are very angry that they find no cargo on your ship. To stop them from destroying you, you have no choice but to pay them an amount equal to 5% of your current worth - ^1.",
+                dr = (new FormAlert("Pirates Find No Cargo", "The pirates are very angry that they find no cargo on your ship. To stop them from destroying you, you have no choice but to pay them an amount equal to 5% of your currentrent worth - ^1.",
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case EncounterPiratesSurrenderPrincess:
@@ -524,11 +523,11 @@ public class FormAlert extends wfForm {
                         "Yes", DialogResult.Yes, "No", DialogResult.No, ss)).ShowDialog(wp);
                 break;
             case FileErrorOpen:
-                dr = (new FormAlert("Error", "An error occurred while trying to open ^1." + Strings.newline + Strings.newline + "^2",
+                dr = (new FormAlert("Error", "An error occurrentred while trying to open ^1." + Strings.newline + Strings.newline + "^2",
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case FileErrorSave:
-                dr = (new FormAlert("Error", "An error occurred while trying to save ^1." + Strings.newline + Strings.newline + "^2",
+                dr = (new FormAlert("Error", "An error occurrentred while trying to save ^1." + Strings.newline + Strings.newline + "^2",
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case FleaBuilt:
@@ -536,7 +535,7 @@ public class FormAlert extends wfForm {
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case GameAbandonConfirm:
-                dr = (new FormAlert("Are You Sure?", "Are you sure you want to abandon your current game?",
+                dr = (new FormAlert("Are You Sure?", "Are you sure you want to abandon your currentrent game?",
                         "Yes", DialogResult.Yes, "No", DialogResult.No, ss)).ShowDialog(wp);
                 break;
             case GameClearHighScores:
@@ -704,7 +703,7 @@ public class FormAlert extends wfForm {
                         "Yes", DialogResult.Yes, "No", DialogResult.No, ss)).ShowDialog(wp);
                 break;
             case ShipBuyCrewQuarters:
-                dr = (new FormAlert("Too Many Crewmembers", "The new ship you picked doesn't have enough quarters for all of your crewmembers. First you will have to fire one or more of them.",
+                dr = (new FormAlert("Too Many Crewmembers", "The new ship you pictureked doesn't have enough quarters for all of your crewmembers. First you will have to fire one or more of them.",
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case ShipBuyIF:
@@ -720,7 +719,7 @@ public class FormAlert extends wfForm {
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case ShipBuyNotAvailable:
-                dr = (new FormAlert("Ship Not Available", "That type of ship is not available in the current system.",
+                dr = (new FormAlert("Ship Not Available", "That type of ship is not available in the currentrent system.",
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case ShipBuyNoTransfer:
@@ -768,7 +767,7 @@ public class FormAlert extends wfForm {
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case SpecialNoQuarters:
-                dr = (new FormAlert("No Free Quarters", "There are currently no free crew quarters on your ship.",
+                dr = (new FormAlert("No Free Quarters", "There are currentrently no free crew quarters on your ship.",
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case SpecialNotEnoughBays:
@@ -868,7 +867,7 @@ public class FormAlert extends wfForm {
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case TribblesTradeIn:
-                dr = (new FormAlert("You've Got Tribbles", "Hm. I see you got a tribble infestation on your current ship. I'm sorry, but that severely reduces the trade-in price.",
+                dr = (new FormAlert("You've Got Tribbles", "Hm. I see you got a tribble infestation on your currentrent ship. I'm sorry, but that severely reduces the trade-in price.",
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case WildArrested:
@@ -911,14 +910,14 @@ public class FormAlert extends wfForm {
         return dr;
     }
 
-    private void FormAlert_Click(Object sender, EventArgs e) {
+    private void FormAlert_Click(Object sender, EventData e) {
         // If the button is off-screen, this is an image and can be clicked away.
         if (button1.getLeft() < 0) {
             Close();
         }
     }
 
-    private void tmrTick_Tick() {
+    private void timerTick_Tick() {
         Close();
     }
 }

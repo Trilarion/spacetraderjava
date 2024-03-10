@@ -1,6 +1,6 @@
 package org.winforms;
 
-
+// TODO documentation
 public enum Shortcut {
     CtrlL,
     CtrlC,

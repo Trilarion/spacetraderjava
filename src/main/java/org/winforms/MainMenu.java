@@ -19,6 +19,6 @@ public class MainMenu extends wfControl {
     }
 
     private JMenuBar asJMenuBar() {
-        return (JMenuBar) swingVersion;
+        return (JMenuBar) swingComponent;
     }
 }

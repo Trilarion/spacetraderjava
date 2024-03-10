@@ -20,9 +20,9 @@ import java.util.Arrays;
 
 
 public class FormShipyard extends wfForm {
-    private final Game game = Game.CurrentGame();
-    private final Commander cmdr = game.Commander();
-    private final Shipyard yard = cmdr.CurrentSystem().Shipyard();
+    private final Game game = Game.getCurrentGame();
+    private final Commander commander = game.Commander();
+    private final Shipyard yard = commander.CurrentSystem().Shipyard();
     private final ShipType[] imgTypes = new ShipType[]{
             ShipType.Flea, ShipType.Gnat, ShipType.Firefly, ShipType.Mosquito, ShipType.Bumblebee, ShipType.Beetle,
             ShipType.Hornet, ShipType.Grasshopper, ShipType.Termite, ShipType.Wasp, ShipType.Custom
@@ -33,18 +33,18 @@ public class FormShipyard extends wfForm {
     private ComboBox selSize;
     private ComboBox selTemplate;
     private wfImage[] customImages = new wfImage[Constants.ImagesPerShip];
-    private Label lblDesignFee;
-    private Label lblShipCost;
-    private Label lblTotalCost;
-    private Label lblImage;
-    private Label lblPctLabel;
-    private Label lblPct;
-    private Label lblPenalty;
-    private Label lblSkillLabel;
-    private Label lblTradeIn;
-    private Label lblUnitsUsed;
-    private Label lblDisabledPct;
-    private Label lblDisabledName;
+    private Label labelDesignFee;
+    private Label labelShipCost;
+    private Label labelTotalCost;
+    private Label labelImage;
+    private Label labelPctLabel;
+    private Label labelPct;
+    private Label labelPenalty;
+    private Label labelSkillLabel;
+    private Label labelTradeIn;
+    private Label labelUnitsUsed;
+    private Label labelDisabledPct;
+    private Label labelDisabledName;
     private NumericUpDown numHullStrength;
     private NumericUpDown numCargoBays;
     private NumericUpDown numCrewQuarters;
@@ -53,7 +53,7 @@ public class FormShipyard extends wfForm {
     private NumericUpDown numGadgetSlots;
     private NumericUpDown numWeaponSlots;
     private OpenFileDialog dlgOpen;
-    private PictureBox picShip;
+    private PictureBox pictureShip;
     private SaveFileDialog dlgSave;
     private TextBox txtName;
     private boolean loading = false;
@@ -63,144 +63,144 @@ public class FormShipyard extends wfForm {
         IContainer components = new Container();
         ResourceManager resources = new ResourceManager(FormShipyard.class);
         GroupBox boxWelcome = new GroupBox();
-        Label lblSkillDescription = new Label();
-        Label lblSkill = new Label();
-        Label lblSizeSpecialty = new Label();
-        lblSkillLabel = new Label();
-        Label lblSizeSpecialtyLabel = new Label();
-        Label lblWelcome = new Label();
-        Label lblWarning = new Label();
-        PictureBox picLogo = new PictureBox();
+        Label labelSkillDescription = new Label();
+        Label labelSkill = new Label();
+        Label labelSizeSpecialty = new Label();
+        labelSkillLabel = new Label();
+        Label labelSizeSpecialtyLabel = new Label();
+        Label labelWelcome = new Label();
+        Label labelWarning = new Label();
+        PictureBox pictureLogo = new PictureBox();
         GroupBox boxInfo = new GroupBox();
         buttonSave = new Button();
         Button buttonLoad = new Button();
-        PictureBox picInfoLine = new PictureBox();
+        PictureBox pictureInfoLine = new PictureBox();
         Button buttonPrevImage = new Button();
         Button buttonNextImage = new Button();
-        lblImage = new Label();
-        Label lblImageLabel = new Label();
+        labelImage = new Label();
+        Label labelImageLabel = new Label();
         selTemplate = new ComboBox();
-        Label lblTemplate = new Label();
+        Label labelTemplate = new Label();
         selSize = new ComboBox();
-        Label lblSize = new Label();
+        Label labelSize = new Label();
         Button buttonSetCustomImage = new Button();
-        picShip = new PictureBox();
+        pictureShip = new PictureBox();
         txtName = new TextBox();
-        Label lblName = new Label();
-        lblUnitsUsed = new Label();
-        Label lblUnitsUsedLabel = new Label();
+        Label labelName = new Label();
+        labelUnitsUsed = new Label();
+        Label labelUnitsUsedLabel = new Label();
         GroupBox boxCosts = new GroupBox();
-        lblTradeIn = new Label();
-        Label lblTradeInLabel = new Label();
-        PictureBox picCostsLine = new PictureBox();
-        lblPenalty = new Label();
-        Label lblPenaltyLabel = new Label();
-        lblShipCost = new Label();
-        lblTotalCost = new Label();
-        Label lblTotalCostLabel = new Label();
-        Label lblShipCostLabel = new Label();
-        lblDesignFee = new Label();
-        Label lblDesignFeeLabel = new Label();
+        labelTradeIn = new Label();
+        Label labelTradeInLabel = new Label();
+        PictureBox pictureCostsLine = new PictureBox();
+        labelPenalty = new Label();
+        Label labelPenaltyLabel = new Label();
+        labelShipCost = new Label();
+        labelTotalCost = new Label();
+        Label labelTotalCostLabel = new Label();
+        Label labelShipCostLabel = new Label();
+        labelDesignFee = new Label();
+        Label labelDesignFeeLabel = new Label();
         buttonConstruct = new Button();
         Button buttonCancel = new Button();
         GroupBox boxAllocation = new GroupBox();
-        lblPct = new Label();
-        lblPctLabel = new Label();
+        labelPct = new Label();
+        labelPctLabel = new Label();
         numHullStrength = new NumericUpDown();
-        Label lblHullStrengthLabel = new Label();
+        Label labelHullStrengthLabel = new Label();
         numCargoBays = new NumericUpDown();
         numCrewQuarters = new NumericUpDown();
         numFuelTanks = new NumericUpDown();
         numShieldSlots = new NumericUpDown();
         numGadgetSlots = new NumericUpDown();
         numWeaponSlots = new NumericUpDown();
-        Label lblCargoBays = new Label();
-        Label lblFuelTanks = new Label();
-        Label lblCrewQuarters = new Label();
-        Label lblShieldSlots = new Label();
-        Label lblGadgetSlots = new Label();
-        Label lblWeaponsSlots = new Label();
+        Label labelCargoBays = new Label();
+        Label labelFuelTanks = new Label();
+        Label labelCrewQuarters = new Label();
+        Label labelShieldSlots = new Label();
+        Label labelGadgetSlots = new Label();
+        Label labelWeaponsSlots = new Label();
         ImageList ilShipyardLogos = new ImageList(components);
         dlgOpen = new OpenFileDialog();
-        lblDisabledPct = new Label();
+        labelDisabledPct = new Label();
         dlgSave = new SaveFileDialog();
-        lblDisabledName = new Label();
+        labelDisabledName = new Label();
         boxWelcome.SuspendLayout();
         boxInfo.SuspendLayout();
         boxCosts.SuspendLayout();
         boxAllocation.SuspendLayout();
-        ((ISupportInitialize) (numHullStrength)).BeginInit();
-        ((ISupportInitialize) (numCargoBays)).BeginInit();
-        ((ISupportInitialize) (numCrewQuarters)).BeginInit();
-        ((ISupportInitialize) (numFuelTanks)).BeginInit();
-        ((ISupportInitialize) (numShieldSlots)).BeginInit();
-        ((ISupportInitialize) (numGadgetSlots)).BeginInit();
-        ((ISupportInitialize) (numWeaponSlots)).BeginInit();
+        ((ISupportInitialize) (numHullStrength)).beginInit();
+        ((ISupportInitialize) (numCargoBays)).beginInit();
+        ((ISupportInitialize) (numCrewQuarters)).beginInit();
+        ((ISupportInitialize) (numFuelTanks)).beginInit();
+        ((ISupportInitialize) (numShieldSlots)).beginInit();
+        ((ISupportInitialize) (numGadgetSlots)).beginInit();
+        ((ISupportInitialize) (numWeaponSlots)).beginInit();
         SuspendLayout();
         // boxWelcome
-        boxWelcome.Controls.addAll(lblSkillDescription, lblSkill, lblSizeSpecialty, lblSkillLabel, lblSizeSpecialtyLabel, lblWarning, picLogo, lblWelcome);
+        boxWelcome.Controls.addAll(labelSkillDescription, labelSkill, labelSizeSpecialty, labelSkillLabel, labelSizeSpecialtyLabel, labelWarning, pictureLogo, labelWelcome);
         boxWelcome.setLocation(new Point(8, 0));
         boxWelcome.setName("boxWelcome");
         boxWelcome.setSize(new FormSize(270, 204));
         boxWelcome.setTabIndex(1);
         boxWelcome.setTabStop(false);
-        // lblSkillDescription
-        lblSkillDescription.setLocation(new Point(8, 98));
-        lblSkillDescription.setName("lblSkillDescription");
-        lblSkillDescription.setSize(new FormSize(258, 26));
-        lblSkillDescription.setTabIndex(27);
-        lblSkillDescription.setText("All ships constructed at this shipyard use 2 fewer units per crew quarter.");
-        // lblSkill
-        lblSkill.setLocation(new Point(180, 79));
-        lblSkill.setName("lblSkill");
-        lblSkill.setSize(new FormSize(87, 13));
-        lblSkill.setTabIndex(26);
-        lblSkill.setText("Crew Quartering");
-        // lblSizeSpecialty
-        lblSizeSpecialty.setLocation(new Point(180, 65));
-        lblSizeSpecialty.setName("lblSizeSpecialty");
-        lblSizeSpecialty.setSize(new FormSize(64, 13));
-        lblSizeSpecialty.setTabIndex(25);
-        lblSizeSpecialty.setText("Gargantuan");
-        // lblSkillLabel
-        lblSkillLabel.setAutoSize(true);
-        lblSkillLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblSkillLabel.setLocation(new Point(92, 79));
-        lblSkillLabel.setName("lblSkillLabel");
-        lblSkillLabel.setSize(new FormSize(72, 13));
-        lblSkillLabel.setTabIndex(24);
-        lblSkillLabel.setText("Special Skill:");
-        // lblSizeSpecialtyLabel
-        lblSizeSpecialtyLabel.setAutoSize(true);
-        lblSizeSpecialtyLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblSizeSpecialtyLabel.setLocation(new Point(92, 65));
-        lblSizeSpecialtyLabel.setName("lblSizeSpecialtyLabel");
-        lblSizeSpecialtyLabel.setSize(new FormSize(82, 13));
-        lblSizeSpecialtyLabel.setTabIndex(23);
-        lblSizeSpecialtyLabel.setText("Size Specialty:");
-        // lblWelcome
-        lblWelcome.setLocation(new Point(92, 12));
-        lblWelcome.setName("lblWelcome");
-        lblWelcome.setSize(new FormSize(176, 52));
-        lblWelcome.setTabIndex(3);
-        lblWelcome.setText("Welcome to Sorosuub Engineering Shipyards! Our best engineer, Obi-Wan, is at your service.");
-        // lblWarning
-        lblWarning.setLocation(new Point(8, 134));
-        lblWarning.setName("lblWarning");
-        lblWarning.setSize(new FormSize(258, 65));
-        lblWarning.setTabIndex(5);
-        lblWarning.setText("Bear in mind that getting too close to the maximum number of units will result in a \"Crowding Penalty\" due to the engineering difficulty of squeezing everything in. There is a modest penalty at 80%, and a more severe one at 90%.");
-        // picLogo
-        picLogo.setBackColor(Color.black);
-        picLogo.setLocation(new Point(8, 12));
-        picLogo.setName("picLogo");
-        picLogo.setSize(new FormSize(80, 80));
-        picLogo.SizeMode = PictureBoxSizeMode.StretchImage;
-        picLogo.setTabIndex(22);
-        picLogo.setTabStop(false);
+        // labelSkillDescription
+        labelSkillDescription.setLocation(new Point(8, 98));
+        labelSkillDescription.setName("labelSkillDescription");
+        labelSkillDescription.setSize(new FormSize(258, 26));
+        labelSkillDescription.setTabIndex(27);
+        labelSkillDescription.setText("All ships constructed at this shipyard use 2 fewer units per crew quarter.");
+        // labelSkill
+        labelSkill.setLocation(new Point(180, 79));
+        labelSkill.setName("labelSkill");
+        labelSkill.setSize(new FormSize(87, 13));
+        labelSkill.setTabIndex(26);
+        labelSkill.setText("Crew Quartering");
+        // labelSizeSpecialty
+        labelSizeSpecialty.setLocation(new Point(180, 65));
+        labelSizeSpecialty.setName("labelSizeSpecialty");
+        labelSizeSpecialty.setSize(new FormSize(64, 13));
+        labelSizeSpecialty.setTabIndex(25);
+        labelSizeSpecialty.setText("Gargantuan");
+        // labelSkillLabel
+        labelSkillLabel.setAutoSize(true);
+        labelSkillLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelSkillLabel.setLocation(new Point(92, 79));
+        labelSkillLabel.setName("labelSkillLabel");
+        labelSkillLabel.setSize(new FormSize(72, 13));
+        labelSkillLabel.setTabIndex(24);
+        labelSkillLabel.setText("Special Skill:");
+        // labelSizeSpecialtyLabel
+        labelSizeSpecialtyLabel.setAutoSize(true);
+        labelSizeSpecialtyLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelSizeSpecialtyLabel.setLocation(new Point(92, 65));
+        labelSizeSpecialtyLabel.setName("labelSizeSpecialtyLabel");
+        labelSizeSpecialtyLabel.setSize(new FormSize(82, 13));
+        labelSizeSpecialtyLabel.setTabIndex(23);
+        labelSizeSpecialtyLabel.setText("Size Specialty:");
+        // labelWelcome
+        labelWelcome.setLocation(new Point(92, 12));
+        labelWelcome.setName("labelWelcome");
+        labelWelcome.setSize(new FormSize(176, 52));
+        labelWelcome.setTabIndex(3);
+        labelWelcome.setText("Welcome to Sorosuub Engineering Shipyards! Our best engineer, Obi-Wan, is at your service.");
+        // labelWarning
+        labelWarning.setLocation(new Point(8, 134));
+        labelWarning.setName("labelWarning");
+        labelWarning.setSize(new FormSize(258, 65));
+        labelWarning.setTabIndex(5);
+        labelWarning.setText("Bear in mind that getting too close to the maximum number of units will result in a \"Crowding Penalty\" due to the engineering difficulty of squeezing everything in. There is a modest penalty at 80%, and a more severe one at 90%.");
+        // pictureLogo
+        pictureLogo.setBackColor(Color.black);
+        pictureLogo.setLocation(new Point(8, 12));
+        pictureLogo.setName("pictureLogo");
+        pictureLogo.setSize(new FormSize(80, 80));
+        pictureLogo.SizeMode = PictureBoxSizeMode.StretchImage;
+        pictureLogo.setTabIndex(22);
+        pictureLogo.setTabStop(false);
         // boxInfo
-        boxInfo.Controls.addAll(buttonSave, buttonLoad, picInfoLine, buttonPrevImage, buttonNextImage, lblImage, lblImageLabel, selTemplate,
-                lblTemplate, selSize, lblSize, buttonSetCustomImage, picShip, txtName, lblName);
+        boxInfo.Controls.addAll(buttonSave, buttonLoad, pictureInfoLine, buttonPrevImage, buttonNextImage, labelImage, labelImageLabel, selTemplate,
+                labelTemplate, selSize, labelSize, buttonSetCustomImage, pictureShip, txtName, labelName);
         boxInfo.setLocation(new Point(8, 208));
         boxInfo.setName("boxInfo");
         boxInfo.setSize(new FormSize(270, 160));
@@ -217,21 +217,21 @@ public class FormShipyard extends wfForm {
         buttonSave.setClick(
                 new EventHandler<>() {
                     @Override
-                    public void handle(Object sender, EventArgs e) {
+                    public void handle(Object sender, EventData e) {
                         buttonSave_Click(sender, e);
                     }
                 });
         buttonSave.setMouseEnter(
                 new EventHandler<>() {
                     @Override
-                    public void handle(Object sender, EventArgs e) {
+                    public void handle(Object sender, EventData e) {
                         buttonSave_MouseEnter(sender, e);
                     }
                 });
         buttonSave.setMouseLeave(
                 new EventHandler<>() {
                     @Override
-                    public void handle(Object sender, EventArgs e) {
+                    public void handle(Object sender, EventData e) {
                         buttonSave_MouseLeave(sender, e);
                     }
                 });
@@ -244,17 +244,17 @@ public class FormShipyard extends wfForm {
         buttonLoad.setText("Load");
         buttonLoad.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonLoad_Click(sender, e);
             }
         });
-        // picInfoLine
-        picInfoLine.setBackColor(Color.darkGray);
-        picInfoLine.setLocation(new Point(8, 89));
-        picInfoLine.setName("picInfoLine");
-        picInfoLine.setSize(new FormSize(254, 1));
-        picInfoLine.setTabIndex(132);
-        picInfoLine.setTabStop(false);
+        // pictureInfoLine
+        pictureInfoLine.setBackColor(Color.darkGray);
+        pictureInfoLine.setLocation(new Point(8, 89));
+        pictureInfoLine.setName("pictureInfoLine");
+        pictureInfoLine.setSize(new FormSize(254, 1));
+        pictureInfoLine.setTabIndex(132);
+        pictureInfoLine.setTabStop(false);
         // buttonPrevImage
         buttonPrevImage.setFlatStyle(FlatStyle.Flat);
         buttonPrevImage.setLocation(new Point(154, 95));
@@ -264,7 +264,7 @@ public class FormShipyard extends wfForm {
         buttonPrevImage.setText("<");
         buttonPrevImage.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonPrevImage_Click(sender, e);
             }
         });
@@ -277,37 +277,37 @@ public class FormShipyard extends wfForm {
         buttonNextImage.setText(">");
         buttonNextImage.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonNextImage_Click(sender, e);
             }
         });
-        // lblImage
-        lblImage.setLocation(new Point(174, 98));
-        lblImage.setName("lblImage");
-        lblImage.setSize(new FormSize(70, 13));
-        lblImage.setTabIndex(61);
-        lblImage.setText("Custom Ship");
-        lblImage.TextAlign = ContentAlignment.TopCenter;
-        // lblImageLabel
-        lblImageLabel.setAutoSize(true);
-        lblImageLabel.setLocation(new Point(8, 95));
-        lblImageLabel.setName("lblImageLabel");
-        lblImageLabel.setSize(new FormSize(39, 13));
-        lblImageLabel.setTabIndex(22);
-        lblImageLabel.setText("Image:");
+        // labelImage
+        labelImage.setLocation(new Point(174, 98));
+        labelImage.setName("labelImage");
+        labelImage.setSize(new FormSize(70, 13));
+        labelImage.setTabIndex(61);
+        labelImage.setText("Custom Ship");
+        labelImage.TextAlign = ContentAlignment.TopCenter;
+        // labelImageLabel
+        labelImageLabel.setAutoSize(true);
+        labelImageLabel.setLocation(new Point(8, 95));
+        labelImageLabel.setName("labelImageLabel");
+        labelImageLabel.setSize(new FormSize(39, 13));
+        labelImageLabel.setTabIndex(22);
+        labelImageLabel.setText("Image:");
         // selTemplate
         selTemplate.DropDownStyle = ComboBoxStyle.DropDownList;
         selTemplate.setLocation(new Point(80, 16));
         selTemplate.setName("selTemplate");
         selTemplate.setSize(new FormSize(132, 21));
         selTemplate.setTabIndex(1);
-        // lblTemplate
-        lblTemplate.setAutoSize(true);
-        lblTemplate.setLocation(new Point(8, 19));
-        lblTemplate.setName("lblTemplate");
-        lblTemplate.setSize(new FormSize(55, 13));
-        lblTemplate.setTabIndex(20);
-        lblTemplate.setText("Template:");
+        // labelTemplate
+        labelTemplate.setAutoSize(true);
+        labelTemplate.setLocation(new Point(8, 19));
+        labelTemplate.setName("labelTemplate");
+        labelTemplate.setSize(new FormSize(55, 13));
+        labelTemplate.setTabIndex(20);
+        labelTemplate.setText("Template:");
         // selSize
         selSize.DropDownStyle = ComboBoxStyle.DropDownList;
         selSize.setLocation(new Point(80, 63));
@@ -316,17 +316,17 @@ public class FormShipyard extends wfForm {
         selSize.setTabIndex(5);
         selSize.setSelectedIndexChanged(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 selSize_SelectedIndexChanged(sender, e);
             }
         });
-        // lblSize
-        lblSize.setAutoSize(true);
-        lblSize.setLocation(new Point(8, 66));
-        lblSize.setName("lblSize");
-        lblSize.setSize(new FormSize(29, 13));
-        lblSize.setTabIndex(18);
-        lblSize.setText("Size:");
+        // labelSize
+        labelSize.setAutoSize(true);
+        labelSize.setLocation(new Point(8, 66));
+        labelSize.setName("labelSize");
+        labelSize.setSize(new FormSize(29, 13));
+        labelSize.setTabIndex(18);
+        labelSize.setText("Size:");
         // buttonSetCustomImage
         buttonSetCustomImage.setFlatStyle(FlatStyle.Flat);
         buttonSetCustomImage.setLocation(new Point(154, 121));
@@ -336,18 +336,18 @@ public class FormShipyard extends wfForm {
         buttonSetCustomImage.setText("Set Custom...");
         buttonSetCustomImage.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonSetCustomImage_Click(sender, e);
             }
         });
-        // picShip
-        picShip.setBackColor(Color.white);
-        picShip.setBorderStyle(BorderStyle.FixedSingle);
-        picShip.setLocation(new Point(80, 95));
-        picShip.setName("picShip");
-        picShip.setSize(new FormSize(66, 54));
-        picShip.setTabIndex(14);
-        picShip.setTabStop(false);
+        // pictureShip
+        pictureShip.setBackColor(Color.white);
+        pictureShip.setBorderStyle(BorderStyle.FixedSingle);
+        pictureShip.setLocation(new Point(80, 95));
+        pictureShip.setName("pictureShip");
+        pictureShip.setSize(new FormSize(66, 54));
+        pictureShip.setTabIndex(14);
+        pictureShip.setTabStop(false);
         // txtName
         txtName.setLocation(new Point(80, 40));
         txtName.setName("txtName");
@@ -356,117 +356,117 @@ public class FormShipyard extends wfForm {
         txtName.setText("");
         txtName.setTextChanged(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 txtName_TextChanged(sender, e);
             }
         });
-        // lblName
-        lblName.setAutoSize(true);
-        lblName.setLocation(new Point(8, 44));
-        lblName.setName("lblName");
-        lblName.setSize(new FormSize(63, 13));
-        lblName.setTabIndex(5);
-        lblName.setText("Ship Name:");
-        // lblUnitsUsed
-        lblUnitsUsed.setLocation(new Point(110, 186));
-        lblUnitsUsed.setName("lblUnitsUsed");
-        lblUnitsUsed.setSize(new FormSize(23, 13));
-        lblUnitsUsed.setTabIndex(17);
-        lblUnitsUsed.setText("888");
-        lblUnitsUsed.TextAlign = ContentAlignment.TopRight;
-        // lblUnitsUsedLabel
-        lblUnitsUsedLabel.setAutoSize(true);
-        lblUnitsUsedLabel.setLocation(new Point(8, 186));
-        lblUnitsUsedLabel.setName("lblUnitsUsedLabel");
-        lblUnitsUsedLabel.setSize(new FormSize(63, 13));
-        lblUnitsUsedLabel.setTabIndex(16);
-        lblUnitsUsedLabel.setText("Units Used:");
+        // labelName
+        labelName.setAutoSize(true);
+        labelName.setLocation(new Point(8, 44));
+        labelName.setName("labelName");
+        labelName.setSize(new FormSize(63, 13));
+        labelName.setTabIndex(5);
+        labelName.setText("Ship Name:");
+        // labelUnitsUsed
+        labelUnitsUsed.setLocation(new Point(110, 186));
+        labelUnitsUsed.setName("labelUnitsUsed");
+        labelUnitsUsed.setSize(new FormSize(23, 13));
+        labelUnitsUsed.setTabIndex(17);
+        labelUnitsUsed.setText("888");
+        labelUnitsUsed.TextAlign = ContentAlignment.TopRight;
+        // labelUnitsUsedLabel
+        labelUnitsUsedLabel.setAutoSize(true);
+        labelUnitsUsedLabel.setLocation(new Point(8, 186));
+        labelUnitsUsedLabel.setName("labelUnitsUsedLabel");
+        labelUnitsUsedLabel.setSize(new FormSize(63, 13));
+        labelUnitsUsedLabel.setTabIndex(16);
+        labelUnitsUsedLabel.setText("Units Used:");
         // boxCosts
-        boxCosts.Controls.addAll(lblTradeIn, lblTradeInLabel, picCostsLine, lblPenalty, lblPenaltyLabel,
-                lblShipCost, lblTotalCost, lblTotalCostLabel, lblShipCostLabel, lblDesignFee, lblDesignFeeLabel);
+        boxCosts.Controls.addAll(labelTradeIn, labelTradeInLabel, pictureCostsLine, labelPenalty, labelPenaltyLabel,
+                labelShipCost, labelTotalCost, labelTotalCostLabel, labelShipCostLabel, labelDesignFee, labelDesignFeeLabel);
         boxCosts.setLocation(new Point(286, 230));
         boxCosts.setName("boxCosts");
         boxCosts.setSize(new FormSize(184, 106));
         boxCosts.setTabIndex(4);
         boxCosts.setTabStop(false);
         boxCosts.setText("Costs");
-        // lblTradeIn
-        lblTradeIn.setLocation(new Point(106, 64));
-        lblTradeIn.setName("lblTradeIn");
-        lblTradeIn.setSize(new FormSize(75, 16));
-        lblTradeIn.setTabIndex(135);
-        lblTradeIn.setText("-8,888,888 cr.");
-        lblTradeIn.TextAlign = ContentAlignment.TopRight;
-        // lblTradeInLabel
-        lblTradeInLabel.setAutoSize(true);
-        lblTradeInLabel.setLocation(new Point(8, 64));
-        lblTradeInLabel.setName("lblTradeInLabel");
-        lblTradeInLabel.setSize(new FormSize(77, 13));
-        lblTradeInLabel.setTabIndex(134);
-        lblTradeInLabel.setText("Less Trade-In:");
-        // picCostsLine
-        picCostsLine.setBackColor(Color.darkGray);
-        picCostsLine.setLocation(new Point(8, 80));
-        picCostsLine.setName("picCostsLine");
-        picCostsLine.setSize(new FormSize(168, 1));
-        picCostsLine.setTabIndex(133);
-        picCostsLine.setTabStop(false);
-        // lblPenalty
-        lblPenalty.setLocation(new Point(106, 32));
-        lblPenalty.setName("lblPenalty");
-        lblPenalty.setSize(new FormSize(74, 16));
-        lblPenalty.setTabIndex(21);
-        lblPenalty.setText("8,888,888 cr.");
-        lblPenalty.TextAlign = ContentAlignment.TopRight;
-        // lblPenaltyLabel
-        lblPenaltyLabel.setAutoSize(true);
-        lblPenaltyLabel.setLocation(new Point(8, 32));
-        lblPenaltyLabel.setName("lblPenaltyLabel");
-        lblPenaltyLabel.setSize(new FormSize(96, 13));
-        lblPenaltyLabel.setTabIndex(20);
-        lblPenaltyLabel.setText("Crowding Penalty:");
-        // lblShipCost
-        lblShipCost.setLocation(new Point(106, 16));
-        lblShipCost.setName("lblShipCost");
-        lblShipCost.setSize(new FormSize(74, 16));
-        lblShipCost.setTabIndex(19);
-        lblShipCost.setText("8,888,888 cr.");
-        lblShipCost.TextAlign = ContentAlignment.TopRight;
-        // lblTotalCost
-        lblTotalCost.setLocation(new Point(106, 84));
-        lblTotalCost.setName("lblTotalCost");
-        lblTotalCost.setSize(new FormSize(74, 16));
-        lblTotalCost.setTabIndex(18);
-        lblTotalCost.setText("8,888,888 cr.");
-        lblTotalCost.TextAlign = ContentAlignment.TopRight;
-        // lblTotalCostLabel
-        lblTotalCostLabel.setAutoSize(true);
-        lblTotalCostLabel.setLocation(new Point(8, 84));
-        lblTotalCostLabel.setName("lblTotalCostLabel");
-        lblTotalCostLabel.setSize(new FormSize(59, 13));
-        lblTotalCostLabel.setTabIndex(17);
-        lblTotalCostLabel.setText("Total Cost:");
-        // lblShipCostLabel
-        lblShipCostLabel.setAutoSize(true);
-        lblShipCostLabel.setLocation(new Point(8, 16));
-        lblShipCostLabel.setName("lblShipCostLabel");
-        lblShipCostLabel.setSize(new FormSize(56, 13));
-        lblShipCostLabel.setTabIndex(16);
-        lblShipCostLabel.setText("Ship Cost:");
-        // lblDesignFee
-        lblDesignFee.setLocation(new Point(106, 48));
-        lblDesignFee.setName("lblDesignFee");
-        lblDesignFee.setSize(new FormSize(74, 16));
-        lblDesignFee.setTabIndex(15);
-        lblDesignFee.setText("888,888 cr.");
-        lblDesignFee.TextAlign = ContentAlignment.TopRight;
-        // lblDesignFeeLabel
-        lblDesignFeeLabel.setAutoSize(true);
-        lblDesignFeeLabel.setLocation(new Point(8, 48));
-        lblDesignFeeLabel.setName("lblDesignFeeLabel");
-        lblDesignFeeLabel.setSize(new FormSize(65, 13));
-        lblDesignFeeLabel.setTabIndex(14);
-        lblDesignFeeLabel.setText("Design Fee:");
+        // labelTradeIn
+        labelTradeIn.setLocation(new Point(106, 64));
+        labelTradeIn.setName("labelTradeIn");
+        labelTradeIn.setSize(new FormSize(75, 16));
+        labelTradeIn.setTabIndex(135);
+        labelTradeIn.setText("-8,888,888 cr.");
+        labelTradeIn.TextAlign = ContentAlignment.TopRight;
+        // labelTradeInLabel
+        labelTradeInLabel.setAutoSize(true);
+        labelTradeInLabel.setLocation(new Point(8, 64));
+        labelTradeInLabel.setName("labelTradeInLabel");
+        labelTradeInLabel.setSize(new FormSize(77, 13));
+        labelTradeInLabel.setTabIndex(134);
+        labelTradeInLabel.setText("Less Trade-In:");
+        // pictureCostsLine
+        pictureCostsLine.setBackColor(Color.darkGray);
+        pictureCostsLine.setLocation(new Point(8, 80));
+        pictureCostsLine.setName("pictureCostsLine");
+        pictureCostsLine.setSize(new FormSize(168, 1));
+        pictureCostsLine.setTabIndex(133);
+        pictureCostsLine.setTabStop(false);
+        // labelPenalty
+        labelPenalty.setLocation(new Point(106, 32));
+        labelPenalty.setName("labelPenalty");
+        labelPenalty.setSize(new FormSize(74, 16));
+        labelPenalty.setTabIndex(21);
+        labelPenalty.setText("8,888,888 cr.");
+        labelPenalty.TextAlign = ContentAlignment.TopRight;
+        // labelPenaltyLabel
+        labelPenaltyLabel.setAutoSize(true);
+        labelPenaltyLabel.setLocation(new Point(8, 32));
+        labelPenaltyLabel.setName("labelPenaltyLabel");
+        labelPenaltyLabel.setSize(new FormSize(96, 13));
+        labelPenaltyLabel.setTabIndex(20);
+        labelPenaltyLabel.setText("Crowding Penalty:");
+        // labelShipCost
+        labelShipCost.setLocation(new Point(106, 16));
+        labelShipCost.setName("labelShipCost");
+        labelShipCost.setSize(new FormSize(74, 16));
+        labelShipCost.setTabIndex(19);
+        labelShipCost.setText("8,888,888 cr.");
+        labelShipCost.TextAlign = ContentAlignment.TopRight;
+        // labelTotalCost
+        labelTotalCost.setLocation(new Point(106, 84));
+        labelTotalCost.setName("labelTotalCost");
+        labelTotalCost.setSize(new FormSize(74, 16));
+        labelTotalCost.setTabIndex(18);
+        labelTotalCost.setText("8,888,888 cr.");
+        labelTotalCost.TextAlign = ContentAlignment.TopRight;
+        // labelTotalCostLabel
+        labelTotalCostLabel.setAutoSize(true);
+        labelTotalCostLabel.setLocation(new Point(8, 84));
+        labelTotalCostLabel.setName("labelTotalCostLabel");
+        labelTotalCostLabel.setSize(new FormSize(59, 13));
+        labelTotalCostLabel.setTabIndex(17);
+        labelTotalCostLabel.setText("Total Cost:");
+        // labelShipCostLabel
+        labelShipCostLabel.setAutoSize(true);
+        labelShipCostLabel.setLocation(new Point(8, 16));
+        labelShipCostLabel.setName("labelShipCostLabel");
+        labelShipCostLabel.setSize(new FormSize(56, 13));
+        labelShipCostLabel.setTabIndex(16);
+        labelShipCostLabel.setText("Ship Cost:");
+        // labelDesignFee
+        labelDesignFee.setLocation(new Point(106, 48));
+        labelDesignFee.setName("labelDesignFee");
+        labelDesignFee.setSize(new FormSize(74, 16));
+        labelDesignFee.setTabIndex(15);
+        labelDesignFee.setText("888,888 cr.");
+        labelDesignFee.TextAlign = ContentAlignment.TopRight;
+        // labelDesignFeeLabel
+        labelDesignFeeLabel.setAutoSize(true);
+        labelDesignFeeLabel.setLocation(new Point(8, 48));
+        labelDesignFeeLabel.setName("labelDesignFeeLabel");
+        labelDesignFeeLabel.setSize(new FormSize(65, 13));
+        labelDesignFeeLabel.setTabIndex(14);
+        labelDesignFeeLabel.setText("Design Fee:");
         // buttonConstruct
         buttonConstruct.setFlatStyle(FlatStyle.Flat);
         buttonConstruct.setForeColor(SystemColors.ControlText);
@@ -477,19 +477,19 @@ public class FormShipyard extends wfForm {
         buttonConstruct.setText("Construct Ship");
         buttonConstruct.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonConstruct_Click(sender, e);
             }
         });
         buttonConstruct.setMouseEnter(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonConstruct_MouseEnter(sender, e);
             }
         });
         buttonConstruct.setMouseLeave(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonConstruct_MouseLeave(sender, e);
             }
         });
@@ -502,31 +502,31 @@ public class FormShipyard extends wfForm {
         buttonCancel.setTabIndex(5);
         buttonCancel.setText("Cancel Design");
         // boxAllocation
-        boxAllocation.Controls.addAll(lblPct, lblPctLabel, numHullStrength, lblHullStrengthLabel, numCargoBays, numCrewQuarters, numFuelTanks,
-                numShieldSlots, numGadgetSlots, numWeaponSlots, lblCargoBays, lblFuelTanks, lblCrewQuarters,
-                lblShieldSlots, lblGadgetSlots, lblWeaponsSlots, lblUnitsUsedLabel, lblUnitsUsed);
+        boxAllocation.Controls.addAll(labelPct, labelPctLabel, numHullStrength, labelHullStrengthLabel, numCargoBays, numCrewQuarters, numFuelTanks,
+                numShieldSlots, numGadgetSlots, numWeaponSlots, labelCargoBays, labelFuelTanks, labelCrewQuarters,
+                labelShieldSlots, labelGadgetSlots, labelWeaponsSlots, labelUnitsUsedLabel, labelUnitsUsed);
         boxAllocation.setLocation(new Point(286, 0));
         boxAllocation.setName("boxAllocation");
         boxAllocation.setSize(new FormSize(184, 226));
         boxAllocation.setTabIndex(3);
         boxAllocation.setTabStop(false);
         boxAllocation.setText("Space Allocation");
-        // lblPct
-        lblPct.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblPct.setForeColor(Color.red);
-        lblPct.setLocation(new Point(110, 204));
-        lblPct.setName("lblPct");
-        lblPct.setSize(new FormSize(34, 13));
-        lblPct.setTabIndex(19);
-        lblPct.setText("888%");
-        lblPct.TextAlign = ContentAlignment.TopRight;
-        // lblPctLabel
-        lblPctLabel.setAutoSize(true);
-        lblPctLabel.setLocation(new Point(8, 204));
-        lblPctLabel.setName("lblPctLabel");
-        lblPctLabel.setSize(new FormSize(54, 13));
-        lblPctLabel.setTabIndex(18);
-        lblPctLabel.setText("% of Max:");
+        // labelPct
+        labelPct.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelPct.setForeColor(Color.red);
+        labelPct.setLocation(new Point(110, 204));
+        labelPct.setName("labelPct");
+        labelPct.setSize(new FormSize(34, 13));
+        labelPct.setTabIndex(19);
+        labelPct.setText("888%");
+        labelPct.TextAlign = ContentAlignment.TopRight;
+        // labelPctLabel
+        labelPctLabel.setAutoSize(true);
+        labelPctLabel.setLocation(new Point(8, 204));
+        labelPctLabel.setName("labelPctLabel");
+        labelPctLabel.setSize(new FormSize(54, 13));
+        labelPctLabel.setTabIndex(18);
+        labelPctLabel.setText("% of Max:");
         // numHullStrength
         numHullStrength.setBackColor(Color.white);
         numHullStrength.setLocation(new Point(110, 64));
@@ -538,23 +538,23 @@ public class FormShipyard extends wfForm {
         numHullStrength.TextAlign = HorizontalAlignment.Right;
         numHullStrength.setEnter(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueEnter(sender, e);
             }
         });
         numHullStrength.setValueChanged(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueChanged(sender, e);
             }
         });
-        // lblHullStrengthLabel
-        lblHullStrengthLabel.setAutoSize(true);
-        lblHullStrengthLabel.setLocation(new Point(8, 66));
-        lblHullStrengthLabel.setName("lblHullStrengthLabel");
-        lblHullStrengthLabel.setSize(new FormSize(70, 13));
-        lblHullStrengthLabel.setTabIndex(13);
-        lblHullStrengthLabel.setText("Hull Strength:");
+        // labelHullStrengthLabel
+        labelHullStrengthLabel.setAutoSize(true);
+        labelHullStrengthLabel.setLocation(new Point(8, 66));
+        labelHullStrengthLabel.setName("labelHullStrengthLabel");
+        labelHullStrengthLabel.setSize(new FormSize(70, 13));
+        labelHullStrengthLabel.setTabIndex(13);
+        labelHullStrengthLabel.setText("Hull Strength:");
         // numCargoBays
         numCargoBays.setBackColor(Color.white);
         numCargoBays.setLocation(new Point(110, 16));
@@ -566,13 +566,13 @@ public class FormShipyard extends wfForm {
         numCargoBays.TextAlign = HorizontalAlignment.Right;
         numCargoBays.setEnter(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueEnter(sender, e);
             }
         });
         numCargoBays.setValueChanged(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueChanged(sender, e);
             }
         });
@@ -588,13 +588,13 @@ public class FormShipyard extends wfForm {
         numCrewQuarters.setValue(1);
         numCrewQuarters.setEnter(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueEnter(sender, e);
             }
         });
         numCrewQuarters.setValueChanged(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueChanged(sender, e);
             }
         });
@@ -608,13 +608,13 @@ public class FormShipyard extends wfForm {
         numFuelTanks.TextAlign = HorizontalAlignment.Right;
         numFuelTanks.setEnter(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueEnter(sender, e);
             }
         });
         numFuelTanks.setValueChanged(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueChanged(sender, e);
             }
         });
@@ -628,13 +628,13 @@ public class FormShipyard extends wfForm {
         numShieldSlots.TextAlign = HorizontalAlignment.Right;
         numShieldSlots.setEnter(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueEnter(sender, e);
             }
         });
         numShieldSlots.setValueChanged(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueChanged(sender, e);
             }
         });
@@ -648,13 +648,13 @@ public class FormShipyard extends wfForm {
         numGadgetSlots.TextAlign = HorizontalAlignment.Right;
         numGadgetSlots.setEnter(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueEnter(sender, e);
             }
         });
         numGadgetSlots.setValueChanged(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueChanged(sender, e);
             }
         });
@@ -668,58 +668,58 @@ public class FormShipyard extends wfForm {
         numWeaponSlots.TextAlign = HorizontalAlignment.Right;
         numWeaponSlots.setEnter(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueEnter(sender, e);
             }
         });
         numWeaponSlots.setValueChanged(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueChanged(sender, e);
             }
         });
-        // lblCargoBays
-        lblCargoBays.setAutoSize(true);
-        lblCargoBays.setLocation(new Point(8, 18));
-        lblCargoBays.setName("lblCargoBays");
-        lblCargoBays.setSize(new FormSize(66, 13));
-        lblCargoBays.setTabIndex(5);
-        lblCargoBays.setText("Cargo Bays:");
-        // lblFuelTanks
-        lblFuelTanks.setAutoSize(true);
-        lblFuelTanks.setLocation(new Point(8, 42));
-        lblFuelTanks.setName("lblFuelTanks");
-        lblFuelTanks.setSize(new FormSize(41, 13));
-        lblFuelTanks.setTabIndex(4);
-        lblFuelTanks.setText("Range:");
-        // lblCrewQuarters
-        lblCrewQuarters.setAutoSize(true);
-        lblCrewQuarters.setLocation(new Point(8, 162));
-        lblCrewQuarters.setName("lblCrewQuarters");
-        lblCrewQuarters.setSize(new FormSize(81, 13));
-        lblCrewQuarters.setTabIndex(3);
-        lblCrewQuarters.setText("Crew Quarters:");
-        // lblShieldSlots
-        lblShieldSlots.setAutoSize(true);
-        lblShieldSlots.setLocation(new Point(8, 114));
-        lblShieldSlots.setName("lblShieldSlots");
-        lblShieldSlots.setSize(new FormSize(67, 13));
-        lblShieldSlots.setTabIndex(2);
-        lblShieldSlots.setText("Shield Slots:");
-        // lblGadgetSlots
-        lblGadgetSlots.setAutoSize(true);
-        lblGadgetSlots.setLocation(new Point(8, 138));
-        lblGadgetSlots.setName("lblGadgetSlots");
-        lblGadgetSlots.setSize(new FormSize(73, 13));
-        lblGadgetSlots.setTabIndex(1);
-        lblGadgetSlots.setText("Gadget Slots:");
-        // lblWeaponsSlots
-        lblWeaponsSlots.setAutoSize(true);
-        lblWeaponsSlots.setLocation(new Point(8, 90));
-        lblWeaponsSlots.setName("lblWeaponsSlots");
-        lblWeaponsSlots.setSize(new FormSize(78, 13));
-        lblWeaponsSlots.setTabIndex(0);
-        lblWeaponsSlots.setText("Weapon Slots:");
+        // labelCargoBays
+        labelCargoBays.setAutoSize(true);
+        labelCargoBays.setLocation(new Point(8, 18));
+        labelCargoBays.setName("labelCargoBays");
+        labelCargoBays.setSize(new FormSize(66, 13));
+        labelCargoBays.setTabIndex(5);
+        labelCargoBays.setText("Cargo Bays:");
+        // labelFuelTanks
+        labelFuelTanks.setAutoSize(true);
+        labelFuelTanks.setLocation(new Point(8, 42));
+        labelFuelTanks.setName("labelFuelTanks");
+        labelFuelTanks.setSize(new FormSize(41, 13));
+        labelFuelTanks.setTabIndex(4);
+        labelFuelTanks.setText("Range:");
+        // labelCrewQuarters
+        labelCrewQuarters.setAutoSize(true);
+        labelCrewQuarters.setLocation(new Point(8, 162));
+        labelCrewQuarters.setName("labelCrewQuarters");
+        labelCrewQuarters.setSize(new FormSize(81, 13));
+        labelCrewQuarters.setTabIndex(3);
+        labelCrewQuarters.setText("Crew Quarters:");
+        // labelShieldSlots
+        labelShieldSlots.setAutoSize(true);
+        labelShieldSlots.setLocation(new Point(8, 114));
+        labelShieldSlots.setName("labelShieldSlots");
+        labelShieldSlots.setSize(new FormSize(67, 13));
+        labelShieldSlots.setTabIndex(2);
+        labelShieldSlots.setText("Shield Slots:");
+        // labelGadgetSlots
+        labelGadgetSlots.setAutoSize(true);
+        labelGadgetSlots.setLocation(new Point(8, 138));
+        labelGadgetSlots.setName("labelGadgetSlots");
+        labelGadgetSlots.setSize(new FormSize(73, 13));
+        labelGadgetSlots.setTabIndex(1);
+        labelGadgetSlots.setText("Gadget Slots:");
+        // labelWeaponsSlots
+        labelWeaponsSlots.setAutoSize(true);
+        labelWeaponsSlots.setLocation(new Point(8, 90));
+        labelWeaponsSlots.setName("labelWeaponsSlots");
+        labelWeaponsSlots.setSize(new FormSize(78, 13));
+        labelWeaponsSlots.setTabIndex(0);
+        labelWeaponsSlots.setText("Weapon Slots:");
         // ilShipyardLogos
         ilShipyardLogos.ColorDepth = ColorDepth.Depth24Bit;
         ilShipyardLogos.setImageSize(new FormSize(80, 80));
@@ -728,39 +728,39 @@ public class FormShipyard extends wfForm {
         // dlgOpen
         dlgOpen.setFilter("Windows Bitmaps (*.bmp)|*bmp");
         dlgOpen.setTitle("Open Ship Image");
-        // lblDisabledPct
-        lblDisabledPct.setBackColor(SystemColors.Info);
-        lblDisabledPct.setBorderStyle(BorderStyle.FixedSingle);
-        lblDisabledPct.ImageAlign = ContentAlignment.MiddleRight;
-        lblDisabledPct.setLocation(new Point(154, 182));
-        lblDisabledPct.setName("lblDisabledPct");
-        lblDisabledPct.setSize(new FormSize(276, 20));
-        lblDisabledPct.setTabIndex(8);
-        lblDisabledPct.setText("Your % of Max must be less than or equal to 100%.");
-        lblDisabledPct.TextAlign = ContentAlignment.MiddleCenter;
-        lblDisabledPct.setVisible(false);
+        // labelDisabledPct
+        labelDisabledPct.setBackColor(SystemColors.Info);
+        labelDisabledPct.setBorderStyle(BorderStyle.FixedSingle);
+        labelDisabledPct.ImageAlign = ContentAlignment.MiddleRight;
+        labelDisabledPct.setLocation(new Point(154, 182));
+        labelDisabledPct.setName("labelDisabledPct");
+        labelDisabledPct.setSize(new FormSize(276, 20));
+        labelDisabledPct.setTabIndex(8);
+        labelDisabledPct.setText("Your % of Max must be less than or equal to 100%.");
+        labelDisabledPct.TextAlign = ContentAlignment.MiddleCenter;
+        labelDisabledPct.setVisible(false);
         // dlgSave
         dlgSave.setDefaultExt("sst");
         dlgSave.setFileName("CustomShip.sst");
         dlgSave.setFilter("SpaceTrader Ship Template Files (*.sst)|*.sst");
         dlgSave.setTitle("Save Ship Template");
-        // lblDisabledName
-        lblDisabledName.setBackColor(SystemColors.Info);
-        lblDisabledName.setBorderStyle(BorderStyle.FixedSingle);
-        lblDisabledName.ImageAlign = ContentAlignment.MiddleLeft;
-        lblDisabledName.setLocation(new Point(96, 222));
-        lblDisabledName.setName("lblDisabledName");
-        lblDisabledName.setSize(new FormSize(170, 20));
-        lblDisabledName.setTabIndex(7);
-        lblDisabledName.setText("You must enter a Ship Name.");
-        lblDisabledName.TextAlign = ContentAlignment.MiddleRight;
-        lblDisabledName.setVisible(false);
+        // labelDisabledName
+        labelDisabledName.setBackColor(SystemColors.Info);
+        labelDisabledName.setBorderStyle(BorderStyle.FixedSingle);
+        labelDisabledName.ImageAlign = ContentAlignment.MiddleLeft;
+        labelDisabledName.setLocation(new Point(96, 222));
+        labelDisabledName.setName("labelDisabledName");
+        labelDisabledName.setSize(new FormSize(170, 20));
+        labelDisabledName.setTabIndex(7);
+        labelDisabledName.setText("You must enter a Ship Name.");
+        labelDisabledName.TextAlign = ContentAlignment.MiddleRight;
+        labelDisabledName.setVisible(false);
         // Form_Shipyard
         setAcceptButton(buttonConstruct);
         setAutoScaleBaseSize(new FormSize(5, 13));
         setCancelButton(buttonCancel);
         setClientSize(new FormSize(478, 375));
-        Controls.addAll(Arrays.asList(lblDisabledPct, boxWelcome, lblDisabledName, boxAllocation, boxCosts, boxInfo, buttonCancel, buttonConstruct));
+        Controls.addAll(Arrays.asList(labelDisabledPct, boxWelcome, labelDisabledName, boxAllocation, boxCosts, boxInfo, buttonCancel, buttonConstruct));
         setFormBorderStyle(FormBorderStyle.FixedDialog);
         setMaximizeBox(false);
         setMinimizeBox(false);
@@ -772,25 +772,25 @@ public class FormShipyard extends wfForm {
         boxInfo.ResumeLayout(false);
         boxCosts.ResumeLayout(false);
         boxAllocation.ResumeLayout(false);
-        ((ISupportInitialize) (numHullStrength)).EndInit();
-        ((ISupportInitialize) (numCargoBays)).EndInit();
-        ((ISupportInitialize) (numCrewQuarters)).EndInit();
-        ((ISupportInitialize) (numFuelTanks)).EndInit();
-        ((ISupportInitialize) (numShieldSlots)).EndInit();
-        ((ISupportInitialize) (numGadgetSlots)).EndInit();
-        ((ISupportInitialize) (numWeaponSlots)).EndInit();
+        ((ISupportInitialize) (numHullStrength)).endInit();
+        ((ISupportInitialize) (numCargoBays)).endInit();
+        ((ISupportInitialize) (numCrewQuarters)).endInit();
+        ((ISupportInitialize) (numFuelTanks)).endInit();
+        ((ISupportInitialize) (numShieldSlots)).endInit();
+        ((ISupportInitialize) (numGadgetSlots)).endInit();
+        ((ISupportInitialize) (numWeaponSlots)).endInit();
         ResumeLayout(false);
         setText(Functions.StringVars(Strings.ShipyardTitle, yard.Name()));
-        picLogo.setImage(ilShipyardLogos.getImages()[yard.Id().CastToInt()]);
-        lblWelcome.setText(Functions.StringVars(Strings.ShipyardWelcome, yard.Name(), yard.Engineer()));
-        lblSizeSpecialty.setText(Strings.Sizes[yard.SpecialtySize().CastToInt()]);
-        lblSkill.setText(Strings.ShipyardSkills[yard.Skill().CastToInt()]);
-        lblSkillDescription.setText(Strings.ShipyardSkillDescriptions[yard.Skill().CastToInt()]);
-        lblWarning.setText(Functions.StringVars(Strings.ShipyardWarning, "" + Shipyard.PENALTY_FIRST_PCT, "" + Shipyard.PENALTY_SECOND_PCT));
+        pictureLogo.setImage(ilShipyardLogos.getImages()[yard.Id().CastToInt()]);
+        labelWelcome.setText(Functions.StringVars(Strings.ShipyardWelcome, yard.Name(), yard.Engineer()));
+        labelSizeSpecialty.setText(Strings.Sizes[yard.SpecialtySize().CastToInt()]);
+        labelSkill.setText(Strings.ShipyardSkills[yard.Skill().CastToInt()]);
+        labelSkillDescription.setText(Strings.ShipyardSkillDescriptions[yard.Skill().CastToInt()]);
+        labelWarning.setText(Functions.StringVars(Strings.ShipyardWarning, "" + Shipyard.PENALTY_FIRST_PCT, "" + Shipyard.PENALTY_SECOND_PCT));
         dlgOpen.setInitialDirectory(Constants.CustomImagesDirectory);
         dlgSave.setInitialDirectory(Constants.CustomTemplatesDirectory);
-        lblDisabledName.setImage(game.getParentWindow().DirectionImages().getImages()[Constants.DirectionDown]);
-        lblDisabledPct.setImage(game.getParentWindow().DirectionImages().getImages()[Constants.DirectionDown]);
+        labelDisabledName.setImage(game.getParentWindow().DirectionImages().getImages()[Constants.DirectionDown]);
+        labelDisabledPct.setImage(game.getParentWindow().DirectionImages().getImages()[Constants.DirectionDown]);
         LoadSizes();
         LoadTemplateList();
         LoadSelectedTemplate();
@@ -816,7 +816,7 @@ public class FormShipyard extends wfForm {
             loading = true;
             ShipTemplate template = (ShipTemplate) selTemplate.getSelectedItem();
             if (template.Name().equals(Strings.ShipNameCurrentShip)) {
-                txtName.setText(cmdr.getShip().Name());
+                txtName.setText(commander.getShip().Name());
             } else if (template.Name().endsWith(Strings.ShipNameTemplateSuffixDefault) || template.Name().endsWith(Strings.ShipNameTemplateSuffixMinimum)) {
                 txtName.setText("");
             } else {
@@ -856,8 +856,8 @@ public class FormShipyard extends wfForm {
     }
 
     private void LoadTemplateList() {
-        ShipTemplate currentShip = new ShipTemplate(cmdr.getShip(), Strings.ShipNameCurrentShip);
-        selTemplate.Items.add(currentShip);
+        ShipTemplate currentrentShip = new ShipTemplate(commander.getShip(), Strings.ShipNameCurrentShip);
+        selTemplate.Items.add(currentrentShip);
         selTemplate.Items.add(Constants.ShipTemplateSeparator);
         // Add the minimal sizes templates.
         for (ShipSize size : sizes) {
@@ -873,7 +873,7 @@ public class FormShipyard extends wfForm {
         selTemplate.Items.add(Constants.ShipTemplateSeparator);
         // Add the user-created templates.
         ArrayList<ShipTemplate> userTemplates = new ArrayList<>();
-        for (String fileName : Directory.GetFiles(Constants.CustomTemplatesDirectory, "*.sst")) {
+        for (String fileName : Directory.getFiles(Constants.CustomTemplatesDirectory, "*.sst")) {
             ShipTemplate template = new ShipTemplate((Hashtable) Functions.LoadFile(fileName, true, this));
             if (sizes.contains(template.Size())) {
                 userTemplates.add(template);
@@ -937,27 +937,27 @@ public class FormShipyard extends wfForm {
         yard.ShipSpec().setGadgetSlots(numGadgetSlots.getValue());
         yard.ShipSpec().setCrewQuarters(numCrewQuarters.getValue());
         yard.CalculateDependantVariables();
-        lblUnitsUsed.setText(yard.UnitsUsed() + "");
-        lblPct.setText(Functions.FormatPercent(yard.PercentOfMaxUnits()));
+        labelUnitsUsed.setText(yard.UnitsUsed() + "");
+        labelPct.setText(Functions.FormatPercent(yard.PercentOfMaxUnits()));
         if (yard.PercentOfMaxUnits() >= Shipyard.PENALTY_FIRST_PCT) {
-            lblPct.setFont(lblSkillLabel.getFont());
+            labelPct.setFont(labelSkillLabel.getFont());
         } else {
-            lblPct.setFont(lblPctLabel.getFont());
+            labelPct.setFont(labelPctLabel.getFont());
         }
         if (yard.UnitsUsed() > yard.MaxUnits()) {
-            lblPct.setForeColor(Color.red);
+            labelPct.setForeColor(Color.red);
         } else if (yard.PercentOfMaxUnits() >= Shipyard.PENALTY_SECOND_PCT) {
-            lblPct.setForeColor(Color.orange);
+            labelPct.setForeColor(Color.orange);
         } else if (yard.PercentOfMaxUnits() >= Shipyard.PENALTY_FIRST_PCT) {
-            lblPct.setForeColor(Color.yellow);
+            labelPct.setForeColor(Color.yellow);
         } else {
-            lblPct.setForeColor(lblPctLabel.getForeColor());
+            labelPct.setForeColor(labelPctLabel.getForeColor());
         }
-        lblShipCost.setText(Functions.FormatMoney(yard.AdjustedPrice()));
-        lblDesignFee.setText(Functions.FormatMoney(yard.AdjustedDesignFee()));
-        lblPenalty.setText(Functions.FormatMoney(yard.AdjustedPenaltyCost()));
-        lblTradeIn.setText(Functions.FormatMoney(-yard.TradeIn()));
-        lblTotalCost.setText(Functions.FormatMoney(yard.TotalCost()));
+        labelShipCost.setText(Functions.FormatMoney(yard.AdjustedPrice()));
+        labelDesignFee.setText(Functions.FormatMoney(yard.AdjustedDesignFee()));
+        labelPenalty.setText(Functions.FormatMoney(yard.AdjustedPenaltyCost()));
+        labelTradeIn.setText(Functions.FormatMoney(-yard.TradeIn()));
+        labelTotalCost.setText(Functions.FormatMoney(yard.TotalCost()));
         UpdateButtonEnabledState();
     }
 
@@ -968,21 +968,21 @@ public class FormShipyard extends wfForm {
 
     private void UpdateShip() {
         yard.ShipSpec().ImageIndex(imgTypes[imgIndex].CastToInt());
-        picShip.setImage((imgIndex > Constants.MaxShip ? customImages[0] : Constants.ShipSpecs[imgTypes[imgIndex].CastToInt()].Image()));
-        lblImage.setText((imgIndex > Constants.MaxShip ? Strings.ShipNameCustomShip : Constants.ShipSpecs[imgTypes[imgIndex].CastToInt()].Name()));
+        pictureShip.setImage((imgIndex > Constants.MaxShip ? customImages[0] : Constants.ShipSpecs[imgTypes[imgIndex].CastToInt()].Image()));
+        labelImage.setText((imgIndex > Constants.MaxShip ? Strings.ShipNameCustomShip : Constants.ShipSpecs[imgTypes[imgIndex].CastToInt()].Name()));
     }
 
-    private void buttonConstruct_Click(Object sender, EventArgs e) {
+    private void buttonConstruct_Click(Object sender, EventData e) {
         if (ConstructButtonEnabled()) {
-            if (cmdr.TradeShip(yard.ShipSpec(), yard.TotalCost(), txtName.getText(), this)) {
+            if (commander.TradeShip(yard.ShipSpec(), yard.TotalCost(), txtName.getText(), this)) {
                 Strings.ShipNames[ShipType.Custom.CastToInt()] = txtName.getText();
                 if (game.getQuestStatusScarab() == SpecialEvent.StatusScarabDone) {
                     game.setQuestStatusScarab(SpecialEvent.StatusScarabNotStarted);
                 }
-                // Replace the current custom images with the new ones.
-                if (cmdr.getShip().ImageIndex() == ShipType.Custom.CastToInt()) {
+                // Replace the currentrent custom images with the new ones.
+                if (commander.getShip().ImageIndex() == ShipType.Custom.CastToInt()) {
                     game.getParentWindow().setCustomShipImages(customImages);
-                    cmdr.getShip().UpdateCustomImageOffsetConstants();
+                    commander.getShip().UpdateCustomImageOffsetConstants();
                 }
                 FormAlert.Alert(AlertType.ShipDesignThanks, this, yard.Name());
                 Close();
@@ -990,33 +990,33 @@ public class FormShipyard extends wfForm {
         }
     }
 
-    private void buttonConstruct_MouseEnter(Object sender, EventArgs e) {
-        lblDisabledName.setVisible(txtName.getText().isEmpty());
-        lblDisabledPct.setVisible(yard.PercentOfMaxUnits() > 100);
+    private void buttonConstruct_MouseEnter(Object sender, EventData e) {
+        labelDisabledName.setVisible(txtName.getText().isEmpty());
+        labelDisabledPct.setVisible(yard.PercentOfMaxUnits() > 100);
     }
 
-    private void buttonConstruct_MouseLeave(Object sender, EventArgs e) {
-        lblDisabledName.setVisible(false);
-        lblDisabledPct.setVisible(false);
+    private void buttonConstruct_MouseLeave(Object sender, EventData e) {
+        labelDisabledName.setVisible(false);
+        labelDisabledPct.setVisible(false);
     }
 
-    private void buttonLoad_Click(Object sender, EventArgs e) {
+    private void buttonLoad_Click(Object sender, EventData e) {
         LoadSelectedTemplate();
     }
 
-    private void buttonNextImage_Click(Object sender, EventArgs e) {
+    private void buttonNextImage_Click(Object sender, EventData e) {
         SetTemplateModified();
         imgIndex = (imgIndex + 1) % imgTypes.length;
         UpdateShip();
     }
 
-    private void buttonPrevImage_Click(Object sender, EventArgs e) {
+    private void buttonPrevImage_Click(Object sender, EventData e) {
         SetTemplateModified();
         imgIndex = (imgIndex + imgTypes.length - 1) % imgTypes.length;
         UpdateShip();
     }
 
-    private void buttonSave_Click(Object sender, EventArgs e) {
+    private void buttonSave_Click(Object sender, EventData e) {
         if (SaveButtonEnabled()) {
             if (dlgSave.ShowDialog(this) == DialogResult.OK) {
                 ShipTemplate template = new ShipTemplate(yard.ShipSpec(), txtName.getText());
@@ -1032,18 +1032,18 @@ public class FormShipyard extends wfForm {
         }
     }
 
-    private void buttonSave_MouseEnter(Object sender, EventArgs e) {
-        lblDisabledName.setVisible(txtName.getText().isEmpty());
+    private void buttonSave_MouseEnter(Object sender, EventData e) {
+        labelDisabledName.setVisible(txtName.getText().isEmpty());
     }
 
-    private void buttonSave_MouseLeave(Object sender, EventArgs e) {
-        lblDisabledName.setVisible(false);
+    private void buttonSave_MouseLeave(Object sender, EventData e) {
+        labelDisabledName.setVisible(false);
     }
 
-    private void buttonSetCustomImage_Click(Object sender, EventArgs e) {
+    private void buttonSetCustomImage_Click(Object sender, EventData e) {
         if (dlgOpen.ShowDialog(this) == DialogResult.OK) {
-            String baseFileName = Path.RemoveExtension(dlgOpen.getFileName());
-            String ext = Path.GetExtension(dlgOpen.getFileName());
+            String baseFileName = Path.removeExtension(dlgOpen.getFileName());
+            String ext = Path.getExtension(dlgOpen.getFileName());
             wfBitmap image = GetImageFile(baseFileName + ext);
             wfBitmap imageDamaged = GetImageFile(baseFileName + "d" + ext);
             wfBitmap imageShields = GetImageFile(baseFileName + "s" + ext);
@@ -1059,23 +1059,23 @@ public class FormShipyard extends wfForm {
         }
     }
 
-    private void num_ValueChanged(Object sender, EventArgs e) {
+    private void num_ValueChanged(Object sender, EventData e) {
         SetTemplateModified();
         UpdateCalculatedFigures();
     }
 
-    private void num_ValueEnter(Object sender, EventArgs e) {
+    private void num_ValueEnter(Object sender, EventData e) {
         ((NumericUpDown) sender).Select(0, ("" + ((NumericUpDown) sender).getValue()).length());
     }
 
-    private void selSize_SelectedIndexChanged(Object sender, EventArgs e) {
+    private void selSize_SelectedIndexChanged(Object sender, EventData e) {
         SetTemplateModified();
         yard.ShipSpec().setSize(sizes.get(selSize.getSelectedIndex()));
         UpdateAllocation();
         UpdateCalculatedFigures();
     }
 
-    private void txtName_TextChanged(Object sender, EventArgs e) {
+    private void txtName_TextChanged(Object sender, EventData e) {
         SetTemplateModified();
         UpdateButtonEnabledState();
     }

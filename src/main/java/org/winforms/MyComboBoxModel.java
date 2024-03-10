@@ -2,7 +2,7 @@ package org.winforms;
 
 import javax.swing.*;
 
-
+// TODO documentation of usage, template version, more specific name
 public class MyComboBoxModel extends DefaultComboBoxModel<Object> {
     private static final long serialVersionUID = 1L;
     // TODO inline methods, use super-class.

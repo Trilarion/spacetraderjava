@@ -12,6 +12,6 @@ public class SaveFileDialog extends FileDialog {
 
     @Override
     public String getFileName() {
-        return Path.DefaultExtension(super.getFileName(), ".sav");
+        return Path.getDefaultExtension(super.getFileName(), ".sav");
     }
 }

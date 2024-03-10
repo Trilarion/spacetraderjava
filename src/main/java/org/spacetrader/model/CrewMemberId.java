@@ -2,7 +2,7 @@ package org.spacetrader.model;
 
 import org.spacetrader.controller.enums.SpaceTraderEnum;
 
-
+// TODO is this the best way of having autonumbered enums? are the exact ids important?
 public enum CrewMemberId implements SpaceTraderEnum {
     NA, // = -1,
     Commander, // = 0,

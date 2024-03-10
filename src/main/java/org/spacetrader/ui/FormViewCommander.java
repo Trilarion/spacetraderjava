@@ -14,62 +14,62 @@ import java.util.Arrays;
 public class FormViewCommander extends wfForm {
 
     public FormViewCommander() {
-        Label lblNameLabel = new Label();
-        Label lblName = new Label();
-        Label lblDifficulty = new Label();
+        Label labelNameLabel = new Label();
+        Label labelName = new Label();
+        Label labelDifficulty = new Label();
         Button buttonClose = new Button();
-        Label lblTimeLabel = new Label();
-        Label lblCashLabel = new Label();
-        Label lblDebtLabel = new Label();
-        Label lblNetWorthLabel = new Label();
-        Label lblDifficultyLabel = new Label();
-        Label lblTime = new Label();
+        Label labelTimeLabel = new Label();
+        Label labelCashLabel = new Label();
+        Label labelDebtLabel = new Label();
+        Label labelNetWorthLabel = new Label();
+        Label labelDifficultyLabel = new Label();
+        Label labelTime = new Label();
         GroupBox boxSkills = new GroupBox();
-        Label lblEngineer = new Label();
-        Label lblTrader = new Label();
-        Label lblFighter = new Label();
-        Label lblPilot = new Label();
-        Label lblEngineerLabel = new Label();
-        Label lblTraderLabel = new Label();
-        Label lblFighterLabel = new Label();
-        Label lblPilotLabel = new Label();
+        Label labelEngineer = new Label();
+        Label labelTrader = new Label();
+        Label labelFighter = new Label();
+        Label labelPilot = new Label();
+        Label labelEngineerLabel = new Label();
+        Label labelTraderLabel = new Label();
+        Label labelFighterLabel = new Label();
+        Label labelPilotLabel = new Label();
         GroupBox boxFinances = new GroupBox();
-        Label lblCash = new Label();
-        Label lblDebt = new Label();
-        Label lblNetWorth = new Label();
+        Label labelCash = new Label();
+        Label labelDebt = new Label();
+        Label labelNetWorth = new Label();
         GroupBox boxNotoriety = new GroupBox();
-        Label lblPoliceLabel = new Label();
-        Label lblReputationLabel = new Label();
-        Label lblKillsLabel = new Label();
-        Label lblKills = new Label();
-        Label lblReputation = new Label();
-        Label lblRecord = new Label();
-        Label lblBountyLabel = new Label();
-        Label lblBounty = new Label();
+        Label labelPoliceLabel = new Label();
+        Label labelReputationLabel = new Label();
+        Label labelKillsLabel = new Label();
+        Label labelKills = new Label();
+        Label labelReputation = new Label();
+        Label labelRecord = new Label();
+        Label labelBountyLabel = new Label();
+        Label labelBounty = new Label();
         boxSkills.SuspendLayout();
         boxFinances.SuspendLayout();
         boxNotoriety.SuspendLayout();
         SuspendLayout();
-        // lblNameLabel
-        lblNameLabel.setAutoSize(true);
-        lblNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblNameLabel.setLocation(new Point(8, 8));
-        lblNameLabel.setName("lblNameLabel");
-        lblNameLabel.setSize(new FormSize(39, 16));
-        lblNameLabel.setTabIndex(2);
-        lblNameLabel.setText("Name:");
-        // lblName
-        lblName.setLocation(new Point(69, 8));
-        lblName.setName("lblName");
-        lblName.setSize(new FormSize(155, 13));
-        lblName.setTabIndex(4);
-        lblName.setText("XXXXXXXXXXXXXXXXXX");
-        // lblDifficulty
-        lblDifficulty.setLocation(new Point(69, 24));
-        lblDifficulty.setName("lblDifficulty");
-        lblDifficulty.setSize(new FormSize(58, 13));
-        lblDifficulty.setTabIndex(5);
-        lblDifficulty.setText("Impossible");
+        // labelNameLabel
+        labelNameLabel.setAutoSize(true);
+        labelNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelNameLabel.setLocation(new Point(8, 8));
+        labelNameLabel.setName("labelNameLabel");
+        labelNameLabel.setSize(new FormSize(39, 16));
+        labelNameLabel.setTabIndex(2);
+        labelNameLabel.setText("Name:");
+        // labelName
+        labelName.setLocation(new Point(69, 8));
+        labelName.setName("labelName");
+        labelName.setSize(new FormSize(155, 13));
+        labelName.setTabIndex(4);
+        labelName.setText("XXXXXXXXXXXXXXXXXX");
+        // labelDifficulty
+        labelDifficulty.setLocation(new Point(69, 24));
+        labelDifficulty.setName("labelDifficulty");
+        labelDifficulty.setSize(new FormSize(58, 13));
+        labelDifficulty.setTabIndex(5);
+        labelDifficulty.setText("Impossible");
         // buttonClose
         buttonClose.setDialogResult(DialogResult.Cancel);
         buttonClose.setLocation(new Point(-32, -32));
@@ -78,218 +78,218 @@ public class FormViewCommander extends wfForm {
         buttonClose.setTabIndex(32);
         buttonClose.setTabStop(false);
         buttonClose.setText("X");
-        // lblTimeLabel
-        lblTimeLabel.setAutoSize(true);
-        lblTimeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblTimeLabel.setLocation(new Point(8, 40));
-        lblTimeLabel.setName("lblTimeLabel");
-        lblTimeLabel.setSize(new FormSize(34, 16));
-        lblTimeLabel.setTabIndex(37);
-        lblTimeLabel.setText("Time:");
-        // lblCashLabel
-        lblCashLabel.setAutoSize(true);
-        lblCashLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblCashLabel.setLocation(new Point(8, 16));
-        lblCashLabel.setName("lblCashLabel");
-        lblCashLabel.setSize(new FormSize(35, 16));
-        lblCashLabel.setTabIndex(38);
-        lblCashLabel.setText("Cash:");
-        // lblDebtLabel
-        lblDebtLabel.setAutoSize(true);
-        lblDebtLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblDebtLabel.setLocation(new Point(8, 32));
-        lblDebtLabel.setName("lblDebtLabel");
-        lblDebtLabel.setSize(new FormSize(32, 16));
-        lblDebtLabel.setTabIndex(39);
-        lblDebtLabel.setText("Debt:");
-        // lblNetWorthLabel
-        lblNetWorthLabel.setAutoSize(true);
-        lblNetWorthLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblNetWorthLabel.setLocation(new Point(8, 48));
-        lblNetWorthLabel.setName("lblNetWorthLabel");
-        lblNetWorthLabel.setSize(new FormSize(60, 16));
-        lblNetWorthLabel.setTabIndex(40);
-        lblNetWorthLabel.setText("Net Worth:");
-        // lblDifficultyLabel
-        lblDifficultyLabel.setAutoSize(true);
-        lblDifficultyLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblDifficultyLabel.setLocation(new Point(8, 24));
-        lblDifficultyLabel.setName("lblDifficultyLabel");
-        lblDifficultyLabel.setSize(new FormSize(53, 16));
-        lblDifficultyLabel.setTabIndex(43);
-        lblDifficultyLabel.setText("Difficulty:");
-        // lblTime
-        lblTime.setLocation(new Point(69, 40));
-        lblTime.setName("lblTime");
-        lblTime.setSize(new FormSize(66, 13));
-        lblTime.setTabIndex(44);
-        lblTime.setText("88,888 days");
+        // labelTimeLabel
+        labelTimeLabel.setAutoSize(true);
+        labelTimeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelTimeLabel.setLocation(new Point(8, 40));
+        labelTimeLabel.setName("labelTimeLabel");
+        labelTimeLabel.setSize(new FormSize(34, 16));
+        labelTimeLabel.setTabIndex(37);
+        labelTimeLabel.setText("Time:");
+        // labelCashLabel
+        labelCashLabel.setAutoSize(true);
+        labelCashLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelCashLabel.setLocation(new Point(8, 16));
+        labelCashLabel.setName("labelCashLabel");
+        labelCashLabel.setSize(new FormSize(35, 16));
+        labelCashLabel.setTabIndex(38);
+        labelCashLabel.setText("Cash:");
+        // labelDebtLabel
+        labelDebtLabel.setAutoSize(true);
+        labelDebtLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelDebtLabel.setLocation(new Point(8, 32));
+        labelDebtLabel.setName("labelDebtLabel");
+        labelDebtLabel.setSize(new FormSize(32, 16));
+        labelDebtLabel.setTabIndex(39);
+        labelDebtLabel.setText("Debt:");
+        // labelNetWorthLabel
+        labelNetWorthLabel.setAutoSize(true);
+        labelNetWorthLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelNetWorthLabel.setLocation(new Point(8, 48));
+        labelNetWorthLabel.setName("labelNetWorthLabel");
+        labelNetWorthLabel.setSize(new FormSize(60, 16));
+        labelNetWorthLabel.setTabIndex(40);
+        labelNetWorthLabel.setText("Net Worth:");
+        // labelDifficultyLabel
+        labelDifficultyLabel.setAutoSize(true);
+        labelDifficultyLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelDifficultyLabel.setLocation(new Point(8, 24));
+        labelDifficultyLabel.setName("labelDifficultyLabel");
+        labelDifficultyLabel.setSize(new FormSize(53, 16));
+        labelDifficultyLabel.setTabIndex(43);
+        labelDifficultyLabel.setText("Difficulty:");
+        // labelTime
+        labelTime.setLocation(new Point(69, 40));
+        labelTime.setName("labelTime");
+        labelTime.setSize(new FormSize(66, 13));
+        labelTime.setTabIndex(44);
+        labelTime.setText("88,888 days");
         // boxSkills
-        boxSkills.Controls.addAll(lblEngineer, lblTrader, lblFighter, lblPilot, lblEngineerLabel, lblTraderLabel, lblFighterLabel, lblPilotLabel);
+        boxSkills.Controls.addAll(labelEngineer, labelTrader, labelFighter, labelPilot, labelEngineerLabel, labelTraderLabel, labelFighterLabel, labelPilotLabel);
         boxSkills.setLocation(new Point(8, 64));
         boxSkills.setName("boxSkills");
         boxSkills.setSize(new FormSize(216, 56));
         boxSkills.setTabIndex(49);
         boxSkills.setTabStop(false);
         boxSkills.setText("Skills");
-        // lblEngineer
-        lblEngineer.setLocation(new Point(167, 32));
-        lblEngineer.setName("lblEngineer");
-        lblEngineer.setSize(new FormSize(40, 13));
-        lblEngineer.setTabIndex(56);
-        lblEngineer.setText("88 (88)");
-        // lblTrader
-        lblTrader.setLocation(new Point(58, 32));
-        lblTrader.setName("lblTrader");
-        lblTrader.setSize(new FormSize(40, 13));
-        lblTrader.setTabIndex(55);
-        lblTrader.setText("88 (88)");
-        // lblFighter
-        lblFighter.setLocation(new Point(167, 16));
-        lblFighter.setName("lblFighter");
-        lblFighter.setSize(new FormSize(40, 13));
-        lblFighter.setTabIndex(54);
-        lblFighter.setText("88 (88)");
-        // lblPilot
-        lblPilot.setLocation(new Point(58, 16));
-        lblPilot.setName("lblPilot");
-        lblPilot.setSize(new FormSize(40, 13));
-        lblPilot.setTabIndex(53);
-        lblPilot.setText("88 (88)");
-        // lblEngineerLabel
-        lblEngineerLabel.setAutoSize(true);
-        lblEngineerLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblEngineerLabel.setLocation(new Point(104, 32));
-        lblEngineerLabel.setName("lblEngineerLabel");
-        lblEngineerLabel.setSize(new FormSize(55, 16));
-        lblEngineerLabel.setTabIndex(52);
-        lblEngineerLabel.setText("Engineer:");
-        // lblTraderLabel
-        lblTraderLabel.setAutoSize(true);
-        lblTraderLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblTraderLabel.setLocation(new Point(8, 32));
-        lblTraderLabel.setName("lblTraderLabel");
-        lblTraderLabel.setSize(new FormSize(42, 16));
-        lblTraderLabel.setTabIndex(51);
-        lblTraderLabel.setText("Trader:");
-        // lblFighterLabel
-        lblFighterLabel.setAutoSize(true);
-        lblFighterLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblFighterLabel.setLocation(new Point(104, 16));
-        lblFighterLabel.setName("lblFighterLabel");
-        lblFighterLabel.setSize(new FormSize(44, 16));
-        lblFighterLabel.setTabIndex(50);
-        lblFighterLabel.setText("Fighter:");
-        // lblPilotLabel
-        lblPilotLabel.setAutoSize(true);
-        lblPilotLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblPilotLabel.setLocation(new Point(8, 16));
-        lblPilotLabel.setName("lblPilotLabel");
-        lblPilotLabel.setSize(new FormSize(31, 16));
-        lblPilotLabel.setTabIndex(49);
-        lblPilotLabel.setText("Pilot:");
+        // labelEngineer
+        labelEngineer.setLocation(new Point(167, 32));
+        labelEngineer.setName("labelEngineer");
+        labelEngineer.setSize(new FormSize(40, 13));
+        labelEngineer.setTabIndex(56);
+        labelEngineer.setText("88 (88)");
+        // labelTrader
+        labelTrader.setLocation(new Point(58, 32));
+        labelTrader.setName("labelTrader");
+        labelTrader.setSize(new FormSize(40, 13));
+        labelTrader.setTabIndex(55);
+        labelTrader.setText("88 (88)");
+        // labelFighter
+        labelFighter.setLocation(new Point(167, 16));
+        labelFighter.setName("labelFighter");
+        labelFighter.setSize(new FormSize(40, 13));
+        labelFighter.setTabIndex(54);
+        labelFighter.setText("88 (88)");
+        // labelPilot
+        labelPilot.setLocation(new Point(58, 16));
+        labelPilot.setName("labelPilot");
+        labelPilot.setSize(new FormSize(40, 13));
+        labelPilot.setTabIndex(53);
+        labelPilot.setText("88 (88)");
+        // labelEngineerLabel
+        labelEngineerLabel.setAutoSize(true);
+        labelEngineerLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelEngineerLabel.setLocation(new Point(104, 32));
+        labelEngineerLabel.setName("labelEngineerLabel");
+        labelEngineerLabel.setSize(new FormSize(55, 16));
+        labelEngineerLabel.setTabIndex(52);
+        labelEngineerLabel.setText("Engineer:");
+        // labelTraderLabel
+        labelTraderLabel.setAutoSize(true);
+        labelTraderLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelTraderLabel.setLocation(new Point(8, 32));
+        labelTraderLabel.setName("labelTraderLabel");
+        labelTraderLabel.setSize(new FormSize(42, 16));
+        labelTraderLabel.setTabIndex(51);
+        labelTraderLabel.setText("Trader:");
+        // labelFighterLabel
+        labelFighterLabel.setAutoSize(true);
+        labelFighterLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelFighterLabel.setLocation(new Point(104, 16));
+        labelFighterLabel.setName("labelFighterLabel");
+        labelFighterLabel.setSize(new FormSize(44, 16));
+        labelFighterLabel.setTabIndex(50);
+        labelFighterLabel.setText("Fighter:");
+        // labelPilotLabel
+        labelPilotLabel.setAutoSize(true);
+        labelPilotLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelPilotLabel.setLocation(new Point(8, 16));
+        labelPilotLabel.setName("labelPilotLabel");
+        labelPilotLabel.setSize(new FormSize(31, 16));
+        labelPilotLabel.setTabIndex(49);
+        labelPilotLabel.setText("Pilot:");
         // boxFinances
-        boxFinances.Controls.addAll(lblCash, lblDebt, lblNetWorth, lblNetWorthLabel, lblCashLabel, lblDebtLabel);
+        boxFinances.Controls.addAll(labelCash, labelDebt, labelNetWorth, labelNetWorthLabel, labelCashLabel, labelDebtLabel);
         boxFinances.setLocation(new Point(8, 128));
         boxFinances.setName("boxFinances");
         boxFinances.setSize(new FormSize(216, 72));
         boxFinances.setTabIndex(50);
         boxFinances.setTabStop(false);
         boxFinances.setText("Finances");
-        // lblCash
-        lblCash.setLocation(new Point(104, 16));
-        lblCash.setName("lblCash");
-        lblCash.setSize(new FormSize(70, 13));
-        lblCash.setTabIndex(43);
-        lblCash.setText("8,888,888 cr.");
-        lblCash.TextAlign = ContentAlignment.TopRight;
-        // lblDebt
-        lblDebt.setLocation(new Point(104, 32));
-        lblDebt.setName("lblDebt");
-        lblDebt.setSize(new FormSize(70, 13));
-        lblDebt.setTabIndex(42);
-        lblDebt.setText("8,888,888 cr.");
-        lblDebt.TextAlign = ContentAlignment.TopRight;
-        // lblNetWorth
-        lblNetWorth.setLocation(new Point(104, 48));
-        lblNetWorth.setName("lblNetWorth");
-        lblNetWorth.setSize(new FormSize(70, 13));
-        lblNetWorth.setTabIndex(41);
-        lblNetWorth.setText("8,888,888 cr.");
-        lblNetWorth.TextAlign = ContentAlignment.TopRight;
+        // labelCash
+        labelCash.setLocation(new Point(104, 16));
+        labelCash.setName("labelCash");
+        labelCash.setSize(new FormSize(70, 13));
+        labelCash.setTabIndex(43);
+        labelCash.setText("8,888,888 cr.");
+        labelCash.TextAlign = ContentAlignment.TopRight;
+        // labelDebt
+        labelDebt.setLocation(new Point(104, 32));
+        labelDebt.setName("labelDebt");
+        labelDebt.setSize(new FormSize(70, 13));
+        labelDebt.setTabIndex(42);
+        labelDebt.setText("8,888,888 cr.");
+        labelDebt.TextAlign = ContentAlignment.TopRight;
+        // labelNetWorth
+        labelNetWorth.setLocation(new Point(104, 48));
+        labelNetWorth.setName("labelNetWorth");
+        labelNetWorth.setSize(new FormSize(70, 13));
+        labelNetWorth.setTabIndex(41);
+        labelNetWorth.setText("8,888,888 cr.");
+        labelNetWorth.TextAlign = ContentAlignment.TopRight;
         // boxNotoriety
-        boxNotoriety.Controls.addAll(lblBountyLabel, lblBounty, lblPoliceLabel, lblReputationLabel, lblKillsLabel, lblKills, lblReputation, lblRecord);
+        boxNotoriety.Controls.addAll(labelBountyLabel, labelBounty, labelPoliceLabel, labelReputationLabel, labelKillsLabel, labelKills, labelReputation, labelRecord);
         boxNotoriety.setLocation(new Point(8, 208));
         boxNotoriety.setName("boxNotoriety");
         boxNotoriety.setSize(new FormSize(216, 88));
         boxNotoriety.setTabIndex(51);
         boxNotoriety.setTabStop(false);
         boxNotoriety.setText("Notoriety");
-        // lblPoliceLabel
-        lblPoliceLabel.setAutoSize(true);
-        lblPoliceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblPoliceLabel.setLocation(new Point(8, 48));
-        lblPoliceLabel.setName("lblPoliceLabel");
-        lblPoliceLabel.setSize(new FormSize(81, 16));
-        lblPoliceLabel.setTabIndex(46);
-        lblPoliceLabel.setText("Police Record:");
-        // lblReputationLabel
-        lblReputationLabel.setAutoSize(true);
-        lblReputationLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblReputationLabel.setLocation(new Point(8, 32));
-        lblReputationLabel.setName("lblReputationLabel");
-        lblReputationLabel.setSize(new FormSize(65, 16));
-        lblReputationLabel.setTabIndex(45);
-        lblReputationLabel.setText("Reputation:");
-        // lblKillsLabel
-        lblKillsLabel.setAutoSize(true);
-        lblKillsLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblKillsLabel.setLocation(new Point(8, 16));
-        lblKillsLabel.setName("lblKillsLabel");
-        lblKillsLabel.setSize(new FormSize(30, 16));
-        lblKillsLabel.setTabIndex(44);
-        lblKillsLabel.setText("Kills:");
-        // lblKills
-        lblKills.setLocation(new Point(104, 16));
-        lblKills.setName("lblKills");
-        lblKills.setSize(new FormSize(33, 13));
-        lblKills.setTabIndex(43);
-        lblKills.setText("8,888");
-        // lblReputation
-        lblReputation.setLocation(new Point(104, 32));
-        lblReputation.setName("lblReputation");
-        lblReputation.setSize(new FormSize(88, 13));
-        lblReputation.setTabIndex(42);
-        lblReputation.setText("Mostly Harmless");
-        // lblRecord
-        lblRecord.setLocation(new Point(104, 48));
-        lblRecord.setName("lblRecord");
-        lblRecord.setSize(new FormSize(63, 13));
-        lblRecord.setTabIndex(41);
-        lblRecord.setText("Psychopath");
-        // lblBountyLabel
-        lblBountyLabel.setAutoSize(true);
-        lblBountyLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblBountyLabel.setLocation(new Point(8, 64));
-        lblBountyLabel.setName("lblBountyLabel");
-        lblBountyLabel.setSize(new FormSize(84, 16));
-        lblBountyLabel.setTabIndex(48);
-        lblBountyLabel.setText("Bounty offered:");
-        lblBountyLabel.setVisible(false);
-        // lblBounty
-        lblBounty.setLocation(new Point(104, 64));
-        lblBounty.setName("lblBounty");
-        lblBounty.setSize(new FormSize(72, 13));
-        lblBounty.setTabIndex(47);
-        lblBounty.setText("8,888,888 cr.");
-        lblBounty.setVisible(false);
+        // labelPoliceLabel
+        labelPoliceLabel.setAutoSize(true);
+        labelPoliceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelPoliceLabel.setLocation(new Point(8, 48));
+        labelPoliceLabel.setName("labelPoliceLabel");
+        labelPoliceLabel.setSize(new FormSize(81, 16));
+        labelPoliceLabel.setTabIndex(46);
+        labelPoliceLabel.setText("Police Record:");
+        // labelReputationLabel
+        labelReputationLabel.setAutoSize(true);
+        labelReputationLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelReputationLabel.setLocation(new Point(8, 32));
+        labelReputationLabel.setName("labelReputationLabel");
+        labelReputationLabel.setSize(new FormSize(65, 16));
+        labelReputationLabel.setTabIndex(45);
+        labelReputationLabel.setText("Reputation:");
+        // labelKillsLabel
+        labelKillsLabel.setAutoSize(true);
+        labelKillsLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelKillsLabel.setLocation(new Point(8, 16));
+        labelKillsLabel.setName("labelKillsLabel");
+        labelKillsLabel.setSize(new FormSize(30, 16));
+        labelKillsLabel.setTabIndex(44);
+        labelKillsLabel.setText("Kills:");
+        // labelKills
+        labelKills.setLocation(new Point(104, 16));
+        labelKills.setName("labelKills");
+        labelKills.setSize(new FormSize(33, 13));
+        labelKills.setTabIndex(43);
+        labelKills.setText("8,888");
+        // labelReputation
+        labelReputation.setLocation(new Point(104, 32));
+        labelReputation.setName("labelReputation");
+        labelReputation.setSize(new FormSize(88, 13));
+        labelReputation.setTabIndex(42);
+        labelReputation.setText("Mostly Harmless");
+        // labelRecord
+        labelRecord.setLocation(new Point(104, 48));
+        labelRecord.setName("labelRecord");
+        labelRecord.setSize(new FormSize(63, 13));
+        labelRecord.setTabIndex(41);
+        labelRecord.setText("Psychopath");
+        // labelBountyLabel
+        labelBountyLabel.setAutoSize(true);
+        labelBountyLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelBountyLabel.setLocation(new Point(8, 64));
+        labelBountyLabel.setName("labelBountyLabel");
+        labelBountyLabel.setSize(new FormSize(84, 16));
+        labelBountyLabel.setTabIndex(48);
+        labelBountyLabel.setText("Bounty offered:");
+        labelBountyLabel.setVisible(false);
+        // labelBounty
+        labelBounty.setLocation(new Point(104, 64));
+        labelBounty.setName("labelBounty");
+        labelBounty.setSize(new FormSize(72, 13));
+        labelBounty.setTabIndex(47);
+        labelBounty.setText("8,888,888 cr.");
+        labelBounty.setVisible(false);
         // FormViewCommander
         setAutoScaleBaseSize(new FormSize(5, 13));
         setCancelButton(buttonClose);
         setClientSize(new FormSize(232, 304));
-        Controls.addAll(Arrays.asList(boxNotoriety, boxFinances, boxSkills, lblTime,
-                lblDifficultyLabel, lblTimeLabel, lblNameLabel, buttonClose, lblDifficulty,
-                lblName));
+        Controls.addAll(Arrays.asList(boxNotoriety, boxFinances, boxSkills, labelTime,
+                labelDifficultyLabel, labelTimeLabel, labelNameLabel, buttonClose, labelDifficulty,
+                labelName));
         setFormBorderStyle(FormBorderStyle.FixedDialog);
         setMaximizeBox(false);
         setMinimizeBox(false);
@@ -301,35 +301,35 @@ public class FormViewCommander extends wfForm {
         boxFinances.ResumeLayout(false);
         boxNotoriety.ResumeLayout(false);
         ResumeLayout(false);
-        Game game = Game.CurrentGame();
-        Commander cmdr = game.Commander();
-        lblName.setText(cmdr.Name());
-        lblDifficulty.setText(Strings.DifficultyLevels[game.Difficulty().CastToInt()]);
-        lblTime.setText(Functions.Multiples(cmdr.getDays(), Strings.TimeUnit));
-        lblPilot.setText(cmdr.Pilot() + " (" + cmdr.getShip().Pilot() + ")");
-        lblFighter.setText(cmdr.Fighter() + " (" + cmdr.getShip().Fighter() + ")");
-        lblTrader.setText(cmdr.Trader() + " (" + cmdr.getShip().Trader() + ")");
-        lblEngineer.setText(cmdr.Engineer() + " (" + cmdr.getShip().Engineer() + ")");
-        lblCash.setText(Functions.FormatMoney(cmdr.getCash()));
-        lblDebt.setText(Functions.FormatMoney(cmdr.getDebt()));
-        lblNetWorth.setText(Functions.FormatMoney(cmdr.Worth()));
-        lblKills.setText(Functions.FormatNumber(cmdr.getKillsPirate() + cmdr.getKillsPolice() + cmdr.getKillsTrader()));
-        lblRecord.setText(PoliceRecord.GetPoliceRecordFromScore(cmdr.getPoliceRecordScore()).Name());
-        lblReputation.setText(Reputation.GetReputationFromScore(cmdr.getReputationScore()).Name());
-        int score = cmdr.getPoliceRecordScore();
+        Game game = Game.getCurrentGame();
+        Commander commander = game.Commander();
+        labelName.setText(commander.Name());
+        labelDifficulty.setText(Strings.DifficultyLevels[game.Difficulty().CastToInt()]);
+        labelTime.setText(Functions.Multiples(commander.getDays(), Strings.TimeUnit));
+        labelPilot.setText(commander.Pilot() + " (" + commander.getShip().Pilot() + ")");
+        labelFighter.setText(commander.Fighter() + " (" + commander.getShip().Fighter() + ")");
+        labelTrader.setText(commander.Trader() + " (" + commander.getShip().Trader() + ")");
+        labelEngineer.setText(commander.Engineer() + " (" + commander.getShip().Engineer() + ")");
+        labelCash.setText(Functions.FormatMoney(commander.getCash()));
+        labelDebt.setText(Functions.FormatMoney(commander.getDebt()));
+        labelNetWorth.setText(Functions.FormatMoney(commander.Worth()));
+        labelKills.setText(Functions.FormatNumber(commander.getKillsPirate() + commander.getKillsPolice() + commander.getKillsTrader()));
+        labelRecord.setText(PoliceRecord.GetPoliceRecordFromScore(commander.getPoliceRecordScore()).Name());
+        labelReputation.setText(Reputation.GetReputationFromScore(commander.getReputationScore()).Name());
+        int score = commander.getPoliceRecordScore();
         if (score <= Constants.PoliceRecordScoreCrook) {
-            lblBountyLabel.setVisible(true);
-            lblBountyLabel.setText("Bounty offered:");
-            lblBounty.setVisible(true);
-            lblBounty.setText(Functions.FormatMoney(-1000 * score));
+            labelBountyLabel.setVisible(true);
+            labelBountyLabel.setText("Bounty offered:");
+            labelBounty.setVisible(true);
+            labelBounty.setText(Functions.FormatMoney(-1000 * score));
         } else if (score >= Constants.PoliceRecordScoreTrusted) {
-            lblBountyLabel.setVisible(true);
-            lblBountyLabel.setText("Angry kingpins:");
-            lblBounty.setVisible(true);
-            lblBounty.setText(Functions.FormatNumber(score / 5));
+            labelBountyLabel.setVisible(true);
+            labelBountyLabel.setText("Angry kingpins:");
+            labelBounty.setVisible(true);
+            labelBounty.setText(Functions.FormatNumber(score / 5));
         } else {
-            lblBountyLabel.setVisible(false);
-            lblBounty.setVisible(false);
+            labelBountyLabel.setVisible(false);
+            labelBounty.setVisible(false);
         }
     }
 

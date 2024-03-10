@@ -1,6 +1,6 @@
 package org.winforms;
 
-
+// TODO documentation of usage
 public class ToolTip {
     public ToolTip(IContainer components) {
     }

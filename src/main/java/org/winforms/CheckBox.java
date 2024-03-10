@@ -11,7 +11,7 @@ public class CheckBox extends wfControl {
     }
 
     public JCheckBox asJCheckBox() {
-        return ((JCheckBox) swingVersion);
+        return ((JCheckBox) swingComponent);
     }
 
     public String getText() {
@@ -30,7 +30,7 @@ public class CheckBox extends wfControl {
         asJCheckBox().setSelected(checked);
     }
 
-    public void setCheckedChanged(final EventHandler<Object, EventArgs> handler) {
+    public void setCheckedChanged(final EventHandler<Object, EventData> handler) {
         asJCheckBox().addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {

@@ -1,6 +1,6 @@
 package org.winforms;
 
-
+// TODO use a standard Rectangle implementation instead
 public class Rectangle {
     public int X, Y, Width, Height;
 

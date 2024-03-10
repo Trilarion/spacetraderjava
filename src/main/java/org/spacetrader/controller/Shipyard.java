@@ -4,10 +4,11 @@ import org.spacetrader.controller.enums.ShipyardId;
 import org.spacetrader.controller.enums.ShipyardSkill;
 import org.spacetrader.model.ship.ShipSize;
 import org.spacetrader.model.ship.ShipType;
+import org.spacetrader.ui.Strings;
 
 import java.util.ArrayList;
 
-
+// TODo part of model
 // Represents a shipyard orbiting a solar system in the universe.
 // In a shipyard, the player can design his own ship and have it constructed, for a fee.
 public class Shipyard {
@@ -198,7 +199,7 @@ public class Shipyard {
     }
 
     public int TradeIn() {
-        return Game.CurrentGame().Commander().getShip().Worth(false);
+        return Game.getCurrentGame().Commander().getShip().Worth(false);
     }
 
     public int UnitsCrew() {

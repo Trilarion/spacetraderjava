@@ -1,14 +1,14 @@
 package org.spacetrader.controller;
 
 import org.spacetrader.controller.enums.SpaceTraderEnum;
-import org.spacetrader.model.ship.equip.Gadget;
-import org.spacetrader.model.ship.equip.Shield;
-import org.spacetrader.model.ship.equip.Weapon;
+import org.spacetrader.model.ship.equipment.Gadget;
+import org.spacetrader.model.ship.equipment.Shield;
+import org.spacetrader.model.ship.equipment.Weapon;
 import org.spacetrader.util.ArrayList;
 import org.spacetrader.util.DWIM;
 import org.spacetrader.util.Hashtable;
 
-
+// TODO part of io?
 abstract public class SerializableObject {
 
     public SerializableObject() {
@@ -18,7 +18,7 @@ abstract public class SerializableObject {
     }
 
     /**
-     * Types currently supported:<ul>
+     * Types currentrently supported:<ul>
      * <li>CrewMember</li>
      * <li>Gadget</li>
      * <li>HighScoreRecord</li>
@@ -119,8 +119,8 @@ abstract public class SerializableObject {
         return list;
     }
 
-
-    public static <U> U GetValueFromHash(Hashtable hash, String key, Class<U> requstedType) {
+    // TODO is this a good way? lots of casting, what about more direct ways instead?
+    public static <U> U GetValueFromHash(Hashtable hash, String key, Class<U> requestedType) {
         if (!hash.containsKey(key)) {
             return null;
         }

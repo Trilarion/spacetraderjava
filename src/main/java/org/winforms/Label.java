@@ -5,6 +5,7 @@ import org.winforms.enums.ContentAlignment;
 import javax.swing.*;
 
 
+// TODO documentation
 public class Label extends wfControl {
     private static final String NEWLINE_LITERAL = "\n";
     private static final String END = "</HTML>";
@@ -19,7 +20,7 @@ public class Label extends wfControl {
     }
 
     public String getText() {
-        String text = ((JLabel) swingVersion).getText();
+        String text = ((JLabel) swingComponent).getText();
         if (convertedToHtml) {
             text = text.substring(START.length(), text.length() - END.length());
             text = text.replaceAll(NEWLINE, NEWLINE_LITERAL);
@@ -34,10 +35,10 @@ public class Label extends wfControl {
         } else {
             convertedToHtml = false;
         }
-        ((JLabel) swingVersion).setText(text);
+        ((JLabel) swingComponent).setText(text);
     }
 
     public void setImage(wfImage image) {
-        ((JLabel) swingVersion).setIcon(new ImageIcon(image.asSwingImage()));
+        ((JLabel) swingComponent).setIcon(new ImageIcon(image.asSwingImage()));
     }
 }

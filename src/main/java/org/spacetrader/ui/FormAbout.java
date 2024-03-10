@@ -17,10 +17,10 @@ public class FormAbout extends wfForm {
     public FormAbout() {
         ComponentResourceManager resources = new ComponentResourceManager(FormAbout.class);
         Button buttonClose = new Button();
-        Label lblTitle = new Label();
-        Label lblAbout = new Label();
-        PictureBox picLogo = new PictureBox();
-        ((ISupportInitialize) (picLogo)).BeginInit();
+        Label labelTitle = new Label();
+        Label labelAbout = new Label();
+        PictureBox pictureLogo = new PictureBox();
+        ((ISupportInitialize) (pictureLogo)).beginInit();
         SuspendLayout();
         // buttonClose
         buttonClose.setDialogResult(DialogResult.Cancel);
@@ -29,31 +29,31 @@ public class FormAbout extends wfForm {
         buttonClose.setTabIndex(32);
         buttonClose.setTabStop(false);
         buttonClose.setText("X");
-        // lblTitle
-        lblTitle.setAutoSize(true);
-        lblTitle.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblTitle.setLocation(new Point(172, 8));
-        lblTitle.setSize(new FormSize(187, 13));
-        lblTitle.setTabIndex(33);
-        lblTitle.setText("Space Trader for Windows 2.01");
-        // lblAbout
-        lblAbout.setLocation(new Point(172, 32));
-        lblAbout.setSize(new FormSize(272, 160));
-        lblAbout.setTabIndex(34);
-        lblAbout.setText(resources.GetString("lblAbout.Text"));
-        // picLogo
-        picLogo.setImage(((wfImage) (resources.GetObject("picLogo.Image"))));
-        picLogo.setLocation(new Point(8, 8));
-        picLogo.setSize(new FormSize(160, 160));
-        picLogo.setTabIndex(35);
-        picLogo.setTabStop(false);
+        // labelTitle
+        labelTitle.setAutoSize(true);
+        labelTitle.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelTitle.setLocation(new Point(172, 8));
+        labelTitle.setSize(new FormSize(187, 13));
+        labelTitle.setTabIndex(33);
+        labelTitle.setText("Space Trader for Windows 2.01");
+        // labelAbout
+        labelAbout.setLocation(new Point(172, 32));
+        labelAbout.setSize(new FormSize(272, 160));
+        labelAbout.setTabIndex(34);
+        labelAbout.setText(resources.GetString("labelAbout.Text"));
+        // pictureLogo
+        pictureLogo.setImage(((wfImage) (resources.GetObject("pictureLogo.Image"))));
+        pictureLogo.setLocation(new Point(8, 8));
+        pictureLogo.setSize(new FormSize(160, 160));
+        pictureLogo.setTabIndex(35);
+        pictureLogo.setTabStop(false);
         // FormAbout
         setAutoScaleBaseSize(new FormSize(5, 13));
         setCancelButton(buttonClose);
         setClientSize(new FormSize(446, 191));
-        Controls.add(picLogo);
-        Controls.add(lblAbout);
-        Controls.add(lblTitle);
+        Controls.add(pictureLogo);
+        Controls.add(labelAbout);
+        Controls.add(labelTitle);
         Controls.add(buttonClose);
         setFormBorderStyle(FormBorderStyle.FixedDialog);
         setMaximizeBox(false);
@@ -61,7 +61,7 @@ public class FormAbout extends wfForm {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("About Space Trader");
-        ((ISupportInitialize) (picLogo)).EndInit();
+        ((ISupportInitialize) (pictureLogo)).endInit();
         ResumeLayout(false);
         PerformLayout();
     }

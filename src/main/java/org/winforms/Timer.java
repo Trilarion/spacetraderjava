@@ -3,9 +3,10 @@ package org.winforms;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+// TODO documentation of usage
 public class Timer {
-    public EventHandler<Object, EventArgs> Tick;
+
+    public EventHandler<Object, EventData> Tick;
     private javax.swing.Timer timer = new javax.swing.Timer(0, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent arg0) {

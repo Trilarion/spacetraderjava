@@ -16,12 +16,12 @@ import java.util.Arrays;
 
 
 public class FormViewQuests extends wfForm {
-    private final Game game = Game.CurrentGame();
-    private LinkLabel lblQuests;
+    private final Game game = Game.getCurrentGame();
+    private LinkLabel labelQuests;
 
     public FormViewQuests() {
         Button buttonClose = new Button();
-        lblQuests = new LinkLabel();
+        labelQuests = new LinkLabel();
         SuspendLayout();
         // buttonClose
         buttonClose.setDialogResult(DialogResult.Cancel);
@@ -31,13 +31,13 @@ public class FormViewQuests extends wfForm {
         buttonClose.setTabIndex(32);
         buttonClose.setTabStop(false);
         buttonClose.setText("X");
-        // lblQuests
-        lblQuests.LinkArea = new LinkArea(0, 0);
-        lblQuests.setLocation(new Point(8, 8));
-        lblQuests.setName("lblQuests");
-        lblQuests.setSize(new FormSize(368, 312));
-        lblQuests.setTabIndex(44);
-        lblQuests.setText("Kill the space monster at Acamar.\n\n"
+        // labelQuests
+        labelQuests.LinkArea = new LinkArea(0, 0);
+        labelQuests.setLocation(new Point(8, 8));
+        labelQuests.setName("labelQuests");
+        labelQuests.setSize(new FormSize(368, 312));
+        labelQuests.setTabIndex(44);
+        labelQuests.setText("Kill the space monster at Acamar.\n\n"
                 + "Get your lightning shield at Zalkon.\n\n"
                 + "Deliver antidote to Japori.\n\n"
                 + "Deliver the alien artifact to Professor Berger at some hi-tech system.\n\n"
@@ -49,17 +49,17 @@ public class FormViewQuests extends wfForm {
                 + "Smuggle Jonathan Wild to Kravat. Wild is getting impatient, and will no longer aid your crew along the way.\n\n"
                 + "Get rid of those pesky tribbles.\n\n"
                 + "Claim your moon at Utopia.");
-        lblQuests.LinkClicked = new EventHandler<>() {
+        labelQuests.LinkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventArgs e) {
-                lblQuests_LinkClicked(sender, e);
+            public void handle(Object sender, LinkLabelLinkClickedEventData e) {
+                labelQuests_LinkClicked(sender, e);
             }
         };
         // FormViewQuests
         setAutoScaleBaseSize(new FormSize(5, 13));
         setCancelButton(buttonClose);
         setClientSize(new FormSize(378, 325));
-        Controls.addAll(Arrays.asList(buttonClose, lblQuests));
+        Controls.addAll(Arrays.asList(buttonClose, labelQuests));
         setFormBorderStyle(FormBorderStyle.FixedDialog);
         setMaximizeBox(false);
         setMinimizeBox(false);
@@ -190,22 +190,22 @@ public class FormViewQuests extends wfForm {
     private void UpdateAll() {
         String[] quests = GetQuestStrings();
         if (quests.length == 0) {
-            lblQuests.setText(Strings.QuestNone);
+            labelQuests.setText(Strings.QuestNone);
         } else {
-            lblQuests.setText(Util.StringsJoin(Strings.newline + Strings.newline, quests));
+            labelQuests.setText(Util.StringsJoin(Strings.newline + Strings.newline, quests));
             for (int i = 0; i < Strings.SystemNames.length; i++) {
                 String systemName = Strings.SystemNames[i];
                 int start = 0;
                 int index = -1;
-                while ((index = lblQuests.getText().indexOf(systemName, start)) >= 0) {
-                    lblQuests.Links.add(index, systemName.length(), systemName);
+                while ((index = labelQuests.getText().indexOf(systemName, start)) >= 0) {
+                    labelQuests.Links.add(index, systemName.length(), systemName);
                     start = index + systemName.length();
                 }
             }
         }
     }
 
-    private void lblQuests_LinkClicked(Object sender, LinkLabelLinkClickedEventArgs e) {
+    private void labelQuests_LinkClicked(Object sender, LinkLabelLinkClickedEventData e) {
         game.setSelectedSystemByName(e.Link.LinkData.toString());
         game.getParentWindow().UpdateAll();
         Close();

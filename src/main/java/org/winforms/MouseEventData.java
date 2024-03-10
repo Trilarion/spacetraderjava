@@ -3,11 +3,11 @@ package org.winforms;
 import java.awt.event.MouseEvent;
 
 
-public class MouseEventArgs extends EventArgs {
+public class MouseEventData extends EventData {
     public final MouseButtons Button;
     public final int X, Y;
 
-    public MouseEventArgs(MouseEvent e) {
+    public MouseEventData(MouseEvent e) {
         X = e.getX();
         Y = e.getY();
         Button = findMouseButton(e.getButton());

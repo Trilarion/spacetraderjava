@@ -8,14 +8,15 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+// TODO documentation
 public class ResourceManager {
+
     private static final ClassLoader classLoader = ResourceManager.class.getClassLoader();
     protected final Properties properties = new Properties();
-    private final String path;
+    private final String path;  // TODO meaning of path?
 
-    protected ResourceManager(URL url, String s) {
-        path = s;
+    protected ResourceManager(URL url, String path) {
+        this.path = path;
         try {
             properties.load(url.openStream());
         } catch (IOException ex) {

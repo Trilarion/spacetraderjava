@@ -18,20 +18,20 @@ public class FormBuyFuel extends wfForm {
     private NumericUpDown numAmount;
 
     public FormBuyFuel() {
-        Label lblQuestion = new Label();
+        Label labelQuestion = new Label();
         numAmount = new NumericUpDown();
         Button buttonOk = new Button();
         Button buttonMax = new Button();
         Button buttonNothing = new Button();
-        ((ISupportInitialize) (numAmount)).BeginInit();
+        ((ISupportInitialize) (numAmount)).beginInit();
         SuspendLayout();
-        // lblQuestion
-        lblQuestion.setAutoSize(true);
-        lblQuestion.setLocation(new Point(8, 8));
-        lblQuestion.setName("lblQuestion");
-        lblQuestion.setSize(new FormSize(211, 13));
-        lblQuestion.setTabIndex(3);
-        lblQuestion.setText("How much do you want to spend on fuel?");
+        // labelQuestion
+        labelQuestion.setAutoSize(true);
+        labelQuestion.setLocation(new Point(8, 8));
+        labelQuestion.setName("labelQuestion");
+        labelQuestion.setSize(new FormSize(211, 13));
+        labelQuestion.setTabIndex(3);
+        labelQuestion.setText("How much do you want to spend on fuel?");
         // numAmount
         numAmount.setLocation(new Point(216, 6));
         numAmount.setMaximum(999);
@@ -58,7 +58,7 @@ public class FormBuyFuel extends wfForm {
         buttonMax.setText("Max");
         buttonMax.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonMax_Click();
             }
         });
@@ -76,17 +76,17 @@ public class FormBuyFuel extends wfForm {
         setCancelButton(buttonNothing);
         setClientSize(new FormSize(270, 63));
         setControlBox(false);
-        Controls.addAll(Arrays.asList(buttonNothing, buttonMax, buttonOk, numAmount, lblQuestion));
+        Controls.addAll(Arrays.asList(buttonNothing, buttonMax, buttonOk, numAmount, labelQuestion));
         setFormBorderStyle(FormBorderStyle.FixedDialog);
         setName("FormBuyFuel");
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Buy Fuel");
-        ((ISupportInitialize) (numAmount)).EndInit();
+        ((ISupportInitialize) (numAmount)).endInit();
         ResumeLayout(false);
-        Game game = Game.CurrentGame();
-        Commander cmdr = game.Commander();
-        numAmount.setMaximum(Math.min(cmdr.getCash(), (cmdr.getShip().FuelTanks() - cmdr.getShip().getFuel()) * cmdr.getShip().getFuelCost()));
+        Game game = Game.getCurrentGame();
+        Commander commander = game.Commander();
+        numAmount.setMaximum(Math.min(commander.getCash(), (commander.getShip().FuelTanks() - commander.getShip().getFuel()) * commander.getShip().getFuelCost()));
         numAmount.setValue(numAmount.getMaximum());
     }
 

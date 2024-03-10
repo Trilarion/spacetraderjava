@@ -7,9 +7,9 @@ import org.spacetrader.controller.enums.StarSystemId;
 import org.spacetrader.model.CrewMemberId;
 import org.spacetrader.model.events.VeryRareEncounter;
 import org.spacetrader.model.ship.ShipType;
-import org.spacetrader.model.ship.equip.Gadget;
-import org.spacetrader.model.ship.equip.Shield;
-import org.spacetrader.model.ship.equip.Weapon;
+import org.spacetrader.model.ship.equipment.Gadget;
+import org.spacetrader.model.ship.equipment.Shield;
+import org.spacetrader.model.ship.equipment.Weapon;
 import org.spacetrader.ui.*;
 import org.spacetrader.util.Directory;
 import org.spacetrader.util.Hashtable;
@@ -31,11 +31,11 @@ import java.util.Arrays;
 
 public class Main extends wfWindow {
 
-    private final Label[] lblSellPrice;
-    private final Label[] lblBuyPrice;
-    private final Label[] lblTargetPrice;
-    private final Label[] lblTargetDiff;
-    private final Label[] lblTargetPct;
+    private final Label[] labelSellPrice;
+    private final Label[] labelBuyPrice;
+    private final Label[] labelTargetPrice;
+    private final Label[] labelTargetDiff;
+    private final Label[] labelTargetPct;
     private final Button[] buttonSellQty;
     private final Button[] buttonSellAll;
     private final Button[] buttonBuyQty;
@@ -66,36 +66,36 @@ public class Main extends wfWindow {
     private ImageList ilDirectionImages;
     private ImageList ilEquipmentImages;
     private ImageList ilShipImages;
-    private Label lblBuy;
-    private Label lblEquipForSale;
-    private Label lblEscapePod;
-    private Label lblFuelCost;
-    private Label lblFuelStatus;
-    private Label lblHullStatus;
-    private Label lblRepairCost;
-    private Label lblSell;
-    private Label lblShipsForSale;
-    private Label lblSystemName;
-    private Label lblSystemNameLabel;
-    private Label lblSystemPirates;
-    private Label lblSystemPolice;
-    private Label lblSystemPolSys;
-    private Label lblSystemPressure;
-    private Label lblSystemPressurePre;
-    private Label lblSystemResource;
-    private Label lblSystemSize;
-    private Label lblSystemTech;
-    private Label lblTargetDistance;
-    private Label lblTargetName;
-    private Label lblTargetOutOfRange;
-    private Label lblTargetPirates;
-    private Label lblTargetPolice;
-    private Label lblTargetPolSys;
-    private Label lblTargetResource;
-    private Label lblTargetSize;
-    private Label lblTargetTech;
-    private Label lblWormhole;
-    private Label lblWormholeLabel;
+    private Label labelBuy;
+    private Label labelEquipForSale;
+    private Label labelEscapePod;
+    private Label labelFuelCost;
+    private Label labelFuelStatus;
+    private Label labelHullStatus;
+    private Label labelRepairCost;
+    private Label labelSell;
+    private Label labelShipsForSale;
+    private Label labelSystemName;
+    private Label labelSystemNameLabel;
+    private Label labelSystemPirates;
+    private Label labelSystemPolice;
+    private Label labelSystemPolSys;
+    private Label labelSystemPressure;
+    private Label labelSystemPressurePre;
+    private Label labelSystemResource;
+    private Label labelSystemSize;
+    private Label labelSystemTech;
+    private Label labelTargetDistance;
+    private Label labelTargetName;
+    private Label labelTargetOutOfRange;
+    private Label labelTargetPirates;
+    private Label labelTargetPolice;
+    private Label labelTargetPolSys;
+    private Label labelTargetResource;
+    private Label labelTargetSize;
+    private Label labelTargetTech;
+    private Label labelWormhole;
+    private Label labelWormholeLabel;
     private MenuItem mnuGameSave;
     private MenuItem mnuGameSaveAs;
     private MenuItem mnuRetire;
@@ -105,8 +105,8 @@ public class Main extends wfWindow {
     private MenuItem mnuViewQuests;
     private MenuItem mnuViewShip;
     private OpenFileDialog dlgOpen;
-    private PictureBox picGalacticChart;
-    private PictureBox picShortRangeChart;
+    private PictureBox pictureGalacticChart;
+    private PictureBox pictureShortRangeChart;
     private SaveFileDialog dlgSave;
     private StatusBarPanel statusBarPanelBays;
     private StatusBarPanel statusBarPanelCash;
@@ -115,7 +115,7 @@ public class Main extends wfWindow {
     private ToolTip tipSpecial;
     private ToolTip tipMerc;
     private Game game = null;
-    private Commander cmdr = null;
+    private Commander commander = null;
     private String SaveGameFile = null;
     private int SaveGameDays = -1;
 
@@ -144,8 +144,8 @@ public class Main extends wfWindow {
         MenuItem mnuOptions = new MenuItem();
         SubMenu mnuHelp = new SubMenu();
         MenuItem mnuHelpAbout = new MenuItem();
-        picGalacticChart = new PictureBox();
-        picShortRangeChart = new PictureBox();
+        pictureGalacticChart = new PictureBox();
+        pictureShortRangeChart = new PictureBox();
         StatusBar statusBar = new StatusBar();
         statusBarPanelCash = new StatusBarPanel();
         statusBarPanelBays = new StatusBarPanel();
@@ -153,179 +153,179 @@ public class Main extends wfWindow {
         statusBarPanelExtra = new StatusBarPanel(StatusBarPanelAutoSize.Spring);
         GroupBox boxShortRangeChart = new GroupBox();
         GroupBox boxGalacticChart = new GroupBox();
-        lblWormhole = new Label();
-        lblWormholeLabel = new Label();
+        labelWormhole = new Label();
+        labelWormholeLabel = new Label();
         buttonJump = new Button();
         buttonFind = new Button();
         GroupBox boxTargetSystem = new GroupBox();
         buttonTrack = new Button();
         buttonNextSystem = new Button();
         buttonPrevSystem = new Button();
-        lblTargetOutOfRange = new Label();
+        labelTargetOutOfRange = new Label();
         buttonWarp = new Button();
-        lblTargetPolSys = new Label();
-        lblTargetSize = new Label();
-        lblTargetTech = new Label();
-        lblTargetDistance = new Label();
-        lblTargetPirates = new Label();
-        lblTargetPolice = new Label();
-        lblTargetResource = new Label();
-        Label lblTargetDistanceLabel = new Label();
-        Label lblTargetPiratesLabel = new Label();
-        Label lblTargetPoliceLabel = new Label();
-        Label lblTargetResourceLabel = new Label();
-        Label lblTargetGovtLabel = new Label();
-        Label lblTargetTechLabel = new Label();
-        Label lblTargetSizeLabel = new Label();
-        lblTargetName = new Label();
-        Label lblTargetNameLabel = new Label();
+        labelTargetPolSys = new Label();
+        labelTargetSize = new Label();
+        labelTargetTech = new Label();
+        labelTargetDistance = new Label();
+        labelTargetPirates = new Label();
+        labelTargetPolice = new Label();
+        labelTargetResource = new Label();
+        Label labelTargetDistanceLabel = new Label();
+        Label labelTargetPiratesLabel = new Label();
+        Label labelTargetPoliceLabel = new Label();
+        Label labelTargetResourceLabel = new Label();
+        Label labelTargetGovtLabel = new Label();
+        Label labelTargetTechLabel = new Label();
+        Label labelTargetSizeLabel = new Label();
+        labelTargetName = new Label();
+        Label labelTargetNameLabel = new Label();
         GroupBox boxCargo = new GroupBox();
-        PictureBox picCargoLine3 = new PictureBox();
-        PictureBox picCargoLine2 = new PictureBox();
-        PictureBox picCargoLine0 = new PictureBox();
-        PictureBox picCargoLine1 = new PictureBox();
-        Label lblTargetPct9 = new Label();
-        Label lblTargetDiff9 = new Label();
-        Label lblTargetPrice9 = new Label();
+        PictureBox pictureCargoLine3 = new PictureBox();
+        PictureBox pictureCargoLine2 = new PictureBox();
+        PictureBox pictureCargoLine0 = new PictureBox();
+        PictureBox pictureCargoLine1 = new PictureBox();
+        Label labelTargetPct9 = new Label();
+        Label labelTargetDiff9 = new Label();
+        Label labelTargetPrice9 = new Label();
         Button buttonBuyMax9 = new Button();
         Button buttonBuyQty9 = new Button();
-        Label lblBuyPrice9 = new Label();
+        Label labelBuyPrice9 = new Label();
         Button buttonSellAll9 = new Button();
         Button buttonSellQty9 = new Button();
-        Label lblSellPrice9 = new Label();
-        Label lblTargetPct8 = new Label();
-        Label lblTargetDiff8 = new Label();
-        Label lblTargetPrice8 = new Label();
+        Label labelSellPrice9 = new Label();
+        Label labelTargetPct8 = new Label();
+        Label labelTargetDiff8 = new Label();
+        Label labelTargetPrice8 = new Label();
         Button buttonBuyMax8 = new Button();
         Button buttonBuyQty8 = new Button();
-        Label lblBuyPrice8 = new Label();
+        Label labelBuyPrice8 = new Label();
         Button buttonSellAll8 = new Button();
         Button buttonSellQty8 = new Button();
-        Label lblSellPrice8 = new Label();
-        Label lblTargetPct7 = new Label();
-        Label lblTargetDiff7 = new Label();
-        Label lblTargetPrice7 = new Label();
+        Label labelSellPrice8 = new Label();
+        Label labelTargetPct7 = new Label();
+        Label labelTargetDiff7 = new Label();
+        Label labelTargetPrice7 = new Label();
         Button buttonBuyMax7 = new Button();
         Button buttonBuyQty7 = new Button();
-        Label lblBuyPrice7 = new Label();
+        Label labelBuyPrice7 = new Label();
         Button buttonSellAll7 = new Button();
         Button buttonSellQty7 = new Button();
-        Label lblSellPrice7 = new Label();
-        Label lblTargetPct6 = new Label();
-        Label lblTargetDiff6 = new Label();
-        Label lblTargetPrice6 = new Label();
+        Label labelSellPrice7 = new Label();
+        Label labelTargetPct6 = new Label();
+        Label labelTargetDiff6 = new Label();
+        Label labelTargetPrice6 = new Label();
         Button buttonBuyMax6 = new Button();
         Button buttonBuyQty6 = new Button();
-        Label lblBuyPrice6 = new Label();
+        Label labelBuyPrice6 = new Label();
         Button buttonSellAll6 = new Button();
         Button buttonSellQty6 = new Button();
-        Label lblSellPrice6 = new Label();
-        Label lblTargetPct5 = new Label();
-        Label lblTargetDiff5 = new Label();
-        Label lblTargetPrice5 = new Label();
+        Label labelSellPrice6 = new Label();
+        Label labelTargetPct5 = new Label();
+        Label labelTargetDiff5 = new Label();
+        Label labelTargetPrice5 = new Label();
         Button buttonBuyMax5 = new Button();
         Button buttonBuyQty5 = new Button();
-        Label lblBuyPrice5 = new Label();
+        Label labelBuyPrice5 = new Label();
         Button buttonSellAll5 = new Button();
         Button buttonSellQty5 = new Button();
-        Label lblSellPrice5 = new Label();
-        Label lblTargetPct4 = new Label();
-        Label lblTargetDiff4 = new Label();
-        Label lblTargetPrice4 = new Label();
+        Label labelSellPrice5 = new Label();
+        Label labelTargetPct4 = new Label();
+        Label labelTargetDiff4 = new Label();
+        Label labelTargetPrice4 = new Label();
         Button buttonBuyMax4 = new Button();
         Button buttonBuyQty4 = new Button();
-        Label lblBuyPrice4 = new Label();
+        Label labelBuyPrice4 = new Label();
         Button buttonSellAll4 = new Button();
         Button buttonSellQty4 = new Button();
-        Label lblSellPrice4 = new Label();
-        Label lblTargetPct3 = new Label();
-        Label lblTargetDiff3 = new Label();
-        Label lblTargetPrice3 = new Label();
+        Label labelSellPrice4 = new Label();
+        Label labelTargetPct3 = new Label();
+        Label labelTargetDiff3 = new Label();
+        Label labelTargetPrice3 = new Label();
         Button buttonBuyMax3 = new Button();
         Button buttonBuyQty3 = new Button();
-        Label lblBuyPrice3 = new Label();
+        Label labelBuyPrice3 = new Label();
         Button buttonSellAll3 = new Button();
         Button buttonSellQty3 = new Button();
-        Label lblSellPrice3 = new Label();
-        Label lblTargetPct2 = new Label();
-        Label lblTargetDiff2 = new Label();
-        Label lblTargetPrice2 = new Label();
+        Label labelSellPrice3 = new Label();
+        Label labelTargetPct2 = new Label();
+        Label labelTargetDiff2 = new Label();
+        Label labelTargetPrice2 = new Label();
         Button buttonBuyMax2 = new Button();
         Button buttonBuyQty2 = new Button();
-        Label lblBuyPrice2 = new Label();
+        Label labelBuyPrice2 = new Label();
         Button buttonSellAll2 = new Button();
         Button buttonSellQty2 = new Button();
-        Label lblSellPrice2 = new Label();
-        Label lblTargetPct1 = new Label();
-        Label lblTargetDiff1 = new Label();
-        Label lblTargetPrice1 = new Label();
+        Label labelSellPrice2 = new Label();
+        Label labelTargetPct1 = new Label();
+        Label labelTargetDiff1 = new Label();
+        Label labelTargetPrice1 = new Label();
         Button buttonBuyMax1 = new Button();
         Button buttonBuyQty1 = new Button();
-        Label lblBuyPrice1 = new Label();
-        Label lblTargetPctLabel = new Label();
-        Label lblTargetDiffLabel = new Label();
-        Label lblTargetPriceLabel = new Label();
-        Label lblTargetPct0 = new Label();
-        Label lblTargetDiff0 = new Label();
-        Label lblTargetPrice0 = new Label();
+        Label labelBuyPrice1 = new Label();
+        Label labelTargetPctLabel = new Label();
+        Label labelTargetDiffLabel = new Label();
+        Label labelTargetPriceLabel = new Label();
+        Label labelTargetPct0 = new Label();
+        Label labelTargetDiff0 = new Label();
+        Label labelTargetPrice0 = new Label();
         Button buttonBuyMax0 = new Button();
         Button buttonBuyQty0 = new Button();
-        Label lblBuyPrice0 = new Label();
+        Label labelBuyPrice0 = new Label();
         Button buttonSellAll1 = new Button();
         Button buttonSellQty1 = new Button();
-        Label lblSellPrice1 = new Label();
+        Label labelSellPrice1 = new Label();
         Button buttonSellAll0 = new Button();
         Button buttonSellQty0 = new Button();
-        Label lblSellPrice0 = new Label();
-        Label lblTradeTarget = new Label();
-        lblBuy = new Label();
-        lblSell = new Label();
-        Label lblTradeCommodity9 = new Label();
-        Label lblTradeCommodity8 = new Label();
-        Label lblTradeCommodity2 = new Label();
-        Label lblTradeCommodity0 = new Label();
-        Label lblTradeCommodity1 = new Label();
-        Label lblTradeCommodity6 = new Label();
-        Label lblTradeCommodity5 = new Label();
-        Label lblTradeCommodity4 = new Label();
-        Label lblTradeCommodity3 = new Label();
-        Label lblTradeCommodity7 = new Label();
+        Label labelSellPrice0 = new Label();
+        Label labelTradeTarget = new Label();
+        labelBuy = new Label();
+        labelSell = new Label();
+        Label labelTradeCommodity9 = new Label();
+        Label labelTradeCommodity8 = new Label();
+        Label labelTradeCommodity2 = new Label();
+        Label labelTradeCommodity0 = new Label();
+        Label labelTradeCommodity1 = new Label();
+        Label labelTradeCommodity6 = new Label();
+        Label labelTradeCommodity5 = new Label();
+        Label labelTradeCommodity4 = new Label();
+        Label labelTradeCommodity3 = new Label();
+        Label labelTradeCommodity7 = new Label();
         GroupBox boxSystem = new GroupBox();
         buttonMerc = new Button();
         buttonSpecial = new Button();
         buttonNews = new Button();
-        lblSystemPressure = new Label();
-        lblSystemPressurePre = new Label();
-        lblSystemPolSys = new Label();
-        lblSystemSize = new Label();
-        lblSystemTech = new Label();
-        lblSystemPirates = new Label();
-        lblSystemPolice = new Label();
-        lblSystemResource = new Label();
-        Label lblSystemPiratesLabel = new Label();
-        Label lblSystemPoliceLabel = new Label();
-        Label lblSystemResourceLabel = new Label();
-        Label lblSystemGovtLabel = new Label();
-        Label lblSystemTechLabel = new Label();
-        Label lblSystemSizeLabel = new Label();
-        lblSystemName = new Label();
-        lblSystemNameLabel = new Label();
+        labelSystemPressure = new Label();
+        labelSystemPressurePre = new Label();
+        labelSystemPolSys = new Label();
+        labelSystemSize = new Label();
+        labelSystemTech = new Label();
+        labelSystemPirates = new Label();
+        labelSystemPolice = new Label();
+        labelSystemResource = new Label();
+        Label labelSystemPiratesLabel = new Label();
+        Label labelSystemPoliceLabel = new Label();
+        Label labelSystemResourceLabel = new Label();
+        Label labelSystemGovtLabel = new Label();
+        Label labelSystemTechLabel = new Label();
+        Label labelSystemSizeLabel = new Label();
+        labelSystemName = new Label();
+        labelSystemNameLabel = new Label();
         GroupBox boxShipYard = new GroupBox();
         buttonDesign = new Button();
         buttonPod = new Button();
-        lblEscapePod = new Label();
+        labelEscapePod = new Label();
         buttonEquip = new Button();
         buttonBuyShip = new Button();
-        lblEquipForSale = new Label();
-        lblShipsForSale = new Label();
+        labelEquipForSale = new Label();
+        labelShipsForSale = new Label();
         GroupBox boxDock = new GroupBox();
         buttonRepair = new Button();
         buttonFuel = new Button();
-        lblFuelStatus = new Label();
-        lblFuelCost = new Label();
-        lblHullStatus = new Label();
-        lblRepairCost = new Label();
-        PictureBox picLine = new PictureBox();
+        labelFuelStatus = new Label();
+        labelFuelCost = new Label();
+        labelHullStatus = new Label();
+        labelRepairCost = new Label();
+        PictureBox pictureLine = new PictureBox();
         dlgOpen = new OpenFileDialog();
         dlgSave = new SaveFileDialog();
         ilChartImages = new ImageList(components);
@@ -334,10 +334,10 @@ public class Main extends wfWindow {
         tipSpecial = new ToolTip(components);
         tipMerc = new ToolTip(components);
         ilEquipmentImages = new ImageList(components);
-        ((ISupportInitialize) (statusBarPanelCash)).BeginInit();
-        ((ISupportInitialize) (statusBarPanelBays)).BeginInit();
-        ((ISupportInitialize) (statusBarPanelCosts)).BeginInit();
-        ((ISupportInitialize) (statusBarPanelExtra)).BeginInit();
+        ((ISupportInitialize) (statusBarPanelCash)).beginInit();
+        ((ISupportInitialize) (statusBarPanelBays)).beginInit();
+        ((ISupportInitialize) (statusBarPanelCosts)).beginInit();
+        ((ISupportInitialize) (statusBarPanelExtra)).beginInit();
         boxShortRangeChart.SuspendLayout();
         boxGalacticChart.SuspendLayout();
         boxTargetSystem.SuspendLayout();
@@ -359,7 +359,7 @@ public class Main extends wfWindow {
         mnuGameNew.setText("&New...");
         mnuGameNew.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 mnuGameNew_Click(sender, e);
             }
         });
@@ -369,7 +369,7 @@ public class Main extends wfWindow {
         mnuGameLoad.setText("&Load...");
         mnuGameLoad.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 mnuGameLoad_Click(sender, e);
             }
         });
@@ -380,7 +380,7 @@ public class Main extends wfWindow {
         mnuGameSave.setText("&Save");
         mnuGameSave.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 mnuGameSave_Click(sender, e);
             }
         });
@@ -391,7 +391,7 @@ public class Main extends wfWindow {
         mnuGameSaveAs.setText("Save &As...");
         mnuGameSaveAs.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 mnuGameSaveAs_Click(sender, e);
             }
         });
@@ -404,7 +404,7 @@ public class Main extends wfWindow {
         mnuRetire.setText("&Retire");
         mnuRetire.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 mnuRetire_Click(sender, e);
             }
         });
@@ -416,7 +416,7 @@ public class Main extends wfWindow {
         mnuGameExit.setText("E&xit");
         mnuGameExit.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 mnuGameExit_Click(sender, e);
             }
         });
@@ -433,7 +433,7 @@ public class Main extends wfWindow {
         mnuViewCommander.setText("&Commander Status");
         mnuViewCommander.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 mnuViewCommander_Click(sender, e);
             }
         });
@@ -444,7 +444,7 @@ public class Main extends wfWindow {
         mnuViewShip.setText("&Ship");
         mnuViewShip.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 mnuViewShip_Click(sender, e);
             }
         });
@@ -455,7 +455,7 @@ public class Main extends wfWindow {
         mnuViewPersonnel.setText("&Personnel");
         mnuViewPersonnel.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 mnuViewPersonnel_Click(sender, e);
             }
         });
@@ -466,7 +466,7 @@ public class Main extends wfWindow {
         mnuViewQuests.setText("&Quests");
         mnuViewQuests.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 mnuViewQuests_Click(sender, e);
             }
         });
@@ -477,7 +477,7 @@ public class Main extends wfWindow {
         mnuViewBank.setText("&Bank");
         mnuViewBank.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 mnuViewBank_Click(sender, e);
             }
         });
@@ -489,7 +489,7 @@ public class Main extends wfWindow {
         mnuHighScores.setText("&High Scores");
         mnuHighScores.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 mnuHighScores_Click(sender, e);
             }
         });
@@ -501,7 +501,7 @@ public class Main extends wfWindow {
         mnuOptions.setText("Options");
         mnuOptions.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 mnuOptions_Click(sender, e);
             }
         });
@@ -514,46 +514,46 @@ public class Main extends wfWindow {
         mnuHelpAbout.setText("&About Space Trader");
         mnuHelpAbout.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 mnuHelpAbout_Click(sender, e);
             }
         });
-        // picGalacticChart
-        picGalacticChart.setBackColor(Color.white);
-        picGalacticChart.setLocation(new Point(8, 16));
-        picGalacticChart.setName("picGalacticChart");
-        picGalacticChart.setSize(new FormSize(160, 116));
-        picGalacticChart.setTabIndex(0);
-        picGalacticChart.setTabStop(false);
-        picGalacticChart.setPaint(new EventHandler<>() {
+        // pictureGalacticChart
+        pictureGalacticChart.setBackColor(Color.white);
+        pictureGalacticChart.setLocation(new Point(8, 16));
+        pictureGalacticChart.setName("pictureGalacticChart");
+        pictureGalacticChart.setSize(new FormSize(160, 116));
+        pictureGalacticChart.setTabIndex(0);
+        pictureGalacticChart.setTabStop(false);
+        pictureGalacticChart.setPaint(new EventHandler<>() {
             @Override
-            public void handle(Object sender, PaintEventArgs e) {
-                picGalacticChart_Paint(sender, e);
+            public void handle(Object sender, PaintEventData e) {
+                pictureGalacticChart_Paint(sender, e);
             }
         });
-        picGalacticChart.setMouseDown(new EventHandler<>() {
+        pictureGalacticChart.setMouseDown(new EventHandler<>() {
             @Override
-            public void handle(Object sender, MouseEventArgs e) {
-                picGalacticChart_MouseDown(sender, e);
+            public void handle(Object sender, MouseEventData e) {
+                pictureGalacticChart_MouseDown(sender, e);
             }
         });
-        // picShortRangeChart
-        picShortRangeChart.setBackColor(Color.white);
-        picShortRangeChart.setLocation(new Point(8, 16));
-        picShortRangeChart.setName("picShortRangeChart");
-        picShortRangeChart.setSize(new FormSize(160, 145));
-        picShortRangeChart.setTabIndex(1);
-        picShortRangeChart.setTabStop(false);
-        picShortRangeChart.setPaint(new EventHandler<>() {
+        // pictureShortRangeChart
+        pictureShortRangeChart.setBackColor(Color.white);
+        pictureShortRangeChart.setLocation(new Point(8, 16));
+        pictureShortRangeChart.setName("pictureShortRangeChart");
+        pictureShortRangeChart.setSize(new FormSize(160, 145));
+        pictureShortRangeChart.setTabIndex(1);
+        pictureShortRangeChart.setTabStop(false);
+        pictureShortRangeChart.setPaint(new EventHandler<>() {
             @Override
-            public void handle(Object sender, PaintEventArgs e) {
-                picShortRangeChart_Paint(sender, e);
+            public void handle(Object sender, PaintEventData e) {
+                pictureShortRangeChart_Paint(sender, e);
             }
         });
-        picShortRangeChart.setMouseDown(new EventHandler<>() {
+        pictureShortRangeChart.setMouseDown(new EventHandler<>() {
             @Override
-            public void handle(Object sender, MouseEventArgs e) {
-                picShortRangeChart_MouseDown(sender, e);
+            public void handle(Object sender, MouseEventData e) {
+                pictureShortRangeChart_MouseDown(sender, e);
             }
         });
         // statusBar
@@ -566,7 +566,7 @@ public class Main extends wfWindow {
         statusBar.setTabIndex(2);
         statusBar.PanelClick = new EventHandler<>() {
             @Override
-            public void handle(Object sender, StatusBarPanelClickEventArgs e) {
+            public void handle(Object sender, StatusBarPanelClickEventData e) {
                 statusBar_PanelClick(sender, e);
             }
         };
@@ -589,7 +589,7 @@ public class Main extends wfWindow {
 
         // boxShortRangeChart
         boxShortRangeChart.Anchor = AnchorStyles.Top_Right;
-        boxShortRangeChart.Controls.add(picShortRangeChart);
+        boxShortRangeChart.Controls.add(pictureShortRangeChart);
         boxShortRangeChart.setLocation(new Point(364, 306));
         boxShortRangeChart.setName("boxShortRangeChart");
         boxShortRangeChart.setSize(new FormSize(176, 168));
@@ -599,29 +599,29 @@ public class Main extends wfWindow {
         // boxGalacticChart
         boxGalacticChart.Anchor = AnchorStyles.Top_Right;
         boxGalacticChart.setBackColor(SystemColors.Control);
-        boxGalacticChart.Controls.add(lblWormhole);
-        boxGalacticChart.Controls.add(lblWormholeLabel);
+        boxGalacticChart.Controls.add(labelWormhole);
+        boxGalacticChart.Controls.add(labelWormholeLabel);
         boxGalacticChart.Controls.add(buttonJump);
         boxGalacticChart.Controls.add(buttonFind);
-        boxGalacticChart.Controls.add(picGalacticChart);
+        boxGalacticChart.Controls.add(pictureGalacticChart);
         boxGalacticChart.setLocation(new Point(180, 306));
         boxGalacticChart.setName("boxGalacticChart");
         boxGalacticChart.setSize(new FormSize(176, 168));
         boxGalacticChart.setTabIndex(5);
         boxGalacticChart.setTabStop(false);
         boxGalacticChart.setText("Galactic Chart");
-        // lblWormhole
-        lblWormhole.setLocation(new Point(8, 148));
-        lblWormhole.setName("lblWormhole");
-        lblWormhole.setSize(new FormSize(72, 13));
-        lblWormhole.setTabIndex(29);
-        lblWormhole.setText("Tarchannen");
-        // lblWormholeLabel
-        lblWormholeLabel.setLocation(new Point(8, 135));
-        lblWormholeLabel.setName("lblWormholeLabel");
-        lblWormholeLabel.setSize(new FormSize(72, 13));
-        lblWormholeLabel.setTabIndex(28);
-        lblWormholeLabel.setText("Wormhole to");
+        // labelWormhole
+        labelWormhole.setLocation(new Point(8, 148));
+        labelWormhole.setName("labelWormhole");
+        labelWormhole.setSize(new FormSize(72, 13));
+        labelWormhole.setTabIndex(29);
+        labelWormhole.setText("Tarchannen");
+        // labelWormholeLabel
+        labelWormholeLabel.setLocation(new Point(8, 135));
+        labelWormholeLabel.setName("labelWormholeLabel");
+        labelWormholeLabel.setSize(new FormSize(72, 13));
+        labelWormholeLabel.setTabIndex(28);
+        labelWormholeLabel.setText("Wormhole to");
         // buttonJump
         buttonJump.setFlatStyle(FlatStyle.Flat);
         buttonJump.setLocation(new Point(81, 138));
@@ -631,7 +631,7 @@ public class Main extends wfWindow {
         buttonJump.setText("Jump");
         buttonJump.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonJump_Click(sender, e);
             }
         });
@@ -644,7 +644,7 @@ public class Main extends wfWindow {
         buttonFind.setText("Find");
         buttonFind.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonFind_Click(sender, e);
             }
         });
@@ -653,24 +653,24 @@ public class Main extends wfWindow {
         boxTargetSystem.Controls.add(buttonTrack);
         boxTargetSystem.Controls.add(buttonNextSystem);
         boxTargetSystem.Controls.add(buttonPrevSystem);
-        boxTargetSystem.Controls.add(lblTargetOutOfRange);
+        boxTargetSystem.Controls.add(labelTargetOutOfRange);
         boxTargetSystem.Controls.add(buttonWarp);
-        boxTargetSystem.Controls.add(lblTargetPolSys);
-        boxTargetSystem.Controls.add(lblTargetSize);
-        boxTargetSystem.Controls.add(lblTargetTech);
-        boxTargetSystem.Controls.add(lblTargetDistance);
-        boxTargetSystem.Controls.add(lblTargetPirates);
-        boxTargetSystem.Controls.add(lblTargetPolice);
-        boxTargetSystem.Controls.add(lblTargetResource);
-        boxTargetSystem.Controls.add(lblTargetDistanceLabel);
-        boxTargetSystem.Controls.add(lblTargetPiratesLabel);
-        boxTargetSystem.Controls.add(lblTargetPoliceLabel);
-        boxTargetSystem.Controls.add(lblTargetResourceLabel);
-        boxTargetSystem.Controls.add(lblTargetGovtLabel);
-        boxTargetSystem.Controls.add(lblTargetTechLabel);
-        boxTargetSystem.Controls.add(lblTargetSizeLabel);
-        boxTargetSystem.Controls.add(lblTargetName);
-        boxTargetSystem.Controls.add(lblTargetNameLabel);
+        boxTargetSystem.Controls.add(labelTargetPolSys);
+        boxTargetSystem.Controls.add(labelTargetSize);
+        boxTargetSystem.Controls.add(labelTargetTech);
+        boxTargetSystem.Controls.add(labelTargetDistance);
+        boxTargetSystem.Controls.add(labelTargetPirates);
+        boxTargetSystem.Controls.add(labelTargetPolice);
+        boxTargetSystem.Controls.add(labelTargetResource);
+        boxTargetSystem.Controls.add(labelTargetDistanceLabel);
+        boxTargetSystem.Controls.add(labelTargetPiratesLabel);
+        boxTargetSystem.Controls.add(labelTargetPoliceLabel);
+        boxTargetSystem.Controls.add(labelTargetResourceLabel);
+        boxTargetSystem.Controls.add(labelTargetGovtLabel);
+        boxTargetSystem.Controls.add(labelTargetTechLabel);
+        boxTargetSystem.Controls.add(labelTargetSizeLabel);
+        boxTargetSystem.Controls.add(labelTargetName);
+        boxTargetSystem.Controls.add(labelTargetNameLabel);
         boxTargetSystem.setLocation(new Point(548, 306));
         boxTargetSystem.setName("boxTargetSystem");
         boxTargetSystem.setSize(new FormSize(216, 168));
@@ -687,7 +687,7 @@ public class Main extends wfWindow {
         buttonTrack.setVisible(false);
         buttonTrack.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonTrack_Click(sender, e);
             }
         });
@@ -700,7 +700,7 @@ public class Main extends wfWindow {
         buttonNextSystem.setText(">");
         buttonNextSystem.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonNextSystem_Click(sender, e);
             }
         });
@@ -713,16 +713,16 @@ public class Main extends wfWindow {
         buttonPrevSystem.setText("<");
         buttonPrevSystem.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonPrevSystem_Click(sender, e);
             }
         });
-        // lblTargetOutOfRange
-        lblTargetOutOfRange.setLocation(new Point(8, 144));
-        lblTargetOutOfRange.setName("lblTargetOutOfRange");
-        lblTargetOutOfRange.setSize(new FormSize(144, 13));
-        lblTargetOutOfRange.setTabIndex(17);
-        lblTargetOutOfRange.setText("This system is out of range.");
+        // labelTargetOutOfRange
+        labelTargetOutOfRange.setLocation(new Point(8, 144));
+        labelTargetOutOfRange.setName("labelTargetOutOfRange");
+        labelTargetOutOfRange.setSize(new FormSize(144, 13));
+        labelTargetOutOfRange.setTabIndex(17);
+        labelTargetOutOfRange.setText("This system is out of range.");
         // buttonWarp
         buttonWarp.setFlatStyle(FlatStyle.Flat);
         buttonWarp.setLocation(new Point(160, 98));
@@ -732,297 +732,297 @@ public class Main extends wfWindow {
         buttonWarp.setText("Warp");
         buttonWarp.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonWarp_Click(sender, e);
             }
         });
-        // lblTargetPolSys
-        lblTargetPolSys.setLocation(new Point(88, 64));
-        lblTargetPolSys.setName("lblTargetPolSys");
-        lblTargetPolSys.setSize(new FormSize(91, 13));
-        lblTargetPolSys.setTabIndex(15);
-        lblTargetPolSys.setText("Communist State");
-        // lblTargetSize
-        lblTargetSize.setLocation(new Point(88, 32));
-        lblTargetSize.setName("lblTargetSize");
-        lblTargetSize.setSize(new FormSize(45, 13));
-        lblTargetSize.setTabIndex(14);
-        lblTargetSize.setText("Medium");
-        // lblTargetTech
-        lblTargetTech.setLocation(new Point(88, 48));
-        lblTargetTech.setName("lblTargetTech");
-        lblTargetTech.setSize(new FormSize(82, 13));
-        lblTargetTech.setTabIndex(13);
-        lblTargetTech.setText("Pre-Agricultural");
-        // lblTargetDistance
-        lblTargetDistance.setLocation(new Point(88, 128));
-        lblTargetDistance.setName("lblTargetDistance");
-        lblTargetDistance.setSize(new FormSize(66, 13));
-        lblTargetDistance.setTabIndex(12);
-        lblTargetDistance.setText("888 parsecs");
-        // lblTargetPirates
-        lblTargetPirates.setLocation(new Point(88, 112));
-        lblTargetPirates.setName("lblTargetPirates");
-        lblTargetPirates.setSize(new FormSize(53, 13));
-        lblTargetPirates.setTabIndex(11);
-        lblTargetPirates.setText("Abundant");
-        // lblTargetPolice
-        lblTargetPolice.setLocation(new Point(88, 96));
-        lblTargetPolice.setName("lblTargetPolice");
-        lblTargetPolice.setSize(new FormSize(53, 13));
-        lblTargetPolice.setTabIndex(10);
-        lblTargetPolice.setText("Abundant");
-        // lblTargetResource
-        lblTargetResource.setLocation(new Point(88, 80));
-        lblTargetResource.setName("lblTargetResource");
-        lblTargetResource.setSize(new FormSize(105, 13));
-        lblTargetResource.setTabIndex(9);
-        lblTargetResource.setText("Sweetwater Oceans");
-        // lblTargetDistanceLabel
-        lblTargetDistanceLabel.setAutoSize(true);
-        lblTargetDistanceLabel.setFont(
+        // labelTargetPolSys
+        labelTargetPolSys.setLocation(new Point(88, 64));
+        labelTargetPolSys.setName("labelTargetPolSys");
+        labelTargetPolSys.setSize(new FormSize(91, 13));
+        labelTargetPolSys.setTabIndex(15);
+        labelTargetPolSys.setText("Communist State");
+        // labelTargetSize
+        labelTargetSize.setLocation(new Point(88, 32));
+        labelTargetSize.setName("labelTargetSize");
+        labelTargetSize.setSize(new FormSize(45, 13));
+        labelTargetSize.setTabIndex(14);
+        labelTargetSize.setText("Medium");
+        // labelTargetTech
+        labelTargetTech.setLocation(new Point(88, 48));
+        labelTargetTech.setName("labelTargetTech");
+        labelTargetTech.setSize(new FormSize(82, 13));
+        labelTargetTech.setTabIndex(13);
+        labelTargetTech.setText("Pre-Agricultural");
+        // labelTargetDistance
+        labelTargetDistance.setLocation(new Point(88, 128));
+        labelTargetDistance.setName("labelTargetDistance");
+        labelTargetDistance.setSize(new FormSize(66, 13));
+        labelTargetDistance.setTabIndex(12);
+        labelTargetDistance.setText("888 parsecs");
+        // labelTargetPirates
+        labelTargetPirates.setLocation(new Point(88, 112));
+        labelTargetPirates.setName("labelTargetPirates");
+        labelTargetPirates.setSize(new FormSize(53, 13));
+        labelTargetPirates.setTabIndex(11);
+        labelTargetPirates.setText("Abundant");
+        // labelTargetPolice
+        labelTargetPolice.setLocation(new Point(88, 96));
+        labelTargetPolice.setName("labelTargetPolice");
+        labelTargetPolice.setSize(new FormSize(53, 13));
+        labelTargetPolice.setTabIndex(10);
+        labelTargetPolice.setText("Abundant");
+        // labelTargetResource
+        labelTargetResource.setLocation(new Point(88, 80));
+        labelTargetResource.setName("labelTargetResource");
+        labelTargetResource.setSize(new FormSize(105, 13));
+        labelTargetResource.setTabIndex(9);
+        labelTargetResource.setText("Sweetwater Oceans");
+        // labelTargetDistanceLabel
+        labelTargetDistanceLabel.setAutoSize(true);
+        labelTargetDistanceLabel.setFont(
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblTargetDistanceLabel.setLocation(new Point(8, 128));
-        lblTargetDistanceLabel.setName("lblTargetDistanceLabel");
-        lblTargetDistanceLabel.setSize(new FormSize(53, 16));
-        lblTargetDistanceLabel.setTabIndex(8);
-        lblTargetDistanceLabel.setText("Distance:");
-        // lblTargetPiratesLabel
-        lblTargetPiratesLabel.setAutoSize(true);
-        lblTargetPiratesLabel.setFont(
+        labelTargetDistanceLabel.setLocation(new Point(8, 128));
+        labelTargetDistanceLabel.setName("labelTargetDistanceLabel");
+        labelTargetDistanceLabel.setSize(new FormSize(53, 16));
+        labelTargetDistanceLabel.setTabIndex(8);
+        labelTargetDistanceLabel.setText("Distance:");
+        // labelTargetPiratesLabel
+        labelTargetPiratesLabel.setAutoSize(true);
+        labelTargetPiratesLabel.setFont(
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblTargetPiratesLabel.setLocation(new Point(8, 112));
-        lblTargetPiratesLabel.setName("lblTargetPiratesLabel");
-        lblTargetPiratesLabel.setSize(new FormSize(44, 16));
-        lblTargetPiratesLabel.setTabIndex(7);
-        lblTargetPiratesLabel.setText("Pirates:");
-        // lblTargetPoliceLabel
-        lblTargetPoliceLabel.setAutoSize(true);
-        lblTargetPoliceLabel.setFont(
+        labelTargetPiratesLabel.setLocation(new Point(8, 112));
+        labelTargetPiratesLabel.setName("labelTargetPiratesLabel");
+        labelTargetPiratesLabel.setSize(new FormSize(44, 16));
+        labelTargetPiratesLabel.setTabIndex(7);
+        labelTargetPiratesLabel.setText("Pirates:");
+        // labelTargetPoliceLabel
+        labelTargetPoliceLabel.setAutoSize(true);
+        labelTargetPoliceLabel.setFont(
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblTargetPoliceLabel.setLocation(new Point(8, 96));
-        lblTargetPoliceLabel.setName("lblTargetPoliceLabel");
-        lblTargetPoliceLabel.setSize(new FormSize(40, 16));
-        lblTargetPoliceLabel.setTabIndex(6);
-        lblTargetPoliceLabel.setText("Police:");
-        // lblTargetResourceLabel
-        lblTargetResourceLabel.setAutoSize(true);
-        lblTargetResourceLabel.setFont(
+        labelTargetPoliceLabel.setLocation(new Point(8, 96));
+        labelTargetPoliceLabel.setName("labelTargetPoliceLabel");
+        labelTargetPoliceLabel.setSize(new FormSize(40, 16));
+        labelTargetPoliceLabel.setTabIndex(6);
+        labelTargetPoliceLabel.setText("Police:");
+        // labelTargetResourceLabel
+        labelTargetResourceLabel.setAutoSize(true);
+        labelTargetResourceLabel.setFont(
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblTargetResourceLabel.setLocation(new Point(8, 80));
-        lblTargetResourceLabel.setName("lblTargetResourceLabel");
-        lblTargetResourceLabel.setSize(new FormSize(58, 16));
-        lblTargetResourceLabel.setTabIndex(5);
-        lblTargetResourceLabel.setText("Resource:");
-        // lblTargetGovtLabel
-        lblTargetGovtLabel.setAutoSize(true);
-        lblTargetGovtLabel.setFont(
+        labelTargetResourceLabel.setLocation(new Point(8, 80));
+        labelTargetResourceLabel.setName("labelTargetResourceLabel");
+        labelTargetResourceLabel.setSize(new FormSize(58, 16));
+        labelTargetResourceLabel.setTabIndex(5);
+        labelTargetResourceLabel.setText("Resource:");
+        // labelTargetGovtLabel
+        labelTargetGovtLabel.setAutoSize(true);
+        labelTargetGovtLabel.setFont(
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblTargetGovtLabel.setLocation(new Point(8, 64));
-        lblTargetGovtLabel.setName("lblTargetGovtLabel");
-        lblTargetGovtLabel.setSize(new FormSize(72, 16));
-        lblTargetGovtLabel.setTabIndex(4);
-        lblTargetGovtLabel.setText("Government:");
-        // lblTargetTechLabel
-        lblTargetTechLabel.setAutoSize(true);
-        lblTargetTechLabel.setFont(
+        labelTargetGovtLabel.setLocation(new Point(8, 64));
+        labelTargetGovtLabel.setName("labelTargetGovtLabel");
+        labelTargetGovtLabel.setSize(new FormSize(72, 16));
+        labelTargetGovtLabel.setTabIndex(4);
+        labelTargetGovtLabel.setText("Government:");
+        // labelTargetTechLabel
+        labelTargetTechLabel.setAutoSize(true);
+        labelTargetTechLabel.setFont(
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblTargetTechLabel.setLocation(new Point(8, 48));
-        lblTargetTechLabel.setName("lblTargetTechLabel");
-        lblTargetTechLabel.setSize(new FormSize(65, 16));
-        lblTargetTechLabel.setTabIndex(3);
-        lblTargetTechLabel.setText("Tech Level:");
-        // lblTargetSizeLabel
-        lblTargetSizeLabel.setAutoSize(true);
-        lblTargetSizeLabel.setFont(
+        labelTargetTechLabel.setLocation(new Point(8, 48));
+        labelTargetTechLabel.setName("labelTargetTechLabel");
+        labelTargetTechLabel.setSize(new FormSize(65, 16));
+        labelTargetTechLabel.setTabIndex(3);
+        labelTargetTechLabel.setText("Tech Level:");
+        // labelTargetSizeLabel
+        labelTargetSizeLabel.setAutoSize(true);
+        labelTargetSizeLabel.setFont(
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblTargetSizeLabel.setLocation(new Point(8, 32));
-        lblTargetSizeLabel.setName("lblTargetSizeLabel");
-        lblTargetSizeLabel.setSize(new FormSize(31, 16));
-        lblTargetSizeLabel.setTabIndex(2);
-        lblTargetSizeLabel.setText("Size:");
-        // lblTargetName
-        lblTargetName.setLocation(new Point(88, 16));
-        lblTargetName.setName("lblTargetName");
-        lblTargetName.setSize(new FormSize(65, 13));
-        lblTargetName.setTabIndex(1);
-        lblTargetName.setText("Tarchannen");
-        // lblTargetNameLabel
-        lblTargetNameLabel.setAutoSize(true);
-        lblTargetNameLabel.setFont(
+        labelTargetSizeLabel.setLocation(new Point(8, 32));
+        labelTargetSizeLabel.setName("labelTargetSizeLabel");
+        labelTargetSizeLabel.setSize(new FormSize(31, 16));
+        labelTargetSizeLabel.setTabIndex(2);
+        labelTargetSizeLabel.setText("Size:");
+        // labelTargetName
+        labelTargetName.setLocation(new Point(88, 16));
+        labelTargetName.setName("labelTargetName");
+        labelTargetName.setSize(new FormSize(65, 13));
+        labelTargetName.setTabIndex(1);
+        labelTargetName.setText("Tarchannen");
+        // labelTargetNameLabel
+        labelTargetNameLabel.setAutoSize(true);
+        labelTargetNameLabel.setFont(
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblTargetNameLabel.setLocation(new Point(8, 16));
-        lblTargetNameLabel.setName("lblTargetNameLabel");
-        lblTargetNameLabel.setSize(new FormSize(39, 16));
-        lblTargetNameLabel.setTabIndex(0);
-        lblTargetNameLabel.setText("Name:");
+        labelTargetNameLabel.setLocation(new Point(8, 16));
+        labelTargetNameLabel.setName("labelTargetNameLabel");
+        labelTargetNameLabel.setSize(new FormSize(39, 16));
+        labelTargetNameLabel.setTabIndex(0);
+        labelTargetNameLabel.setText("Name:");
         // boxCargo
         boxCargo.Anchor = AnchorStyles.Top_Right;
-        boxCargo.Controls.add(picCargoLine3);
-        boxCargo.Controls.add(picCargoLine2);
-        boxCargo.Controls.add(picCargoLine0);
-        boxCargo.Controls.add(picCargoLine1);
-        boxCargo.Controls.add(lblTargetPct9);
-        boxCargo.Controls.add(lblTargetDiff9);
-        boxCargo.Controls.add(lblTargetPrice9);
+        boxCargo.Controls.add(pictureCargoLine3);
+        boxCargo.Controls.add(pictureCargoLine2);
+        boxCargo.Controls.add(pictureCargoLine0);
+        boxCargo.Controls.add(pictureCargoLine1);
+        boxCargo.Controls.add(labelTargetPct9);
+        boxCargo.Controls.add(labelTargetDiff9);
+        boxCargo.Controls.add(labelTargetPrice9);
         boxCargo.Controls.add(buttonBuyMax9);
         boxCargo.Controls.add(buttonBuyQty9);
-        boxCargo.Controls.add(lblBuyPrice9);
+        boxCargo.Controls.add(labelBuyPrice9);
         boxCargo.Controls.add(buttonSellAll9);
         boxCargo.Controls.add(buttonSellQty9);
-        boxCargo.Controls.add(lblSellPrice9);
-        boxCargo.Controls.add(lblTargetPct8);
-        boxCargo.Controls.add(lblTargetDiff8);
-        boxCargo.Controls.add(lblTargetPrice8);
+        boxCargo.Controls.add(labelSellPrice9);
+        boxCargo.Controls.add(labelTargetPct8);
+        boxCargo.Controls.add(labelTargetDiff8);
+        boxCargo.Controls.add(labelTargetPrice8);
         boxCargo.Controls.add(buttonBuyMax8);
         boxCargo.Controls.add(buttonBuyQty8);
-        boxCargo.Controls.add(lblBuyPrice8);
+        boxCargo.Controls.add(labelBuyPrice8);
         boxCargo.Controls.add(buttonSellAll8);
         boxCargo.Controls.add(buttonSellQty8);
-        boxCargo.Controls.add(lblSellPrice8);
-        boxCargo.Controls.add(lblTargetPct7);
-        boxCargo.Controls.add(lblTargetDiff7);
-        boxCargo.Controls.add(lblTargetPrice7);
+        boxCargo.Controls.add(labelSellPrice8);
+        boxCargo.Controls.add(labelTargetPct7);
+        boxCargo.Controls.add(labelTargetDiff7);
+        boxCargo.Controls.add(labelTargetPrice7);
         boxCargo.Controls.add(buttonBuyMax7);
         boxCargo.Controls.add(buttonBuyQty7);
-        boxCargo.Controls.add(lblBuyPrice7);
+        boxCargo.Controls.add(labelBuyPrice7);
         boxCargo.Controls.add(buttonSellAll7);
         boxCargo.Controls.add(buttonSellQty7);
-        boxCargo.Controls.add(lblSellPrice7);
-        boxCargo.Controls.add(lblTargetPct6);
-        boxCargo.Controls.add(lblTargetDiff6);
-        boxCargo.Controls.add(lblTargetPrice6);
+        boxCargo.Controls.add(labelSellPrice7);
+        boxCargo.Controls.add(labelTargetPct6);
+        boxCargo.Controls.add(labelTargetDiff6);
+        boxCargo.Controls.add(labelTargetPrice6);
         boxCargo.Controls.add(buttonBuyMax6);
         boxCargo.Controls.add(buttonBuyQty6);
-        boxCargo.Controls.add(lblBuyPrice6);
+        boxCargo.Controls.add(labelBuyPrice6);
         boxCargo.Controls.add(buttonSellAll6);
         boxCargo.Controls.add(buttonSellQty6);
-        boxCargo.Controls.add(lblSellPrice6);
-        boxCargo.Controls.add(lblTargetPct5);
-        boxCargo.Controls.add(lblTargetDiff5);
-        boxCargo.Controls.add(lblTargetPrice5);
+        boxCargo.Controls.add(labelSellPrice6);
+        boxCargo.Controls.add(labelTargetPct5);
+        boxCargo.Controls.add(labelTargetDiff5);
+        boxCargo.Controls.add(labelTargetPrice5);
         boxCargo.Controls.add(buttonBuyMax5);
         boxCargo.Controls.add(buttonBuyQty5);
-        boxCargo.Controls.add(lblBuyPrice5);
+        boxCargo.Controls.add(labelBuyPrice5);
         boxCargo.Controls.add(buttonSellAll5);
         boxCargo.Controls.add(buttonSellQty5);
-        boxCargo.Controls.add(lblSellPrice5);
-        boxCargo.Controls.add(lblTargetPct4);
-        boxCargo.Controls.add(lblTargetDiff4);
-        boxCargo.Controls.add(lblTargetPrice4);
+        boxCargo.Controls.add(labelSellPrice5);
+        boxCargo.Controls.add(labelTargetPct4);
+        boxCargo.Controls.add(labelTargetDiff4);
+        boxCargo.Controls.add(labelTargetPrice4);
         boxCargo.Controls.add(buttonBuyMax4);
         boxCargo.Controls.add(buttonBuyQty4);
-        boxCargo.Controls.add(lblBuyPrice4);
+        boxCargo.Controls.add(labelBuyPrice4);
         boxCargo.Controls.add(buttonSellAll4);
         boxCargo.Controls.add(buttonSellQty4);
-        boxCargo.Controls.add(lblSellPrice4);
-        boxCargo.Controls.add(lblTargetPct3);
-        boxCargo.Controls.add(lblTargetDiff3);
-        boxCargo.Controls.add(lblTargetPrice3);
+        boxCargo.Controls.add(labelSellPrice4);
+        boxCargo.Controls.add(labelTargetPct3);
+        boxCargo.Controls.add(labelTargetDiff3);
+        boxCargo.Controls.add(labelTargetPrice3);
         boxCargo.Controls.add(buttonBuyMax3);
         boxCargo.Controls.add(buttonBuyQty3);
-        boxCargo.Controls.add(lblBuyPrice3);
+        boxCargo.Controls.add(labelBuyPrice3);
         boxCargo.Controls.add(buttonSellAll3);
         boxCargo.Controls.add(buttonSellQty3);
-        boxCargo.Controls.add(lblSellPrice3);
-        boxCargo.Controls.add(lblTargetPct2);
-        boxCargo.Controls.add(lblTargetDiff2);
-        boxCargo.Controls.add(lblTargetPrice2);
+        boxCargo.Controls.add(labelSellPrice3);
+        boxCargo.Controls.add(labelTargetPct2);
+        boxCargo.Controls.add(labelTargetDiff2);
+        boxCargo.Controls.add(labelTargetPrice2);
         boxCargo.Controls.add(buttonBuyMax2);
         boxCargo.Controls.add(buttonBuyQty2);
-        boxCargo.Controls.add(lblBuyPrice2);
+        boxCargo.Controls.add(labelBuyPrice2);
         boxCargo.Controls.add(buttonSellAll2);
         boxCargo.Controls.add(buttonSellQty2);
-        boxCargo.Controls.add(lblSellPrice2);
-        boxCargo.Controls.add(lblTargetPct1);
-        boxCargo.Controls.add(lblTargetDiff1);
-        boxCargo.Controls.add(lblTargetPrice1);
+        boxCargo.Controls.add(labelSellPrice2);
+        boxCargo.Controls.add(labelTargetPct1);
+        boxCargo.Controls.add(labelTargetDiff1);
+        boxCargo.Controls.add(labelTargetPrice1);
         boxCargo.Controls.add(buttonBuyMax1);
         boxCargo.Controls.add(buttonBuyQty1);
-        boxCargo.Controls.add(lblBuyPrice1);
-        boxCargo.Controls.add(lblTargetPctLabel);
-        boxCargo.Controls.add(lblTargetDiffLabel);
-        boxCargo.Controls.add(lblTargetPriceLabel);
-        boxCargo.Controls.add(lblTargetPct0);
-        boxCargo.Controls.add(lblTargetDiff0);
-        boxCargo.Controls.add(lblTargetPrice0);
+        boxCargo.Controls.add(labelBuyPrice1);
+        boxCargo.Controls.add(labelTargetPctLabel);
+        boxCargo.Controls.add(labelTargetDiffLabel);
+        boxCargo.Controls.add(labelTargetPriceLabel);
+        boxCargo.Controls.add(labelTargetPct0);
+        boxCargo.Controls.add(labelTargetDiff0);
+        boxCargo.Controls.add(labelTargetPrice0);
         boxCargo.Controls.add(buttonBuyMax0);
         boxCargo.Controls.add(buttonBuyQty0);
-        boxCargo.Controls.add(lblBuyPrice0);
+        boxCargo.Controls.add(labelBuyPrice0);
         boxCargo.Controls.add(buttonSellAll1);
         boxCargo.Controls.add(buttonSellQty1);
-        boxCargo.Controls.add(lblSellPrice1);
+        boxCargo.Controls.add(labelSellPrice1);
         boxCargo.Controls.add(buttonSellAll0);
         boxCargo.Controls.add(buttonSellQty0);
-        boxCargo.Controls.add(lblSellPrice0);
-        boxCargo.Controls.add(lblTradeTarget);
-        boxCargo.Controls.add(lblBuy);
-        boxCargo.Controls.add(lblSell);
-        boxCargo.Controls.add(lblTradeCommodity9);
-        boxCargo.Controls.add(lblTradeCommodity8);
-        boxCargo.Controls.add(lblTradeCommodity2);
-        boxCargo.Controls.add(lblTradeCommodity0);
-        boxCargo.Controls.add(lblTradeCommodity1);
-        boxCargo.Controls.add(lblTradeCommodity6);
-        boxCargo.Controls.add(lblTradeCommodity5);
-        boxCargo.Controls.add(lblTradeCommodity4);
-        boxCargo.Controls.add(lblTradeCommodity3);
-        boxCargo.Controls.add(lblTradeCommodity7);
+        boxCargo.Controls.add(labelSellPrice0);
+        boxCargo.Controls.add(labelTradeTarget);
+        boxCargo.Controls.add(labelBuy);
+        boxCargo.Controls.add(labelSell);
+        boxCargo.Controls.add(labelTradeCommodity9);
+        boxCargo.Controls.add(labelTradeCommodity8);
+        boxCargo.Controls.add(labelTradeCommodity2);
+        boxCargo.Controls.add(labelTradeCommodity0);
+        boxCargo.Controls.add(labelTradeCommodity1);
+        boxCargo.Controls.add(labelTradeCommodity6);
+        boxCargo.Controls.add(labelTradeCommodity5);
+        boxCargo.Controls.add(labelTradeCommodity4);
+        boxCargo.Controls.add(labelTradeCommodity3);
+        boxCargo.Controls.add(labelTradeCommodity7);
         boxCargo.setLocation(new Point(252, 2));
         boxCargo.setName("boxCargo");
         boxCargo.setSize(new FormSize(512, 300));
         boxCargo.setTabIndex(8);
         boxCargo.setTabStop(false);
         boxCargo.setText("Cargo");
-        // picCargoLine3
-        picCargoLine3.setBackColor(Color.darkGray);
-        picCargoLine3.setLocation(new Point(8, 52));
-        picCargoLine3.setName("picCargoLine3");
-        picCargoLine3.setSize(new FormSize(496, 1));
-        picCargoLine3.setTabIndex(131);
-        picCargoLine3.setTabStop(false);
-        // picCargoLine2
-        picCargoLine2.setBackColor(Color.darkGray);
-        picCargoLine2.setLocation(new Point(352, 32));
-        picCargoLine2.setName("picCargoLine2");
-        picCargoLine2.setSize(new FormSize(1, 262));
-        picCargoLine2.setTabIndex(130);
-        picCargoLine2.setTabStop(false);
-        // picCargoLine0
-        picCargoLine0.setBackColor(Color.darkGray);
-        picCargoLine0.setLocation(new Point(71, 32));
-        picCargoLine0.setName("picCargoLine0");
-        picCargoLine0.setSize(new FormSize(1, 262));
-        picCargoLine0.setTabIndex(129);
-        picCargoLine0.setTabStop(false);
-        // picCargoLine1
-        picCargoLine1.setBackColor(Color.darkGray);
-        picCargoLine1.setLocation(new Point(218, 32));
-        picCargoLine1.setName("picCargoLine1");
-        picCargoLine1.setSize(new FormSize(1, 262));
-        picCargoLine1.setTabIndex(128);
-        picCargoLine1.setTabStop(false);
-        // lblTargetPct9
-        lblTargetPct9.setLocation(new Point(466, 276));
-        lblTargetPct9.setName("lblTargetPct9");
-        lblTargetPct9.setSize(new FormSize(37, 13));
-        lblTargetPct9.setTabIndex(127);
-        lblTargetPct9.setText("--------");
-        lblTargetPct9.TextAlign = ContentAlignment.TopRight;
-        // lblTargetDiff9
-        lblTargetDiff9.setLocation(new Point(410, 276));
-        lblTargetDiff9.setName("lblTargetDiff9");
-        lblTargetDiff9.setSize(new FormSize(52, 13));
-        lblTargetDiff9.setTabIndex(126);
-        lblTargetDiff9.setText("------------");
-        lblTargetDiff9.TextAlign = ContentAlignment.TopRight;
-        // lblTargetPrice9
-        lblTargetPrice9.setLocation(new Point(358, 276));
-        lblTargetPrice9.setName("lblTargetPrice9");
-        lblTargetPrice9.setSize(new FormSize(48, 13));
-        lblTargetPrice9.setTabIndex(125);
-        lblTargetPrice9.setText("-----------");
-        lblTargetPrice9.TextAlign = ContentAlignment.TopRight;
+        // pictureCargoLine3
+        pictureCargoLine3.setBackColor(Color.darkGray);
+        pictureCargoLine3.setLocation(new Point(8, 52));
+        pictureCargoLine3.setName("pictureCargoLine3");
+        pictureCargoLine3.setSize(new FormSize(496, 1));
+        pictureCargoLine3.setTabIndex(131);
+        pictureCargoLine3.setTabStop(false);
+        // pictureCargoLine2
+        pictureCargoLine2.setBackColor(Color.darkGray);
+        pictureCargoLine2.setLocation(new Point(352, 32));
+        pictureCargoLine2.setName("pictureCargoLine2");
+        pictureCargoLine2.setSize(new FormSize(1, 262));
+        pictureCargoLine2.setTabIndex(130);
+        pictureCargoLine2.setTabStop(false);
+        // pictureCargoLine0
+        pictureCargoLine0.setBackColor(Color.darkGray);
+        pictureCargoLine0.setLocation(new Point(71, 32));
+        pictureCargoLine0.setName("pictureCargoLine0");
+        pictureCargoLine0.setSize(new FormSize(1, 262));
+        pictureCargoLine0.setTabIndex(129);
+        pictureCargoLine0.setTabStop(false);
+        // pictureCargoLine1
+        pictureCargoLine1.setBackColor(Color.darkGray);
+        pictureCargoLine1.setLocation(new Point(218, 32));
+        pictureCargoLine1.setName("pictureCargoLine1");
+        pictureCargoLine1.setSize(new FormSize(1, 262));
+        pictureCargoLine1.setTabIndex(128);
+        pictureCargoLine1.setTabStop(false);
+        // labelTargetPct9
+        labelTargetPct9.setLocation(new Point(466, 276));
+        labelTargetPct9.setName("labelTargetPct9");
+        labelTargetPct9.setSize(new FormSize(37, 13));
+        labelTargetPct9.setTabIndex(127);
+        labelTargetPct9.setText("--------");
+        labelTargetPct9.TextAlign = ContentAlignment.TopRight;
+        // labelTargetDiff9
+        labelTargetDiff9.setLocation(new Point(410, 276));
+        labelTargetDiff9.setName("labelTargetDiff9");
+        labelTargetDiff9.setSize(new FormSize(52, 13));
+        labelTargetDiff9.setTabIndex(126);
+        labelTargetDiff9.setText("------------");
+        labelTargetDiff9.TextAlign = ContentAlignment.TopRight;
+        // labelTargetPrice9
+        labelTargetPrice9.setLocation(new Point(358, 276));
+        labelTargetPrice9.setName("labelTargetPrice9");
+        labelTargetPrice9.setSize(new FormSize(48, 13));
+        labelTargetPrice9.setTabIndex(125);
+        labelTargetPrice9.setText("-----------");
+        labelTargetPrice9.TextAlign = ContentAlignment.TopRight;
         // buttonBuyMax9
         buttonBuyMax9.setFlatStyle(FlatStyle.Flat);
         buttonBuyMax9.setLocation(new Point(262, 272));
@@ -1032,7 +1032,7 @@ public class Main extends wfWindow {
         buttonBuyMax9.setText("Max");
         buttonBuyMax9.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
@@ -1045,17 +1045,17 @@ public class Main extends wfWindow {
         buttonBuyQty9.setText("88");
         buttonBuyQty9.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
-        // lblBuyPrice9
-        lblBuyPrice9.setLocation(new Point(302, 276));
-        lblBuyPrice9.setName("lblBuyPrice9");
-        lblBuyPrice9.setSize(new FormSize(48, 13));
-        lblBuyPrice9.setTabIndex(122);
-        lblBuyPrice9.setText("not sold");
-        lblBuyPrice9.TextAlign = ContentAlignment.TopRight;
+        // labelBuyPrice9
+        labelBuyPrice9.setLocation(new Point(302, 276));
+        labelBuyPrice9.setName("labelBuyPrice9");
+        labelBuyPrice9.setSize(new FormSize(48, 13));
+        labelBuyPrice9.setTabIndex(122);
+        labelBuyPrice9.setText("not sold");
+        labelBuyPrice9.TextAlign = ContentAlignment.TopRight;
         // buttonSellAll9
         buttonSellAll9.setFlatStyle(FlatStyle.Flat);
         buttonSellAll9.setLocation(new Point(115, 272));
@@ -1065,7 +1065,7 @@ public class Main extends wfWindow {
         buttonSellAll9.setText("Dump");
         buttonSellAll9.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
@@ -1078,38 +1078,38 @@ public class Main extends wfWindow {
         buttonSellQty9.setText("88");
         buttonSellQty9.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
-        // lblSellPrice9
-        lblSellPrice9.setLocation(new Point(163, 276));
-        lblSellPrice9.setName("lblSellPrice9");
-        lblSellPrice9.setSize(new FormSize(48, 13));
-        lblSellPrice9.setTabIndex(119);
-        lblSellPrice9.setText("no trade");
-        lblSellPrice9.TextAlign = ContentAlignment.TopRight;
-        // lblTargetPct8
-        lblTargetPct8.setLocation(new Point(466, 252));
-        lblTargetPct8.setName("lblTargetPct8");
-        lblTargetPct8.setSize(new FormSize(37, 13));
-        lblTargetPct8.setTabIndex(118);
-        lblTargetPct8.setText("-888%");
-        lblTargetPct8.TextAlign = ContentAlignment.TopRight;
-        // lblTargetDiff8
-        lblTargetDiff8.setLocation(new Point(410, 252));
-        lblTargetDiff8.setName("lblTargetDiff8");
-        lblTargetDiff8.setSize(new FormSize(52, 13));
-        lblTargetDiff8.setTabIndex(117);
-        lblTargetDiff8.setText("-8,888 cr.");
-        lblTargetDiff8.TextAlign = ContentAlignment.TopRight;
-        // lblTargetPrice8
-        lblTargetPrice8.setLocation(new Point(358, 252));
-        lblTargetPrice8.setName("lblTargetPrice8");
-        lblTargetPrice8.setSize(new FormSize(48, 13));
-        lblTargetPrice8.setTabIndex(116);
-        lblTargetPrice8.setText("8,888 cr.");
-        lblTargetPrice8.TextAlign = ContentAlignment.TopRight;
+        // labelSellPrice9
+        labelSellPrice9.setLocation(new Point(163, 276));
+        labelSellPrice9.setName("labelSellPrice9");
+        labelSellPrice9.setSize(new FormSize(48, 13));
+        labelSellPrice9.setTabIndex(119);
+        labelSellPrice9.setText("no trade");
+        labelSellPrice9.TextAlign = ContentAlignment.TopRight;
+        // labelTargetPct8
+        labelTargetPct8.setLocation(new Point(466, 252));
+        labelTargetPct8.setName("labelTargetPct8");
+        labelTargetPct8.setSize(new FormSize(37, 13));
+        labelTargetPct8.setTabIndex(118);
+        labelTargetPct8.setText("-888%");
+        labelTargetPct8.TextAlign = ContentAlignment.TopRight;
+        // labelTargetDiff8
+        labelTargetDiff8.setLocation(new Point(410, 252));
+        labelTargetDiff8.setName("labelTargetDiff8");
+        labelTargetDiff8.setSize(new FormSize(52, 13));
+        labelTargetDiff8.setTabIndex(117);
+        labelTargetDiff8.setText("-8,888 cr.");
+        labelTargetDiff8.TextAlign = ContentAlignment.TopRight;
+        // labelTargetPrice8
+        labelTargetPrice8.setLocation(new Point(358, 252));
+        labelTargetPrice8.setName("labelTargetPrice8");
+        labelTargetPrice8.setSize(new FormSize(48, 13));
+        labelTargetPrice8.setTabIndex(116);
+        labelTargetPrice8.setText("8,888 cr.");
+        labelTargetPrice8.TextAlign = ContentAlignment.TopRight;
         // buttonBuyMax8
         buttonBuyMax8.setFlatStyle(FlatStyle.Flat);
         buttonBuyMax8.setLocation(new Point(262, 248));
@@ -1119,7 +1119,7 @@ public class Main extends wfWindow {
         buttonBuyMax8.setText("Max");
         buttonBuyMax8.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
@@ -1132,17 +1132,17 @@ public class Main extends wfWindow {
         buttonBuyQty8.setText("88");
         buttonBuyQty8.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
-        // lblBuyPrice8
-        lblBuyPrice8.setLocation(new Point(302, 252));
-        lblBuyPrice8.setName("lblBuyPrice8");
-        lblBuyPrice8.setSize(new FormSize(48, 13));
-        lblBuyPrice8.setTabIndex(113);
-        lblBuyPrice8.setText("8,888 cr.");
-        lblBuyPrice8.TextAlign = ContentAlignment.TopRight;
+        // labelBuyPrice8
+        labelBuyPrice8.setLocation(new Point(302, 252));
+        labelBuyPrice8.setName("labelBuyPrice8");
+        labelBuyPrice8.setSize(new FormSize(48, 13));
+        labelBuyPrice8.setTabIndex(113);
+        labelBuyPrice8.setText("8,888 cr.");
+        labelBuyPrice8.TextAlign = ContentAlignment.TopRight;
         // buttonSellAll8
         buttonSellAll8.setFlatStyle(FlatStyle.Flat);
         buttonSellAll8.setLocation(new Point(115, 248));
@@ -1152,7 +1152,7 @@ public class Main extends wfWindow {
         buttonSellAll8.setText("All");
         buttonSellAll8.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
@@ -1165,40 +1165,40 @@ public class Main extends wfWindow {
         buttonSellQty8.setText("88");
         buttonSellQty8.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
-        // lblSellPrice8
-        lblSellPrice8.setLocation(new Point(163, 252));
-        lblSellPrice8.setName("lblSellPrice8");
-        lblSellPrice8.setSize(new FormSize(48, 13));
-        lblSellPrice8.setTabIndex(110);
-        lblSellPrice8.setText("8,888 cr.");
-        lblSellPrice8.TextAlign = ContentAlignment.TopRight;
-        // lblTargetPct7
-        lblTargetPct7.setLocation(new Point(466, 228));
-        lblTargetPct7.setName("lblTargetPct7");
-        lblTargetPct7.setSize(new FormSize(37, 13));
-        lblTargetPct7.setTabIndex(109);
-        lblTargetPct7.setText("-888%");
-        lblTargetPct7.TextAlign = ContentAlignment.TopRight;
-        // lblTargetDiff7
-        lblTargetDiff7.setFont(
+        // labelSellPrice8
+        labelSellPrice8.setLocation(new Point(163, 252));
+        labelSellPrice8.setName("labelSellPrice8");
+        labelSellPrice8.setSize(new FormSize(48, 13));
+        labelSellPrice8.setTabIndex(110);
+        labelSellPrice8.setText("8,888 cr.");
+        labelSellPrice8.TextAlign = ContentAlignment.TopRight;
+        // labelTargetPct7
+        labelTargetPct7.setLocation(new Point(466, 228));
+        labelTargetPct7.setName("labelTargetPct7");
+        labelTargetPct7.setSize(new FormSize(37, 13));
+        labelTargetPct7.setTabIndex(109);
+        labelTargetPct7.setText("-888%");
+        labelTargetPct7.TextAlign = ContentAlignment.TopRight;
+        // labelTargetDiff7
+        labelTargetDiff7.setFont(
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte) (0))));
-        lblTargetDiff7.setLocation(new Point(410, 228));
-        lblTargetDiff7.setName("lblTargetDiff7");
-        lblTargetDiff7.setSize(new FormSize(52, 13));
-        lblTargetDiff7.setTabIndex(108);
-        lblTargetDiff7.setText("-8,888 cr.");
-        lblTargetDiff7.TextAlign = ContentAlignment.TopRight;
-        // lblTargetPrice7
-        lblTargetPrice7.setLocation(new Point(358, 228));
-        lblTargetPrice7.setName("lblTargetPrice7");
-        lblTargetPrice7.setSize(new FormSize(48, 13));
-        lblTargetPrice7.setTabIndex(107);
-        lblTargetPrice7.setText("8,888 cr.");
-        lblTargetPrice7.TextAlign = ContentAlignment.TopRight;
+        labelTargetDiff7.setLocation(new Point(410, 228));
+        labelTargetDiff7.setName("labelTargetDiff7");
+        labelTargetDiff7.setSize(new FormSize(52, 13));
+        labelTargetDiff7.setTabIndex(108);
+        labelTargetDiff7.setText("-8,888 cr.");
+        labelTargetDiff7.TextAlign = ContentAlignment.TopRight;
+        // labelTargetPrice7
+        labelTargetPrice7.setLocation(new Point(358, 228));
+        labelTargetPrice7.setName("labelTargetPrice7");
+        labelTargetPrice7.setSize(new FormSize(48, 13));
+        labelTargetPrice7.setTabIndex(107);
+        labelTargetPrice7.setText("8,888 cr.");
+        labelTargetPrice7.TextAlign = ContentAlignment.TopRight;
         // buttonBuyMax7
         buttonBuyMax7.setFlatStyle(FlatStyle.Flat);
         buttonBuyMax7.setLocation(new Point(262, 224));
@@ -1208,7 +1208,7 @@ public class Main extends wfWindow {
         buttonBuyMax7.setText("Max");
         buttonBuyMax7.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
@@ -1221,17 +1221,17 @@ public class Main extends wfWindow {
         buttonBuyQty7.setText("88");
         buttonBuyQty7.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
-        // lblBuyPrice7
-        lblBuyPrice7.setLocation(new Point(302, 228));
-        lblBuyPrice7.setName("lblBuyPrice7");
-        lblBuyPrice7.setSize(new FormSize(48, 13));
-        lblBuyPrice7.setTabIndex(104);
-        lblBuyPrice7.setText("8,888 cr.");
-        lblBuyPrice7.TextAlign = ContentAlignment.TopRight;
+        // labelBuyPrice7
+        labelBuyPrice7.setLocation(new Point(302, 228));
+        labelBuyPrice7.setName("labelBuyPrice7");
+        labelBuyPrice7.setSize(new FormSize(48, 13));
+        labelBuyPrice7.setTabIndex(104);
+        labelBuyPrice7.setText("8,888 cr.");
+        labelBuyPrice7.TextAlign = ContentAlignment.TopRight;
         // buttonSellAll7
         buttonSellAll7.setFlatStyle(FlatStyle.Flat);
         buttonSellAll7.setLocation(new Point(115, 224));
@@ -1241,7 +1241,7 @@ public class Main extends wfWindow {
         buttonSellAll7.setText("All");
         buttonSellAll7.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
@@ -1254,38 +1254,38 @@ public class Main extends wfWindow {
         buttonSellQty7.setText("88");
         buttonSellQty7.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
-        // lblSellPrice7
-        lblSellPrice7.setLocation(new Point(163, 228));
-        lblSellPrice7.setName("lblSellPrice7");
-        lblSellPrice7.setSize(new FormSize(48, 13));
-        lblSellPrice7.setTabIndex(101);
-        lblSellPrice7.setText("8,888 cr.");
-        lblSellPrice7.TextAlign = ContentAlignment.TopRight;
-        // lblTargetPct6
-        lblTargetPct6.setLocation(new Point(466, 204));
-        lblTargetPct6.setName("lblTargetPct6");
-        lblTargetPct6.setSize(new FormSize(37, 13));
-        lblTargetPct6.setTabIndex(100);
-        lblTargetPct6.setText("-888%");
-        lblTargetPct6.TextAlign = ContentAlignment.TopRight;
-        // lblTargetDiff6
-        lblTargetDiff6.setLocation(new Point(410, 204));
-        lblTargetDiff6.setName("lblTargetDiff6");
-        lblTargetDiff6.setSize(new FormSize(52, 13));
-        lblTargetDiff6.setTabIndex(99);
-        lblTargetDiff6.setText("-8,888 cr.");
-        lblTargetDiff6.TextAlign = ContentAlignment.TopRight;
-        // lblTargetPrice6
-        lblTargetPrice6.setLocation(new Point(358, 204));
-        lblTargetPrice6.setName("lblTargetPrice6");
-        lblTargetPrice6.setSize(new FormSize(48, 13));
-        lblTargetPrice6.setTabIndex(98);
-        lblTargetPrice6.setText("8,888 cr.");
-        lblTargetPrice6.TextAlign = ContentAlignment.TopRight;
+        // labelSellPrice7
+        labelSellPrice7.setLocation(new Point(163, 228));
+        labelSellPrice7.setName("labelSellPrice7");
+        labelSellPrice7.setSize(new FormSize(48, 13));
+        labelSellPrice7.setTabIndex(101);
+        labelSellPrice7.setText("8,888 cr.");
+        labelSellPrice7.TextAlign = ContentAlignment.TopRight;
+        // labelTargetPct6
+        labelTargetPct6.setLocation(new Point(466, 204));
+        labelTargetPct6.setName("labelTargetPct6");
+        labelTargetPct6.setSize(new FormSize(37, 13));
+        labelTargetPct6.setTabIndex(100);
+        labelTargetPct6.setText("-888%");
+        labelTargetPct6.TextAlign = ContentAlignment.TopRight;
+        // labelTargetDiff6
+        labelTargetDiff6.setLocation(new Point(410, 204));
+        labelTargetDiff6.setName("labelTargetDiff6");
+        labelTargetDiff6.setSize(new FormSize(52, 13));
+        labelTargetDiff6.setTabIndex(99);
+        labelTargetDiff6.setText("-8,888 cr.");
+        labelTargetDiff6.TextAlign = ContentAlignment.TopRight;
+        // labelTargetPrice6
+        labelTargetPrice6.setLocation(new Point(358, 204));
+        labelTargetPrice6.setName("labelTargetPrice6");
+        labelTargetPrice6.setSize(new FormSize(48, 13));
+        labelTargetPrice6.setTabIndex(98);
+        labelTargetPrice6.setText("8,888 cr.");
+        labelTargetPrice6.TextAlign = ContentAlignment.TopRight;
         // buttonBuyMax6
         buttonBuyMax6.setFlatStyle(FlatStyle.Flat);
         buttonBuyMax6.setLocation(new Point(262, 200));
@@ -1295,7 +1295,7 @@ public class Main extends wfWindow {
         buttonBuyMax6.setText("Max");
         buttonBuyMax6.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
@@ -1308,17 +1308,17 @@ public class Main extends wfWindow {
         buttonBuyQty6.setText("88");
         buttonBuyQty6.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
-        // lblBuyPrice6
-        lblBuyPrice6.setLocation(new Point(302, 204));
-        lblBuyPrice6.setName("lblBuyPrice6");
-        lblBuyPrice6.setSize(new FormSize(48, 13));
-        lblBuyPrice6.setTabIndex(95);
-        lblBuyPrice6.setText("8,888 cr.");
-        lblBuyPrice6.TextAlign = ContentAlignment.TopRight;
+        // labelBuyPrice6
+        labelBuyPrice6.setLocation(new Point(302, 204));
+        labelBuyPrice6.setName("labelBuyPrice6");
+        labelBuyPrice6.setSize(new FormSize(48, 13));
+        labelBuyPrice6.setTabIndex(95);
+        labelBuyPrice6.setText("8,888 cr.");
+        labelBuyPrice6.TextAlign = ContentAlignment.TopRight;
         // buttonSellAll6
         buttonSellAll6.setFlatStyle(FlatStyle.Flat);
         buttonSellAll6.setLocation(new Point(115, 200));
@@ -1328,7 +1328,7 @@ public class Main extends wfWindow {
         buttonSellAll6.setText("All");
         buttonSellAll6.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
@@ -1341,38 +1341,38 @@ public class Main extends wfWindow {
         buttonSellQty6.setText("88");
         buttonSellQty6.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
-        // lblSellPrice6
-        lblSellPrice6.setLocation(new Point(163, 204));
-        lblSellPrice6.setName("lblSellPrice6");
-        lblSellPrice6.setSize(new FormSize(48, 13));
-        lblSellPrice6.setTabIndex(92);
-        lblSellPrice6.setText("8,888 cr.");
-        lblSellPrice6.TextAlign = ContentAlignment.TopRight;
-        // lblTargetPct5
-        lblTargetPct5.setLocation(new Point(466, 180));
-        lblTargetPct5.setName("lblTargetPct5");
-        lblTargetPct5.setSize(new FormSize(37, 13));
-        lblTargetPct5.setTabIndex(91);
-        lblTargetPct5.setText("-888%");
-        lblTargetPct5.TextAlign = ContentAlignment.TopRight;
-        // lblTargetDiff5
-        lblTargetDiff5.setLocation(new Point(410, 180));
-        lblTargetDiff5.setName("lblTargetDiff5");
-        lblTargetDiff5.setSize(new FormSize(52, 13));
-        lblTargetDiff5.setTabIndex(90);
-        lblTargetDiff5.setText("-8,888 cr.");
-        lblTargetDiff5.TextAlign = ContentAlignment.TopRight;
-        // lblTargetPrice5
-        lblTargetPrice5.setLocation(new Point(358, 180));
-        lblTargetPrice5.setName("lblTargetPrice5");
-        lblTargetPrice5.setSize(new FormSize(48, 13));
-        lblTargetPrice5.setTabIndex(89);
-        lblTargetPrice5.setText("8,888 cr.");
-        lblTargetPrice5.TextAlign = ContentAlignment.TopRight;
+        // labelSellPrice6
+        labelSellPrice6.setLocation(new Point(163, 204));
+        labelSellPrice6.setName("labelSellPrice6");
+        labelSellPrice6.setSize(new FormSize(48, 13));
+        labelSellPrice6.setTabIndex(92);
+        labelSellPrice6.setText("8,888 cr.");
+        labelSellPrice6.TextAlign = ContentAlignment.TopRight;
+        // labelTargetPct5
+        labelTargetPct5.setLocation(new Point(466, 180));
+        labelTargetPct5.setName("labelTargetPct5");
+        labelTargetPct5.setSize(new FormSize(37, 13));
+        labelTargetPct5.setTabIndex(91);
+        labelTargetPct5.setText("-888%");
+        labelTargetPct5.TextAlign = ContentAlignment.TopRight;
+        // labelTargetDiff5
+        labelTargetDiff5.setLocation(new Point(410, 180));
+        labelTargetDiff5.setName("labelTargetDiff5");
+        labelTargetDiff5.setSize(new FormSize(52, 13));
+        labelTargetDiff5.setTabIndex(90);
+        labelTargetDiff5.setText("-8,888 cr.");
+        labelTargetDiff5.TextAlign = ContentAlignment.TopRight;
+        // labelTargetPrice5
+        labelTargetPrice5.setLocation(new Point(358, 180));
+        labelTargetPrice5.setName("labelTargetPrice5");
+        labelTargetPrice5.setSize(new FormSize(48, 13));
+        labelTargetPrice5.setTabIndex(89);
+        labelTargetPrice5.setText("8,888 cr.");
+        labelTargetPrice5.TextAlign = ContentAlignment.TopRight;
         // buttonBuyMax5
         buttonBuyMax5.setFlatStyle(FlatStyle.Flat);
         buttonBuyMax5.setLocation(new Point(262, 176));
@@ -1382,7 +1382,7 @@ public class Main extends wfWindow {
         buttonBuyMax5.setText("Max");
         buttonBuyMax5.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
@@ -1395,17 +1395,17 @@ public class Main extends wfWindow {
         buttonBuyQty5.setText("88");
         buttonBuyQty5.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
-        // lblBuyPrice5
-        lblBuyPrice5.setLocation(new Point(302, 180));
-        lblBuyPrice5.setName("lblBuyPrice5");
-        lblBuyPrice5.setSize(new FormSize(48, 13));
-        lblBuyPrice5.setTabIndex(86);
-        lblBuyPrice5.setText("8,888 cr.");
-        lblBuyPrice5.TextAlign = ContentAlignment.TopRight;
+        // labelBuyPrice5
+        labelBuyPrice5.setLocation(new Point(302, 180));
+        labelBuyPrice5.setName("labelBuyPrice5");
+        labelBuyPrice5.setSize(new FormSize(48, 13));
+        labelBuyPrice5.setTabIndex(86);
+        labelBuyPrice5.setText("8,888 cr.");
+        labelBuyPrice5.TextAlign = ContentAlignment.TopRight;
         // buttonSellAll5
         buttonSellAll5.setFlatStyle(FlatStyle.Flat);
         buttonSellAll5.setLocation(new Point(115, 176));
@@ -1415,7 +1415,7 @@ public class Main extends wfWindow {
         buttonSellAll5.setText("All");
         buttonSellAll5.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
@@ -1428,38 +1428,38 @@ public class Main extends wfWindow {
         buttonSellQty5.setText("88");
         buttonSellQty5.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
-        // lblSellPrice5
-        lblSellPrice5.setLocation(new Point(163, 180));
-        lblSellPrice5.setName("lblSellPrice5");
-        lblSellPrice5.setSize(new FormSize(48, 13));
-        lblSellPrice5.setTabIndex(83);
-        lblSellPrice5.setText("8,888 cr.");
-        lblSellPrice5.TextAlign = ContentAlignment.TopRight;
-        // lblTargetPct4
-        lblTargetPct4.setLocation(new Point(466, 156));
-        lblTargetPct4.setName("lblTargetPct4");
-        lblTargetPct4.setSize(new FormSize(37, 13));
-        lblTargetPct4.setTabIndex(82);
-        lblTargetPct4.setText("-888%");
-        lblTargetPct4.TextAlign = ContentAlignment.TopRight;
-        // lblTargetDiff4
-        lblTargetDiff4.setLocation(new Point(410, 156));
-        lblTargetDiff4.setName("lblTargetDiff4");
-        lblTargetDiff4.setSize(new FormSize(52, 13));
-        lblTargetDiff4.setTabIndex(81);
-        lblTargetDiff4.setText("-8,888 cr.");
-        lblTargetDiff4.TextAlign = ContentAlignment.TopRight;
-        // lblTargetPrice4
-        lblTargetPrice4.setLocation(new Point(358, 156));
-        lblTargetPrice4.setName("lblTargetPrice4");
-        lblTargetPrice4.setSize(new FormSize(48, 13));
-        lblTargetPrice4.setTabIndex(80);
-        lblTargetPrice4.setText("8,888 cr.");
-        lblTargetPrice4.TextAlign = ContentAlignment.TopRight;
+        // labelSellPrice5
+        labelSellPrice5.setLocation(new Point(163, 180));
+        labelSellPrice5.setName("labelSellPrice5");
+        labelSellPrice5.setSize(new FormSize(48, 13));
+        labelSellPrice5.setTabIndex(83);
+        labelSellPrice5.setText("8,888 cr.");
+        labelSellPrice5.TextAlign = ContentAlignment.TopRight;
+        // labelTargetPct4
+        labelTargetPct4.setLocation(new Point(466, 156));
+        labelTargetPct4.setName("labelTargetPct4");
+        labelTargetPct4.setSize(new FormSize(37, 13));
+        labelTargetPct4.setTabIndex(82);
+        labelTargetPct4.setText("-888%");
+        labelTargetPct4.TextAlign = ContentAlignment.TopRight;
+        // labelTargetDiff4
+        labelTargetDiff4.setLocation(new Point(410, 156));
+        labelTargetDiff4.setName("labelTargetDiff4");
+        labelTargetDiff4.setSize(new FormSize(52, 13));
+        labelTargetDiff4.setTabIndex(81);
+        labelTargetDiff4.setText("-8,888 cr.");
+        labelTargetDiff4.TextAlign = ContentAlignment.TopRight;
+        // labelTargetPrice4
+        labelTargetPrice4.setLocation(new Point(358, 156));
+        labelTargetPrice4.setName("labelTargetPrice4");
+        labelTargetPrice4.setSize(new FormSize(48, 13));
+        labelTargetPrice4.setTabIndex(80);
+        labelTargetPrice4.setText("8,888 cr.");
+        labelTargetPrice4.TextAlign = ContentAlignment.TopRight;
         // buttonBuyMax4
         buttonBuyMax4.setFlatStyle(FlatStyle.Flat);
         buttonBuyMax4.setLocation(new Point(262, 152));
@@ -1469,7 +1469,7 @@ public class Main extends wfWindow {
         buttonBuyMax4.setText("Max");
         buttonBuyMax4.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
@@ -1482,17 +1482,17 @@ public class Main extends wfWindow {
         buttonBuyQty4.setText("88");
         buttonBuyQty4.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
-        // lblBuyPrice4
-        lblBuyPrice4.setLocation(new Point(302, 156));
-        lblBuyPrice4.setName("lblBuyPrice4");
-        lblBuyPrice4.setSize(new FormSize(48, 13));
-        lblBuyPrice4.setTabIndex(77);
-        lblBuyPrice4.setText("8,888 cr.");
-        lblBuyPrice4.TextAlign = ContentAlignment.TopRight;
+        // labelBuyPrice4
+        labelBuyPrice4.setLocation(new Point(302, 156));
+        labelBuyPrice4.setName("labelBuyPrice4");
+        labelBuyPrice4.setSize(new FormSize(48, 13));
+        labelBuyPrice4.setTabIndex(77);
+        labelBuyPrice4.setText("8,888 cr.");
+        labelBuyPrice4.TextAlign = ContentAlignment.TopRight;
         // buttonSellAll4
         buttonSellAll4.setFlatStyle(FlatStyle.Flat);
         buttonSellAll4.setLocation(new Point(115, 152));
@@ -1502,7 +1502,7 @@ public class Main extends wfWindow {
         buttonSellAll4.setText("All");
         buttonSellAll4.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
@@ -1515,38 +1515,38 @@ public class Main extends wfWindow {
         buttonSellQty4.setText("88");
         buttonSellQty4.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
-        // lblSellPrice4
-        lblSellPrice4.setLocation(new Point(163, 156));
-        lblSellPrice4.setName("lblSellPrice4");
-        lblSellPrice4.setSize(new FormSize(48, 13));
-        lblSellPrice4.setTabIndex(74);
-        lblSellPrice4.setText("8,888 cr.");
-        lblSellPrice4.TextAlign = ContentAlignment.TopRight;
-        // lblTargetPct3
-        lblTargetPct3.setLocation(new Point(466, 132));
-        lblTargetPct3.setName("lblTargetPct3");
-        lblTargetPct3.setSize(new FormSize(37, 13));
-        lblTargetPct3.setTabIndex(73);
-        lblTargetPct3.setText("-888%");
-        lblTargetPct3.TextAlign = ContentAlignment.TopRight;
-        // lblTargetDiff3
-        lblTargetDiff3.setLocation(new Point(410, 132));
-        lblTargetDiff3.setName("lblTargetDiff3");
-        lblTargetDiff3.setSize(new FormSize(52, 13));
-        lblTargetDiff3.setTabIndex(72);
-        lblTargetDiff3.setText("-8,888 cr.");
-        lblTargetDiff3.TextAlign = ContentAlignment.TopRight;
-        // lblTargetPrice3
-        lblTargetPrice3.setLocation(new Point(358, 132));
-        lblTargetPrice3.setName("lblTargetPrice3");
-        lblTargetPrice3.setSize(new FormSize(48, 13));
-        lblTargetPrice3.setTabIndex(71);
-        lblTargetPrice3.setText("8,888 cr.");
-        lblTargetPrice3.TextAlign = ContentAlignment.TopRight;
+        // labelSellPrice4
+        labelSellPrice4.setLocation(new Point(163, 156));
+        labelSellPrice4.setName("labelSellPrice4");
+        labelSellPrice4.setSize(new FormSize(48, 13));
+        labelSellPrice4.setTabIndex(74);
+        labelSellPrice4.setText("8,888 cr.");
+        labelSellPrice4.TextAlign = ContentAlignment.TopRight;
+        // labelTargetPct3
+        labelTargetPct3.setLocation(new Point(466, 132));
+        labelTargetPct3.setName("labelTargetPct3");
+        labelTargetPct3.setSize(new FormSize(37, 13));
+        labelTargetPct3.setTabIndex(73);
+        labelTargetPct3.setText("-888%");
+        labelTargetPct3.TextAlign = ContentAlignment.TopRight;
+        // labelTargetDiff3
+        labelTargetDiff3.setLocation(new Point(410, 132));
+        labelTargetDiff3.setName("labelTargetDiff3");
+        labelTargetDiff3.setSize(new FormSize(52, 13));
+        labelTargetDiff3.setTabIndex(72);
+        labelTargetDiff3.setText("-8,888 cr.");
+        labelTargetDiff3.TextAlign = ContentAlignment.TopRight;
+        // labelTargetPrice3
+        labelTargetPrice3.setLocation(new Point(358, 132));
+        labelTargetPrice3.setName("labelTargetPrice3");
+        labelTargetPrice3.setSize(new FormSize(48, 13));
+        labelTargetPrice3.setTabIndex(71);
+        labelTargetPrice3.setText("8,888 cr.");
+        labelTargetPrice3.TextAlign = ContentAlignment.TopRight;
         // buttonBuyMax3
         buttonBuyMax3.setFlatStyle(FlatStyle.Flat);
         buttonBuyMax3.setLocation(new Point(262, 128));
@@ -1556,7 +1556,7 @@ public class Main extends wfWindow {
         buttonBuyMax3.setText("Max");
         buttonBuyMax3.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
@@ -1569,17 +1569,17 @@ public class Main extends wfWindow {
         buttonBuyQty3.setText("88");
         buttonBuyQty3.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
-        // lblBuyPrice3
-        lblBuyPrice3.setLocation(new Point(302, 132));
-        lblBuyPrice3.setName("lblBuyPrice3");
-        lblBuyPrice3.setSize(new FormSize(48, 13));
-        lblBuyPrice3.setTabIndex(68);
-        lblBuyPrice3.setText("8,888 cr.");
-        lblBuyPrice3.TextAlign = ContentAlignment.TopRight;
+        // labelBuyPrice3
+        labelBuyPrice3.setLocation(new Point(302, 132));
+        labelBuyPrice3.setName("labelBuyPrice3");
+        labelBuyPrice3.setSize(new FormSize(48, 13));
+        labelBuyPrice3.setTabIndex(68);
+        labelBuyPrice3.setText("8,888 cr.");
+        labelBuyPrice3.TextAlign = ContentAlignment.TopRight;
         // buttonSellAll3
         buttonSellAll3.setFlatStyle(FlatStyle.Flat);
         buttonSellAll3.setLocation(new Point(115, 128));
@@ -1589,7 +1589,7 @@ public class Main extends wfWindow {
         buttonSellAll3.setText("All");
         buttonSellAll3.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
@@ -1602,38 +1602,38 @@ public class Main extends wfWindow {
         buttonSellQty3.setText("88");
         buttonSellQty3.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
-        // lblSellPrice3
-        lblSellPrice3.setLocation(new Point(163, 132));
-        lblSellPrice3.setName("lblSellPrice3");
-        lblSellPrice3.setSize(new FormSize(48, 13));
-        lblSellPrice3.setTabIndex(65);
-        lblSellPrice3.setText("8,888 cr.");
-        lblSellPrice3.TextAlign = ContentAlignment.TopRight;
-        // lblTargetPct2
-        lblTargetPct2.setLocation(new Point(466, 108));
-        lblTargetPct2.setName("lblTargetPct2");
-        lblTargetPct2.setSize(new FormSize(37, 13));
-        lblTargetPct2.setTabIndex(64);
-        lblTargetPct2.setText("-888%");
-        lblTargetPct2.TextAlign = ContentAlignment.TopRight;
-        // lblTargetDiff2
-        lblTargetDiff2.setLocation(new Point(410, 108));
-        lblTargetDiff2.setName("lblTargetDiff2");
-        lblTargetDiff2.setSize(new FormSize(52, 13));
-        lblTargetDiff2.setTabIndex(63);
-        lblTargetDiff2.setText("-8,888 cr.");
-        lblTargetDiff2.TextAlign = ContentAlignment.TopRight;
-        // lblTargetPrice2
-        lblTargetPrice2.setLocation(new Point(358, 108));
-        lblTargetPrice2.setName("lblTargetPrice2");
-        lblTargetPrice2.setSize(new FormSize(48, 13));
-        lblTargetPrice2.setTabIndex(62);
-        lblTargetPrice2.setText("8,888 cr.");
-        lblTargetPrice2.TextAlign = ContentAlignment.TopRight;
+        // labelSellPrice3
+        labelSellPrice3.setLocation(new Point(163, 132));
+        labelSellPrice3.setName("labelSellPrice3");
+        labelSellPrice3.setSize(new FormSize(48, 13));
+        labelSellPrice3.setTabIndex(65);
+        labelSellPrice3.setText("8,888 cr.");
+        labelSellPrice3.TextAlign = ContentAlignment.TopRight;
+        // labelTargetPct2
+        labelTargetPct2.setLocation(new Point(466, 108));
+        labelTargetPct2.setName("labelTargetPct2");
+        labelTargetPct2.setSize(new FormSize(37, 13));
+        labelTargetPct2.setTabIndex(64);
+        labelTargetPct2.setText("-888%");
+        labelTargetPct2.TextAlign = ContentAlignment.TopRight;
+        // labelTargetDiff2
+        labelTargetDiff2.setLocation(new Point(410, 108));
+        labelTargetDiff2.setName("labelTargetDiff2");
+        labelTargetDiff2.setSize(new FormSize(52, 13));
+        labelTargetDiff2.setTabIndex(63);
+        labelTargetDiff2.setText("-8,888 cr.");
+        labelTargetDiff2.TextAlign = ContentAlignment.TopRight;
+        // labelTargetPrice2
+        labelTargetPrice2.setLocation(new Point(358, 108));
+        labelTargetPrice2.setName("labelTargetPrice2");
+        labelTargetPrice2.setSize(new FormSize(48, 13));
+        labelTargetPrice2.setTabIndex(62);
+        labelTargetPrice2.setText("8,888 cr.");
+        labelTargetPrice2.TextAlign = ContentAlignment.TopRight;
         // buttonBuyMax2
         buttonBuyMax2.setFlatStyle(FlatStyle.Flat);
         buttonBuyMax2.setLocation(new Point(262, 104));
@@ -1643,7 +1643,7 @@ public class Main extends wfWindow {
         buttonBuyMax2.setText("Max");
         buttonBuyMax2.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
@@ -1656,17 +1656,17 @@ public class Main extends wfWindow {
         buttonBuyQty2.setText("88");
         buttonBuyQty2.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
-        // lblBuyPrice2
-        lblBuyPrice2.setLocation(new Point(302, 108));
-        lblBuyPrice2.setName("lblBuyPrice2");
-        lblBuyPrice2.setSize(new FormSize(48, 13));
-        lblBuyPrice2.setTabIndex(59);
-        lblBuyPrice2.setText("8,888 cr.");
-        lblBuyPrice2.TextAlign = ContentAlignment.TopRight;
+        // labelBuyPrice2
+        labelBuyPrice2.setLocation(new Point(302, 108));
+        labelBuyPrice2.setName("labelBuyPrice2");
+        labelBuyPrice2.setSize(new FormSize(48, 13));
+        labelBuyPrice2.setTabIndex(59);
+        labelBuyPrice2.setText("8,888 cr.");
+        labelBuyPrice2.TextAlign = ContentAlignment.TopRight;
         // buttonSellAll2
         buttonSellAll2.setFlatStyle(FlatStyle.Flat);
         buttonSellAll2.setLocation(new Point(115, 104));
@@ -1676,7 +1676,7 @@ public class Main extends wfWindow {
         buttonSellAll2.setText("All");
         buttonSellAll2.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
@@ -1689,38 +1689,38 @@ public class Main extends wfWindow {
         buttonSellQty2.setText("88");
         buttonSellQty2.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
-        // lblSellPrice2
-        lblSellPrice2.setLocation(new Point(163, 108));
-        lblSellPrice2.setName("lblSellPrice2");
-        lblSellPrice2.setSize(new FormSize(48, 13));
-        lblSellPrice2.setTabIndex(56);
-        lblSellPrice2.setText("8,888 cr.");
-        lblSellPrice2.TextAlign = ContentAlignment.TopRight;
-        // lblTargetPct1
-        lblTargetPct1.setLocation(new Point(466, 84));
-        lblTargetPct1.setName("lblTargetPct1");
-        lblTargetPct1.setSize(new FormSize(37, 13));
-        lblTargetPct1.setTabIndex(55);
-        lblTargetPct1.setText("-888%");
-        lblTargetPct1.TextAlign = ContentAlignment.TopRight;
-        // lblTargetDiff1
-        lblTargetDiff1.setLocation(new Point(410, 84));
-        lblTargetDiff1.setName("lblTargetDiff1");
-        lblTargetDiff1.setSize(new FormSize(52, 13));
-        lblTargetDiff1.setTabIndex(54);
-        lblTargetDiff1.setText("-8,888 cr.");
-        lblTargetDiff1.TextAlign = ContentAlignment.TopRight;
-        // lblTargetPrice1
-        lblTargetPrice1.setLocation(new Point(358, 84));
-        lblTargetPrice1.setName("lblTargetPrice1");
-        lblTargetPrice1.setSize(new FormSize(48, 13));
-        lblTargetPrice1.setTabIndex(53);
-        lblTargetPrice1.setText("8,888 cr.");
-        lblTargetPrice1.TextAlign = ContentAlignment.TopRight;
+        // labelSellPrice2
+        labelSellPrice2.setLocation(new Point(163, 108));
+        labelSellPrice2.setName("labelSellPrice2");
+        labelSellPrice2.setSize(new FormSize(48, 13));
+        labelSellPrice2.setTabIndex(56);
+        labelSellPrice2.setText("8,888 cr.");
+        labelSellPrice2.TextAlign = ContentAlignment.TopRight;
+        // labelTargetPct1
+        labelTargetPct1.setLocation(new Point(466, 84));
+        labelTargetPct1.setName("labelTargetPct1");
+        labelTargetPct1.setSize(new FormSize(37, 13));
+        labelTargetPct1.setTabIndex(55);
+        labelTargetPct1.setText("-888%");
+        labelTargetPct1.TextAlign = ContentAlignment.TopRight;
+        // labelTargetDiff1
+        labelTargetDiff1.setLocation(new Point(410, 84));
+        labelTargetDiff1.setName("labelTargetDiff1");
+        labelTargetDiff1.setSize(new FormSize(52, 13));
+        labelTargetDiff1.setTabIndex(54);
+        labelTargetDiff1.setText("-8,888 cr.");
+        labelTargetDiff1.TextAlign = ContentAlignment.TopRight;
+        // labelTargetPrice1
+        labelTargetPrice1.setLocation(new Point(358, 84));
+        labelTargetPrice1.setName("labelTargetPrice1");
+        labelTargetPrice1.setSize(new FormSize(48, 13));
+        labelTargetPrice1.setTabIndex(53);
+        labelTargetPrice1.setText("8,888 cr.");
+        labelTargetPrice1.TextAlign = ContentAlignment.TopRight;
         // buttonBuyMax1
         buttonBuyMax1.setFlatStyle(FlatStyle.Flat);
         buttonBuyMax1.setLocation(new Point(262, 80));
@@ -1730,7 +1730,7 @@ public class Main extends wfWindow {
         buttonBuyMax1.setText("Max");
         buttonBuyMax1.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
@@ -1743,59 +1743,59 @@ public class Main extends wfWindow {
         buttonBuyQty1.setText("88");
         buttonBuyQty1.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
-        // lblBuyPrice1
-        lblBuyPrice1.setLocation(new Point(302, 84));
-        lblBuyPrice1.setName("lblBuyPrice1");
-        lblBuyPrice1.setSize(new FormSize(48, 13));
-        lblBuyPrice1.setTabIndex(50);
-        lblBuyPrice1.setText("8,888 cr.");
-        lblBuyPrice1.TextAlign = ContentAlignment.TopRight;
-        // lblTargetPctLabel
-        lblTargetPctLabel.setAutoSize(true);
-        lblTargetPctLabel.setLocation(new Point(476, 34));
-        lblTargetPctLabel.setName("lblTargetPctLabel");
-        lblTargetPctLabel.setSize(new FormSize(14, 16));
-        lblTargetPctLabel.setTabIndex(49);
-        lblTargetPctLabel.setText("%");
-        // lblTargetDiffLabel
-        lblTargetDiffLabel.setAutoSize(true);
-        lblTargetDiffLabel.setLocation(new Point(424, 34));
-        lblTargetDiffLabel.setName("lblTargetDiffLabel");
-        lblTargetDiffLabel.setSize(new FormSize(18, 16));
-        lblTargetDiffLabel.setTabIndex(48);
-        lblTargetDiffLabel.setText("+/-");
-        // lblTargetPriceLabel
-        lblTargetPriceLabel.setAutoSize(true);
-        lblTargetPriceLabel.setLocation(new Point(360, 34));
-        lblTargetPriceLabel.setName("lblTargetPriceLabel");
-        lblTargetPriceLabel.setSize(new FormSize(30, 16));
-        lblTargetPriceLabel.setTabIndex(47);
-        lblTargetPriceLabel.setText("Price");
-        // lblTargetPct0
-        lblTargetPct0.setLocation(new Point(466, 60));
-        lblTargetPct0.setName("lblTargetPct0");
-        lblTargetPct0.setSize(new FormSize(37, 13));
-        lblTargetPct0.setTabIndex(46);
-        lblTargetPct0.setText("-888%");
-        lblTargetPct0.TextAlign = ContentAlignment.TopRight;
-        // lblTargetDiff0
-        lblTargetDiff0.setLocation(new Point(410, 60));
-        lblTargetDiff0.setName("lblTargetDiff0");
-        lblTargetDiff0.setSize(new FormSize(52, 13));
-        lblTargetDiff0.setTabIndex(45);
-        lblTargetDiff0.setText("-8,888 cr.");
-        lblTargetDiff0.TextAlign = ContentAlignment.TopRight;
-        // lblTargetPrice0
-        lblTargetPrice0.setLocation(new Point(358, 60));
-        lblTargetPrice0.setName("lblTargetPrice0");
-        lblTargetPrice0.setSize(new FormSize(48, 13));
-        lblTargetPrice0.setTabIndex(44);
-        lblTargetPrice0.setText("8,888 cr.");
-        lblTargetPrice0.TextAlign = ContentAlignment.TopRight;
+        // labelBuyPrice1
+        labelBuyPrice1.setLocation(new Point(302, 84));
+        labelBuyPrice1.setName("labelBuyPrice1");
+        labelBuyPrice1.setSize(new FormSize(48, 13));
+        labelBuyPrice1.setTabIndex(50);
+        labelBuyPrice1.setText("8,888 cr.");
+        labelBuyPrice1.TextAlign = ContentAlignment.TopRight;
+        // labelTargetPctLabel
+        labelTargetPctLabel.setAutoSize(true);
+        labelTargetPctLabel.setLocation(new Point(476, 34));
+        labelTargetPctLabel.setName("labelTargetPctLabel");
+        labelTargetPctLabel.setSize(new FormSize(14, 16));
+        labelTargetPctLabel.setTabIndex(49);
+        labelTargetPctLabel.setText("%");
+        // labelTargetDiffLabel
+        labelTargetDiffLabel.setAutoSize(true);
+        labelTargetDiffLabel.setLocation(new Point(424, 34));
+        labelTargetDiffLabel.setName("labelTargetDiffLabel");
+        labelTargetDiffLabel.setSize(new FormSize(18, 16));
+        labelTargetDiffLabel.setTabIndex(48);
+        labelTargetDiffLabel.setText("+/-");
+        // labelTargetPriceLabel
+        labelTargetPriceLabel.setAutoSize(true);
+        labelTargetPriceLabel.setLocation(new Point(360, 34));
+        labelTargetPriceLabel.setName("labelTargetPriceLabel");
+        labelTargetPriceLabel.setSize(new FormSize(30, 16));
+        labelTargetPriceLabel.setTabIndex(47);
+        labelTargetPriceLabel.setText("Price");
+        // labelTargetPct0
+        labelTargetPct0.setLocation(new Point(466, 60));
+        labelTargetPct0.setName("labelTargetPct0");
+        labelTargetPct0.setSize(new FormSize(37, 13));
+        labelTargetPct0.setTabIndex(46);
+        labelTargetPct0.setText("-888%");
+        labelTargetPct0.TextAlign = ContentAlignment.TopRight;
+        // labelTargetDiff0
+        labelTargetDiff0.setLocation(new Point(410, 60));
+        labelTargetDiff0.setName("labelTargetDiff0");
+        labelTargetDiff0.setSize(new FormSize(52, 13));
+        labelTargetDiff0.setTabIndex(45);
+        labelTargetDiff0.setText("-8,888 cr.");
+        labelTargetDiff0.TextAlign = ContentAlignment.TopRight;
+        // labelTargetPrice0
+        labelTargetPrice0.setLocation(new Point(358, 60));
+        labelTargetPrice0.setName("labelTargetPrice0");
+        labelTargetPrice0.setSize(new FormSize(48, 13));
+        labelTargetPrice0.setTabIndex(44);
+        labelTargetPrice0.setText("8,888 cr.");
+        labelTargetPrice0.TextAlign = ContentAlignment.TopRight;
         // buttonBuyMax0
         buttonBuyMax0.setFlatStyle(FlatStyle.Flat);
         buttonBuyMax0.setLocation(new Point(262, 56));
@@ -1805,7 +1805,7 @@ public class Main extends wfWindow {
         buttonBuyMax0.setText("Max");
         buttonBuyMax0.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
@@ -1818,17 +1818,17 @@ public class Main extends wfWindow {
         buttonBuyQty0.setText("88");
         buttonBuyQty0.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
-        // lblBuyPrice0
-        lblBuyPrice0.setLocation(new Point(302, 60));
-        lblBuyPrice0.setName("lblBuyPrice0");
-        lblBuyPrice0.setSize(new FormSize(48, 13));
-        lblBuyPrice0.setTabIndex(41);
-        lblBuyPrice0.setText("8,888 cr.");
-        lblBuyPrice0.TextAlign = ContentAlignment.TopRight;
+        // labelBuyPrice0
+        labelBuyPrice0.setLocation(new Point(302, 60));
+        labelBuyPrice0.setName("labelBuyPrice0");
+        labelBuyPrice0.setSize(new FormSize(48, 13));
+        labelBuyPrice0.setTabIndex(41);
+        labelBuyPrice0.setText("8,888 cr.");
+        labelBuyPrice0.TextAlign = ContentAlignment.TopRight;
         // buttonSellAll1
         buttonSellAll1.setFlatStyle(FlatStyle.Flat);
         buttonSellAll1.setLocation(new Point(115, 80));
@@ -1838,7 +1838,7 @@ public class Main extends wfWindow {
         buttonSellAll1.setText("All");
         buttonSellAll1.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
@@ -1851,17 +1851,17 @@ public class Main extends wfWindow {
         buttonSellQty1.setText("88");
         buttonSellQty1.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
-        // lblSellPrice1
-        lblSellPrice1.setLocation(new Point(163, 84));
-        lblSellPrice1.setName("lblSellPrice1");
-        lblSellPrice1.setSize(new FormSize(48, 13));
-        lblSellPrice1.setTabIndex(38);
-        lblSellPrice1.setText("8,888 cr.");
-        lblSellPrice1.TextAlign = ContentAlignment.TopRight;
+        // labelSellPrice1
+        labelSellPrice1.setLocation(new Point(163, 84));
+        labelSellPrice1.setName("labelSellPrice1");
+        labelSellPrice1.setSize(new FormSize(48, 13));
+        labelSellPrice1.setTabIndex(38);
+        labelSellPrice1.setText("8,888 cr.");
+        labelSellPrice1.TextAlign = ContentAlignment.TopRight;
         // buttonSellAll0
         buttonSellAll0.setFlatStyle(FlatStyle.Flat);
         buttonSellAll0.setLocation(new Point(115, 56));
@@ -1871,7 +1871,7 @@ public class Main extends wfWindow {
         buttonSellAll0.setText("All");
         buttonSellAll0.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
@@ -1884,130 +1884,130 @@ public class Main extends wfWindow {
         buttonSellQty0.setText("88");
         buttonSellQty0.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuySell_Click(sender, e);
             }
         });
-        // lblSellPrice0
-        lblSellPrice0.setLocation(new Point(163, 60));
-        lblSellPrice0.setName("lblSellPrice0");
-        lblSellPrice0.setSize(new FormSize(48, 13));
-        lblSellPrice0.setTabIndex(35);
-        lblSellPrice0.setText("8,888 cr.");
-        lblSellPrice0.TextAlign = ContentAlignment.TopRight;
-        // lblTradeTarget
-        lblTradeTarget.setAutoSize(true);
-        lblTradeTarget.setLocation(new Point(391, 16));
-        lblTradeTarget.setName("lblTradeTarget");
-        lblTradeTarget.setSize(new FormSize(78, 16));
-        lblTradeTarget.setTabIndex(28);
-        lblTradeTarget.setText("Target System");
-        // lblBuy
-        lblBuy.setAutoSize(true);
-        lblBuy.setLocation(new Point(273, 34));
-        lblBuy.setName("lblBuy");
-        lblBuy.setSize(new FormSize(24, 16));
-        lblBuy.setTabIndex(27);
-        lblBuy.setText("Buy");
-        // lblSell
-        lblSell.setAutoSize(true);
-        lblSell.setFont(
+        // labelSellPrice0
+        labelSellPrice0.setLocation(new Point(163, 60));
+        labelSellPrice0.setName("labelSellPrice0");
+        labelSellPrice0.setSize(new FormSize(48, 13));
+        labelSellPrice0.setTabIndex(35);
+        labelSellPrice0.setText("8,888 cr.");
+        labelSellPrice0.TextAlign = ContentAlignment.TopRight;
+        // labelTradeTarget
+        labelTradeTarget.setAutoSize(true);
+        labelTradeTarget.setLocation(new Point(391, 16));
+        labelTradeTarget.setName("labelTradeTarget");
+        labelTradeTarget.setSize(new FormSize(78, 16));
+        labelTradeTarget.setTabIndex(28);
+        labelTradeTarget.setText("Target System");
+        // labelBuy
+        labelBuy.setAutoSize(true);
+        labelBuy.setLocation(new Point(273, 34));
+        labelBuy.setName("labelBuy");
+        labelBuy.setSize(new FormSize(24, 16));
+        labelBuy.setTabIndex(27);
+        labelBuy.setText("Buy");
+        // labelSell
+        labelSell.setAutoSize(true);
+        labelSell.setFont(
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte) (0))));
-        lblSell.setLocation(new Point(132, 34));
-        lblSell.setName("lblSell");
-        lblSell.setSize(new FormSize(23, 16));
-        lblSell.setTabIndex(26);
-        lblSell.setText("Sell");
-        // lblTradeCommodity9
-        lblTradeCommodity9.setAutoSize(true);
-        lblTradeCommodity9.setLocation(new Point(8, 276));
-        lblTradeCommodity9.setName("lblTradeCommodity9");
-        lblTradeCommodity9.setSize(new FormSize(40, 16));
-        lblTradeCommodity9.setTabIndex(25);
-        lblTradeCommodity9.setText("Robots");
-        // lblTradeCommodity8
-        lblTradeCommodity8.setAutoSize(true);
-        lblTradeCommodity8.setLocation(new Point(8, 252));
-        lblTradeCommodity8.setName("lblTradeCommodity8");
-        lblTradeCommodity8.setSize(new FormSize(51, 16));
-        lblTradeCommodity8.setTabIndex(24);
-        lblTradeCommodity8.setText("Narcotics");
-        // lblTradeCommodity2
-        lblTradeCommodity2.setAutoSize(true);
-        lblTradeCommodity2.setLocation(new Point(8, 108));
-        lblTradeCommodity2.setName("lblTradeCommodity2");
-        lblTradeCommodity2.setSize(new FormSize(30, 16));
-        lblTradeCommodity2.setTabIndex(23);
-        lblTradeCommodity2.setText("Food");
-        // lblTradeCommodity0
-        lblTradeCommodity0.setAutoSize(true);
-        lblTradeCommodity0.setLocation(new Point(8, 60));
-        lblTradeCommodity0.setName("lblTradeCommodity0");
-        lblTradeCommodity0.setSize(new FormSize(34, 16));
-        lblTradeCommodity0.setTabIndex(22);
-        lblTradeCommodity0.setText("Water");
-        // lblTradeCommodity1
-        lblTradeCommodity1.setAutoSize(true);
-        lblTradeCommodity1.setLocation(new Point(8, 84));
-        lblTradeCommodity1.setName("lblTradeCommodity1");
-        lblTradeCommodity1.setSize(new FormSize(27, 16));
-        lblTradeCommodity1.setTabIndex(21);
-        lblTradeCommodity1.setText("Furs");
-        // lblTradeCommodity6
-        lblTradeCommodity6.setAutoSize(true);
-        lblTradeCommodity6.setLocation(new Point(8, 204));
-        lblTradeCommodity6.setName("lblTradeCommodity6");
-        lblTradeCommodity6.setSize(new FormSize(50, 16));
-        lblTradeCommodity6.setTabIndex(20);
-        lblTradeCommodity6.setText("Medicine");
-        // lblTradeCommodity5
-        lblTradeCommodity5.setAutoSize(true);
-        lblTradeCommodity5.setLocation(new Point(8, 180));
-        lblTradeCommodity5.setName("lblTradeCommodity5");
-        lblTradeCommodity5.setSize(new FormSize(49, 16));
-        lblTradeCommodity5.setTabIndex(19);
-        lblTradeCommodity5.setText("Firearms");
-        // lblTradeCommodity4
-        lblTradeCommodity4.setAutoSize(true);
-        lblTradeCommodity4.setLocation(new Point(8, 156));
-        lblTradeCommodity4.setName("lblTradeCommodity4");
-        lblTradeCommodity4.setSize(new FormSize(41, 16));
-        lblTradeCommodity4.setTabIndex(18);
-        lblTradeCommodity4.setText("Games");
-        // lblTradeCommodity3
-        lblTradeCommodity3.setAutoSize(true);
-        lblTradeCommodity3.setLocation(new Point(8, 132));
-        lblTradeCommodity3.setName("lblTradeCommodity3");
-        lblTradeCommodity3.setSize(new FormSize(23, 16));
-        lblTradeCommodity3.setTabIndex(17);
-        lblTradeCommodity3.setText("Ore");
-        // lblTradeCommodity7
-        lblTradeCommodity7.setAutoSize(true);
-        lblTradeCommodity7.setLocation(new Point(8, 228));
-        lblTradeCommodity7.setName("lblTradeCommodity7");
-        lblTradeCommodity7.setSize(new FormSize(53, 16));
-        lblTradeCommodity7.setTabIndex(16);
-        lblTradeCommodity7.setText("Machines");
+        labelSell.setLocation(new Point(132, 34));
+        labelSell.setName("labelSell");
+        labelSell.setSize(new FormSize(23, 16));
+        labelSell.setTabIndex(26);
+        labelSell.setText("Sell");
+        // labelTradeCommodity9
+        labelTradeCommodity9.setAutoSize(true);
+        labelTradeCommodity9.setLocation(new Point(8, 276));
+        labelTradeCommodity9.setName("labelTradeCommodity9");
+        labelTradeCommodity9.setSize(new FormSize(40, 16));
+        labelTradeCommodity9.setTabIndex(25);
+        labelTradeCommodity9.setText("Robots");
+        // labelTradeCommodity8
+        labelTradeCommodity8.setAutoSize(true);
+        labelTradeCommodity8.setLocation(new Point(8, 252));
+        labelTradeCommodity8.setName("labelTradeCommodity8");
+        labelTradeCommodity8.setSize(new FormSize(51, 16));
+        labelTradeCommodity8.setTabIndex(24);
+        labelTradeCommodity8.setText("Narcotics");
+        // labelTradeCommodity2
+        labelTradeCommodity2.setAutoSize(true);
+        labelTradeCommodity2.setLocation(new Point(8, 108));
+        labelTradeCommodity2.setName("labelTradeCommodity2");
+        labelTradeCommodity2.setSize(new FormSize(30, 16));
+        labelTradeCommodity2.setTabIndex(23);
+        labelTradeCommodity2.setText("Food");
+        // labelTradeCommodity0
+        labelTradeCommodity0.setAutoSize(true);
+        labelTradeCommodity0.setLocation(new Point(8, 60));
+        labelTradeCommodity0.setName("labelTradeCommodity0");
+        labelTradeCommodity0.setSize(new FormSize(34, 16));
+        labelTradeCommodity0.setTabIndex(22);
+        labelTradeCommodity0.setText("Water");
+        // labelTradeCommodity1
+        labelTradeCommodity1.setAutoSize(true);
+        labelTradeCommodity1.setLocation(new Point(8, 84));
+        labelTradeCommodity1.setName("labelTradeCommodity1");
+        labelTradeCommodity1.setSize(new FormSize(27, 16));
+        labelTradeCommodity1.setTabIndex(21);
+        labelTradeCommodity1.setText("Furs");
+        // labelTradeCommodity6
+        labelTradeCommodity6.setAutoSize(true);
+        labelTradeCommodity6.setLocation(new Point(8, 204));
+        labelTradeCommodity6.setName("labelTradeCommodity6");
+        labelTradeCommodity6.setSize(new FormSize(50, 16));
+        labelTradeCommodity6.setTabIndex(20);
+        labelTradeCommodity6.setText("Medicine");
+        // labelTradeCommodity5
+        labelTradeCommodity5.setAutoSize(true);
+        labelTradeCommodity5.setLocation(new Point(8, 180));
+        labelTradeCommodity5.setName("labelTradeCommodity5");
+        labelTradeCommodity5.setSize(new FormSize(49, 16));
+        labelTradeCommodity5.setTabIndex(19);
+        labelTradeCommodity5.setText("Firearms");
+        // labelTradeCommodity4
+        labelTradeCommodity4.setAutoSize(true);
+        labelTradeCommodity4.setLocation(new Point(8, 156));
+        labelTradeCommodity4.setName("labelTradeCommodity4");
+        labelTradeCommodity4.setSize(new FormSize(41, 16));
+        labelTradeCommodity4.setTabIndex(18);
+        labelTradeCommodity4.setText("Games");
+        // labelTradeCommodity3
+        labelTradeCommodity3.setAutoSize(true);
+        labelTradeCommodity3.setLocation(new Point(8, 132));
+        labelTradeCommodity3.setName("labelTradeCommodity3");
+        labelTradeCommodity3.setSize(new FormSize(23, 16));
+        labelTradeCommodity3.setTabIndex(17);
+        labelTradeCommodity3.setText("Ore");
+        // labelTradeCommodity7
+        labelTradeCommodity7.setAutoSize(true);
+        labelTradeCommodity7.setLocation(new Point(8, 228));
+        labelTradeCommodity7.setName("labelTradeCommodity7");
+        labelTradeCommodity7.setSize(new FormSize(53, 16));
+        labelTradeCommodity7.setTabIndex(16);
+        labelTradeCommodity7.setText("Machines");
         // boxSystem
         boxSystem.Controls.add(buttonMerc);
         boxSystem.Controls.add(buttonSpecial);
         boxSystem.Controls.add(buttonNews);
-        boxSystem.Controls.add(lblSystemPressure);
-        boxSystem.Controls.add(lblSystemPressurePre);
-        boxSystem.Controls.add(lblSystemPolSys);
-        boxSystem.Controls.add(lblSystemSize);
-        boxSystem.Controls.add(lblSystemTech);
-        boxSystem.Controls.add(lblSystemPirates);
-        boxSystem.Controls.add(lblSystemPolice);
-        boxSystem.Controls.add(lblSystemResource);
-        boxSystem.Controls.add(lblSystemPiratesLabel);
-        boxSystem.Controls.add(lblSystemPoliceLabel);
-        boxSystem.Controls.add(lblSystemResourceLabel);
-        boxSystem.Controls.add(lblSystemGovtLabel);
-        boxSystem.Controls.add(lblSystemTechLabel);
-        boxSystem.Controls.add(lblSystemSizeLabel);
-        boxSystem.Controls.add(lblSystemName);
-        boxSystem.Controls.add(lblSystemNameLabel);
+        boxSystem.Controls.add(labelSystemPressure);
+        boxSystem.Controls.add(labelSystemPressurePre);
+        boxSystem.Controls.add(labelSystemPolSys);
+        boxSystem.Controls.add(labelSystemSize);
+        boxSystem.Controls.add(labelSystemTech);
+        boxSystem.Controls.add(labelSystemPirates);
+        boxSystem.Controls.add(labelSystemPolice);
+        boxSystem.Controls.add(labelSystemResource);
+        boxSystem.Controls.add(labelSystemPiratesLabel);
+        boxSystem.Controls.add(labelSystemPoliceLabel);
+        boxSystem.Controls.add(labelSystemResourceLabel);
+        boxSystem.Controls.add(labelSystemGovtLabel);
+        boxSystem.Controls.add(labelSystemTechLabel);
+        boxSystem.Controls.add(labelSystemSizeLabel);
+        boxSystem.Controls.add(labelSystemName);
+        boxSystem.Controls.add(labelSystemNameLabel);
         boxSystem.setLocation(new Point(4, 2));
         boxSystem.setName("boxSystem");
         boxSystem.setSize(new FormSize(240, 206));
@@ -2023,7 +2023,7 @@ public class Main extends wfWindow {
         buttonMerc.setText("Mercenary For Hire");
         buttonMerc.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonMerc_Click(sender, e);
             }
         });
@@ -2037,7 +2037,7 @@ public class Main extends wfWindow {
         buttonSpecial.setText("Special");
         buttonSpecial.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonSpecial_Click(sender, e);
             }
         });
@@ -2050,136 +2050,136 @@ public class Main extends wfWindow {
         buttonNews.setText("News");
         buttonNews.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonNews_Click(sender, e);
             }
         });
-        // lblSystemPressure
-        lblSystemPressure.setLocation(new Point(8, 147));
-        lblSystemPressure.setName("lblSystemPressure");
-        lblSystemPressure.setSize(new FormSize(168, 16));
-        lblSystemPressure.setTabIndex(18);
-        lblSystemPressure.setText("suffering from extreme boredom.");
-        // lblSystemPressurePre
-        lblSystemPressurePre.setAutoSize(true);
-        lblSystemPressurePre.setLocation(new Point(8, 134));
-        lblSystemPressurePre.setName("lblSystemPressurePre");
-        lblSystemPressurePre.setSize(new FormSize(122, 16));
-        lblSystemPressurePre.setTabIndex(17);
-        lblSystemPressurePre.setText("This system is currently");
-        // lblSystemPolSys
-        lblSystemPolSys.setLocation(new Point(88, 64));
-        lblSystemPolSys.setName("lblSystemPolSys");
-        lblSystemPolSys.setSize(new FormSize(91, 13));
-        lblSystemPolSys.setTabIndex(15);
-        lblSystemPolSys.setText("Cybernetic State");
-        // lblSystemSize
-        lblSystemSize.setLocation(new Point(88, 32));
-        lblSystemSize.setName("lblSystemSize");
-        lblSystemSize.setSize(new FormSize(45, 13));
-        lblSystemSize.setTabIndex(14);
-        lblSystemSize.setText("Medium");
-        // lblSystemTech
-        lblSystemTech.setLocation(new Point(88, 48));
-        lblSystemTech.setName("lblSystemTech");
-        lblSystemTech.setSize(new FormSize(82, 13));
-        lblSystemTech.setTabIndex(13);
-        lblSystemTech.setText("Pre-Agricultural");
-        // lblSystemPirates
-        lblSystemPirates.setLocation(new Point(88, 112));
-        lblSystemPirates.setName("lblSystemPirates");
-        lblSystemPirates.setSize(new FormSize(53, 13));
-        lblSystemPirates.setTabIndex(11);
-        lblSystemPirates.setText("Abundant");
-        // lblSystemPolice
-        lblSystemPolice.setLocation(new Point(88, 96));
-        lblSystemPolice.setName("lblSystemPolice");
-        lblSystemPolice.setSize(new FormSize(53, 13));
-        lblSystemPolice.setTabIndex(10);
-        lblSystemPolice.setText("Moderate");
-        // lblSystemResource
-        lblSystemResource.setLocation(new Point(88, 80));
-        lblSystemResource.setName("lblSystemResource");
-        lblSystemResource.setSize(new FormSize(105, 13));
-        lblSystemResource.setTabIndex(9);
-        lblSystemResource.setText("Sweetwater Oceans");
-        // lblSystemPiratesLabel
-        lblSystemPiratesLabel.setAutoSize(true);
-        lblSystemPiratesLabel.setFont(
+        // labelSystemPressure
+        labelSystemPressure.setLocation(new Point(8, 147));
+        labelSystemPressure.setName("labelSystemPressure");
+        labelSystemPressure.setSize(new FormSize(168, 16));
+        labelSystemPressure.setTabIndex(18);
+        labelSystemPressure.setText("suffering from extreme boredom.");
+        // labelSystemPressurePre
+        labelSystemPressurePre.setAutoSize(true);
+        labelSystemPressurePre.setLocation(new Point(8, 134));
+        labelSystemPressurePre.setName("labelSystemPressurePre");
+        labelSystemPressurePre.setSize(new FormSize(122, 16));
+        labelSystemPressurePre.setTabIndex(17);
+        labelSystemPressurePre.setText("This system is currentrently");
+        // labelSystemPolSys
+        labelSystemPolSys.setLocation(new Point(88, 64));
+        labelSystemPolSys.setName("labelSystemPolSys");
+        labelSystemPolSys.setSize(new FormSize(91, 13));
+        labelSystemPolSys.setTabIndex(15);
+        labelSystemPolSys.setText("Cybernetic State");
+        // labelSystemSize
+        labelSystemSize.setLocation(new Point(88, 32));
+        labelSystemSize.setName("labelSystemSize");
+        labelSystemSize.setSize(new FormSize(45, 13));
+        labelSystemSize.setTabIndex(14);
+        labelSystemSize.setText("Medium");
+        // labelSystemTech
+        labelSystemTech.setLocation(new Point(88, 48));
+        labelSystemTech.setName("labelSystemTech");
+        labelSystemTech.setSize(new FormSize(82, 13));
+        labelSystemTech.setTabIndex(13);
+        labelSystemTech.setText("Pre-Agricultural");
+        // labelSystemPirates
+        labelSystemPirates.setLocation(new Point(88, 112));
+        labelSystemPirates.setName("labelSystemPirates");
+        labelSystemPirates.setSize(new FormSize(53, 13));
+        labelSystemPirates.setTabIndex(11);
+        labelSystemPirates.setText("Abundant");
+        // labelSystemPolice
+        labelSystemPolice.setLocation(new Point(88, 96));
+        labelSystemPolice.setName("labelSystemPolice");
+        labelSystemPolice.setSize(new FormSize(53, 13));
+        labelSystemPolice.setTabIndex(10);
+        labelSystemPolice.setText("Moderate");
+        // labelSystemResource
+        labelSystemResource.setLocation(new Point(88, 80));
+        labelSystemResource.setName("labelSystemResource");
+        labelSystemResource.setSize(new FormSize(105, 13));
+        labelSystemResource.setTabIndex(9);
+        labelSystemResource.setText("Sweetwater Oceans");
+        // labelSystemPiratesLabel
+        labelSystemPiratesLabel.setAutoSize(true);
+        labelSystemPiratesLabel.setFont(
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblSystemPiratesLabel.setLocation(new Point(8, 112));
-        lblSystemPiratesLabel.setName("lblSystemPiratesLabel");
-        lblSystemPiratesLabel.setSize(new FormSize(44, 16));
-        lblSystemPiratesLabel.setTabIndex(7);
-        lblSystemPiratesLabel.setText("Pirates:");
-        // lblSystemPoliceLabel
-        lblSystemPoliceLabel.setAutoSize(true);
-        lblSystemPoliceLabel.setFont(
+        labelSystemPiratesLabel.setLocation(new Point(8, 112));
+        labelSystemPiratesLabel.setName("labelSystemPiratesLabel");
+        labelSystemPiratesLabel.setSize(new FormSize(44, 16));
+        labelSystemPiratesLabel.setTabIndex(7);
+        labelSystemPiratesLabel.setText("Pirates:");
+        // labelSystemPoliceLabel
+        labelSystemPoliceLabel.setAutoSize(true);
+        labelSystemPoliceLabel.setFont(
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblSystemPoliceLabel.setLocation(new Point(8, 96));
-        lblSystemPoliceLabel.setName("lblSystemPoliceLabel");
-        lblSystemPoliceLabel.setSize(new FormSize(40, 16));
-        lblSystemPoliceLabel.setTabIndex(6);
-        lblSystemPoliceLabel.setText("Police:");
-        // lblSystemResourceLabel
-        lblSystemResourceLabel.setAutoSize(true);
-        lblSystemResourceLabel.setFont(
+        labelSystemPoliceLabel.setLocation(new Point(8, 96));
+        labelSystemPoliceLabel.setName("labelSystemPoliceLabel");
+        labelSystemPoliceLabel.setSize(new FormSize(40, 16));
+        labelSystemPoliceLabel.setTabIndex(6);
+        labelSystemPoliceLabel.setText("Police:");
+        // labelSystemResourceLabel
+        labelSystemResourceLabel.setAutoSize(true);
+        labelSystemResourceLabel.setFont(
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblSystemResourceLabel.setLocation(new Point(8, 80));
-        lblSystemResourceLabel.setName("lblSystemResourceLabel");
-        lblSystemResourceLabel.setSize(new FormSize(58, 16));
-        lblSystemResourceLabel.setTabIndex(5);
-        lblSystemResourceLabel.setText("Resource:");
-        // lblSystemGovtLabel
-        lblSystemGovtLabel.setAutoSize(true);
-        lblSystemGovtLabel.setFont(
+        labelSystemResourceLabel.setLocation(new Point(8, 80));
+        labelSystemResourceLabel.setName("labelSystemResourceLabel");
+        labelSystemResourceLabel.setSize(new FormSize(58, 16));
+        labelSystemResourceLabel.setTabIndex(5);
+        labelSystemResourceLabel.setText("Resource:");
+        // labelSystemGovtLabel
+        labelSystemGovtLabel.setAutoSize(true);
+        labelSystemGovtLabel.setFont(
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblSystemGovtLabel.setLocation(new Point(8, 64));
-        lblSystemGovtLabel.setName("lblSystemGovtLabel");
-        lblSystemGovtLabel.setSize(new FormSize(72, 16));
-        lblSystemGovtLabel.setTabIndex(4);
-        lblSystemGovtLabel.setText("Government:");
-        // lblSystemTechLabel
-        lblSystemTechLabel.setAutoSize(true);
-        lblSystemTechLabel.setFont(
+        labelSystemGovtLabel.setLocation(new Point(8, 64));
+        labelSystemGovtLabel.setName("labelSystemGovtLabel");
+        labelSystemGovtLabel.setSize(new FormSize(72, 16));
+        labelSystemGovtLabel.setTabIndex(4);
+        labelSystemGovtLabel.setText("Government:");
+        // labelSystemTechLabel
+        labelSystemTechLabel.setAutoSize(true);
+        labelSystemTechLabel.setFont(
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblSystemTechLabel.setLocation(new Point(8, 48));
-        lblSystemTechLabel.setName("lblSystemTechLabel");
-        lblSystemTechLabel.setSize(new FormSize(65, 16));
-        lblSystemTechLabel.setTabIndex(3);
-        lblSystemTechLabel.setText("Tech Level:");
-        // lblSystemSizeLabel
-        lblSystemSizeLabel.setAutoSize(true);
-        lblSystemSizeLabel.setFont(
+        labelSystemTechLabel.setLocation(new Point(8, 48));
+        labelSystemTechLabel.setName("labelSystemTechLabel");
+        labelSystemTechLabel.setSize(new FormSize(65, 16));
+        labelSystemTechLabel.setTabIndex(3);
+        labelSystemTechLabel.setText("Tech Level:");
+        // labelSystemSizeLabel
+        labelSystemSizeLabel.setAutoSize(true);
+        labelSystemSizeLabel.setFont(
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblSystemSizeLabel.setLocation(new Point(8, 32));
-        lblSystemSizeLabel.setName("lblSystemSizeLabel");
-        lblSystemSizeLabel.setSize(new FormSize(31, 16));
-        lblSystemSizeLabel.setTabIndex(2);
-        lblSystemSizeLabel.setText("Size:");
-        // lblSystemName
-        lblSystemName.setLocation(new Point(88, 16));
-        lblSystemName.setName("lblSystemName");
-        lblSystemName.setSize(new FormSize(65, 13));
-        lblSystemName.setTabIndex(1);
-        lblSystemName.setText("Tarchannen");
-        // lblSystemNameLabel
-        lblSystemNameLabel.setAutoSize(true);
-        lblSystemNameLabel.setFont(
+        labelSystemSizeLabel.setLocation(new Point(8, 32));
+        labelSystemSizeLabel.setName("labelSystemSizeLabel");
+        labelSystemSizeLabel.setSize(new FormSize(31, 16));
+        labelSystemSizeLabel.setTabIndex(2);
+        labelSystemSizeLabel.setText("Size:");
+        // labelSystemName
+        labelSystemName.setLocation(new Point(88, 16));
+        labelSystemName.setName("labelSystemName");
+        labelSystemName.setSize(new FormSize(65, 13));
+        labelSystemName.setTabIndex(1);
+        labelSystemName.setText("Tarchannen");
+        // labelSystemNameLabel
+        labelSystemNameLabel.setAutoSize(true);
+        labelSystemNameLabel.setFont(
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblSystemNameLabel.setLocation(new Point(8, 16));
-        lblSystemNameLabel.setName("lblSystemNameLabel");
-        lblSystemNameLabel.setSize(new FormSize(39, 16));
-        lblSystemNameLabel.setTabIndex(0);
-        lblSystemNameLabel.setText("Name:");
+        labelSystemNameLabel.setLocation(new Point(8, 16));
+        labelSystemNameLabel.setName("labelSystemNameLabel");
+        labelSystemNameLabel.setSize(new FormSize(39, 16));
+        labelSystemNameLabel.setTabIndex(0);
+        labelSystemNameLabel.setText("Name:");
         // boxShipYard
         boxShipYard.Controls.add(buttonDesign);
         boxShipYard.Controls.add(buttonPod);
-        boxShipYard.Controls.add(lblEscapePod);
+        boxShipYard.Controls.add(labelEscapePod);
         boxShipYard.Controls.add(buttonEquip);
         boxShipYard.Controls.add(buttonBuyShip);
-        boxShipYard.Controls.add(lblEquipForSale);
-        boxShipYard.Controls.add(lblShipsForSale);
+        boxShipYard.Controls.add(labelEquipForSale);
+        boxShipYard.Controls.add(labelShipsForSale);
         boxShipYard.setLocation(new Point(4, 306));
         boxShipYard.setName("boxShipYard");
         boxShipYard.setSize(new FormSize(168, 168));
@@ -2195,7 +2195,7 @@ public class Main extends wfWindow {
         buttonDesign.setText("Design");
         buttonDesign.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonDesign_Click(sender, e);
             }
         });
@@ -2208,16 +2208,16 @@ public class Main extends wfWindow {
         buttonPod.setText("Buy Pod");
         buttonPod.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonPod_Click(sender, e);
             }
         });
-        // lblEscapePod
-        lblEscapePod.setLocation(new Point(8, 122));
-        lblEscapePod.setName("lblEscapePod");
-        lblEscapePod.setSize(new FormSize(152, 26));
-        lblEscapePod.setTabIndex(27);
-        lblEscapePod.setText("You can buy an escape pod for  2,000 cr.");
+        // labelEscapePod
+        labelEscapePod.setLocation(new Point(8, 122));
+        labelEscapePod.setName("labelEscapePod");
+        labelEscapePod.setSize(new FormSize(152, 26));
+        labelEscapePod.setTabIndex(27);
+        labelEscapePod.setText("You can buy an escape pod for  2,000 cr.");
         // buttonEquip
         buttonEquip.setFlatStyle(FlatStyle.Flat);
         buttonEquip.setLocation(new Point(43, 85));
@@ -2227,7 +2227,7 @@ public class Main extends wfWindow {
         buttonEquip.setText("Buy/Sell Equipment");
         buttonEquip.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonEquip_Click(sender, e);
             }
         });
@@ -2240,29 +2240,29 @@ public class Main extends wfWindow {
         buttonBuyShip.setText("View Ship Info");
         buttonBuyShip.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuyShip_Click(sender, e);
             }
         });
-        // lblEquipForSale
-        lblEquipForSale.setLocation(new Point(8, 69));
-        lblEquipForSale.setName("lblEquipForSale");
-        lblEquipForSale.setSize(new FormSize(152, 13));
-        lblEquipForSale.setTabIndex(21);
-        lblEquipForSale.setText("There is equipment for sale.");
-        // lblShipsForSale
-        lblShipsForSale.setLocation(new Point(8, 16));
-        lblShipsForSale.setName("lblShipsForSale");
-        lblShipsForSale.setSize(new FormSize(152, 13));
-        lblShipsForSale.setTabIndex(20);
-        lblShipsForSale.setText("There are new ships for sale.");
+        // labelEquipForSale
+        labelEquipForSale.setLocation(new Point(8, 69));
+        labelEquipForSale.setName("labelEquipForSale");
+        labelEquipForSale.setSize(new FormSize(152, 13));
+        labelEquipForSale.setTabIndex(21);
+        labelEquipForSale.setText("There is equipment for sale.");
+        // labelShipsForSale
+        labelShipsForSale.setLocation(new Point(8, 16));
+        labelShipsForSale.setName("labelShipsForSale");
+        labelShipsForSale.setSize(new FormSize(152, 13));
+        labelShipsForSale.setTabIndex(20);
+        labelShipsForSale.setText("There are new ships for sale.");
         // boxDock
         boxDock.Controls.add(buttonRepair);
         boxDock.Controls.add(buttonFuel);
-        boxDock.Controls.add(lblFuelStatus);
-        boxDock.Controls.add(lblFuelCost);
-        boxDock.Controls.add(lblHullStatus);
-        boxDock.Controls.add(lblRepairCost);
+        boxDock.Controls.add(labelFuelStatus);
+        boxDock.Controls.add(labelFuelCost);
+        boxDock.Controls.add(labelHullStatus);
+        boxDock.Controls.add(labelRepairCost);
         boxDock.setLocation(new Point(4, 212));
         boxDock.setName("boxDock");
         boxDock.setSize(new FormSize(240, 90));
@@ -2278,7 +2278,7 @@ public class Main extends wfWindow {
         buttonRepair.setText("Repair");
         buttonRepair.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonRepair_Click(sender, e);
             }
         });
@@ -2291,41 +2291,41 @@ public class Main extends wfWindow {
         buttonFuel.setText("Fuel");
         buttonFuel.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonFuel_Click(sender, e);
             }
         });
-        // lblFuelStatus
-        lblFuelStatus.setLocation(new Point(8, 16));
-        lblFuelStatus.setName("lblFuelStatus");
-        lblFuelStatus.setSize(new FormSize(162, 13));
-        lblFuelStatus.setTabIndex(20);
-        lblFuelStatus.setText("You have fuel to fly 88 parsecs.");
-        // lblFuelCost
-        lblFuelCost.setLocation(new Point(8, 31));
-        lblFuelCost.setName("lblFuelCost");
-        lblFuelCost.setSize(new FormSize(121, 13));
-        lblFuelCost.setTabIndex(19);
-        lblFuelCost.setText("A full tank costs 888 cr.");
-        // lblHullStatus
-        lblHullStatus.setLocation(new Point(8, 52));
-        lblHullStatus.setName("lblHullStatus");
-        lblHullStatus.setSize(new FormSize(152, 13));
-        lblHullStatus.setTabIndex(18);
-        lblHullStatus.setText("Your hull strength is at 888%.");
-        // lblRepairCost
-        lblRepairCost.setLocation(new Point(8, 67));
-        lblRepairCost.setName("lblRepairCost");
-        lblRepairCost.setSize(new FormSize(150, 13));
-        lblRepairCost.setTabIndex(19);
-        lblRepairCost.setText("Full repairs will cost 8,888 cr.");
-        // picLine
-        picLine.setBackColor(Color.darkGray);
-        picLine.setLocation(new Point(0, 0));
-        picLine.setName("picLine");
-        picLine.setSize(new FormSize(770, 1));
-        picLine.setTabIndex(132);
-        picLine.setTabStop(false);
+        // labelFuelStatus
+        labelFuelStatus.setLocation(new Point(8, 16));
+        labelFuelStatus.setName("labelFuelStatus");
+        labelFuelStatus.setSize(new FormSize(162, 13));
+        labelFuelStatus.setTabIndex(20);
+        labelFuelStatus.setText("You have fuel to fly 88 parsecs.");
+        // labelFuelCost
+        labelFuelCost.setLocation(new Point(8, 31));
+        labelFuelCost.setName("labelFuelCost");
+        labelFuelCost.setSize(new FormSize(121, 13));
+        labelFuelCost.setTabIndex(19);
+        labelFuelCost.setText("A full tank costs 888 cr.");
+        // labelHullStatus
+        labelHullStatus.setLocation(new Point(8, 52));
+        labelHullStatus.setName("labelHullStatus");
+        labelHullStatus.setSize(new FormSize(152, 13));
+        labelHullStatus.setTabIndex(18);
+        labelHullStatus.setText("Your hull strength is at 888%.");
+        // labelRepairCost
+        labelRepairCost.setLocation(new Point(8, 67));
+        labelRepairCost.setName("labelRepairCost");
+        labelRepairCost.setSize(new FormSize(150, 13));
+        labelRepairCost.setTabIndex(19);
+        labelRepairCost.setText("Full repairs will cost 8,888 cr.");
+        // pictureLine
+        pictureLine.setBackColor(Color.darkGray);
+        pictureLine.setLocation(new Point(0, 0));
+        pictureLine.setName("pictureLine");
+        pictureLine.setSize(new FormSize(770, 1));
+        pictureLine.setTabIndex(132);
+        pictureLine.setTabStop(false);
         // dlgOpen
         dlgOpen.setFilter("Saved-Game Files (*.sav)|*.sav|All Files (*.*)|*.*");
         // dlgSave
@@ -2350,7 +2350,7 @@ public class Main extends wfWindow {
         // ApplicationST
         setAutoScaleBaseSize(new FormSize(5, 13));
         setClientSize(new FormSize(768, 505));
-        Controls.add(picLine);
+        Controls.add(pictureLine);
         Controls.add(boxDock);
         Controls.add(boxCargo);
         Controls.add(boxTargetSystem);
@@ -2369,20 +2369,20 @@ public class Main extends wfWindow {
         setText("Space Trader");
         setClosing(new EventHandler<>() {
             @Override
-            public void handle(Object sender, CancelEventArgs e) {
+            public void handle(Object sender, CancelEventData e) {
                 SpaceTrader_Closing(sender, e);
             }
         });
         setLoad(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 SpaceTrader_Load(sender, e);
             }
         });
-        ((ISupportInitialize) (statusBarPanelCash)).EndInit();
-        ((ISupportInitialize) (statusBarPanelBays)).EndInit();
-        ((ISupportInitialize) (statusBarPanelCosts)).EndInit();
-        ((ISupportInitialize) (statusBarPanelExtra)).EndInit();
+        ((ISupportInitialize) (statusBarPanelCash)).endInit();
+        ((ISupportInitialize) (statusBarPanelBays)).endInit();
+        ((ISupportInitialize) (statusBarPanelCosts)).endInit();
+        ((ISupportInitialize) (statusBarPanelExtra)).endInit();
         boxShortRangeChart.ResumeLayout(false);
         boxGalacticChart.ResumeLayout(false);
         boxTargetSystem.ResumeLayout(false);
@@ -2392,25 +2392,25 @@ public class Main extends wfWindow {
         boxDock.ResumeLayout(false);
         ResumeLayout(false);
         InitFileStructure();
-        lblSellPrice = new Label[]{
-                lblSellPrice0, lblSellPrice1, lblSellPrice2, lblSellPrice3, lblSellPrice4,
-                lblSellPrice5, lblSellPrice6, lblSellPrice7, lblSellPrice8, lblSellPrice9
+        labelSellPrice = new Label[]{
+                labelSellPrice0, labelSellPrice1, labelSellPrice2, labelSellPrice3, labelSellPrice4,
+                labelSellPrice5, labelSellPrice6, labelSellPrice7, labelSellPrice8, labelSellPrice9
         };
-        lblBuyPrice = new Label[]{
-                lblBuyPrice0, lblBuyPrice1, lblBuyPrice2, lblBuyPrice3, lblBuyPrice4,
-                lblBuyPrice5, lblBuyPrice6, lblBuyPrice7, lblBuyPrice8, lblBuyPrice9
+        labelBuyPrice = new Label[]{
+                labelBuyPrice0, labelBuyPrice1, labelBuyPrice2, labelBuyPrice3, labelBuyPrice4,
+                labelBuyPrice5, labelBuyPrice6, labelBuyPrice7, labelBuyPrice8, labelBuyPrice9
         };
-        lblTargetPrice = new Label[]{
-                lblTargetPrice0, lblTargetPrice1, lblTargetPrice2, lblTargetPrice3, lblTargetPrice4,
-                lblTargetPrice5, lblTargetPrice6, lblTargetPrice7, lblTargetPrice8, lblTargetPrice9
+        labelTargetPrice = new Label[]{
+                labelTargetPrice0, labelTargetPrice1, labelTargetPrice2, labelTargetPrice3, labelTargetPrice4,
+                labelTargetPrice5, labelTargetPrice6, labelTargetPrice7, labelTargetPrice8, labelTargetPrice9
         };
-        lblTargetDiff = new Label[]{
-                lblTargetDiff0, lblTargetDiff1, lblTargetDiff2, lblTargetDiff3, lblTargetDiff4,
-                lblTargetDiff5, lblTargetDiff6, lblTargetDiff7, lblTargetDiff8, lblTargetDiff9
+        labelTargetDiff = new Label[]{
+                labelTargetDiff0, labelTargetDiff1, labelTargetDiff2, labelTargetDiff3, labelTargetDiff4,
+                labelTargetDiff5, labelTargetDiff6, labelTargetDiff7, labelTargetDiff8, labelTargetDiff9
         };
-        lblTargetPct = new Label[]{
-                lblTargetPct0, lblTargetPct1, lblTargetPct2, lblTargetPct3, lblTargetPct4,
-                lblTargetPct5, lblTargetPct6, lblTargetPct7, lblTargetPct8, lblTargetPct9
+        labelTargetPct = new Label[]{
+                labelTargetPct0, labelTargetPct1, labelTargetPct2, labelTargetPct3, labelTargetPct4,
+                labelTargetPct5, labelTargetPct6, labelTargetPct7, labelTargetPct8, labelTargetPct9
         };
         buttonSellQty = new Button[]{
                 buttonSellQty0, buttonSellQty1, buttonSellQty2, buttonSellQty3, buttonSellQty4,
@@ -2497,8 +2497,8 @@ public class Main extends wfWindow {
         FormAlert.Alert(alertType, this);
         FormAlert.Alert(AlertType.GameEndScore, this, Functions.FormatNumber(game.Score() / 10), Functions.FormatNumber(game.Score() % 10));
         HighScoreRecord candidate = new HighScoreRecord(
-                cmdr.Name(), game.Score(), game.getEndStatus(),
-                cmdr.getDays(), cmdr.Worth(), game.Difficulty());
+                commander.Name(), game.Score(), game.getEndStatus(),
+                commander.getDays(), commander.Worth(), game.Difficulty());
         if (candidate.CompareTo(Functions.GetHighScores(this)[0]) > 0) {
             if (game.getCheatEnabled()) {
                 FormAlert.Alert(AlertType.GameEndHighScoreCheat, this);
@@ -2509,7 +2509,7 @@ public class Main extends wfWindow {
         } else {
             FormAlert.Alert(AlertType.GameEndHighScoreMissed, this);
         }
-        Game.CurrentGame(null);
+        Game.setCurrentGame(null);
         game = null;
     }
 
@@ -2538,7 +2538,7 @@ public class Main extends wfWindow {
                 Constants.SaveDirectory
         };
         for (String path : paths) {
-            if (!Directory.Exists(path)) {
+            if (!Directory.exists(path)) {
                 Directory.CreateDirectory(path);
             }
         }
@@ -2551,9 +2551,9 @@ public class Main extends wfWindow {
             Object obj = Functions.LoadFile(fileName, false, this);
             if (obj != null) {
                 game = new Game((Hashtable) obj, this);
-                cmdr = game.Commander();
+                commander = game.Commander();
                 SaveGameFile = fileName;
-                SaveGameDays = cmdr.getDays();
+                SaveGameDays = commander.getDays();
                 SetInGameControlsEnabled(true);
                 UpdateAll();
             }
@@ -2566,7 +2566,7 @@ public class Main extends wfWindow {
         if (Functions.SaveFile(fileName, game.Serialize(), this) && saveFileName) {
             SaveGameFile = fileName;
         }
-        SaveGameDays = cmdr.getDays();
+        SaveGameDays = commander.getDays();
     }
 
     private void SetInGameControlsEnabled(boolean enabled) {
@@ -2601,13 +2601,13 @@ public class Main extends wfWindow {
     }
 
     private void UpdateCargo() {
-        if (game == null || cmdr.CurrentSystem() == null) {
-            for (int i = 0; i < lblSellPrice.length; i++) {
-                lblSellPrice[i].setText("");
-                lblBuyPrice[i].setText("");
-                lblTargetPrice[i].setText("");
-                lblTargetDiff[i].setText("");
-                lblTargetPct[i].setText("");
+        if (game == null || commander.CurrentSystem() == null) {
+            for (int i = 0; i < labelSellPrice.length; i++) {
+                labelSellPrice[i].setText("");
+                labelBuyPrice[i].setText("");
+                labelTargetPrice[i].setText("");
+                labelTargetDiff[i].setText("");
+                labelTargetPct[i].setText("");
                 buttonSellQty[i].setVisible(false);
                 buttonSellAll[i].setVisible(false);
                 buttonBuyQty[i].setVisible(false);
@@ -2616,64 +2616,64 @@ public class Main extends wfWindow {
         } else {
             int[] buy = game.PriceCargoBuy();
             int[] sell = game.PriceCargoSell();
-            cmdr = game.Commander();//todo: is this unnecessary? GAC
+            commander = game.Commander();//todo: is this unnecessary? GAC
             StarSystem warpSys = game.WarpSystem();
-            for (int i = 0; i < lblSellPrice.length; i++) {
+            for (int i = 0; i < labelSellPrice.length; i++) {
                 int price = warpSys == null ? 0 : Constants.TradeItems[i].StandardPrice(warpSys);
-                lblSellPrice[i].setText(sell[i] > 0 ? Functions.FormatMoney(sell[i]) : "no trade");
-                buttonSellQty[i].setText("" + cmdr.getShip().Cargo()[i]);
+                labelSellPrice[i].setText(sell[i] > 0 ? Functions.FormatMoney(sell[i]) : "no trade");
+                buttonSellQty[i].setText("" + commander.getShip().Cargo()[i]);
                 buttonSellQty[i].setVisible(true);
                 buttonSellAll[i].setText(sell[i] > 0 ? "All" : "Dump");
                 buttonSellAll[i].setVisible(true);
-                lblBuyPrice[i].setText(buy[i] > 0 ? Functions.FormatMoney(buy[i]) : "not sold");
-                buttonBuyQty[i].setText("" + cmdr.CurrentSystem().TradeItems()[i]);
+                labelBuyPrice[i].setText(buy[i] > 0 ? Functions.FormatMoney(buy[i]) : "not sold");
+                buttonBuyQty[i].setText("" + commander.CurrentSystem().TradeItems()[i]);
                 buttonBuyQty[i].setVisible(buy[i] > 0);
                 buttonBuyMax[i].setVisible(buy[i] > 0);
-                if (sell[i] * cmdr.getShip().Cargo()[i] > cmdr.PriceCargo()[i]) {
-                    lblSellPrice[i].setFont(lblSystemNameLabel.getFont());
+                if (sell[i] * commander.getShip().Cargo()[i] > commander.PriceCargo()[i]) {
+                    labelSellPrice[i].setFont(labelSystemNameLabel.getFont());
                 } else {
-                    lblSellPrice[i].setFont(lblSell.getFont());
+                    labelSellPrice[i].setFont(labelSell.getFont());
                 }
                 if (warpSys != null && warpSys.DestOk() && price > 0) {
-                    lblTargetPrice[i].setText(Functions.FormatMoney(price));
+                    labelTargetPrice[i].setText(Functions.FormatMoney(price));
                 } else {
-                    lblTargetPrice[i].setText("-----------");
+                    labelTargetPrice[i].setText("-----------");
                 }
                 if (warpSys != null && warpSys.DestOk() && price > 0 && buy[i] > 0) {
                     int diff = price - buy[i];
-                    lblTargetDiff[i].setText((diff > 0 ? "+" : "") + Functions.FormatMoney(diff));
-                    lblTargetPct[i].setText((diff > 0 ? "+" : "") + Functions.FormatNumber(100 * diff / buy[i]) + "%");
-                    lblBuyPrice[i].setFont(
-                            (diff > 0 && cmdr.CurrentSystem().TradeItems()[i] > 0)
-                                    ? lblSystemNameLabel.getFont() : lblBuy.getFont());
+                    labelTargetDiff[i].setText((diff > 0 ? "+" : "") + Functions.FormatMoney(diff));
+                    labelTargetPct[i].setText((diff > 0 ? "+" : "") + Functions.FormatNumber(100 * diff / buy[i]) + "%");
+                    labelBuyPrice[i].setFont(
+                            (diff > 0 && commander.CurrentSystem().TradeItems()[i] > 0)
+                                    ? labelSystemNameLabel.getFont() : labelBuy.getFont());
                 } else {
-                    lblTargetDiff[i].setText("------------");
-                    lblTargetPct[i].setText("--------");
-                    lblBuyPrice[i].setFont(lblBuy.getFont());
+                    labelTargetDiff[i].setText("------------");
+                    labelTargetPct[i].setText("--------");
+                    labelBuyPrice[i].setFont(labelBuy.getFont());
                 }
-                lblTargetPrice[i].setFont(lblBuyPrice[i].getFont());
-                lblTargetDiff[i].setFont(lblBuyPrice[i].getFont());
-                lblTargetPct[i].setFont(lblBuyPrice[i].getFont());
+                labelTargetPrice[i].setFont(labelBuyPrice[i].getFont());
+                labelTargetDiff[i].setFont(labelBuyPrice[i].getFont());
+                labelTargetPct[i].setFont(labelBuyPrice[i].getFont());
             }
         }
     }
 
     private void UpdateCharts() {
-        picGalacticChart.Refresh();
-        picShortRangeChart.Refresh();
+        pictureGalacticChart.Refresh();
+        pictureShortRangeChart.Refresh();
         if (game == null) {
-            lblWormholeLabel.setVisible(false);
-            lblWormhole.setVisible(false);
+            labelWormholeLabel.setVisible(false);
+            labelWormhole.setVisible(false);
             buttonJump.setVisible(false);
             buttonFind.setVisible(false);
         } else {
             if (game.TargetWormhole()) {
-                lblWormholeLabel.setVisible(true);
-                lblWormhole.setVisible(true);
-                lblWormhole.setText(game.WarpSystem().Name());
+                labelWormholeLabel.setVisible(true);
+                labelWormhole.setVisible(true);
+                labelWormhole.setText(game.WarpSystem().Name());
             } else {
-                lblWormholeLabel.setVisible(false);
-                lblWormhole.setVisible(false);
+                labelWormholeLabel.setVisible(false);
+                labelWormhole.setVisible(false);
             }
             buttonJump.setVisible(game.getCanSuperWarp());
             buttonFind.setVisible(true);
@@ -2682,26 +2682,26 @@ public class Main extends wfWindow {
 
     private void UpdateDock() {
         if (game == null) {
-            lblFuelStatus.setText("");
-            lblFuelCost.setText("");
+            labelFuelStatus.setText("");
+            labelFuelCost.setText("");
             buttonFuel.setVisible(false);
-            lblHullStatus.setText("");
-            lblRepairCost.setText("");
+            labelHullStatus.setText("");
+            labelRepairCost.setText("");
             buttonRepair.setVisible(false);
         } else {
-            Ship ship = cmdr.getShip();
-            lblFuelStatus.setText(
+            Ship ship = commander.getShip();
+            labelFuelStatus.setText(
                     Functions.StringVars("You have fuel to fly ^1.", Functions.Multiples(ship.getFuel(), "parsec")));
             int tanksEmpty = ship.FuelTanks() - ship.getFuel();
-            lblFuelCost.setText(tanksEmpty > 0
+            labelFuelCost.setText(tanksEmpty > 0
                     ? Functions.StringVars("A full tank costs ^1", Functions.FormatMoney(tanksEmpty * ship.getFuelCost()))
                     : "Your tank is full.");
             buttonFuel.setVisible(tanksEmpty > 0);
-            lblHullStatus.setText(
+            labelHullStatus.setText(
                     Functions.StringVars("Your hull strength is at ^1%.",
                             Functions.FormatNumber((int) Math.floor((double) 100 * ship.getHull() / ship.HullStrength()))));
             int hullLoss = ship.HullStrength() - ship.getHull();
-            lblRepairCost.setText(hullLoss > 0
+            labelRepairCost.setText(hullLoss > 0
                     ? Functions.StringVars("Full repairs will cost ^1", Functions.FormatMoney(hullLoss * ship.getRepairCost()))
                     : "No repairs are needed.");
             buttonRepair.setVisible(hullLoss > 0);
@@ -2710,31 +2710,31 @@ public class Main extends wfWindow {
 
     private void UpdateShipyard() {
         if (game == null) {
-            lblShipsForSale.setText("");
-            lblEquipForSale.setText("");
-            lblEscapePod.setText("");
+            labelShipsForSale.setText("");
+            labelEquipForSale.setText("");
+            labelEscapePod.setText("");
             buttonPod.setVisible(false);
             buttonBuyShip.setVisible(false);
             buttonDesign.setVisible(false);
             buttonEquip.setVisible(false);
         } else {
             boolean noTech =
-                    cmdr.CurrentSystem().TechLevel().ordinal()
+                    commander.CurrentSystem().TechLevel().ordinal()
                             < Constants.ShipSpecs[ShipType.Flea.CastToInt()].MinimumTechLevel().ordinal();
-            lblShipsForSale.setText(noTech ? Strings.ShipyardShipNoSale : Strings.ShipyardShipForSale);
+            labelShipsForSale.setText(noTech ? Strings.ShipyardShipNoSale : Strings.ShipyardShipForSale);
             buttonBuyShip.setVisible(true);
-            buttonDesign.setVisible((cmdr.CurrentSystem().Shipyard() != null));
-            lblEquipForSale.setText(noTech ? Strings.ShipyardEquipNoSale : Strings.ShipyardEquipForSale);
+            buttonDesign.setVisible((commander.CurrentSystem().Shipyard() != null));
+            labelEquipForSale.setText(noTech ? Strings.ShipyardEquipNoSale : Strings.ShipyardEquipForSale);
             buttonEquip.setVisible(true);
             buttonPod.setVisible(false);
-            if (cmdr.getShip().getEscapePod()) {
-                lblEscapePod.setText(Strings.ShipyardPodInstalled);
+            if (commander.getShip().getEscapePod()) {
+                labelEscapePod.setText(Strings.ShipyardPodInstalled);
             } else if (noTech) {
-                lblEscapePod.setText(Strings.ShipyardPodNoSale);
-            } else if (cmdr.getCash() < 2000) {
-                lblEscapePod.setText(Strings.ShipyardPodIF);
+                labelEscapePod.setText(Strings.ShipyardPodNoSale);
+            } else if (commander.getCash() < 2000) {
+                labelEscapePod.setText(Strings.ShipyardPodIF);
             } else {
-                lblEscapePod.setText(Strings.ShipyardPodCost);
+                labelEscapePod.setText(Strings.ShipyardPodCost);
                 buttonPod.setVisible(true);
             }
         }
@@ -2747,40 +2747,40 @@ public class Main extends wfWindow {
             statusBarPanelCosts.setText("");
             statusBarPanelExtra.setText("No Game Loaded.");
         } else {
-            statusBarPanelCash.setText("Cash: " + Functions.FormatMoney(cmdr.getCash()));
+            statusBarPanelCash.setText("Cash: " + Functions.FormatMoney(commander.getCash()));
             statusBarPanelBays.setText(
-                    "Bays: " + cmdr.getShip().FilledCargoBays() + "/" + cmdr.getShip().CargoBays());
+                    "Bays: " + commander.getShip().FilledCargoBays() + "/" + commander.getShip().CargoBays());
             statusBarPanelCosts.setText("Current Costs: " + Functions.FormatMoney(game.CurrentCosts()));
             statusBarPanelExtra.setText("");
         }
     }
 
     private void UpdateSystemInfo() {
-        if (game == null || cmdr.CurrentSystem() == null) {
-            lblSystemName.setText("");
-            lblSystemSize.setText("");
-            lblSystemTech.setText("");
-            lblSystemPolSys.setText("");
-            lblSystemResource.setText("");
-            lblSystemPolice.setText("");
-            lblSystemPirates.setText("");
-            lblSystemPressure.setText("");
-            lblSystemPressurePre.setVisible(false);
+        if (game == null || commander.CurrentSystem() == null) {
+            labelSystemName.setText("");
+            labelSystemSize.setText("");
+            labelSystemTech.setText("");
+            labelSystemPolSys.setText("");
+            labelSystemResource.setText("");
+            labelSystemPolice.setText("");
+            labelSystemPirates.setText("");
+            labelSystemPressure.setText("");
+            labelSystemPressurePre.setVisible(false);
             buttonNews.setVisible(false);
             buttonMerc.setVisible(false);
             buttonSpecial.setVisible(false);
         } else {
-            StarSystem system = cmdr.CurrentSystem();
+            StarSystem system = commander.CurrentSystem();
             CrewMember[] mercs = system.MercenariesForHire();
-            lblSystemName.setText(system.Name());
-            lblSystemSize.setText(Strings.Sizes[system.Size().CastToInt()]);
-            lblSystemTech.setText(system.TechLevel().name);
-            lblSystemPolSys.setText(system.PoliticalSystem().Name());
-            lblSystemResource.setText(system.SpecialResource().name);
-            lblSystemPolice.setText(Strings.ActivityLevels[system.PoliticalSystem().ActivityPolice().CastToInt()]);
-            lblSystemPirates.setText(Strings.ActivityLevels[system.PoliticalSystem().ActivityPirates().CastToInt()]);
-            lblSystemPressure.setText(system.SystemPressure().name);
-            lblSystemPressurePre.setVisible(true);
+            labelSystemName.setText(system.Name());
+            labelSystemSize.setText(Strings.Sizes[system.Size().CastToInt()]);
+            labelSystemTech.setText(system.TechLevel().name);
+            labelSystemPolSys.setText(system.PoliticalSystem().Name());
+            labelSystemResource.setText(system.SpecialResource().name);
+            labelSystemPolice.setText(Strings.ActivityLevels[system.PoliticalSystem().ActivityPolice().CastToInt()]);
+            labelSystemPirates.setText(Strings.ActivityLevels[system.PoliticalSystem().ActivityPirates().CastToInt()]);
+            labelSystemPressure.setText(system.SystemPressure().name);
+            labelSystemPressurePre.setVisible(true);
             buttonNews.setVisible(true);
             buttonMerc.setVisible(mercs.length > 0);
             if (buttonMerc.getVisible()) {
@@ -2799,36 +2799,36 @@ public class Main extends wfWindow {
         buttonNextSystem.setVisible(game != null);
         buttonPrevSystem.setVisible(game != null);
         if (game == null || game.WarpSystem() == null) {
-            lblTargetName.setText("");
-            lblTargetSize.setText("");
-            lblTargetTech.setText("");
-            lblTargetPolSys.setText("");
-            lblTargetResource.setText("");
-            lblTargetPolice.setText("");
-            lblTargetPirates.setText("");
-            lblTargetDistance.setText("");
-            lblTargetOutOfRange.setVisible(false);
+            labelTargetName.setText("");
+            labelTargetSize.setText("");
+            labelTargetTech.setText("");
+            labelTargetPolSys.setText("");
+            labelTargetResource.setText("");
+            labelTargetPolice.setText("");
+            labelTargetPirates.setText("");
+            labelTargetDistance.setText("");
+            labelTargetOutOfRange.setVisible(false);
             buttonWarp.setVisible(false);
             buttonTrack.setVisible(false);
         } else {
             StarSystem system = game.WarpSystem();
-            int distance = Functions.Distance(cmdr.CurrentSystem(), system);
-            lblTargetName.setText(system.Name());
-            lblTargetSize.setText(Strings.Sizes[system.Size().CastToInt()]);
-            lblTargetTech.setText(system.TechLevel().name);
-            lblTargetPolSys.setText(system.PoliticalSystem().Name());
-            lblTargetResource.setText(system.Visited() ? system.SpecialResource().name : Strings.Unknown);
-            lblTargetPolice.setText(Strings.ActivityLevels[system.PoliticalSystem().ActivityPolice().CastToInt()]);
-            lblTargetPirates.setText(Strings.ActivityLevels[system.PoliticalSystem().ActivityPirates().CastToInt()]);
-            lblTargetDistance.setText("" + distance);
-            lblTargetOutOfRange.setVisible(!system.DestOk() && system != cmdr.CurrentSystem());
+            int distance = Functions.Distance(commander.CurrentSystem(), system);
+            labelTargetName.setText(system.Name());
+            labelTargetSize.setText(Strings.Sizes[system.Size().CastToInt()]);
+            labelTargetTech.setText(system.TechLevel().name);
+            labelTargetPolSys.setText(system.PoliticalSystem().Name());
+            labelTargetResource.setText(system.Visited() ? system.SpecialResource().name : Strings.Unknown);
+            labelTargetPolice.setText(Strings.ActivityLevels[system.PoliticalSystem().ActivityPolice().CastToInt()]);
+            labelTargetPirates.setText(Strings.ActivityLevels[system.PoliticalSystem().ActivityPirates().CastToInt()]);
+            labelTargetDistance.setText("" + distance);
+            labelTargetOutOfRange.setVisible(!system.DestOk() && system != commander.CurrentSystem());
             buttonWarp.setVisible(system.DestOk());
-            buttonTrack.setVisible(lblTargetOutOfRange.getVisible() && system != game.TrackedSystem());
+            buttonTrack.setVisible(labelTargetOutOfRange.getVisible() && system != game.TrackedSystem());
         }
     }
 
-    private void SpaceTrader_Closing(Object sender, CancelEventArgs e) {
-        if (game == null || cmdr.getDays() == SaveGameDays
+    private void SpaceTrader_Closing(Object sender, CancelEventData e) {
+        if (game == null || commander.getDays() == SaveGameDays
                 || FormAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes) {
             if (WindowState == FormWindowState.Normal) {
                 SetRegistrySetting("X", Left.toString());
@@ -2839,13 +2839,13 @@ public class Main extends wfWindow {
         }
     }
 
-    private void SpaceTrader_Load(Object sender, EventArgs e) {
+    private void SpaceTrader_Load(Object sender, EventData e) {
         Left = Integer.parseInt(GetRegistrySetting("X", "0"));
         Top = Integer.parseInt(GetRegistrySetting("Y", "0"));
         FormAlert.Alert(AlertType.AppStart, this);
     }
 
-    private void buttonBuySell_Click(Object sender, EventArgs e) {
+    private void buttonBuySell_Click(Object sender, EventData e) {
         String name = ((Button) sender).getName();
         boolean all = !name.contains("Qty");
         int index = Integer.parseInt(name.substring(name.length() - 1));
@@ -2856,25 +2856,25 @@ public class Main extends wfWindow {
         }
     }
 
-    private void buttonBuyShip_Click(Object sender, EventArgs e) {
+    private void buttonBuyShip_Click(Object sender, EventData e) {
         (new FormShipList()).ShowDialog(this);
         UpdateAll();
     }
 
-    private void buttonDesign_Click(Object sender, EventArgs e) {
+    private void buttonDesign_Click(Object sender, EventData e) {
         (new FormShipyard()).ShowDialog(this);
         UpdateAll();
     }
 
-    private void buttonEquip_Click(Object sender, EventArgs e) {
+    private void buttonEquip_Click(Object sender, EventData e) {
         (new FormEquipment()).ShowDialog(this);
         UpdateAll();
     }
 
-    private void buttonFind_Click(Object sender, EventArgs e) {
+    private void buttonFind_Click(Object sender, EventData e) {
         FormFind form = new FormFind();
         if (form.ShowDialog(this) == DialogResult.OK) {
-            Ship ship = cmdr.getShip();
+            Ship ship = commander.getShip();
             String[] words = form.SystemName().split(" ");
             String first = words.length > 0 ? words[0] : "";
             String second = words.length > 1 ? words[1] : "";
@@ -2893,7 +2893,7 @@ public class Main extends wfWindow {
                         }
                         break;
                     case DeLorean:
-                        cmdr.setDays(Math.max(0, num1));
+                        commander.setDays(Math.max(0, num1));
                         break;
                     case Diamond:
                         ship.setHullUpgraded(!ship.getHullUpgraded());
@@ -2914,7 +2914,7 @@ public class Main extends wfWindow {
                         }
                         break;
                     case Fame:
-                        cmdr.setReputationScore(Math.max(0, num1));
+                        commander.setReputationScore(Math.max(0, num1));
                         break;
                     case Go:
                         game.setSelectedSystemByName(second);
@@ -2931,22 +2931,22 @@ public class Main extends wfWindow {
                     case Ice: {
                         switch (SomeStringsForSwitch.find(second)) {
                             case Pirate:
-                                cmdr.setKillsPirate(Math.max(0, num2));
+                                commander.setKillsPirate(Math.max(0, num2));
                                 break;
                             case Police:
-                                cmdr.setKillsPolice(Math.max(0, num2));
+                                commander.setKillsPolice(Math.max(0, num2));
                                 break;
                             case Trader:
-                                cmdr.setKillsTrader(Math.max(0, num2));
+                                commander.setKillsTrader(Math.max(0, num2));
                                 break;
                         }
                     }
                     break;
                     case Indemnity:
-                        cmdr.NoClaim(Math.max(0, num1));
+                        commander.NoClaim(Math.max(0, num1));
                         break;
                     case IOU:
-                        cmdr.setDebt(Math.max(0, num1));
+                        commander.setDebt(Math.max(0, num1));
                         break;
                     case Iron:
                         if (num1 >= 0 && num1 < ship.Weapons().length && num2 >= 0 && num2 < Constants.WeaponObjects.length) {
@@ -2985,18 +2985,18 @@ public class Main extends wfWindow {
                             int skill = ship.Trader();
                             ship.Crew()[num1] = game.Mercenaries()[num2];
                             if (ship.Trader() != skill) {
-                                game.RecalculateBuyPrices(cmdr.CurrentSystem());
+                                game.RecalculateBuyPrices(commander.CurrentSystem());
                             }
                         }
                         break;
                     case RapSheet:
-                        cmdr.setPoliceRecordScore(num1);
+                        commander.setPoliceRecordScore(num1);
                         break;
                     case Rarity:
                         game.setChanceOfVeryRareEncounter(Math.max(0, Math.min(1000, num1)));
                         break;
                     case Scratch:
-                        cmdr.setCash(Math.max(0, num1));
+                        commander.setCash(Math.max(0, num1));
                         break;
                     case Skin:
                         ship.setHull(Math.max(0, Math.min(ship.HullStrength(), num1)));
@@ -3105,20 +3105,20 @@ public class Main extends wfWindow {
         }
     }
 
-    private void buttonFuel_Click(Object sender, EventArgs e) {
+    private void buttonFuel_Click(Object sender, EventData e) {
         FormBuyFuel form = new FormBuyFuel();
         if (form.ShowDialog(this) == DialogResult.OK) {
-            int toAdd = form.Amount() / cmdr.getShip().getFuelCost();
-            cmdr.getShip().setFuel(cmdr.getShip().getFuel() + toAdd);
-            cmdr.setCash(cmdr.getCash() - (toAdd * cmdr.getShip().getFuelCost()));
+            int toAdd = form.Amount() / commander.getShip().getFuelCost();
+            commander.getShip().setFuel(commander.getShip().getFuel() + toAdd);
+            commander.setCash(commander.getCash() - (toAdd * commander.getShip().getFuelCost()));
             UpdateAll();
         }
     }
 
-    private void buttonJump_Click(Object sender, EventArgs e) {
+    private void buttonJump_Click(Object sender, EventData e) {
         if (game.WarpSystem() == null) {
             FormAlert.Alert(AlertType.ChartJumpNoSystemSelected, this);
-        } else if (game.WarpSystem() == cmdr.CurrentSystem()) {
+        } else if (game.WarpSystem() == commander.CurrentSystem()) {
             FormAlert.Alert(AlertType.ChartJumpCurrent, this);
         } else if (FormAlert.Alert(AlertType.ChartJump, this, game.WarpSystem().Name()) == DialogResult.Yes) {
             game.setCanSuperWarp(false);
@@ -3137,45 +3137,45 @@ public class Main extends wfWindow {
         }
     }
 
-    private void buttonMerc_Click(Object sender, EventArgs e) {
+    private void buttonMerc_Click(Object sender, EventData e) {
         (new FormViewPersonnel()).ShowDialog(this);
         UpdateAll();
     }
 
-    private void buttonNews_Click(Object sender, EventArgs e) {
+    private void buttonNews_Click(Object sender, EventData e) {
         game.ShowNewspaper();
     }
 
-    private void buttonNextSystem_Click(Object sender, EventArgs e) {
+    private void buttonNextSystem_Click(Object sender, EventData e) {
         game.SelectNextSystemWithinRange(true);
         UpdateAll();
     }
 
-    private void buttonPod_Click(Object sender, EventArgs e) {
+    private void buttonPod_Click(Object sender, EventData e) {
         if (FormAlert.Alert(AlertType.EquipmentEscapePod, this) == DialogResult.Yes) {
-            cmdr.setCash(cmdr.getCash() - 2000);
-            cmdr.getShip().setEscapePod(true);
+            commander.setCash(commander.getCash() - 2000);
+            commander.getShip().setEscapePod(true);
             UpdateAll();
         }
     }
 
-    private void buttonPrevSystem_Click(Object sender, EventArgs e) {
+    private void buttonPrevSystem_Click(Object sender, EventData e) {
         game.SelectNextSystemWithinRange(false);
         UpdateAll();
     }
 
-    private void buttonRepair_Click(Object sender, EventArgs e) {
+    private void buttonRepair_Click(Object sender, EventData e) {
         FormBuyRepairs form = new FormBuyRepairs();
         if (form.ShowDialog(this) == DialogResult.OK) {
-            int toAdd = form.Amount() / cmdr.getShip().getRepairCost();
-            cmdr.getShip().setHull(cmdr.getShip().getHull() + toAdd);
-            cmdr.setCash(cmdr.getCash() - (toAdd * cmdr.getShip().getRepairCost()));
+            int toAdd = form.Amount() / commander.getShip().getRepairCost();
+            commander.getShip().setHull(commander.getShip().getHull() + toAdd);
+            commander.setCash(commander.getCash() - (toAdd * commander.getShip().getRepairCost()));
             UpdateAll();
         }
     }
 
-    private void buttonSpecial_Click(Object sender, EventArgs e) {
-        SpecialEvent specEvent = cmdr.CurrentSystem().SpecialEvent();
+    private void buttonSpecial_Click(Object sender, EventData e) {
+        SpecialEvent specEvent = commander.CurrentSystem().SpecialEvent();
         String button1, button2;
         DialogResult res1, res2;
         if (specEvent.MessageOnly()) {
@@ -3191,7 +3191,7 @@ public class Main extends wfWindow {
         }
         FormAlert alert = new FormAlert(specEvent.Title(), specEvent.String(), button1, res1, button2, res2, null);
         if (alert.ShowDialog() != DialogResult.No) {
-            if (cmdr.CashToSpend() < specEvent.Price()) {
+            if (commander.CashToSpend() < specEvent.Price()) {
                 FormAlert.Alert(AlertType.SpecialIF, this);
             } else {
                 try {
@@ -3204,12 +3204,12 @@ public class Main extends wfWindow {
         UpdateAll();
     }
 
-    private void buttonTrack_Click(Object sender, EventArgs e) {
+    private void buttonTrack_Click(Object sender, EventData e) {
         game.setTrackedSystemId(game.SelectedSystemId());
         UpdateAll();
     }
 
-    private void buttonWarp_Click(Object sender, EventArgs e) {
+    private void buttonWarp_Click(Object sender, EventData e) {
         try {
             if (game.getAutoSave()) {
                 SaveGame(SAVE_DEPARTURE, false);
@@ -3224,19 +3224,20 @@ public class Main extends wfWindow {
         UpdateAll();
     }
 
-    private void mnuGameExit_Click(Object sender, EventArgs e) {
+    private void mnuGameExit_Click(Object sender, EventData e) {
         Close();
     }
 
-    private void mnuGameNew_Click(Object sender, EventArgs e) {
+    private void mnuGameNew_Click(Object sender, EventData e) {
         FormNewCommander form = new FormNewCommander();
-        if ((game == null || cmdr.getDays() == SaveGameDays
+        if ((game == null || commander.getDays() == SaveGameDays
                 || FormAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes)
                 && form.ShowDialog(this) == DialogResult.OK) {
+            Game.setCurrentGame(new Game());  // TODO quick fix to get a current game, hopefully that helps, but
             game = new Game(
                     form.CommanderName(), form.Difficulty(), form.Pilot(),
                     form.Fighter(), form.Trader(), form.Engineer(), this);
-            cmdr = game.Commander();
+            commander = game.Commander();
             SaveGameFile = null;
             SaveGameDays = 0;
             SetInGameControlsEnabled(true);
@@ -3247,15 +3248,15 @@ public class Main extends wfWindow {
         }
     }
 
-    private void mnuGameLoad_Click(Object sender, EventArgs e) {
-        if ((game == null || cmdr.getDays() == SaveGameDays
+    private void mnuGameLoad_Click(Object sender, EventData e) {
+        if ((game == null || commander.getDays() == SaveGameDays
                 || FormAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes)
                 && dlgOpen.ShowDialog(this) == DialogResult.OK) {
             LoadGame(dlgOpen.getFileName());
         }
     }
 
-    private void mnuGameSave_Click(Object sender, EventArgs e) {
+    private void mnuGameSave_Click(Object sender, EventData e) {
         if (game != null) {
             if (SaveGameFile != null) {
                 SaveGame(SaveGameFile, false);
@@ -3265,21 +3266,21 @@ public class Main extends wfWindow {
         }
     }
 
-    private void mnuGameSaveAs_Click(Object sender, EventArgs e) {
+    private void mnuGameSaveAs_Click(Object sender, EventData e) {
         if (game != null && dlgSave.ShowDialog(this) == DialogResult.OK) {
             SaveGame(dlgSave.getFileName(), true);
         }
     }
 
-    private void mnuHelpAbout_Click(Object sender, EventArgs e) {
+    private void mnuHelpAbout_Click(Object sender, EventData e) {
         (new FormAbout()).ShowDialog(this);
     }
 
-    private void mnuHighScores_Click(Object sender, EventArgs e) {
+    private void mnuHighScores_Click(Object sender, EventData e) {
         (new FormViewHighScores()).ShowDialog(this);
     }
 
-    private void mnuOptions_Click(Object sender, EventArgs e) {
+    private void mnuOptions_Click(Object sender, EventData e) {
         FormOptions form = new FormOptions();
         if (form.ShowDialog(this) == DialogResult.OK) {
             game.Options().CopyValues(form.Options());
@@ -3287,7 +3288,7 @@ public class Main extends wfWindow {
         }
     }
 
-    private void mnuRetire_Click(Object sender, EventArgs e) {
+    private void mnuRetire_Click(Object sender, EventData e) {
         if (FormAlert.Alert(AlertType.GameRetire, this) == DialogResult.Yes) {
             game.setEndStatus(GameEndType.Retired);
             GameEnd();
@@ -3295,27 +3296,27 @@ public class Main extends wfWindow {
         }
     }
 
-    private void mnuViewBank_Click(Object sender, EventArgs e) {
+    private void mnuViewBank_Click(Object sender, EventData e) {
         (new FormViewBank()).ShowDialog(this);
     }
 
-    private void mnuViewCommander_Click(Object sender, EventArgs e) {
+    private void mnuViewCommander_Click(Object sender, EventData e) {
         (new FormViewCommander()).ShowDialog(this);
     }
 
-    private void mnuViewPersonnel_Click(Object sender, EventArgs e) {
+    private void mnuViewPersonnel_Click(Object sender, EventData e) {
         (new FormViewPersonnel()).ShowDialog(this);
     }
 
-    private void mnuViewQuests_Click(Object sender, EventArgs e) {
+    private void mnuViewQuests_Click(Object sender, EventData e) {
         (new FormViewQuests()).ShowDialog(this);
     }
 
-    private void mnuViewShip_Click(Object sender, EventArgs e) {
+    private void mnuViewShip_Click(Object sender, EventData e) {
         (new FormViewShip()).ShowDialog(this);
     }
 
-    private void picGalacticChart_MouseDown(Object sender, MouseEventArgs e) {
+    private void pictureGalacticChart_MouseDown(Object sender, MouseEventData e) {
         if (e.Button == MouseButtons.Left && game != null) {
             StarSystem[] universe = game.Universe();
             boolean clickedSystem = false;
@@ -3340,15 +3341,15 @@ public class Main extends wfWindow {
         }
     }
 
-    private void picGalacticChart_Paint(Object sender, PaintEventArgs e) {
+    private void pictureGalacticChart_Paint(Object sender, PaintEventData e) {
         if (game != null) {
             StarSystem[] universe = game.Universe();
             int[] wormholes = game.Wormholes();
             StarSystem targetSys = game.SelectedSystem();
-            StarSystem curSys = cmdr.CurrentSystem();
-            int fuel = cmdr.getShip().getFuel();
+            StarSystem currentSys = commander.CurrentSystem();
+            int fuel = commander.getShip().getFuel();
             if (fuel > 0) {
-                e.Graphics.DrawEllipse(DEFAULT_PEN, curSys.X() + OFF_X - fuel, curSys.Y() + OFF_Y - fuel, fuel * 2, fuel * 2);
+                e.Graphics.DrawEllipse(DEFAULT_PEN, currentSys.X() + OFF_X - fuel, currentSys.Y() + OFF_Y - fuel, fuel * 2, fuel * 2);
             }
             int index = game.SelectedSystemId().CastToInt();
             if (game.TargetWormhole()) {
@@ -3383,23 +3384,23 @@ public class Main extends wfWindow {
                 }
             }
         } else {
-            e.Graphics.FillRectangle(DEFAULT_BRUSH, 0, 0, picGalacticChart.getWidth(), picGalacticChart.getHeight());
+            e.Graphics.FillRectangle(DEFAULT_BRUSH, 0, 0, pictureGalacticChart.getWidth(), pictureGalacticChart.getHeight());
         }
     }
 
-    private void picShortRangeChart_MouseDown(Object sender, MouseEventArgs e) {
+    private void pictureShortRangeChart_MouseDown(Object sender, MouseEventData e) {
         if (e.Button == MouseButtons.Left && game != null) {
             StarSystem[] universe = game.Universe();
-            StarSystem curSys = cmdr.CurrentSystem();
+            StarSystem currentSys = commander.CurrentSystem();
             boolean clickedSystem = false;
-            int centerX = picShortRangeChart.getWidth() / 2;
-            int centerY = picShortRangeChart.getHeight() / 2;
-            int delta = picShortRangeChart.getHeight() / (Constants.MaxRange * 2);
+            int centerX = pictureShortRangeChart.getWidth() / 2;
+            int centerY = pictureShortRangeChart.getHeight() / 2;
+            int delta = pictureShortRangeChart.getHeight() / (Constants.MaxRange * 2);
             for (int i = 0; i < universe.length && !clickedSystem; i++) {
-                if ((Math.abs(universe[i].X() - curSys.X()) * delta <= picShortRangeChart.getWidth() / 2 - 10)
-                        && (Math.abs(universe[i].Y() - curSys.Y()) * delta <= picShortRangeChart.getHeight() / 2 - 10)) {
-                    int x = centerX + (universe[i].X() - curSys.X()) * delta;
-                    int y = centerY + (universe[i].Y() - curSys.Y()) * delta;
+                if ((Math.abs(universe[i].X() - currentSys.X()) * delta <= pictureShortRangeChart.getWidth() / 2 - 10)
+                        && (Math.abs(universe[i].Y() - currentSys.Y()) * delta <= pictureShortRangeChart.getHeight() / 2 - 10)) {
+                    int x = centerX + (universe[i].X() - currentSys.X()) * delta;
+                    int y = centerY + (universe[i].Y() - currentSys.Y()) * delta;
                     if (e.X >= x - OFF_X && e.X <= x + OFF_X && e.Y >= y - OFF_Y && e.Y <= y + OFF_Y) {
                         clickedSystem = true;
                         game.SelectedSystemId(StarSystemId.FromInt(i));
@@ -3419,29 +3420,29 @@ public class Main extends wfWindow {
         }
     }
 
-    private void picShortRangeChart_Paint(Object sender, PaintEventArgs e) {
+    private void pictureShortRangeChart_Paint(Object sender, PaintEventData e) {
         if (game == null) {
-            e.Graphics.FillRectangle(DEFAULT_BRUSH, 0, 0, picShortRangeChart.getWidth(), picShortRangeChart.getHeight());
+            e.Graphics.FillRectangle(DEFAULT_BRUSH, 0, 0, pictureShortRangeChart.getWidth(), pictureShortRangeChart.getHeight());
         } else {
             int[] wormholes = game.Wormholes();
-            int fuel = cmdr.getShip().getFuel();
-            int centerX = picShortRangeChart.getWidth() / 2;
-            int centerY = picShortRangeChart.getHeight() / 2;
-            int delta = picShortRangeChart.getHeight() / (Constants.MaxRange * 2);
+            int fuel = commander.getShip().getFuel();
+            int centerX = pictureShortRangeChart.getWidth() / 2;
+            int centerY = pictureShortRangeChart.getHeight() / 2;
+            int delta = pictureShortRangeChart.getHeight() / (Constants.MaxRange * 2);
             e.Graphics.DrawLine(DEFAULT_PEN, centerX - 1, centerY - 1, centerX + 1, centerY + 1);
             e.Graphics.DrawLine(DEFAULT_PEN, centerX - 1, centerY + 1, centerX + 1, centerY - 1);
             if (fuel > 0) {
                 e.Graphics.DrawEllipse(DEFAULT_PEN, centerX - fuel * delta, centerY - fuel * delta, fuel * delta * 2, fuel * delta * 2);
             }
-            StarSystem curSys = cmdr.CurrentSystem();
+            StarSystem currentSys = commander.CurrentSystem();
             StarSystem trackSys = game.TrackedSystem();
             if (trackSys != null) {
-                int dist = Functions.Distance(curSys, trackSys);
+                int dist = Functions.Distance(currentSys, trackSys);
                 if (dist > 0) {
-                    int dX = (int) Math.round(25 * (trackSys.X() - curSys.X()) / (double) dist);
-                    int dY = (int) Math.round(25 * (trackSys.Y() - curSys.Y()) / (double) dist);
-                    int dX2 = (int) Math.round(4 * (trackSys.Y() - curSys.Y()) / (double) dist);
-                    int dY2 = (int) Math.round(4 * (curSys.X() - trackSys.X()) / (double) dist);
+                    int dX = (int) Math.round(25 * (trackSys.X() - currentSys.X()) / (double) dist);
+                    int dY = (int) Math.round(25 * (trackSys.Y() - currentSys.Y()) / (double) dist);
+                    int dX2 = (int) Math.round(4 * (trackSys.Y() - currentSys.Y()) / (double) dist);
+                    int dY2 = (int) Math.round(4 * (currentSys.X() - trackSys.X()) / (double) dist);
                     e.Graphics.FillPolygon(new SolidBrush(new Color(220, 20, 60)), new Point[]{
                             new Point(centerX + dX, centerY + dY), new Point(centerX - dX2, centerY - dY2), new Point(centerX + dX2, centerY + dY2)
                     });
@@ -3449,7 +3450,7 @@ public class Main extends wfWindow {
                 if (game.Options().getShowTrackedRange()) {
                     e.Graphics.DrawString(
                             Functions.StringVars("^1 to ^2.", Functions.Multiples(dist, Strings.DistanceUnit), trackSys.Name()),
-                            getFont(), new SolidBrush(Color.black), 0, picShortRangeChart.getHeight() - 13);
+                            getFont(), new SolidBrush(Color.black), 0, pictureShortRangeChart.getHeight() - 13);
                 }
             }
             // First, draw the names, then the systems.
@@ -3457,10 +3458,10 @@ public class Main extends wfWindow {
             StarSystem[] universe = game.Universe();
             for (int j = 0; j < 2; j++) {
                 for (int i = 0; i < universe.length; i++) {
-                    if ((Math.abs(universe[i].X() - curSys.X()) * delta <= picShortRangeChart.getWidth() / 2 - 10)
-                            && (Math.abs(universe[i].Y() - curSys.Y()) * delta <= picShortRangeChart.getHeight() / 2 - 10)) {
-                        int x = centerX + (universe[i].X() - curSys.X()) * delta;
-                        int y = centerY + (universe[i].Y() - curSys.Y()) * delta;
+                    if ((Math.abs(universe[i].X() - currentSys.X()) * delta <= pictureShortRangeChart.getWidth() / 2 - 10)
+                            && (Math.abs(universe[i].Y() - currentSys.Y()) * delta <= pictureShortRangeChart.getHeight() / 2 - 10)) {
+                        int x = centerX + (universe[i].X() - currentSys.X()) * delta;
+                        int y = centerY + (universe[i].Y() - currentSys.Y()) * delta;
                         if (j == 1) {
                             if (universe[i] == game.WarpSystem()) {
                                 e.Graphics.DrawLine(DEFAULT_PEN, x - 6, y, x + 6, y);
@@ -3495,7 +3496,7 @@ public class Main extends wfWindow {
         }
     }
 
-    private void statusBar_PanelClick(Object sender, StatusBarPanelClickEventArgs e) {
+    private void statusBar_PanelClick(Object sender, StatusBarPanelClickEventData e) {
         if (game != null) {
             if (e.StatusBarPanel == statusBarPanelCash) {
                 mnuViewBank_Click(sender, e);

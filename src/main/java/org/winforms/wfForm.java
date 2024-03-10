@@ -8,12 +8,13 @@ import javax.swing.*;
 import java.awt.Dialog.ModalityType;
 import java.awt.*;
 
-
+// TODO documentation of usage
 public class wfForm extends wfControl implements wfPane {
+
     protected final wfPanel Controls;
     private final JDialog jdialog;
     private final wfPanel panel;
-    protected EventHandler<Object, EventArgs> Closed;
+    protected EventHandler<Object, EventData> Closed;
     DialogResult result;
     // Must encapsulate most of these.
     private FormSize AutoScaleBaseSize;
@@ -21,8 +22,8 @@ public class wfForm extends wfControl implements wfPane {
     private boolean MinimizeBox;
     private boolean MaximizeBox;
     private FormStartPosition StartPosition;
-    private EventHandler<Object, CancelEventArgs> Closing;
-    private EventHandler<Object, EventArgs> Load;
+    private EventHandler<Object, CancelEventData> Closing;
+    private EventHandler<Object, EventData> Load;
     private Button AcceptButton;
     private Button CancelButton;
     private String Title;
@@ -31,7 +32,7 @@ public class wfForm extends wfControl implements wfPane {
     public wfForm() {
         // super(new WinformJPanel());
         super(new JDialog());
-        jdialog = (JDialog) swingVersion;
+        jdialog = (JDialog) swingComponent;
         // panel = (WinformJPanel)swingVersion;
         panel = new wfPanel(this);
         jdialog.setContentPane(panel);
@@ -116,19 +117,19 @@ public class wfForm extends wfControl implements wfPane {
         CancelButton = cancelButton;
     }
 
-    public EventHandler<Object, EventArgs> getLoad() {
+    public EventHandler<Object, EventData> getLoad() {
         return Load;
     }
 
-    public void setLoad(EventHandler<Object, EventArgs> load) {
+    public void setLoad(EventHandler<Object, EventData> load) {
         Load = load;
     }
 
-    public EventHandler<Object, CancelEventArgs> getClosing() {
+    public EventHandler<Object, CancelEventData> getClosing() {
         return Closing;
     }
 
-    public void setClosing(EventHandler<Object, CancelEventArgs> closing) {
+    public void setClosing(EventHandler<Object, CancelEventData> closing) {
         Closing = closing;
     }
 

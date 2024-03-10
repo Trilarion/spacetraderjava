@@ -4,7 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 
+// TODO what is this good for, better name and documentation
 public class Lisp {
+
     private Lisp() {
     }
 

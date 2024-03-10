@@ -1,8 +1,9 @@
 package org.spacetrader.controller;
 
 import org.spacetrader.model.events.SpecialEventType;
+import org.spacetrader.ui.Strings;
 
-
+// TODO part of model
 public class SpecialEvent {
     public final static int MoonCost = 500000;
     public final static int StatusArtifactNotStarted = 0;
@@ -67,19 +68,19 @@ public class SpecialEvent {
     public final static int StatusWildDone = 12;
     private SpecialEventType _type;
     private int _price;
-    private int _occurrence;
+    private int _occurrentrence;
     private boolean _messageOnly;
 
-    public SpecialEvent(SpecialEventType type, int price, int occurrence, boolean messageOnly) {
+    public SpecialEvent(SpecialEventType type, int price, int occurrentrence, boolean messageOnly) {
         _type = type;
         _price = price;
-        _occurrence = occurrence;
+        _occurrentrence = occurrentrence;
         _messageOnly = messageOnly;
     }
 
     public StarSystem Location() {
         StarSystem location = null;
-        StarSystem[] universe = Game.CurrentGame().Universe();
+        StarSystem[] universe = Game.getCurrentGame().Universe();
         for (int i = 0; i < universe.length && location == null; i++) {
             if (universe[i].SpecialEventType() == Type()) {
                 location = universe[i];
@@ -92,8 +93,8 @@ public class SpecialEvent {
         return _messageOnly;
     }
 
-    public int Occurrence() {
-        return _occurrence;
+    public int Occurrentrence() {
+        return _occurrentrence;
     }
 
     public int Price() {

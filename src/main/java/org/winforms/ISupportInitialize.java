@@ -1,8 +1,8 @@
 package org.winforms;
 
-
+// TODO why start with I, needed?, documentation of usage
 public interface ISupportInitialize {
-    void BeginInit();
+    void beginInit();
 
-    void EndInit();
+    void endInit();
 }

@@ -4,41 +4,42 @@ import org.spacetrader.controller.enums.SkillType;
 import org.spacetrader.controller.enums.StarSystemId;
 import org.spacetrader.model.CrewMemberId;
 import org.spacetrader.model.Difficulty;
+import org.spacetrader.ui.Strings;
 import org.spacetrader.util.ArrayList;
 import org.spacetrader.util.Hashtable;
 import org.spacetrader.util.Util;
 
 import java.util.Arrays;
 
-
+// TODO part of model
 public class CrewMember extends SerializableObject {
-    private CrewMemberId _id;
-    private StarSystemId _curSystemId = StarSystemId.NA;
-    private int[] _skills = new int[4];
+    private CrewMemberId crewMemberId;
+    private StarSystemId currentSystemId = StarSystemId.NA;
+    private int[] skills = new int[4];
 
-    public CrewMember(CrewMemberId id, int pilot, int fighter, int trader, int engineer, StarSystemId curSystemId) {
-        _id = id;
-        Pilot(pilot);
+    public CrewMember(CrewMemberId id, int pilot, int fighter, int trader, int engineer, StarSystemId currentSystemId) {
+        crewMemberId = id;
+        Pilot(pilot);  // TODO change to setPilotSkill, getPilotSkill, ...
         Fighter(fighter);
         Trader(trader);
         Engineer(engineer);
-        _curSystemId = curSystemId;
+        this.currentSystemId = currentSystemId;
     }
 
     public CrewMember(CrewMember baseCrewMember) {
-        _id = baseCrewMember.Id();
+        crewMemberId = baseCrewMember.Id();
         Pilot(baseCrewMember.Pilot());
         Fighter(baseCrewMember.Fighter());
         Trader(baseCrewMember.Trader());
         Engineer(baseCrewMember.Engineer());
-        _curSystemId = baseCrewMember.getCurrentSystemId();
+        currentSystemId = baseCrewMember.getCurrentSystemId();
     }
 
     public CrewMember(Hashtable hash) {
         super(hash);
-        _id = CrewMemberId.FromInt(GetValueFromHash(hash, "_id", Integer.class));
-        _skills = GetValueFromHash(hash, "_skills", _skills, int[].class);
-        _curSystemId = StarSystemId.FromInt(GetValueFromHash(hash, "_curSystemId", Integer.class));
+        crewMemberId = CrewMemberId.FromInt(GetValueFromHash(hash, "_id", Integer.class));
+        skills = GetValueFromHash(hash, "_skills", skills, int[].class);
+        currentSystemId = StarSystemId.FromInt(GetValueFromHash(hash, "_currentSystemId", Integer.class));
     }
 
     private void ChangeRandomSkill(int amount) {
@@ -50,10 +51,10 @@ public class CrewMember extends SerializableObject {
         }
         if (!skillIdList.isEmpty()) {
             int skill = skillIdList.get(Functions.GetRandom(skillIdList.size()));
-            int curTrader = Game.CurrentGame().Commander().getShip().Trader();
+            int currentTrader = Game.getCurrentGame().Commander().getShip().Trader();
             Skills()[skill] += amount;
-            if (Game.CurrentGame().Commander().getShip().Trader() != curTrader) {
-                Game.CurrentGame().RecalculateBuyPrices(Game.CurrentGame().Commander().CurrentSystem());
+            if (Game.getCurrentGame().Commander().getShip().Trader() != currentTrader) {
+                Game.getCurrentGame().RecalculateBuyPrices(Game.getCurrentGame().Commander().CurrentSystem());
             }
         }
     }
@@ -87,9 +88,9 @@ public class CrewMember extends SerializableObject {
     @Override
     public Hashtable Serialize() {
         Hashtable hash = super.Serialize();
-        hash.add("_id", _id);
-        hash.add("_skills", _skills);
-        hash.add("_curSystemId", _curSystemId);
+        hash.add("_id", crewMemberId);
+        hash.add("_skills", skills);
+        hash.add("_currentSystemId", currentSystemId);
         return hash;
     }
 
@@ -98,7 +99,7 @@ public class CrewMember extends SerializableObject {
     // *************************************************************************
     public void TonicTweakRandomSkill() {
         int[] oldSkills = Arrays.copyOf(Skills(), Skills().length);
-        if (Game.CurrentGame().Difficulty().CastToInt() < Difficulty.Hard.CastToInt()) {
+        if (Game.getCurrentGame().Difficulty().CastToInt() < Difficulty.Hard.CastToInt()) {
             // add one to a random skill, subtract one from a random skill
             while (Skills()[0] == oldSkills[0] && Skills()[1] == oldSkills[1] && Skills()[2] == oldSkills[2] && Skills()[3] == oldSkills[3]) {
                 ChangeRandomSkill(1);
@@ -118,51 +119,51 @@ public class CrewMember extends SerializableObject {
     }
 
     public StarSystem CurrentSystem() {
-        return _curSystemId == StarSystemId.NA ? null : Game.CurrentGame().Universe()[_curSystemId.CastToInt()];
+        return currentSystemId == StarSystemId.NA ? null : Game.getCurrentGame().Universe()[currentSystemId.CastToInt()];
     }
 
     public void CurrentSystem(StarSystem value) {
-        _curSystemId = value.Id();
+        currentSystemId = value.Id();
     }
 
     public StarSystemId getCurrentSystemId() {
-        return _curSystemId;
+        return currentSystemId;
     }
 
-    public void setCurrentSystemId(StarSystemId currentSystemId) {
-        _curSystemId = currentSystemId;
+    public void setCurrentSystemId(StarSystemId currentrentSystemId) {
+        currentSystemId = currentrentSystemId;
     }
 
     public int Engineer() {
-        return _skills[SkillType.Engineer.CastToInt()];
+        return skills[SkillType.Engineer.CastToInt()];
     }
 
     public void Engineer(int value) {
-        _skills[SkillType.Engineer.CastToInt()] = value;
+        skills[SkillType.Engineer.CastToInt()] = value;
     }
 
     public int Fighter() {
-        return _skills[SkillType.Fighter.CastToInt()];
+        return skills[SkillType.Fighter.CastToInt()];
     }
 
     public void Fighter(int value) {
-        _skills[SkillType.Fighter.CastToInt()] = value;
+        skills[SkillType.Fighter.CastToInt()] = value;
     }
 
     public CrewMemberId Id() {
-        return _id;
+        return crewMemberId;
     }
 
     public String Name() {
-        return Strings.CrewMemberNames[_id.CastToInt()];
+        return Strings.CrewMemberNames[crewMemberId.CastToInt()];
     }
 
     public int Pilot() {
-        return _skills[SkillType.Pilot.CastToInt()];
+        return skills[SkillType.Pilot.CastToInt()];
     }
 
     public void Pilot(int value) {
-        _skills[SkillType.Pilot.CastToInt()] = value;
+        skills[SkillType.Pilot.CastToInt()] = value;
     }
 
     public int Rate() {
@@ -171,14 +172,14 @@ public class CrewMember extends SerializableObject {
     }
 
     public int[] Skills() {
-        return _skills;
+        return skills;
     }
 
     public int Trader() {
-        return _skills[SkillType.Trader.CastToInt()];
+        return skills[SkillType.Trader.CastToInt()];
     }
 
     public void Trader(int value) {
-        _skills[SkillType.Trader.CastToInt()] = value;
+        skills[SkillType.Trader.CastToInt()] = value;
     }
 }

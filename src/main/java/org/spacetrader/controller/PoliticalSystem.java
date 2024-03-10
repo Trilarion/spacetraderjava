@@ -3,16 +3,18 @@ package org.spacetrader.controller;
 import org.spacetrader.controller.enums.Activity;
 import org.spacetrader.controller.enums.OpponentType;
 import org.spacetrader.controller.enums.PoliticalSystemType;
-import org.spacetrader.controller.enums.TechLevel;
+import org.spacetrader.model.TechLevel;
 import org.spacetrader.model.Difficulty;
 import org.spacetrader.model.cargo.TradeItemType;
 import org.spacetrader.model.ship.ShipType;
+import org.spacetrader.ui.Strings;
 
 
+// TODO part of the model
 public class PoliticalSystem {
     private PoliticalSystemType _type;
     private int _reactionIllegal; // Reaction level of illegal goods 0 = total acceptance (determines how police reacts if they find you carry them)
-    private Activity _activityPolice; // Activity level of police force 0 = no police (determines occurrence rate)
+    private Activity _activityPolice; // Activity level of police force 0 = no police (determines occurrentrence rate)
     private Activity _activityPirates; // Activity level of pirates 0 = no pirates
     private Activity _activityTraders; // Activity level of traders 0 = no traders
     private TechLevel _minTech; // Minimum tech level needed
@@ -40,7 +42,7 @@ public class PoliticalSystem {
 
     public boolean ShipTypeLikely(ShipType shipType, OpponentType oppType) {
         boolean likely = false;
-        int diffMod = Math.max(0, Game.CurrentGame().Difficulty().CastToInt() - Difficulty.Normal.CastToInt());
+        int diffMod = Math.max(0, Game.getCurrentGame().Difficulty().CastToInt() - Difficulty.Normal.CastToInt());
         switch (oppType) {
             case Pirate:
                 likely = ActivityPirates().CastToInt() + diffMod >= Constants.ShipSpecs[shipType.CastToInt()].Pirates().CastToInt();

@@ -3,7 +3,7 @@ package org.winforms;
 import javax.swing.Icon;
 import javax.swing.*;
 
-
+// TODO documentation (maybe without J)
 public class JStatusBarSection extends JLabel {
     private static final long serialVersionUID = 1L;
 

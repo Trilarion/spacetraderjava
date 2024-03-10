@@ -10,9 +10,9 @@ import java.awt.*;
  *
  * @author Gregory
  */
-class SpecialImageJLabel extends JLabel {
+class SpecialImageJLabel extends JLabel {  // TODO better name and documentation of usage
     private static final long serialVersionUID = 1L;
-    EventHandler<Object, PaintEventArgs> paintEventHandler;
+    EventHandler<Object, PaintEventData> paintEventHandler;
     PictureBox pictureBox;
     Color background;
 
@@ -31,9 +31,9 @@ class SpecialImageJLabel extends JLabel {
         graphics.fillRect(0, 0, getWidth(), getHeight());
     }
 
-    private void tryEventHandler(EventHandler<Object, PaintEventArgs> handler, Graphics graphics) {
+    private void tryEventHandler(EventHandler<Object, PaintEventData> handler, Graphics graphics) {
         if (handler != null) {
-            handler.handle(pictureBox, new PaintEventArgs(graphics));
+            handler.handle(pictureBox, new PaintEventData(graphics));
         }
     }
 }

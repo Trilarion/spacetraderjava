@@ -6,6 +6,7 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 
 
+// TODO what is this about?
 public class DWIM {
     /**
      * even if it's of the right type, I still take the value from the "canon" collections, because the input is likely to be from

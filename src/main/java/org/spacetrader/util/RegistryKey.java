@@ -3,8 +3,9 @@ package org.spacetrader.util;
 import java.io.*;
 import java.util.Properties;
 
-
+// TODO what is this good for?
 public class RegistryKey {
+
     protected final Properties properties = new Properties();
     private final File file;
 

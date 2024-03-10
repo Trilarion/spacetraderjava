@@ -13,85 +13,85 @@ import java.util.Arrays;
 
 
 public class FormShipList extends wfForm {
-    private final Game game = Game.CurrentGame();
-    private final Commander cmdr = game.Commander();
-    private final Ship ship = cmdr.getShip();
-    private PictureBox picShip;
-    private Label lblName;
-    private Label lblSize;
-    private Label lblBays;
-    private Label lblRange;
-    private Label lblHull;
-    private Label lblWeapon;
-    private Label lblShield;
-    private Label lblGadget;
-    private Label lblCrew;
-    private Label[] lblPrice;
+    private final Game game = Game.getCurrentGame();
+    private final Commander commander = game.Commander();
+    private final Ship ship = commander.getShip();
+    private PictureBox pictureShip;
+    private Label labelName;
+    private Label labelSize;
+    private Label labelBays;
+    private Label labelRange;
+    private Label labelHull;
+    private Label labelWeapon;
+    private Label labelShield;
+    private Label labelGadget;
+    private Label labelCrew;
+    private Label[] labelPrice;
     private Button[] buttonBuy;
     private int[] prices = new int[Constants.ShipSpecs.length];
 
     public FormShipList() {
         Button buttonClose = new Button();
         Button buttonBuy0 = new Button();
-        Label lblName0 = new Label();
+        Label labelName0 = new Label();
         Button buttonInfo0 = new Button();
-        Label lblPrice0 = new Label();
-        Label lblPrice1 = new Label();
+        Label labelPrice0 = new Label();
+        Label labelPrice1 = new Label();
         Button buttonInfo1 = new Button();
-        Label lblName1 = new Label();
+        Label labelName1 = new Label();
         Button buttonBuy1 = new Button();
-        Label lblPrice2 = new Label();
+        Label labelPrice2 = new Label();
         Button buttonInfo2 = new Button();
-        Label lblName2 = new Label();
+        Label labelName2 = new Label();
         Button buttonBuy2 = new Button();
-        Label lblPrice3 = new Label();
+        Label labelPrice3 = new Label();
         Button buttonInfo3 = new Button();
-        Label lblName3 = new Label();
+        Label labelName3 = new Label();
         Button buttonBuy3 = new Button();
-        Label lblPrice4 = new Label();
+        Label labelPrice4 = new Label();
         Button buttonInfo4 = new Button();
-        Label lblName4 = new Label();
+        Label labelName4 = new Label();
         Button buttonBuy4 = new Button();
-        Label lblPrice5 = new Label();
+        Label labelPrice5 = new Label();
         Button buttonInfo5 = new Button();
-        Label lblName5 = new Label();
+        Label labelName5 = new Label();
         Button buttonBuy5 = new Button();
-        Label lblPrice6 = new Label();
+        Label labelPrice6 = new Label();
         Button buttonInfo6 = new Button();
-        Label lblName6 = new Label();
+        Label labelName6 = new Label();
         Button buttonBuy6 = new Button();
-        Label lblPrice7 = new Label();
+        Label labelPrice7 = new Label();
         Button buttonInfo7 = new Button();
-        Label lblName7 = new Label();
+        Label labelName7 = new Label();
         Button buttonBuy7 = new Button();
-        Label lblPrice8 = new Label();
+        Label labelPrice8 = new Label();
         Button buttonInfo8 = new Button();
-        Label lblName8 = new Label();
+        Label labelName8 = new Label();
         Button buttonBuy8 = new Button();
-        Label lblPrice9 = new Label();
+        Label labelPrice9 = new Label();
         Button buttonInfo9 = new Button();
-        Label lblName9 = new Label();
+        Label labelName9 = new Label();
         Button buttonBuy9 = new Button();
         GroupBox boxShipInfo = new GroupBox();
-        lblCrew = new Label();
-        lblGadget = new Label();
-        lblShield = new Label();
-        lblWeapon = new Label();
-        lblHull = new Label();
-        lblRange = new Label();
-        lblBays = new Label();
-        lblSize = new Label();
-        lblName = new Label();
-        picShip = new PictureBox();
-        Label lblGadgetLabel = new Label();
-        Label lblCrewLabel = new Label();
-        Label lblShieldLabel = new Label();
-        Label lblWeaponLabel = new Label();
-        Label lblHullLabel = new Label();
-        Label lblRangeLabel = new Label();
-        Label lblBaysLabel = new Label();
-        Label lblNameLabel = new Label();
-        Label lblSizeLabel = new Label();
+        labelCrew = new Label();
+        labelGadget = new Label();
+        labelShield = new Label();
+        labelWeapon = new Label();
+        labelHull = new Label();
+        labelRange = new Label();
+        labelBays = new Label();
+        labelSize = new Label();
+        labelName = new Label();
+        pictureShip = new PictureBox();
+        Label labelGadgetLabel = new Label();
+        Label labelCrewLabel = new Label();
+        Label labelShieldLabel = new Label();
+        Label labelWeaponLabel = new Label();
+        Label labelHullLabel = new Label();
+        Label labelRangeLabel = new Label();
+        Label labelBaysLabel = new Label();
+        Label labelNameLabel = new Label();
+        Label labelSizeLabel = new Label();
         boxShipInfo.SuspendLayout();
         SuspendLayout();
         // buttonClose
@@ -112,16 +112,16 @@ public class FormShipList extends wfForm {
         buttonBuy0.setVisible(false);
         buttonBuy0.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuyInfo_Click(sender, e);
             }
         });
-        // lblName0
-        lblName0.setLocation(new Point(48, 12));
-        lblName0.setName("lblName0");
-        lblName0.setSize(new FormSize(70, 13));
-        lblName0.setTabIndex(34);
-        lblName0.setText("Flea");
+        // labelName0
+        labelName0.setLocation(new Point(48, 12));
+        labelName0.setName("labelName0");
+        labelName0.setSize(new FormSize(70, 13));
+        labelName0.setTabIndex(34);
+        labelName0.setText("Flea");
         // buttonInfo0
         buttonInfo0.setFlatStyle(FlatStyle.Flat);
         buttonInfo0.setLocation(new Point(120, 8));
@@ -131,24 +131,24 @@ public class FormShipList extends wfForm {
         buttonInfo0.setText("Info");
         buttonInfo0.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuyInfo_Click(sender, e);
             }
         });
-        // lblPrice0
-        lblPrice0.setLocation(new Point(160, 12));
-        lblPrice0.setName("lblPrice0");
-        lblPrice0.setSize(new FormSize(64, 13));
-        lblPrice0.setTabIndex(36);
-        lblPrice0.setText("-888,888 cr.");
-        lblPrice0.TextAlign = ContentAlignment.TopRight;
-        // lblPrice1
-        lblPrice1.setLocation(new Point(160, 36));
-        lblPrice1.setName("lblPrice1");
-        lblPrice1.setSize(new FormSize(64, 13));
-        lblPrice1.setTabIndex(40);
-        lblPrice1.setText("-888,888 cr.");
-        lblPrice1.TextAlign = ContentAlignment.TopRight;
+        // labelPrice0
+        labelPrice0.setLocation(new Point(160, 12));
+        labelPrice0.setName("labelPrice0");
+        labelPrice0.setSize(new FormSize(64, 13));
+        labelPrice0.setTabIndex(36);
+        labelPrice0.setText("-888,888 cr.");
+        labelPrice0.TextAlign = ContentAlignment.TopRight;
+        // labelPrice1
+        labelPrice1.setLocation(new Point(160, 36));
+        labelPrice1.setName("labelPrice1");
+        labelPrice1.setSize(new FormSize(64, 13));
+        labelPrice1.setTabIndex(40);
+        labelPrice1.setText("-888,888 cr.");
+        labelPrice1.TextAlign = ContentAlignment.TopRight;
         // buttonInfo1
         buttonInfo1.setFlatStyle(FlatStyle.Flat);
         buttonInfo1.setLocation(new Point(120, 32));
@@ -158,16 +158,16 @@ public class FormShipList extends wfForm {
         buttonInfo1.setText("Info");
         buttonInfo1.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuyInfo_Click(sender, e);
             }
         });
-        // lblName1
-        lblName1.setLocation(new Point(48, 36));
-        lblName1.setName("lblName1");
-        lblName1.setSize(new FormSize(70, 13));
-        lblName1.setTabIndex(38);
-        lblName1.setText("Gnat");
+        // labelName1
+        labelName1.setLocation(new Point(48, 36));
+        labelName1.setName("labelName1");
+        labelName1.setSize(new FormSize(70, 13));
+        labelName1.setTabIndex(38);
+        labelName1.setText("Gnat");
         // buttonBuy1
         buttonBuy1.setFlatStyle(FlatStyle.Flat);
         buttonBuy1.setLocation(new Point(8, 32));
@@ -178,17 +178,17 @@ public class FormShipList extends wfForm {
         buttonBuy1.setVisible(false);
         buttonBuy1.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuyInfo_Click(sender, e);
             }
         });
-        // lblPrice2
-        lblPrice2.setLocation(new Point(160, 60));
-        lblPrice2.setName("lblPrice2");
-        lblPrice2.setSize(new FormSize(64, 13));
-        lblPrice2.setTabIndex(44);
-        lblPrice2.setText("-888,888 cr.");
-        lblPrice2.TextAlign = ContentAlignment.TopRight;
+        // labelPrice2
+        labelPrice2.setLocation(new Point(160, 60));
+        labelPrice2.setName("labelPrice2");
+        labelPrice2.setSize(new FormSize(64, 13));
+        labelPrice2.setTabIndex(44);
+        labelPrice2.setText("-888,888 cr.");
+        labelPrice2.TextAlign = ContentAlignment.TopRight;
         // buttonInfo2
         buttonInfo2.setFlatStyle(FlatStyle.Flat);
         buttonInfo2.setLocation(new Point(120, 56));
@@ -198,16 +198,16 @@ public class FormShipList extends wfForm {
         buttonInfo2.setText("Info");
         buttonInfo2.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuyInfo_Click(sender, e);
             }
         });
-        // lblName2
-        lblName2.setLocation(new Point(48, 60));
-        lblName2.setName("lblName2");
-        lblName2.setSize(new FormSize(70, 13));
-        lblName2.setTabIndex(42);
-        lblName2.setText("Firefly");
+        // labelName2
+        labelName2.setLocation(new Point(48, 60));
+        labelName2.setName("labelName2");
+        labelName2.setSize(new FormSize(70, 13));
+        labelName2.setTabIndex(42);
+        labelName2.setText("Firefly");
         // buttonBuy2
         buttonBuy2.setFlatStyle(FlatStyle.Flat);
         buttonBuy2.setLocation(new Point(8, 56));
@@ -218,17 +218,17 @@ public class FormShipList extends wfForm {
         buttonBuy2.setVisible(false);
         buttonBuy2.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuyInfo_Click(sender, e);
             }
         });
-        // lblPrice3
-        lblPrice3.setLocation(new Point(160, 84));
-        lblPrice3.setName("lblPrice3");
-        lblPrice3.setSize(new FormSize(64, 13));
-        lblPrice3.setTabIndex(48);
-        lblPrice3.setText("-888,888 cr.");
-        lblPrice3.TextAlign = ContentAlignment.TopRight;
+        // labelPrice3
+        labelPrice3.setLocation(new Point(160, 84));
+        labelPrice3.setName("labelPrice3");
+        labelPrice3.setSize(new FormSize(64, 13));
+        labelPrice3.setTabIndex(48);
+        labelPrice3.setText("-888,888 cr.");
+        labelPrice3.TextAlign = ContentAlignment.TopRight;
         // buttonInfo3
         buttonInfo3.setFlatStyle(FlatStyle.Flat);
         buttonInfo3.setLocation(new Point(120, 80));
@@ -238,16 +238,16 @@ public class FormShipList extends wfForm {
         buttonInfo3.setText("Info");
         buttonInfo3.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuyInfo_Click(sender, e);
             }
         });
-        // lblName3
-        lblName3.setLocation(new Point(48, 84));
-        lblName3.setName("lblName3");
-        lblName3.setSize(new FormSize(70, 13));
-        lblName3.setTabIndex(46);
-        lblName3.setText("Mosquito");
+        // labelName3
+        labelName3.setLocation(new Point(48, 84));
+        labelName3.setName("labelName3");
+        labelName3.setSize(new FormSize(70, 13));
+        labelName3.setTabIndex(46);
+        labelName3.setText("Mosquito");
         // buttonBuy3
         buttonBuy3.setFlatStyle(FlatStyle.Flat);
         buttonBuy3.setLocation(new Point(8, 80));
@@ -258,17 +258,17 @@ public class FormShipList extends wfForm {
         buttonBuy3.setVisible(false);
         buttonBuy3.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuyInfo_Click(sender, e);
             }
         });
-        // lblPrice4
-        lblPrice4.setLocation(new Point(160, 108));
-        lblPrice4.setName("lblPrice4");
-        lblPrice4.setSize(new FormSize(64, 13));
-        lblPrice4.setTabIndex(52);
-        lblPrice4.setText("-888,888 cr.");
-        lblPrice4.TextAlign = ContentAlignment.TopRight;
+        // labelPrice4
+        labelPrice4.setLocation(new Point(160, 108));
+        labelPrice4.setName("labelPrice4");
+        labelPrice4.setSize(new FormSize(64, 13));
+        labelPrice4.setTabIndex(52);
+        labelPrice4.setText("-888,888 cr.");
+        labelPrice4.TextAlign = ContentAlignment.TopRight;
         // buttonInfo4
         buttonInfo4.setFlatStyle(FlatStyle.Flat);
         buttonInfo4.setLocation(new Point(120, 104));
@@ -278,16 +278,16 @@ public class FormShipList extends wfForm {
         buttonInfo4.setText("Info");
         buttonInfo4.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuyInfo_Click(sender, e);
             }
         });
-        // lblName4
-        lblName4.setLocation(new Point(48, 108));
-        lblName4.setName("lblName4");
-        lblName4.setSize(new FormSize(70, 13));
-        lblName4.setTabIndex(50);
-        lblName4.setText("Bumblebee");
+        // labelName4
+        labelName4.setLocation(new Point(48, 108));
+        labelName4.setName("labelName4");
+        labelName4.setSize(new FormSize(70, 13));
+        labelName4.setTabIndex(50);
+        labelName4.setText("Bumblebee");
         // buttonBuy4
         buttonBuy4.setFlatStyle(FlatStyle.Flat);
         buttonBuy4.setLocation(new Point(8, 104));
@@ -298,17 +298,17 @@ public class FormShipList extends wfForm {
         buttonBuy4.setVisible(false);
         buttonBuy4.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuyInfo_Click(sender, e);
             }
         });
-        // lblPrice5
-        lblPrice5.setLocation(new Point(160, 132));
-        lblPrice5.setName("lblPrice5");
-        lblPrice5.setSize(new FormSize(64, 13));
-        lblPrice5.setTabIndex(56);
-        lblPrice5.setText("got one");
-        lblPrice5.TextAlign = ContentAlignment.TopRight;
+        // labelPrice5
+        labelPrice5.setLocation(new Point(160, 132));
+        labelPrice5.setName("labelPrice5");
+        labelPrice5.setSize(new FormSize(64, 13));
+        labelPrice5.setTabIndex(56);
+        labelPrice5.setText("got one");
+        labelPrice5.TextAlign = ContentAlignment.TopRight;
         // buttonInfo5
         buttonInfo5.setFlatStyle(FlatStyle.Flat);
         buttonInfo5.setLocation(new Point(120, 128));
@@ -318,16 +318,16 @@ public class FormShipList extends wfForm {
         buttonInfo5.setText("Info");
         buttonInfo5.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuyInfo_Click(sender, e);
             }
         });
-        // lblName5
-        lblName5.setLocation(new Point(48, 132));
-        lblName5.setName("lblName5");
-        lblName5.setSize(new FormSize(70, 13));
-        lblName5.setTabIndex(54);
-        lblName5.setText("Beetle");
+        // labelName5
+        labelName5.setLocation(new Point(48, 132));
+        labelName5.setName("labelName5");
+        labelName5.setSize(new FormSize(70, 13));
+        labelName5.setTabIndex(54);
+        labelName5.setText("Beetle");
         // buttonBuy5
         buttonBuy5.setFlatStyle(FlatStyle.Flat);
         buttonBuy5.setLocation(new Point(8, 128));
@@ -338,17 +338,17 @@ public class FormShipList extends wfForm {
         buttonBuy5.setVisible(false);
         buttonBuy5.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuyInfo_Click(sender, e);
             }
         });
-        // lblPrice6
-        lblPrice6.setLocation(new Point(160, 156));
-        lblPrice6.setName("lblPrice6");
-        lblPrice6.setSize(new FormSize(64, 13));
-        lblPrice6.setTabIndex(60);
-        lblPrice6.setText("-888,888 cr.");
-        lblPrice6.TextAlign = ContentAlignment.TopRight;
+        // labelPrice6
+        labelPrice6.setLocation(new Point(160, 156));
+        labelPrice6.setName("labelPrice6");
+        labelPrice6.setSize(new FormSize(64, 13));
+        labelPrice6.setTabIndex(60);
+        labelPrice6.setText("-888,888 cr.");
+        labelPrice6.TextAlign = ContentAlignment.TopRight;
         // buttonInfo6
         buttonInfo6.setFlatStyle(FlatStyle.Flat);
         buttonInfo6.setLocation(new Point(120, 152));
@@ -358,16 +358,16 @@ public class FormShipList extends wfForm {
         buttonInfo6.setText("Info");
         buttonInfo6.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuyInfo_Click(sender, e);
             }
         });
-        // lblName6
-        lblName6.setLocation(new Point(48, 156));
-        lblName6.setName("lblName6");
-        lblName6.setSize(new FormSize(70, 13));
-        lblName6.setTabIndex(58);
-        lblName6.setText("Hornet");
+        // labelName6
+        labelName6.setLocation(new Point(48, 156));
+        labelName6.setName("labelName6");
+        labelName6.setSize(new FormSize(70, 13));
+        labelName6.setTabIndex(58);
+        labelName6.setText("Hornet");
         // buttonBuy6
         buttonBuy6.setFlatStyle(FlatStyle.Flat);
         buttonBuy6.setLocation(new Point(8, 152));
@@ -378,17 +378,17 @@ public class FormShipList extends wfForm {
         buttonBuy6.setVisible(false);
         buttonBuy6.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuyInfo_Click(sender, e);
             }
         });
-        // lblPrice7
-        lblPrice7.setLocation(new Point(160, 180));
-        lblPrice7.setName("lblPrice7");
-        lblPrice7.setSize(new FormSize(64, 13));
-        lblPrice7.setTabIndex(64);
-        lblPrice7.setText("-888,888 cr.");
-        lblPrice7.TextAlign = ContentAlignment.TopRight;
+        // labelPrice7
+        labelPrice7.setLocation(new Point(160, 180));
+        labelPrice7.setName("labelPrice7");
+        labelPrice7.setSize(new FormSize(64, 13));
+        labelPrice7.setTabIndex(64);
+        labelPrice7.setText("-888,888 cr.");
+        labelPrice7.TextAlign = ContentAlignment.TopRight;
         // buttonInfo7
         buttonInfo7.setFlatStyle(FlatStyle.Flat);
         buttonInfo7.setLocation(new Point(120, 176));
@@ -398,16 +398,16 @@ public class FormShipList extends wfForm {
         buttonInfo7.setText("Info");
         buttonInfo7.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuyInfo_Click(sender, e);
             }
         });
-        // lblName7
-        lblName7.setLocation(new Point(48, 180));
-        lblName7.setName("lblName7");
-        lblName7.setSize(new FormSize(70, 13));
-        lblName7.setTabIndex(62);
-        lblName7.setText("Grasshopper");
+        // labelName7
+        labelName7.setLocation(new Point(48, 180));
+        labelName7.setName("labelName7");
+        labelName7.setSize(new FormSize(70, 13));
+        labelName7.setTabIndex(62);
+        labelName7.setText("Grasshopper");
         // buttonBuy7
         buttonBuy7.setFlatStyle(FlatStyle.Flat);
         buttonBuy7.setLocation(new Point(8, 176));
@@ -418,17 +418,17 @@ public class FormShipList extends wfForm {
         buttonBuy7.setVisible(false);
         buttonBuy7.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuyInfo_Click(sender, e);
             }
         });
-        // lblPrice8
-        lblPrice8.setLocation(new Point(160, 204));
-        lblPrice8.setName("lblPrice8");
-        lblPrice8.setSize(new FormSize(64, 13));
-        lblPrice8.setTabIndex(68);
-        lblPrice8.setText("-888,888 cr.");
-        lblPrice8.TextAlign = ContentAlignment.TopRight;
+        // labelPrice8
+        labelPrice8.setLocation(new Point(160, 204));
+        labelPrice8.setName("labelPrice8");
+        labelPrice8.setSize(new FormSize(64, 13));
+        labelPrice8.setTabIndex(68);
+        labelPrice8.setText("-888,888 cr.");
+        labelPrice8.TextAlign = ContentAlignment.TopRight;
         // buttonInfo8
         buttonInfo8.setFlatStyle(FlatStyle.Flat);
         buttonInfo8.setLocation(new Point(120, 200));
@@ -438,16 +438,16 @@ public class FormShipList extends wfForm {
         buttonInfo8.setText("Info");
         buttonInfo8.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuyInfo_Click(sender, e);
             }
         });
-        // lblName8
-        lblName8.setLocation(new Point(48, 204));
-        lblName8.setName("lblName8");
-        lblName8.setSize(new FormSize(70, 13));
-        lblName8.setTabIndex(66);
-        lblName8.setText("Termite");
+        // labelName8
+        labelName8.setLocation(new Point(48, 204));
+        labelName8.setName("labelName8");
+        labelName8.setSize(new FormSize(70, 13));
+        labelName8.setTabIndex(66);
+        labelName8.setText("Termite");
         // buttonBuy8
         buttonBuy8.setFlatStyle(FlatStyle.Flat);
         buttonBuy8.setLocation(new Point(8, 200));
@@ -458,17 +458,17 @@ public class FormShipList extends wfForm {
         buttonBuy8.setVisible(false);
         buttonBuy8.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuyInfo_Click(sender, e);
             }
         });
-        // lblPrice9
-        lblPrice9.setLocation(new Point(160, 228));
-        lblPrice9.setName("lblPrice9");
-        lblPrice9.setSize(new FormSize(64, 13));
-        lblPrice9.setTabIndex(72);
-        lblPrice9.setText("not sold");
-        lblPrice9.TextAlign = ContentAlignment.TopRight;
+        // labelPrice9
+        labelPrice9.setLocation(new Point(160, 228));
+        labelPrice9.setName("labelPrice9");
+        labelPrice9.setSize(new FormSize(64, 13));
+        labelPrice9.setTabIndex(72);
+        labelPrice9.setText("not sold");
+        labelPrice9.TextAlign = ContentAlignment.TopRight;
         // buttonInfo9
         buttonInfo9.setFlatStyle(FlatStyle.Flat);
         buttonInfo9.setLocation(new Point(120, 224));
@@ -478,16 +478,16 @@ public class FormShipList extends wfForm {
         buttonInfo9.setText("Info");
         buttonInfo9.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuyInfo_Click(sender, e);
             }
         });
-        // lblName9
-        lblName9.setLocation(new Point(48, 228));
-        lblName9.setName("lblName9");
-        lblName9.setSize(new FormSize(70, 13));
-        lblName9.setTabIndex(70);
-        lblName9.setText("Wasp");
+        // labelName9
+        labelName9.setLocation(new Point(48, 228));
+        labelName9.setName("labelName9");
+        labelName9.setSize(new FormSize(70, 13));
+        labelName9.setTabIndex(70);
+        labelName9.setText("Wasp");
         // buttonBuy9
         buttonBuy9.setFlatStyle(FlatStyle.Flat);
         buttonBuy9.setLocation(new Point(8, 224));
@@ -498,215 +498,215 @@ public class FormShipList extends wfForm {
         buttonBuy9.setVisible(false);
         buttonBuy9.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBuyInfo_Click(sender, e);
             }
         });
         // boxShipInfo
-        boxShipInfo.Controls.addAll(lblCrew,
-                lblGadget,
-                lblShield,
-                lblWeapon,
-                lblHull,
-                lblRange,
-                lblBays,
-                lblSize,
-                lblName,
-                picShip,
-                lblGadgetLabel,
-                lblCrewLabel,
-                lblShieldLabel,
-                lblWeaponLabel,
-                lblHullLabel,
-                lblRangeLabel,
-                lblBaysLabel,
-                lblNameLabel,
-                lblSizeLabel);
+        boxShipInfo.Controls.addAll(labelCrew,
+                labelGadget,
+                labelShield,
+                labelWeapon,
+                labelHull,
+                labelRange,
+                labelBays,
+                labelSize,
+                labelName,
+                pictureShip,
+                labelGadgetLabel,
+                labelCrewLabel,
+                labelShieldLabel,
+                labelWeaponLabel,
+                labelHullLabel,
+                labelRangeLabel,
+                labelBaysLabel,
+                labelNameLabel,
+                labelSizeLabel);
         boxShipInfo.setLocation(new Point(232, 0));
         boxShipInfo.setName("boxShipInfo");
         boxShipInfo.setSize(new FormSize(200, 248));
         boxShipInfo.setTabIndex(73);
         boxShipInfo.setTabStop(false);
         boxShipInfo.setText("Ship Information");
-        // lblCrew
-        lblCrew.setLocation(new Point(96, 224));
-        lblCrew.setName("lblCrew");
-        lblCrew.setSize(new FormSize(10, 13));
-        lblCrew.setTabIndex(43);
-        lblCrew.setText("8");
-        // lblGadget
-        lblGadget.setLocation(new Point(96, 208));
-        lblGadget.setName("lblGadget");
-        lblGadget.setSize(new FormSize(10, 13));
-        lblGadget.setTabIndex(42);
-        lblGadget.setText("8");
-        // lblShield
-        lblShield.setLocation(new Point(96, 192));
-        lblShield.setName("lblShield");
-        lblShield.setSize(new FormSize(10, 13));
-        lblShield.setTabIndex(41);
-        lblShield.setText("8");
-        // lblWeapon
-        lblWeapon.setLocation(new Point(96, 176));
-        lblWeapon.setName("lblWeapon");
-        lblWeapon.setSize(new FormSize(10, 13));
-        lblWeapon.setTabIndex(40);
-        lblWeapon.setText("8");
-        // lblHull
-        lblHull.setLocation(new Point(96, 160));
-        lblHull.setName("lblHull");
-        lblHull.setSize(new FormSize(23, 13));
-        lblHull.setTabIndex(39);
-        lblHull.setText("888");
-        // lblRange
-        lblRange.setLocation(new Point(96, 144));
-        lblRange.setName("lblRange");
-        lblRange.setSize(new FormSize(59, 13));
-        lblRange.setTabIndex(38);
-        lblRange.setText("88 parsecs");
-        // lblBays
-        lblBays.setLocation(new Point(96, 128));
-        lblBays.setName("lblBays");
-        lblBays.setSize(new FormSize(17, 13));
-        lblBays.setTabIndex(37);
-        lblBays.setText("88");
-        // lblSize
-        lblSize.setLocation(new Point(96, 112));
-        lblSize.setName("lblSize");
-        lblSize.setSize(new FormSize(45, 13));
-        lblSize.setTabIndex(36);
-        lblSize.setText("Medium");
-        // lblName
-        lblName.setLocation(new Point(96, 96));
-        lblName.setName("lblName");
-        lblName.setSize(new FormSize(100, 13));
-        lblName.setTabIndex(35);
-        lblName.setText("Grasshopper");
-        // picShip
-        picShip.setBackColor(Color.white);
-        picShip.setBorderStyle(BorderStyle.FixedSingle);
-        picShip.setLocation(new Point(67, 25));
-        picShip.setName("picShip");
-        picShip.setSize(new FormSize(66, 54));
-        picShip.setTabIndex(12);
-        picShip.setTabStop(false);
-        // lblGadgetLabel
-        lblGadgetLabel.setAutoSize(true);
-        lblGadgetLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblGadgetLabel.setLocation(new Point(8, 208));
-        lblGadgetLabel.setName("lblGadgetLabel");
-        lblGadgetLabel.setSize(new FormSize(76, 13));
-        lblGadgetLabel.setTabIndex(11);
-        lblGadgetLabel.setText("Gadget Slots:");
-        // lblCrewLabel
-        lblCrewLabel.setAutoSize(true);
-        lblCrewLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblCrewLabel.setLocation(new Point(8, 224));
-        lblCrewLabel.setName("lblCrewLabel");
-        lblCrewLabel.setSize(new FormSize(84, 13));
-        lblCrewLabel.setTabIndex(10);
-        lblCrewLabel.setText("Crew Quarters:");
-        // lblShieldLabel
-        lblShieldLabel.setAutoSize(true);
-        lblShieldLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblShieldLabel.setLocation(new Point(8, 192));
-        lblShieldLabel.setName("lblShieldLabel");
-        lblShieldLabel.setSize(new FormSize(70, 13));
-        lblShieldLabel.setTabIndex(9);
-        lblShieldLabel.setText("Shield Slots:");
-        // lblWeaponLabel
-        lblWeaponLabel.setAutoSize(true);
-        lblWeaponLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblWeaponLabel.setLocation(new Point(8, 176));
-        lblWeaponLabel.setName("lblWeaponLabel");
-        lblWeaponLabel.setSize(new FormSize(81, 13));
-        lblWeaponLabel.setTabIndex(8);
-        lblWeaponLabel.setText("Weapon Slots:");
-        // lblHullLabel
-        lblHullLabel.setAutoSize(true);
-        lblHullLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblHullLabel.setLocation(new Point(8, 160));
-        lblHullLabel.setName("lblHullLabel");
-        lblHullLabel.setSize(new FormSize(73, 13));
-        lblHullLabel.setTabIndex(7);
-        lblHullLabel.setText("Hull Strength");
-        // lblRangeLabel
-        lblRangeLabel.setAutoSize(true);
-        lblRangeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblRangeLabel.setLocation(new Point(8, 144));
-        lblRangeLabel.setName("lblRangeLabel");
-        lblRangeLabel.setSize(new FormSize(42, 13));
-        lblRangeLabel.setTabIndex(6);
-        lblRangeLabel.setText("Range:");
-        // lblBaysLabel
-        lblBaysLabel.setAutoSize(true);
-        lblBaysLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblBaysLabel.setLocation(new Point(8, 128));
-        lblBaysLabel.setName("lblBaysLabel");
-        lblBaysLabel.setSize(new FormSize(69, 13));
-        lblBaysLabel.setTabIndex(5);
-        lblBaysLabel.setText("Cargo Bays:");
-        // lblNameLabel
-        lblNameLabel.setAutoSize(true);
-        lblNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblNameLabel.setLocation(new Point(8, 96));
-        lblNameLabel.setName("lblNameLabel");
-        lblNameLabel.setSize(new FormSize(39, 13));
-        lblNameLabel.setTabIndex(4);
-        lblNameLabel.setText("Name:");
-        // lblSizeLabel
-        lblSizeLabel.setAutoSize(true);
-        lblSizeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblSizeLabel.setLocation(new Point(8, 112));
-        lblSizeLabel.setName("lblSizeLabel");
-        lblSizeLabel.setSize(new FormSize(31, 13));
-        lblSizeLabel.setTabIndex(3);
-        lblSizeLabel.setText("Size:");
+        // labelCrew
+        labelCrew.setLocation(new Point(96, 224));
+        labelCrew.setName("labelCrew");
+        labelCrew.setSize(new FormSize(10, 13));
+        labelCrew.setTabIndex(43);
+        labelCrew.setText("8");
+        // labelGadget
+        labelGadget.setLocation(new Point(96, 208));
+        labelGadget.setName("labelGadget");
+        labelGadget.setSize(new FormSize(10, 13));
+        labelGadget.setTabIndex(42);
+        labelGadget.setText("8");
+        // labelShield
+        labelShield.setLocation(new Point(96, 192));
+        labelShield.setName("labelShield");
+        labelShield.setSize(new FormSize(10, 13));
+        labelShield.setTabIndex(41);
+        labelShield.setText("8");
+        // labelWeapon
+        labelWeapon.setLocation(new Point(96, 176));
+        labelWeapon.setName("labelWeapon");
+        labelWeapon.setSize(new FormSize(10, 13));
+        labelWeapon.setTabIndex(40);
+        labelWeapon.setText("8");
+        // labelHull
+        labelHull.setLocation(new Point(96, 160));
+        labelHull.setName("labelHull");
+        labelHull.setSize(new FormSize(23, 13));
+        labelHull.setTabIndex(39);
+        labelHull.setText("888");
+        // labelRange
+        labelRange.setLocation(new Point(96, 144));
+        labelRange.setName("labelRange");
+        labelRange.setSize(new FormSize(59, 13));
+        labelRange.setTabIndex(38);
+        labelRange.setText("88 parsecs");
+        // labelBays
+        labelBays.setLocation(new Point(96, 128));
+        labelBays.setName("labelBays");
+        labelBays.setSize(new FormSize(17, 13));
+        labelBays.setTabIndex(37);
+        labelBays.setText("88");
+        // labelSize
+        labelSize.setLocation(new Point(96, 112));
+        labelSize.setName("labelSize");
+        labelSize.setSize(new FormSize(45, 13));
+        labelSize.setTabIndex(36);
+        labelSize.setText("Medium");
+        // labelName
+        labelName.setLocation(new Point(96, 96));
+        labelName.setName("labelName");
+        labelName.setSize(new FormSize(100, 13));
+        labelName.setTabIndex(35);
+        labelName.setText("Grasshopper");
+        // pictureShip
+        pictureShip.setBackColor(Color.white);
+        pictureShip.setBorderStyle(BorderStyle.FixedSingle);
+        pictureShip.setLocation(new Point(67, 25));
+        pictureShip.setName("pictureShip");
+        pictureShip.setSize(new FormSize(66, 54));
+        pictureShip.setTabIndex(12);
+        pictureShip.setTabStop(false);
+        // labelGadgetLabel
+        labelGadgetLabel.setAutoSize(true);
+        labelGadgetLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelGadgetLabel.setLocation(new Point(8, 208));
+        labelGadgetLabel.setName("labelGadgetLabel");
+        labelGadgetLabel.setSize(new FormSize(76, 13));
+        labelGadgetLabel.setTabIndex(11);
+        labelGadgetLabel.setText("Gadget Slots:");
+        // labelCrewLabel
+        labelCrewLabel.setAutoSize(true);
+        labelCrewLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelCrewLabel.setLocation(new Point(8, 224));
+        labelCrewLabel.setName("labelCrewLabel");
+        labelCrewLabel.setSize(new FormSize(84, 13));
+        labelCrewLabel.setTabIndex(10);
+        labelCrewLabel.setText("Crew Quarters:");
+        // labelShieldLabel
+        labelShieldLabel.setAutoSize(true);
+        labelShieldLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelShieldLabel.setLocation(new Point(8, 192));
+        labelShieldLabel.setName("labelShieldLabel");
+        labelShieldLabel.setSize(new FormSize(70, 13));
+        labelShieldLabel.setTabIndex(9);
+        labelShieldLabel.setText("Shield Slots:");
+        // labelWeaponLabel
+        labelWeaponLabel.setAutoSize(true);
+        labelWeaponLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelWeaponLabel.setLocation(new Point(8, 176));
+        labelWeaponLabel.setName("labelWeaponLabel");
+        labelWeaponLabel.setSize(new FormSize(81, 13));
+        labelWeaponLabel.setTabIndex(8);
+        labelWeaponLabel.setText("Weapon Slots:");
+        // labelHullLabel
+        labelHullLabel.setAutoSize(true);
+        labelHullLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelHullLabel.setLocation(new Point(8, 160));
+        labelHullLabel.setName("labelHullLabel");
+        labelHullLabel.setSize(new FormSize(73, 13));
+        labelHullLabel.setTabIndex(7);
+        labelHullLabel.setText("Hull Strength");
+        // labelRangeLabel
+        labelRangeLabel.setAutoSize(true);
+        labelRangeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelRangeLabel.setLocation(new Point(8, 144));
+        labelRangeLabel.setName("labelRangeLabel");
+        labelRangeLabel.setSize(new FormSize(42, 13));
+        labelRangeLabel.setTabIndex(6);
+        labelRangeLabel.setText("Range:");
+        // labelBaysLabel
+        labelBaysLabel.setAutoSize(true);
+        labelBaysLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelBaysLabel.setLocation(new Point(8, 128));
+        labelBaysLabel.setName("labelBaysLabel");
+        labelBaysLabel.setSize(new FormSize(69, 13));
+        labelBaysLabel.setTabIndex(5);
+        labelBaysLabel.setText("Cargo Bays:");
+        // labelNameLabel
+        labelNameLabel.setAutoSize(true);
+        labelNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelNameLabel.setLocation(new Point(8, 96));
+        labelNameLabel.setName("labelNameLabel");
+        labelNameLabel.setSize(new FormSize(39, 13));
+        labelNameLabel.setTabIndex(4);
+        labelNameLabel.setText("Name:");
+        // labelSizeLabel
+        labelSizeLabel.setAutoSize(true);
+        labelSizeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelSizeLabel.setLocation(new Point(8, 112));
+        labelSizeLabel.setName("labelSizeLabel");
+        labelSizeLabel.setSize(new FormSize(31, 13));
+        labelSizeLabel.setTabIndex(3);
+        labelSizeLabel.setText("Size:");
         // FormShipList
         setAutoScaleBaseSize(new FormSize(5, 13));
         setCancelButton(buttonClose);
         setClientSize(new FormSize(438, 255));
         Controls.addAll(Arrays.asList(
                 boxShipInfo,
-                lblPrice9,
+                labelPrice9,
                 buttonInfo9,
-                lblName9,
+                labelName9,
                 buttonBuy9,
-                lblPrice8,
+                labelPrice8,
                 buttonInfo8,
-                lblName8,
+                labelName8,
                 buttonBuy8,
-                lblPrice7,
+                labelPrice7,
                 buttonInfo7,
-                lblName7,
+                labelName7,
                 buttonBuy7,
-                lblPrice6,
+                labelPrice6,
                 buttonInfo6,
-                lblName6,
+                labelName6,
                 buttonBuy6,
-                lblPrice5,
+                labelPrice5,
                 buttonInfo5,
-                lblName5,
+                labelName5,
                 buttonBuy5,
-                lblPrice4,
+                labelPrice4,
                 buttonInfo4,
-                lblName4,
+                labelName4,
                 buttonBuy4,
-                lblPrice3,
+                labelPrice3,
                 buttonInfo3,
-                lblName3,
+                labelName3,
                 buttonBuy3,
-                lblPrice2,
+                labelPrice2,
                 buttonInfo2,
-                lblName2,
+                labelName2,
                 buttonBuy2,
-                lblPrice1,
+                labelPrice1,
                 buttonInfo1,
-                lblName1,
+                labelName1,
                 buttonBuy1,
-                lblPrice0,
+                labelPrice0,
                 buttonInfo0,
-                lblName0,
+                labelName0,
                 buttonBuy0,
                 buttonClose));
         setFormBorderStyle(FormBorderStyle.FixedDialog);
@@ -718,17 +718,17 @@ public class FormShipList extends wfForm {
         setText("Ship List");
         boxShipInfo.ResumeLayout(false);
         ResumeLayout(false);
-        lblPrice = new Label[]{
-                lblPrice0,
-                lblPrice1,
-                lblPrice2,
-                lblPrice3,
-                lblPrice4,
-                lblPrice5,
-                lblPrice6,
-                lblPrice7,
-                lblPrice8,
-                lblPrice9,};
+        labelPrice = new Label[]{
+                labelPrice0,
+                labelPrice1,
+                labelPrice2,
+                labelPrice3,
+                labelPrice4,
+                labelPrice5,
+                labelPrice6,
+                labelPrice7,
+                labelPrice8,
+                labelPrice9,};
         buttonBuy = new Button[]{
                 buttonBuy0,
                 buttonBuy1,
@@ -751,7 +751,7 @@ public class FormShipList extends wfForm {
 
     private void Buy(int id) {
         Info(id);
-        if (cmdr.TradeShip(Constants.ShipSpecs[id], prices[id], this)) {
+        if (commander.TradeShip(Constants.ShipSpecs[id], prices[id], this)) {
             if (game.getQuestStatusScarab() == SpecialEvent.StatusScarabDone) {
                 game.setQuestStatusScarab(SpecialEvent.StatusScarabNotStarted);
             }
@@ -762,34 +762,34 @@ public class FormShipList extends wfForm {
 
     private void Info(int id) {
         ShipSpec spec = Constants.ShipSpecs[id];
-        picShip.setImage(spec.Image());
-        lblName.setText(spec.Name());
-        lblSize.setText(Strings.Sizes[spec.getSize().CastToInt()]);
-        lblBays.setText(Functions.FormatNumber(spec.CargoBays()));
-        lblRange.setText(Functions.Multiples(spec.FuelTanks(), Strings.DistanceUnit));
-        lblHull.setText(Functions.FormatNumber(spec.HullStrength()));
-        lblWeapon.setText(Functions.FormatNumber(spec.getWeaponSlots()));
-        lblShield.setText(Functions.FormatNumber(spec.getShieldSlots()));
-        lblGadget.setText(Functions.FormatNumber(spec.getGadgetSlots()));
-        lblCrew.setText(Functions.FormatNumber(spec.getCrewQuarters()));
+        pictureShip.setImage(spec.Image());
+        labelName.setText(spec.Name());
+        labelSize.setText(Strings.Sizes[spec.getSize().CastToInt()]);
+        labelBays.setText(Functions.FormatNumber(spec.CargoBays()));
+        labelRange.setText(Functions.Multiples(spec.FuelTanks(), Strings.DistanceUnit));
+        labelHull.setText(Functions.FormatNumber(spec.HullStrength()));
+        labelWeapon.setText(Functions.FormatNumber(spec.getWeaponSlots()));
+        labelShield.setText(Functions.FormatNumber(spec.getShieldSlots()));
+        labelGadget.setText(Functions.FormatNumber(spec.getGadgetSlots()));
+        labelCrew.setText(Functions.FormatNumber(spec.getCrewQuarters()));
     }
 
     private void UpdateAll() {
-        for (int i = 0; i < lblPrice.length; i++) {
+        for (int i = 0; i < labelPrice.length; i++) {
             buttonBuy[i].setVisible(false);
-            if (Constants.ShipSpecs[i].MinimumTechLevel().ordinal() > cmdr.CurrentSystem().TechLevel().ordinal()) {
-                lblPrice[i].setText("not sold");
+            if (Constants.ShipSpecs[i].MinimumTechLevel().ordinal() > commander.CurrentSystem().TechLevel().ordinal()) {
+                labelPrice[i].setText("not sold");
             } else if (Constants.ShipSpecs[i].Type() == ship.Type()) {
-                lblPrice[i].setText(Strings.ShipBuyGotOne);
+                labelPrice[i].setText(Strings.ShipBuyGotOne);
             } else {
                 buttonBuy[i].setVisible(true);
                 prices[i] = Constants.ShipSpecs[i].getPrice() - ship.Worth(false);
-                lblPrice[i].setText(Functions.FormatMoney(prices[i]));
+                labelPrice[i].setText(Functions.FormatMoney(prices[i]));
             }
         }
     }
 
-    private void buttonBuyInfo_Click(Object sender, EventArgs e) {
+    private void buttonBuyInfo_Click(Object sender, EventData e) {
         String name = ((Button) sender).getName();
         int index = Integer.parseInt(name.substring(name.length() - 1));
         if (!name.contains("Buy")) {

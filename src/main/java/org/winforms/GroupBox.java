@@ -13,7 +13,7 @@ public class GroupBox extends wfControl {
 
     public GroupBox() {
         super(new wfPanel(null));
-        Controls = (wfPanel) swingVersion;
+        Controls = (wfPanel) swingComponent;
         border = BorderFactory.createTitledBorder("");
         asJPanel().setBorder(border);
     }

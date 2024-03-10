@@ -13,8 +13,8 @@ public enum VeryRareEncounter implements SpaceTraderEnum {
     public final String name;
     public final int id;
 
-    VeryRareEncounter(String s) {
-        name = s;
+    VeryRareEncounter(String name) {
+        this.name = name;
         id = ordinal();
     }
 

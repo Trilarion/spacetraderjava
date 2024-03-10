@@ -1,6 +1,7 @@
 package org.winforms;
 
 
+// TODO looks like a point, can it become a point?
 public class LinkArea {
     int x, y;
 

@@ -2,7 +2,7 @@ package org.winforms;
 
 import javax.swing.*;
 
-
+// TODO documentation of usage
 public class Panel extends wfControl {
     public Panel Controls = this;
     public boolean AutoScroll;
@@ -12,6 +12,6 @@ public class Panel extends wfControl {
     }
 
     public void add(wfControl control) {
-        ((JPanel) swingVersion).add(control.swingVersion);
+        ((JPanel) swingComponent).add(control.swingComponent);
     }
 }

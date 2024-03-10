@@ -18,20 +18,20 @@ public class FormBuyRepairs extends wfForm {
     private NumericUpDown numAmount;
 
     public FormBuyRepairs() {
-        Label lblQuestion = new Label();
+        Label labelQuestion = new Label();
         numAmount = new NumericUpDown();
         Button buttonOk = new Button();
         Button buttonMax = new Button();
         Button buttonNothing = new Button();
-        ((ISupportInitialize) (numAmount)).BeginInit();
+        ((ISupportInitialize) (numAmount)).beginInit();
         SuspendLayout();
-        // lblQuestion
-        lblQuestion.setAutoSize(true);
-        lblQuestion.setLocation(new Point(8, 8));
-        lblQuestion.setName("lblQuestion");
-        lblQuestion.setSize(new FormSize(227, 13));
-        lblQuestion.setTabIndex(3);
-        lblQuestion.setText("How much do you want to spend on repairs?");
+        // labelQuestion
+        labelQuestion.setAutoSize(true);
+        labelQuestion.setLocation(new Point(8, 8));
+        labelQuestion.setName("labelQuestion");
+        labelQuestion.setSize(new FormSize(227, 13));
+        labelQuestion.setTabIndex(3);
+        labelQuestion.setText("How much do you want to spend on repairs?");
         // numAmount
         numAmount.setLocation(new Point(232, 6));
         numAmount.setMaximum(999);
@@ -70,22 +70,22 @@ public class FormBuyRepairs extends wfForm {
         setCancelButton(buttonNothing);
         setClientSize(new FormSize(286, 63));
         setControlBox(false);
-        Controls.addAll(Arrays.asList(buttonNothing, buttonMax, buttonOk, numAmount, lblQuestion));
+        Controls.addAll(Arrays.asList(buttonNothing, buttonMax, buttonOk, numAmount, labelQuestion));
         setFormBorderStyle(FormBorderStyle.FixedDialog);
         setName("FormBuyRepairs");
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Hull Repair");
-        ((ISupportInitialize) (numAmount)).EndInit();
+        ((ISupportInitialize) (numAmount)).endInit();
         ResumeLayout(false);
-        Game game = Game.CurrentGame();
-        Commander cmdr = game.Commander();
-        numAmount.setMaximum(Math.min(cmdr.getCash(), (cmdr.getShip().HullStrength() - cmdr.getShip().getHull()) * cmdr.getShip().getRepairCost()));
+        Game game = Game.getCurrentGame();
+        Commander commander = game.Commander();
+        numAmount.setMaximum(Math.min(commander.getCash(), (commander.getShip().HullStrength() - commander.getShip().getHull()) * commander.getShip().getRepairCost()));
         numAmount.setValue(numAmount.getMaximum());
     }
 
     // TODO This action is not connected in the .NET version either.
-    private void buttonMax_Click(Object sender, EventArgs e) {
+    private void buttonMax_Click(Object sender, EventData e) {
         numAmount.setValue(numAmount.getMaximum());
     }
 

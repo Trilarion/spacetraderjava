@@ -4,9 +4,10 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.List;
 
-
+// TODO small static utilities, maybe combine with other class
 public class Directory {
-    public static String[] GetFiles(String path, String filter) {
+
+    public static String[] getFiles(String path, String filter) {
         if (!filter.startsWith("*.")) {
             new Error("unsupported format").printStackTrace();
         }
@@ -30,7 +31,7 @@ public class Directory {
         return names.toArray(new String[names.size()]);
     }
 
-    public static boolean Exists(String path) {
+    public static boolean exists(String path) {
         return new File(path).exists();
     }
 

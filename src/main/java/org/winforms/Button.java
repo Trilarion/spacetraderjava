@@ -31,7 +31,7 @@ public class Button extends wfControl {
     }
 
     public JButton asJButton() {
-        return (JButton) swingVersion;
+        return (JButton) swingComponent;
     }
 
     public void setDialogResult(DialogResult dialogResult) {
@@ -40,7 +40,7 @@ public class Button extends wfControl {
 
     @Override
     @SuppressWarnings("serial")
-    public void setClick(final EventHandler<Object, EventArgs> click) {
+    public void setClick(final EventHandler<Object, EventData> click) {
         userAction = new AbstractAction() {
             private static final long serialVersionUID = 1L;
 

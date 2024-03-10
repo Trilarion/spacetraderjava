@@ -2,8 +2,9 @@ package org.spacetrader.util;
 
 import java.io.*;
 
-
+// TODO very small class, should maybe be part of something bigger (serialization related)
 public class BinaryFormatter {
+
     public Object Deserialize(FileInputStream inStream) throws SerializationException, IOException {
         try {
             return new ObjectInputStream(inStream).readObject();

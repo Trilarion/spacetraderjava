@@ -1,8 +1,10 @@
 package org.spacetrader.controller;
 
 import org.spacetrader.controller.enums.ReputationType;
+import org.spacetrader.ui.Strings;
 
 
+// TODO part of the model
 public class Reputation {
     private ReputationType _type;
     private int _minScore;
@@ -14,7 +16,7 @@ public class Reputation {
 
     public static Reputation GetReputationFromScore(int ReputationScore) {
         int i;
-        for (i = 0; i < Constants.Reputations.length && Game.CurrentGame().Commander().getReputationScore() >= Constants.Reputations[i].MinScore(); i++) {
+        for (i = 0; i < Constants.Reputations.length && Game.getCurrentGame().Commander().getReputationScore() >= Constants.Reputations[i].MinScore(); i++) {
         }
         return Constants.Reputations[Math.max(0, i - 1)];
     }

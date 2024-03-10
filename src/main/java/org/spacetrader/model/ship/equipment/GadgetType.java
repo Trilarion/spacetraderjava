@@ -1,4 +1,4 @@
-package org.spacetrader.model.ship.equip;
+package org.spacetrader.model.ship.equipment;
 
 import org.spacetrader.controller.enums.SpaceTraderEnum;
 

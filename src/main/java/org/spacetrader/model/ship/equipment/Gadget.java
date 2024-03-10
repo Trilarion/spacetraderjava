@@ -1,8 +1,8 @@
-package org.spacetrader.model.ship.equip;
+package org.spacetrader.model.ship.equipment;
 
-import org.spacetrader.controller.Strings;
+import org.spacetrader.ui.Strings;
 import org.spacetrader.controller.enums.SkillType;
-import org.spacetrader.controller.enums.TechLevel;
+import org.spacetrader.model.TechLevel;
 import org.spacetrader.util.Hashtable;
 import org.spacetrader.util.Log;
 

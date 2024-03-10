@@ -1,10 +1,10 @@
-package org.spacetrader.model.ship.equip;
+package org.spacetrader.model.ship.equipment;
 
 import org.spacetrader.controller.Commander;
 import org.spacetrader.controller.Game;
 import org.spacetrader.controller.SerializableObject;
-import org.spacetrader.controller.Strings;
-import org.spacetrader.controller.enums.TechLevel;
+import org.spacetrader.ui.Strings;
+import org.spacetrader.model.TechLevel;
 import org.spacetrader.util.Hashtable;
 import org.winforms.wfImage;
 
@@ -70,7 +70,7 @@ abstract public class Equipment extends SerializableObject implements Cloneable 
     }
 
     public wfImage Image() {
-        return Game.CurrentGame().getParentWindow().EquipmentImages().getImages()[BaseImageIndex() + SubType().asInteger()];
+        return Game.getCurrentGame().getParentWindow().EquipmentImages().getImages()[BaseImageIndex() + SubType().asInteger()];
     }
 
     public String Name() {
@@ -86,10 +86,10 @@ abstract public class Equipment extends SerializableObject implements Cloneable 
     }
 
     public int Price() {
-        Commander cmdr = Game.CurrentGame().Commander();
+        Commander commander = Game.getCurrentGame().Commander();
         int price = 0;
-        if (cmdr != null && cmdr.CurrentSystem().TechLevel().ordinal() >= MinimumTechLevel().ordinal()) {
-            price = (_price * (100 - cmdr.getShip().Trader())) / 100;
+        if (commander != null && commander.CurrentSystem().TechLevel().ordinal() >= MinimumTechLevel().ordinal()) {
+            price = (_price * (100 - commander.getShip().Trader())) / 100;
         }
         return price;
     }

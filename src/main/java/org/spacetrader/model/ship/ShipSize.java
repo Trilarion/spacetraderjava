@@ -3,6 +3,7 @@ package org.spacetrader.model.ship;
 import org.spacetrader.controller.enums.SpaceTraderEnum;
 
 
+// TODO best way for autonumbered enums
 public enum ShipSize implements SpaceTraderEnum {
     Tiny, // = 0,
     Small, // = 1,

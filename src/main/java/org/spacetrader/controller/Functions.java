@@ -3,6 +3,7 @@ package org.spacetrader.controller;
 import org.spacetrader.controller.enums.AlertType;
 import org.spacetrader.model.Difficulty;
 import org.spacetrader.ui.FormAlert;
+import org.spacetrader.ui.Strings;
 import org.spacetrader.util.*;
 import org.winforms.Graphics;
 import org.winforms.Rectangle;
@@ -22,7 +23,7 @@ public class Functions {
     private static long SeedY = DEFSEEDY;
 
     public static int AdjustSkillForDifficulty(int skill) {
-        Difficulty diff = Game.CurrentGame().Difficulty();
+        Difficulty diff = Game.getCurrentGame().Difficulty();
         skill = diff.adjustSkill(skill);
         return skill;
     }
@@ -235,21 +236,21 @@ public class Functions {
     // Returns true if there exists a wormhole from a to b.
     // If b < 0, then return true if there exists a wormhole at all from a.
     public static boolean WormholeExists(int a, int b) {
-        int[] wormholes = Game.CurrentGame().Wormholes();
+        int[] wormholes = Game.getCurrentGame().Wormholes();
         int i = Util.BruteSeek(wormholes, a);
         return (i >= 0 && (b < 0 || wormholes[(i + 1) % wormholes.length] == b));
     }
 
     public static boolean WormholeExists(StarSystem a, StarSystem b) {
-        StarSystem[] universe = Game.CurrentGame().Universe();
-        int[] wormholes = Game.CurrentGame().Wormholes();
+        StarSystem[] universe = Game.getCurrentGame().Universe();
+        int[] wormholes = Game.getCurrentGame().Wormholes();
         int i = Util.BruteSeek(wormholes, a.Id().CastToInt());
         return (i >= 0 && (universe[wormholes[(i + 1) % wormholes.length]] == b));
     }
 
     public static StarSystem WormholeTarget(int a) {
-        int[] wormholes = Game.CurrentGame().Wormholes();
+        int[] wormholes = Game.getCurrentGame().Wormholes();
         int i = Util.BruteSeek(wormholes, a);
-        return (i >= 0 ? (Game.CurrentGame().Universe()[wormholes[(i + 1) % wormholes.length]]) : null);
+        return (i >= 0 ? (Game.getCurrentGame().Universe()[wormholes[(i + 1) % wormholes.length]]) : null);
     }
 }

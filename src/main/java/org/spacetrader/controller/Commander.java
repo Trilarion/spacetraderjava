@@ -3,52 +3,53 @@ package org.spacetrader.controller;
 import org.spacetrader.controller.enums.AlertType;
 import org.spacetrader.model.CrewMemberId;
 import org.spacetrader.model.ship.ShipType;
-import org.spacetrader.model.ship.equip.Equipment;
-import org.spacetrader.model.ship.equip.GadgetType;
-import org.spacetrader.model.ship.equip.ShieldType;
-import org.spacetrader.model.ship.equip.WeaponType;
+import org.spacetrader.model.ship.equipment.Equipment;
+import org.spacetrader.model.ship.equipment.GadgetType;
+import org.spacetrader.model.ship.equipment.ShieldType;
+import org.spacetrader.model.ship.equipment.WeaponType;
 import org.spacetrader.ui.FormAlert;
+import org.spacetrader.ui.Strings;
 import org.spacetrader.util.Hashtable;
 import org.winforms.enums.DialogResult;
 import org.winforms.wfPane;
 
-
+// TODO part of model
 public class Commander extends CrewMember {
-    private Ship _ship = new Ship(ShipType.Gnat);
-    private boolean _insurance = false;
-    private int _cash = 1000;
-    private int _debt = 0;
-    private int _killsPirate = 0;
-    private int _killsPolice = 0;
-    private int _killsTrader = 0;
-    private int _policeRecordScore = 0;
-    private int _reputationScore = 0;
-    private int _days = 0;
-    private int _noclaim = 0;
-    private int[] _priceCargo = new int[10]; // Total price paid for trade goods
+    private Ship ship = new Ship(ShipType.Gnat);
+    private boolean insurance = false;
+    private int cash = 1000;
+    private int debt = 0;
+    private int killsPirate = 0;
+    private int killsPolice = 0;
+    private int killsTrader = 0;
+    private int policeRecordScore = 0;
+    private int reputationScore = 0;
+    private int days = 0;
+    private int noclaim = 0;
+    private int[] priceCargo = new int[10]; // Total price paid for trade goods
 
-    public Commander(CrewMember cm) {
-        super(cm);
+    public Commander(CrewMember crewMember) {
+        super(crewMember);
         // Start off with a crew of only the commander and a Pulse Laser.
-        _ship.Crew()[0] = this;
-        _ship.AddEquipment(Constants.WeaponObjects[WeaponType.PulseLaser.id]);
+        ship.Crew()[0] = this;
+        ship.AddEquipment(Constants.WeaponObjects[WeaponType.PulseLaser.id]);
     }
 
     public Commander(Hashtable hash) {
         super(hash);
-        _cash = GetValueFromHash(hash, "_cash", _cash);
-        _debt = GetValueFromHash(hash, "_debt", _debt);
-        _killsPirate = GetValueFromHash(hash, "_killsPirate", _killsPirate);
-        _killsPolice = GetValueFromHash(hash, "_killsPolice", _killsPolice);
-        _killsTrader = GetValueFromHash(hash, "_killsTrader", _killsTrader);
-        _policeRecordScore = GetValueFromHash(hash, "_policeRecordScore", _policeRecordScore);
-        _reputationScore = GetValueFromHash(hash, "_reputationScore", _reputationScore);
-        _days = GetValueFromHash(hash, "_days", _days);
-        _insurance = GetValueFromHash(hash, "_insurance", _insurance);
-        _noclaim = GetValueFromHash(hash, "_noclaim", _noclaim);
-        _ship = new Ship(GetValueFromHash(hash, "_ship"/*,_ship*/, Hashtable.class));
-        _priceCargo = GetValueFromHash(hash, "_priceCargo", _priceCargo, int[].class);
-        Game.CurrentGame().Mercenaries()[CrewMemberId.Commander.CastToInt()] = this;
+        cash = GetValueFromHash(hash, "_cash", cash);
+        debt = GetValueFromHash(hash, "_debt", debt);
+        killsPirate = GetValueFromHash(hash, "_killsPirate", killsPirate);
+        killsPolice = GetValueFromHash(hash, "_killsPolice", killsPolice);
+        killsTrader = GetValueFromHash(hash, "_killsTrader", killsTrader);
+        policeRecordScore = GetValueFromHash(hash, "_policeRecordScore", policeRecordScore);
+        reputationScore = GetValueFromHash(hash, "_reputationScore", reputationScore);
+        days = GetValueFromHash(hash, "_days", days);
+        insurance = GetValueFromHash(hash, "_insurance", insurance);
+        noclaim = GetValueFromHash(hash, "_noclaim", noclaim);
+        ship = new Ship(GetValueFromHash(hash, "_ship"/*,_ship*/, Hashtable.class));
+        priceCargo = GetValueFromHash(hash, "_priceCargo", priceCargo, int[].class);
+        Game.getCurrentGame().Mercenaries()[CrewMemberId.Commander.CastToInt()] = this;
         Strings.CrewMemberNames[CrewMemberId.Commander.CastToInt()] = GetValueFromHash(hash, "_name", Strings.CrewMemberNames[CrewMemberId.Commander.CastToInt()]);
     }
 
@@ -67,18 +68,18 @@ public class Commander extends CrewMember {
     @Override
     public Hashtable Serialize() {
         Hashtable hash = super.Serialize();
-        hash.add("_cash", _cash);
-        hash.add("_debt", _debt);
-        hash.add("_killsPirate", _killsPirate);
-        hash.add("_killsPolice", _killsPolice);
-        hash.add("_killsTrader", _killsTrader);
-        hash.add("_policeRecordScore", _policeRecordScore);
-        hash.add("_reputationScore", _reputationScore);
-        hash.add("_days", _days);
-        hash.add("_insurance", _insurance);
-        hash.add("_noclaim", _noclaim);
-        hash.add("_ship", _ship.Serialize());
-        hash.add("_priceCargo", _priceCargo);
+        hash.add("_cash", cash);
+        hash.add("_debt", debt);
+        hash.add("_killsPirate", killsPirate);
+        hash.add("_killsPolice", killsPolice);
+        hash.add("_killsTrader", killsTrader);
+        hash.add("_policeRecordScore", policeRecordScore);
+        hash.add("_reputationScore", reputationScore);
+        hash.add("_days", days);
+        hash.add("_insurance", insurance);
+        hash.add("_noclaim", noclaim);
+        hash.add("_ship", ship.Serialize());
+        hash.add("_priceCargo", priceCargo);
         hash.add("_name", Name());
         return hash;
     }
@@ -106,7 +107,7 @@ public class Commander extends CrewMember {
         } else {
             Equipment[] special = new Equipment[]{
                     Constants.WeaponObjects[WeaponType.MorgansLaser.id],
-                    Constants.WeaponObjects[WeaponType.QuantumDistruptor.id],
+                    Constants.WeaponObjects[WeaponType.QuantumDisruptor.id],
                     Constants.Shields[ShieldType.Lightning.id],
                     Constants.Gadgets[GadgetType.FuelCompactor.asInteger()],
                     Constants.Gadgets[GadgetType.HiddenCargoBays.asInteger()]
@@ -177,102 +178,102 @@ public class Commander extends CrewMember {
     }
 
     public int CashToSpend() {
-        return _cash - (Game.CurrentGame().Options().getReserveMoney() ? Game.CurrentGame().CurrentCosts() : 0);
+        return cash - (Game.getCurrentGame().Options().getReserveMoney() ? Game.getCurrentGame().CurrentCosts() : 0);
     }
 
     public int NoClaim() {
-        return _noclaim;
+        return noclaim;
     }
 
     public void NoClaim(int value) {
-        _noclaim = Math.max(0, Math.min(Constants.MaxNoClaim, value));
+        noclaim = Math.max(0, Math.min(Constants.MaxNoClaim, value));
     }
 
     public int[] PriceCargo() {
-        return _priceCargo;
+        return priceCargo;
     }
 
     public int Worth() {
-        return getShip().getPrice() + _cash - _debt + (Game.CurrentGame().getQuestStatusMoon() > 0 ? SpecialEvent.MoonCost : 0);
+        return getShip().getPrice() + cash - debt + (Game.getCurrentGame().getQuestStatusMoon() > 0 ? SpecialEvent.MoonCost : 0);
     }
 
     public Ship getShip() {
-        return _ship;
+        return ship;
     }
 
     public void setShip(Ship ship) {
-        _ship = ship;
+        this.ship = ship;
     }
 
     public int getReputationScore() {
-        return _reputationScore;
+        return reputationScore;
     }
 
     public void setReputationScore(int reputationScore) {
-        _reputationScore = reputationScore;
+        this.reputationScore = reputationScore;
     }
 
     public int getPoliceRecordScore() {
-        return _policeRecordScore;
+        return policeRecordScore;
     }
 
     public void setPoliceRecordScore(int policeRecordScore) {
-        _policeRecordScore = policeRecordScore;
+        this.policeRecordScore = policeRecordScore;
     }
 
     public int getKillsTrader() {
-        return _killsTrader;
+        return killsTrader;
     }
 
     public void setKillsTrader(int killsTrader) {
-        _killsTrader = killsTrader;
+        this.killsTrader = killsTrader;
     }
 
     public int getKillsPolice() {
-        return _killsPolice;
+        return killsPolice;
     }
 
     public void setKillsPolice(int killsPolice) {
-        _killsPolice = killsPolice;
+        this.killsPolice = killsPolice;
     }
 
     public int getKillsPirate() {
-        return _killsPirate;
+        return killsPirate;
     }
 
     public void setKillsPirate(int killsPirate) {
-        _killsPirate = killsPirate;
+        this.killsPirate = killsPirate;
     }
 
     public boolean getInsurance() {
-        return _insurance;
+        return insurance;
     }
 
     public void setInsurance(boolean insurance) {
-        _insurance = insurance;
+        this.insurance = insurance;
     }
 
     public int getDebt() {
-        return _debt;
+        return debt;
     }
 
     public void setDebt(int debt) {
-        _debt = debt;
+        this.debt = debt;
     }
 
     public int getDays() {
-        return _days;
+        return days;
     }
 
     public void setDays(int days) {
-        _days = days;
+        this.days = days;
     }
 
     public int getCash() {
-        return _cash;
+        return cash;
     }
 
     public void setCash(int cash) {
-        _cash = cash;
+        this.cash = cash;
     }
 }

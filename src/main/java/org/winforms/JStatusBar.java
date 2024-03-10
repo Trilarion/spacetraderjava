@@ -3,7 +3,7 @@ package org.winforms;
 import javax.swing.*;
 import java.awt.*;
 
-
+// TODO documentation (maybe without J)
 public class JStatusBar extends JPanel {
     private static final long serialVersionUID = 1L;
 

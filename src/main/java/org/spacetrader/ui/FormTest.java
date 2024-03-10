@@ -21,32 +21,32 @@ public class FormTest extends wfForm {
     private TextBox txtValue3;
 
     public FormTest() {
-        Label lblAlertType = new Label();
+        Label labelAlertType = new Label();
         GroupBox boxAlert = new GroupBox();
         Button buttonTestAlert = new Button();
         txtValue3 = new TextBox();
         txtValue2 = new TextBox();
         txtValue1 = new TextBox();
         selAlertType = new ComboBox();
-        Label lblValue3 = new Label();
-        Label lblValue1 = new Label();
-        Label lblValue2 = new Label();
+        Label labelValue3 = new Label();
+        Label labelValue1 = new Label();
+        Label labelValue2 = new Label();
         GroupBox groupBox1 = new GroupBox();
         Button buttonTestSpecialEvent = new Button();
         selSpecialEvent = new ComboBox();
-        Label lblSpecialEvent = new Label();
+        Label labelSpecialEvent = new Label();
         boxAlert.SuspendLayout();
         groupBox1.SuspendLayout();
         SuspendLayout();
-        // lblAlertType
-        lblAlertType.setAutoSize(true);
-        lblAlertType.setLocation(new Point(8, 19));
-        lblAlertType.setName("lblAlertType");
-        lblAlertType.setSize(new FormSize(56, 13));
-        lblAlertType.setTabIndex(0);
-        lblAlertType.setText("Alert Type");
+        // labelAlertType
+        labelAlertType.setAutoSize(true);
+        labelAlertType.setLocation(new Point(8, 19));
+        labelAlertType.setName("labelAlertType");
+        labelAlertType.setSize(new FormSize(56, 13));
+        labelAlertType.setTabIndex(0);
+        labelAlertType.setText("Alert Type");
         // boxAlert
-        boxAlert.Controls.addAll(buttonTestAlert, txtValue3, txtValue2, txtValue1, selAlertType, lblValue3, lblValue1, lblValue2, lblAlertType);
+        boxAlert.Controls.addAll(buttonTestAlert, txtValue3, txtValue2, txtValue1, selAlertType, labelValue3, labelValue1, labelValue2, labelAlertType);
         boxAlert.setLocation(new Point(8, 8));
         boxAlert.setName("boxAlert");
         boxAlert.setSize(new FormSize(200, 152));
@@ -62,7 +62,7 @@ public class FormTest extends wfForm {
         buttonTestAlert.setText("Test");
         buttonTestAlert.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonTestAlert_Click();
             }
         });
@@ -90,29 +90,29 @@ public class FormTest extends wfForm {
         selAlertType.setName("selAlertType");
         selAlertType.setSize(new FormSize(120, 21));
         selAlertType.setTabIndex(4);
-        // lblValue3
-        lblValue3.setAutoSize(true);
-        lblValue3.setLocation(new Point(8, 91));
-        lblValue3.setName("lblValue3");
-        lblValue3.setSize(new FormSize(43, 13));
-        lblValue3.setTabIndex(3);
-        lblValue3.setText("Value 3");
-        // lblValue1
-        lblValue1.setAutoSize(true);
-        lblValue1.setLocation(new Point(8, 43));
-        lblValue1.setName("lblValue1");
-        lblValue1.setSize(new FormSize(43, 13));
-        lblValue1.setTabIndex(2);
-        lblValue1.setText("Value 1");
-        // lblValue2
-        lblValue2.setAutoSize(true);
-        lblValue2.setLocation(new Point(8, 67));
-        lblValue2.setName("lblValue2");
-        lblValue2.setSize(new FormSize(43, 13));
-        lblValue2.setTabIndex(1);
-        lblValue2.setText("Value 2");
+        // labelValue3
+        labelValue3.setAutoSize(true);
+        labelValue3.setLocation(new Point(8, 91));
+        labelValue3.setName("labelValue3");
+        labelValue3.setSize(new FormSize(43, 13));
+        labelValue3.setTabIndex(3);
+        labelValue3.setText("Value 3");
+        // labelValue1
+        labelValue1.setAutoSize(true);
+        labelValue1.setLocation(new Point(8, 43));
+        labelValue1.setName("labelValue1");
+        labelValue1.setSize(new FormSize(43, 13));
+        labelValue1.setTabIndex(2);
+        labelValue1.setText("Value 1");
+        // labelValue2
+        labelValue2.setAutoSize(true);
+        labelValue2.setLocation(new Point(8, 67));
+        labelValue2.setName("labelValue2");
+        labelValue2.setSize(new FormSize(43, 13));
+        labelValue2.setTabIndex(1);
+        labelValue2.setText("Value 2");
         // groupBox1
-        groupBox1.Controls.addAll(buttonTestSpecialEvent, selSpecialEvent, lblSpecialEvent);
+        groupBox1.Controls.addAll(buttonTestSpecialEvent, selSpecialEvent, labelSpecialEvent);
         groupBox1.setLocation(new Point(8, 168));
         groupBox1.setName("groupBox1");
         groupBox1.setSize(new FormSize(200, 80));
@@ -128,7 +128,7 @@ public class FormTest extends wfForm {
         buttonTestSpecialEvent.setText("Test");
         buttonTestSpecialEvent.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonTestSpecialEvent_Click();
             }
         });
@@ -138,13 +138,13 @@ public class FormTest extends wfForm {
         selSpecialEvent.setName("selSpecialEvent");
         selSpecialEvent.setSize(new FormSize(104, 21));
         selSpecialEvent.setTabIndex(4);
-        // lblSpecialEvent
-        lblSpecialEvent.setAutoSize(true);
-        lblSpecialEvent.setLocation(new Point(8, 19));
-        lblSpecialEvent.setName("lblSpecialEvent");
-        lblSpecialEvent.setSize(new FormSize(73, 13));
-        lblSpecialEvent.setTabIndex(0);
-        lblSpecialEvent.setText("Special Event");
+        // labelSpecialEvent
+        labelSpecialEvent.setAutoSize(true);
+        labelSpecialEvent.setLocation(new Point(8, 19));
+        labelSpecialEvent.setName("labelSpecialEvent");
+        labelSpecialEvent.setSize(new FormSize(73, 13));
+        labelSpecialEvent.setTabIndex(0);
+        labelSpecialEvent.setText("Special Event");
         // FormTest
         setAutoScaleBaseSize(new FormSize(5, 13));
         setClientSize(new FormSize(370, 255));

@@ -2,7 +2,7 @@ package org.winforms;
 
 import javax.swing.*;
 
-
+// TODO documentation of usage
 public class SubMenu extends MenuItem {
     public SubMenu() {
         super(new JMenu());

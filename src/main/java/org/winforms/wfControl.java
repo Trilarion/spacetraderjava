@@ -6,11 +6,12 @@ import java.awt.Font;
 import java.awt.*;
 import java.awt.event.MouseListener;
 
-
+// TODO documentation of usage
 public class wfControl implements ISupportInitialize {
-    protected final Component swingVersion;
-    EventHandler<Object, EventArgs> click;
-    EventHandler<Object, EventArgs> doubleClick;
+
+    protected final Component swingComponent;
+    EventHandler<Object, EventData> click;
+    EventHandler<Object, EventData> doubleClick;
     private String Name;
     private Color ForeColor;
     private int tabIndex;
@@ -21,12 +22,12 @@ public class wfControl implements ISupportInitialize {
         this(null);
     }
 
-    public wfControl(Component swingVersion) {
+    public wfControl(Component swingComponent) {
         super();
-        this.swingVersion = swingVersion;
+        this.swingComponent = swingComponent;
     }
 
-    public void setDoubleClick(EventHandler<Object, EventArgs> doubleClick) {
+    public void setDoubleClick(EventHandler<Object, EventData> doubleClick) {
         this.doubleClick = doubleClick;
     }
 
@@ -43,7 +44,7 @@ public class wfControl implements ISupportInitialize {
     }
 
     public Component asSwingObject() {
-        return swingVersion;
+        return swingComponent;
     }
 
     public Color getBackColor() {
@@ -58,12 +59,12 @@ public class wfControl implements ISupportInitialize {
     }
 
     public org.winforms.Font getFont() {
-        Font font = swingVersion.getFont();
+        Font font = swingComponent.getFont();
         return font == null ? null : new org.winforms.Font(font);
     }
 
     public void setFont(Font font) {
-        swingVersion.setFont(font);
+        swingComponent.setFont(font);
     }
 
     public Color getForeColor() {
@@ -85,13 +86,13 @@ public class wfControl implements ISupportInitialize {
     }
 
     public int getLeft() {
-        return swingVersion.getLocation().x;
+        return swingComponent.getLocation().x;
     }
 
     public void setLeft(int left) {
-        Point location = (Point) swingVersion.getLocation().clone();
+        Point location = (Point) swingComponent.getLocation().clone();
         location.x = left;
-        swingVersion.setLocation(location);
+        swingComponent.setLocation(location);
     }
 
     public String getName() {
@@ -106,21 +107,21 @@ public class wfControl implements ISupportInitialize {
     }
 
     public int getTop() {
-        return swingVersion.getLocation().y;
+        return swingComponent.getLocation().y;
     }
 
     public void setTop(int top) {
-        Point location = (Point) swingVersion.getLocation().clone();
+        Point location = (Point) swingComponent.getLocation().clone();
         location.y = top;
-        swingVersion.setLocation(location);
+        swingComponent.setLocation(location);
     }
 
     public boolean getVisible() {
-        return swingVersion.isVisible();
+        return swingComponent.isVisible();
     }
 
     public void setVisible(boolean visible) {
-        swingVersion.setVisible(visible);
+        swingComponent.setVisible(visible);
     }
 
     public int getWidth() {
@@ -145,38 +146,38 @@ public class wfControl implements ISupportInitialize {
     public void setBorderStyle(BorderStyle borderStyle) {
     }
 
-    public void setClick(EventHandler<Object, EventArgs> click) {
+    public void setClick(EventHandler<Object, EventData> click) {
         this.click = click;
     }
 
     public void setEnabled(boolean enabled) {
-        swingVersion.setEnabled(enabled);
+        swingComponent.setEnabled(enabled);
     }
 
-    public void setEnter(EventHandler<Object, EventArgs> enter) {
+    public void setEnter(EventHandler<Object, EventData> enter) {
     }
 
     public void setLocation(Point location) {
-        swingVersion.setLocation(location);
+        swingComponent.setLocation(location);
     }
 
-    public void setMouseEnter(EventHandler<Object, EventArgs> mouseEnter) {
+    public void setMouseEnter(EventHandler<Object, EventData> mouseEnter) {
     }
 
-    public void setMouseLeave(EventHandler<Object, EventArgs> mouseLeave) {
+    public void setMouseLeave(EventHandler<Object, EventData> mouseLeave) {
     }
 
     Dimension getSize() {
-        return swingVersion.getPreferredSize();
+        return swingComponent.getPreferredSize();
     }
 
     public void setSize(Dimension size) {
-        swingVersion.setPreferredSize(size);
-        swingVersion.setSize(size);
+        swingComponent.setPreferredSize(size);
+        swingComponent.setSize(size);
     }
 
     public void setTabStop(boolean tabStop) {
-        swingVersion.setFocusable(tabStop);
+        swingComponent.setFocusable(tabStop);
     }
 
     public void SuspendLayout() {
@@ -184,12 +185,12 @@ public class wfControl implements ISupportInitialize {
     }
 
     @Override
-    public void BeginInit() {
+    public void beginInit() {
         // TODO Auto-generated method stub
     }
 
     @Override
-    public void EndInit() {
+    public void endInit() {
         // TODO Auto-generated method stub
     }
 }

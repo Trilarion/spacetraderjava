@@ -1,8 +1,7 @@
-package org.spacetrader.model.ship.equip;
+package org.spacetrader.model.ship.equipment;
 
 
 /**
- * I made this.
  *
  * @author Aviv
  */

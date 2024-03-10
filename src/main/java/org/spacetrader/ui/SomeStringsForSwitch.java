@@ -2,7 +2,7 @@ package org.spacetrader.ui;
 
 import java.util.Hashtable;
 
-
+// TODO how is this used, document and maybe refactor
 public enum SomeStringsForSwitch {
     Bazaar,
     Cover,

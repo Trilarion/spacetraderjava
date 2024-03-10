@@ -1,11 +1,12 @@
 package org.winforms;
 
 import org.winforms.enums.BorderStyle;
+import org.winforms.enums.PictureBoxSizeMode;
 
 import javax.swing.*;
 import java.awt.*;
 
-
+// TODO documentation of usage
 public class PictureBox extends wfControl implements ISupportInitialize {
     public PictureBoxSizeMode SizeMode;
     private ImageMouseListener mouseListener;
@@ -23,7 +24,6 @@ public class PictureBox extends wfControl implements ISupportInitialize {
     }
 
     @Override
-
     public void setBorderStyle(BorderStyle borderStyle) {
         switch (borderStyle) {
             case FixedSingle:
@@ -35,7 +35,7 @@ public class PictureBox extends wfControl implements ISupportInitialize {
     }
 
     private SpecialImageJLabel asJLabel() {
-        return ((SpecialImageJLabel) swingVersion);
+        return ((SpecialImageJLabel) swingComponent);
     }
 
     public void Refresh() {
@@ -48,11 +48,11 @@ public class PictureBox extends wfControl implements ISupportInitialize {
         }
     }
 
-    public void setMouseDown(EventHandler<Object, MouseEventArgs> mouseDown) {
+    public void setMouseDown(EventHandler<Object, MouseEventData> mouseDown) {
         mouseListener.pressed = mouseDown;
     }
 
-    public void setPaint(EventHandler<Object, PaintEventArgs> paint) {
+    public void setPaint(EventHandler<Object, PaintEventData> paint) {
         if (asJLabel().paintEventHandler != null) {
             throw new Error("2 handlers same event");
         }

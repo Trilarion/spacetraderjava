@@ -40,7 +40,7 @@ public enum StarSystemId implements SpaceTraderEnum {
     Hades, // = 34,
     Hamlet, // = 35,
     Helena, // = 36,
-    Hulst, // = 37,
+    Hulist, // = 37,
     Iodine, // = 38,
     Iralius, // = 39,
     Janus, // = 40,

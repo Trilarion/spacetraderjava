@@ -2,27 +2,28 @@ package org.spacetrader.controller;
 
 import org.spacetrader.controller.enums.*;
 import org.spacetrader.model.CrewMemberId;
+import org.spacetrader.model.TechLevel;
 import org.spacetrader.model.cargo.TradeItem;
 import org.spacetrader.model.cargo.TradeItemType;
 import org.spacetrader.model.events.SpecialEventType;
 import org.spacetrader.model.ship.ShipSize;
 import org.spacetrader.model.ship.ShipType;
-import org.spacetrader.model.ship.equip.*;
+import org.spacetrader.model.ship.equipment.*;
 import org.spacetrader.util.Environment;
 import org.spacetrader.util.Path;
 import org.winforms.Rectangle;
 
-
+// TODO lots of constants, maybe make several classes (name spaces), maybe some can become enums
 public class Constants {
     // Directory structure and File Constants.
     public static final String BaseDirectory = Environment.CurrentDirectory;
-    public static final String CustomDirectory = Path.Combine(BaseDirectory, "custom");
-    public static final String CustomImagesDirectory = Path.Combine(CustomDirectory, "images");
-    public static final String CustomTemplatesDirectory = Path.Combine(CustomDirectory, "templates");
-    public static final String DataDirectory = Path.Combine(BaseDirectory, "data");
-    public static final String HighScoreFile = Path.Combine(DataDirectory, "HighScores.bin");
-    public static final String DefaultSettingsFile = Path.Combine(DataDirectory, "DefaultSettings.bin");
-    public static final String SaveDirectory = Path.Combine(BaseDirectory, "save");
+    public static final String CustomDirectory = Path.combine(BaseDirectory, "custom");
+    public static final String CustomImagesDirectory = Path.combine(CustomDirectory, "images");
+    public static final String CustomTemplatesDirectory = Path.combine(CustomDirectory, "templates");
+    public static final String DataDirectory = Path.combine(BaseDirectory, "data");
+    public static final String HighScoreFile = Path.combine(DataDirectory, "HighScores.bin");
+    public static final String DefaultSettingsFile = Path.combine(DataDirectory, "DefaultSettings.bin");
+    public static final String SaveDirectory = Path.combine(BaseDirectory, "save");
     // Price paid by government for each negative PoliceScore point
     //public static final int BountyModifier = 1000;
     public static final int CloseDistance = 13;
@@ -101,7 +102,7 @@ public class Constants {
             new Weapon(WeaponType.MilitaryLaser, 35, false, 35000, TechLevel.t7, 15),
             new Weapon(WeaponType.MorgansLaser, 85, false, 50000, TechLevel.t8, 0),
             new Weapon(WeaponType.PhotonDisruptor, 20, true, 15000, TechLevel.t6, 0),
-            new Weapon(WeaponType.QuantumDistruptor, 60, true, 50000, TechLevel.t8, 0)
+            new Weapon(WeaponType.QuantumDisruptor, 60, true, 50000, TechLevel.t8, 0)
     };
     public static final Shield[] Shields = new Shield[]{
             new Shield(ShieldType.Energy, 100, 5000, TechLevel.t5, 70),

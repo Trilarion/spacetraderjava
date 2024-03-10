@@ -14,9 +14,9 @@ import java.awt.*;
 
 
 public class FormEncounter extends wfForm {
-    private final Game game = Game.CurrentGame();
-    private final Commander cmdr = game.Commander();
-    private final Ship cmdrship = cmdr.getShip();
+    private final Game game = Game.getCurrentGame();
+    private final Commander commander = game.Commander();
+    private final Ship commandership = commander.getShip();
     private final Ship opponent = game.getOpponent();
     private Button buttonFlee;
     private Button buttonBribe;
@@ -29,72 +29,72 @@ public class FormEncounter extends wfForm {
     private Button[] buttons;
     private ImageList ilContinuous;
     private ImageList ilTribbles;
-    private Label lblEncounter;
-    private Label lblOpponentShip;
-    private Label lblYouShip;
-    private Label lblYouHull;
-    private Label lblYouShields;
-    private Label lblOpponentShields;
-    private Label lblOpponentHull;
-    private Label lblAction;
-    private PictureBox picShipYou;
-    private PictureBox picShipOpponent;
-    private PictureBox picContinuous;
-    private PictureBox picTribbles00;
-    private PictureBox picTribbles50;
-    private PictureBox picTribbles10;
-    private PictureBox picTribbles40;
-    private PictureBox picTribbles20;
-    private PictureBox picTribbles30;
-    private PictureBox picTribbles04;
-    private PictureBox picTribbles03;
-    private PictureBox picTribbles02;
-    private PictureBox picTribbles01;
-    private PictureBox picTribbles05;
-    private PictureBox picTribbles11;
-    private PictureBox picTribbles12;
-    private PictureBox picTribbles13;
-    private PictureBox picTribbles14;
-    private PictureBox picTribbles15;
-    private PictureBox picTribbles21;
-    private PictureBox picTribbles22;
-    private PictureBox picTribbles23;
-    private PictureBox picTribbles24;
-    private PictureBox picTribbles25;
-    private PictureBox picTribbles31;
-    private PictureBox picTribbles32;
-    private PictureBox picTribbles33;
-    private PictureBox picTribbles34;
-    private PictureBox picTribbles35;
-    private PictureBox picTribbles41;
-    private PictureBox picTribbles51;
-    private PictureBox picTribbles42;
-    private PictureBox picTribbles52;
-    private PictureBox picTribbles43;
-    private PictureBox picTribbles53;
-    private PictureBox picTribbles44;
-    private PictureBox picTribbles45;
-    private PictureBox picTribbles54;
-    private PictureBox picTribbles55;
-    private Timer tmrTick;
+    private Label labelEncounter;
+    private Label labelOpponentShip;
+    private Label labelYouShip;
+    private Label labelYouHull;
+    private Label labelYouShields;
+    private Label labelOpponentShields;
+    private Label labelOpponentHull;
+    private Label labelAction;
+    private PictureBox pictureShipYou;
+    private PictureBox pictureShipOpponent;
+    private PictureBox pictureContinuous;
+    private PictureBox pictureTribbles00;
+    private PictureBox pictureTribbles50;
+    private PictureBox pictureTribbles10;
+    private PictureBox pictureTribbles40;
+    private PictureBox pictureTribbles20;
+    private PictureBox pictureTribbles30;
+    private PictureBox pictureTribbles04;
+    private PictureBox pictureTribbles03;
+    private PictureBox pictureTribbles02;
+    private PictureBox pictureTribbles01;
+    private PictureBox pictureTribbles05;
+    private PictureBox pictureTribbles11;
+    private PictureBox pictureTribbles12;
+    private PictureBox pictureTribbles13;
+    private PictureBox pictureTribbles14;
+    private PictureBox pictureTribbles15;
+    private PictureBox pictureTribbles21;
+    private PictureBox pictureTribbles22;
+    private PictureBox pictureTribbles23;
+    private PictureBox pictureTribbles24;
+    private PictureBox pictureTribbles25;
+    private PictureBox pictureTribbles31;
+    private PictureBox pictureTribbles32;
+    private PictureBox pictureTribbles33;
+    private PictureBox pictureTribbles34;
+    private PictureBox pictureTribbles35;
+    private PictureBox pictureTribbles41;
+    private PictureBox pictureTribbles51;
+    private PictureBox pictureTribbles42;
+    private PictureBox pictureTribbles52;
+    private PictureBox pictureTribbles43;
+    private PictureBox pictureTribbles53;
+    private PictureBox pictureTribbles44;
+    private PictureBox pictureTribbles45;
+    private PictureBox pictureTribbles54;
+    private PictureBox pictureTribbles55;
+    private Timer timerTick;
     private int contImg = 1;
     private EncounterResult _result = EncounterResult.Continue;
 
     public FormEncounter() {
         IContainer components = new Container();
         ResourceManager resources = new ResourceManager(FormEncounter.class);
-        lblEncounter = new Label();
-        picShipYou = new PictureBox();
-        picShipOpponent = new PictureBox();
-        lblAction = new Label();
-        Label lblOpponentLabel = new Label();
-        Label lblYouLabel = new Label();
-        lblOpponentShip = new Label();
-        lblYouShip = new Label();
-        lblYouHull = new Label();
-        lblYouShields = new Label();
-        lblOpponentShields = new Label();
-        lblOpponentHull = new Label();
+        labelEncounter = new Label();
+        pictureShipYou = new PictureBox();
+        pictureShipOpponent = new PictureBox();
+        labelAction = new Label();
+        Label labelOpponentLabel = new Label();
+        Label labelYouLabel = new Label();
+        labelOpponentShip = new Label();
+        labelYouShip = new Label();
+        labelYouHull = new Label();
+        labelYouShields = new Label();
+        labelOpponentShields = new Label();
+        labelOpponentHull = new Label();
         Button buttonAttack = new Button();
         buttonFlee = new Button();
         Button buttonSubmit = new Button();
@@ -108,141 +108,141 @@ public class FormEncounter extends wfForm {
         buttonDrink = new Button();
         buttonInt = new Button();
         buttonYield = new Button();
-        picContinuous = new PictureBox();
+        pictureContinuous = new PictureBox();
         ilContinuous = new ImageList(components);
-        PictureBox picEncounterType = new PictureBox();
+        PictureBox pictureEncounterType = new PictureBox();
         ImageList ilEncounterType = new ImageList(components);
-        picTribbles00 = new PictureBox();
+        pictureTribbles00 = new PictureBox();
         ilTribbles = new ImageList(components);
-        picTribbles50 = new PictureBox();
-        picTribbles10 = new PictureBox();
-        picTribbles40 = new PictureBox();
-        picTribbles20 = new PictureBox();
-        picTribbles30 = new PictureBox();
-        picTribbles04 = new PictureBox();
-        picTribbles03 = new PictureBox();
-        picTribbles02 = new PictureBox();
-        picTribbles01 = new PictureBox();
-        picTribbles05 = new PictureBox();
-        picTribbles11 = new PictureBox();
-        picTribbles12 = new PictureBox();
-        picTribbles13 = new PictureBox();
-        picTribbles14 = new PictureBox();
-        picTribbles15 = new PictureBox();
-        picTribbles21 = new PictureBox();
-        picTribbles22 = new PictureBox();
-        picTribbles23 = new PictureBox();
-        picTribbles24 = new PictureBox();
-        picTribbles25 = new PictureBox();
-        picTribbles31 = new PictureBox();
-        picTribbles32 = new PictureBox();
-        picTribbles33 = new PictureBox();
-        picTribbles34 = new PictureBox();
-        picTribbles35 = new PictureBox();
-        picTribbles41 = new PictureBox();
-        picTribbles51 = new PictureBox();
-        picTribbles42 = new PictureBox();
-        picTribbles52 = new PictureBox();
-        picTribbles43 = new PictureBox();
-        picTribbles53 = new PictureBox();
-        picTribbles44 = new PictureBox();
-        picTribbles45 = new PictureBox();
-        picTribbles54 = new PictureBox();
-        picTribbles55 = new PictureBox();
-        tmrTick = new Timer(components);
+        pictureTribbles50 = new PictureBox();
+        pictureTribbles10 = new PictureBox();
+        pictureTribbles40 = new PictureBox();
+        pictureTribbles20 = new PictureBox();
+        pictureTribbles30 = new PictureBox();
+        pictureTribbles04 = new PictureBox();
+        pictureTribbles03 = new PictureBox();
+        pictureTribbles02 = new PictureBox();
+        pictureTribbles01 = new PictureBox();
+        pictureTribbles05 = new PictureBox();
+        pictureTribbles11 = new PictureBox();
+        pictureTribbles12 = new PictureBox();
+        pictureTribbles13 = new PictureBox();
+        pictureTribbles14 = new PictureBox();
+        pictureTribbles15 = new PictureBox();
+        pictureTribbles21 = new PictureBox();
+        pictureTribbles22 = new PictureBox();
+        pictureTribbles23 = new PictureBox();
+        pictureTribbles24 = new PictureBox();
+        pictureTribbles25 = new PictureBox();
+        pictureTribbles31 = new PictureBox();
+        pictureTribbles32 = new PictureBox();
+        pictureTribbles33 = new PictureBox();
+        pictureTribbles34 = new PictureBox();
+        pictureTribbles35 = new PictureBox();
+        pictureTribbles41 = new PictureBox();
+        pictureTribbles51 = new PictureBox();
+        pictureTribbles42 = new PictureBox();
+        pictureTribbles52 = new PictureBox();
+        pictureTribbles43 = new PictureBox();
+        pictureTribbles53 = new PictureBox();
+        pictureTribbles44 = new PictureBox();
+        pictureTribbles45 = new PictureBox();
+        pictureTribbles54 = new PictureBox();
+        pictureTribbles55 = new PictureBox();
+        timerTick = new Timer(components);
         SuspendLayout();
-        // lblEncounter
-        lblEncounter.setLocation(new Point(8, 152));
-        lblEncounter.setName("lblEncounter");
-        lblEncounter.setSize(new FormSize(232, 26));
-        lblEncounter.setTabIndex(0);
-        lblEncounter.setText("At 20 clicks from Tarchannen, you encounter the famous Captain Ahab.");
-        // picShipYou
-        picShipYou.setBackColor(Color.white);
-        picShipYou.setBorderStyle(BorderStyle.FixedSingle);
-        picShipYou.setLocation(new Point(26, 24));
-        picShipYou.setName("picShipYou");
-        picShipYou.setSize(new FormSize(70, 58));
-        picShipYou.setTabIndex(13);
-        picShipYou.setTabStop(false);
-        picShipYou.setPaint(new EventHandler<>() {
+        // labelEncounter
+        labelEncounter.setLocation(new Point(8, 152));
+        labelEncounter.setName("labelEncounter");
+        labelEncounter.setSize(new FormSize(232, 26));
+        labelEncounter.setTabIndex(0);
+        labelEncounter.setText("At 20 clicks from Tarchannen, you encounter the famous Captain Ahab.");
+        // pictureShipYou
+        pictureShipYou.setBackColor(Color.white);
+        pictureShipYou.setBorderStyle(BorderStyle.FixedSingle);
+        pictureShipYou.setLocation(new Point(26, 24));
+        pictureShipYou.setName("pictureShipYou");
+        pictureShipYou.setSize(new FormSize(70, 58));
+        pictureShipYou.setTabIndex(13);
+        pictureShipYou.setTabStop(false);
+        pictureShipYou.setPaint(new EventHandler<>() {
             @Override
-            public void handle(Object sender, PaintEventArgs e) {
-                picShipYou_Paint(sender, e);
+            public void handle(Object sender, PaintEventData e) {
+                pictureShipYou_Paint(sender, e);
             }
         });
-        // picShipOpponent
-        picShipOpponent.setBackColor(Color.white);
-        picShipOpponent.setBorderStyle(BorderStyle.FixedSingle);
-        picShipOpponent.setLocation(new Point(138, 24));
-        picShipOpponent.setName("picShipOpponent");
-        picShipOpponent.setSize(new FormSize(70, 58));
-        picShipOpponent.setTabIndex(14);
-        picShipOpponent.setTabStop(false);
-        picShipOpponent.setPaint(new EventHandler<>() {
+        // pictureShipOpponent
+        pictureShipOpponent.setBackColor(Color.white);
+        pictureShipOpponent.setBorderStyle(BorderStyle.FixedSingle);
+        pictureShipOpponent.setLocation(new Point(138, 24));
+        pictureShipOpponent.setName("pictureShipOpponent");
+        pictureShipOpponent.setSize(new FormSize(70, 58));
+        pictureShipOpponent.setTabIndex(14);
+        pictureShipOpponent.setTabStop(false);
+        pictureShipOpponent.setPaint(new EventHandler<>() {
             @Override
-            public void handle(Object sender, PaintEventArgs e) {
-                picShipOpponent_Paint(sender, e);
+            public void handle(Object sender, PaintEventData e) {
+                pictureShipOpponent_Paint(sender, e);
             }
         });
-        // lblAction
-        lblAction.setLocation(new Point(8, 192));
-        lblAction.setName("lblAction");
-        lblAction.setSize(new FormSize(232, 39));
-        lblAction.setTabIndex(15);
-        lblAction.setText("\"We know you removed illegal goods from the Marie Celeste. You must give them up at once!\"");
-        // lblOpponentLabel
-        lblOpponentLabel.setAutoSize(true);
-        lblOpponentLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblOpponentLabel.setLocation(new Point(141, 8));
-        lblOpponentLabel.setName("lblOpponentLabel");
-        lblOpponentLabel.setSize(new FormSize(59, 16));
-        lblOpponentLabel.setTabIndex(16);
-        lblOpponentLabel.setText("Opponent:");
-        // lblYouLabel
-        lblYouLabel.setAutoSize(true);
-        lblYouLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
-        lblYouLabel.setLocation(new Point(45, 8));
-        lblYouLabel.setName("lblYouLabel");
-        lblYouLabel.setSize(new FormSize(28, 16));
-        lblYouLabel.setTabIndex(17);
-        lblYouLabel.setText("You:");
-        // lblOpponentShip
-        lblOpponentShip.setLocation(new Point(138, 88));
-        lblOpponentShip.setName("lblOpponentShip");
-        lblOpponentShip.setSize(new FormSize(80, 13));
-        lblOpponentShip.setTabIndex(18);
-        lblOpponentShip.setText("Space Monster");
-        // lblYouShip
-        lblYouShip.setLocation(new Point(26, 88));
-        lblYouShip.setName("lblYouShip");
-        lblYouShip.setSize(new FormSize(100, 13));
-        lblYouShip.setTabIndex(19);
-        lblYouShip.setText("Grasshopper");
-        // lblYouHull
-        lblYouHull.setLocation(new Point(26, 104));
-        lblYouHull.setName("lblYouHull");
-        lblYouHull.setSize(new FormSize(68, 13));
-        lblYouHull.setTabIndex(20);
-        lblYouHull.setText("Hull at 100%");
-        // lblYouShields
-        lblYouShields.setLocation(new Point(26, 120));
-        lblYouShields.setName("lblYouShields");
-        lblYouShields.setSize(new FormSize(86, 13));
-        lblYouShields.setTabIndex(21);
-        lblYouShields.setText("Shields at 100%");
-        // lblOpponentShields
-        lblOpponentShields.setLocation(new Point(138, 120));
-        lblOpponentShields.setName("lblOpponentShields");
-        lblOpponentShields.setSize(new FormSize(86, 13));
-        lblOpponentShields.setTabIndex(23);
-        lblOpponentShields.setText("Shields at 100%");
-        // lblOpponentHull
-        lblOpponentHull.setLocation(new Point(138, 104));
-        lblOpponentHull.setName("lblOpponentHull");
-        lblOpponentHull.setSize(new FormSize(68, 13));
-        lblOpponentHull.setTabIndex(22);
-        lblOpponentHull.setText("Hull at 100%");
+        // labelAction
+        labelAction.setLocation(new Point(8, 192));
+        labelAction.setName("labelAction");
+        labelAction.setSize(new FormSize(232, 39));
+        labelAction.setTabIndex(15);
+        labelAction.setText("\"We know you removed illegal goods from the Marie Celeste. You must give them up at once!\"");
+        // labelOpponentLabel
+        labelOpponentLabel.setAutoSize(true);
+        labelOpponentLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelOpponentLabel.setLocation(new Point(141, 8));
+        labelOpponentLabel.setName("labelOpponentLabel");
+        labelOpponentLabel.setSize(new FormSize(59, 16));
+        labelOpponentLabel.setTabIndex(16);
+        labelOpponentLabel.setText("Opponent:");
+        // labelYouLabel
+        labelYouLabel.setAutoSize(true);
+        labelYouLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelYouLabel.setLocation(new Point(45, 8));
+        labelYouLabel.setName("labelYouLabel");
+        labelYouLabel.setSize(new FormSize(28, 16));
+        labelYouLabel.setTabIndex(17);
+        labelYouLabel.setText("You:");
+        // labelOpponentShip
+        labelOpponentShip.setLocation(new Point(138, 88));
+        labelOpponentShip.setName("labelOpponentShip");
+        labelOpponentShip.setSize(new FormSize(80, 13));
+        labelOpponentShip.setTabIndex(18);
+        labelOpponentShip.setText("Space Monster");
+        // labelYouShip
+        labelYouShip.setLocation(new Point(26, 88));
+        labelYouShip.setName("labelYouShip");
+        labelYouShip.setSize(new FormSize(100, 13));
+        labelYouShip.setTabIndex(19);
+        labelYouShip.setText("Grasshopper");
+        // labelYouHull
+        labelYouHull.setLocation(new Point(26, 104));
+        labelYouHull.setName("labelYouHull");
+        labelYouHull.setSize(new FormSize(68, 13));
+        labelYouHull.setTabIndex(20);
+        labelYouHull.setText("Hull at 100%");
+        // labelYouShields
+        labelYouShields.setLocation(new Point(26, 120));
+        labelYouShields.setName("labelYouShields");
+        labelYouShields.setSize(new FormSize(86, 13));
+        labelYouShields.setTabIndex(21);
+        labelYouShields.setText("Shields at 100%");
+        // labelOpponentShields
+        labelOpponentShields.setLocation(new Point(138, 120));
+        labelOpponentShields.setName("labelOpponentShields");
+        labelOpponentShields.setSize(new FormSize(86, 13));
+        labelOpponentShields.setTabIndex(23);
+        labelOpponentShields.setText("Shields at 100%");
+        // labelOpponentHull
+        labelOpponentHull.setLocation(new Point(138, 104));
+        labelOpponentHull.setName("labelOpponentHull");
+        labelOpponentHull.setSize(new FormSize(68, 13));
+        labelOpponentHull.setTabIndex(22);
+        labelOpponentHull.setText("Hull at 100%");
         // buttonAttack
         buttonAttack.setFlatStyle(FlatStyle.Flat);
         buttonAttack.setLocation(new Point(8, 240));
@@ -253,7 +253,7 @@ public class FormEncounter extends wfForm {
         buttonAttack.setVisible(false);
         buttonAttack.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonAttack_Click(sender, e);
             }
         });
@@ -267,7 +267,7 @@ public class FormEncounter extends wfForm {
         buttonFlee.setVisible(false);
         buttonFlee.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonFlee_Click(sender, e);
             }
         });
@@ -281,7 +281,7 @@ public class FormEncounter extends wfForm {
         buttonSubmit.setVisible(false);
         buttonSubmit.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonSubmit_Click(sender, e);
             }
         });
@@ -295,7 +295,7 @@ public class FormEncounter extends wfForm {
         buttonBribe.setVisible(false);
         buttonBribe.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBribe_Click(sender, e);
             }
         });
@@ -309,7 +309,7 @@ public class FormEncounter extends wfForm {
         buttonSurrender.setVisible(false);
         buttonSurrender.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonSurrender_Click(sender, e);
             }
         });
@@ -323,7 +323,7 @@ public class FormEncounter extends wfForm {
         buttonIgnore.setVisible(false);
         buttonIgnore.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonIgnore_Click(sender, e);
             }
         });
@@ -337,7 +337,7 @@ public class FormEncounter extends wfForm {
         buttonTrade.setVisible(false);
         buttonTrade.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonTrade_Click(sender, e);
             }
         });
@@ -351,7 +351,7 @@ public class FormEncounter extends wfForm {
         buttonPlunder.setVisible(false);
         buttonPlunder.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonPlunder_Click(sender, e);
             }
         });
@@ -365,7 +365,7 @@ public class FormEncounter extends wfForm {
         buttonBoard.setVisible(false);
         buttonBoard.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonBoard_Click(sender, e);
             }
         });
@@ -379,7 +379,7 @@ public class FormEncounter extends wfForm {
         buttonMeet.setVisible(false);
         buttonMeet.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonMeet_Click(sender, e);
             }
         });
@@ -393,7 +393,7 @@ public class FormEncounter extends wfForm {
         buttonDrink.setVisible(false);
         buttonDrink.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonDrink_Click(sender, e);
             }
         });
@@ -407,7 +407,7 @@ public class FormEncounter extends wfForm {
         buttonInt.setVisible(false);
         buttonInt.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonInt_Click(sender, e);
             }
         });
@@ -421,589 +421,589 @@ public class FormEncounter extends wfForm {
         buttonYield.setVisible(false);
         buttonYield.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonYield_Click(sender, e);
             }
         });
-        // picContinuous
-        picContinuous.setLocation(new Point(214, 247));
-        picContinuous.setName("picContinuous");
-        picContinuous.setSize(new FormSize(9, 9));
-        picContinuous.setTabIndex(38);
-        picContinuous.setTabStop(false);
-        picContinuous.setVisible(false);
+        // pictureContinuous
+        pictureContinuous.setLocation(new Point(214, 247));
+        pictureContinuous.setName("pictureContinuous");
+        pictureContinuous.setSize(new FormSize(9, 9));
+        pictureContinuous.setTabIndex(38);
+        pictureContinuous.setTabStop(false);
+        pictureContinuous.setVisible(false);
         // ilContinuous
         ilContinuous.setImageSize(new FormSize(9, 9));
         ilContinuous.setImageStream(((ImageListStreamer) (resources.GetObject("ilContinuous.ImageStream"))));
         ilContinuous.setTransparentColor(Color.white);
-        // picEncounterType
-        picEncounterType.setLocation(new Point(220, 2));
-        picEncounterType.setName("picEncounterType");
-        picEncounterType.setSize(new FormSize(12, 12));
-        picEncounterType.setTabIndex(39);
-        picEncounterType.setTabStop(false);
+        // pictureEncounterType
+        pictureEncounterType.setLocation(new Point(220, 2));
+        pictureEncounterType.setName("pictureEncounterType");
+        pictureEncounterType.setSize(new FormSize(12, 12));
+        pictureEncounterType.setTabIndex(39);
+        pictureEncounterType.setTabStop(false);
         // ilEncounterType
         ilEncounterType.setImageSize(new FormSize(12, 12));
         ilEncounterType.setImageStream(((ImageListStreamer) (resources.GetObject("ilEncounterType.ImageStream"))));
         ilEncounterType.setTransparentColor(Color.white);
-        // picTribbles00
-        picTribbles00.setBackColor(SystemColors.Control);
-        picTribbles00.setLocation(new Point(16, 16));
-        picTribbles00.setName("picTribbles00");
-        picTribbles00.setSize(new FormSize(12, 12));
-        picTribbles00.setTabIndex(41);
-        picTribbles00.setTabStop(false);
-        picTribbles00.setVisible(false);
-        picTribbles00.setClick(new EventHandler<>() {
+        // pictureTribbles00
+        pictureTribbles00.setBackColor(SystemColors.Control);
+        pictureTribbles00.setLocation(new Point(16, 16));
+        pictureTribbles00.setName("pictureTribbles00");
+        pictureTribbles00.setSize(new FormSize(12, 12));
+        pictureTribbles00.setTabIndex(41);
+        pictureTribbles00.setTabStop(false);
+        pictureTribbles00.setVisible(false);
+        pictureTribbles00.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
         // ilTribbles
         ilTribbles.setImageSize(new FormSize(12, 12));
         ilTribbles.setImageStream(((ImageListStreamer) (resources.GetObject("ilTribbles.ImageStream"))));
         ilTribbles.setTransparentColor(Color.white);
-        // picTribbles50
-        picTribbles50.setBackColor(SystemColors.Control);
-        picTribbles50.setLocation(new Point(16, 224));
-        picTribbles50.setName("picTribbles50");
-        picTribbles50.setSize(new FormSize(12, 12));
-        picTribbles50.setTabIndex(42);
-        picTribbles50.setTabStop(false);
-        picTribbles50.setVisible(false);
-        picTribbles50.setClick(new EventHandler<>() {
+        // pictureTribbles50
+        pictureTribbles50.setBackColor(SystemColors.Control);
+        pictureTribbles50.setLocation(new Point(16, 224));
+        pictureTribbles50.setName("pictureTribbles50");
+        pictureTribbles50.setSize(new FormSize(12, 12));
+        pictureTribbles50.setTabIndex(42);
+        pictureTribbles50.setTabStop(false);
+        pictureTribbles50.setVisible(false);
+        pictureTribbles50.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles10
-        picTribbles10.setBackColor(SystemColors.Control);
-        picTribbles10.setLocation(new Point(8, 56));
-        picTribbles10.setName("picTribbles10");
-        picTribbles10.setSize(new FormSize(12, 12));
-        picTribbles10.setTabIndex(43);
-        picTribbles10.setTabStop(false);
-        picTribbles10.setVisible(false);
-        picTribbles10.setClick(new EventHandler<>() {
+        // pictureTribbles10
+        pictureTribbles10.setBackColor(SystemColors.Control);
+        pictureTribbles10.setLocation(new Point(8, 56));
+        pictureTribbles10.setName("pictureTribbles10");
+        pictureTribbles10.setSize(new FormSize(12, 12));
+        pictureTribbles10.setTabIndex(43);
+        pictureTribbles10.setTabStop(false);
+        pictureTribbles10.setVisible(false);
+        pictureTribbles10.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles40
-        picTribbles40.setBackColor(SystemColors.Control);
-        picTribbles40.setLocation(new Point(8, 184));
-        picTribbles40.setName("picTribbles40");
-        picTribbles40.setSize(new FormSize(12, 12));
-        picTribbles40.setTabIndex(44);
-        picTribbles40.setTabStop(false);
-        picTribbles40.setVisible(false);
-        picTribbles40.setClick(new EventHandler<>() {
+        // pictureTribbles40
+        pictureTribbles40.setBackColor(SystemColors.Control);
+        pictureTribbles40.setLocation(new Point(8, 184));
+        pictureTribbles40.setName("pictureTribbles40");
+        pictureTribbles40.setSize(new FormSize(12, 12));
+        pictureTribbles40.setTabIndex(44);
+        pictureTribbles40.setTabStop(false);
+        pictureTribbles40.setVisible(false);
+        pictureTribbles40.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles20
-        picTribbles20.setBackColor(SystemColors.Control);
-        picTribbles20.setLocation(new Point(8, 96));
-        picTribbles20.setName("picTribbles20");
-        picTribbles20.setSize(new FormSize(12, 12));
-        picTribbles20.setTabIndex(45);
-        picTribbles20.setTabStop(false);
-        picTribbles20.setVisible(false);
-        picTribbles20.setClick(new EventHandler<>() {
+        // pictureTribbles20
+        pictureTribbles20.setBackColor(SystemColors.Control);
+        pictureTribbles20.setLocation(new Point(8, 96));
+        pictureTribbles20.setName("pictureTribbles20");
+        pictureTribbles20.setSize(new FormSize(12, 12));
+        pictureTribbles20.setTabIndex(45);
+        pictureTribbles20.setTabStop(false);
+        pictureTribbles20.setVisible(false);
+        pictureTribbles20.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles30
-        picTribbles30.setBackColor(SystemColors.Control);
-        picTribbles30.setLocation(new Point(16, 136));
-        picTribbles30.setName("picTribbles30");
-        picTribbles30.setSize(new FormSize(12, 12));
-        picTribbles30.setTabIndex(46);
-        picTribbles30.setTabStop(false);
-        picTribbles30.setVisible(false);
-        picTribbles30.setClick(new EventHandler<>() {
+        // pictureTribbles30
+        pictureTribbles30.setBackColor(SystemColors.Control);
+        pictureTribbles30.setLocation(new Point(16, 136));
+        pictureTribbles30.setName("pictureTribbles30");
+        pictureTribbles30.setSize(new FormSize(12, 12));
+        pictureTribbles30.setTabIndex(46);
+        pictureTribbles30.setTabStop(false);
+        pictureTribbles30.setVisible(false);
+        pictureTribbles30.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles04
-        picTribbles04.setBackColor(SystemColors.Control);
-        picTribbles04.setLocation(new Point(176, 8));
-        picTribbles04.setName("picTribbles04");
-        picTribbles04.setSize(new FormSize(12, 12));
-        picTribbles04.setTabIndex(47);
-        picTribbles04.setTabStop(false);
-        picTribbles04.setVisible(false);
-        picTribbles04.setClick(new EventHandler<>() {
+        // pictureTribbles04
+        pictureTribbles04.setBackColor(SystemColors.Control);
+        pictureTribbles04.setLocation(new Point(176, 8));
+        pictureTribbles04.setName("pictureTribbles04");
+        pictureTribbles04.setSize(new FormSize(12, 12));
+        pictureTribbles04.setTabIndex(47);
+        pictureTribbles04.setTabStop(false);
+        pictureTribbles04.setVisible(false);
+        pictureTribbles04.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles03
-        picTribbles03.setBackColor(SystemColors.Control);
-        picTribbles03.setLocation(new Point(128, 8));
-        picTribbles03.setName("picTribbles03");
-        picTribbles03.setSize(new FormSize(12, 12));
-        picTribbles03.setTabIndex(48);
-        picTribbles03.setTabStop(false);
-        picTribbles03.setVisible(false);
-        picTribbles03.setClick(new EventHandler<>() {
+        // pictureTribbles03
+        pictureTribbles03.setBackColor(SystemColors.Control);
+        pictureTribbles03.setLocation(new Point(128, 8));
+        pictureTribbles03.setName("pictureTribbles03");
+        pictureTribbles03.setSize(new FormSize(12, 12));
+        pictureTribbles03.setTabIndex(48);
+        pictureTribbles03.setTabStop(false);
+        pictureTribbles03.setVisible(false);
+        pictureTribbles03.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles02
-        picTribbles02.setBackColor(SystemColors.Control);
-        picTribbles02.setLocation(new Point(96, 16));
-        picTribbles02.setName("picTribbles02");
-        picTribbles02.setSize(new FormSize(12, 12));
-        picTribbles02.setTabIndex(49);
-        picTribbles02.setTabStop(false);
-        picTribbles02.setVisible(false);
-        picTribbles02.setClick(new EventHandler<>() {
+        // pictureTribbles02
+        pictureTribbles02.setBackColor(SystemColors.Control);
+        pictureTribbles02.setLocation(new Point(96, 16));
+        pictureTribbles02.setName("pictureTribbles02");
+        pictureTribbles02.setSize(new FormSize(12, 12));
+        pictureTribbles02.setTabIndex(49);
+        pictureTribbles02.setTabStop(false);
+        pictureTribbles02.setVisible(false);
+        pictureTribbles02.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles01
-        picTribbles01.setBackColor(SystemColors.Control);
-        picTribbles01.setLocation(new Point(56, 8));
-        picTribbles01.setName("picTribbles01");
-        picTribbles01.setSize(new FormSize(12, 12));
-        picTribbles01.setTabIndex(50);
-        picTribbles01.setTabStop(false);
-        picTribbles01.setVisible(false);
-        picTribbles01.setClick(new EventHandler<>() {
+        // pictureTribbles01
+        pictureTribbles01.setBackColor(SystemColors.Control);
+        pictureTribbles01.setLocation(new Point(56, 8));
+        pictureTribbles01.setName("pictureTribbles01");
+        pictureTribbles01.setSize(new FormSize(12, 12));
+        pictureTribbles01.setTabIndex(50);
+        pictureTribbles01.setTabStop(false);
+        pictureTribbles01.setVisible(false);
+        pictureTribbles01.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles05
-        picTribbles05.setBackColor(SystemColors.Control);
-        picTribbles05.setLocation(new Point(208, 16));
-        picTribbles05.setName("picTribbles05");
-        picTribbles05.setSize(new FormSize(12, 12));
-        picTribbles05.setTabIndex(51);
-        picTribbles05.setTabStop(false);
-        picTribbles05.setVisible(false);
-        picTribbles05.setClick(new EventHandler<>() {
+        // pictureTribbles05
+        pictureTribbles05.setBackColor(SystemColors.Control);
+        pictureTribbles05.setLocation(new Point(208, 16));
+        pictureTribbles05.setName("pictureTribbles05");
+        pictureTribbles05.setSize(new FormSize(12, 12));
+        pictureTribbles05.setTabIndex(51);
+        pictureTribbles05.setTabStop(false);
+        pictureTribbles05.setVisible(false);
+        pictureTribbles05.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles11
-        picTribbles11.setBackColor(SystemColors.Control);
-        picTribbles11.setLocation(new Point(32, 80));
-        picTribbles11.setName("picTribbles11");
-        picTribbles11.setSize(new FormSize(12, 12));
-        picTribbles11.setTabIndex(52);
-        picTribbles11.setTabStop(false);
-        picTribbles11.setVisible(false);
-        picTribbles11.setClick(new EventHandler<>() {
+        // pictureTribbles11
+        pictureTribbles11.setBackColor(SystemColors.Control);
+        pictureTribbles11.setLocation(new Point(32, 80));
+        pictureTribbles11.setName("pictureTribbles11");
+        pictureTribbles11.setSize(new FormSize(12, 12));
+        pictureTribbles11.setTabIndex(52);
+        pictureTribbles11.setTabStop(false);
+        pictureTribbles11.setVisible(false);
+        pictureTribbles11.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles12
-        picTribbles12.setBackColor(SystemColors.Control);
-        picTribbles12.setLocation(new Point(88, 56));
-        picTribbles12.setName("picTribbles12");
-        picTribbles12.setSize(new FormSize(12, 12));
-        picTribbles12.setTabIndex(53);
-        picTribbles12.setTabStop(false);
-        picTribbles12.setVisible(false);
-        picTribbles12.setClick(new EventHandler<>() {
+        // pictureTribbles12
+        pictureTribbles12.setBackColor(SystemColors.Control);
+        pictureTribbles12.setLocation(new Point(88, 56));
+        pictureTribbles12.setName("pictureTribbles12");
+        pictureTribbles12.setSize(new FormSize(12, 12));
+        pictureTribbles12.setTabIndex(53);
+        pictureTribbles12.setTabStop(false);
+        pictureTribbles12.setVisible(false);
+        pictureTribbles12.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles13
-        picTribbles13.setBackColor(SystemColors.Control);
-        picTribbles13.setLocation(new Point(128, 40));
-        picTribbles13.setName("picTribbles13");
-        picTribbles13.setSize(new FormSize(12, 12));
-        picTribbles13.setTabIndex(54);
-        picTribbles13.setTabStop(false);
-        picTribbles13.setVisible(false);
-        picTribbles13.setClick(new EventHandler<>() {
+        // pictureTribbles13
+        pictureTribbles13.setBackColor(SystemColors.Control);
+        pictureTribbles13.setLocation(new Point(128, 40));
+        pictureTribbles13.setName("pictureTribbles13");
+        pictureTribbles13.setSize(new FormSize(12, 12));
+        pictureTribbles13.setTabIndex(54);
+        pictureTribbles13.setTabStop(false);
+        pictureTribbles13.setVisible(false);
+        pictureTribbles13.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles14
-        picTribbles14.setBackColor(SystemColors.Control);
-        picTribbles14.setLocation(new Point(192, 72));
-        picTribbles14.setName("picTribbles14");
-        picTribbles14.setSize(new FormSize(12, 12));
-        picTribbles14.setTabIndex(55);
-        picTribbles14.setTabStop(false);
-        picTribbles14.setVisible(false);
-        picTribbles14.setClick(new EventHandler<>() {
+        // pictureTribbles14
+        pictureTribbles14.setBackColor(SystemColors.Control);
+        pictureTribbles14.setLocation(new Point(192, 72));
+        pictureTribbles14.setName("pictureTribbles14");
+        pictureTribbles14.setSize(new FormSize(12, 12));
+        pictureTribbles14.setTabIndex(55);
+        pictureTribbles14.setTabStop(false);
+        pictureTribbles14.setVisible(false);
+        pictureTribbles14.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles15
-        picTribbles15.setBackColor(SystemColors.Control);
-        picTribbles15.setLocation(new Point(216, 48));
-        picTribbles15.setName("picTribbles15");
-        picTribbles15.setSize(new FormSize(12, 12));
-        picTribbles15.setTabIndex(56);
-        picTribbles15.setTabStop(false);
-        picTribbles15.setVisible(false);
-        picTribbles15.setClick(new EventHandler<>() {
+        // pictureTribbles15
+        pictureTribbles15.setBackColor(SystemColors.Control);
+        pictureTribbles15.setLocation(new Point(216, 48));
+        pictureTribbles15.setName("pictureTribbles15");
+        pictureTribbles15.setSize(new FormSize(12, 12));
+        pictureTribbles15.setTabIndex(56);
+        pictureTribbles15.setTabStop(false);
+        pictureTribbles15.setVisible(false);
+        pictureTribbles15.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles21
-        picTribbles21.setBackColor(SystemColors.Control);
-        picTribbles21.setLocation(new Point(56, 96));
-        picTribbles21.setName("picTribbles21");
-        picTribbles21.setSize(new FormSize(12, 12));
-        picTribbles21.setTabIndex(57);
-        picTribbles21.setTabStop(false);
-        picTribbles21.setVisible(false);
-        picTribbles21.setClick(new EventHandler<>() {
+        // pictureTribbles21
+        pictureTribbles21.setBackColor(SystemColors.Control);
+        pictureTribbles21.setLocation(new Point(56, 96));
+        pictureTribbles21.setName("pictureTribbles21");
+        pictureTribbles21.setSize(new FormSize(12, 12));
+        pictureTribbles21.setTabIndex(57);
+        pictureTribbles21.setTabStop(false);
+        pictureTribbles21.setVisible(false);
+        pictureTribbles21.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles22
-        picTribbles22.setBackColor(SystemColors.Control);
-        picTribbles22.setLocation(new Point(96, 80));
-        picTribbles22.setName("picTribbles22");
-        picTribbles22.setSize(new FormSize(12, 12));
-        picTribbles22.setTabIndex(58);
-        picTribbles22.setTabStop(false);
-        picTribbles22.setVisible(false);
-        picTribbles22.setClick(new EventHandler<>() {
+        // pictureTribbles22
+        pictureTribbles22.setBackColor(SystemColors.Control);
+        pictureTribbles22.setLocation(new Point(96, 80));
+        pictureTribbles22.setName("pictureTribbles22");
+        pictureTribbles22.setSize(new FormSize(12, 12));
+        pictureTribbles22.setTabIndex(58);
+        pictureTribbles22.setTabStop(false);
+        pictureTribbles22.setVisible(false);
+        pictureTribbles22.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles23
-        picTribbles23.setBackColor(SystemColors.Control);
-        picTribbles23.setLocation(new Point(136, 88));
-        picTribbles23.setName("picTribbles23");
-        picTribbles23.setSize(new FormSize(12, 12));
-        picTribbles23.setTabIndex(59);
-        picTribbles23.setTabStop(false);
-        picTribbles23.setVisible(false);
-        picTribbles23.setClick(new EventHandler<>() {
+        // pictureTribbles23
+        pictureTribbles23.setBackColor(SystemColors.Control);
+        pictureTribbles23.setLocation(new Point(136, 88));
+        pictureTribbles23.setName("pictureTribbles23");
+        pictureTribbles23.setSize(new FormSize(12, 12));
+        pictureTribbles23.setTabIndex(59);
+        pictureTribbles23.setTabStop(false);
+        pictureTribbles23.setVisible(false);
+        pictureTribbles23.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles24
-        picTribbles24.setBackColor(SystemColors.Control);
-        picTribbles24.setLocation(new Point(176, 104));
-        picTribbles24.setName("picTribbles24");
-        picTribbles24.setSize(new FormSize(12, 12));
-        picTribbles24.setTabIndex(60);
-        picTribbles24.setTabStop(false);
-        picTribbles24.setVisible(false);
-        picTribbles24.setClick(new EventHandler<>() {
+        // pictureTribbles24
+        pictureTribbles24.setBackColor(SystemColors.Control);
+        pictureTribbles24.setLocation(new Point(176, 104));
+        pictureTribbles24.setName("pictureTribbles24");
+        pictureTribbles24.setSize(new FormSize(12, 12));
+        pictureTribbles24.setTabIndex(60);
+        pictureTribbles24.setTabStop(false);
+        pictureTribbles24.setVisible(false);
+        pictureTribbles24.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles25
-        picTribbles25.setBackColor(SystemColors.Control);
-        picTribbles25.setLocation(new Point(216, 96));
-        picTribbles25.setName("picTribbles25");
-        picTribbles25.setSize(new FormSize(12, 12));
-        picTribbles25.setTabIndex(61);
-        picTribbles25.setTabStop(false);
-        picTribbles25.setVisible(false);
-        picTribbles25.setClick(new EventHandler<>() {
+        // pictureTribbles25
+        pictureTribbles25.setBackColor(SystemColors.Control);
+        pictureTribbles25.setLocation(new Point(216, 96));
+        pictureTribbles25.setName("pictureTribbles25");
+        pictureTribbles25.setSize(new FormSize(12, 12));
+        pictureTribbles25.setTabIndex(61);
+        pictureTribbles25.setTabStop(false);
+        pictureTribbles25.setVisible(false);
+        pictureTribbles25.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles31
-        picTribbles31.setBackColor(SystemColors.Control);
-        picTribbles31.setLocation(new Point(56, 128));
-        picTribbles31.setName("picTribbles31");
-        picTribbles31.setSize(new FormSize(12, 12));
-        picTribbles31.setTabIndex(62);
-        picTribbles31.setTabStop(false);
-        picTribbles31.setVisible(false);
-        picTribbles31.setClick(new EventHandler<>() {
+        // pictureTribbles31
+        pictureTribbles31.setBackColor(SystemColors.Control);
+        pictureTribbles31.setLocation(new Point(56, 128));
+        pictureTribbles31.setName("pictureTribbles31");
+        pictureTribbles31.setSize(new FormSize(12, 12));
+        pictureTribbles31.setTabIndex(62);
+        pictureTribbles31.setTabStop(false);
+        pictureTribbles31.setVisible(false);
+        pictureTribbles31.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles32
-        picTribbles32.setBackColor(SystemColors.Control);
-        picTribbles32.setLocation(new Point(96, 120));
-        picTribbles32.setName("picTribbles32");
-        picTribbles32.setSize(new FormSize(12, 12));
-        picTribbles32.setTabIndex(63);
-        picTribbles32.setTabStop(false);
-        picTribbles32.setVisible(false);
-        picTribbles32.setClick(new EventHandler<>() {
+        // pictureTribbles32
+        pictureTribbles32.setBackColor(SystemColors.Control);
+        pictureTribbles32.setLocation(new Point(96, 120));
+        pictureTribbles32.setName("pictureTribbles32");
+        pictureTribbles32.setSize(new FormSize(12, 12));
+        pictureTribbles32.setTabIndex(63);
+        pictureTribbles32.setTabStop(false);
+        pictureTribbles32.setVisible(false);
+        pictureTribbles32.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles33
-        picTribbles33.setBackColor(SystemColors.Control);
-        picTribbles33.setLocation(new Point(128, 128));
-        picTribbles33.setName("picTribbles33");
-        picTribbles33.setSize(new FormSize(12, 12));
-        picTribbles33.setTabIndex(64);
-        picTribbles33.setTabStop(false);
-        picTribbles33.setVisible(false);
-        picTribbles33.setClick(new EventHandler<>() {
+        // pictureTribbles33
+        pictureTribbles33.setBackColor(SystemColors.Control);
+        pictureTribbles33.setLocation(new Point(128, 128));
+        pictureTribbles33.setName("pictureTribbles33");
+        pictureTribbles33.setSize(new FormSize(12, 12));
+        pictureTribbles33.setTabIndex(64);
+        pictureTribbles33.setTabStop(false);
+        pictureTribbles33.setVisible(false);
+        pictureTribbles33.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles34
-        picTribbles34.setBackColor(SystemColors.Control);
-        picTribbles34.setLocation(new Point(168, 144));
-        picTribbles34.setName("picTribbles34");
-        picTribbles34.setSize(new FormSize(12, 12));
-        picTribbles34.setTabIndex(65);
-        picTribbles34.setTabStop(false);
-        picTribbles34.setVisible(false);
-        picTribbles34.setClick(new EventHandler<>() {
+        // pictureTribbles34
+        pictureTribbles34.setBackColor(SystemColors.Control);
+        pictureTribbles34.setLocation(new Point(168, 144));
+        pictureTribbles34.setName("pictureTribbles34");
+        pictureTribbles34.setSize(new FormSize(12, 12));
+        pictureTribbles34.setTabIndex(65);
+        pictureTribbles34.setTabStop(false);
+        pictureTribbles34.setVisible(false);
+        pictureTribbles34.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles35
-        picTribbles35.setBackColor(SystemColors.Control);
-        picTribbles35.setLocation(new Point(208, 128));
-        picTribbles35.setName("picTribbles35");
-        picTribbles35.setSize(new FormSize(12, 12));
-        picTribbles35.setTabIndex(66);
-        picTribbles35.setTabStop(false);
-        picTribbles35.setVisible(false);
-        picTribbles35.setClick(new EventHandler<>() {
+        // pictureTribbles35
+        pictureTribbles35.setBackColor(SystemColors.Control);
+        pictureTribbles35.setLocation(new Point(208, 128));
+        pictureTribbles35.setName("pictureTribbles35");
+        pictureTribbles35.setSize(new FormSize(12, 12));
+        pictureTribbles35.setTabIndex(66);
+        pictureTribbles35.setTabStop(false);
+        pictureTribbles35.setVisible(false);
+        pictureTribbles35.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles41
-        picTribbles41.setBackColor(SystemColors.Control);
-        picTribbles41.setLocation(new Point(48, 176));
-        picTribbles41.setName("picTribbles41");
-        picTribbles41.setSize(new FormSize(12, 12));
-        picTribbles41.setTabIndex(67);
-        picTribbles41.setTabStop(false);
-        picTribbles41.setVisible(false);
-        picTribbles41.setClick(new EventHandler<>() {
+        // pictureTribbles41
+        pictureTribbles41.setBackColor(SystemColors.Control);
+        pictureTribbles41.setLocation(new Point(48, 176));
+        pictureTribbles41.setName("pictureTribbles41");
+        pictureTribbles41.setSize(new FormSize(12, 12));
+        pictureTribbles41.setTabIndex(67);
+        pictureTribbles41.setTabStop(false);
+        pictureTribbles41.setVisible(false);
+        pictureTribbles41.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles51
-        picTribbles51.setBackColor(SystemColors.Control);
-        picTribbles51.setLocation(new Point(64, 216));
-        picTribbles51.setName("picTribbles51");
-        picTribbles51.setSize(new FormSize(12, 12));
-        picTribbles51.setTabIndex(68);
-        picTribbles51.setTabStop(false);
-        picTribbles51.setVisible(false);
-        picTribbles51.setClick(new EventHandler<>() {
+        // pictureTribbles51
+        pictureTribbles51.setBackColor(SystemColors.Control);
+        pictureTribbles51.setLocation(new Point(64, 216));
+        pictureTribbles51.setName("pictureTribbles51");
+        pictureTribbles51.setSize(new FormSize(12, 12));
+        pictureTribbles51.setTabIndex(68);
+        pictureTribbles51.setTabStop(false);
+        pictureTribbles51.setVisible(false);
+        pictureTribbles51.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles42
-        picTribbles42.setBackColor(SystemColors.Control);
-        picTribbles42.setLocation(new Point(88, 168));
-        picTribbles42.setName("picTribbles42");
-        picTribbles42.setSize(new FormSize(12, 12));
-        picTribbles42.setTabIndex(69);
-        picTribbles42.setTabStop(false);
-        picTribbles42.setVisible(false);
-        picTribbles42.setClick(new EventHandler<>() {
+        // pictureTribbles42
+        pictureTribbles42.setBackColor(SystemColors.Control);
+        pictureTribbles42.setLocation(new Point(88, 168));
+        pictureTribbles42.setName("pictureTribbles42");
+        pictureTribbles42.setSize(new FormSize(12, 12));
+        pictureTribbles42.setTabIndex(69);
+        pictureTribbles42.setTabStop(false);
+        pictureTribbles42.setVisible(false);
+        pictureTribbles42.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles52
-        picTribbles52.setBackColor(SystemColors.Control);
-        picTribbles52.setLocation(new Point(96, 224));
-        picTribbles52.setName("picTribbles52");
-        picTribbles52.setSize(new FormSize(12, 12));
-        picTribbles52.setTabIndex(70);
-        picTribbles52.setTabStop(false);
-        picTribbles52.setVisible(false);
-        picTribbles52.setClick(new EventHandler<>() {
+        // pictureTribbles52
+        pictureTribbles52.setBackColor(SystemColors.Control);
+        pictureTribbles52.setLocation(new Point(96, 224));
+        pictureTribbles52.setName("pictureTribbles52");
+        pictureTribbles52.setSize(new FormSize(12, 12));
+        pictureTribbles52.setTabIndex(70);
+        pictureTribbles52.setTabStop(false);
+        pictureTribbles52.setVisible(false);
+        pictureTribbles52.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles43
-        picTribbles43.setBackColor(SystemColors.Control);
-        picTribbles43.setLocation(new Point(136, 176));
-        picTribbles43.setName("picTribbles43");
-        picTribbles43.setSize(new FormSize(12, 12));
-        picTribbles43.setTabIndex(71);
-        picTribbles43.setTabStop(false);
-        picTribbles43.setVisible(false);
-        picTribbles43.setClick(new EventHandler<>() {
+        // pictureTribbles43
+        pictureTribbles43.setBackColor(SystemColors.Control);
+        pictureTribbles43.setLocation(new Point(136, 176));
+        pictureTribbles43.setName("pictureTribbles43");
+        pictureTribbles43.setSize(new FormSize(12, 12));
+        pictureTribbles43.setTabIndex(71);
+        pictureTribbles43.setTabStop(false);
+        pictureTribbles43.setVisible(false);
+        pictureTribbles43.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles53
-        picTribbles53.setBackColor(SystemColors.Control);
-        picTribbles53.setLocation(new Point(144, 216));
-        picTribbles53.setName("picTribbles53");
-        picTribbles53.setSize(new FormSize(12, 12));
-        picTribbles53.setTabIndex(72);
-        picTribbles53.setTabStop(false);
-        picTribbles53.setVisible(false);
-        picTribbles53.setClick(new EventHandler<>() {
+        // pictureTribbles53
+        pictureTribbles53.setBackColor(SystemColors.Control);
+        pictureTribbles53.setLocation(new Point(144, 216));
+        pictureTribbles53.setName("pictureTribbles53");
+        pictureTribbles53.setSize(new FormSize(12, 12));
+        pictureTribbles53.setTabIndex(72);
+        pictureTribbles53.setTabStop(false);
+        pictureTribbles53.setVisible(false);
+        pictureTribbles53.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles44
-        picTribbles44.setBackColor(SystemColors.Control);
-        picTribbles44.setLocation(new Point(184, 184));
-        picTribbles44.setName("picTribbles44");
-        picTribbles44.setSize(new FormSize(12, 12));
-        picTribbles44.setTabIndex(73);
-        picTribbles44.setTabStop(false);
-        picTribbles44.setVisible(false);
-        picTribbles44.setClick(new EventHandler<>() {
+        // pictureTribbles44
+        pictureTribbles44.setBackColor(SystemColors.Control);
+        pictureTribbles44.setLocation(new Point(184, 184));
+        pictureTribbles44.setName("pictureTribbles44");
+        pictureTribbles44.setSize(new FormSize(12, 12));
+        pictureTribbles44.setTabIndex(73);
+        pictureTribbles44.setTabStop(false);
+        pictureTribbles44.setVisible(false);
+        pictureTribbles44.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles45
-        picTribbles45.setBackColor(SystemColors.Control);
-        picTribbles45.setLocation(new Point(216, 176));
-        picTribbles45.setName("picTribbles45");
-        picTribbles45.setSize(new FormSize(12, 12));
-        picTribbles45.setTabIndex(74);
-        picTribbles45.setTabStop(false);
-        picTribbles45.setVisible(false);
-        picTribbles45.setClick(new EventHandler<>() {
+        // pictureTribbles45
+        pictureTribbles45.setBackColor(SystemColors.Control);
+        pictureTribbles45.setLocation(new Point(216, 176));
+        pictureTribbles45.setName("pictureTribbles45");
+        pictureTribbles45.setSize(new FormSize(12, 12));
+        pictureTribbles45.setTabIndex(74);
+        pictureTribbles45.setTabStop(false);
+        pictureTribbles45.setVisible(false);
+        pictureTribbles45.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles54
-        picTribbles54.setBackColor(SystemColors.Control);
-        picTribbles54.setLocation(new Point(176, 224));
-        picTribbles54.setName("picTribbles54");
-        picTribbles54.setSize(new FormSize(12, 12));
-        picTribbles54.setTabIndex(75);
-        picTribbles54.setTabStop(false);
-        picTribbles54.setVisible(false);
-        picTribbles54.setClick(new EventHandler<>() {
+        // pictureTribbles54
+        pictureTribbles54.setBackColor(SystemColors.Control);
+        pictureTribbles54.setLocation(new Point(176, 224));
+        pictureTribbles54.setName("pictureTribbles54");
+        pictureTribbles54.setSize(new FormSize(12, 12));
+        pictureTribbles54.setTabIndex(75);
+        pictureTribbles54.setTabStop(false);
+        pictureTribbles54.setVisible(false);
+        pictureTribbles54.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // picTribbles55
-        picTribbles55.setBackColor(SystemColors.Control);
-        picTribbles55.setLocation(new Point(208, 216));
-        picTribbles55.setName("picTribbles55");
-        picTribbles55.setSize(new FormSize(12, 12));
-        picTribbles55.setTabIndex(76);
-        picTribbles55.setTabStop(false);
-        picTribbles55.setVisible(false);
-        picTribbles55.setClick(new EventHandler<>() {
+        // pictureTribbles55
+        pictureTribbles55.setBackColor(SystemColors.Control);
+        pictureTribbles55.setLocation(new Point(208, 216));
+        pictureTribbles55.setName("pictureTribbles55");
+        pictureTribbles55.setSize(new FormSize(12, 12));
+        pictureTribbles55.setTabIndex(76);
+        pictureTribbles55.setTabStop(false);
+        pictureTribbles55.setVisible(false);
+        pictureTribbles55.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                picTribbles_Click(sender, e);
+            public void handle(Object sender, EventData e) {
+                pictureTribbles_Click(sender, e);
             }
         });
-        // tmrTick
-        tmrTick.setInterval(1000);
-        tmrTick.Tick = new EventHandler<>() {
+        // timerTick
+        timerTick.setInterval(1000);
+        timerTick.Tick = new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
-                tmrTick_Tick(sender, e);
+            public void handle(Object sender, EventData e) {
+                timerTick_Tick(sender, e);
             }
         };
         // FormEncounter
         setAutoScaleBaseSize(new FormSize(5, 13));
         setClientSize(new FormSize(234, 271));
         setControlBox(false);
-        Controls.add(picTribbles55);
-        Controls.add(picTribbles54);
-        Controls.add(picTribbles45);
-        Controls.add(picTribbles44);
-        Controls.add(picTribbles53);
-        Controls.add(picTribbles43);
-        Controls.add(picTribbles52);
-        Controls.add(picTribbles42);
-        Controls.add(picTribbles51);
-        Controls.add(picTribbles41);
-        Controls.add(picTribbles35);
-        Controls.add(picTribbles34);
-        Controls.add(picTribbles33);
-        Controls.add(picTribbles32);
-        Controls.add(picTribbles31);
-        Controls.add(picTribbles25);
-        Controls.add(picTribbles24);
-        Controls.add(picTribbles23);
-        Controls.add(picTribbles22);
-        Controls.add(picTribbles21);
-        Controls.add(picTribbles15);
-        Controls.add(picTribbles14);
-        Controls.add(picTribbles13);
-        Controls.add(picTribbles12);
-        Controls.add(picTribbles11);
-        Controls.add(picTribbles05);
-        Controls.add(picTribbles01);
-        Controls.add(picTribbles02);
-        Controls.add(picTribbles03);
-        Controls.add(picTribbles04);
-        Controls.add(picTribbles30);
-        Controls.add(picTribbles20);
-        Controls.add(picTribbles40);
-        Controls.add(picTribbles10);
-        Controls.add(picTribbles50);
-        Controls.add(picTribbles00);
-        Controls.add(picEncounterType);
-        Controls.add(picContinuous);
+        Controls.add(pictureTribbles55);
+        Controls.add(pictureTribbles54);
+        Controls.add(pictureTribbles45);
+        Controls.add(pictureTribbles44);
+        Controls.add(pictureTribbles53);
+        Controls.add(pictureTribbles43);
+        Controls.add(pictureTribbles52);
+        Controls.add(pictureTribbles42);
+        Controls.add(pictureTribbles51);
+        Controls.add(pictureTribbles41);
+        Controls.add(pictureTribbles35);
+        Controls.add(pictureTribbles34);
+        Controls.add(pictureTribbles33);
+        Controls.add(pictureTribbles32);
+        Controls.add(pictureTribbles31);
+        Controls.add(pictureTribbles25);
+        Controls.add(pictureTribbles24);
+        Controls.add(pictureTribbles23);
+        Controls.add(pictureTribbles22);
+        Controls.add(pictureTribbles21);
+        Controls.add(pictureTribbles15);
+        Controls.add(pictureTribbles14);
+        Controls.add(pictureTribbles13);
+        Controls.add(pictureTribbles12);
+        Controls.add(pictureTribbles11);
+        Controls.add(pictureTribbles05);
+        Controls.add(pictureTribbles01);
+        Controls.add(pictureTribbles02);
+        Controls.add(pictureTribbles03);
+        Controls.add(pictureTribbles04);
+        Controls.add(pictureTribbles30);
+        Controls.add(pictureTribbles20);
+        Controls.add(pictureTribbles40);
+        Controls.add(pictureTribbles10);
+        Controls.add(pictureTribbles50);
+        Controls.add(pictureTribbles00);
+        Controls.add(pictureEncounterType);
+        Controls.add(pictureContinuous);
         Controls.add(buttonYield);
         Controls.add(buttonInt);
         Controls.add(buttonMeet);
@@ -1014,18 +1014,18 @@ public class FormEncounter extends wfForm {
         Controls.add(buttonBribe);
         Controls.add(buttonSubmit);
         Controls.add(buttonFlee);
-        Controls.add(lblOpponentShields);
-        Controls.add(lblOpponentHull);
-        Controls.add(lblYouShields);
-        Controls.add(lblYouHull);
-        Controls.add(lblYouShip);
-        Controls.add(lblOpponentShip);
-        Controls.add(lblYouLabel);
-        Controls.add(lblOpponentLabel);
-        Controls.add(lblAction);
-        Controls.add(picShipOpponent);
-        Controls.add(picShipYou);
-        Controls.add(lblEncounter);
+        Controls.add(labelOpponentShields);
+        Controls.add(labelOpponentHull);
+        Controls.add(labelYouShields);
+        Controls.add(labelYouHull);
+        Controls.add(labelYouShip);
+        Controls.add(labelOpponentShip);
+        Controls.add(labelYouLabel);
+        Controls.add(labelOpponentLabel);
+        Controls.add(labelAction);
+        Controls.add(pictureShipOpponent);
+        Controls.add(pictureShipYou);
+        Controls.add(labelEncounter);
         Controls.add(buttonDrink);
         Controls.add(buttonBoard);
         Controls.add(buttonAttack);
@@ -1050,21 +1050,21 @@ public class FormEncounter extends wfForm {
         UpdateTribbles();
         UpdateButtons();
         if (game.EncounterImageIndex() >= 0) {
-            picEncounterType.setImage(ilEncounterType.getImages()[game.EncounterImageIndex()]);
+            pictureEncounterType.setImage(ilEncounterType.getImages()[game.EncounterImageIndex()]);
         } else {
-            picEncounterType.setVisible(false);
+            pictureEncounterType.setVisible(false);
         }
-        lblEncounter.setText(game.EncounterTextInitial());
-        lblAction.setText(game.EncounterActionInitial());
+        labelEncounter.setText(game.EncounterTextInitial());
+        labelAction.setText(game.EncounterActionInitial());
     }
 
 
     private void DisableAuto() {
-        tmrTick.Stop();
+        timerTick.Stop();
         game.setEncounterContinueFleeing(false);
         game.setEncounterContinueAttacking(false);
         buttonInt.setVisible(false);
-        picContinuous.setVisible(false);
+        pictureContinuous.setVisible(false);
     }
 
     private void ExecuteAction() {
@@ -1072,10 +1072,10 @@ public class FormEncounter extends wfForm {
         if (_result == EncounterResult.Continue) {
             UpdateButtons();
             UpdateShipStats();
-            lblEncounter.setText(game.EncounterText());
-            lblAction.setText(game.EncounterAction());
+            labelEncounter.setText(game.EncounterText());
+            labelAction.setText(game.EncounterAction());
             if (game.getEncounterContinueFleeing() || game.getEncounterContinueAttacking()) {
-                tmrTick.Start();
+                timerTick.Start();
             }
         } else {
             Close();
@@ -1188,40 +1188,40 @@ public class FormEncounter extends wfForm {
             if (visible[i] != buttons[i].getVisible()) {
                 buttons[i].setVisible(visible[i]);
                 if (i == INT) {
-                    picContinuous.setVisible(visible[i]);
+                    pictureContinuous.setVisible(visible[i]);
                 }
             }
         }
-        if (picContinuous.getVisible()) {
-            picContinuous.setImage(ilContinuous.getImages()[contImg = (contImg + 1) % 2]);
+        if (pictureContinuous.getVisible()) {
+            pictureContinuous.setImage(ilContinuous.getImages()[contImg = (contImg + 1) % 2]);
         }
     }
 
     private void UpdateShipInfo() {
-        lblYouShip.setText(cmdrship.Name());
-        lblOpponentShip.setText(opponent.Name());
+        labelYouShip.setText(commandership.Name());
+        labelOpponentShip.setText(opponent.Name());
         UpdateShipStats();
     }
 
     private void UpdateShipStats() {
-        lblYouHull.setText(cmdrship.HullText());
-        lblYouShields.setText(cmdrship.ShieldText());
-        lblOpponentHull.setText(opponent.HullText());
-        lblOpponentShields.setText(opponent.ShieldText());
-        picShipYou.Refresh();
-        picShipOpponent.Refresh();
+        labelYouHull.setText(commandership.HullText());
+        labelYouShields.setText(commandership.ShieldText());
+        labelOpponentHull.setText(opponent.HullText());
+        labelOpponentShields.setText(opponent.ShieldText());
+        pictureShipYou.Refresh();
+        pictureShipOpponent.Refresh();
     }
 
     private void UpdateTribbles() {
         PictureBox[] tribbles = new PictureBox[]{
-                picTribbles00, picTribbles01, picTribbles02, picTribbles03, picTribbles04, picTribbles05,
-                picTribbles10, picTribbles11, picTribbles12, picTribbles13, picTribbles14, picTribbles15,
-                picTribbles20, picTribbles21, picTribbles22, picTribbles23, picTribbles24, picTribbles25,
-                picTribbles30, picTribbles31, picTribbles32, picTribbles33, picTribbles34, picTribbles35,
-                picTribbles40, picTribbles41, picTribbles42, picTribbles43, picTribbles44, picTribbles45,
-                picTribbles50, picTribbles51, picTribbles52, picTribbles53, picTribbles54, picTribbles55
+                pictureTribbles00, pictureTribbles01, pictureTribbles02, pictureTribbles03, pictureTribbles04, pictureTribbles05,
+                pictureTribbles10, pictureTribbles11, pictureTribbles12, pictureTribbles13, pictureTribbles14, pictureTribbles15,
+                pictureTribbles20, pictureTribbles21, pictureTribbles22, pictureTribbles23, pictureTribbles24, pictureTribbles25,
+                pictureTribbles30, pictureTribbles31, pictureTribbles32, pictureTribbles33, pictureTribbles34, pictureTribbles35,
+                pictureTribbles40, pictureTribbles41, pictureTribbles42, pictureTribbles43, pictureTribbles44, pictureTribbles45,
+                pictureTribbles50, pictureTribbles51, pictureTribbles52, pictureTribbles53, pictureTribbles54, pictureTribbles55
         };
-        int toShow = Math.min(tribbles.length, (int) Math.sqrt(cmdrship.getTribbles() / Math.ceil(Constants.MaxTribbles / Math.pow(tribbles.length + 1, 2))));
+        int toShow = Math.min(tribbles.length, (int) Math.sqrt(commandership.getTribbles() / Math.ceil(Constants.MaxTribbles / Math.pow(tribbles.length + 1, 2))));
         for (int i = 0; i < toShow; i++) {
             int index = Functions.GetRandom(tribbles.length);
             while (tribbles[index].getVisible()) {
@@ -1232,64 +1232,64 @@ public class FormEncounter extends wfForm {
         }
     }
 
-    private void buttonAttack_Click(Object sender, EventArgs e) {
+    private void buttonAttack_Click(Object sender, EventData e) {
         DisableAuto();
         if (game.EncounterVerifyAttack(this)) {
             ExecuteAction();
         }
     }
 
-    private void buttonBoard_Click(Object sender, EventArgs e) {
+    private void buttonBoard_Click(Object sender, EventData e) {
         if (game.EncounterVerifyBoard(this)) {
             Exit(EncounterResult.Normal);
         }
     }
 
-    private void buttonBribe_Click(Object sender, EventArgs e) {
+    private void buttonBribe_Click(Object sender, EventData e) {
         if (game.EncounterVerifyBribe(this)) {
             Exit(EncounterResult.Normal);
         }
     }
 
-    private void buttonDrink_Click(Object sender, EventArgs e) {
+    private void buttonDrink_Click(Object sender, EventData e) {
         game.EncounterDrink(this);
         Exit(EncounterResult.Normal);
     }
 
-    private void buttonFlee_Click(Object sender, EventArgs e) {
+    private void buttonFlee_Click(Object sender, EventData e) {
         DisableAuto();
         if (game.EncounterVerifyFlee(this)) {
             ExecuteAction();
         }
     }
 
-    private void buttonIgnore_Click(Object sender, EventArgs e) {
+    private void buttonIgnore_Click(Object sender, EventData e) {
         DisableAuto();
         Exit(EncounterResult.Normal);
     }
 
-    private void buttonInt_Click(Object sender, EventArgs e) {
+    private void buttonInt_Click(Object sender, EventData e) {
         DisableAuto();
     }
 
-    private void buttonMeet_Click(Object sender, EventArgs e) {
+    private void buttonMeet_Click(Object sender, EventData e) {
         game.EncounterMeet(this);
         Exit(EncounterResult.Normal);
     }
 
-    private void buttonPlunder_Click(Object sender, EventArgs e) {
+    private void buttonPlunder_Click(Object sender, EventData e) {
         DisableAuto();
         game.EncounterPlunder(this);
         Exit(EncounterResult.Normal);
     }
 
-    private void buttonSubmit_Click(Object sender, EventArgs e) {
+    private void buttonSubmit_Click(Object sender, EventData e) {
         if (game.EncounterVerifySubmit(this)) {
-            Exit(cmdrship.IllegalSpecialCargo() ? EncounterResult.Arrested : EncounterResult.Normal);
+            Exit(commandership.IllegalSpecialCargo() ? EncounterResult.Arrested : EncounterResult.Normal);
         }
     }
 
-    private void buttonSurrender_Click(Object sender, EventArgs e) {
+    private void buttonSurrender_Click(Object sender, EventData e) {
         DisableAuto();
         _result = game.EncounterVerifySurrender(this);
         if (_result != EncounterResult.Continue) {
@@ -1297,31 +1297,31 @@ public class FormEncounter extends wfForm {
         }
     }
 
-    private void buttonTrade_Click(Object sender, EventArgs e) {
+    private void buttonTrade_Click(Object sender, EventData e) {
         game.EncounterTrade(this);
         Exit(EncounterResult.Normal);
     }
 
-    private void buttonYield_Click(Object sender, EventArgs e) {
+    private void buttonYield_Click(Object sender, EventData e) {
         _result = game.EncounterVerifyYield(this);
         if (_result != EncounterResult.Continue) {
             Close();
         }
     }
 
-    private void picShipOpponent_Paint(Object sender, PaintEventArgs e) {
-        Functions.PaintShipImage(opponent, e.Graphics, picShipOpponent.getBackColor());
+    private void pictureShipOpponent_Paint(Object sender, PaintEventData e) {
+        Functions.PaintShipImage(opponent, e.Graphics, pictureShipOpponent.getBackColor());
     }
 
-    private void picShipYou_Paint(Object sender, PaintEventArgs e) {
-        Functions.PaintShipImage(cmdrship, e.Graphics, picShipYou.getBackColor());
+    private void pictureShipYou_Paint(Object sender, PaintEventData e) {
+        Functions.PaintShipImage(commandership, e.Graphics, pictureShipYou.getBackColor());
     }
 
-    private void picTribbles_Click(Object sender, EventArgs e) {
+    private void pictureTribbles_Click(Object sender, EventData e) {
         FormAlert.Alert(AlertType.TribblesSqueek, this);
     }
 
-    private void tmrTick_Tick(Object sender, EventArgs e) {
+    private void timerTick_Tick(Object sender, EventData e) {
         DisableAuto();
         ExecuteAction();
     }

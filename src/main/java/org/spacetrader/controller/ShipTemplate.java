@@ -5,7 +5,7 @@ import org.spacetrader.model.ship.ShipType;
 import org.spacetrader.util.Hashtable;
 import org.winforms.wfImage;
 
-
+// TODO part of the model
 public class ShipTemplate extends SerializableObject implements Comparable<ShipTemplate> {
     private wfImage[] _images = null;
     private ShipSize _size = ShipSize.Tiny;
@@ -36,7 +36,7 @@ public class ShipTemplate extends SerializableObject implements Comparable<ShipT
     public ShipTemplate(ShipSize s, String t) {
         _size = s;
         _name = t;
-        _images = Game.CurrentGame().getParentWindow().CustomShipImages();
+        _images = Game.getCurrentGame().getParentWindow().CustomShipImages();
     }
 
     public ShipTemplate(ShipSpec s, String t) {
@@ -51,7 +51,7 @@ public class ShipTemplate extends SerializableObject implements Comparable<ShipT
         _fuelTanks = s.FuelTanks();
         _hullStrength = s.HullStrength();
         if (_imageIndex == Constants.ShipImgUseDefault) {
-            _images = Game.CurrentGame().getParentWindow().CustomShipImages();
+            _images = Game.getCurrentGame().getParentWindow().CustomShipImages();
         }
     }
 

@@ -10,8 +10,9 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.net.URL;
 
-
+// TODO documentation of usage
 public class wfBitmap extends wfImage implements Icon, Serializable {
+
     private static final long serialVersionUID = 2134761799614301086L;
     final URL imageUrl;
     transient BufferedImage image;
@@ -19,7 +20,7 @@ public class wfBitmap extends wfImage implements Icon, Serializable {
     Color transparent = null;
 
     public wfBitmap(wfImage source) {
-        image = ((wfBitmap) source).image;
+        image = ((wfBitmap) source).image;  // TODO casts necessary?
         imageUrl = ((wfBitmap) source).imageUrl;
     }
 

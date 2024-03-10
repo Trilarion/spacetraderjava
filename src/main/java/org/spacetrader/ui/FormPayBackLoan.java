@@ -3,7 +3,6 @@ package org.spacetrader.ui;
 import org.spacetrader.controller.Commander;
 import org.spacetrader.controller.Functions;
 import org.spacetrader.controller.Game;
-import org.spacetrader.controller.Strings;
 import org.winforms.Button;
 import org.winforms.Label;
 import org.winforms.*;
@@ -19,21 +18,21 @@ public class FormPayBackLoan extends wfForm {
     private NumericUpDown numAmount;
 
     public FormPayBackLoan() {
-        Label lblQuestion = new Label();
+        Label labelQuestion = new Label();
         numAmount = new NumericUpDown();
         Button buttonOk = new Button();
         Button buttonMax = new Button();
         Button buttonNothing = new Button();
-        Label lblStatement = new Label();
-        ((ISupportInitialize) (numAmount)).BeginInit();
+        Label labelStatement = new Label();
+        ((ISupportInitialize) (numAmount)).beginInit();
         SuspendLayout();
-        // lblQuestion
-        lblQuestion.setAutoSize(true);
-        lblQuestion.setLocation(new Point(8, 24));
-        lblQuestion.setName("lblQuestion");
-        lblQuestion.setSize(new FormSize(188, 13));
-        lblQuestion.setTabIndex(3);
-        lblQuestion.setText("How much do you want to pay back?");
+        // labelQuestion
+        labelQuestion.setAutoSize(true);
+        labelQuestion.setLocation(new Point(8, 24));
+        labelQuestion.setName("labelQuestion");
+        labelQuestion.setSize(new FormSize(188, 13));
+        labelQuestion.setTabIndex(3);
+        labelQuestion.setText("How much do you want to pay back?");
         // numAmount
         numAmount.setLocation(new Point(196, 22));
         numAmount.setMaximum(999999);
@@ -61,7 +60,7 @@ public class FormPayBackLoan extends wfForm {
         buttonMax.setText("Max");
         buttonMax.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonMax_Click();
             }
         });
@@ -73,32 +72,32 @@ public class FormPayBackLoan extends wfForm {
         buttonNothing.setSize(new FormSize(53, 22));
         buttonNothing.setTabIndex(4);
         buttonNothing.setText("Nothing");
-        // lblStatement
-        lblStatement.setLocation(new Point(8, 8));
-        lblStatement.setName("lblStatement");
-        lblStatement.setSize(new FormSize(176, 13));
-        lblStatement.setTabIndex(5);
-        lblStatement.setText("You have a debt of 88,888 credits.");
+        // labelStatement
+        labelStatement.setLocation(new Point(8, 8));
+        labelStatement.setName("labelStatement");
+        labelStatement.setSize(new FormSize(176, 13));
+        labelStatement.setTabIndex(5);
+        labelStatement.setText("You have a debt of 88,888 credits.");
         // FormPayBackLoan
         setAcceptButton(buttonOk);
         setAutoScaleBaseSize(new FormSize(5, 13));
         setCancelButton(buttonNothing);
         setClientSize(new FormSize(264, 79));
         setControlBox(false);
-        Controls.addAll(lblStatement, buttonNothing, buttonMax, buttonOk, numAmount, lblQuestion);
+        Controls.addAll(labelStatement, buttonNothing, buttonMax, buttonOk, numAmount, labelQuestion);
         setFormBorderStyle(FormBorderStyle.FixedDialog);
         setName("FormPayBackLoan");
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Pay Back Loan");
-        ((ISupportInitialize) (numAmount)).EndInit();
+        ((ISupportInitialize) (numAmount)).endInit();
         ResumeLayout(false);
-        Game game = Game.CurrentGame();
-        Commander cmdr = game.Commander();
-        int max = Math.min(cmdr.getDebt(), cmdr.getCash());
+        Game game = Game.getCurrentGame();
+        Commander commander = game.Commander();
+        int max = Math.min(commander.getDebt(), commander.getCash());
         numAmount.setMaximum(max);
         numAmount.setValue(numAmount.getMinimum());
-        lblStatement.setText(Functions.StringVars("You have a debt of ^1.", Functions.Multiples(cmdr.getDebt(), Strings.MoneyUnit)));
+        labelStatement.setText(Functions.StringVars("You have a debt of ^1.", Functions.Multiples(commander.getDebt(), Strings.MoneyUnit)));
     }
 
 

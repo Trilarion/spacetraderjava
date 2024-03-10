@@ -12,8 +12,8 @@ public enum SystemPressure implements SpaceTraderEnum {
     Employment("lacking enough workers");//= 7
     public final String name;
 
-    SystemPressure(String s) {
-        name = s;
+    SystemPressure(String name) {
+        this.name = name;
     }
 
     public static SystemPressure FromInt(int i) {

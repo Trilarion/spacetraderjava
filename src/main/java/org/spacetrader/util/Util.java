@@ -1,7 +1,9 @@
 package org.spacetrader.util;
 
 
+// TODO document and maybe merge with others
 public class Util {
+
     public static <T> boolean ArrayContains(T[] array, T item) {
         for (T t : array) {
             if (t == item) {

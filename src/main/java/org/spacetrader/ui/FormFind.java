@@ -14,23 +14,23 @@ import java.awt.*;
 public class FormFind extends wfForm {
     private static String text = "";
     private static boolean boxChecked = false;
-    private CheckBox chkTrack;
+    private CheckBox checkBoxTrack;
     private TextBox txtSystem;
 
     public FormFind() {
-        Label lblText = new Label();
+        Label labelText = new Label();
         Button buttonOk = new Button();
         Button buttonCancel = new Button();
         txtSystem = new TextBox();
-        chkTrack = new CheckBox();
+        checkBoxTrack = new CheckBox();
         SuspendLayout();
-        // lblText
-        lblText.setAutoSize(true);
-        lblText.setLocation(new Point(8, 8));
-        lblText.setName("lblText");
-        lblText.setSize(new FormSize(177, 13));
-        lblText.setTabIndex(3);
-        lblText.setText("Which system are you looking for?");
+        // labelText
+        labelText.setAutoSize(true);
+        labelText.setLocation(new Point(8, 8));
+        labelText.setName("labelText");
+        labelText.setSize(new FormSize(177, 13));
+        labelText.setTabIndex(3);
+        labelText.setText("Which system are you looking for?");
         // buttonOk
         buttonOk.setDialogResult(DialogResult.OK);
         buttonOk.setFlatStyle(FlatStyle.Flat);
@@ -53,19 +53,19 @@ public class FormFind extends wfForm {
         txtSystem.setSize(new FormSize(168, 20));
         txtSystem.setTabIndex(1);
         txtSystem.setText("");
-        // chkTrack
-        chkTrack.setLocation(new Point(8, 48));
-        chkTrack.setName("chkTrack");
-        chkTrack.setSize(new FormSize(112, 16));
-        chkTrack.setTabIndex(2);
-        chkTrack.setText("Track this system");
+        // checkBoxTrack
+        checkBoxTrack.setLocation(new Point(8, 48));
+        checkBoxTrack.setName("checkBoxTrack");
+        checkBoxTrack.setSize(new FormSize(112, 16));
+        checkBoxTrack.setTabIndex(2);
+        checkBoxTrack.setText("Track this system");
         // FormFind
         setAcceptButton(buttonOk);
         setAutoScaleBaseSize(new FormSize(5, 13));
         setCancelButton(buttonCancel);
         setClientSize(new FormSize(184, 97));
         setControlBox(false);
-        Controls.addAll(chkTrack, txtSystem, buttonCancel, buttonOk, lblText);
+        Controls.addAll(checkBoxTrack, txtSystem, buttonCancel, buttonOk, labelText);
         setFormBorderStyle(FormBorderStyle.FixedDialog);
         setName("FormFind");
         setShowInTaskbar(false);
@@ -73,19 +73,19 @@ public class FormFind extends wfForm {
         setText("Find System");
         Closed = new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 FormFind_Closed(sender, e);
             }
         };
         ResumeLayout(false);
         txtSystem.setText(text);
-        chkTrack.setChecked(boxChecked);
+        checkBoxTrack.setChecked(boxChecked);
     }
 
 
-    private void FormFind_Closed(Object sender, EventArgs e) {
+    private void FormFind_Closed(Object sender, EventData e) {
         text = txtSystem.getText();
-        boxChecked = chkTrack.isChecked();
+        boxChecked = checkBoxTrack.isChecked();
     }
 
     public String SystemName() {
@@ -93,6 +93,6 @@ public class FormFind extends wfForm {
     }
 
     public boolean TrackSystem() {
-        return chkTrack.isChecked();
+        return checkBoxTrack.isChecked();
     }
 }

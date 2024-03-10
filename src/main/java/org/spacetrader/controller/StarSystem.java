@@ -1,15 +1,18 @@
 package org.spacetrader.controller;
 
 import org.spacetrader.controller.enums.*;
+import org.spacetrader.model.TechLevel;
 import org.spacetrader.model.cargo.TradeItem;
 import org.spacetrader.model.cargo.TradeItemType;
 import org.spacetrader.model.events.SpecialEventType;
 import org.spacetrader.model.ship.ShipSize;
+import org.spacetrader.ui.Strings;
 import org.spacetrader.util.Hashtable;
 
 import java.util.ArrayList;
 
 
+// TODO part of the model?
 public class StarSystem extends SerializableObject {
     private PoliticalSystemType _politicalSystemType;
     private ShipyardId _shipyardId = ShipyardId.NA;
@@ -64,7 +67,7 @@ public class StarSystem extends SerializableObject {
                         * (Functions.GetRandom(9, 14) - Math.abs(Constants.TradeItems[i].TechTopProduction().ordinal() - this.TechLevel().ordinal()));
                 // Because of the enormous profits possible, there shouldn't be too many robots or narcotics available.
                 if (i >= TradeItemType.Narcotics.CastToInt()) {
-                    _tradeItems[i] = ((_tradeItems[i] * (5 - Game.CurrentGame().Difficulty().CastToInt())) / (6 - Game.CurrentGame().Difficulty().CastToInt())) + 1;
+                    _tradeItems[i] = ((_tradeItems[i] * (5 - Game.getCurrentGame().Difficulty().CastToInt())) / (6 - Game.getCurrentGame().Difficulty().CastToInt())) + 1;
                 }
                 if (this.SpecialResource() == Constants.TradeItems[i].ResourceLowPrice()) {
                     _tradeItems[i] = _tradeItems[i] * 4 / 3;
@@ -113,7 +116,7 @@ public class StarSystem extends SerializableObject {
     }
 
     public boolean ShowSpecialButton() {
-        Game game = Game.CurrentGame();
+        Game game = Game.getCurrentGame();
         boolean show = false;
         switch (SpecialEventType()) {
             case Artifact:
@@ -253,12 +256,12 @@ public class StarSystem extends SerializableObject {
     }
 
     public boolean DestOk() {
-        Commander comm = Game.CurrentGame().Commander();
+        Commander comm = Game.getCurrentGame().Commander();
         return this != comm.CurrentSystem() && (Distance() <= comm.getShip().getFuel() || Functions.WormholeExists(comm.CurrentSystem(), this));
     }
 
     public int Distance() {
-        return Functions.Distance(this, Game.CurrentGame().Commander().CurrentSystem());
+        return Functions.Distance(this, Game.getCurrentGame().Commander().CurrentSystem());
     }
 
     public StarSystemId Id() {
@@ -266,11 +269,11 @@ public class StarSystem extends SerializableObject {
     }
 
     public CrewMember[] MercenariesForHire() {
-        Commander cmdr = Game.CurrentGame().Commander();
-        CrewMember[] mercs = Game.CurrentGame().Mercenaries();
+        Commander commander = Game.getCurrentGame().Commander();
+        CrewMember[] mercs = Game.getCurrentGame().Mercenaries();
         ArrayList<CrewMember> forHire = new ArrayList<>(3);
         for (int i = 1; i < mercs.length; i++) {
-            if (mercs[i].CurrentSystem() == cmdr.CurrentSystem() && !cmdr.getShip().HasCrew(mercs[i].Id())) {
+            if (mercs[i].CurrentSystem() == commander.CurrentSystem() && !commander.getShip().HasCrew(mercs[i].Id())) {
                 forHire.add(mercs[i]);
             }
         }

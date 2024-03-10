@@ -1,4 +1,4 @@
-package org.winforms;
+package org.winforms.enums;
 
 
 public enum PictureBoxSizeMode {

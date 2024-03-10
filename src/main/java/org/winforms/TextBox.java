@@ -4,13 +4,13 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-
+// TODO documentation of usage
 public class TextBox extends wfControl {
     public TextBox() {
         super(new JTextField());
     }
 
-    public void setTextChanged(final EventHandler<Object, EventArgs> valueChanged) {
+    public void setTextChanged(final EventHandler<Object, EventData> valueChanged) {
         asJTextField().getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void changedUpdate(DocumentEvent e) {
@@ -37,6 +37,6 @@ public class TextBox extends wfControl {
     }
 
     public JTextField asJTextField() {
-        return (JTextField) swingVersion;
+        return (JTextField) swingComponent;
     }
 }

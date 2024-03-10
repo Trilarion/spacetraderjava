@@ -5,10 +5,10 @@ import org.winforms.enums.StatusBarPanelAutoSize;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
+// TODO documentation of usage
 public class StatusBar extends wfControl {
     public StatusBar Panels = this;
-    public EventHandler<Object, StatusBarPanelClickEventArgs> PanelClick;
+    public EventHandler<Object, StatusBarPanelClickEventData> PanelClick;
     public boolean ShowPanels;
     public boolean SizingGrip;
 
@@ -28,7 +28,7 @@ public class StatusBar extends wfControl {
     }
 
     private JStatusBar asJStatusBar() {
-        return (JStatusBar) swingVersion;
+        return (JStatusBar) swingComponent;
     }
 
 
@@ -43,7 +43,7 @@ public class StatusBar extends wfControl {
         @Override
         public void mouseClicked(MouseEvent e) {
             if (PanelClick != null) {
-                PanelClick.handle(source, new StatusBarPanelClickEventArgs(source));
+                PanelClick.handle(source, new StatusBarPanelClickEventData(source));
             }
         }
     }

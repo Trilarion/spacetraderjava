@@ -17,29 +17,29 @@ public class FormCargoBuy extends wfForm {
     private NumericUpDown numAmount;
 
     public FormCargoBuy(int item, int maxAmount, CargoBuyOp op) {
-        Label lblQuestion = new Label();
-        Label lblStatement = new Label();
+        Label labelQuestion = new Label();
+        Label labelStatement = new Label();
         numAmount = new NumericUpDown();
         Button buttonOk = new Button();
         Button buttonAll = new Button();
         Button buttonNone = new Button();
-        Label lblAvailable = new Label();
-        Label lblAfford = new Label();
-        ((ISupportInitialize) (numAmount)).BeginInit();
+        Label labelAvailable = new Label();
+        Label labelAfford = new Label();
+        ((ISupportInitialize) (numAmount)).beginInit();
         SuspendLayout();
-        // lblQuestion
-        lblQuestion.setAutoSize(true);
-        lblQuestion.setLocation(new Point(8, 24));
-        lblQuestion.setName("lblQuestion");
-        lblQuestion.setSize(new FormSize(161, 16));
-        lblQuestion.setTabIndex(1);
-        lblQuestion.setText("How many do you want to buy?");
-        // lblStatement
-        lblStatement.setLocation(new Point(8, 8));
-        lblStatement.setName("lblStatement");
-        lblStatement.setSize(new FormSize(326, 13));
-        lblStatement.setTabIndex(3);
-        lblStatement.setText("The trader wants to sell Machines for the price of 8,888 cr. each.");
+        // labelQuestion
+        labelQuestion.setAutoSize(true);
+        labelQuestion.setLocation(new Point(8, 24));
+        labelQuestion.setName("labelQuestion");
+        labelQuestion.setSize(new FormSize(161, 16));
+        labelQuestion.setTabIndex(1);
+        labelQuestion.setText("How many do you want to buy?");
+        // labelStatement
+        labelStatement.setLocation(new Point(8, 8));
+        labelStatement.setName("labelStatement");
+        labelStatement.setSize(new FormSize(326, 13));
+        labelStatement.setTabIndex(3);
+        labelStatement.setText("The trader wants to sell Machines for the price of 8,888 cr. each.");
         // numAmount
         numAmount.setLocation(new Point(168, 22));
         numAmount.setMaximum(999);
@@ -66,7 +66,7 @@ public class FormCargoBuy extends wfForm {
         buttonAll.setText("All");
         buttonAll.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 buttonAll_Click(sender, e);
             }
         });
@@ -78,20 +78,20 @@ public class FormCargoBuy extends wfForm {
         buttonNone.setSize(new FormSize(41, 22));
         buttonNone.setTabIndex(4);
         buttonNone.setText("None");
-        // lblAvailable
-        lblAvailable.setLocation(new Point(8, 21));
-        lblAvailable.setName("lblAvailable");
-        lblAvailable.setSize(new FormSize(163, 13));
-        lblAvailable.setTabIndex(5);
-        lblAvailable.setText("The trader has 88 units for sale.");
-        lblAvailable.setVisible(false);
-        // lblAfford
-        lblAfford.setLocation(new Point(8, 34));
-        lblAfford.setName("lblAfford");
-        lblAfford.setSize(new FormSize(157, 13));
-        lblAfford.setTabIndex(6);
-        lblAfford.setText("You can afford to buy 88 units.");
-        lblAfford.setVisible(false);
+        // labelAvailable
+        labelAvailable.setLocation(new Point(8, 21));
+        labelAvailable.setName("labelAvailable");
+        labelAvailable.setSize(new FormSize(163, 13));
+        labelAvailable.setTabIndex(5);
+        labelAvailable.setText("The trader has 88 units for sale.");
+        labelAvailable.setVisible(false);
+        // labelAfford
+        labelAfford.setLocation(new Point(8, 34));
+        labelAfford.setName("labelAfford");
+        labelAfford.setSize(new FormSize(157, 13));
+        labelAfford.setTabIndex(6);
+        labelAfford.setText("You can afford to buy 88 units.");
+        labelAfford.setVisible(false);
         // FormCargoBuy
         setAcceptButton(buttonOk);
         setAutoScaleBaseSize(new FormSize(5, 13));
@@ -102,53 +102,53 @@ public class FormCargoBuy extends wfForm {
         Controls.add(buttonAll);
         Controls.add(buttonOk);
         Controls.add(numAmount);
-        Controls.add(lblQuestion);
-        Controls.add(lblStatement);
-        Controls.add(lblAfford);
-        Controls.add(lblAvailable);
+        Controls.add(labelQuestion);
+        Controls.add(labelStatement);
+        Controls.add(labelAfford);
+        Controls.add(labelAvailable);
         setFormBorderStyle(FormBorderStyle.FixedDialog);
         setName("FormCargoBuy");
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Buy Xxxxxxxxxx");
-        ((ISupportInitialize) (numAmount)).EndInit();
+        ((ISupportInitialize) (numAmount)).endInit();
         ResumeLayout(false);
         numAmount.setMaximum(maxAmount);
         numAmount.setValue(numAmount.getMinimum());
         setText(Functions.StringVars(Strings.CargoTitle, Strings.CargoBuyOps[op.id], Constants.TradeItems[item].Name()));
-        lblQuestion.setText(Functions.StringVars("How many do you want to ^1?", Strings.CargoBuyOps[op.id].toLowerCase()));
-        Game game = Game.CurrentGame();
-        Commander cmdr = game.Commander();
+        labelQuestion.setText(Functions.StringVars("How many do you want to ^1?", Strings.CargoBuyOps[op.id].toLowerCase()));
+        Game game = Game.getCurrentGame();
+        Commander commander = game.Commander();
         switch (op) {
             case BuySystem:
-                lblStatement.setText(Functions.StringVars("At ^1 each, you can buy up to ^2.", Functions.FormatMoney(game.PriceCargoBuy()[item]), Functions.FormatNumber(maxAmount)));
+                labelStatement.setText(Functions.StringVars("At ^1 each, you can buy up to ^2.", Functions.FormatMoney(game.PriceCargoBuy()[item]), Functions.FormatNumber(maxAmount)));
                 setHeight(buttonOk.getTop() + buttonOk.getHeight() + 34);
                 break;
             case BuyTrader:
-                int afford = Math.min(cmdr.getCash() / game.PriceCargoBuy()[item], cmdr.getShip().FreeCargoBays());
+                int afford = Math.min(commander.getCash() / game.PriceCargoBuy()[item], commander.getShip().FreeCargoBays());
                 if (afford < maxAmount) {
                     numAmount.setMaximum(afford);
                 }
-                lblStatement.setText(Functions.StringVars("The trader wants to sell ^1 for the price of ^2 each.", Constants.TradeItems[item].Name(), Functions.FormatMoney(game.PriceCargoBuy()[item])));
-                lblAvailable.setText(Functions.StringVars("The trader has ^1 for sale.", Functions.Multiples(game.getOpponent().Cargo()[item], Strings.CargoUnit)));
-                lblAfford.setText(Functions.StringVars("You can afford to buy ^1.", Functions.Multiples(afford, Strings.CargoUnit)));
-                lblAvailable.setVisible(true);
-                lblAfford.setVisible(true);
+                labelStatement.setText(Functions.StringVars("The trader wants to sell ^1 for the price of ^2 each.", Constants.TradeItems[item].Name(), Functions.FormatMoney(game.PriceCargoBuy()[item])));
+                labelAvailable.setText(Functions.StringVars("The trader has ^1 for sale.", Functions.Multiples(game.getOpponent().Cargo()[item], Strings.CargoUnit)));
+                labelAfford.setText(Functions.StringVars("You can afford to buy ^1.", Functions.Multiples(afford, Strings.CargoUnit)));
+                labelAvailable.setVisible(true);
+                labelAfford.setVisible(true);
                 buttonOk.setTop(buttonOk.getTop() + 26);
                 buttonAll.setTop(buttonAll.getTop() + 26);
                 buttonNone.setTop(buttonNone.getTop() + 26);
-                lblQuestion.setTop(lblQuestion.getTop() + 26);
+                labelQuestion.setTop(labelQuestion.getTop() + 26);
                 numAmount.setTop(numAmount.getTop() + 26);
                 break;
             case InPlunder:
-                lblStatement.setText(Functions.StringVars("Your victim has ^1 of these goods.", Functions.FormatNumber(game.getOpponent().Cargo()[item])));
+                labelStatement.setText(Functions.StringVars("Your victim has ^1 of these goods.", Functions.FormatNumber(game.getOpponent().Cargo()[item])));
                 setHeight(buttonOk.getTop() + buttonOk.getHeight() + 34);
                 break;
         }
     }
 
 
-    private void buttonAll_Click(Object sender, EventArgs e) {
+    private void buttonAll_Click(Object sender, EventData e) {
         numAmount.setValue(numAmount.getMaximum());
     }
 

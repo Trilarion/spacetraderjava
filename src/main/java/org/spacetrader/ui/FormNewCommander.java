@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class FormNewCommander extends wfForm {
     private Button buttonOk;
     private ComboBox selDifficulty;
-    private Label lblPoints;
+    private Label labelPoints;
     private NumericUpDown numFighter;
     private NumericUpDown numTrader;
     private NumericUpDown numEngineer;
@@ -21,35 +21,35 @@ public class FormNewCommander extends wfForm {
     private TextBox txtName;
 
     public FormNewCommander() {
-        Label lblName = new Label();
+        Label labelName = new Label();
         txtName = new TextBox();
         Button buttonClose = new Button();
-        Label lblDifficulty = new Label();
-        Label lblSkillPoints = new Label();
-        Label lblPilot = new Label();
-        Label lblFighter = new Label();
-        Label lblTrader = new Label();
-        Label lblEngineer = new Label();
+        Label labelDifficulty = new Label();
+        Label labelSkillPoints = new Label();
+        Label labelPilot = new Label();
+        Label labelFighter = new Label();
+        Label labelTrader = new Label();
+        Label labelEngineer = new Label();
         selDifficulty = new ComboBox();
         numPilot = new NumericUpDown();
         numFighter = new NumericUpDown();
         numTrader = new NumericUpDown();
         numEngineer = new NumericUpDown();
         buttonOk = new Button();
-        Label lblPointsRemaining = new Label();
-        lblPoints = new Label();
-        ((ISupportInitialize) (numPilot)).BeginInit();
-        ((ISupportInitialize) (numFighter)).BeginInit();
-        ((ISupportInitialize) (numTrader)).BeginInit();
-        ((ISupportInitialize) (numEngineer)).BeginInit();
+        Label labelPointsRemaining = new Label();
+        labelPoints = new Label();
+        ((ISupportInitialize) (numPilot)).beginInit();
+        ((ISupportInitialize) (numFighter)).beginInit();
+        ((ISupportInitialize) (numTrader)).beginInit();
+        ((ISupportInitialize) (numEngineer)).beginInit();
         SuspendLayout();
-        // lblName
-        lblName.setAutoSize(true);
-        lblName.setLocation(new Point(8, 8));
-        lblName.setName("lblName");
-        lblName.setSize(new FormSize(38, 13));
-        lblName.setTabIndex(0);
-        lblName.setText("Name:");
+        // labelName
+        labelName.setAutoSize(true);
+        labelName.setLocation(new Point(8, 8));
+        labelName.setName("labelName");
+        labelName.setSize(new FormSize(38, 13));
+        labelName.setTabIndex(0);
+        labelName.setText("Name:");
         // txtName
         txtName.setLocation(new Point(72, 5));
         txtName.setName("txtName");
@@ -58,7 +58,7 @@ public class FormNewCommander extends wfForm {
         txtName.setText("");
         txtName.setTextChanged(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 txtName_TextChanged(sender, e);
             }
         });
@@ -70,48 +70,48 @@ public class FormNewCommander extends wfForm {
         buttonClose.setTabIndex(33);
         buttonClose.setTabStop(false);
         buttonClose.setText("X");
-        // lblDifficulty
-        lblDifficulty.setAutoSize(true);
-        lblDifficulty.setLocation(new Point(8, 40));
-        lblDifficulty.setName("lblDifficulty");
-        lblDifficulty.setSize(new FormSize(50, 13));
-        lblDifficulty.setTabIndex(34);
-        lblDifficulty.setText("Difficulty:");
-        // lblSkillPoints
-        lblSkillPoints.setAutoSize(true);
-        lblSkillPoints.setLocation(new Point(8, 72));
-        lblSkillPoints.setName("lblSkillPoints");
-        lblSkillPoints.setSize(new FormSize(63, 13));
-        lblSkillPoints.setTabIndex(35);
-        lblSkillPoints.setText("Skill Points:");
-        // lblPilot
-        lblPilot.setAutoSize(true);
-        lblPilot.setLocation(new Point(16, 96));
-        lblPilot.setName("lblPilot");
-        lblPilot.setSize(new FormSize(29, 13));
-        lblPilot.setTabIndex(36);
-        lblPilot.setText("Pilot:");
-        // lblFighter
-        lblFighter.setAutoSize(true);
-        lblFighter.setLocation(new Point(16, 120));
-        lblFighter.setName("lblFighter");
-        lblFighter.setSize(new FormSize(43, 13));
-        lblFighter.setTabIndex(37);
-        lblFighter.setText("Fighter:");
-        // lblTrader
-        lblTrader.setAutoSize(true);
-        lblTrader.setLocation(new Point(16, 144));
-        lblTrader.setName("lblTrader");
-        lblTrader.setSize(new FormSize(41, 13));
-        lblTrader.setTabIndex(38);
-        lblTrader.setText("Trader:");
-        // lblEngineer
-        lblEngineer.setAutoSize(true);
-        lblEngineer.setLocation(new Point(16, 168));
-        lblEngineer.setName("lblEngineer");
-        lblEngineer.setSize(new FormSize(53, 13));
-        lblEngineer.setTabIndex(39);
-        lblEngineer.setText("Engineer:");
+        // labelDifficulty
+        labelDifficulty.setAutoSize(true);
+        labelDifficulty.setLocation(new Point(8, 40));
+        labelDifficulty.setName("labelDifficulty");
+        labelDifficulty.setSize(new FormSize(50, 13));
+        labelDifficulty.setTabIndex(34);
+        labelDifficulty.setText("Difficulty:");
+        // labelSkillPoints
+        labelSkillPoints.setAutoSize(true);
+        labelSkillPoints.setLocation(new Point(8, 72));
+        labelSkillPoints.setName("labelSkillPoints");
+        labelSkillPoints.setSize(new FormSize(63, 13));
+        labelSkillPoints.setTabIndex(35);
+        labelSkillPoints.setText("Skill Points:");
+        // labelPilot
+        labelPilot.setAutoSize(true);
+        labelPilot.setLocation(new Point(16, 96));
+        labelPilot.setName("labelPilot");
+        labelPilot.setSize(new FormSize(29, 13));
+        labelPilot.setTabIndex(36);
+        labelPilot.setText("Pilot:");
+        // labelFighter
+        labelFighter.setAutoSize(true);
+        labelFighter.setLocation(new Point(16, 120));
+        labelFighter.setName("labelFighter");
+        labelFighter.setSize(new FormSize(43, 13));
+        labelFighter.setTabIndex(37);
+        labelFighter.setText("Fighter:");
+        // labelTrader
+        labelTrader.setAutoSize(true);
+        labelTrader.setLocation(new Point(16, 144));
+        labelTrader.setName("labelTrader");
+        labelTrader.setSize(new FormSize(41, 13));
+        labelTrader.setTabIndex(38);
+        labelTrader.setText("Trader:");
+        // labelEngineer
+        labelEngineer.setAutoSize(true);
+        labelEngineer.setLocation(new Point(16, 168));
+        labelEngineer.setName("labelEngineer");
+        labelEngineer.setSize(new FormSize(53, 13));
+        labelEngineer.setTabIndex(39);
+        labelEngineer.setText("Engineer:");
         // selDifficulty
         selDifficulty.DropDownStyle = ComboBoxStyle.DropDownList;
         selDifficulty.Items.AddRange("Beginner", "Easy", "Normal", "Hard", "Impossible");
@@ -130,19 +130,19 @@ public class FormNewCommander extends wfForm {
         numPilot.setValue(1);
         numPilot.setEnter(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueEnter(sender, e);
             }
         });
         numPilot.setValueChanged(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueChanged(sender, e);
             }
         });
         numPilot.setLeave(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueChanged(sender, e);
             }
         });
@@ -157,19 +157,19 @@ public class FormNewCommander extends wfForm {
         numFighter.setValue(1);
         numFighter.setEnter(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueEnter(sender, e);
             }
         });
         numFighter.setValueChanged(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueChanged(sender, e);
             }
         });
         numFighter.setLeave(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueChanged(sender, e);
             }
         });
@@ -184,19 +184,19 @@ public class FormNewCommander extends wfForm {
         numTrader.setValue(1);
         numTrader.setEnter(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueEnter(sender, e);
             }
         });
         numTrader.setValueChanged(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueChanged(sender, e);
             }
         });
         numTrader.setLeave(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueChanged(sender, e);
             }
         });
@@ -211,19 +211,19 @@ public class FormNewCommander extends wfForm {
         numEngineer.setValue(1);
         numEngineer.setEnter(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueEnter(sender, e);
             }
         });
         numEngineer.setValueChanged(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueChanged(sender, e);
             }
         });
         numEngineer.setLeave(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventArgs e) {
+            public void handle(Object sender, EventData e) {
                 num_ValueChanged(sender, e);
             }
         });
@@ -237,28 +237,28 @@ public class FormNewCommander extends wfForm {
         buttonOk.setTabIndex(7);
         buttonOk.setText("Ok");
         buttonOk.setEnabled(false);
-        // lblPointsRemaining
-        lblPointsRemaining.setAutoSize(true);
-        lblPointsRemaining.setLocation(new Point(91, 72));
-        lblPointsRemaining.setName("lblPointsRemaining");
-        lblPointsRemaining.setSize(new FormSize(90, 13));
-        lblPointsRemaining.setTabIndex(40);
-        lblPointsRemaining.setText("points remaining.");
-        // lblPoints
-        lblPoints.setLocation(new Point(73, 72));
-        lblPoints.setName("lblPoints");
-        lblPoints.setSize(new FormSize(17, 13));
-        lblPoints.setTabIndex(41);
-        lblPoints.setText("16");
-        lblPoints.TextAlign = ContentAlignment.TopRight;
+        // labelPointsRemaining
+        labelPointsRemaining.setAutoSize(true);
+        labelPointsRemaining.setLocation(new Point(91, 72));
+        labelPointsRemaining.setName("labelPointsRemaining");
+        labelPointsRemaining.setSize(new FormSize(90, 13));
+        labelPointsRemaining.setTabIndex(40);
+        labelPointsRemaining.setText("points remaining.");
+        // labelPoints
+        labelPoints.setLocation(new Point(73, 72));
+        labelPoints.setName("labelPoints");
+        labelPoints.setSize(new FormSize(17, 13));
+        labelPoints.setTabIndex(41);
+        labelPoints.setText("16");
+        labelPoints.TextAlign = ContentAlignment.TopRight;
         // FormNewCommander
         setAcceptButton(buttonOk);
         setAutoScaleBaseSize(new FormSize(5, 13));
         setCancelButton(buttonClose);
         setClientSize(new FormSize(202, 231));
         Controls.addAll(Arrays.asList(
-                lblPoints, lblPointsRemaining, lblEngineer, lblTrader, lblFighter, lblPilot, lblSkillPoints, lblDifficulty,
-                lblName, buttonOk, numEngineer, numTrader, numFighter, numPilot, selDifficulty, buttonClose, txtName));
+                labelPoints, labelPointsRemaining, labelEngineer, labelTrader, labelFighter, labelPilot, labelSkillPoints, labelDifficulty,
+                labelName, buttonOk, numEngineer, numTrader, numFighter, numPilot, selDifficulty, buttonClose, txtName));
         setFormBorderStyle(FormBorderStyle.FixedDialog);
         setMaximizeBox(false);
         setMinimizeBox(false);
@@ -266,22 +266,22 @@ public class FormNewCommander extends wfForm {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("New Commander");
-        ((ISupportInitialize) (numPilot)).EndInit();
-        ((ISupportInitialize) (numFighter)).EndInit();
-        ((ISupportInitialize) (numTrader)).EndInit();
-        ((ISupportInitialize) (numEngineer)).EndInit();
+        ((ISupportInitialize) (numPilot)).endInit();
+        ((ISupportInitialize) (numFighter)).endInit();
+        ((ISupportInitialize) (numTrader)).endInit();
+        ((ISupportInitialize) (numEngineer)).endInit();
         ResumeLayout(false);
         selDifficulty.setSelectedIndex(2);
     }
 
 
     private void UpdateOkEnabled() {
-        buttonOk.setEnabled(lblPoints.getText().equals("0") && !txtName.getText().isEmpty());
+        buttonOk.setEnabled(labelPoints.getText().equals("0") && !txtName.getText().isEmpty());
     }
 
-    private void num_ValueChanged(Object sender, EventArgs e) {
+    private void num_ValueChanged(Object sender, EventData e) {
         int points = 20 - (Pilot() + Fighter() + Trader() + Engineer());
-        lblPoints.setText("" + points);
+        labelPoints.setText("" + points);
         numPilot.setMaximum(Math.min(10, Pilot() + points));
         numFighter.setMaximum(Math.min(10, Fighter() + points));
         numTrader.setMaximum(Math.min(10, Trader() + points));
@@ -289,11 +289,11 @@ public class FormNewCommander extends wfForm {
         UpdateOkEnabled();
     }
 
-    private void num_ValueEnter(Object sender, EventArgs e) {
+    private void num_ValueEnter(Object sender, EventData e) {
         ((NumericUpDown) sender).Select(0, ("" + ((NumericUpDown) sender).getValue()).length());
     }
 
-    private void txtName_TextChanged(Object sender, EventArgs e) {
+    private void txtName_TextChanged(Object sender, EventData e) {
         UpdateOkEnabled();
     }
 

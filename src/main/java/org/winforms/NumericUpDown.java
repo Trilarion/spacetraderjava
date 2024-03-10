@@ -9,7 +9,7 @@ import javax.swing.text.JTextComponent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
-
+// TODO control in name, better name?
 public class NumericUpDown extends wfControl {
     private final SpinnerNumberModel model = new SpinnerNumberModel();
     public HorizontalAlignment TextAlign;
@@ -40,7 +40,7 @@ public class NumericUpDown extends wfControl {
         //TODO Auto-generated method stub
     }
 
-    public void setValueChanged(final EventHandler<Object, EventArgs> valueChanged) {
+    public void setValueChanged(final EventHandler<Object, EventData> valueChanged) {
         asJSpinner().addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -50,7 +50,7 @@ public class NumericUpDown extends wfControl {
     }
 
     private JSpinner asJSpinner() {
-        return (JSpinner) swingVersion;
+        return (JSpinner) swingComponent;
     }
 
     public int getMaximum() {
@@ -81,7 +81,7 @@ public class NumericUpDown extends wfControl {
         asJSpinner().setEnabled(!b);
     }
 
-    public void setLeave(EventHandler<Object, EventArgs> leave) {
+    public void setLeave(EventHandler<Object, EventData> leave) {
     }
 
     public int getValue() {

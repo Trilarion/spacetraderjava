@@ -1,4 +1,4 @@
-package org.spacetrader.controller.enums;
+package org.spacetrader.model;
 
 
 public enum TechLevel {
@@ -13,16 +13,17 @@ public enum TechLevel {
     t7(7, "T7", "High Tech"), // = 7, high-tech
     t8(8, "T8", "Unavailable"),// = 8 unavailable
     xt(9, "XT", "Post-Technology");
-    public final String abbr;
+
+    public final String abbreviation;
     public final String name;
     public final int id;
-    public final int tl;
+    public final int value;
 
-    TechLevel(int i, String s, String t) {
-        tl = i;
-        abbr = s;
-        name = t;
-        id = ordinal();
+    TechLevel(int value, String abbreviation, String name) {
+        this.value = value;
+        this.abbreviation = abbreviation;
+        this.name = name;
+        this.id = ordinal();
     }
 
     public static TechLevel FromInt(int i) {
