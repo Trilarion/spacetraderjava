@@ -1,9 +1,9 @@
 package org.spacetrader.model.ship.equipment;
 
-import org.spacetrader.controller.enums.SpaceTraderEnum;
+import org.spacetrader.model.enums.IdentifiableEnum;
 
 
-public enum EquipmentType implements SpaceTraderEnum {
+public enum EquipmentType implements IdentifiableEnum {
     Weapon,
     Shield,
     Gadget;
@@ -13,7 +13,7 @@ public enum EquipmentType implements SpaceTraderEnum {
     }
 
     @Override
-    public int CastToInt() {
+    public int getId() {
         return ordinal();
     }
 }

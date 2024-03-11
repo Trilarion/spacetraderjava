@@ -7,7 +7,7 @@ import java.awt.*;
 
 
 /**
- * A public dialog form to display details of currentrently-available mercenaries, quests, and shipyards.
+ * A public dialog form to display details of currently-available mercenaries, quests, and shipyards.
  *
  * @author Gregory
  */

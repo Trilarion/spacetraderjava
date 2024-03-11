@@ -1,9 +1,10 @@
 package org.spacetrader.model.events;
 
-import org.spacetrader.controller.enums.SpaceTraderEnum;
+import org.spacetrader.model.enums.IdentifiableEnum;
 
 
-public enum SpecialEventType implements SpaceTraderEnum {
+public enum SpecialEventType implements IdentifiableEnum {
+
     //public static final String[] SpecialEventTitles = new String[]{
 //  "Alien Artifact", "Artifact Delivery", "Cargo For Sale", "Dragonfly", "Dragonfly Destroyed", "Weird Ship", "Lightning Ship",
 //  "Lightning Shield", "Strange Ship", "Erase Record", "Dangerous Experiment", "Experiment Failed", "Disaster Averted",
@@ -72,7 +73,7 @@ public enum SpecialEventType implements SpaceTraderEnum {
     }
 
     @Override
-    public int CastToInt() {
+    public int getId() {
         return ordinal() - 1;
     }
 }

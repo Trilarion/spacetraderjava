@@ -1,63 +1,64 @@
 package org.spacetrader.model.ship.equipment;
 
-import org.spacetrader.model.TechLevel;
+import org.spacetrader.model.enums.TechLevel;
 import org.spacetrader.util.Log;
 
 import java.util.Hashtable;
 
 
 public class Weapon extends Equipment {
+
     private static final String[] ss = {
             "_type", "_power", "_disabling"
     };
-    private final WeaponType _type;
-    private final boolean _disabling;
-    private final int _power;
+    private final WeaponType type;
+    private final boolean disabling;
+    private final int power;
 
     public Weapon(Hashtable ht) {
         super(ht);
-        _type = WeaponType.fromId(GetValueFromHash(ht, ss[0], Integer.class));
-        _power = GetValueFromHash(ht, ss[1], Integer.class);
-        _disabling = GetValueFromHash(ht, ss[2], false);
+        type = WeaponType.fromId(GetValueFromHash(ht, ss[0], Integer.class));
+        power = GetValueFromHash(ht, ss[1], Integer.class);
+        disabling = GetValueFromHash(ht, ss[2], false);
     }
 
-    public Weapon(WeaponType w, int power, boolean disabling, int price, TechLevel t, int chance) {
-        super(EquipmentType.Weapon, price, t, chance);
-        _type = w;
-        _power = power;
-        _disabling = disabling;
+    public Weapon(WeaponType weaponType, int power, boolean disabling, int price, TechLevel techLevel, int chance) {
+        super(EquipmentType.Weapon, price, techLevel, chance);
+        type = weaponType;
+        this.power = power;
+        this.disabling = disabling;
     }
 
     @Override
     public Equipment Clone() {
-        return new Weapon(_type, _power, _disabling, _price, _minTech, _chance);
+        return new Weapon(type, power, disabling, price, minTech, chance);
     }
 
     @Override
     public EquipmentSubType SubType() {
         //TODO: Is this supposed to be irrelevant? GAC
-        return _type;
+        return type;
     }
 
     @Override
     public Hashtable Serialize() {
         Hashtable hash = super.Serialize();
-        hash.put(ss[0], _type.id);
-        hash.put(ss[1], _power);
-        hash.put(ss[2], _disabling);
+        hash.put(ss[0], type.id);
+        hash.put(ss[1], power);
+        hash.put(ss[2], disabling);
         return hash;
     }
 
     @Override
     public String Name() {
-        return _type.name;
+        return type.name;
     }
 
     @Override
     public boolean TypeEquals(Object type) {
         boolean equal = false;
         try {
-            if (_type == type) {
+            if (this.type == type) {
                 equal = true;
             }
         } catch (Exception e) {
@@ -67,14 +68,14 @@ public class Weapon extends Equipment {
     }
 
     public WeaponType Type() {
-        return _type;
+        return type;
     }
 
     public boolean Disabling() {
-        return _disabling;
+        return disabling;
     }
 
     public int Power() {
-        return _power;
+        return power;
     }
 }

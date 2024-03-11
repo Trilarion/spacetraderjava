@@ -1,13 +1,19 @@
 package org.spacetrader.controller;
 
-import org.spacetrader.controller.enums.*;
-import org.spacetrader.model.CrewMemberId;
-import org.spacetrader.model.TechLevel;
+import org.spacetrader.model.PoliceRecord;
+import org.spacetrader.model.PoliticalSystem;
+import org.spacetrader.model.Reputation;
+import org.spacetrader.model.enums.CrewMemberId;
+import org.spacetrader.model.enums.TechLevel;
 import org.spacetrader.model.cargo.TradeItem;
 import org.spacetrader.model.cargo.TradeItemType;
+import org.spacetrader.model.enums.*;
+import org.spacetrader.model.events.SpecialEvent;
 import org.spacetrader.model.events.SpecialEventType;
 import org.spacetrader.model.ship.ShipSize;
+import org.spacetrader.model.ship.ShipSpec;
 import org.spacetrader.model.ship.ShipType;
+import org.spacetrader.model.ship.Shipyard;
 import org.spacetrader.model.ship.equipment.*;
 import org.spacetrader.util.Environment;
 import org.spacetrader.util.Path;

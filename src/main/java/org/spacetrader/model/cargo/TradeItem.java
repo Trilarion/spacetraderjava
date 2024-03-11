@@ -1,47 +1,48 @@
 package org.spacetrader.model.cargo;
 
-import org.spacetrader.controller.StarSystem;
-import org.spacetrader.controller.enums.SpecialResource;
-import org.spacetrader.controller.enums.SystemPressure;
-import org.spacetrader.model.TechLevel;
+import org.spacetrader.model.system.StarSystem;
+import org.spacetrader.model.enums.SpecialResource;
+import org.spacetrader.model.enums.SystemPressure;
+import org.spacetrader.model.enums.TechLevel;
 
 
 public class TradeItem implements Comparable<TradeItem> {
-    private final SpecialResource _resourceLowPrice; // When this resource is available, this trade item is cheap
-    private final SpecialResource _resourceHighPrice;// When this resource is available, this trade item is expensive
-    private final SystemPressure _pressurePriceHike; // Price increases considerably when this event occurrents
-    private final TechLevel _techProduction;         // Tech level needed for production
-    private final TechLevel _techUsage;              // Tech level needed to use
-    private final TechLevel _techTopProduction;      // Tech level which produces this item the most
-    private final TradeItemType _type;
-    private final int _pictureeLowTech;   // Medium price at lowest tech level
-    private final int _priceInc;      // Price increase per tech level
-    private final int _priceVariance; // Max percentage above or below calculated price
-    private final int _minTradePrice; // Minimum price to buy/sell in orbit
-    private final int _maxTradePrice; // Minimum price to buy/sell in orbit
-    private final int _roundOff;      // Roundoff price for trade in orbit
+
+    private final SpecialResource resourceLowPrice; // When this resource is available, this trade item is cheap
+    private final SpecialResource resourceHighPrice;// When this resource is available, this trade item is expensive
+    private final SystemPressure pressurePriceHike; // Price increases considerably when this event occurs
+    private final TechLevel techProduction;         // Tech level needed for production
+    private final TechLevel techUsage;              // Tech level needed to use
+    private final TechLevel techTopProduction;      // Tech level which produces this item the most
+    private final TradeItemType type;
+    private final int pictureLowTech;   // Medium price at lowest tech level
+    private final int priceIncrease;      // Price increase per tech level
+    private final int priceVariance; // Max percentage above or below calculated price
+    private final int minTradePrice; // Minimum price to buy/sell in orbit
+    private final int maxTradePrice; // Minimum price to buy/sell in orbit
+    private final int roundOff;      // Roundoff price for trade in orbit
 
     public TradeItem(TradeItemType type, TechLevel techProduction, TechLevel techUsage, TechLevel techTopProduction, int pictureeLowTech,
                      int priceInc, int priceVariance, SystemPressure pressurePriceHike, SpecialResource resourceLowPrice,
                      SpecialResource resourceHighPrice, int minTradePrice, int maxTradePrice, int roundOff) {
-        _type = type;
-        _techProduction = techProduction;
-        _techUsage = techUsage;
-        _techTopProduction = techTopProduction;
-        _pictureeLowTech = pictureeLowTech;
-        _priceInc = priceInc;
-        _priceVariance = priceVariance;
-        _pressurePriceHike = pressurePriceHike;
-        _resourceLowPrice = resourceLowPrice;
-        _resourceHighPrice = resourceHighPrice;
-        _minTradePrice = minTradePrice;
-        _maxTradePrice = maxTradePrice;
-        _roundOff = roundOff;
+        this.type = type;
+        this.techProduction = techProduction;
+        this.techUsage = techUsage;
+        this.techTopProduction = techTopProduction;
+        this.pictureLowTech = pictureeLowTech;
+        priceIncrease = priceInc;
+        this.priceVariance = priceVariance;
+        this.pressurePriceHike = pressurePriceHike;
+        this.resourceLowPrice = resourceLowPrice;
+        this.resourceHighPrice = resourceHighPrice;
+        this.minTradePrice = minTradePrice;
+        this.maxTradePrice = maxTradePrice;
+        this.roundOff = roundOff;
     }
 
     @Override
-    public int compareTo(TradeItem ti) {
-        return CompareTo(ti);
+    public int compareTo(TradeItem tradeItem) {
+        return this.CompareTo(tradeItem);
     }
 
     public int CompareTo(Object value) {
@@ -49,94 +50,94 @@ public class TradeItem implements Comparable<TradeItem> {
         if (value == null) {
             compared = 1;
         } else {
-            compared = ((Integer) _pictureeLowTech).compareTo(((TradeItem) value)._pictureeLowTech);
+            compared = ((Integer) pictureLowTech).compareTo(((TradeItem) value).pictureLowTech);
             if (compared == 0) {
-                compared = -((Integer) _priceInc).compareTo(((TradeItem) value)._priceInc);
+                compared = -((Integer) priceIncrease).compareTo(((TradeItem) value).priceIncrease);
             }
         }
         return compared;
     }
 
-    public int StandardPrice(StarSystem target) {
+    public int getStandardPrice(StarSystem target) {
         int price = 0;
         if (target.ItemUsed(this)) {
             // Determine base price on techlevel of system
-            price = _pictureeLowTech + target.TechLevel().ordinal() * _priceInc;
+            price = pictureLowTech + target.TechLevel().ordinal() * priceIncrease;
             // If a good is highly requested, increase the price
-            if (target.PoliticalSystem().Wanted() == _type) {
+            if (target.PoliticalSystem().Wanted() == type) {
                 price = price * 4 / 3;
             }
             // High trader activity decreases prices
-            price = price * (100 - 2 * target.PoliticalSystem().ActivityTraders().CastToInt()) / 100;
+            price = price * (100 - 2 * target.PoliticalSystem().ActivityTraders().getId()) / 100;
             // Large system = high production decreases prices
-            price = price * (100 - target.Size().CastToInt()) / 100;
+            price = price * (100 - target.Size().getId()) / 100;
             // Special resources price adaptation
-            if (target.SpecialResource() == _resourceLowPrice) {
+            if (target.SpecialResource() == resourceLowPrice) {
                 price = price * 3 / 4;
-            } else if (target.SpecialResource() == _resourceHighPrice) {
+            } else if (target.SpecialResource() == resourceHighPrice) {
                 price = price * 4 / 3;
             }
         }
         return price;
     }
 
-    public boolean Illegal() {
-        return _type == TradeItemType.Firearms || _type == TradeItemType.Narcotics;
+    public boolean isIllegal() {
+        return type == TradeItemType.Firearms || type == TradeItemType.Narcotics;
     }
 
     public int MaxTradePrice() {
-        return _maxTradePrice;
+        return maxTradePrice;
     }
 
     public int MinTradePrice() {
-        return _minTradePrice;
+        return minTradePrice;
     }
 
     public String Name() {
-        return _type.name;
+        return type.name;
     }
 
     public SystemPressure PressurePriceHike() {
-        return _pressurePriceHike;
+        return pressurePriceHike;
     }
 
     public int PriceInc() {
-        return _priceInc;
+        return priceIncrease;
     }
 
     public int PriceLowTech() {
-        return _pictureeLowTech;
+        return pictureLowTech;
     }
 
     public int PriceVariance() {
-        return _priceVariance;
+        return priceVariance;
     }
 
     public SpecialResource ResourceHighPrice() {
-        return _resourceHighPrice;
+        return resourceHighPrice;
     }
 
     public SpecialResource ResourceLowPrice() {
-        return _resourceLowPrice;
+        return resourceLowPrice;
     }
 
     public int RoundOff() {
-        return _roundOff;
+        return roundOff;
     }
 
     public TechLevel TechProduction() {
-        return _techProduction;
+        return techProduction;
     }
 
     public TechLevel TechTopProduction() {
-        return _techTopProduction;
+        return techTopProduction;
     }
 
     public TechLevel TechUsage() {
-        return _techUsage;
+        return techUsage;
     }
 
     public TradeItemType Type() {
-        return _type;
+        return type;
     }
 }

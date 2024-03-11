@@ -1,8 +1,11 @@
 package org.spacetrader.ui;
 
 import org.spacetrader.controller.*;
-import org.spacetrader.controller.enums.AlertType;
-import org.spacetrader.model.CrewMemberId;
+import org.spacetrader.model.crew.Commander;
+import org.spacetrader.model.crew.CrewMember;
+import org.spacetrader.model.enums.AlertType;
+import org.spacetrader.model.enums.CrewMemberId;
+import org.spacetrader.model.ship.Ship;
 import org.winforms.Button;
 import org.winforms.Font;
 import org.winforms.Label;
@@ -336,7 +339,7 @@ public class FormViewPersonnel extends wfForm {
         if (selectedCrewMember != null && buttonHireFire.getVisible()) {
             if (ship.HasCrew(selectedCrewMember.Id())) {
                 if (FormAlert.Alert(AlertType.CrewFireMercenary, this, selectedCrewMember.Name()) == DialogResult.Yes) {
-                    ship.Fire(selectedCrewMember.Id());
+                    ship.handleFire(selectedCrewMember.Id());
                     UpdateAll();
                     game.getParentWindow().UpdateAll();
                 }

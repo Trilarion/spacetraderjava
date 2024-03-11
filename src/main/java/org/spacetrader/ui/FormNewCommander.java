@@ -1,6 +1,6 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.model.Difficulty;
+import org.spacetrader.model.enums.Difficulty;
 import org.winforms.Button;
 import org.winforms.Label;
 import org.winforms.*;

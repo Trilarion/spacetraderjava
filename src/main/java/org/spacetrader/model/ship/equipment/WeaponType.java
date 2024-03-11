@@ -1,10 +1,10 @@
 package org.spacetrader.model.ship.equipment;
 
-import org.spacetrader.controller.enums.SpaceTraderEnum;
-import org.spacetrader.model.TechLevel;
+import org.spacetrader.model.enums.IdentifiableEnum;
+import org.spacetrader.model.enums.TechLevel;
 
 
-public enum WeaponType implements SpaceTraderEnum, EquipmentSubType {
+public enum WeaponType implements IdentifiableEnum, EquipmentSubType {
 
     PulseLaser(TechLevel.t5, false, 50, 15, 2000, "PL", "Pulse Laser"),
     BeamLaser(TechLevel.t6, false, 35, 25, 12500, "BL", "Beam Laser"),
@@ -38,7 +38,7 @@ public enum WeaponType implements SpaceTraderEnum, EquipmentSubType {
     }
 
     @Override
-    public int CastToInt() {
+    public int getId() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

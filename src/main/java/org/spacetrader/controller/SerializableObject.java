@@ -1,9 +1,11 @@
 package org.spacetrader.controller;
 
-import org.spacetrader.controller.enums.SpaceTraderEnum;
+import org.spacetrader.model.crew.CrewMember;
+import org.spacetrader.model.enums.IdentifiableEnum;
 import org.spacetrader.model.ship.equipment.Gadget;
 import org.spacetrader.model.ship.equipment.Shield;
 import org.spacetrader.model.ship.equipment.Weapon;
+import org.spacetrader.model.system.StarSystem;
 import org.spacetrader.util.DWIM;
 
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ abstract public class SerializableObject {
     }
 
     /**
-     * Types currentrently supported:<ul>
+     * Types currently supported:<ul>
      * <li>CrewMember</li>
      * <li>Gadget</li>
      * <li>HighScoreRecord</li>
@@ -92,7 +94,7 @@ abstract public class SerializableObject {
         return array;
     }
 
-    public static Integer[] ArrayListToIntArray(ArrayList<? extends SpaceTraderEnum> list) {
+    public static Integer[] ArrayListToIntArray(ArrayList<? extends IdentifiableEnum> list) {
         Integer[] array = new Integer[list.size()];
         if (list.isEmpty()) {
             return array;
@@ -104,7 +106,7 @@ abstract public class SerializableObject {
             }
         }
         for (int index = 0; index < array.length; index++) {
-            array[index] = list.get(index).CastToInt();
+            array[index] = list.get(index).getId();
         }
         return array;
     }
@@ -126,8 +128,8 @@ abstract public class SerializableObject {
             return null;
         }
         Object object = hash.get(key);
-        if (object instanceof SpaceTraderEnum) {
-            return (U) (Integer) ((SpaceTraderEnum) object).CastToInt();
+        if (object instanceof IdentifiableEnum) {
+            return (U) (Integer) ((IdentifiableEnum) object).getId();
         } else {
             return (U) object;
         }
@@ -143,23 +145,23 @@ abstract public class SerializableObject {
         if (!hash.containsKey(key)) {
             return defaultValue;
         }
-        if (SpaceTraderEnum.class.isAssignableFrom(requstedType)) {
-            return (U) DWIM.dwim(hash.get(key), (Class<? extends SpaceTraderEnum>) requstedType);
+        if (IdentifiableEnum.class.isAssignableFrom(requstedType)) {
+            return (U) DWIM.dwim(hash.get(key), (Class<? extends IdentifiableEnum>) requstedType);
         } else {
             return (U) hash.get(key);
         }
     }
 
-    public static int GetValueFromHash(Hashtable hash, String key, SpaceTraderEnum defaultValue, Class<Integer> requstedType) {
+    public static int GetValueFromHash(Hashtable hash, String key, IdentifiableEnum defaultValue, Class<Integer> requstedType) {
         //TODO many of calls to this method then cast it back to the enum type; fix them to call generic form.
         if (!hash.containsKey(key)) {
-            return defaultValue.CastToInt();
+            return defaultValue.getId();
         }
         Object saved = hash.get(key);
         if (saved instanceof Integer) {
             return (Integer) saved;
         } else { //Assume its the enum
-            return ((SpaceTraderEnum) saved).CastToInt();
+            return ((IdentifiableEnum) saved).getId();
         }
     }
 

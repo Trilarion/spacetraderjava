@@ -1,8 +1,8 @@
 package org.spacetrader.ui;
 
 import org.spacetrader.controller.Constants;
-import org.spacetrader.controller.SpecialEvent;
-import org.spacetrader.controller.enums.AlertType;
+import org.spacetrader.model.events.SpecialEvent;
+import org.spacetrader.model.enums.AlertType;
 import org.spacetrader.model.events.SpecialEventType;
 import org.winforms.Button;
 import org.winforms.Label;
@@ -178,7 +178,7 @@ public class FormTest extends wfForm {
     }
 
     private void buttonTestSpecialEvent_Click() {
-        SpecialEvent se = Constants.SpecialEvents[((SpecialEventType) selSpecialEvent.getSelectedItem()).CastToInt()];
+        SpecialEvent se = Constants.SpecialEvents[((SpecialEventType) selSpecialEvent.getSelectedItem()).getId()];
         String button1, button2;
         DialogResult res1, res2;
         if (se.MessageOnly()) {

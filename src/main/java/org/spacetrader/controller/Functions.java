@@ -1,7 +1,9 @@
 package org.spacetrader.controller;
 
-import org.spacetrader.controller.enums.AlertType;
-import org.spacetrader.model.Difficulty;
+import org.spacetrader.model.enums.AlertType;
+import org.spacetrader.model.enums.Difficulty;
+import org.spacetrader.model.ship.Ship;
+import org.spacetrader.model.system.StarSystem;
 import org.spacetrader.ui.FormAlert;
 import org.spacetrader.ui.Strings;
 import org.spacetrader.util.*;
@@ -149,8 +151,8 @@ public class Functions {
     }
 
     public static void PaintShipImage(Ship ship, Graphics graphics, Color backgroundColor) {
-        int x = Constants.ShipImageOffsets[ship.Type().CastToInt()].X;
-        int width = Constants.ShipImageOffsets[ship.Type().CastToInt()].Width;
+        int x = Constants.ShipImageOffsets[ship.Type().getId()].X;
+        int width = Constants.ShipImageOffsets[ship.Type().getId()].Width;
         int startDamage = x + width - ship.getHull() * width / ship.HullStrength();
         int startShield = x + width + 2 - (ship.ShieldStrength() > 0 ? ship.ShieldCharge() * (width + 4) / ship.ShieldStrength() : 0);
         graphics.clear(backgroundColor);
@@ -246,7 +248,7 @@ public class Functions {
     public static boolean WormholeExists(StarSystem a, StarSystem b) {
         StarSystem[] universe = Game.getCurrentGame().Universe();
         int[] wormholes = Game.getCurrentGame().Wormholes();
-        int i = Util.bruteSeek(wormholes, a.Id().CastToInt());
+        int i = Util.bruteSeek(wormholes, a.Id().getId());
         return (i >= 0 && (universe[wormholes[(i + 1) % wormholes.length]] == b));
     }
 

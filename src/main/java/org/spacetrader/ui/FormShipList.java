@@ -1,7 +1,11 @@
 package org.spacetrader.ui;
 
 import org.spacetrader.controller.*;
-import org.spacetrader.controller.enums.AlertType;
+import org.spacetrader.model.crew.Commander;
+import org.spacetrader.model.enums.AlertType;
+import org.spacetrader.model.events.SpecialEvent;
+import org.spacetrader.model.ship.Ship;
+import org.spacetrader.model.ship.ShipSpec;
 import org.winforms.Button;
 import org.winforms.Font;
 import org.winforms.Label;
@@ -741,7 +745,7 @@ public class FormShipList extends wfForm {
                 buttonBuy8,
                 buttonBuy9,};
         UpdateAll();
-        Info(ship.Type().CastToInt());
+        Info(ship.Type().getId());
         if (ship.getTribbles() > 0 && !game.getTribbleMessage()) {
             FormAlert.Alert(AlertType.TribblesTradeIn, this);
             game.setTribbleMessage(true);
@@ -764,7 +768,7 @@ public class FormShipList extends wfForm {
         ShipSpec spec = Constants.ShipSpecs[id];
         pictureShip.setImage(spec.Image());
         labelName.setText(spec.Name());
-        labelSize.setText(Strings.Sizes[spec.getSize().CastToInt()]);
+        labelSize.setText(Strings.Sizes[spec.getSize().getId()]);
         labelBays.setText(Functions.FormatNumber(spec.CargoBays()));
         labelRange.setText(Functions.Multiples(spec.FuelTanks(), Strings.DistanceUnit));
         labelHull.setText(Functions.FormatNumber(spec.HullStrength()));

@@ -1,9 +1,10 @@
 package org.spacetrader.model.events;
 
-import org.spacetrader.controller.enums.SpaceTraderEnum;
+import org.spacetrader.model.enums.IdentifiableEnum;
 
 
-public enum EncounterType implements SpaceTraderEnum {
+public enum EncounterType implements IdentifiableEnum {
+
     BottleGood, // = 0,
     BottleOld, // = 1,
     CaptainAhab, // = 2,
@@ -45,7 +46,7 @@ public enum EncounterType implements SpaceTraderEnum {
     }
 
     @Override
-    public int CastToInt() {
+    public int getId() {
         return ordinal();
     }
 }

@@ -1,6 +1,6 @@
 package org.spacetrader.controller;
 
-import org.spacetrader.controller.enums.GameEndType;
+import org.spacetrader.model.enums.GameEndType;
 
 
 // TODO document and describe usage

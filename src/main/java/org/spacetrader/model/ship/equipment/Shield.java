@@ -1,6 +1,6 @@
 package org.spacetrader.model.ship.equipment;
 
-import org.spacetrader.model.TechLevel;
+import org.spacetrader.model.enums.TechLevel;
 import org.spacetrader.ui.Strings;
 import org.spacetrader.util.Log;
 
@@ -8,28 +8,28 @@ import java.util.Hashtable;
 
 
 public class Shield extends Equipment {
-    private final ShieldType _type;
-    private final int _charge;
-    private final int _power;
+    private final ShieldType type;
+    private final int charge;
+    private final int power;
     private int Charge;
 
     public Shield(Hashtable hash) {
         super(hash);
-        _type = ShieldType.fromId(GetValueFromHash(hash, "_type", Integer.class));
-        _power = GetValueFromHash(hash, "_power", Integer.class);
-        _charge = GetValueFromHash(hash, "_charge", Integer.class);
+        type = ShieldType.fromId(GetValueFromHash(hash, "_type", Integer.class));
+        power = GetValueFromHash(hash, "_power", Integer.class);
+        charge = GetValueFromHash(hash, "_charge", Integer.class);
     }
 
     public Shield(ShieldType type, int power, int price, TechLevel minTechLevel, int chance) {
         super(EquipmentType.Shield, price, minTechLevel, chance);
-        _type = type;
-        _power = power;
-        _charge = _power;
+        this.type = type;
+        this.power = power;
+        charge = this.power;
     }
 
     @Override
     public Equipment Clone() {
-        Shield shield = new Shield(_type, _power, _price, _minTech, _chance);
+        Shield shield = new Shield(type, power, price, minTech, chance);
         shield.setCharge(Charge);
         return shield;
     }
@@ -42,15 +42,15 @@ public class Shield extends Equipment {
     @Override
     public Hashtable Serialize() {
         Hashtable hash = super.Serialize();
-        hash.put("_type", _type);
-        hash.put("_power", _power);
-        hash.put("_charge", _charge);
+        hash.put("_type", type);
+        hash.put("_power", power);
+        hash.put("_charge", charge);
         return hash;
     }
 
     @Override
     public String Name() {
-        return Strings.ShieldNames[_type.id];
+        return Strings.ShieldNames[type.id];
     }
 
     @Override
@@ -64,7 +64,7 @@ public class Shield extends Equipment {
     }
 
     public ShieldType Type() {
-        return _type;
+        return type;
     }
 
     public int getCharge() {
@@ -76,6 +76,6 @@ public class Shield extends Equipment {
     }
 
     public int Power() {
-        return _power;
+        return power;
     }
 }

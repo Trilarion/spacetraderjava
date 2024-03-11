@@ -1,7 +1,10 @@
 package org.spacetrader.ui;
 
 import org.spacetrader.controller.*;
-import org.spacetrader.controller.enums.ShipyardId;
+import org.spacetrader.model.crew.Commander;
+import org.spacetrader.model.crew.CrewMember;
+import org.spacetrader.model.enums.ShipyardId;
+import org.spacetrader.model.system.StarSystem;
 import org.spacetrader.util.Util;
 import org.winforms.Button;
 import org.winforms.Font;
@@ -438,8 +441,8 @@ public class FormMonster extends wfForm {
             Object valB = null;
             switch (SomeStringsForSwitch.valueOf(sortBy)) {
                 case I: // Id
-                    valA = A.Id().CastToInt();
-                    valB = B.Id().CastToInt();
+                    valA = A.Id().getId();
+                    valB = B.Id().getId();
                     break;
                 case N: // Name
                     valA = A.Name();
@@ -513,7 +516,7 @@ public class FormMonster extends wfForm {
         ArrayList<Integer> ids = new ArrayList<>();
         for (CrewMember merc : game.Mercenaries()) {
             if (!Util.arrayContains(Constants.SpecialCrewMemberIds, merc.Id())) {
-                ids.add(merc.Id().CastToInt());
+                ids.add(merc.Id().getId());
             }
         }
         mercIds = ids.toArray(new Integer[0]);
@@ -522,10 +525,10 @@ public class FormMonster extends wfForm {
         ArrayList<Integer> shipyards = new ArrayList<>();
         for (StarSystem system : game.Universe()) {
             if (system.ShowSpecialButton()) {
-                quests.add(system.Id().CastToInt());
+                quests.add(system.Id().getId());
             }
             if (system.ShipyardId() != ShipyardId.NA) {
-                shipyards.add(system.Id().CastToInt());
+                shipyards.add(system.Id().getId());
             }
         }
         questSystemIds = quests.toArray(new Integer[0]);
@@ -605,7 +608,7 @@ public class FormMonster extends wfForm {
         for (int i = 0; i < mercIds.length; i++) {
             CrewMember merc = game.Mercenaries()[mercIds[i]];
             boolean link = merc.CurrentSystem() != null && !commander.getShip().HasCrew(merc.Id());
-            labelMercIds.setText(labelMercIds.getText() + ((merc.Id().CastToInt()) + Strings.newline));
+            labelMercIds.setText(labelMercIds.getText() + ((merc.Id().getId()) + Strings.newline));
             labelMercNames.setText(labelMercNames.getText() + (merc.Name() + Strings.newline));
             labelMercSkillsPilot.setText(labelMercSkillsPilot.getText() + (merc.Pilot() + Strings.newline));
             labelMercSkillsFighter.setText(labelMercSkillsFighter.getText() + (merc.Fighter() + Strings.newline));

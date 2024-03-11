@@ -3,8 +3,8 @@ package org.spacetrader.ui;
 import org.spacetrader.controller.Constants;
 import org.spacetrader.controller.Functions;
 import org.spacetrader.controller.Game;
-import org.spacetrader.controller.SpecialEvent;
-import org.spacetrader.model.CrewMemberId;
+import org.spacetrader.model.events.SpecialEvent;
+import org.spacetrader.model.enums.CrewMemberId;
 import org.spacetrader.model.events.SpecialEventType;
 import org.spacetrader.util.Util;
 import org.winforms.Button;
@@ -138,12 +138,12 @@ public class FormViewQuests extends wfForm {
             case SpecialEvent.StatusPrincessRescued:
                 if (game.Commander().getShip().PrincessOnBoard()) {
                     if (game.getQuestStatusPrincess() == SpecialEvent.StatusPrincessImpatient) {
-                        quests.add(Functions.StringVars(Strings.QuestPrincessReturningImpatient, game.Mercenaries()[CrewMemberId.Princess.CastToInt()].Name()));
+                        quests.add(Functions.StringVars(Strings.QuestPrincessReturningImpatient, game.Mercenaries()[CrewMemberId.Princess.getId()].Name()));
                     } else {
-                        quests.add(Functions.StringVars(Strings.QuestPrincessReturning, game.Mercenaries()[CrewMemberId.Princess.CastToInt()].Name()));
+                        quests.add(Functions.StringVars(Strings.QuestPrincessReturning, game.Mercenaries()[CrewMemberId.Princess.getId()].Name()));
                     }
                 } else {
-                    quests.add(Functions.StringVars(Strings.QuestPrincessReturn, game.Mercenaries()[CrewMemberId.Princess.CastToInt()].Name()));
+                    quests.add(Functions.StringVars(Strings.QuestPrincessReturn, game.Mercenaries()[CrewMemberId.Princess.getId()].Name()));
                 }
                 break;
             case SpecialEvent.StatusPrincessReturned:
@@ -153,10 +153,10 @@ public class FormViewQuests extends wfForm {
         if (game.getQuestStatusScarab() == SpecialEvent.StatusScarabHunting) {
             quests.add(Strings.QuestScarabFind);
         } else if (game.getQuestStatusScarab() == SpecialEvent.StatusScarabDestroyed) {
-            if (Constants.SpecialEvents[SpecialEventType.ScarabUpgradeHull.CastToInt()].Location() == null) {
-                quests.add(Functions.StringVars(Strings.QuestScarabNotify, Constants.SpecialEvents[SpecialEventType.ScarabDestroyed.CastToInt()].Location().Name()));
+            if (Constants.SpecialEvents[SpecialEventType.ScarabUpgradeHull.getId()].Location() == null) {
+                quests.add(Functions.StringVars(Strings.QuestScarabNotify, Constants.SpecialEvents[SpecialEventType.ScarabDestroyed.getId()].Location().Name()));
             } else {
-                quests.add(Functions.StringVars(Strings.QuestScarabHull, Constants.SpecialEvents[SpecialEventType.ScarabUpgradeHull.CastToInt()].Location().Name()));
+                quests.add(Functions.StringVars(Strings.QuestScarabHull, Constants.SpecialEvents[SpecialEventType.ScarabUpgradeHull.getId()].Location().Name()));
             }
         }
         if (game.Commander().getShip().SculptureOnBoard()) {

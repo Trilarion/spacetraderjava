@@ -150,10 +150,10 @@ public class FormViewHighScores extends wfForm {
             labelName[2 - i].setText(highScores[i].Name());
             labelScore[2 - i].setText(Functions.FormatNumber(highScores[i].Score() / 10) + "." + highScores[i].Score() % 10);
             labelStatus[2 - i].setText(Functions.StringVars(Strings.HighScoreStatus, new String[]{
-                    Strings.GameCompletionTypes[highScores[i].Type().CastToInt()],
+                    Strings.GameCompletionTypes[highScores[i].Type().getId()],
                     Functions.Multiples(highScores[i].Days(), Strings.TimeUnit),
                     Functions.Multiples(highScores[i].Worth(), Strings.MoneyUnit),
-                    Strings.DifficultyLevels[highScores[i].Difficulty().CastToInt()].toLowerCase()
+                    Strings.DifficultyLevels[highScores[i].Difficulty().getId()].toLowerCase()
             }));
             labelScore[2 - i].setVisible(true);
             labelStatus[2 - i].setVisible(true);

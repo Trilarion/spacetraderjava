@@ -1,6 +1,6 @@
 package org.spacetrader.util;
 
-import org.spacetrader.controller.enums.SpaceTraderEnum;
+import org.spacetrader.model.enums.IdentifiableEnum;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
@@ -20,12 +20,12 @@ public class DWIM {
      * </code>
      */
 
-    public static <T extends SpaceTraderEnum> T dwim(Object ob, Class<T> cls) {
+    public static <T extends IdentifiableEnum> T dwim(Object ob, Class<T> cls) {
         int value;
         if (ob instanceof Integer) {
             value = (Integer) ob;
-        } else if (ob instanceof SpaceTraderEnum) {
-            value = ((SpaceTraderEnum) ob).CastToInt();
+        } else if (ob instanceof IdentifiableEnum) {
+            value = ((IdentifiableEnum) ob).getId();
         } else {
             throw new Error("Unknown value: type is " + ob.getClass() + " toString is " + ob);
         }
@@ -37,7 +37,7 @@ public class DWIM {
     }
 
 
-    public static <T extends SpaceTraderEnum> T[] dwim(Object[] ob, Class<T> cls) {
+    public static <T extends IdentifiableEnum> T[] dwim(Object[] ob, Class<T> cls) {
         try {
             T[] arrayVal = (T[]) Array.newInstance(cls, ob.length);
             for (int i = 0; i < ob.length; i++) {

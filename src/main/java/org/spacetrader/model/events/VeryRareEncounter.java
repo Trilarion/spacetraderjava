@@ -1,9 +1,10 @@
 package org.spacetrader.model.events;
 
-import org.spacetrader.controller.enums.SpaceTraderEnum;
+import org.spacetrader.model.enums.IdentifiableEnum;
 
 
-public enum VeryRareEncounter implements SpaceTraderEnum {
+public enum VeryRareEncounter implements IdentifiableEnum {
+
     MarieCeleste("Marie Celeste"), // = 0,
     CaptainAhab("Captain Ahab"), // = 1,
     CaptainConrad("Captain Conrad"), // = 2,
@@ -19,7 +20,7 @@ public enum VeryRareEncounter implements SpaceTraderEnum {
     }
 
     @Override
-    public int CastToInt() {
+    public int getId() {
         return ordinal();
     }
 }

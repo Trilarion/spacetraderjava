@@ -1,9 +1,9 @@
 package org.spacetrader.model.cargo;
 
-import org.spacetrader.controller.enums.SpaceTraderEnum;
+import org.spacetrader.model.enums.IdentifiableEnum;
 
 
-public enum TradeItemType implements SpaceTraderEnum {
+public enum TradeItemType implements IdentifiableEnum {
     NA(""),//					= -1,
     Water("Water"),//			= 0,
     Furs("Furs"),//				= 1,
@@ -22,7 +22,7 @@ public enum TradeItemType implements SpaceTraderEnum {
     }
 
     @Override
-    public int CastToInt() {
+    public int getId() {
         return ordinal() - 1;
     }
 }

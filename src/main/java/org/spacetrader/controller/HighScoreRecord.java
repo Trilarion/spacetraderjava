@@ -1,7 +1,7 @@
 package org.spacetrader.controller;
 
-import org.spacetrader.controller.enums.GameEndType;
-import org.spacetrader.model.Difficulty;
+import org.spacetrader.model.enums.GameEndType;
+import org.spacetrader.model.enums.Difficulty;
 
 import java.util.Hashtable;
 
@@ -65,10 +65,10 @@ public class HighScoreRecord extends SerializableObject implements Comparable<Hi
         Hashtable hash = super.Serialize();
         hash.put("_name", name);
         hash.put("_score", score);
-        hash.put("_type", gameEndType.CastToInt());
+        hash.put("_type", gameEndType.getId());
         hash.put("_days", days);
         hash.put("_worth", worth);
-        hash.put("_difficulty", difficulty.CastToInt());
+        hash.put("_difficulty", difficulty.getId());
         return hash;
     }
 

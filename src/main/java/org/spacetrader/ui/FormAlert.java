@@ -2,8 +2,8 @@ package org.spacetrader.ui;
 
 import org.spacetrader.controller.Functions;
 import org.spacetrader.controller.Game;
-import org.spacetrader.controller.enums.AlertType;
-import org.spacetrader.controller.enums.GameEndType;
+import org.spacetrader.model.enums.AlertType;
+import org.spacetrader.model.enums.GameEndType;
 import org.winforms.*;
 import org.winforms.enums.*;
 
@@ -238,7 +238,7 @@ public class FormAlert extends wfForm {
                         "Use Singularity", DialogResult.Yes, "Don't use it", DialogResult.No, ss)).ShowDialog(wp);
                 break;
             case ChartJumpCurrent:
-                dr = (new FormAlert("Cannot Jump", "You are tracking the system where you are currentrently located. It's useless to jump to your currentrent location.",
+                dr = (new FormAlert("Cannot Jump", "You are tracking the system where you are currently located. It's useless to jump to your current location.",
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case ChartJumpNoSystemSelected:
@@ -274,7 +274,7 @@ public class FormAlert extends wfForm {
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case DebtReminder:
-                dr = (new FormAlert("Loan Notification", "The Bank's Loan Officer reminds you that your debt continues to accrue interest. You currentrently owe ^1.",
+                dr = (new FormAlert("Loan Notification", "The Bank's Loan Officer reminds you that your debt continues to accrue interest. You currently owe ^1.",
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case DebtTooLargeGrounded:
@@ -387,7 +387,7 @@ public class FormAlert extends wfForm {
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case EncounterPiratesFindNoCargo:
-                dr = (new FormAlert("Pirates Find No Cargo", "The pirates are very angry that they find no cargo on your ship. To stop them from destroying you, you have no choice but to pay them an amount equal to 5% of your currentrent worth - ^1.",
+                dr = (new FormAlert("Pirates Find No Cargo", "The pirates are very angry that they find no cargo on your ship. To stop them from destroying you, you have no choice but to pay them an amount equal to 5% of your current worth - ^1.",
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case EncounterPiratesSurrenderPrincess:
@@ -535,7 +535,7 @@ public class FormAlert extends wfForm {
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case GameAbandonConfirm:
-                dr = (new FormAlert("Are You Sure?", "Are you sure you want to abandon your currentrent game?",
+                dr = (new FormAlert("Are You Sure?", "Are you sure you want to abandon your current game?",
                         "Yes", DialogResult.Yes, "No", DialogResult.No, ss)).ShowDialog(wp);
                 break;
             case GameClearHighScores:
@@ -543,10 +543,10 @@ public class FormAlert extends wfForm {
                         "Yes", DialogResult.Yes, "No", DialogResult.No, ss)).ShowDialog(wp);
                 break;
             case GameEndBoughtMoon:
-                (new FormAlert("You Have Retired", GameEndType.BoughtMoon.CastToInt())).ShowDialog(wp);
+                (new FormAlert("You Have Retired", GameEndType.BoughtMoon.getId())).ShowDialog(wp);
                 break;
             case GameEndBoughtMoonGirl:
-                (new FormAlert("You Have Retired with the Princess", GameEndType.BoughtMoonGirl.CastToInt())).ShowDialog(wp);
+                (new FormAlert("You Have Retired with the Princess", GameEndType.BoughtMoonGirl.getId())).ShowDialog(wp);
                 break;
             case GameEndHighScoreAchieved:
                 dr = (new FormAlert("Congratulations!", "You have made the high-score list!",
@@ -561,10 +561,10 @@ public class FormAlert extends wfForm {
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case GameEndKilled:
-                (new FormAlert("You Are Dead", GameEndType.Killed.CastToInt())).ShowDialog(wp);
+                (new FormAlert("You Are Dead", GameEndType.Killed.getId())).ShowDialog(wp);
                 break;
             case GameEndRetired:
-                (new FormAlert("You Have Retired", GameEndType.Retired.CastToInt())).ShowDialog(wp);
+                (new FormAlert("You Have Retired", GameEndType.Retired.getId())).ShowDialog(wp);
                 break;
             case GameEndScore:
                 dr = (new FormAlert("Score", "You achieved a score of ^1.^2%.",
@@ -719,7 +719,7 @@ public class FormAlert extends wfForm {
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case ShipBuyNotAvailable:
-                dr = (new FormAlert("Ship Not Available", "That type of ship is not available in the currentrent system.",
+                dr = (new FormAlert("Ship Not Available", "That type of ship is not available in the current system.",
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case ShipBuyNoTransfer:
@@ -767,7 +767,7 @@ public class FormAlert extends wfForm {
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case SpecialNoQuarters:
-                dr = (new FormAlert("No Free Quarters", "There are currentrently no free crew quarters on your ship.",
+                dr = (new FormAlert("No Free Quarters", "There are currently no free crew quarters on your ship.",
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case SpecialNotEnoughBays:
@@ -867,7 +867,7 @@ public class FormAlert extends wfForm {
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case TribblesTradeIn:
-                dr = (new FormAlert("You've Got Tribbles", "Hm. I see you got a tribble infestation on your currentrent ship. I'm sorry, but that severely reduces the trade-in price.",
+                dr = (new FormAlert("You've Got Tribbles", "Hm. I see you got a tribble infestation on your current ship. I'm sorry, but that severely reduces the trade-in price.",
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case WildArrested:

@@ -1,6 +1,6 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.Commander;
+import org.spacetrader.model.crew.Commander;
 import org.spacetrader.controller.Functions;
 import org.spacetrader.controller.Game;
 import org.winforms.Button;

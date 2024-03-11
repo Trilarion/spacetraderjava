@@ -1,8 +1,8 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.Commander;
+import org.spacetrader.model.crew.Commander;
 import org.spacetrader.controller.Game;
-import org.spacetrader.controller.Ship;
+import org.spacetrader.model.ship.Ship;
 import org.winforms.Button;
 import org.winforms.Container;
 import org.winforms.Label;

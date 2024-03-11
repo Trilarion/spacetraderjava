@@ -1,9 +1,10 @@
 package org.spacetrader.model.events;
 
-import org.spacetrader.controller.enums.SpaceTraderEnum;
+import org.spacetrader.model.enums.IdentifiableEnum;
 
 
-public enum EncounterResult implements SpaceTraderEnum {
+public enum EncounterResult implements IdentifiableEnum {
+
     Continue,
     Normal,
     Killed,
@@ -11,7 +12,7 @@ public enum EncounterResult implements SpaceTraderEnum {
     Arrested;
 
     @Override
-    public int CastToInt() {
+    public int getId() {
         return ordinal();
     }
 }

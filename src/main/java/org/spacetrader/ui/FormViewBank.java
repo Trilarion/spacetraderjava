@@ -1,10 +1,10 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.Commander;
+import org.spacetrader.model.crew.Commander;
 import org.spacetrader.controller.Constants;
 import org.spacetrader.controller.Functions;
 import org.spacetrader.controller.Game;
-import org.spacetrader.controller.enums.AlertType;
+import org.spacetrader.model.enums.AlertType;
 import org.winforms.Button;
 import org.winforms.Font;
 import org.winforms.Label;
@@ -234,7 +234,7 @@ public class FormViewBank extends wfForm {
         labelMaxLoan.setText(Functions.FormatMoney(MaxLoan));
         buttonPayBack.setVisible((commander.getDebt() > 0));
         // Insurance Info
-        labelShipValue.setText(Functions.FormatMoney(commander.getShip().BaseWorth(true)));
+        labelShipValue.setText(Functions.FormatMoney(commander.getShip().getBaseWorth(true)));
         labelNoClaim.setText(Functions.FormatPercent(commander.NoClaim()));
         labelMaxNoClaim.setVisible((commander.NoClaim() == Constants.MaxNoClaim));
         labelInsAmt.setText(Functions.StringVars(Strings.MoneyRateSuffix, Functions.FormatMoney(game.InsuranceCosts())));

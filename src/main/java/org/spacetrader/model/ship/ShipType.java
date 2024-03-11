@@ -1,9 +1,9 @@
 package org.spacetrader.model.ship;
 
-import org.spacetrader.controller.enums.SpaceTraderEnum;
+import org.spacetrader.model.enums.IdentifiableEnum;
 
 
-public enum ShipType implements SpaceTraderEnum {
+public enum ShipType implements IdentifiableEnum {
     Flea, // 0
     Gnat, // 1
     Firefly,
@@ -27,7 +27,7 @@ public enum ShipType implements SpaceTraderEnum {
     }
 
     @Override
-    public int CastToInt() {
+    public int getId() {
         return ordinal();
     }
 }

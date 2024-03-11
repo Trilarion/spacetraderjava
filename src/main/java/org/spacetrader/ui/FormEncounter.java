@@ -1,8 +1,10 @@
 package org.spacetrader.ui;
 
 import org.spacetrader.controller.*;
-import org.spacetrader.controller.enums.AlertType;
+import org.spacetrader.model.crew.Commander;
+import org.spacetrader.model.enums.AlertType;
 import org.spacetrader.model.events.EncounterResult;
+import org.spacetrader.model.ship.Ship;
 import org.winforms.Button;
 import org.winforms.Container;
 import org.winforms.Font;

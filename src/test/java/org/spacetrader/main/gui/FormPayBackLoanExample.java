@@ -1,6 +1,5 @@
 package org.spacetrader.main.gui;
 
-import org.spacetrader.Main;
 import org.spacetrader.ui.FormPayBackLoan;
 
 public class FormPayBackLoanExample {
@@ -9,7 +8,7 @@ public class FormPayBackLoanExample {
 
     public static void main(String[] args) throws Exception {
         FormPayBackLoan form = new FormPayBackLoan();
-        Main.runForm(form);
+        form.ShowDialog(null);
         System.out.println(form.Amount());
     }
 }

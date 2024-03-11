@@ -65,7 +65,7 @@ public interface Strings {
     String EquipmentNoSlots = "No slots";
     String EquipmentFreeSlot = " - FREE SLOT - ";
     String FileFormatBad = "The file is not a Space Trader for Windows file, or is the wrong version or has been corrupted.";
-    String FileFutureVersion = "The version of the file is greater than the currentrent version. You should upgrade to the latest version of Space Trader for Windows.";
+    String FileFutureVersion = "The version of the file is greater than the current version. You should upgrade to the latest version of Space Trader for Windows.";
     String HighScoreStatus = "^1 in ^2, worth ^3 on ^4 level.";
     String Mercenaries = " mercenaries";
     String MercenariesForHire = "^1 available for hire.";
@@ -119,7 +119,7 @@ public interface Strings {
     String ShipBuyGotOne = "got one";
     String ShipBuyTransfer = ", and transfer your unique equipment to the new ship";
     String ShipInfoEscapePod = "Escape Pod";
-    String ShipNameCurrentShip = "<currentrent ship>";
+    String ShipNameCurrentShip = "<current ship>";
     String ShipNameCustomShip = "Custom Ship";
     String ShipNameModified = "<modified>";
     String ShipNameTemplateSuffixDefault = " (Default)";
@@ -402,7 +402,7 @@ public interface Strings {
     String[] ShipyardSkills = new String[]{"Crew Quartering", "Fuel Efficienty", "Hull Strength", "Shielding", "Weaponry"};
     String[] Sizes = new String[]{"Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"};
     String[] SpecialEventStrings = new String[]{
-            "This alien artifact should be delivered to professor Berger, who is currentrently traveling. You can probably find him at a hi-tech solar system. The alien race which produced this artifact seems keen on getting it back, however, and may hinder the carrier. Are you, for a price, willing to deliver it?",
+            "This alien artifact should be delivered to professor Berger, who is currently traveling. You can probably find him at a hi-tech solar system. The alien race which produced this artifact seems keen on getting it back, however, and may hinder the carrier. Are you, for a price, willing to deliver it?",
             "This is professor Berger. I thank you for delivering the alien artifact to me. I hope the aliens weren't too much of a nuisance. I have transferred 20000 credits to your account, which I assume compensates for your troubles.",
             "A trader in second-hand goods offers you 3 sealed cargo canisters for the sum of 1000 credits. It could be a good deal: they could contain robots. Then again, it might just be water. Do you want the canisters?",
             "This is Colonel Jackson of the Space Corps. An experimental ship, code-named \"Dragonfly\", has been stolen. It is equipped with very special, almost indestructible shields. It shouldn't fall into the wrong hands and we will reward you if you destroy it. It has been last seen in the Baratas system.",
@@ -410,13 +410,13 @@ public interface Strings {
             "Hello, Commander. This is Colonel Jackson again. On behalf of the Space Corps, I thank you for your valuable assistance in destroying the Dragonfly. As a reward, we will install one of the experimental shields on your ship. Return here for that when you're ready.",
             "A ship with shields that seemed to be like lightning recently fought many other ships in our system. I have never seen anything like it before. After it left, I heard it went to the Regulas system.",
             "A small ship with shields like I have never seen before was here a few days ago. It destroyed at least ten police ships! Last thing I heard was that it went to the Zalkon system.",
-            "Colonel Jackson here. Do you want us to install a lightning shield on your currentrent ship?",
+            "Colonel Jackson here. Do you want us to install a lightning shield on your current ship?",
             "A hacker conveys to you that he has cracked the passwords to the galaxy-wide police computer network, and that he can erase your police record for the sum of 5000 credits. Do you want him to do that?",
             "While reviewing the plans for Dr. Fehler's new space-warping drive, Dr. Lowenstam discovered a critical error. If you don't go to Daled and stop the experiment within ten days, the time-space continuum itself could be damaged!",
             "Dr. Fehler can't understand why the experiment failed. But the failure has had a dramatic and disastrous effect on the fabric of space-time itself. It seems that Dr. Fehler won't be getting tenure any time soon... and you may have trouble when you warp!",
             "Upon your warning, Dr. Fehler calls off the experiment. As your  reward, you are given a Portable Singularity. This device will, for one time only, instantaneously transport you to any system in the galaxy. The Singularity can be accessed  by clicking the \"J\" (Jump) button on the Galactic Chart.",
             "We received word that aliens will invade Gemulon seven days from now. We know exactly at which coordinates they will arrive, but we can't warn Gemulon because an ion storm disturbs all forms of communication. We need someone, anyone, to deliver this info to Gemulon within six days.",
-            "Do you wish us to install the fuel compactor on your currentrent ship? (You need a free gadget slot)",
+            "Do you wish us to install the fuel compactor on your current ship? (You need a free gadget slot)",
             "Alas, Gemulon has been invaded by aliens, which has thrown us back to pre-agricultural times. If only we had known the exact coordinates where they first arrived at our system, we might have prevented this tragedy from happening.",
             "This information of the arrival of the alien invasion force allows us to prepare a defense. You have saved our way of life. As a reward, we have a fuel compactor gadget for you, which will increase the travel distance by 3 parsecs for any ship. Return here to get it installed.",
             "A strange disease has invaded the Japori system. We would like you to deliver these ten canisters of special antidote to Japori. Note that, if you accept, ten of your cargo bays will remain in use on your way to Japori. Do you accept this mission?",
@@ -446,7 +446,7 @@ public interface Strings {
             "A ship had its shields upgraded to Lighting Shields just two days ago. A shipyard worker overheard one of the crew saying they were headed to Inthara.",
             "Just yesterday a ship was seen in docking bay 327. A trader sold goods to a member of the crew, who was a native of Qonos. It's possible that's where they were going next.",
             "The Galvonian Ambassador to Qonos approaches you. The Princess needs a ride home. Will you take her? I don't think she'll feel safe with anyone else.",
-            "His Majesty's Shipyard: Do you want us to install a quantum disruptor on your currentrent ship?",
+            "His Majesty's Shipyard: Do you want us to install a quantum disruptor on your current ship?",
             "The King and Queen are extremely grateful to you for returning their daughter to them. The King says, \"Ziyal is priceless to us, but we feel we must offer you something as a reward. Visit my shipyard captain and he'll install one of our new Quantum Disruptors.\""
     };
     String[] SpecialEventTitles = new String[]{

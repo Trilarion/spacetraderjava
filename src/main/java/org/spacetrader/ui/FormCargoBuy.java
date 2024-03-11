@@ -1,10 +1,10 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.Commander;
+import org.spacetrader.model.crew.Commander;
 import org.spacetrader.controller.Constants;
 import org.spacetrader.controller.Functions;
 import org.spacetrader.controller.Game;
-import org.spacetrader.model.cargo.CargoBuyOp;
+import org.spacetrader.model.cargo.CargoBuyOperation;
 import org.winforms.Button;
 import org.winforms.Label;
 import org.winforms.*;
@@ -19,7 +19,7 @@ import java.awt.*;
 public class FormCargoBuy extends wfForm {
     private final NumericUpDown numAmount;
 
-    public FormCargoBuy(int item, int maxAmount, CargoBuyOp op) {
+    public FormCargoBuy(int item, int maxAmount, CargoBuyOperation op) {
         Label labelQuestion = new Label();
         Label labelStatement = new Label();
         numAmount = new NumericUpDown();

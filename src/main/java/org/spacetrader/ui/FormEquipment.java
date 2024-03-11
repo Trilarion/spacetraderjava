@@ -1,7 +1,9 @@
 package org.spacetrader.ui;
 
 import org.spacetrader.controller.*;
-import org.spacetrader.controller.enums.AlertType;
+import org.spacetrader.model.crew.Commander;
+import org.spacetrader.model.enums.AlertType;
+import org.spacetrader.model.ship.Ship;
 import org.spacetrader.model.ship.equipment.*;
 import org.winforms.Button;
 import org.winforms.Font;
@@ -509,7 +511,7 @@ public class FormEquipment extends wfForm {
                     || (baseType == EquipmentType.Gadget && ship.FreeSlotsGadget() == 0)) {
                 FormAlert.Alert(AlertType.EquipmentNotEnoughSlots, this);
             } else if (FormAlert.Alert(AlertType.EquipmentBuy, this, selectedEquipment.Name(), Functions.FormatNumber(selectedEquipment.Price())) == DialogResult.Yes) {
-                ship.AddEquipment(selectedEquipment);
+                ship.addEquipment(selectedEquipment);
                 commander.setCash(commander.getCash() - selectedEquipment.Price());
                 DeselectAll();
                 UpdateSell();
@@ -611,8 +613,8 @@ public class FormEquipment extends wfForm {
                     break;
             }
             labelName.setText(selectedEquipment.Name());
-            labelType.setText(Strings.EquipmentTypes[selectedEquipment.EquipmentType().CastToInt()]);
-            labelDescription.setText(Strings.EquipmentDescriptions[selectedEquipment.EquipmentType().CastToInt()][selectedEquipment.SubType().asInteger()]);
+            labelType.setText(Strings.EquipmentTypes[selectedEquipment.EquipmentType().getId()]);
+            labelDescription.setText(Strings.EquipmentDescriptions[selectedEquipment.EquipmentType().getId()][selectedEquipment.SubType().asInteger()]);
             labelBuyPrice.setText(Functions.FormatMoney(selectedEquipment.Price()));
             labelSellPrice.setText(Functions.FormatMoney(selectedEquipment.SellPrice()));
             labelPower.setText(power);
@@ -632,15 +634,15 @@ public class FormEquipment extends wfForm {
         listSellGadget.Items.clear();
         Equipment[] equipSell;
         int index;
-        equipSell = ship.EquipmentByType(EquipmentType.Weapon);
+        equipSell = ship.getEquipmentByType(EquipmentType.Weapon);
         for (index = 0; index < equipSell.length; index++) {
             listSellWeapon.Items.add(equipSell[index] == null ? Strings.EquipmentFreeSlot : equipSell[index]);
         }
-        equipSell = ship.EquipmentByType(EquipmentType.Shield);
+        equipSell = ship.getEquipmentByType(EquipmentType.Shield);
         for (index = 0; index < equipSell.length; index++) {
             listSellShield.Items.add(equipSell[index] == null ? Strings.EquipmentFreeSlot : equipSell[index]);
         }
-        equipSell = ship.EquipmentByType(EquipmentType.Gadget);
+        equipSell = ship.getEquipmentByType(EquipmentType.Gadget);
         for (index = 0; index < equipSell.length; index++) {
             listSellGadget.Items.add(equipSell[index] == null ? Strings.EquipmentFreeSlot : equipSell[index]);
         }

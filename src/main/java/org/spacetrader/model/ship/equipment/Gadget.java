@@ -1,7 +1,7 @@
 package org.spacetrader.model.ship.equipment;
 
-import org.spacetrader.controller.enums.SkillType;
-import org.spacetrader.model.TechLevel;
+import org.spacetrader.model.enums.SkillType;
+import org.spacetrader.model.enums.TechLevel;
 import org.spacetrader.ui.Strings;
 import org.spacetrader.util.Log;
 
@@ -9,24 +9,24 @@ import java.util.Hashtable;
 
 
 public class Gadget extends Equipment {
-    private final GadgetType _type;
-    private final SkillType _skillBonus;
+    private final GadgetType type;
+    private final SkillType skillBonus;
 
     public Gadget(GadgetType type, SkillType skillBonus, int price, TechLevel minTechLevel, int chance) {
         super(EquipmentType.Gadget, price, minTechLevel, chance);
-        _type = type;
-        _skillBonus = skillBonus;
+        this.type = type;
+        this.skillBonus = skillBonus;
     }
 
     public Gadget(Hashtable hash) {
         super(hash);
-        _type = GadgetType.FromInt(GetValueFromHash(hash, "_type", Integer.class));
-        _skillBonus = (GetValueFromHash(hash, "_skillBonus", SkillType.NA, SkillType.class));
+        type = GadgetType.FromInt(GetValueFromHash(hash, "_type", Integer.class));
+        skillBonus = (GetValueFromHash(hash, "_skillBonus", SkillType.NA, SkillType.class));
     }
 
     @Override
     public Equipment Clone() {
-        return new Gadget(_type, _skillBonus, _price, _minTech, _chance);
+        return new Gadget(type, skillBonus, price, minTech, chance);
     }
 
     @Override
@@ -37,14 +37,14 @@ public class Gadget extends Equipment {
     @Override
     public Hashtable Serialize() {
         Hashtable hash = super.Serialize();
-        hash.put("_type", _type.asInteger());
-        hash.put("_skillBonus", _skillBonus.CastToInt());
+        hash.put("_type", type.asInteger());
+        hash.put("_skillBonus", skillBonus.getId());
         return hash;
     }
 
     @Override
     public String Name() {
-        return Strings.GadgetNames[_type.asInteger()];
+        return Strings.GadgetNames[type.asInteger()];
     }
 
     @Override
@@ -61,10 +61,10 @@ public class Gadget extends Equipment {
     }
 
     public GadgetType Type() {
-        return _type;
+        return type;
     }
 
     public SkillType SkillBonus() {
-        return _skillBonus;
+        return skillBonus;
     }
 }

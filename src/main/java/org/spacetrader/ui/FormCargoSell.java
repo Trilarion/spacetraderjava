@@ -1,10 +1,10 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.Commander;
+import org.spacetrader.model.crew.Commander;
 import org.spacetrader.controller.Constants;
 import org.spacetrader.controller.Functions;
 import org.spacetrader.controller.Game;
-import org.spacetrader.model.cargo.CargoSellOp;
+import org.spacetrader.model.cargo.CargoSellOperation;
 import org.winforms.Button;
 import org.winforms.Label;
 import org.winforms.*;
@@ -19,7 +19,7 @@ import java.awt.*;
 public class FormCargoSell extends wfForm {
     private final NumericUpDown numAmount;
 
-    public FormCargoSell(int item, int maxAmount, CargoSellOp op, int price) {
+    public FormCargoSell(int item, int maxAmount, CargoSellOperation op, int price) {
         Label labelQuestion = new Label();
         Label labelStatement = new Label();
         numAmount = new NumericUpDown();
@@ -117,20 +117,20 @@ public class FormCargoSell extends wfForm {
         int cost = commander.PriceCargo()[item] / commander.getShip().Cargo()[item];
         numAmount.setMaximum(maxAmount);
         numAmount.setValue(numAmount.getMinimum());
-        setText(Functions.StringVars(Strings.CargoTitle, Strings.CargoSellOps[op.CastToInt()], Constants.TradeItems[item].Name()));
-        labelQuestion.setText(Functions.StringVars("How many do you want to ^1?", Strings.CargoSellOps[op.CastToInt()].toLowerCase()));
-        labelPaid.setText(Functions.StringVars(op == CargoSellOp.SellTrader
+        setText(Functions.StringVars(Strings.CargoTitle, Strings.CargoSellOps[op.getId()], Constants.TradeItems[item].Name()));
+        labelQuestion.setText(Functions.StringVars("How many do you want to ^1?", Strings.CargoSellOps[op.getId()].toLowerCase()));
+        labelPaid.setText(Functions.StringVars(op == CargoSellOperation.SellTrader
                 ? "You paid about ^1 per unit, and can sell ^2." : "You paid about ^1 per unit.", Functions.FormatMoney(cost), Functions.Multiples(maxAmount, Strings.CargoUnit)));
         labelProfit.setText(Functions.StringVars("Your ^1 per unit is ^2", price >= cost
                 ? "profit" : "loss", Functions.FormatMoney(price >= cost ? price - cost : cost - price)));
         // Override defaults for some ops.
         switch (op) {
             case Dump:
-                labelStatement.setText(Functions.StringVars(Strings.CargoSellStatementDump, Strings.CargoSellOps[op.CastToInt()].toLowerCase(), Functions.FormatNumber(maxAmount)));
+                labelStatement.setText(Functions.StringVars(Strings.CargoSellStatementDump, Strings.CargoSellOps[op.getId()].toLowerCase(), Functions.FormatNumber(maxAmount)));
                 labelProfit.setText(Functions.StringVars("It costs ^1 per unit for disposal.", Functions.FormatMoney(-price)));
                 break;
             case Jettison:
-                labelStatement.setText(Functions.StringVars(Strings.CargoSellStatementDump, Strings.CargoSellOps[op.CastToInt()].toLowerCase(), Functions.FormatNumber(maxAmount)));
+                labelStatement.setText(Functions.StringVars(Strings.CargoSellStatementDump, Strings.CargoSellOps[op.getId()].toLowerCase(), Functions.FormatNumber(maxAmount)));
                 break;
             case SellSystem:
                 labelStatement.setText(Functions.StringVars("You can sell up to ^1 at ^2 each.", Functions.FormatNumber(maxAmount), Functions.FormatMoney(price)));

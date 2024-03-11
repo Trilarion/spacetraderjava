@@ -9,6 +9,7 @@ package org.spacetrader.model.events.quests;
  * @author Gregory
  */
 public enum QuestWild {
+
     q0,// day 0: not delivered
     q1,// day 1 - 11: Wild on board
     q2// day 12: Wild delivered

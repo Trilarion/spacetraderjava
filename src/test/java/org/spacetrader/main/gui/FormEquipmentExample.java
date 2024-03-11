@@ -1,6 +1,5 @@
 package org.spacetrader.main.gui;
 
-import org.spacetrader.Main;
 import org.spacetrader.ui.FormEquipment;
 
 public class FormEquipmentExample {
@@ -9,6 +8,6 @@ public class FormEquipmentExample {
 
     public static void main(String[] args) throws Exception {
         FormEquipment fe = new FormEquipment();
-        Main.runForm(fe);
+        fe.ShowDialog(null);
     }
 }

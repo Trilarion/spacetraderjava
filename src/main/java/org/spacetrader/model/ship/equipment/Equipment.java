@@ -1,9 +1,9 @@
 package org.spacetrader.model.ship.equipment;
 
-import org.spacetrader.controller.Commander;
+import org.spacetrader.model.crew.Commander;
 import org.spacetrader.controller.Game;
 import org.spacetrader.controller.SerializableObject;
-import org.spacetrader.model.TechLevel;
+import org.spacetrader.model.enums.TechLevel;
 import org.spacetrader.ui.Strings;
 import org.winforms.wfImage;
 
@@ -11,33 +11,34 @@ import java.util.Hashtable;
 
 
 abstract public class Equipment extends SerializableObject implements Cloneable {
-    protected EquipmentType _equipType;
-    protected TechLevel _minTech;
-    protected int _chance;
-    protected int _price;
+
+    protected EquipmentType equipType;
+    protected TechLevel minTech;
+    protected int chance;
+    protected int price;
 
     public Equipment(EquipmentType type, int price, TechLevel minTechLevel, int chance) {
-        _equipType = type;
-        _price = price;
-        _minTech = minTechLevel;
-        _chance = chance;
+        equipType = type;
+        this.price = price;
+        minTech = minTechLevel;
+        this.chance = chance;
     }
 
     public Equipment(Hashtable hash) {
         super(hash);
-        _equipType = EquipmentType.FromInt(GetValueFromHash(hash, "_equipType", Integer.class));
-        _price = GetValueFromHash(hash, "_price", Integer.class);
-        _minTech = TechLevel.FromInt(GetValueFromHash(hash, "_minTech", Integer.class));
-        _chance = GetValueFromHash(hash, "_chance", Integer.class);
+        equipType = EquipmentType.FromInt(GetValueFromHash(hash, "_equipType", Integer.class));
+        price = GetValueFromHash(hash, "_price", Integer.class);
+        minTech = TechLevel.FromInt(GetValueFromHash(hash, "_minTech", Integer.class));
+        chance = GetValueFromHash(hash, "_chance", Integer.class);
     }
 
     @Override
     public Hashtable Serialize() {
         Hashtable hash = super.Serialize();
-        hash.put("_equipType", _equipType.CastToInt());
-        hash.put("_price", _price);
-        hash.put("_minTech", _minTech.ordinal());
-        hash.put("_chance", _chance);
+        hash.put("_equipType", equipType.getId());
+        hash.put("_price", price);
+        hash.put("_minTech", minTech.ordinal());
+        hash.put("_chance", chance);
         return hash;
     }
 
@@ -67,7 +68,7 @@ abstract public class Equipment extends SerializableObject implements Cloneable 
     }
 
     public EquipmentType EquipmentType() {
-        return _equipType;
+        return equipType;
     }
 
     public wfImage Image() {
@@ -79,24 +80,24 @@ abstract public class Equipment extends SerializableObject implements Cloneable 
     }
 
     public TechLevel MinimumTechLevel() {
-        return _minTech;
+        return minTech;
     }
 
     public int Chance() {
-        return _chance;
+        return chance;
     }
 
     public int Price() {
         Commander commander = Game.getCurrentGame().Commander();
         int price = 0;
         if (commander != null && commander.CurrentSystem().TechLevel().ordinal() >= MinimumTechLevel().ordinal()) {
-            price = (_price * (100 - commander.getShip().Trader())) / 100;
+            price = (this.price * (100 - commander.getShip().Trader())) / 100;
         }
         return price;
     }
 
     public int SellPrice() {
-        return _price * 3 / 4;
+        return price * 3 / 4;
     }
 
     public int TransferPrice() {

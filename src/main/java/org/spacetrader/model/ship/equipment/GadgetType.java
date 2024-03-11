@@ -1,9 +1,9 @@
 package org.spacetrader.model.ship.equipment;
 
-import org.spacetrader.controller.enums.SpaceTraderEnum;
+import org.spacetrader.model.enums.IdentifiableEnum;
 
 
-public enum GadgetType implements EquipmentSubType, SpaceTraderEnum {
+public enum GadgetType implements EquipmentSubType, IdentifiableEnum {
     ExtraCargoBays, // = 0,
     AutoRepairSystem, // = 1,
     NavigatingSystem, // = 2,
@@ -22,7 +22,7 @@ public enum GadgetType implements EquipmentSubType, SpaceTraderEnum {
     }
 
     @Override
-    public int CastToInt() {
+    public int getId() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

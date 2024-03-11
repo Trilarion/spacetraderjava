@@ -5,6 +5,7 @@ package org.spacetrader.model.events.quests;
  * @author Gregory
  */
 public enum QuestArtifact {
+
     q0("Quest not started yet."),
     q1("Has artifact on board."),
     q2("Artifact not on board.");

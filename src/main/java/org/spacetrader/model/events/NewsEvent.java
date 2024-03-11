@@ -1,9 +1,10 @@
 package org.spacetrader.model.events;
 
-import org.spacetrader.controller.enums.SpaceTraderEnum;
+import org.spacetrader.model.enums.IdentifiableEnum;
 
 
-public enum NewsEvent implements SpaceTraderEnum {
+public enum NewsEvent implements IdentifiableEnum {
+
     ArtifactDelivery, // = 0,
     CaughtLittering, // = 1,
     Dragonfly, // = 2,
@@ -49,7 +50,7 @@ public enum NewsEvent implements SpaceTraderEnum {
     }
 
     @Override
-    public int CastToInt() {
+    public int getId() {
         return ordinal();
     }
 }

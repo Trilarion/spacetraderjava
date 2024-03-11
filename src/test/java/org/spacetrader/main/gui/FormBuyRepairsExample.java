@@ -1,6 +1,5 @@
 package org.spacetrader.main.gui;
 
-import org.spacetrader.Main;
 import org.spacetrader.ui.FormBuyRepairs;
 
 import javax.swing.*;
@@ -11,7 +10,7 @@ public class FormBuyRepairsExample {
 
     public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
         FormBuyRepairs form = new FormBuyRepairs();
-        Main.runForm(form);
+        form.ShowDialog(null);
         System.out.println(form.Amount());
     }
 }

@@ -1,6 +1,9 @@
 package org.spacetrader.ui;
 
 import org.spacetrader.controller.*;
+import org.spacetrader.model.PoliceRecord;
+import org.spacetrader.model.Reputation;
+import org.spacetrader.model.crew.Commander;
 import org.winforms.Button;
 import org.winforms.Font;
 import org.winforms.Label;
@@ -304,7 +307,7 @@ public class FormViewCommander extends wfForm {
         Game game = Game.getCurrentGame();
         Commander commander = game.Commander();
         labelName.setText(commander.Name());
-        labelDifficulty.setText(Strings.DifficultyLevels[game.Difficulty().CastToInt()]);
+        labelDifficulty.setText(Strings.DifficultyLevels[game.Difficulty().getId()]);
         labelTime.setText(Functions.Multiples(commander.getDays(), Strings.TimeUnit));
         labelPilot.setText(commander.Pilot() + " (" + commander.getShip().Pilot() + ")");
         labelFighter.setText(commander.Fighter() + " (" + commander.getShip().Fighter() + ")");
@@ -314,8 +317,8 @@ public class FormViewCommander extends wfForm {
         labelDebt.setText(Functions.FormatMoney(commander.getDebt()));
         labelNetWorth.setText(Functions.FormatMoney(commander.Worth()));
         labelKills.setText(Functions.FormatNumber(commander.getKillsPirate() + commander.getKillsPolice() + commander.getKillsTrader()));
-        labelRecord.setText(PoliceRecord.GetPoliceRecordFromScore(commander.getPoliceRecordScore()).Name());
-        labelReputation.setText(Reputation.GetReputationFromScore(commander.getReputationScore()).Name());
+        labelRecord.setText(PoliceRecord.getPoliceRecordFromScore(commander.getPoliceRecordScore()).getName());
+        labelReputation.setText(Reputation.getReputationFromScore(commander.getReputationScore()).getName());
         int score = commander.getPoliceRecordScore();
         if (score <= Constants.PoliceRecordScoreCrook) {
             labelBountyLabel.setVisible(true);

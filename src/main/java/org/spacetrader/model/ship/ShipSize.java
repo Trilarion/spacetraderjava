@@ -1,10 +1,9 @@
 package org.spacetrader.model.ship;
 
-import org.spacetrader.controller.enums.SpaceTraderEnum;
+import org.spacetrader.model.enums.IdentifiableEnum;
 
+public enum ShipSize implements IdentifiableEnum {
 
-// TODO best way for autonumbered enums
-public enum ShipSize implements SpaceTraderEnum {
     Tiny, // = 0,
     Small, // = 1,
     Medium, // = 2,
@@ -17,7 +16,7 @@ public enum ShipSize implements SpaceTraderEnum {
     }
 
     @Override
-    public int CastToInt() {
+    public int getId() {
         return ordinal();
     }
 }

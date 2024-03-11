@@ -1,9 +1,9 @@
 package org.spacetrader.model.ship.equipment;
 
-import org.spacetrader.controller.enums.SpaceTraderEnum;
+import org.spacetrader.model.enums.IdentifiableEnum;
 
 
-public enum ShieldType implements SpaceTraderEnum, EquipmentSubType {
+public enum ShieldType implements IdentifiableEnum, EquipmentSubType {
     Energy,
     Reflective,
     Lightning;
@@ -23,7 +23,7 @@ public enum ShieldType implements SpaceTraderEnum, EquipmentSubType {
     }
 
     @Override
-    public int CastToInt() {
+    public int getId() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

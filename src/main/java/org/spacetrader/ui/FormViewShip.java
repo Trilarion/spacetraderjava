@@ -1,6 +1,8 @@
 package org.spacetrader.ui;
 
 import org.spacetrader.controller.*;
+import org.spacetrader.model.events.SpecialEvent;
+import org.spacetrader.model.ship.Ship;
 import org.spacetrader.model.ship.equipment.GadgetType;
 import org.spacetrader.util.Util;
 import org.winforms.Button;

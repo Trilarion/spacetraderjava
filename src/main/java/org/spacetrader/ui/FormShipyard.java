@@ -1,9 +1,10 @@
 package org.spacetrader.ui;
 
 import org.spacetrader.controller.*;
-import org.spacetrader.controller.enums.AlertType;
-import org.spacetrader.model.ship.ShipSize;
-import org.spacetrader.model.ship.ShipType;
+import org.spacetrader.model.crew.Commander;
+import org.spacetrader.model.enums.AlertType;
+import org.spacetrader.model.events.SpecialEvent;
+import org.spacetrader.model.ship.*;
 import org.spacetrader.util.Directory;
 import org.spacetrader.util.Path;
 import org.winforms.Button;
@@ -782,11 +783,11 @@ public class FormShipyard extends wfForm {
         ((ISupportInitialize) (numWeaponSlots)).endInit();
         ResumeLayout(false);
         setText(Functions.StringVars(Strings.ShipyardTitle, yard.Name()));
-        pictureLogo.setImage(ilShipyardLogos.getImages()[yard.Id().CastToInt()]);
+        pictureLogo.setImage(ilShipyardLogos.getImages()[yard.Id().getId()]);
         labelWelcome.setText(Functions.StringVars(Strings.ShipyardWelcome, yard.Name(), yard.Engineer()));
-        labelSizeSpecialty.setText(Strings.Sizes[yard.SpecialtySize().CastToInt()]);
-        labelSkill.setText(Strings.ShipyardSkills[yard.Skill().CastToInt()]);
-        labelSkillDescription.setText(Strings.ShipyardSkillDescriptions[yard.Skill().CastToInt()]);
+        labelSizeSpecialty.setText(Strings.Sizes[yard.SpecialtySize().getId()]);
+        labelSkill.setText(Strings.ShipyardSkills[yard.Skill().getId()]);
+        labelSkillDescription.setText(Strings.ShipyardSkillDescriptions[yard.Skill().getId()]);
         labelWarning.setText(Functions.StringVars(Strings.ShipyardWarning, "" + Shipyard.PENALTY_FIRST_PCT, "" + Shipyard.PENALTY_SECOND_PCT));
         dlgOpen.setInitialDirectory(Constants.CustomImagesDirectory);
         dlgSave.setInitialDirectory(Constants.CustomTemplatesDirectory);
@@ -824,7 +825,7 @@ public class FormShipyard extends wfForm {
                 txtName.setText(template.Name());
             }
             selSize.setSelectedIndex(Math.max(0, sizes.indexOf(template.Size())));
-            imgIndex = template.ImageIndex() == ShipType.Custom.CastToInt() ? imgTypes.length - 1 : template.ImageIndex();
+            imgIndex = template.ImageIndex() == ShipType.Custom.getId() ? imgTypes.length - 1 : template.ImageIndex();
             if (template.Images() != null) {
                 customImages = template.Images();
             } else {
@@ -851,23 +852,23 @@ public class FormShipyard extends wfForm {
         for (ShipSize size : yard.AvailableSizes()) {
             sizes.add(size);
             selSize.Items.add(Functions.StringVars(
-                    Strings.ShipyardSizeItem, Strings.Sizes[size.CastToInt()],
-                    Functions.Multiples(Shipyard.MAX_UNITS[size.CastToInt()], Strings.ShipyardUnit)));
+                    Strings.ShipyardSizeItem, Strings.Sizes[size.getId()],
+                    Functions.Multiples(Shipyard.MAX_UNITS[size.getId()], Strings.ShipyardUnit)));
         }
     }
 
     private void LoadTemplateList() {
-        ShipTemplate currentrentShip = new ShipTemplate(commander.getShip(), Strings.ShipNameCurrentShip);
-        selTemplate.Items.add(currentrentShip);
+        ShipTemplate currentShip = new ShipTemplate(commander.getShip(), Strings.ShipNameCurrentShip);
+        selTemplate.Items.add(currentShip);
         selTemplate.Items.add(Constants.ShipTemplateSeparator);
         // Add the minimal sizes templates.
         for (ShipSize size : sizes) {
-            selTemplate.Items.add(new ShipTemplate(size, Strings.Sizes[size.CastToInt()] + Strings.ShipNameTemplateSuffixMinimum));
+            selTemplate.Items.add(new ShipTemplate(size, Strings.Sizes[size.getId()] + Strings.ShipNameTemplateSuffixMinimum));
         }
         selTemplate.Items.add(Constants.ShipTemplateSeparator);
         // Add the buyable ship spec templates.
         for (ShipSpec spec : Constants.ShipSpecs) {
-            if (sizes.contains(spec.getSize()) && spec.Type().CastToInt() <= Constants.MaxShip) {
+            if (sizes.contains(spec.getSize()) && spec.Type().getId() <= Constants.MaxShip) {
                 selTemplate.Items.add(new ShipTemplate(spec, spec.Name() + Strings.ShipNameTemplateSuffixDefault));
             }
         }
@@ -968,20 +969,20 @@ public class FormShipyard extends wfForm {
     }
 
     private void UpdateShip() {
-        yard.ShipSpec().ImageIndex(imgTypes[imgIndex].CastToInt());
-        pictureShip.setImage((imgIndex > Constants.MaxShip ? customImages[0] : Constants.ShipSpecs[imgTypes[imgIndex].CastToInt()].Image()));
-        labelImage.setText((imgIndex > Constants.MaxShip ? Strings.ShipNameCustomShip : Constants.ShipSpecs[imgTypes[imgIndex].CastToInt()].Name()));
+        yard.ShipSpec().ImageIndex(imgTypes[imgIndex].getId());
+        pictureShip.setImage((imgIndex > Constants.MaxShip ? customImages[0] : Constants.ShipSpecs[imgTypes[imgIndex].getId()].Image()));
+        labelImage.setText((imgIndex > Constants.MaxShip ? Strings.ShipNameCustomShip : Constants.ShipSpecs[imgTypes[imgIndex].getId()].Name()));
     }
 
     private void buttonConstruct_Click(Object sender, EventData e) {
         if (ConstructButtonEnabled()) {
             if (commander.TradeShip(yard.ShipSpec(), yard.TotalCost(), txtName.getText(), this)) {
-                Strings.ShipNames[ShipType.Custom.CastToInt()] = txtName.getText();
+                Strings.ShipNames[ShipType.Custom.getId()] = txtName.getText();
                 if (game.getQuestStatusScarab() == SpecialEvent.StatusScarabDone) {
                     game.setQuestStatusScarab(SpecialEvent.StatusScarabNotStarted);
                 }
-                // Replace the currentrent custom images with the new ones.
-                if (commander.getShip().ImageIndex() == ShipType.Custom.CastToInt()) {
+                // Replace the current custom images with the new ones.
+                if (commander.getShip().ImageIndex() == ShipType.Custom.getId()) {
                     game.getParentWindow().setCustomShipImages(customImages);
                     commander.getShip().UpdateCustomImageOffsetConstants();
                 }
@@ -1022,7 +1023,7 @@ public class FormShipyard extends wfForm {
             if (dlgSave.ShowDialog(this) == DialogResult.OK) {
                 ShipTemplate template = new ShipTemplate(yard.ShipSpec(), txtName.getText());
                 if (imgIndex > Constants.MaxShip) {
-                    template.ImageIndex(ShipType.Custom.CastToInt());
+                    template.ImageIndex(ShipType.Custom.getId());
                     template.Images(customImages);
                 } else {
                     template.ImageIndex(imgIndex);

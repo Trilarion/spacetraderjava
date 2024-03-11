@@ -5,6 +5,7 @@ package org.spacetrader.model.events.quests;
  * @author Gregory
  */
 public enum QuestDragonfly {
+
     q0(""), // not yet available
     q1(""), // must go to Baratas
     q2(""), // must go to Melina
