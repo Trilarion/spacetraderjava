@@ -30,7 +30,7 @@ public class Shield extends Equipment {
     @Override
     public Equipment Clone() {
         Shield shield = new Shield(type, power, price, minTech, chance);
-        shield.setCharge(Charge);
+        shield.Charge = Charge;
         return shield;
     }
 

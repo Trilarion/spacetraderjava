@@ -1,7 +1,7 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.model.crew.Commander;
 import org.spacetrader.controller.Game;
+import org.spacetrader.model.crew.Commander;
 import org.spacetrader.model.ship.Ship;
 import org.winforms.Button;
 import org.winforms.Label;
@@ -466,7 +466,7 @@ public class FormJettison extends form {
                 buttonJettisonQty8,
                 buttonJettisonQty9
         };
-        Button[] buttonJettisonAll = new Button[]{
+        Button[] buttonJettisonAll = {
                 buttonJettisonAll0,
                 buttonJettisonAll1,
                 buttonJettisonAll2,

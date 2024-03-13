@@ -1,7 +1,7 @@
 package org.spacetrader.controller;
 
-import org.spacetrader.model.enums.GameEndType;
 import org.spacetrader.model.enums.Difficulty;
+import org.spacetrader.model.enums.GameEndType;
 
 import java.util.Hashtable;
 
@@ -40,7 +40,7 @@ public class HighScoreRecord extends SerializableObject implements Comparable<Hi
     @Override
     public int compareTo(HighScoreRecord record) {
         int compared;
-        if (record == null) {
+        if (null == record) {
             compared = 1;
         } else if (record.Score() < Score()) {
             compared = 1;

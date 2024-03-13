@@ -19,13 +19,13 @@ public class MouseListener extends MouseAdapter {
     public void mouseClicked(MouseEvent e) {
         switch (e.getClickCount()) {
             case 1:
-                if (normalClick != null) {
+                if (null != normalClick) {
                     normalClick.handle(sender, new MouseEventData(e));
                 }
                 break;
             case 2:
             case 3:
-                if (doubleClick != null) {
+                if (null != doubleClick) {
                     doubleClick.handle(sender, new MouseEventData(e));
                 }
                 break;

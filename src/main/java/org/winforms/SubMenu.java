@@ -14,7 +14,7 @@ public class SubMenu extends MenuItem {  // TODO difference to MenuItem
 
     public void addAll(MenuItem... items) {
         for (MenuItem item : items) {
-            this.add(item);
+            add(item);
         }
     }
 

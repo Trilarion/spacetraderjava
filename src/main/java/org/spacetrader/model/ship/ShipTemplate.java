@@ -9,17 +9,17 @@ import java.util.Hashtable;
 
 public class ShipTemplate extends SerializableObject implements Comparable<ShipTemplate> {
 
-    private Image[] images = null;
+    private Image[] images;
     private ShipSize size = ShipSize.Tiny;
-    private String name = null;
+    private String name;
     private int imageIndex = ShipType.Custom.getId();
-    private int cargoBays = 0;
-    private int weaponSlots = 0;
-    private int shieldSlots = 0;
-    private int gadgetSlots = 0;
-    private int crewQuarters = 0;
-    private int fuelTanks = 0;
-    private int hullStrength = 0;
+    private int cargoBays;
+    private int weaponSlots;
+    private int shieldSlots;
+    private int gadgetSlots;
+    private int crewQuarters;
+    private int fuelTanks;
+    private int hullStrength;
 
     public ShipTemplate(Hashtable ht) {
         name = GetValueFromHash(ht, "_name", name, String.class);
@@ -52,14 +52,14 @@ public class ShipTemplate extends SerializableObject implements Comparable<ShipT
         crewQuarters = s.getCrewQuarters();
         fuelTanks = s.FuelTanks();
         hullStrength = s.HullStrength();
-        if (imageIndex == Constants.ShipImgUseDefault) {
+        if (Constants.ShipImgUseDefault == imageIndex) {
             images = Game.getCurrentGame().getParentWindow().CustomShipImages();
         }
     }
 
     @Override
     public int compareTo(ShipTemplate st) {
-        if (st == null) {
+        if (null == st) {
             return 1;
         } else {
             return name.compareTo(st.name);
@@ -79,7 +79,7 @@ public class ShipTemplate extends SerializableObject implements Comparable<ShipT
         hash.put("_crewQuarters", crewQuarters);
         hash.put("_fuelTanks", fuelTanks);
         hash.put("_hullStrength", hullStrength);
-        if (images != null) {
+        if (null != images) {
             hash.put("_images", images);
         }
         return hash;

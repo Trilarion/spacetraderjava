@@ -69,7 +69,7 @@ public enum SomeStringsForSwitch {
 
     static public SomeStringsForSwitch find(String string) {
         SomeStringsForSwitch spacialvalue = specialStrings.get(string);
-        if (spacialvalue != null) {
+        if (null != spacialvalue) {
             return spacialvalue;
         }
         try {

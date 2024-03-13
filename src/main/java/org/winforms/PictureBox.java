@@ -43,7 +43,7 @@ public class PictureBox extends Control {
     }
 
     public void setImage(Image image) {
-        if (image != null) {
+        if (null != image) {
             asJLabel().setIcon(new ImageIcon(image.asSwingImage()));
         }
     }
@@ -53,7 +53,7 @@ public class PictureBox extends Control {
     }
 
     public void setPaint(EventHandler<Object, Graphics> paint) {
-        if (asJLabel().paintEventHandler != null) {
+        if (null != asJLabel().paintEventHandler) {
             throw new Error("2 handlers same event");
         }
         asJLabel().paintEventHandler = paint;

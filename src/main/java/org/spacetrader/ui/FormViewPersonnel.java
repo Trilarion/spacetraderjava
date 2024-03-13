@@ -1,6 +1,7 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.*;
+import org.spacetrader.controller.Functions;
+import org.spacetrader.controller.Game;
 import org.spacetrader.model.crew.Commander;
 import org.spacetrader.model.crew.CrewMember;
 import org.spacetrader.model.enums.AlertType;
@@ -34,8 +35,8 @@ public class FormViewPersonnel extends form {
     private final Label labelForHireNone;
     private final ListBox listForHire;
     private final ListBox listCrew;
-    private CrewMember selectedCrewMember = null;
-    private boolean handlingSelect = false;
+    private CrewMember selectedCrewMember;
+    private boolean handlingSelect;
 
     public FormViewPersonnel() {
         Button buttonClose = new Button();
@@ -272,7 +273,7 @@ public class FormViewPersonnel extends form {
         CrewMember[] crew = ship.Crew();
         listCrew.Items.clear();
         for (int i = 1; i < crew.length; i++) {
-            if (crew[i] == null) {
+            if (null == crew[i]) {
                 listCrew.Items.addElement(Strings.PersonnelVacancy);
             } else {
                 listCrew.Items.addElement(crew[i]);
@@ -308,9 +309,9 @@ public class FormViewPersonnel extends form {
         boolean visible = false;
         boolean rateVisible = false;
         boolean hireFireVisible = false;
-        if (selectedCrewMember != null) {
+        if (null != selectedCrewMember) {
             visible = true;
-            if (selectedCrewMember.Rate() > 0) {
+            if (0 < selectedCrewMember.Rate()) {
                 rateVisible = true;
             }
             labelName.setText(selectedCrewMember.Name());
@@ -320,7 +321,7 @@ public class FormViewPersonnel extends form {
             labelTrader.setText(selectedCrewMember.Trader() + "");
             labelEngineer.setText(selectedCrewMember.Engineer() + "");
             buttonHireFire.setText(ship.HasCrew(selectedCrewMember.Id()) ? Strings.MercenaryFire : Strings.MercenaryHire);
-            hireFireVisible = rateVisible || selectedCrewMember.Id() == CrewMemberId.Zeethibal;
+            hireFireVisible = rateVisible || CrewMemberId.Zeethibal == selectedCrewMember.Id();
         }
         labelName.setVisible(visible);
         labelRate.setVisible(rateVisible);
@@ -336,15 +337,15 @@ public class FormViewPersonnel extends form {
     }
 
     private void HireFire(Object sender, EventData e) {
-        if (selectedCrewMember != null && buttonHireFire.getVisible()) {
+        if (null != selectedCrewMember && buttonHireFire.getVisible()) {
             if (ship.HasCrew(selectedCrewMember.Id())) {
-                if (FormAlert.Alert(AlertType.CrewFireMercenary, this, selectedCrewMember.Name()) == DialogResult.Yes) {
+                if (DialogResult.Yes == FormAlert.Alert(AlertType.CrewFireMercenary, this, selectedCrewMember.Name())) {
                     ship.handleFire(selectedCrewMember.Id());
                     UpdateAll();
                     game.getParentWindow().UpdateAll();
                 }
             } else {
-                if (ship.FreeCrewQuarters() == 0) {
+                if (0 == ship.FreeCrewQuarters()) {
                     FormAlert.Alert(AlertType.CrewNoQuarters, this, selectedCrewMember.Name());
                 } else {
                     ship.Hire(selectedCrewMember);

@@ -61,7 +61,7 @@ public class FormAbout extends form {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("About Space Trader");
-                resumeLayout(false);
+        resumeLayout(false);
         PerformLayout();
     }
 

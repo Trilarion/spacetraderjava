@@ -1,7 +1,7 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.model.crew.Commander;
 import org.spacetrader.controller.Game;
+import org.spacetrader.model.crew.Commander;
 import org.winforms.Button;
 import org.winforms.Label;
 import org.winforms.*;
@@ -23,7 +23,7 @@ public class FormBuyFuel extends form {
         Button buttonOk = new Button();
         Button buttonMax = new Button();
         Button buttonNothing = new Button();
-                suspendLayout();
+        suspendLayout();
         // labelQuestion
         labelQuestion.setAutoSize(true);
         labelQuestion.setLocation(new Point(8, 8));
@@ -81,7 +81,7 @@ public class FormBuyFuel extends form {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Buy Fuel");
-                resumeLayout(false);
+        resumeLayout(false);
         Game game = Game.getCurrentGame();
         Commander commander = game.Commander();
         numAmount.setMaximum(Math.min(commander.getCash(), (commander.getShip().FuelTanks() - commander.getShip().getFuel()) * commander.getShip().getFuelCost()));

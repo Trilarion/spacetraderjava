@@ -1,6 +1,8 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.*;
+import org.spacetrader.controller.Constants;
+import org.spacetrader.controller.Functions;
+import org.spacetrader.controller.Game;
 import org.spacetrader.model.crew.Commander;
 import org.spacetrader.model.enums.AlertType;
 import org.spacetrader.model.ship.Ship;
@@ -47,9 +49,9 @@ public class FormEquipment extends form {
     private final ListBox listBuyWeapon;
     private final PictureBox pictureEquipment;
     private final Equipment[] equipBuy = Constants.EquipmentForSale;
-    private Equipment selectedEquipment = null;
-    private boolean sellSideSelected = false;
-    private boolean handlingSelect = false;
+    private Equipment selectedEquipment;
+    private boolean sellSideSelected;
+    private boolean handlingSelect;
 
     public FormEquipment() {
         Button buttonClose = new Button();
@@ -497,20 +499,20 @@ public class FormEquipment extends form {
     }
 
     private void Buy() {
-        if (selectedEquipment != null && !sellSideSelected) {
+        if (null != selectedEquipment && !sellSideSelected) {
             EquipmentType baseType = selectedEquipment.EquipmentType();
-            if (baseType == EquipmentType.Gadget && ship.HasGadget(((Gadget) selectedEquipment).Type())
-                    && ((Gadget) selectedEquipment).Type() != GadgetType.ExtraCargoBays) {
+            if (EquipmentType.Gadget == baseType && ship.HasGadget(((Gadget) selectedEquipment).Type())
+                    && GadgetType.ExtraCargoBays != ((Gadget) selectedEquipment).Type()) {
                 FormAlert.Alert(AlertType.EquipmentAlreadyOwn, this);
-            } else if (commander.getDebt() > 0) {
+            } else if (0 < commander.getDebt()) {
                 FormAlert.Alert(AlertType.DebtNoBuy, this);
             } else if (selectedEquipment.Price() > commander.CashToSpend()) {
                 FormAlert.Alert(AlertType.EquipmentIF, this);
-            } else if ((baseType == EquipmentType.Weapon && ship.FreeSlotsWeapon() == 0)
-                    || (baseType == EquipmentType.Shield && ship.FreeSlotsShield() == 0)
-                    || (baseType == EquipmentType.Gadget && ship.FreeSlotsGadget() == 0)) {
+            } else if ((EquipmentType.Weapon == baseType && 0 == ship.FreeSlotsWeapon())
+                    || (EquipmentType.Shield == baseType && 0 == ship.FreeSlotsShield())
+                    || (EquipmentType.Gadget == baseType && 0 == ship.FreeSlotsGadget())) {
                 FormAlert.Alert(AlertType.EquipmentNotEnoughSlots, this);
-            } else if (FormAlert.Alert(AlertType.EquipmentBuy, this, selectedEquipment.Name(), Functions.FormatNumber(selectedEquipment.Price())) == DialogResult.Yes) {
+            } else if (DialogResult.Yes == FormAlert.Alert(AlertType.EquipmentBuy, this, selectedEquipment.Name(), Functions.FormatNumber(selectedEquipment.Price()))) {
                 ship.addEquipment(selectedEquipment);
                 commander.setCash(commander.getCash() - selectedEquipment.Price());
                 DeselectAll();
@@ -530,13 +532,13 @@ public class FormEquipment extends form {
     }
 
     private void Sell() {
-        if (selectedEquipment != null && sellSideSelected) {
-            if (FormAlert.Alert(AlertType.EquipmentSell, this) == DialogResult.Yes) {
+        if (null != selectedEquipment && sellSideSelected) {
+            if (DialogResult.Yes == FormAlert.Alert(AlertType.EquipmentSell, this)) {
                 // The slot is the selected index. Two of the three list boxes will have selected indices of -1, so adding 2 to the total cancels those out.
                 int slot = listSellWeapon.getSelectedIndex() + listSellShield.getSelectedIndex() + listSellGadget.getSelectedIndex() + 2;
-                if (selectedEquipment.EquipmentType() == EquipmentType.Gadget
-                        && (((Gadget) selectedEquipment).Type() == GadgetType.ExtraCargoBays || ((Gadget) selectedEquipment).Type() == GadgetType.HiddenCargoBays)
-                        && ship.FreeCargoBays() < 5) {
+                if (EquipmentType.Gadget == selectedEquipment.EquipmentType()
+                        && (GadgetType.ExtraCargoBays == ((Gadget) selectedEquipment).Type() || GadgetType.HiddenCargoBays == ((Gadget) selectedEquipment).Type())
+                        && 5 > ship.FreeCargoBays()) {
                     FormAlert.Alert(AlertType.EquipmentExtraBaysInUse, this);
                 } else {
                     commander.setCash(commander.getCash() + selectedEquipment.SellPrice());
@@ -550,7 +552,7 @@ public class FormEquipment extends form {
 
     private void UpdateBuy() {
         for (Equipment equipment : equipBuy) {
-            if (equipment.Price() > 0) {
+            if (0 < equipment.Price()) {
                 switch (equipment.EquipmentType()) {
                     case Weapon:
                         listBuyWeapon.Items.addElement(equipment);
@@ -564,8 +566,8 @@ public class FormEquipment extends form {
                 }
             }
         }
-        ListBox[] buyBoxes = new ListBox[]{listBuyWeapon, listBuyShield, listBuyGadget};
-        Label[] buyLabels = new Label[]{labelBuyWeaponNone, labelBuyShieldNone, labelBuyGadgetNone};
+        ListBox[] buyBoxes = {listBuyWeapon, listBuyShield, listBuyGadget};
+        Label[] buyLabels = {labelBuyWeaponNone, labelBuyShieldNone, labelBuyGadgetNone};
         for (int i = 0; i < buyBoxes.length; i++) {
             boolean entries = (!buyBoxes[i].Items.isEmpty());
             buyBoxes[i].setVisible(entries);
@@ -577,7 +579,7 @@ public class FormEquipment extends form {
     }
 
     private void UpdateInfo() {
-        boolean visible = selectedEquipment != null;
+        boolean visible = null != selectedEquipment;
         pictureEquipment.setVisible(visible);
         labelNameLabel.setVisible(visible);
         labelTypeLabel.setVisible(visible);
@@ -585,7 +587,7 @@ public class FormEquipment extends form {
         labelSellPriceLabel.setVisible(visible);
         labelPowerLabel.setVisible(visible);
         labelChargeLabel.setVisible(visible);
-        if (selectedEquipment == null) {
+        if (null == selectedEquipment) {
             labelName.setText("");
             labelType.setText("");
             labelDescription.setText("");
@@ -620,7 +622,7 @@ public class FormEquipment extends form {
             labelPower.setText(power);
             labelCharge.setText(charge);
             pictureEquipment.setImage(selectedEquipment.Image());
-            buttonBuy.setVisible(!sellSideSelected && (selectedEquipment.Price() > 0));
+            buttonBuy.setVisible(!sellSideSelected && (0 < selectedEquipment.Price()));
             buttonSell.setVisible(sellSideSelected);
         }
     }
@@ -636,21 +638,21 @@ public class FormEquipment extends form {
         int index;
         equipSell = ship.getEquipmentByType(EquipmentType.Weapon);
         for (index = 0; index < equipSell.length; index++) {
-            Object obj = equipSell[index] == null ? Strings.EquipmentFreeSlot : equipSell[index];
+            Object obj = null == equipSell[index] ? Strings.EquipmentFreeSlot : equipSell[index];
             listSellWeapon.Items.addElement(obj);
         }
         equipSell = ship.getEquipmentByType(EquipmentType.Shield);
         for (index = 0; index < equipSell.length; index++) {
-            Object obj = equipSell[index] == null ? Strings.EquipmentFreeSlot : equipSell[index];
+            Object obj = null == equipSell[index] ? Strings.EquipmentFreeSlot : equipSell[index];
             listSellShield.Items.addElement(obj);
         }
         equipSell = ship.getEquipmentByType(EquipmentType.Gadget);
         for (index = 0; index < equipSell.length; index++) {
-            Object obj = equipSell[index] == null ? Strings.EquipmentFreeSlot : equipSell[index];
+            Object obj = null == equipSell[index] ? Strings.EquipmentFreeSlot : equipSell[index];
             listSellGadget.Items.addElement(obj);
         }
-        ListBox[] sellBoxes = new ListBox[]{listSellWeapon, listSellShield, listSellGadget};
-        Label[] sellLabels = new Label[]{labelSellWeaponNoSlots, labelSellShieldNoSlots, labelSellGadgetNoSlots};
+        ListBox[] sellBoxes = {listSellWeapon, listSellShield, listSellGadget};
+        Label[] sellLabels = {labelSellWeaponNoSlots, labelSellShieldNoSlots, labelSellGadgetNoSlots};
         for (int i = 0; i < sellBoxes.length; i++) {
             boolean entries = (!sellBoxes[i].Items.isEmpty());
             sellBoxes[i].setVisible(entries);
@@ -662,7 +664,7 @@ public class FormEquipment extends form {
     }
 
     private void BuyClick(Object sender, EventData e) {
-        if (selectedEquipment != null) {
+        if (null != selectedEquipment) {
             Buy();
         }
     }
@@ -685,7 +687,7 @@ public class FormEquipment extends form {
     }
 
     private void SellClick() {
-        if (selectedEquipment != null) {
+        if (null != selectedEquipment) {
             Sell();
         }
     }

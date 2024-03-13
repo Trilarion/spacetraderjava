@@ -1,6 +1,8 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.*;
+import org.spacetrader.controller.Constants;
+import org.spacetrader.controller.Functions;
+import org.spacetrader.controller.Game;
 import org.spacetrader.model.crew.Commander;
 import org.spacetrader.model.crew.CrewMember;
 import org.spacetrader.model.enums.ShipyardId;
@@ -18,9 +20,9 @@ import java.util.ArrayList;
 
 
 public class FormMonster extends form {
+    private static final int SplitSystems = 31;
     private final Game game = Game.getCurrentGame();
     private final Commander commander = game.Commander();
-    private final int SplitSystems = 31;
     private final Label labelMercIds;
     private final Label labelMercNames;
     private final Label labelMercSkillsPilot;
@@ -433,7 +435,7 @@ public class FormMonster extends form {
 
     private int Compare(int a, int b, String sortWhat, String sortBy) {
         int compareVal = 0;
-        if (sortWhat.equals("M")) { // Mercenaries
+        if ("M".equals(sortWhat)) { // Mercenaries
             CrewMember A = game.Mercenaries()[a];
             CrewMember B = game.Mercenaries()[b];
             boolean strCompare = false;
@@ -477,13 +479,13 @@ public class FormMonster extends form {
                 compareVal = ((Integer) valA).compareTo((Integer) valB);
             }
             // Secondary sort by Name
-            if (compareVal == 0 && !"N".equals(sortBy)) {
+            if (0 == compareVal && !"N".equals(sortBy)) {
                 compareVal = A.Name().compareTo(B.Name());
             }
         } else {
             StarSystem A = game.Universe()[a];
             StarSystem B = game.Universe()[b];
-            if (sortBy.equals("D")) { // Description
+            if ("D".equals(sortBy)) { // Description
                 String nameA = "";
                 String nameB = "";
                 switch (SomeStringsForSwitch.valueOf(sortWhat)) {
@@ -498,7 +500,7 @@ public class FormMonster extends form {
                 }
                 compareVal = nameA.compareTo(nameB);
             }
-            if (compareVal == 0) { // Default sort - System Name
+            if (0 == compareVal) { // Default sort - System Name
                 compareVal = A.Name().compareTo(B.Name());
             }
         }
@@ -506,7 +508,7 @@ public class FormMonster extends form {
     }
 
     private String CurrentSystemDisplay(CrewMember merc) {
-        return (merc.CurrentSystem() == null
+        return (null == merc.CurrentSystem()
                 ? Strings.Unknown : (commander.getShip().HasCrew(merc.Id())
                 ? Functions.StringVars(Strings.MercOnBoard, merc.CurrentSystem().Name()) : merc.CurrentSystem().Name()));
     }
@@ -527,7 +529,7 @@ public class FormMonster extends form {
             if (system.ShowSpecialButton()) {
                 quests.add(system.Id().getId());
             }
-            if (system.ShipyardId() != ShipyardId.NA) {
+            if (ShipyardId.NA != system.ShipyardId()) {
                 shipyards.add(system.Id().getId());
             }
         }
@@ -555,7 +557,7 @@ public class FormMonster extends form {
         labelMercSkillsEngineer.setHeight(mercHeight);
         // Due to a limitation of the LinkLabel control, no more than 32 links can exist in the LinkLabel.
         labelMercSystems.setHeight((int) Math.ceil(Math.min(mercIds.length, SplitSystems) * 12.5) + 1);
-        if (mercIds.length > SplitSystems) {
+        if (SplitSystems < mercIds.length) {
             labelMercSystems2.setVisible(true);
             labelMercSystems2.setHeight((int) Math.ceil((mercIds.length - SplitSystems) * 12.5) + 1);
         } else {
@@ -579,7 +581,7 @@ public class FormMonster extends form {
         }
         for (int i = 0; i < array.length - 1; i++) {
             for (int j = 0; j < array.length - i - 1; j++) {
-                if (Compare(array[j], array[j + 1], sortWhat, sortBy) > 0) {
+                if (0 < Compare(array[j], array[j + 1], sortWhat, sortBy)) {
                     int temp = array[j];
                     array[j] = array[j + 1];
                     array[j + 1] = temp;
@@ -607,14 +609,14 @@ public class FormMonster extends form {
         labelMercSystems2.links.clear();
         for (int i = 0; i < mercIds.length; i++) {
             CrewMember merc = game.Mercenaries()[mercIds[i]];
-            boolean link = merc.CurrentSystem() != null && !commander.getShip().HasCrew(merc.Id());
+            boolean link = null != merc.CurrentSystem() && !commander.getShip().HasCrew(merc.Id());
             labelMercIds.setText(labelMercIds.getText() + ((merc.Id().getId()) + Strings.newline));
             labelMercNames.setText(labelMercNames.getText() + (merc.Name() + Strings.newline));
             labelMercSkillsPilot.setText(labelMercSkillsPilot.getText() + (merc.Pilot() + Strings.newline));
             labelMercSkillsFighter.setText(labelMercSkillsFighter.getText() + (merc.Fighter() + Strings.newline));
             labelMercSkillsTrader.setText(labelMercSkillsTrader.getText() + (merc.Trader() + Strings.newline));
             labelMercSkillsEngineer.setText(labelMercSkillsEngineer.getText() + (merc.Engineer() + Strings.newline));
-            if (i < SplitSystems) {
+            if (SplitSystems > i) {
                 int start = labelMercSystems.getText().length();
                 labelMercSystems.setText(labelMercSystems.getText() + (CurrentSystemDisplay(merc) + Strings.newline));
                 if (link) {

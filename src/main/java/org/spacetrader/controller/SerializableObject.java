@@ -35,7 +35,7 @@ abstract public class SerializableObject {
     public static SerializableObject[] ArrayListToArray(ArrayList<Hashtable> list, String typeName) {
         SerializableObject[] array = null;
         SupportedTypesOfSomethingST type = SupportedTypesOfSomethingST.valueOf(typeName);
-        if (list == null) {
+        if (null == list) {
             return null;
         }
         switch (type) {
@@ -63,7 +63,7 @@ abstract public class SerializableObject {
         for (int index = 0; index < list.size(); index++) {
             Hashtable hash = list.get(index);
             SerializableObject obj;
-            if (hash == null) {
+            if (null == hash) {
                 obj = null;
             } else {
                 switch (type) {
@@ -113,10 +113,10 @@ abstract public class SerializableObject {
 
     public static ArrayList<Hashtable> ArrayToArrayList(SerializableObject[] array) {
         ArrayList<Hashtable> list = null;
-        if (array != null) {
+        if (null != array) {
             list = new ArrayList<>();
             for (SerializableObject obj : array) {
-                list.add(obj == null ? null : obj.Serialize());
+                list.add(null == obj ? null : obj.Serialize());
             }
         }
         return list;

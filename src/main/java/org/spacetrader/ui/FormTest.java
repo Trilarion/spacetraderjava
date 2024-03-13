@@ -1,13 +1,13 @@
 package org.spacetrader.ui;
 
 import org.spacetrader.controller.Constants;
-import org.spacetrader.model.events.SpecialEvent;
 import org.spacetrader.model.enums.AlertType;
+import org.spacetrader.model.events.SpecialEvent;
 import org.spacetrader.model.events.SpecialEventType;
 import org.winforms.Button;
 import org.winforms.Label;
-import org.winforms.*;
 import org.winforms.TextField;
+import org.winforms.*;
 import org.winforms.enums.*;
 
 import java.awt.*;

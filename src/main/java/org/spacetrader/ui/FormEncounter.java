@@ -1,6 +1,8 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.*;
+import org.spacetrader.controller.Constants;
+import org.spacetrader.controller.Functions;
+import org.spacetrader.controller.Game;
 import org.spacetrader.model.crew.Commander;
 import org.spacetrader.model.enums.AlertType;
 import org.spacetrader.model.events.EncounterResult;
@@ -1050,7 +1052,7 @@ public class FormEncounter extends form {
         UpdateShipInfo();
         UpdateTribbles();
         UpdateButtons();
-        if (game.EncounterImageIndex() >= 0) {
+        if (0 <= game.EncounterImageIndex()) {
             pictureEncounterType.setImage(ilEncounterType.getImages()[game.EncounterImageIndex()]);
         } else {
             pictureEncounterType.setVisible(false);
@@ -1070,7 +1072,7 @@ public class FormEncounter extends form {
 
     private void ExecuteAction() {
         _result = game.EncounterExecuteAction(this);
-        if (_result == EncounterResult.Continue) {
+        if (EncounterResult.Continue == _result) {
             UpdateButtons();
             UpdateShipStats();
             labelEncounter.setText(game.EncounterText());
@@ -1214,7 +1216,7 @@ public class FormEncounter extends form {
     }
 
     private void UpdateTribbles() {
-        PictureBox[] tribbles = new PictureBox[]{
+        PictureBox[] tribbles = {
                 pictureTribbles00, pictureTribbles01, pictureTribbles02, pictureTribbles03, pictureTribbles04, pictureTribbles05,
                 pictureTribbles10, pictureTribbles11, pictureTribbles12, pictureTribbles13, pictureTribbles14, pictureTribbles15,
                 pictureTribbles20, pictureTribbles21, pictureTribbles22, pictureTribbles23, pictureTribbles24, pictureTribbles25,
@@ -1293,7 +1295,7 @@ public class FormEncounter extends form {
     private void buttonSurrender_Click(Object sender, EventData e) {
         DisableAuto();
         _result = game.EncounterVerifySurrender(this);
-        if (_result != EncounterResult.Continue) {
+        if (EncounterResult.Continue != _result) {
             Close();
         }
     }
@@ -1305,7 +1307,7 @@ public class FormEncounter extends form {
 
     private void buttonYield_Click(Object sender, EventData e) {
         _result = game.EncounterVerifyYield(this);
-        if (_result != EncounterResult.Continue) {
+        if (EncounterResult.Continue != _result) {
             Close();
         }
     }

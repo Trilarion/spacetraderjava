@@ -10,7 +10,7 @@ public class Path {
     }
 
     public static String getDefaultExtension(String filename, String extension) {
-        return getExtension(filename) == null ? filename + extension : filename;
+        return null == getExtension(filename) ? filename + extension : filename;
     }
 
     public static String removeExtension(String s) {

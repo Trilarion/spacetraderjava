@@ -2,8 +2,8 @@ package org.spacetrader.ui;
 
 import org.winforms.Button;
 import org.winforms.Label;
-import org.winforms.*;
 import org.winforms.TextField;
+import org.winforms.*;
 import org.winforms.enums.DialogResult;
 import org.winforms.enums.FlatStyle;
 import org.winforms.enums.FormBorderStyle;
@@ -14,7 +14,7 @@ import java.awt.*;
 
 public class FormFind extends form {
     private static String text = "";
-    private static boolean boxChecked = false;
+    private static boolean boxChecked;
     private final CheckBox checkBoxTrack;
     private final TextField textSystem;
 

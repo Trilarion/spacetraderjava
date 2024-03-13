@@ -5,16 +5,15 @@ public abstract class ChainedEventHandler<Sender, Data> extends EventHandler<Sen
     private final EventHandler<Sender, Data> chain;
 
     public ChainedEventHandler(EventHandler<Sender, Data> chain) {
-        super();
         this.chain = chain;
     }
 
     @Override
     public void handle(Sender sender, Data data) {
-        if (chain != null) {
+        if (null != chain) {
             chain.handle(sender, data);
         }
-        this.instanceHandle(sender, data);
+        instanceHandle(sender, data);
     }
 
     abstract protected void instanceHandle(Sender sender, Data e);

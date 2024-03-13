@@ -1,8 +1,8 @@
 package org.spacetrader.model.ship.equipment;
 
-import org.spacetrader.model.crew.Commander;
 import org.spacetrader.controller.Game;
 import org.spacetrader.controller.SerializableObject;
+import org.spacetrader.model.crew.Commander;
 import org.spacetrader.model.enums.TechLevel;
 import org.spacetrader.ui.Strings;
 import org.winforms.Image;
@@ -90,7 +90,7 @@ abstract public class Equipment extends SerializableObject implements Cloneable 
     public int Price() {
         Commander commander = Game.getCurrentGame().Commander();
         int price = 0;
-        if (commander != null && commander.CurrentSystem().TechLevel().ordinal() >= MinimumTechLevel().ordinal()) {
+        if (null != commander && commander.CurrentSystem().TechLevel().ordinal() >= MinimumTechLevel().ordinal()) {
             price = (this.price * (100 - commander.getShip().Trader())) / 100;
         }
         return price;

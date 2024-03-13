@@ -23,7 +23,7 @@ public class FormGetLoan extends form {
         Button buttonMax = new Button();
         Button buttonNothing = new Button();
         Label labelStatement = new Label();
-                suspendLayout();
+        suspendLayout();
         // labelQuestion
         labelQuestion.setAutoSize(true);
         labelQuestion.setLocation(new Point(8, 24));
@@ -88,7 +88,7 @@ public class FormGetLoan extends form {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Get Loan");
-                resumeLayout(false);
+        resumeLayout(false);
         numAmount.setMaximum(max);
         numAmount.setValue(numAmount.getMinimum());
         labelStatement.setText(Functions.StringVars("You can borrow up to ^1.", Functions.Multiples(max, Strings.MoneyUnit)));

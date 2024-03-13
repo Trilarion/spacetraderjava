@@ -17,7 +17,6 @@ public class Control {  // make generic for the type of component that we get
     private Color backgroundColor;
 
     public Control(Component swingComponent) {
-        super();
         this.swingComponent = swingComponent;
     }
 
@@ -54,7 +53,7 @@ public class Control {  // make generic for the type of component that we get
 
     public org.winforms.Font getFont() {
         Font font = swingComponent.getFont();
-        return font == null ? null : new org.winforms.Font(font);
+        return null == font ? null : new org.winforms.Font(font);
     }
 
     public void setFont(Font font) {
@@ -179,6 +178,6 @@ public class Control {  // make generic for the type of component that we get
 
     public void suspendLayout() {
         // TODO implementation?
-        
+
     }
 }

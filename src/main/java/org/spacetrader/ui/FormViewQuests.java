@@ -3,8 +3,8 @@ package org.spacetrader.ui;
 import org.spacetrader.controller.Constants;
 import org.spacetrader.controller.Functions;
 import org.spacetrader.controller.Game;
-import org.spacetrader.model.events.SpecialEvent;
 import org.spacetrader.model.enums.CrewMemberId;
+import org.spacetrader.model.events.SpecialEvent;
 import org.spacetrader.model.events.SpecialEventType;
 import org.spacetrader.util.Util;
 import org.winforms.Button;
@@ -77,35 +77,35 @@ public class FormViewQuests extends form {
 
     private String[] GetQuestStrings() {
         ArrayList<String> quests = new ArrayList<>(12);
-        if (game.getQuestStatusGemulon() > SpecialEvent.StatusGemulonNotStarted && game.getQuestStatusGemulon() < SpecialEvent.StatusGemulonDate) {
-            if (game.getQuestStatusGemulon() == SpecialEvent.StatusGemulonDate - 1) {
+        if (SpecialEvent.StatusGemulonNotStarted < game.getQuestStatusGemulon() && SpecialEvent.StatusGemulonDate > game.getQuestStatusGemulon()) {
+            if (SpecialEvent.StatusGemulonDate - 1 == game.getQuestStatusGemulon()) {
                 quests.add(Strings.QuestGemulonInformTomorrow);
             } else {
                 quests.add(Functions.StringVars(Strings.QuestGemulonInformDays, Functions.Multiples(SpecialEvent.StatusGemulonDate - game.getQuestStatusGemulon(), "day")));
             }
-        } else if (game.getQuestStatusGemulon() == SpecialEvent.StatusGemulonFuel) {
+        } else if (SpecialEvent.StatusGemulonFuel == game.getQuestStatusGemulon()) {
             quests.add(Strings.QuestGemulonFuel);
         }
-        if (game.getQuestStatusExperiment() > SpecialEvent.StatusExperimentNotStarted && game.getQuestStatusExperiment() < SpecialEvent.StatusExperimentDate) {
-            if (game.getQuestStatusExperiment() == SpecialEvent.StatusExperimentDate - 1) {
+        if (SpecialEvent.StatusExperimentNotStarted < game.getQuestStatusExperiment() && SpecialEvent.StatusExperimentDate > game.getQuestStatusExperiment()) {
+            if (SpecialEvent.StatusExperimentDate - 1 == game.getQuestStatusExperiment()) {
                 quests.add(Strings.QuestExperimentInformTomorrow);
             } else {
                 quests.add(Functions.StringVars(Strings.QuestExperimentInformDays, Functions.Multiples(SpecialEvent.StatusExperimentDate - game.getQuestStatusExperiment(), "day")));
             }
         }
         if (game.Commander().getShip().ReactorOnBoard()) {
-            if (game.getQuestStatusReactor() == SpecialEvent.StatusReactorFuelOk) {
+            if (SpecialEvent.StatusReactorFuelOk == game.getQuestStatusReactor()) {
                 quests.add(Strings.QuestReactor);
             } else {
                 quests.add(Strings.QuestReactorFuel);
             }
-        } else if (game.getQuestStatusReactor() == SpecialEvent.StatusReactorDelivered) {
+        } else if (SpecialEvent.StatusReactorDelivered == game.getQuestStatusReactor()) {
             quests.add(Strings.QuestReactorLaser);
         }
-        if (game.getQuestStatusSpaceMonster() == SpecialEvent.StatusSpaceMonsterAtAcamar) {
+        if (SpecialEvent.StatusSpaceMonsterAtAcamar == game.getQuestStatusSpaceMonster()) {
             quests.add(Strings.QuestSpaceMonsterKill);
         }
-        if (game.getQuestStatusJapori() == SpecialEvent.StatusJaporiInTransit) {
+        if (SpecialEvent.StatusJaporiInTransit == game.getQuestStatusJapori()) {
             quests.add(Strings.QuestJaporiDeliver);
         }
         switch (game.getQuestStatusDragonfly()) {
@@ -137,7 +137,7 @@ public class FormViewQuests extends form {
                 break;
             case SpecialEvent.StatusPrincessRescued:
                 if (game.Commander().getShip().PrincessOnBoard()) {
-                    if (game.getQuestStatusPrincess() == SpecialEvent.StatusPrincessImpatient) {
+                    if (SpecialEvent.StatusPrincessImpatient == game.getQuestStatusPrincess()) {
                         quests.add(Functions.StringVars(Strings.QuestPrincessReturningImpatient, game.Mercenaries()[CrewMemberId.Princess.getId()].Name()));
                     } else {
                         quests.add(Functions.StringVars(Strings.QuestPrincessReturning, game.Mercenaries()[CrewMemberId.Princess.getId()].Name()));
@@ -150,10 +150,10 @@ public class FormViewQuests extends form {
                 quests.add(Strings.QuestPrincessQuantum);
                 break;
         }
-        if (game.getQuestStatusScarab() == SpecialEvent.StatusScarabHunting) {
+        if (SpecialEvent.StatusScarabHunting == game.getQuestStatusScarab()) {
             quests.add(Strings.QuestScarabFind);
-        } else if (game.getQuestStatusScarab() == SpecialEvent.StatusScarabDestroyed) {
-            if (Constants.SpecialEvents[SpecialEventType.ScarabUpgradeHull.getId()].Location() == null) {
+        } else if (SpecialEvent.StatusScarabDestroyed == game.getQuestStatusScarab()) {
+            if (null == Constants.SpecialEvents[SpecialEventType.ScarabUpgradeHull.getId()].Location()) {
                 quests.add(Functions.StringVars(Strings.QuestScarabNotify, Constants.SpecialEvents[SpecialEventType.ScarabDestroyed.getId()].Location().Name()));
             } else {
                 quests.add(Functions.StringVars(Strings.QuestScarabHull, Constants.SpecialEvents[SpecialEventType.ScarabUpgradeHull.getId()].Location().Name()));
@@ -161,38 +161,38 @@ public class FormViewQuests extends form {
         }
         if (game.Commander().getShip().SculptureOnBoard()) {
             quests.add(Strings.QuestSculpture);
-        } else if (game.getQuestStatusReactor() == SpecialEvent.StatusReactorDelivered) {
+        } else if (SpecialEvent.StatusReactorDelivered == game.getQuestStatusReactor()) {
             quests.add(Strings.QuestSculptureHiddenBays);
         }
-        if (game.getQuestStatusArtifact() == SpecialEvent.StatusArtifactOnBoard) {
+        if (SpecialEvent.StatusArtifactOnBoard == game.getQuestStatusArtifact()) {
             quests.add(Strings.QuestArtifact);
         }
         if (game.Commander().getShip().JarekOnBoard()) {
-            if (game.getQuestStatusJarek() == SpecialEvent.StatusJarekImpatient) {
+            if (SpecialEvent.StatusJarekImpatient == game.getQuestStatusJarek()) {
                 quests.add(Strings.QuestJarekImpatient);
             } else {
                 quests.add(Strings.QuestJarek);
             }
         }
         if (game.Commander().getShip().WildOnBoard()) {
-            if (game.getQuestStatusWild() == SpecialEvent.StatusWildImpatient) {
+            if (SpecialEvent.StatusWildImpatient == game.getQuestStatusWild()) {
                 quests.add(Strings.QuestWildImpatient);
             } else {
                 quests.add(Strings.QuestWild);
             }
         }
-        if (game.Commander().getShip().getTribbles() > 0) {
+        if (0 < game.Commander().getShip().getTribbles()) {
             quests.add(Strings.QuestTribbles);
         }
-        if (game.getQuestStatusMoon() == SpecialEvent.StatusMoonBought) {
+        if (SpecialEvent.StatusMoonBought == game.getQuestStatusMoon()) {
             quests.add(Strings.QuestMoon);
         }
-        return Functions.ArrayListtoStringArray(quests);
+        return Functions.arrayListtoStringArray(quests);
     }
 
     private void UpdateAll() {
         String[] quests = GetQuestStrings();
-        if (quests.length == 0) {
+        if (0 == quests.length) {
             labelQuests.setText(Strings.QuestNone);
         } else {
             labelQuests.setText(Util.stringsJoin(Strings.newline + Strings.newline, quests));
@@ -200,7 +200,7 @@ public class FormViewQuests extends form {
                 String systemName = Strings.SystemNames[i];
                 int start = 0;
                 int index = -1;
-                while ((index = labelQuests.getText().indexOf(systemName, start)) >= 0) {
+                while (0 <= (index = labelQuests.getText().indexOf(systemName, start))) {
                     labelQuests.links.add(index, systemName.length(), systemName);
                     start = index + systemName.length();
                 }

@@ -2,9 +2,9 @@ package org.spacetrader.ui;
 
 import org.spacetrader.util.Convertor;
 import org.spacetrader.util.Lisp;
+import org.winforms.Image;
 import org.winforms.ImageListStreamer;
 import org.winforms.ResourceManager;
-import org.winforms.Image;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,14 +21,7 @@ public class ImageStreamResourceManager extends ResourceManager {
 
     public ImageListStreamer getStream() {
         List<Entry<Object, Object>> ls = new ArrayList<>(properties.entrySet());
-        Collections.sort(ls, new Comparator<>() {
-            @Override
-            public int compare(Entry<Object, Object> arg0, Entry<Object, Object> arg1) {
-                String left = (String) arg0.getKey();
-                String right = (String) arg1.getKey();
-                return left.compareTo(right);
-            }
-        });
+        Collections.sort(ls, new EntryComparator());
         Iterable<Image> images = Lisp.map(ls, new Convertor<>() {
             @Override
             public Image convert(Entry<Object, Object> entry) {
@@ -36,5 +29,14 @@ public class ImageStreamResourceManager extends ResourceManager {
             }
         });
         return new ImageListStreamer(images);
+    }
+
+    private static class EntryComparator implements Comparator<Entry<Object, Object>> {
+        @Override
+        public int compare(Entry<Object, Object> arg0, Entry<Object, Object> arg1) {
+            String left = (String) arg0.getKey();
+            String right = (String) arg1.getKey();
+            return left.compareTo(right);
+        }
     }
 }

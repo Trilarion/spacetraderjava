@@ -1,9 +1,9 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.model.crew.Commander;
 import org.spacetrader.controller.Constants;
 import org.spacetrader.controller.Functions;
 import org.spacetrader.controller.Game;
+import org.spacetrader.model.crew.Commander;
 import org.spacetrader.model.enums.AlertType;
 import org.winforms.Button;
 import org.winforms.Font;
@@ -18,7 +18,7 @@ import java.util.Arrays;
 public class FormViewBank extends form {
     private final Game game = Game.getCurrentGame();
     private final Commander commander = game.Commander();
-    private final int MaxLoan = commander.getPoliceRecordScore() >= Constants.PoliceRecordScoreClean
+    private final int MaxLoan = Constants.PoliceRecordScoreClean <= commander.getPoliceRecordScore()
             ? Math.min(25000, Math.max(1000, commander.Worth() / 5000 * 500)) : 500;
     private final Button buttonBuyInsurance;
     private final Button buttonPayBack;
@@ -232,11 +232,11 @@ public class FormViewBank extends form {
         // Loan Info
         labelCurrentDebt.setText(Functions.FormatMoney(commander.getDebt()));
         labelMaxLoan.setText(Functions.FormatMoney(MaxLoan));
-        buttonPayBack.setVisible((commander.getDebt() > 0));
+        buttonPayBack.setVisible((0 < commander.getDebt()));
         // Insurance Info
         labelShipValue.setText(Functions.FormatMoney(commander.getShip().getBaseWorth(true)));
         labelNoClaim.setText(Functions.FormatPercent(commander.NoClaim()));
-        labelMaxNoClaim.setVisible((commander.NoClaim() == Constants.MaxNoClaim));
+        labelMaxNoClaim.setVisible((Constants.MaxNoClaim == commander.NoClaim()));
         labelInsAmt.setText(Functions.StringVars(Strings.MoneyRateSuffix, Functions.FormatMoney(game.InsuranceCosts())));
         buttonBuyInsurance.setText(Functions.StringVars("^1 Insurance", commander.getInsurance() ? "Stop" : "Buy"));
     }
@@ -246,7 +246,7 @@ public class FormViewBank extends form {
             FormAlert.Alert(AlertType.DebtTooLargeLoan, this);
         } else {
             FormGetLoan form = new FormGetLoan(MaxLoan - commander.getDebt());
-            if (form.ShowDialog(this) == DialogResult.OK) {
+            if (DialogResult.OK == form.ShowDialog(this)) {
                 commander.setCash(commander.getCash() + form.Amount());
                 commander.setDebt(commander.getDebt() + form.Amount());
                 UpdateAll();
@@ -256,11 +256,11 @@ public class FormViewBank extends form {
     }
 
     private void buttonPayBack_Click(Object sender, EventData e) {
-        if (commander.getDebt() == 0) {
+        if (0 == commander.getDebt()) {
             FormAlert.Alert(AlertType.DebtNone, this);
         } else {
             FormPayBackLoan form = new FormPayBackLoan();
-            if (form.ShowDialog(this) == DialogResult.OK) {
+            if (DialogResult.OK == form.ShowDialog(this)) {
                 commander.setCash(commander.getCash() - form.Amount());
                 commander.setDebt(commander.getDebt() - form.Amount());
                 UpdateAll();
@@ -271,7 +271,7 @@ public class FormViewBank extends form {
 
     private void buttonBuyInsurance_Click(Object sender, EventData e) {
         if (commander.getInsurance()) {
-            if (FormAlert.Alert(AlertType.InsuranceStop, this) == DialogResult.Yes) {
+            if (DialogResult.Yes == FormAlert.Alert(AlertType.InsuranceStop, this)) {
                 commander.setInsurance(false);
                 commander.NoClaim(0);
             }

@@ -59,7 +59,7 @@ public class Graphics implements EventData {
     }
 
     public Dimension measureString(String text, java.awt.Font font) {
-        if (graphics == null) {
+        if (null == graphics) {
             return new Dimension(text.length() * 5, 30);
         }
         FontMetrics metrics = graphics.getFontMetrics(font);

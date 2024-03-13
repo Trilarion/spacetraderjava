@@ -16,8 +16,8 @@ public class Bitmap extends Image implements Icon, Serializable {
     private static final long serialVersionUID = 2134761799614301086L;
     final URL imageUrl;
     transient BufferedImage image;
-    transient boolean transSet = false;
-    Color transparent = null;
+    transient boolean transSet;
+    Color transparent;
 
     public Bitmap(Image source) {
         image = ((Bitmap) source).image;  // TODO casts necessary?
@@ -64,7 +64,7 @@ public class Bitmap extends Image implements Icon, Serializable {
             throw new Error("setTransparentColor called twice");
         }
         transSet = true;
-        if (transparentColor == null) {
+        if (null == transparentColor) {
             return;
         }
         // Don't yet support all colors.
@@ -81,12 +81,12 @@ public class Bitmap extends Image implements Icon, Serializable {
         }
         int transparent = 0;
         this.transparent = transparentColor;
-        BufferedImage bi = (BufferedImage) this.asSwingImage();
+        BufferedImage bufferedImage = (BufferedImage) asSwingImage();
         BufferedImage newImage = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
         int[] arr = new int[1];
-        WritableRaster raster1 = bi.getRaster();
+        WritableRaster raster1 = bufferedImage.getRaster();
         WritableRaster raster2 = newImage.getRaster();
-        ColorTranslate translate = new ColorTranslate(bi.getColorModel(), transparent);
+        ColorTranslate translate = new ColorTranslate(bufferedImage.getColorModel(), transparent);
         for (int x = 0; x < getWidth(); x++) {
             for (int y = 0; y < getHeight(); y++) {
                 raster1.getPixel(x, y, arr);

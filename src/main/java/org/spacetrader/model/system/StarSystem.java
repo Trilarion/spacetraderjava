@@ -1,12 +1,14 @@
 package org.spacetrader.model.system;
 
-import org.spacetrader.controller.*;
+import org.spacetrader.controller.Constants;
+import org.spacetrader.controller.Functions;
+import org.spacetrader.controller.Game;
+import org.spacetrader.controller.SerializableObject;
 import org.spacetrader.model.PoliticalSystem;
-import org.spacetrader.model.crew.Commander;
-import org.spacetrader.model.crew.CrewMember;
-import org.spacetrader.model.enums.TechLevel;
 import org.spacetrader.model.cargo.TradeItem;
 import org.spacetrader.model.cargo.TradeItemType;
+import org.spacetrader.model.crew.Commander;
+import org.spacetrader.model.crew.CrewMember;
 import org.spacetrader.model.enums.*;
 import org.spacetrader.model.events.SpecialEvent;
 import org.spacetrader.model.events.SpecialEventType;
@@ -28,8 +30,8 @@ public class StarSystem extends SerializableObject {
     private SpecialResource specialResource;
     private SystemPressure systemPressure;
     private TechLevel techLevel;
-    private boolean visited = false;
-    private int countDown = 0;
+    private boolean visited;
+    private int countDown;
     private int x;  // TODO make coordinates a point
     private int y;
     private int[] tradeItems = new int[10];  // make 10 a constant
@@ -66,40 +68,40 @@ public class StarSystem extends SerializableObject {
 
     public void initializeTradeItems() {
         for (int i = 0; i < Constants.TradeItems.length; i++) {
-            if (!ItemTraded(Constants.TradeItems[i])) {
-                tradeItems[i] = 0;
-            } else {
-                tradeItems[i] = (this.Size().getId() + 1)
-                        * (Functions.GetRandom(9, 14) - Math.abs(Constants.TradeItems[i].TechTopProduction().ordinal() - this.TechLevel().ordinal()));
+            if (ItemTraded(Constants.TradeItems[i])) {
+                tradeItems[i] = (Size().getId() + 1)
+                        * (Functions.GetRandom(9, 14) - Math.abs(Constants.TradeItems[i].TechTopProduction().ordinal() - TechLevel().ordinal()));
                 // Because of the enormous profits possible, there shouldn't be too many robots or narcotics available.
                 if (i >= TradeItemType.Narcotics.getId()) {
                     tradeItems[i] = ((tradeItems[i] * (5 - Game.getCurrentGame().Difficulty().getId())) / (6 - Game.getCurrentGame().Difficulty().getId())) + 1;
                 }
-                if (this.SpecialResource() == Constants.TradeItems[i].ResourceLowPrice()) {
+                if (SpecialResource() == Constants.TradeItems[i].ResourceLowPrice()) {
                     tradeItems[i] = tradeItems[i] * 4 / 3;
                 }
-                if (this.SpecialResource() == Constants.TradeItems[i].ResourceHighPrice()) {
+                if (SpecialResource() == Constants.TradeItems[i].ResourceHighPrice()) {
                     tradeItems[i] = tradeItems[i] * 3 / 4;
                 }
-                if (this.SystemPressure() == Constants.TradeItems[i].PressurePriceHike()) {
+                if (SystemPressure() == Constants.TradeItems[i].PressurePriceHike()) {
                     tradeItems[i] /= 5;
                 }
                 tradeItems[i] = tradeItems[i] - Functions.GetRandom(10) + Functions.GetRandom(10);
-                if (tradeItems[i] < 0) {
+                if (0 > tradeItems[i]) {
                     tradeItems[i] = 0;
                 }
+            } else {
+                tradeItems[i] = 0;
             }
         }
     }
 
     public boolean ItemTraded(TradeItem item) {
-        return ((item.Type() != TradeItemType.Narcotics || PoliticalSystem().DrugsOk())
-                && (item.Type() != TradeItemType.Firearms || PoliticalSystem().FirearmsOk()) && TechLevel().ordinal() >= item.TechProduction().ordinal());
+        return ((TradeItemType.Narcotics != item.Type() || PoliticalSystem().DrugsOk())
+                && (TradeItemType.Firearms != item.Type() || PoliticalSystem().FirearmsOk()) && TechLevel().ordinal() >= item.TechProduction().ordinal());
     }
 
     public boolean ItemUsed(TradeItem item) {
-        return ((item.Type() != TradeItemType.Narcotics || PoliticalSystem().DrugsOk())
-                && (item.Type() != TradeItemType.Firearms || PoliticalSystem().FirearmsOk()) && TechLevel().ordinal() >= item.TechUsage().ordinal());
+        return ((TradeItemType.Narcotics != item.Type() || PoliticalSystem().DrugsOk())
+                && (TradeItemType.Firearms != item.Type() || PoliticalSystem().FirearmsOk()) && TechLevel().ordinal() >= item.TechUsage().ordinal());
     }
 
     @Override
@@ -129,28 +131,28 @@ public class StarSystem extends SerializableObject {
             case Dragonfly:
             case Experiment:
             case Jarek:
-                show = game.Commander().getPoliceRecordScore() >= Constants.PoliceRecordScoreDubious;
+                show = Constants.PoliceRecordScoreDubious <= game.Commander().getPoliceRecordScore();
                 break;
             case ArtifactDelivery:
                 show = game.Commander().getShip().ArtifactOnBoard();
                 break;
             case CargoForSale:
-                show = game.Commander().getShip().FreeCargoBays() >= 3;
+                show = 3 <= game.Commander().getShip().FreeCargoBays();
                 break;
             case DragonflyBaratas:
-                show = game.getQuestStatusDragonfly() > SpecialEvent.StatusDragonflyNotStarted
-                        && game.getQuestStatusDragonfly() < SpecialEvent.StatusDragonflyDestroyed;
+                show = SpecialEvent.StatusDragonflyNotStarted < game.getQuestStatusDragonfly()
+                        && SpecialEvent.StatusDragonflyDestroyed > game.getQuestStatusDragonfly();
                 break;
             case DragonflyDestroyed:
-                show = game.getQuestStatusDragonfly() == SpecialEvent.StatusDragonflyDestroyed;
+                show = SpecialEvent.StatusDragonflyDestroyed == game.getQuestStatusDragonfly();
                 break;
             case DragonflyMelina:
-                show = game.getQuestStatusDragonfly() > SpecialEvent.StatusDragonflyFlyBaratas
-                        && game.getQuestStatusDragonfly() < SpecialEvent.StatusDragonflyDestroyed;
+                show = SpecialEvent.StatusDragonflyFlyBaratas < game.getQuestStatusDragonfly()
+                        && SpecialEvent.StatusDragonflyDestroyed > game.getQuestStatusDragonfly();
                 break;
             case DragonflyRegulas:
-                show = game.getQuestStatusDragonfly() > SpecialEvent.StatusDragonflyFlyMelina
-                        && game.getQuestStatusDragonfly() < SpecialEvent.StatusDragonflyDestroyed;
+                show = SpecialEvent.StatusDragonflyFlyMelina < game.getQuestStatusDragonfly()
+                        && SpecialEvent.StatusDragonflyDestroyed > game.getQuestStatusDragonfly();
                 break;
             case DragonflyShield:
             case ExperimentFailed:
@@ -168,81 +170,81 @@ public class StarSystem extends SerializableObject {
                 break;
             case EraseRecord:
             case Wild:
-                show = game.Commander().getPoliceRecordScore() < Constants.PoliceRecordScoreDubious;
+                show = Constants.PoliceRecordScoreDubious > game.Commander().getPoliceRecordScore();
                 break;
             case ExperimentStopped:
-                show = game.getQuestStatusExperiment() > SpecialEvent.StatusExperimentNotStarted
-                        && game.getQuestStatusExperiment() < SpecialEvent.StatusExperimentPerformed;
+                show = SpecialEvent.StatusExperimentNotStarted < game.getQuestStatusExperiment()
+                        && SpecialEvent.StatusExperimentPerformed > game.getQuestStatusExperiment();
                 break;
             case GemulonRescued:
-                show = game.getQuestStatusGemulon() > SpecialEvent.StatusGemulonNotStarted
-                        && game.getQuestStatusGemulon() < SpecialEvent.StatusGemulonTooLate;
+                show = SpecialEvent.StatusGemulonNotStarted < game.getQuestStatusGemulon()
+                        && SpecialEvent.StatusGemulonTooLate > game.getQuestStatusGemulon();
                 break;
             case Japori:
-                show = game.getQuestStatusJapori() == SpecialEvent.StatusJaporiNotStarted
-                        && game.Commander().getPoliceRecordScore() >= Constants.PoliceRecordScoreDubious;
+                show = SpecialEvent.StatusJaporiNotStarted == game.getQuestStatusJapori()
+                        && Constants.PoliceRecordScoreDubious <= game.Commander().getPoliceRecordScore();
                 break;
             case JaporiDelivery:
-                show = game.getQuestStatusJapori() == SpecialEvent.StatusJaporiInTransit;
+                show = SpecialEvent.StatusJaporiInTransit == game.getQuestStatusJapori();
                 break;
             case JarekGetsOut:
                 show = game.Commander().getShip().JarekOnBoard();
                 break;
             case Moon:
-                show = game.getQuestStatusMoon() == SpecialEvent.StatusMoonNotStarted
-                        && game.Commander().Worth() > SpecialEvent.MoonCost * .8;
+                show = SpecialEvent.StatusMoonNotStarted == game.getQuestStatusMoon()
+                        && SpecialEvent.MoonCost * .8 < game.Commander().Worth();
                 break;
             case MoonRetirement:
-                show = game.getQuestStatusMoon() == SpecialEvent.StatusMoonBought;
+                show = SpecialEvent.StatusMoonBought == game.getQuestStatusMoon();
                 break;
             case Princess:
-                show = game.Commander().getPoliceRecordScore() >= Constants.PoliceRecordScoreLawful
-                        && game.Commander().getReputationScore() >= Constants.ReputationScoreAverage;
+                show = Constants.PoliceRecordScoreLawful <= game.Commander().getPoliceRecordScore()
+                        && Constants.ReputationScoreAverage <= game.Commander().getReputationScore();
                 break;
             case PrincessCentauri:
-                show = game.getQuestStatusPrincess() >= SpecialEvent.StatusPrincessFlyCentauri
-                        && game.getQuestStatusPrincess() <= SpecialEvent.StatusPrincessFlyQonos;
+                show = SpecialEvent.StatusPrincessFlyCentauri <= game.getQuestStatusPrincess()
+                        && SpecialEvent.StatusPrincessFlyQonos >= game.getQuestStatusPrincess();
                 break;
             case PrincessInthara:
-                show = game.getQuestStatusPrincess() >= SpecialEvent.StatusPrincessFlyInthara
-                        && game.getQuestStatusPrincess() <= SpecialEvent.StatusPrincessFlyQonos;
+                show = SpecialEvent.StatusPrincessFlyInthara <= game.getQuestStatusPrincess()
+                        && SpecialEvent.StatusPrincessFlyQonos >= game.getQuestStatusPrincess();
                 break;
             case PrincessQonos:
-                show = game.getQuestStatusPrincess() == SpecialEvent.StatusPrincessRescued
+                show = SpecialEvent.StatusPrincessRescued == game.getQuestStatusPrincess()
                         && !game.Commander().getShip().PrincessOnBoard();
                 break;
             case PrincessReturned:
                 show = game.Commander().getShip().PrincessOnBoard();
                 break;
             case Reactor:
-                show = game.getQuestStatusReactor() == SpecialEvent.StatusReactorNotStarted
-                        && game.Commander().getPoliceRecordScore() < Constants.PoliceRecordScoreDubious
-                        && game.Commander().getReputationScore() >= Constants.ReputationScoreAverage;
+                show = SpecialEvent.StatusReactorNotStarted == game.getQuestStatusReactor()
+                        && Constants.PoliceRecordScoreDubious > game.Commander().getPoliceRecordScore()
+                        && Constants.ReputationScoreAverage <= game.Commander().getReputationScore();
                 break;
             case ReactorDelivered:
                 show = game.Commander().getShip().ReactorOnBoard();
                 break;
             case Scarab:
-                show = game.getQuestStatusScarab() == SpecialEvent.StatusScarabNotStarted
-                        && game.Commander().getReputationScore() >= Constants.ReputationScoreAverage;
+                show = SpecialEvent.StatusScarabNotStarted == game.getQuestStatusScarab()
+                        && Constants.ReputationScoreAverage <= game.Commander().getReputationScore();
                 break;
             case ScarabDestroyed:
             case ScarabUpgradeHull:
-                show = game.getQuestStatusScarab() == SpecialEvent.StatusScarabDestroyed;
+                show = SpecialEvent.StatusScarabDestroyed == game.getQuestStatusScarab();
                 break;
             case Sculpture:
-                show = game.getQuestStatusSculpture() == SpecialEvent.StatusSculptureNotStarted
-                        && game.Commander().getPoliceRecordScore() < Constants.PoliceRecordScoreDubious
-                        && game.Commander().getReputationScore() >= Constants.ReputationScoreAverage;
+                show = SpecialEvent.StatusSculptureNotStarted == game.getQuestStatusSculpture()
+                        && Constants.PoliceRecordScoreDubious > game.Commander().getPoliceRecordScore()
+                        && Constants.ReputationScoreAverage <= game.Commander().getReputationScore();
                 break;
             case SculptureDelivered:
-                show = game.getQuestStatusSculpture() == SpecialEvent.StatusSculptureInTransit;
+                show = SpecialEvent.StatusSculptureInTransit == game.getQuestStatusSculpture();
                 break;
             case SpaceMonsterKilled:
-                show = game.getQuestStatusSpaceMonster() == SpecialEvent.StatusSpaceMonsterDestroyed;
+                show = SpecialEvent.StatusSpaceMonsterDestroyed == game.getQuestStatusSpaceMonster();
                 break;
             case TribbleBuyer:
-                show = game.Commander().getShip().getTribbles() > 0;
+                show = 0 < game.Commander().getShip().getTribbles();
                 break;
             case WildGetsOut:
                 show = game.Commander().getShip().WildOnBoard();
@@ -267,7 +269,7 @@ public class StarSystem extends SerializableObject {
     }
 
     public int Distance() {
-        return Functions.Distance(this, Game.getCurrentGame().Commander().CurrentSystem());
+        return Functions.distance(this, Game.getCurrentGame().Commander().CurrentSystem());
     }
 
     public StarSystemId Id() {
@@ -304,7 +306,7 @@ public class StarSystem extends SerializableObject {
 
     public Shipyard Shipyard() {
         ShipyardId();
-        return (shipyardId == ShipyardId.NA ? null : Constants.Shipyards[shipyardId.getId()]);
+        return (ShipyardId.NA == shipyardId ? null : Constants.Shipyards[shipyardId.getId()]);
     }
 
     public ShipyardId ShipyardId() {
@@ -321,7 +323,7 @@ public class StarSystem extends SerializableObject {
 
     public SpecialEvent SpecialEvent() {
         SpecialEventType();
-        return (specialEventType == SpecialEventType.NA ? null : Constants.SpecialEvents[specialEventType.getId()]);
+        return (SpecialEventType.NA == specialEventType ? null : Constants.SpecialEvents[specialEventType.getId()]);
     }
 
     public SpecialEventType SpecialEventType() {

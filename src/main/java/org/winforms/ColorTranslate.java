@@ -3,7 +3,7 @@ package org.winforms;
 import java.awt.image.ColorModel;
 
 class ColorTranslate {
-    private final static int[] transparent = new int[]{0, 0, 0, 0};
+    private final static int[] transparent = {0, 0, 0, 0};
     public ColorModel model;
     public int reference;
 

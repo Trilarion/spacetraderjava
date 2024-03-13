@@ -1,6 +1,8 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.*;
+import org.spacetrader.controller.Constants;
+import org.spacetrader.controller.Functions;
+import org.spacetrader.controller.Game;
 import org.spacetrader.model.PoliceRecord;
 import org.spacetrader.model.Reputation;
 import org.spacetrader.model.crew.Commander;
@@ -320,12 +322,12 @@ public class FormViewCommander extends form {
         labelRecord.setText(PoliceRecord.getPoliceRecordFromScore(commander.getPoliceRecordScore()).getName());
         labelReputation.setText(Reputation.getReputationFromScore(commander.getReputationScore()).getName());
         int score = commander.getPoliceRecordScore();
-        if (score <= Constants.PoliceRecordScoreCrook) {
+        if (Constants.PoliceRecordScoreCrook >= score) {
             labelBountyLabel.setVisible(true);
             labelBountyLabel.setText("Bounty offered:");
             labelBounty.setVisible(true);
             labelBounty.setText(Functions.FormatMoney(-1000 * score));
-        } else if (score >= Constants.PoliceRecordScoreTrusted) {
+        } else if (Constants.PoliceRecordScoreTrusted <= score) {
             labelBountyLabel.setVisible(true);
             labelBountyLabel.setText("Angry kingpins:");
             labelBounty.setVisible(true);

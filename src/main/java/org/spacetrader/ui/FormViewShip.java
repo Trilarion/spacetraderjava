@@ -1,6 +1,8 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.*;
+import org.spacetrader.controller.Constants;
+import org.spacetrader.controller.Functions;
+import org.spacetrader.controller.Game;
 import org.spacetrader.model.events.SpecialEvent;
 import org.spacetrader.model.ship.Ship;
 import org.spacetrader.model.ship.equipment.GadgetType;
@@ -102,7 +104,7 @@ public class FormViewShip extends form {
 
 
     private void DisplayEquipment() {
-        if (game.getQuestStatusScarab() == SpecialEvent.StatusScarabDone) {
+        if (SpecialEvent.StatusScarabDone == game.getQuestStatusScarab()) {
             labelEquipLabel.setText(labelEquipLabel.getText() + ("Hull:" + Strings.newline + Strings.newline));
             labelEquip.setText(labelEquip.getText() + ("Hardened" + Strings.newline + Strings.newline));
         }
@@ -110,11 +112,11 @@ public class FormViewShip extends form {
         for (int i = 0; i < Constants.WeaponObjects.length; i++) {
             int count = 0;
             for (int j = 0; j < ship.Weapons().length; j++) {
-                if (ship.Weapons()[j] != null && ship.Weapons()[j].Type() == Constants.WeaponObjects[i].Type()) {
+                if (null != ship.Weapons()[j] && ship.Weapons()[j].Type() == Constants.WeaponObjects[i].Type()) {
                     count++;
                 }
             }
-            if (count > 0) {
+            if (0 < count) {
                 labelEquipLabel.setText(labelEquipLabel.getText() + (equipPrinted ? Strings.newline : "Equipment:" + Strings.newline));
                 labelEquip.setText(labelEquip.getText() + (Functions.Multiples(count, Constants.WeaponObjects[i].Name()) + Strings.newline));
                 equipPrinted = true;
@@ -123,11 +125,11 @@ public class FormViewShip extends form {
         for (int i = 0; i < Constants.Shields.length; i++) {
             int count = 0;
             for (int j = 0; j < ship.Shields().length; j++) {
-                if (ship.Shields()[j] != null && ship.Shields()[j].Type() == Constants.Shields[i].Type()) {
+                if (null != ship.Shields()[j] && ship.Shields()[j].Type() == Constants.Shields[i].Type()) {
                     count++;
                 }
             }
-            if (count > 0) {
+            if (0 < count) {
                 labelEquipLabel.setText(labelEquipLabel.getText() + (equipPrinted ? Strings.newline : "Equipment:" + Strings.newline));
                 labelEquip.setText(labelEquip.getText() + (Functions.Multiples(count, Constants.Shields[i].Name()) + Strings.newline));
                 equipPrinted = true;
@@ -136,11 +138,11 @@ public class FormViewShip extends form {
         for (int i = 0; i < Constants.Gadgets.length; i++) {
             int count = 0;
             for (int j = 0; j < ship.Gadgets().length; j++) {
-                if (ship.Gadgets()[j] != null && ship.Gadgets()[j].Type() == Constants.Gadgets[i].Type()) {
+                if (null != ship.Gadgets()[j] && ship.Gadgets()[j].Type() == Constants.Gadgets[i].Type()) {
                     count++;
                 }
             }
-            if (count > 0) {
+            if (0 < count) {
                 labelEquipLabel.setText(labelEquipLabel.getText() + (equipPrinted ? Strings.newline : "Equipment:" + Strings.newline));
                 if (i == GadgetType.ExtraCargoBays.asInteger() || i == GadgetType.HiddenCargoBays.asInteger()) {
                     count *= 5;
@@ -156,16 +158,16 @@ public class FormViewShip extends form {
             labelEquip.setText(labelEquip.getText() + ("1 " + Strings.ShipInfoEscapePod + Strings.newline));
             equipPrinted = true;
         }
-        if (ship.FreeSlots() > 0) {
+        if (0 < ship.FreeSlots()) {
             labelEquipLabel.setText(labelEquipLabel.getText() + ((equipPrinted ? Strings.newline : "") + "Unfilled:"));
             labelEquip.setText(labelEquip.getText() + (equipPrinted ? Strings.newline : ""));
-            if (ship.FreeSlotsWeapon() > 0) {
+            if (0 < ship.FreeSlotsWeapon()) {
                 labelEquip.setText(labelEquip.getText() + (Functions.Multiples(ship.FreeSlotsWeapon(), "weapon slot") + Strings.newline));
             }
-            if (ship.FreeSlotsShield() > 0) {
+            if (0 < ship.FreeSlotsShield()) {
                 labelEquip.setText(labelEquip.getText() + (Functions.Multiples(ship.FreeSlotsShield(), "shield slot") + Strings.newline));
             }
-            if (ship.FreeSlotsGadget() > 0) {
+            if (0 < ship.FreeSlotsGadget()) {
                 labelEquip.setText(labelEquip.getText() + (Functions.Multiples(ship.FreeSlotsGadget(), "gadget slot") + Strings.newline));
             }
         }
@@ -173,20 +175,20 @@ public class FormViewShip extends form {
 
     private void DisplaySpecialCargo() {
         ArrayList<String> specialCargo = new ArrayList<>(12);
-        if (ship.getTribbles() > 0) {
-            if (ship.getTribbles() == Constants.MaxTribbles) {
+        if (0 < ship.getTribbles()) {
+            if (Constants.MaxTribbles == ship.getTribbles()) {
                 specialCargo.add(Strings.SpecialCargoTribblesInfest);
             } else {
                 specialCargo.add(Functions.Multiples(ship.getTribbles(), Strings.SpecialCargoTribblesCute) + ".");
             }
         }
-        if (game.getQuestStatusJapori() == SpecialEvent.StatusJaporiInTransit) {
+        if (SpecialEvent.StatusJaporiInTransit == game.getQuestStatusJapori()) {
             specialCargo.add(Strings.SpecialCargoJapori);
         }
         if (ship.ArtifactOnBoard()) {
             specialCargo.add(Strings.SpecialCargoArtifact);
         }
-        if (game.getQuestStatusJarek() == SpecialEvent.StatusJarekDone) {
+        if (SpecialEvent.StatusJarekDone == game.getQuestStatusJarek()) {
             specialCargo.add(Strings.SpecialCargoJarek);
         }
         if (ship.ReactorOnBoard()) {
@@ -201,6 +203,6 @@ public class FormViewShip extends form {
         }
         labelSpecialCargo.setText(specialCargo.isEmpty()
                 ? Strings.SpecialCargoNone
-                : Util.stringsJoin(Strings.newline + Strings.newline, Functions.ArrayListtoStringArray(specialCargo)));
+                : Util.stringsJoin(Strings.newline + Strings.newline, Functions.arrayListtoStringArray(specialCargo)));
     }
 }

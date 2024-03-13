@@ -13,6 +13,20 @@ public class FileDialog {
     private String buttonText;
     private String filter; // TODO why is filter not used, use?
 
+    public static FileDialog createOpenFileDialog() {
+        FileDialog dialog = new FileDialog();
+        dialog.setTitle("Open");
+        dialog.buttonText = "Open";
+        return dialog;
+    }
+
+    public static FileDialog createSaveFileDialog() {  // TODO be able to set default file name extension
+        FileDialog dialog = new FileDialog();
+        dialog.setTitle("Save As");
+        dialog.buttonText = "Save";
+        return dialog;
+    }
+
     public void setTitle(String title) {
         chooser.setDialogTitle(title);
     }
@@ -62,19 +76,5 @@ public class FileDialog {
 
     public void setFileName(String fileName) {
         chooser.setSelectedFile(new File(fileName));
-    }
-
-    public static FileDialog createOpenFileDialog() {
-        FileDialog dialog = new FileDialog();
-        dialog.setTitle("Open");
-        dialog.setButtonText("Open");
-        return dialog;
-    }
-
-    public static FileDialog createSaveFileDialog() {  // TODO be able to set default file name extension
-        FileDialog dialog = new FileDialog();
-        dialog.setTitle("Save As");
-        dialog.setButtonText("Save");
-        return dialog;
     }
 }

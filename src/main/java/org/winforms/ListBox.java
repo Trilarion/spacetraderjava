@@ -10,17 +10,17 @@ import java.awt.*;
 // TODO documentation of properties and usage
 public class ListBox extends Control {
 
-    public final DefaultListModel Items = new DefaultListModel<Object>();
+    public final DefaultListModel Items = new DefaultListModel<>();
 
     public ListBox() {
         super(new JList<>());
-        ListBox.this.asJList().setModel(Items);
+        asJList().setModel(Items);
     }
 
     @Override
 
     public void setBorderStyle(BorderStyle borderStyle) {
-        if (borderStyle != BorderStyle.FixedSingle) {
+        if (BorderStyle.FixedSingle != borderStyle) {
             throw new Error("Unknown border style");
         }
         asJList().setBorder(BorderFactory.createLineBorder(Color.black, 1));

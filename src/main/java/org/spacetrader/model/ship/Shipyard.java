@@ -8,27 +8,28 @@ import org.spacetrader.ui.Strings;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 // TODo part of model
 // Represents a shipyard orbiting a solar system in the universe.
 // In a shipyard, the player can design his own ship and have it constructed, for a fee.
 public class Shipyard {
 
-    public static final int[] COST_FUEL = new int[]{1, 1, 1, 3, 5, 10};
-    public static final int[] COST_HULL = new int[]{1, 5, 10, 15, 20, 40};
-    public static final int[] BASE_FUEL = new int[]{15, 14, 13, 12, 11, 10};
-    public static final int[] BASE_HULL = new int[]{10, 25, 50, 100, 150, 200};
-    public static final int[] DESIGN_FEE = new int[]{2000, 5000, 10000, 20000, 40000, 100000};
-    public static final int[] MAX_UNITS = new int[]{50, 100, 150, 200, 250, 999};
-    public static final int[] PER_UNIT_FUEL = new int[]{3, 2, 1, 1, 1, 1};
-    public static final int[] PER_UNIT_HULL = new int[]{35, 30, 25, 20, 15, 10};
-    public static final int[] PRICE_PER_UNIT = new int[]{75, 250, 500, 750, 1000, 1200};
-    public static final int[] UNITS_CREW = new int[]{20, 20, 20, 20, 20, 20};
-    public static final int[] UNITS_FUEL = new int[]{1, 1, 1, 5, 10, 15};
-    public static final int[] UNITS_GADGET = new int[]{5, 5, 5, 5, 5, 5};
-    public static final int[] UNITS_HULL = new int[]{1, 2, 3, 4, 5, 6};
-    public static final int[] UNITS_SHIELD = new int[]{10, 10, 10, 8, 8, 8};
-    public static final int[] UNITS_WEAPON = new int[]{15, 15, 15, 10, 10, 10};
+    public static final int[] COST_FUEL = {1, 1, 1, 3, 5, 10};
+    public static final int[] COST_HULL = {1, 5, 10, 15, 20, 40};
+    public static final int[] BASE_FUEL = {15, 14, 13, 12, 11, 10};
+    public static final int[] BASE_HULL = {10, 25, 50, 100, 150, 200};
+    public static final int[] DESIGN_FEE = {2000, 5000, 10000, 20000, 40000, 100000};
+    public static final int[] MAX_UNITS = {50, 100, 150, 200, 250, 999};
+    public static final int[] PER_UNIT_FUEL = {3, 2, 1, 1, 1, 1};
+    public static final int[] PER_UNIT_HULL = {35, 30, 25, 20, 15, 10};
+    public static final int[] PRICE_PER_UNIT = {75, 250, 500, 750, 1000, 1200};
+    public static final int[] UNITS_CREW = {20, 20, 20, 20, 20, 20};
+    public static final int[] UNITS_FUEL = {1, 1, 1, 5, 10, 15};
+    public static final int[] UNITS_GADGET = {5, 5, 5, 5, 5, 5};
+    public static final int[] UNITS_HULL = {1, 2, 3, 4, 5, 6};
+    public static final int[] UNITS_SHIELD = {10, 10, 10, 8, 8, 8};
+    public static final int[] UNITS_WEAPON = {15, 15, 15, 10, 10, 10};
     // Fee and Price Per Unit 10% less for the specialty size, and 10% more for sizes more than 1 away from the specialty size.
     public static final int ADJUST_SIZE_DEFAULT = 100;
     public static final int ADJUST_SIZE_SPECIALTY = 90;
@@ -48,11 +49,11 @@ public class Shipyard {
     private final ShipSize _specialtySize;
     private final ShipyardSkill _skill;
     // Internal Variables
-    private int modCrew = 0;
-    private int modFuel = 0;
-    private int modHull = 0;
-    private int modShield = 0;
-    private int modWeapon = 0;
+    private int modCrew;
+    private int modFuel;
+    private int modHull;
+    private int modShield;
+    private int modWeapon;
 
     public Shipyard(ShipyardId si, ShipSize ss, ShipyardSkill ys) {
         _id = si;
@@ -96,7 +97,7 @@ public class Shipyard {
         return BasePrice() * CostAdjustment() / ADJUST_SIZE_DEFAULT;
     }
 
-    public ArrayList<ShipSize> AvailableSizes() {
+    public List<ShipSize> AvailableSizes() {
         ArrayList<ShipSize> list = new ArrayList<>(6);
         int begin = Math.max(ShipSize.Tiny.getId(), _specialtySize.getId() - 2);
         int end = Math.min(ShipSize.Gargantuan.getId(), _specialtySize.getId() + 2);
@@ -158,9 +159,9 @@ public class Shipyard {
 
     public int PenaltyCost() {
         int penalty = 0;
-        if (PercentOfMaxUnits() >= PENALTY_SECOND_PCT) {
+        if (PENALTY_SECOND_PCT <= PercentOfMaxUnits()) {
             penalty = PENALTY_SECOND_FEE;
-        } else if (PercentOfMaxUnits() >= PENALTY_FIRST_PCT) {
+        } else if (PENALTY_FIRST_PCT <= PercentOfMaxUnits()) {
             penalty = PENALTY_FIRST_FEE;
         }
         return BasePrice() * penalty / 100;

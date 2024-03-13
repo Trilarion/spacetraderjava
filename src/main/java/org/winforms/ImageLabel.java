@@ -24,7 +24,7 @@ class ImageLabel extends JLabel {  // TODO better name and documentation of usag
     }
 
     private void tryBackground(Color background, java.awt.Graphics graphics) {
-        if (background == null) {
+        if (null == background) {
             return;
         }
         graphics.setColor(background);
@@ -32,7 +32,7 @@ class ImageLabel extends JLabel {  // TODO better name and documentation of usag
     }
 
     private void tryEventHandler(EventHandler<Object, Graphics> handler, java.awt.Graphics graphics) {
-        if (handler != null) {
+        if (null != handler) {
             handler.handle(pictureBox, new Graphics(graphics));
         }
     }

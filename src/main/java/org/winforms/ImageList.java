@@ -9,9 +9,6 @@ public class ImageList {
     private Image[] images;
     private Dimension size;
 
-    public ImageList() {
-    }
-
     public void draw(Graphics graphics, int x, int y, int imageIndex) {
         graphics.drawImage(images[imageIndex], x, y, new Rectangle(0, 0, size.width, size.height));
     }

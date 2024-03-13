@@ -8,12 +8,12 @@ import java.awt.event.ActionListener;
 
 
 public class ComboBox extends Control {
-    public final DefaultComboBoxModel Items = new DefaultComboBoxModel<Object>();
+    public final DefaultComboBoxModel Items = new DefaultComboBoxModel<>();
     public ComboBoxStyle DropDownStyle;
 
     public ComboBox() {
         super(new JComboBox<>());
-        ComboBox.this.asJComboBox().setModel(Items);
+        asJComboBox().setModel(Items);
     }
 
     public JComboBox<Object> asJComboBox() {

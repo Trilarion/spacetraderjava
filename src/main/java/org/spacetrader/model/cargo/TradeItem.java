@@ -1,9 +1,9 @@
 package org.spacetrader.model.cargo;
 
-import org.spacetrader.model.system.StarSystem;
 import org.spacetrader.model.enums.SpecialResource;
 import org.spacetrader.model.enums.SystemPressure;
 import org.spacetrader.model.enums.TechLevel;
+import org.spacetrader.model.system.StarSystem;
 
 
 public class TradeItem implements Comparable<TradeItem> {
@@ -29,7 +29,7 @@ public class TradeItem implements Comparable<TradeItem> {
         this.techProduction = techProduction;
         this.techUsage = techUsage;
         this.techTopProduction = techTopProduction;
-        this.pictureLowTech = pictureeLowTech;
+        pictureLowTech = pictureeLowTech;
         priceIncrease = priceInc;
         this.priceVariance = priceVariance;
         this.pressurePriceHike = pressurePriceHike;
@@ -42,16 +42,16 @@ public class TradeItem implements Comparable<TradeItem> {
 
     @Override
     public int compareTo(TradeItem tradeItem) {
-        return this.CompareTo(tradeItem);
+        return CompareTo(tradeItem);
     }
 
     public int CompareTo(Object value) {
         int compared = 0;
-        if (value == null) {
+        if (null == value) {
             compared = 1;
         } else {
             compared = ((Integer) pictureLowTech).compareTo(((TradeItem) value).pictureLowTech);
-            if (compared == 0) {
+            if (0 == compared) {
                 compared = -((Integer) priceIncrease).compareTo(((TradeItem) value).priceIncrease);
             }
         }
@@ -82,7 +82,7 @@ public class TradeItem implements Comparable<TradeItem> {
     }
 
     public boolean isIllegal() {
-        return type == TradeItemType.Firearms || type == TradeItemType.Narcotics;
+        return TradeItemType.Firearms == type || TradeItemType.Narcotics == type;
     }
 
     public int MaxTradePrice() {

@@ -5,9 +5,9 @@ import org.spacetrader.controller.*;
 import org.spacetrader.model.crew.Commander;
 import org.spacetrader.model.crew.CrewMember;
 import org.spacetrader.model.enums.AlertType;
+import org.spacetrader.model.enums.CrewMemberId;
 import org.spacetrader.model.enums.GameEndType;
 import org.spacetrader.model.enums.StarSystemId;
-import org.spacetrader.model.enums.CrewMemberId;
 import org.spacetrader.model.events.SpecialEvent;
 import org.spacetrader.model.events.VeryRareEncounter;
 import org.spacetrader.model.ship.Ship;
@@ -23,13 +23,12 @@ import org.winforms.Button;
 import org.winforms.FileDialog;
 import org.winforms.Font;
 import org.winforms.Graphics;
-import org.winforms.Icon;
 import org.winforms.Image;
 import org.winforms.Label;
 import org.winforms.MenuBar;
 import org.winforms.MenuItem;
-import org.winforms.*;
 import org.winforms.Window;
+import org.winforms.*;
 import org.winforms.enums.*;
 
 import java.awt.*;
@@ -335,7 +334,7 @@ public class MainWindow extends Window {
         ilShipImages = new ImageList();
         ilDirectionImages = new ImageList();
         ilEquipmentImages = new ImageList();
-                                        boxShortRangeChart.suspendLayout();
+        boxShortRangeChart.suspendLayout();
         boxGalacticChart.suspendLayout();
         boxTargetSystem.suspendLayout();
         boxCargo.suspendLayout();
@@ -2376,7 +2375,7 @@ public class MainWindow extends Window {
                 SpaceTrader_Load(sender, data);
             }
         });
-                                        boxShortRangeChart.resumeLayout(false);
+        boxShortRangeChart.resumeLayout(false);
         boxGalacticChart.resumeLayout(false);
         boxTargetSystem.resumeLayout(false);
         boxCargo.resumeLayout(false);
@@ -2782,7 +2781,7 @@ public class MainWindow extends Window {
             buttonTrack.setVisible(false);
         } else {
             StarSystem system = game.WarpSystem();
-            int distance = Functions.Distance(commander.CurrentSystem(), system);
+            int distance = Functions.distance(commander.CurrentSystem(), system);
             labelTargetName.setText(system.Name());
             labelTargetSize.setText(Strings.Sizes[system.Size().getId()]);
             labelTargetTech.setText(system.TechLevel().name);
@@ -3406,7 +3405,7 @@ public class MainWindow extends Window {
             StarSystem currentSys = commander.CurrentSystem();
             StarSystem trackSys = game.TrackedSystem();
             if (trackSys != null) {
-                int dist = Functions.Distance(currentSys, trackSys);
+                int dist = Functions.distance(currentSys, trackSys);
                 if (dist > 0) {
                     int dX = (int) Math.round(25 * (trackSys.X() - currentSys.X()) / (double) dist);
                     int dY = (int) Math.round(25 * (trackSys.Y() - currentSys.Y()) / (double) dist);

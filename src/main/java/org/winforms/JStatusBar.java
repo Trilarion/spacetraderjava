@@ -20,6 +20,6 @@ public class JStatusBar extends JPanel {
             c.fill = GridBagConstraints.NONE;
             c.weightx = 0.0;
         }
-        this.add(section, c);
+        add(section, c);
     }
 }

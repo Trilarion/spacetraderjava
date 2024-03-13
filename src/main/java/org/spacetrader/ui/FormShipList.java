@@ -1,6 +1,8 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.*;
+import org.spacetrader.controller.Constants;
+import org.spacetrader.controller.Functions;
+import org.spacetrader.controller.Game;
 import org.spacetrader.model.crew.Commander;
 import org.spacetrader.model.enums.AlertType;
 import org.spacetrader.model.events.SpecialEvent;
@@ -746,7 +748,7 @@ public class FormShipList extends form {
                 buttonBuy9,};
         UpdateAll();
         Info(ship.Type().getId());
-        if (ship.getTribbles() > 0 && !game.getTribbleMessage()) {
+        if (0 < ship.getTribbles() && !game.getTribbleMessage()) {
             FormAlert.Alert(AlertType.TribblesTradeIn, this);
             game.setTribbleMessage(true);
         }
@@ -756,7 +758,7 @@ public class FormShipList extends form {
     private void Buy(int id) {
         Info(id);
         if (commander.TradeShip(Constants.ShipSpecs[id], prices[id], this)) {
-            if (game.getQuestStatusScarab() == SpecialEvent.StatusScarabDone) {
+            if (SpecialEvent.StatusScarabDone == game.getQuestStatusScarab()) {
                 game.setQuestStatusScarab(SpecialEvent.StatusScarabNotStarted);
             }
             UpdateAll();
@@ -796,10 +798,10 @@ public class FormShipList extends form {
     private void buttonBuyInfo_Click(Object sender, EventData e) {
         String name = ((Button) sender).getName();
         int index = Integer.parseInt(name.substring(name.length() - 1));
-        if (!name.contains("Buy")) {
-            Info(index);
-        } else {
+        if (name.contains("Buy")) {
             Buy(index);
+        } else {
+            Info(index);
         }
     }
 }

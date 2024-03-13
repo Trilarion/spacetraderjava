@@ -18,7 +18,7 @@ public class Reputation {
 
     public static Reputation getReputationFromScore(int ReputationScore) {
         int i;
-        for (i = 0; i < Constants.Reputations.length && Game.getCurrentGame().Commander().getReputationScore() >= Constants.Reputations[i].getMinScore(); i++) {
+        for (i = 0; i < Constants.Reputations.length && Game.getCurrentGame().Commander().getReputationScore() >= Constants.Reputations[i].minScore; i++) {
         }
         return Constants.Reputations[Math.max(0, i - 1)];
     }

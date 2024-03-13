@@ -21,20 +21,7 @@ public class Spinner extends Control {
         JSpinner spinner = asJSpinner();
         spinner.setModel(model);
         // this bunch of code selects all text when entering the spinner.
-        ((JSpinner.DefaultEditor) spinner.getEditor()).getTextField().addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (e.getSource() instanceof JTextComponent) {
-                    final JTextComponent textComponent = ((JTextComponent) e.getSource());
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            textComponent.selectAll();
-                        }
-                    });
-                }
-            }
-        });
+        ((JSpinner.DefaultEditor) spinner.getEditor()).getTextField().addFocusListener(new MyFocusAdapter());
     }
 
     public void select(int i, int length) {
@@ -56,7 +43,7 @@ public class Spinner extends Control {
 
     public int getMaximum() {
         Integer maximum = (Integer) model.getMaximum();
-        return maximum == null ? Integer.MAX_VALUE : maximum;
+        return null == maximum ? Integer.MAX_VALUE : maximum;
     }
 
     public void setMaximum(int maximum) {
@@ -65,7 +52,7 @@ public class Spinner extends Control {
 
     public int getMinimum() {
         Integer minimum = (Integer) model.getMinimum();
-        return minimum == null ? 0 : minimum;
+        return null == minimum ? 0 : minimum;
     }
 
     public void setMinimum(int minimum) {
@@ -101,5 +88,20 @@ public class Spinner extends Control {
 
     public void setIncrement(int increment) {
         model.setStepSize(increment);
+    }
+
+    private static class MyFocusAdapter extends FocusAdapter {
+        @Override
+        public void focusGained(FocusEvent e) {
+            if (e.getSource() instanceof JTextComponent) {
+                final JTextComponent textComponent = ((JTextComponent) e.getSource());
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        textComponent.selectAll();
+                    }
+                });
+            }
+        }
     }
 }

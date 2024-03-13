@@ -13,12 +13,12 @@ public enum Activity implements IdentifiableEnum {
     NA;// = 100
 
     public static Activity fromId(int id) {
-        return (id == 100) ? NA : values()[id];
+        return (100 == id) ? NA : values()[id];
     }
 
     @Override
     public int getId() {
-        return (this == NA) ? 100 : ordinal();
+        return (NA == this) ? 100 : ordinal();
     }
 }
 //TODO go over all NAs, see if can use null, or at least normalize.

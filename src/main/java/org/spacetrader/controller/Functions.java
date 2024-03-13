@@ -27,13 +27,12 @@ public class Functions {
     private static long SeedX = DEFSEEDX;
     private static long SeedY = DEFSEEDY;
 
-    public static int AdjustSkillForDifficulty(int skill) {
-        Difficulty diff = Game.getCurrentGame().Difficulty();
-        skill = diff.adjustSkill(skill);
-        return skill;
+    public static int adjustSkillForDifficulty(int skill) {
+        Difficulty difficulty = Game.getCurrentGame().Difficulty();
+        return difficulty.adjustSkill(skill);
     }
 
-    public static String[] ArrayListtoStringArray(ArrayList<?> list) {
+    public static String[] arrayListtoStringArray(ArrayList<?> list) {
         String[] items = new String[list.size()];
         for (int i = 0; i < items.length; i++) {
             items[i] = (String) list.get(i);
@@ -41,15 +40,15 @@ public class Functions {
         return items;
     }
 
-    public static int Distance(StarSystem a, StarSystem b) {
+    public static int distance(StarSystem a, StarSystem b) {
         return (int) Math.floor(Math.sqrt(Math.pow(a.X() - b.X(), 2) + Math.pow(a.Y() - b.Y(), 2)));
     }
 
-    public static int Distance(StarSystem a, int x, int y) {
+    public static int distance(StarSystem a, int x, int y) {
         return (int) Math.floor(Math.sqrt(Math.pow(a.X() - x, 2) + Math.pow(a.Y() - y, 2)));
     }
 
-    private static void DrawPartialImage(Graphics g, Image img, int start, int stop) {
+    private static void drawPartialImage(Graphics g, Image img, int start, int stop) {
         g.drawImage(img, 2 + start, 2, new Rectangle(start, 0, stop - start, img.getHeight()));
     }
 
@@ -71,12 +70,12 @@ public class Functions {
 
     public static int GetColumnOfFirstNonWhitePixel(Image image, int direction) {
         Bitmap bitmap = new Bitmap(image);
-        int step = direction < 0 ? -1 : 1;
-        int col = step > 0 ? 0 : bitmap.getWidth() - 1;
-        int stop = step > 0 ? bitmap.getWidth() : -1;
+        int step = 0 > direction ? -1 : 1;
+        int col = 0 < step ? 0 : bitmap.getWidth() - 1;
+        int stop = 0 < step ? bitmap.getWidth() : -1;
         for (; col != stop; col += step) {
             for (int row = 0; row < bitmap.getHeight(); row++) {
-                if (bitmap.toArgb(col, row) != 0) {
+                if (0 != bitmap.toArgb(col, row)) {
                     return col;
                 }
             }
@@ -87,7 +86,7 @@ public class Functions {
     public static HighScoreRecord[] GetHighScores(Pane owner) {
         HighScoreRecord[] highScores = new HighScoreRecord[3];
         Object obj = LoadFile(Constants.HighScoreFile, true, owner);
-        if (obj != null) {
+        if (null != obj) {
             highScores = (HighScoreRecord[]) SerializableObject.ArrayListToArray((ArrayList<Hashtable>) obj, "HighScoreRecord");
         }
         return highScores;
@@ -136,7 +135,7 @@ public class Functions {
         } catch (SerializationException ex) {
             FormAlert.Alert(AlertType.FileErrorOpen, owner, fileName, Strings.FileFormatBad);
         } finally {
-            if (inStream != null) {
+            if (null != inStream) {
                 try {
                     inStream.close();
                 } catch (IOException e) {
@@ -148,28 +147,28 @@ public class Functions {
     }
 
     public static String Multiples(int num, String unit) {
-        return FormatNumber(num) + " " + unit + (num == 1 ? "" : "s");
+        return FormatNumber(num) + " " + unit + (1 == num ? "" : "s");
     }
 
     public static void PaintShipImage(Ship ship, Graphics graphics, Color backgroundColor) {
         int x = Constants.ShipImageOffsets[ship.Type().getId()].X;
         int width = Constants.ShipImageOffsets[ship.Type().getId()].Width;
         int startDamage = x + width - ship.getHull() * width / ship.HullStrength();
-        int startShield = x + width + 2 - (ship.ShieldStrength() > 0 ? ship.ShieldCharge() * (width + 4) / ship.ShieldStrength() : 0);
+        int startShield = x + width + 2 - (0 < ship.ShieldStrength() ? ship.ShieldCharge() * (width + 4) / ship.ShieldStrength() : 0);
         graphics.clear(backgroundColor);
         if (startDamage > x) {
             if (startShield > x) {
-                DrawPartialImage(graphics, ship.ImageDamaged(), x, Math.min(startDamage, startShield));
+                drawPartialImage(graphics, ship.ImageDamaged(), x, Math.min(startDamage, startShield));
             }
             if (startShield < startDamage) {
-                DrawPartialImage(graphics, ship.ImageDamagedWithShields(), startShield, startDamage);
+                drawPartialImage(graphics, ship.ImageDamagedWithShields(), startShield, startDamage);
             }
         }
         if (startShield > startDamage) {
-            DrawPartialImage(graphics, ship.Image(), startDamage, startShield);
+            drawPartialImage(graphics, ship.Image(), startDamage, startShield);
         }
         if (startShield < x + width + 2) {
-            DrawPartialImage(graphics, ship.ImageWithShields(), startShield, x + width + 2);
+            drawPartialImage(graphics, ship.ImageWithShields(), startShield, x + width + 2);
         }
     }
 
@@ -186,12 +185,12 @@ public class Functions {
     }
 
     public static void RandSeed(int seed1, int seed2) {
-        if (seed1 > 0) {
+        if (0 < seed1) {
             SeedX = seed1; /* use default seeds if parameter is 0 */
         } else {
             SeedX = DEFSEEDX;
         }
-        if (seed2 > 0) {
+        if (0 < seed2) {
             SeedY = seed2;
         } else {
             SeedY = DEFSEEDY;
@@ -210,7 +209,7 @@ public class Functions {
         } catch (IOException ex) {
             FormAlert.Alert(AlertType.FileErrorSave, owner, fileName, ex.getMessage());
         } finally {
-            if (outStream != null) {
+            if (null != outStream) {
                 try {
                     outStream.close();
                 } catch (IOException e) {
@@ -243,19 +242,19 @@ public class Functions {
     public static boolean WormholeExists(int a, int b) {
         int[] wormholes = Game.getCurrentGame().Wormholes();
         int i = Util.bruteSeek(wormholes, a);
-        return (i >= 0 && (b < 0 || wormholes[(i + 1) % wormholes.length] == b));
+        return (0 <= i && (0 > b || wormholes[(i + 1) % wormholes.length] == b));
     }
 
     public static boolean WormholeExists(StarSystem a, StarSystem b) {
         StarSystem[] universe = Game.getCurrentGame().Universe();
         int[] wormholes = Game.getCurrentGame().Wormholes();
         int i = Util.bruteSeek(wormholes, a.Id().getId());
-        return (i >= 0 && (universe[wormholes[(i + 1) % wormholes.length]] == b));
+        return (0 <= i && (universe[wormholes[(i + 1) % wormholes.length]] == b));
     }
 
     public static StarSystem WormholeTarget(int a) {
         int[] wormholes = Game.getCurrentGame().Wormholes();
         int i = Util.bruteSeek(wormholes, a);
-        return (i >= 0 ? (Game.getCurrentGame().Universe()[wormholes[(i + 1) % wormholes.length]]) : null);
+        return (0 <= i ? (Game.getCurrentGame().Universe()[wormholes[(i + 1) % wormholes.length]]) : null);
     }
 }

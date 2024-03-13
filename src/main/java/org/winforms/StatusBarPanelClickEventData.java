@@ -6,7 +6,6 @@ public class StatusBarPanelClickEventData implements EventData {  // TODO make S
     public final StatusBarPanel StatusBarPanel;
 
     public StatusBarPanelClickEventData(StatusBarPanel statusBarPanel) {
-        super();
         StatusBarPanel = statusBarPanel;
     }
 }

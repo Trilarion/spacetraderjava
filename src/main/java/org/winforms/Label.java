@@ -30,7 +30,7 @@ public class Label extends Control {
     }
 
     public void setText(String text) {
-        if (text.length() > 15) {
+        if (15 < text.length()) {
             convertedToHtml = true;
             text = START + text.replaceAll(NEWLINE_LITERAL + "\\s*", NEWLINE) + END;
         } else {

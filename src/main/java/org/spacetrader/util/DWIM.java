@@ -11,13 +11,13 @@ public class DWIM {
     /**
      * even if it's of the right type, I still take the value from the "canon" collections, because the input is likely to be from
      * the persistence; AFAIK, even for enums, the value read from the serializer, while being equals() to the canon values, are
-     * not == to them. i.e.:<code>
+     * not == to them. i.e.:{@code
      * MyEnum val = MyEnum.value;
      * storage.serialize(val);
      * val = storage.deserialize();
      * boolean equals = MyEnum.value(val); // true
      * boolean same = MyEnum.value == val; // false.
-     * </code>
+     * }
      */
 
     public static <T extends IdentifiableEnum> T dwim(Object ob, Class<T> cls) {
@@ -49,7 +49,7 @@ public class DWIM {
         }
     }
 
-    private static Method getFromInt(Class<?> cls) throws Exception {
+    private static Method getFromInt(Class<?> cls) throws NoSuchMethodException, SecurityException {
         return cls.getMethod("FromInt", int.class);
     }
 }

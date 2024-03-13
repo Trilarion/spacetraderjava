@@ -24,7 +24,7 @@ class ImageMouseListener extends MouseAdapter {
     }
 
     private void tryEvent(EventHandler<Object, MouseEventData> handler, MouseEventData e) {
-        if (handler != null) {
+        if (null != handler) {
             handler.handle(pictureBox, e);
         }
     }

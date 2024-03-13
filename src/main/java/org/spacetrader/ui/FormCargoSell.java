@@ -1,10 +1,10 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.model.crew.Commander;
 import org.spacetrader.controller.Constants;
 import org.spacetrader.controller.Functions;
 import org.spacetrader.controller.Game;
 import org.spacetrader.model.cargo.CargoSellOperation;
+import org.spacetrader.model.crew.Commander;
 import org.winforms.Button;
 import org.winforms.Label;
 import org.winforms.*;
@@ -28,7 +28,7 @@ public class FormCargoSell extends form {
         Button buttonNone = new Button();
         Label labelPaid = new Label();
         Label labelProfit = new Label();
-                suspendLayout();
+        suspendLayout();
         // labelQuestion
         labelQuestion.setLocation(new Point(8, 50));
         labelQuestion.setName("labelQuestion");
@@ -109,7 +109,7 @@ public class FormCargoSell extends form {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Sell Xxxxxxxxxx");
-                resumeLayout(false);
+        resumeLayout(false);
         Game game = Game.getCurrentGame();
         Commander commander = game.Commander();
         int cost = commander.PriceCargo()[item] / commander.getShip().Cargo()[item];
@@ -117,7 +117,7 @@ public class FormCargoSell extends form {
         numAmount.setValue(numAmount.getMinimum());
         setText(Functions.StringVars(Strings.CargoTitle, Strings.CargoSellOps[op.getId()], Constants.TradeItems[item].Name()));
         labelQuestion.setText(Functions.StringVars("How many do you want to ^1?", Strings.CargoSellOps[op.getId()].toLowerCase()));
-        labelPaid.setText(Functions.StringVars(op == CargoSellOperation.SellTrader
+        labelPaid.setText(Functions.StringVars(CargoSellOperation.SellTrader == op
                 ? "You paid about ^1 per unit, and can sell ^2." : "You paid about ^1 per unit.", Functions.FormatMoney(cost), Functions.Multiples(maxAmount, Strings.CargoUnit)));
         labelProfit.setText(Functions.StringVars("Your ^1 per unit is ^2", price >= cost
                 ? "profit" : "loss", Functions.FormatMoney(price >= cost ? price - cost : cost - price)));

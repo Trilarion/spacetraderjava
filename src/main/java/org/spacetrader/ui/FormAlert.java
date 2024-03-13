@@ -4,10 +4,10 @@ import org.spacetrader.controller.Functions;
 import org.spacetrader.controller.Game;
 import org.spacetrader.model.enums.AlertType;
 import org.spacetrader.model.enums.GameEndType;
-import org.winforms.*;
 import org.winforms.Button;
 import org.winforms.Graphics;
 import org.winforms.Label;
+import org.winforms.*;
 import org.winforms.enums.*;
 
 import java.awt.*;
@@ -89,23 +89,23 @@ public class FormAlert extends form {
 
     public FormAlert(String title, String text, String button1Text, DialogResult button1Result, String button2Text, DialogResult button2Result, String[] args) {
         this();
-        Graphics g = CreateGraphics();
+        Graphics graphics = CreateGraphics();
         // Replace any variables.
-        if (args != null) {
+        if (null != args) {
             title = Functions.StringVars(title, args);
             text = Functions.StringVars(text, args);
         }
-        labelText.setWidth(g.measureString((text.length() > 80 ? _80_CHARS : text), getFont()).width + 25);
+        labelText.setWidth(graphics.measureString((80 < text.length() ? _80_CHARS : text), getFont()).width + 25);
         labelText.setText(text);
         labelText.setHeight(30 + 30 * text.length() / 80);
         // Size the buttons.
         button1.setText(button1Text);
         button1.setDialogResult(button1Result);
-        button1.setWidth(Math.max(40, g.measureString(button1.getText(), getFont()).width + 35));
+        button1.setWidth(Math.max(40, graphics.measureString(button1.getText(), getFont()).width + 35));
         int buttonWidth = button1.getWidth();
-        if (button2Text != null) {
+        if (null != button2Text) {
             button2.setText(button2Text);
-            button2.setWidth(Math.max((int) Math.ceil(g.measureString(button2.getText(), getFont()).width) + 10, 40));
+            button2.setWidth(Math.max((int) Math.ceil(graphics.measureString(button2.getText(), getFont()).width) + 10, 40));
             button2.setVisible(true);
             button2.setDialogResult(button2Result);
             buttonWidth += button2.getWidth() + 6;
@@ -139,7 +139,7 @@ public class FormAlert extends form {
         // Set the title.
         setText(title);
         // If this is the splash screen, get rid of the title bar and start the timer.
-        if (imageIndex == SPLASH_INDEX) {
+        if (SPLASH_INDEX == imageIndex) {
             setFormBorderStyle(FormBorderStyle.None);
             timerTick.Start();
         }
@@ -163,7 +163,7 @@ public class FormAlert extends form {
 
     public static DialogResult Alert(AlertType at, Pane wp, String[] ss) {
         DialogResult dr = DialogResult.None;
-        if (ss.length == 0) {
+        if (0 == ss.length) {
             ss = null;
         }
         switch (at) {
@@ -916,7 +916,7 @@ public class FormAlert extends form {
 
     private void FormAlert_Click(Object sender, EventData e) {
         // If the button is off-screen, this is an image and can be clicked away.
-        if (button1.getLeft() < 0) {
+        if (0 > button1.getLeft()) {
             Close();
         }
     }

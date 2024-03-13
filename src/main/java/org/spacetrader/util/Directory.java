@@ -18,7 +18,7 @@ public class Directory {
                 return filename.endsWith(suffix);
             }
         });
-        if (files == null) {
+        if (null == files) {
             System.out.println("getFiles rets null!");
             return new String[0];
         }

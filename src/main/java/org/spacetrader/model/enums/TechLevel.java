@@ -23,7 +23,7 @@ public enum TechLevel {
         this.value = value;
         this.abbreviation = abbreviation;
         this.name = name;
-        this.id = ordinal();
+        id = ordinal();
     }
 
     public static TechLevel FromInt(int i) {

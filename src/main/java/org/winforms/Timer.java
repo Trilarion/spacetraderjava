@@ -14,9 +14,6 @@ public class Timer {
         }
     });
 
-    public Timer() {
-    }
-
     public void setInterval(int interval) {
         timer.setDelay(interval);
         timer.setInitialDelay(interval);

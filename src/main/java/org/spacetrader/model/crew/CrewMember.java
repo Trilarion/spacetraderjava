@@ -1,10 +1,13 @@
 package org.spacetrader.model.crew;
 
-import org.spacetrader.controller.*;
-import org.spacetrader.model.enums.SkillType;
-import org.spacetrader.model.enums.StarSystemId;
+import org.spacetrader.controller.Constants;
+import org.spacetrader.controller.Functions;
+import org.spacetrader.controller.Game;
+import org.spacetrader.controller.SerializableObject;
 import org.spacetrader.model.enums.CrewMemberId;
 import org.spacetrader.model.enums.Difficulty;
+import org.spacetrader.model.enums.SkillType;
+import org.spacetrader.model.enums.StarSystemId;
 import org.spacetrader.model.system.StarSystem;
 import org.spacetrader.ui.Strings;
 import org.spacetrader.util.Util;
@@ -35,7 +38,7 @@ public class CrewMember extends SerializableObject {
         Fighter(baseCrewMember.Fighter());
         Trader(baseCrewMember.Trader());
         Engineer(baseCrewMember.Engineer());
-        currentSystemId = baseCrewMember.getCurrentSystemId();
+        currentSystemId = baseCrewMember.currentSystemId;
     }
 
     public CrewMember(Hashtable hash) {
@@ -48,7 +51,7 @@ public class CrewMember extends SerializableObject {
     private void ChangeRandomSkill(int amount) {
         ArrayList<Integer> skillIdList = new ArrayList<>(4);
         for (int i = 0; i < Skills().length; i++) {
-            if (Skills()[i] + amount > 0 && Skills()[i] + amount < Constants.MaxSkill) {
+            if (0 < Skills()[i] + amount && Constants.MaxSkill > Skills()[i] + amount) {
                 skillIdList.add(i);
             }
         }
@@ -75,8 +78,8 @@ public class CrewMember extends SerializableObject {
     // JAF - rewrote this to be more efficient.
     // *************************************************************************
     public int NthLowestSkill(int n) {
-        int[] skillIds = new int[]{0, 1, 2, 3};
-        for (int j = 0; j < 3; j++) {
+        int[] skillIds = {0, 1, 2, 3};
+        for (int j = 0; 3 > j; j++) {
             for (int i = 0; i < 3 - j; i++) {
                 if (Skills()[skillIds[i]] > Skills()[skillIds[i + 1]]) {
                     int temp = skillIds[i];
@@ -122,7 +125,7 @@ public class CrewMember extends SerializableObject {
     }
 
     public StarSystem CurrentSystem() {
-        return currentSystemId == StarSystemId.NA ? null : Game.getCurrentGame().Universe()[currentSystemId.getId()];
+        return StarSystemId.NA == currentSystemId ? null : Game.getCurrentGame().Universe()[currentSystemId.getId()];
     }
 
     public void CurrentSystem(StarSystem value) {
@@ -170,7 +173,7 @@ public class CrewMember extends SerializableObject {
     }
 
     public int Rate() {
-        return Util.arrayContains(Constants.SpecialCrewMemberIds, Id()) || Id() == CrewMemberId.Zeethibal
+        return Util.arrayContains(Constants.SpecialCrewMemberIds, Id()) || CrewMemberId.Zeethibal == Id()
                 ? 0 : (Pilot() + Fighter() + Trader() + Engineer()) * 3;
     }
 

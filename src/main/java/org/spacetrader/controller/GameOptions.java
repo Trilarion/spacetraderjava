@@ -9,15 +9,15 @@ public class GameOptions extends SerializableObject {
     /**
      * Automatically ignores pirates when it is safe to do so
      */
-    private boolean alwaysIgnorePirates = false;
+    private boolean alwaysIgnorePirates;
     /**
      * Automatically ignores police when it is safe to do so
      */
-    private boolean alwaysIgnorePolice = false;
+    private boolean alwaysIgnorePolice;
     /**
      * Automatically ignores Trade in Orbit when it is safe to do so
      */
-    private boolean alwaysIgnoreTradeInOrbit = false;
+    private boolean alwaysIgnoreTradeInOrbit;
     /**
      * Automatically ignores traders when it is safe to do so
      */
@@ -25,31 +25,31 @@ public class GameOptions extends SerializableObject {
     /**
      * Automatically get a full tank when arriving in a new system
      */
-    private boolean autoFuel = false;
+    private boolean autoFuel;
     /**
      * Automatically get a full hull repair when arriving in a new system
      */
-    private boolean autoRepair = false;
+    private boolean autoRepair;
     /**
      * Continuous attack/flee mode
      */
-    private boolean continuousAttack = false;
+    private boolean continuousAttack;
     /**
      * Continue attack on fleeing ship
      */
-    private boolean continuousAttackFleeing = false;
+    private boolean continuousAttackFleeing;
     /**
      * Disable opponents when possible (when you have disabling weapons and the opponent is a pirate, trader, or mantis)
      */
-    private boolean disableOpponents = false;
+    private boolean disableOpponents;
     /**
      * by default, ask each time someone buys a newspaper
      */
-    private boolean newsAutoPay = false;
+    private boolean newsAutoPay;
     /**
      * by default, don't show newspaper
      */
-    private boolean newsAutoShow = false;
+    private boolean newsAutoShow;
     /**
      * remind you every five days about outstanding loan balances
      */
@@ -57,7 +57,7 @@ public class GameOptions extends SerializableObject {
     /**
      * Keep enough money for insurance and mercenaries
      */
-    private boolean reserveMoney = false;
+    private boolean reserveMoney;
     /**
      * display range when tracking a system on Short Range Chart
      */
@@ -69,7 +69,7 @@ public class GameOptions extends SerializableObject {
     /**
      * Number of cargo bays to leave empty when buying goods
      */
-    private int leaveEmpty = 0;
+    private int leaveEmpty;
 
     public GameOptions(Hashtable hash) {
         super(hash);
@@ -120,22 +120,22 @@ public class GameOptions extends SerializableObject {
     }
 
     public void CopyValues(GameOptions source) {
-        setAlwaysIgnorePirates(source.getAlwaysIgnorePirates());
-        setAlwaysIgnorePolice(source.getAlwaysIgnorePolice());
-        setAlwaysIgnoreTradeInOrbit(source.getAlwaysIgnoreTradeInOrbit());
-        setAlwaysIgnoreTraders(source.getAlwaysIgnoreTraders());
-        setAutoFuel(source.getAutoFuel());
-        setAutoRepair(source.getAutoRepair());
-        setContinuousAttack(source.getContinuousAttack());
-        setContinuousAttackFleeing(source.getContinuousAttackFleeing());
-        setDisableOpponents(source.getDisableOpponents());
-        setNewsAutoPay(source.getNewsAutoPay());
-        setNewsAutoShow(source.getNewsAutoShow());
-        setRemindLoans(source.getRemindLoans());
-        setReserveMoney(source.getReserveMoney());
-        setShowTrackedRange(source.getShowTrackedRange());
-        setTrackAutoOff(source.getTrackAutoOff());
-        setLeaveEmpty(source.getLeaveEmpty());
+        alwaysIgnorePirates = source.alwaysIgnorePirates;
+        alwaysIgnorePolice = source.alwaysIgnorePolice;
+        alwaysIgnoreTradeInOrbit = source.alwaysIgnoreTradeInOrbit;
+        alwaysIgnoreTraders = source.alwaysIgnoreTraders;
+        autoFuel = source.autoFuel;
+        autoRepair = source.autoRepair;
+        continuousAttack = source.continuousAttack;
+        continuousAttackFleeing = source.continuousAttackFleeing;
+        disableOpponents = source.disableOpponents;
+        newsAutoPay = source.newsAutoPay;
+        newsAutoShow = source.newsAutoShow;
+        remindLoans = source.remindLoans;
+        reserveMoney = source.reserveMoney;
+        showTrackedRange = source.showTrackedRange;
+        trackAutoOff = source.trackAutoOff;
+        leaveEmpty = source.leaveEmpty;
     }
 
     public void LoadFromDefaults(boolean errorIfFileNotFound) {
@@ -145,7 +145,7 @@ public class GameOptions extends SerializableObject {
     public void LoadFromDefaults(boolean errorIfFileNotFound, Pane owner) {
         GameOptions defaults = null;
         Object obj = Functions.LoadFile(Constants.DefaultSettingsFile, !errorIfFileNotFound, owner);
-        if (obj == null) {
+        if (null == obj) {
             defaults = new GameOptions(false);
         } else {
             defaults = new GameOptions((Hashtable) obj);

@@ -141,11 +141,11 @@ public class FormViewHighScores extends form {
         setStartPosition(FormStartPosition.CenterParent);
         setText("High Scores");
         resumeLayout(false);
-        Label[] labelName = new Label[]{labelName0, labelName1, labelName2};
-        Label[] labelScore = new Label[]{labelScore0, labelScore1, labelScore2};
-        Label[] labelStatus = new Label[]{labelStatus0, labelStatus1, labelStatus2};
+        Label[] labelName = {labelName0, labelName1, labelName2};
+        Label[] labelScore = {labelScore0, labelScore1, labelScore2};
+        Label[] labelStatus = {labelStatus0, labelStatus1, labelStatus2};
         HighScoreRecord[] highScores = Functions.GetHighScores(this);
-        for (int i = highScores.length - 1; i >= 0 && highScores[i] != null; i--) {
+        for (int i = highScores.length - 1; 0 <= i && null != highScores[i]; i--) {
             labelName[2 - i].setText(highScores[i].Name());
             labelScore[2 - i].setText(Functions.FormatNumber(highScores[i].Score() / 10) + "." + highScores[i].Score() % 10);
             labelStatus[2 - i].setText(Functions.StringVars(Strings.HighScoreStatus, new String[]{

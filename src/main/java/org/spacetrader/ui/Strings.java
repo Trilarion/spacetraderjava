@@ -150,10 +150,10 @@ public interface Strings {
     String TimeUnit = "day";
     String TribbleDangerousNumber = "a dangerous number of";
     String Unknown = "Unknown";
-    String[] ActivityLevels = new String[]{"Absent", "Minimal", "Few", "Some", "Moderate", "Many", "Abundant", "Swarms"};
-    String[] CargoBuyOps = new String[]{"Buy", "Buy", "Steal"};
-    String[] CargoSellOps = new String[]{"Sell", "Sell", "Dump", "Jettison"};
-    String[] CrewMemberNames = new String[]{"Commander",
+    String[] ActivityLevels = {"Absent", "Minimal", "Few", "Some", "Moderate", "Many", "Abundant", "Swarms"};
+    String[] CargoBuyOps = {"Buy", "Buy", "Steal"};
+    String[] CargoSellOps = {"Sell", "Sell", "Dump", "Jettison"};
+    String[] CrewMemberNames = {"Commander",
             "Alyssa", "Armatur", "Bentos", "C2U2", "Chi'Ti", "Crystal", "Dane",
             "Deirdre", "Doc", "Draco", "Iranda", "Jeremiah", "Jujubal",
             "Krydon", "Luis", "Mercedez", "Milete", "Muri-L", "Mystyc",
@@ -185,9 +185,9 @@ public interface Strings {
             "Ziyal", // From ST: Deep Space 9
             "Scorpion" // dummy crew member used in opponent ship
     };
-    String[] DifficultyLevels = new String[]{"Beginner",
+    String[] DifficultyLevels = {"Beginner",
             "Easy", "Normal", "Hard", "Impossible"};
-    String[][] EquipmentDescriptions = new String[][]{
+    String[][] EquipmentDescriptions = {
             new String[]{
                     "The Pulse Laser is the weakest weapon available. It's small size allows only enough energy to build up to emit pulses of light.",
                     "The Beam Laser is larger than the Pulse Laser, so can build up enough charge to power what are essentially two Pulse Lasers. The resulting effect appears more like a constant beam.",
@@ -207,19 +207,19 @@ public interface Strings {
                     "The Cloaking Device can enable your ship to evade detection by an opponent, but only if the Engineer skill of your ship is greater than that of your opponent. It also makes your ship harder to hit in battle.",
                     "The Fuel Compactor that you got as a reward for warning Gemulon of the invasion will increase the range of your ship by 3 parsecs.",
                     "These extra bays will not be detected during routine police searches. They may be detected if you are arrested and the police perform a more thorough search."}};
-    String[] EquipmentTypes = new String[]{"Weapon", "Shield", "Gadget"};
-    String[] GadgetNames = new String[]{"5 Extra Cargo Bays",
+    String[] EquipmentTypes = {"Weapon", "Shield", "Gadget"};
+    String[] GadgetNames = {"5 Extra Cargo Bays",
             "Auto-Repair System", "Navigating System", "Targeting System",
             "Cloaking Device", "Fuel Compactor", "5 Hidden Cargo Bays"};
-    String[] GameCompletionTypes = new String[]{"Was killed",
+    String[] GameCompletionTypes = {"Was killed",
             "Retired", "Claimed moon"};
-    String[] ListStrings = new String[]{"", "^1", "^1 and ^2",
+    String[] ListStrings = {"", "^1", "^1 and ^2",
             "^1, ^2, and ^3", "^1, ^2, ^3, and ^4"};
     /*
      * In News Events, the following variables can be used: ^1 Commander Name ^2
      * Current System ^3 Commander's Ship Type
      */
-    String[] NewsEvent = new String[]{
+    String[] NewsEvent = {
             "Scientist Adds Alien Artifact to Museum Collection.",
             "Police Trace Orbiting Space Litter to ^1.",
             "Experimental Craft Stolen! Critics Demand Securrentity Review.",
@@ -259,7 +259,7 @@ public interface Strings {
             "Kidnappers Holding Out at Qonos",
             "Scorpion Defeated! Kidnapped Member of Galvon Royal Family Freed!",
             "Beloved Royal Returns Home!"};
-    String[][] NewsHeadlines = new String[][]{
+    String[][] NewsHeadlines = {
             new String[]{"Riots, Looting Mar Factional Negotiations.",
                     "Communities Seek Consensus.",
                     "Successful Bakunin Day Rally!",
@@ -327,7 +327,7 @@ public interface Strings {
                     "Temple Restoration Fund at 81%.",
                     "Sacred Texts on Public Display.",
                     "Dozen Blasphemers Excommunicated!"}};
-    String[][] NewsMastheads = new String[][]{
+    String[][] NewsMastheads = {
             new String[]{"The ^1 Arsenal", "The Grassroot", "Kick It!"},
             new String[]{"The Objectivist", "The ^1 Market", "The Invisible Hand"},
             new String[]{"The Daily Worker", "The People's Voice", "The ^1 Proletariat"},
@@ -346,62 +346,62 @@ public interface Strings {
             new String[]{"The Future", "Hardware Dispatch", "TechNews"},
             new String[]{"The Spiritual Advisor", "Church Tidings", "The Temple Tribune"}
     };
-    String[] NewsPoliceRecordHero = new String[]{
+    String[] NewsPoliceRecordHero = {
             "Locals Welcome Visiting Hero ^1!",
             "Famed Hero ^1 to Visit System!",
             "Large Turnout At Spaceport to Welcome ^1!"};
-    String[] NewsPoliceRecordPsychopath = new String[]{
+    String[] NewsPoliceRecordPsychopath = {
             "Police Warning: ^1 Will Dock At ^2!",
             "Notorious Criminal ^1 Sighted in ^2!",
             "Locals Rally to Deny Spaceport Access to ^1!",
             "Terror Strikes Locals on Arrival of ^1!"};
-    String[] NewsPressureExternal = new String[]{
+    String[] NewsPressureExternal = {
             "Reports of ^1 in the ^2 System.", "News of ^1 in the ^2 System.",
             "New Rumors of ^1 in the ^2 System.",
             "Sources report ^1 in the ^2 System.",
             "Notice: ^1 in the ^2 System.",
             "Evidence Suggests ^1 in the ^2 System."};
-    String[] NewsPressureExternalPressures = new String[]{"",
+    String[] NewsPressureExternalPressures = {"",
             "Strife and War", "Plague Outbreaks", "Severe Drought",
             "Terrible Boredom", "Cold Weather", "Crop Failures",
             "Labor Shortages"};
-    String[] NewsPressureInternal = new String[]{"",
+    String[] NewsPressureInternal = {"",
             "War News: Offensives Continue!", "Plague Spreads! Outlook Grim.",
             "No Rain in Sight!", "Editors: Won't Someone Entertain Us?",
             "Cold Snap Continues!", "Serious Crop Failure! Must We Ration?",
             "Jobless Rate at All-Time Low!"};
-    String[] PoliceRecordNames = new String[]{"Psychopath",
+    String[] PoliceRecordNames = {"Psychopath",
             "Villain", "Criminal", "Crook", "Dubious", "Clean", "Lawful",
             "Trusted", "Liked", "Hero"};
-    String[] PoliticalSystemNames = new String[]{"Anarchy",
+    String[] PoliticalSystemNames = {"Anarchy",
             "Capitalist State", "Communist State", "Confederacy",
             "Corporate State", "Cybernetic State", "Democracy", "Dictatorship",
             "Fascist State", "Feudal State", "Military State", "Monarchy",
             "Pacifist State", "Socialist State", "State of Satori",
             "Technocracy", "Theocracy"};
-    String[] ReputationNames = new String[]{"Harmless",
+    String[] ReputationNames = {"Harmless",
             "Mostly harmless", "Poor", "Average", "Above average", "Competent",
             "Dangerous", "Deadly", "Elite"};
-    String[] ShieldNames = new String[]{"Energy Shield",
+    String[] ShieldNames = {"Energy Shield",
             "Reflective Shield", "Lightning Shield"};
-    String[] ShipNames = new String[]{"Flea", "Gnat",
+    String[] ShipNames = {"Flea", "Gnat",
             "Firefly", "Mosquito", "Bumblebee", "Beetle", "Hornet",
             "Grasshopper", "Termite", "Wasp", "Space Monster", "Dragonfly",
             "Mantis", "Scarab", "Bottle", ShipNameCustomShip, "Scorpion"};
-    String[] ShipyardEngineers = new String[]{"Wedge", "Luke",
+    String[] ShipyardEngineers = {"Wedge", "Luke",
             "Lando", "Mara", "Obi-Wan"};
-    String[] ShipyardNames = new String[]{
+    String[] ShipyardNames = {
             "Corellian Engineering", "Incom Corporation", "Kuat Drive Yards",
             "Sienar Fleet Systems", "Sorosuub Engineering"};
-    String[] ShipyardSkillDescriptions = new String[]{
+    String[] ShipyardSkillDescriptions = {
             "All ships constructed at this shipyard use 2 fewer units per crew quarter.",
             "All ships constructed at this shipyard have 2 extra base fuel tanks.",
             "All ships constructed at this shipyard have the hull points increment by 5 more than usual.",
             "All ships constructed at this shipyard get shield slots for 2 fewer units.",
             "All ships constructed at this shipyard get weapon slots for 2 fewer units."};
-    String[] ShipyardSkills = new String[]{"Crew Quartering", "Fuel Efficienty", "Hull Strength", "Shielding", "Weaponry"};
-    String[] Sizes = new String[]{"Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"};
-    String[] SpecialEventStrings = new String[]{
+    String[] ShipyardSkills = {"Crew Quartering", "Fuel Efficienty", "Hull Strength", "Shielding", "Weaponry"};
+    String[] Sizes = {"Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"};
+    String[] SpecialEventStrings = {
             "This alien artifact should be delivered to professor Berger, who is currently traveling. You can probably find him at a hi-tech solar system. The alien race which produced this artifact seems keen on getting it back, however, and may hinder the carrier. Are you, for a price, willing to deliver it?",
             "This is professor Berger. I thank you for delivering the alien artifact to me. I hope the aliens weren't too much of a nuisance. I have transferred 20000 credits to your account, which I assume compensates for your troubles.",
             "A trader in second-hand goods offers you 3 sealed cargo canisters for the sum of 1000 credits. It could be a good deal: they could contain robots. Then again, it might just be water. Do you want the canisters?",
@@ -449,7 +449,7 @@ public interface Strings {
             "His Majesty's Shipyard: Do you want us to install a quantum disruptor on your current ship?",
             "The King and Queen are extremely grateful to you for returning their daughter to them. The King says, \"Ziyal is priceless to us, but we feel we must offer you something as a reward. Visit my shipyard captain and he'll install one of our new Quantum Disruptors.\""
     };
-    String[] SpecialEventTitles = new String[]{
+    String[] SpecialEventTitles = {
             "Alien Artifact", "Artifact Delivery", "Cargo For Sale", "Dragonfly", "Dragonfly Destroyed", "Weird Ship", "Lightning Ship",
             "Lightning Shield", "Strange Ship", "Erase Record", "Dangerous Experiment", "Experiment Failed", "Disaster Averted",
             "Alien Invasion", "Fuel Compactor", "Gemulon Invaded", "Gemulon Rescued", "Japori Disease", "Medicine Delivery",
@@ -461,7 +461,7 @@ public interface Strings {
     };
     // Many of these names are from Star Trek: The Next Generation, or are small changes to names of this series. A few have different origins.
     // JAF - Except where noted these comments are the previous author's.
-    String[] SystemNames = new String[]{
+    String[] SystemNames = {
             "Acamar", // JAF - TNG "The Vengeance Factor (Acamar III)"
             "Adahn", // The alternate personality for The Nameless One in "Planescape: Torment"
             "Aldea", // JAF - TNG "When the Bough Breaks"
@@ -577,12 +577,12 @@ public interface Strings {
             "Weytahn", // Star Trek: Enterprise "Cease Fire"
             "Zonama" // From the Star Wars: New Jedi Order series (and Rogue Planet)
     };
-    String[] VeryRareEncounters = new String[]{
+    String[] VeryRareEncounters = {
             //TODO: Only used in SpaceTrader.buttonFind_Click(Object,EventData)
             VeryRareEncounter.MarieCeleste.name, VeryRareEncounter.CaptainAhab.name, VeryRareEncounter.CaptainConrad.name,
             VeryRareEncounter.CaptainHuie.name, VeryRareEncounter.BottleOld.name, VeryRareEncounter.BottleGood.name
     };
-    String[] WeaponNames = new String[]{
+    String[] WeaponNames = {
             //TODO: Only used in Equipment.BaseImageIndex()
             WeaponType.PulseLaser.name, WeaponType.BeamLaser.name, WeaponType.MilitaryLaser.name,
             WeaponType.MorgansLaser.name, WeaponType.PhotonDisruptor.name, WeaponType.QuantumDisruptor.name

@@ -40,7 +40,7 @@ public class form extends Control implements Pane {
         jdialog.setResizable(false);
     }
 
-    
+
     public Graphics CreateGraphics() {
         return new Graphics(jdialog.getGraphics());
     }
@@ -63,12 +63,12 @@ public class form extends Control implements Pane {
     }
 
     private void fixLocation() {
-        if (StartPosition == null) {
+        if (null == StartPosition) {
             return;
         }
         switch (StartPosition) {
             case CenterParent:
-                jdialog.setLocationRelativeTo(parent == null ? null : parent.asSwingObject());
+                jdialog.setLocationRelativeTo(null == parent ? null : parent.asSwingObject());
                 break;
             case Manual:
                 break;
@@ -186,7 +186,7 @@ public class form extends Control implements Pane {
 
     public void setClientSize(Dimension clientSize) {
         // bigger, cause decorations count in swing.
-        if (clientSize == null) {
+        if (null == clientSize) {
             System.out.println("null here");
             return;
         }

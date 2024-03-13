@@ -14,7 +14,7 @@ public class MenuBar extends Control {
 
     public void addAll(MenuItem... items) {
         for (MenuItem item : items) {
-            this.add(item);
+            add(item);
         }
     }
 

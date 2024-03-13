@@ -20,18 +20,18 @@ public class ShipSpec extends SerializableObject {
     private ShipSize size = ShipSize.Tiny;
     private ShipType type = ShipType.Custom;
     private TechLevel minTech = TechLevel.t8;
-    private boolean isHullUpgraded = false;
-    private int cargoBays = 0;
-    private int weaponSlots = 0;
-    private int shieldSlots = 0;
-    private int gadgetSlots = 0;
-    private int crewQuarters = 0;
-    private int fuelTanks = 0;
-    private int fuelCost = 0;
-    private int hullStrength = 0;
-    private int repairCost = 0;
-    private int price = 0;
-    private int occurrence = 0;
+    private boolean isHullUpgraded;
+    private int cargoBays;
+    private int weaponSlots;
+    private int shieldSlots;
+    private int gadgetSlots;
+    private int crewQuarters;
+    private int fuelTanks;
+    private int fuelCost;
+    private int hullStrength;
+    private int repairCost;
+    private int price;
+    private int occurrence;
     private int imageIndex = Constants.ShipImgUseDefault;
 
     public ShipSpec() {
@@ -84,7 +84,7 @@ public class ShipSpec extends SerializableObject {
             Game.getCurrentGame().getParentWindow().setCustomShipImages(GetValueFromHash(hash, "_images", Game.getCurrentGame().getParentWindow().CustomShipImages()));
         }
         // Get the name if the ship is a custom design.
-        if (type == ShipType.Custom) {
+        if (ShipType.Custom == type) {
             Strings.ShipNames[ShipType.Custom.getId()] = GetValueFromHash(hash, "_name", Strings.ShipNames[ShipType.Custom.getId()]);
             Constants.ShipSpecs[ShipType.Custom.getId()] = new ShipSpec(
                     type, size, cargoBays, weaponSlots, shieldSlots, gadgetSlots, crewQuarters, fuelTanks,
@@ -115,11 +115,11 @@ public class ShipSpec extends SerializableObject {
         hash.put("_minTech", minTech.ordinal());
         hash.put("_hullUpgraded", isHullUpgraded);
         // Only save image index if it's not the default.
-        if (imageIndex != Constants.ShipImgUseDefault) {
+        if (Constants.ShipImgUseDefault != imageIndex) {
             hash.put("_imageIndex", imageIndex);
         }
         // Save the name if the ship is a custom design.
-        if (Type() == ShipType.Custom) {
+        if (ShipType.Custom == Type()) {
             hash.put("_name", Name());
         }
         // Save the images if the ship uses the custom images.
@@ -156,13 +156,13 @@ public class ShipSpec extends SerializableObject {
         int count = 0;
         switch (type) {
             case Weapon:
-                count = getWeaponSlots();
+                count = weaponSlots;
                 break;
             case Shield:
-                count = getShieldSlots();
+                count = shieldSlots;
                 break;
             case Gadget:
-                count = getGadgetSlots();
+                count = gadgetSlots;
                 break;
         }
         return count;
@@ -267,7 +267,7 @@ public class ShipSpec extends SerializableObject {
     }
 
     public int HullStrength() {
-        return hullStrength + (getHullUpgraded() ? Constants.HullUpgrade : 0);
+        return hullStrength + (isHullUpgraded ? Constants.HullUpgrade : 0);
     }
 
     public void HullStrength(int value) {
@@ -287,7 +287,7 @@ public class ShipSpec extends SerializableObject {
     }
 
     public int ImageIndex() {
-        return (imageIndex == Constants.ShipImgUseDefault ? Type().getId() : imageIndex);
+        return (Constants.ShipImgUseDefault == imageIndex ? Type().getId() : imageIndex);
     }
 
     public void ImageIndex(int value) {

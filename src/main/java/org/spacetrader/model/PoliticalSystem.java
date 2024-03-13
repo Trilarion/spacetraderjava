@@ -2,12 +2,8 @@ package org.spacetrader.model;
 
 import org.spacetrader.controller.Constants;
 import org.spacetrader.controller.Game;
-import org.spacetrader.model.enums.Activity;
-import org.spacetrader.model.enums.OpponentType;
-import org.spacetrader.model.enums.PoliticalSystemType;
-import org.spacetrader.model.enums.Difficulty;
-import org.spacetrader.model.enums.TechLevel;
 import org.spacetrader.model.cargo.TradeItemType;
+import org.spacetrader.model.enums.*;
 import org.spacetrader.model.ship.ShipType;
 import org.spacetrader.ui.Strings;
 

@@ -470,7 +470,7 @@ public class FormPlunder extends form {
                 buttonPlunderQty0, buttonPlunderQty1, buttonPlunderQty2, buttonPlunderQty3, buttonPlunderQty4,
                 buttonPlunderQty5, buttonPlunderQty6, buttonPlunderQty7, buttonPlunderQty8, buttonPlunderQty9
         };
-        Button[] buttonPlunderAll = new Button[]{
+        Button[] buttonPlunderAll = {
                 buttonPlunderAll0, buttonPlunderAll1, buttonPlunderAll2, buttonPlunderAll3, buttonPlunderAll4,
                 buttonPlunderAll5, buttonPlunderAll6, buttonPlunderAll7, buttonPlunderAll8, buttonPlunderAll9
         };

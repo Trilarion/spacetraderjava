@@ -1,7 +1,6 @@
 package org.spacetrader.model.events;
 
 import org.spacetrader.controller.Game;
-import org.spacetrader.model.events.SpecialEventType;
 import org.spacetrader.model.system.StarSystem;
 import org.spacetrader.ui.Strings;
 
@@ -84,7 +83,7 @@ public class SpecialEvent {
     public StarSystem Location() {
         StarSystem location = null;
         StarSystem[] universe = Game.getCurrentGame().Universe();
-        for (int i = 0; i < universe.length && location == null; i++) {
+        for (int i = 0; i < universe.length && null == location; i++) {
             if (universe[i].SpecialEventType() == Type()) {
                 location = universe[i];
             }

@@ -1,6 +1,8 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.*;
+import org.spacetrader.controller.Constants;
+import org.spacetrader.controller.Functions;
+import org.spacetrader.controller.Game;
 import org.spacetrader.model.crew.Commander;
 import org.spacetrader.model.enums.AlertType;
 import org.spacetrader.model.events.SpecialEvent;
@@ -12,22 +14,20 @@ import org.winforms.FileDialog;
 import org.winforms.Font;
 import org.winforms.Image;
 import org.winforms.Label;
-import org.winforms.*;
 import org.winforms.TextField;
+import org.winforms.*;
 import org.winforms.enums.*;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Hashtable;
+import java.util.List;
+import java.util.*;
 
 
 public class FormShipyard extends form {
     private final Game game = Game.getCurrentGame();
     private final Commander commander = game.Commander();
     private final Shipyard yard = commander.CurrentSystem().Shipyard();
-    private final ShipType[] imgTypes = new ShipType[]{
+    private final ShipType[] imgTypes = {
             ShipType.Flea, ShipType.Gnat, ShipType.Firefly, ShipType.Mosquito, ShipType.Bumblebee, ShipType.Beetle,
             ShipType.Hornet, ShipType.Grasshopper, ShipType.Termite, ShipType.Wasp, ShipType.Custom
     };
@@ -58,10 +58,10 @@ public class FormShipyard extends form {
     private final PictureBox pictureShip;
     private final FileDialog dialogSave = FileDialog.createSaveFileDialog();
     private final TextField textName;
-    private ArrayList<ShipSize> sizes = null;
+    private ArrayList<ShipSize> sizes;
     private Image[] customImages = new Image[Constants.ImagesPerShip];
-    private boolean loading = false;
-    private int imgIndex = 0;
+    private boolean loading;
+    private int imgIndex;
 
     public FormShipyard() {
         ResourceManager resources = new ResourceManager(FormShipyard.class);
@@ -130,7 +130,7 @@ public class FormShipyard extends form {
         boxInfo.suspendLayout();
         boxCosts.suspendLayout();
         boxAllocation.suspendLayout();
-                                                                suspendLayout();
+        suspendLayout();
         // boxWelcome
         boxWelcome.Controls.addAll(labelSkillDescription, labelSkill, labelSizeSpecialty, labelSkillLabel, labelSizeSpecialtyLabel, labelWarning, pictureLogo, labelWelcome);
         boxWelcome.setLocation(new Point(8, 0));
@@ -766,7 +766,7 @@ public class FormShipyard extends form {
         boxInfo.resumeLayout(false);
         boxCosts.resumeLayout(false);
         boxAllocation.resumeLayout(false);
-                                                                resumeLayout(false);
+        resumeLayout(false);
         setText(Functions.StringVars(Strings.ShipyardTitle, yard.Name()));
         pictureLogo.setImage(ilShipyardLogos.getImages()[yard.Id().getId()]);
         labelWelcome.setText(Functions.StringVars(Strings.ShipyardWelcome, yard.Name(), yard.Engineer()));
@@ -785,7 +785,7 @@ public class FormShipyard extends form {
 
 
     private boolean ConstructButtonEnabled() {
-        return yard.PercentOfMaxUnits() <= 100 && !textName.getText().isEmpty();
+        return 100 >= yard.PercentOfMaxUnits() && !textName.getText().isEmpty();
     }
 
     private Bitmap GetImageFile(String fileName) {
@@ -811,7 +811,7 @@ public class FormShipyard extends form {
             }
             selSize.setSelectedIndex(Math.max(0, sizes.indexOf(template.Size())));
             imgIndex = template.ImageIndex() == ShipType.Custom.getId() ? imgTypes.length - 1 : template.ImageIndex();
-            if (template.Images() != null) {
+            if (null != template.Images()) {
                 customImages = template.Images();
             } else {
                 customImages = game.getParentWindow().CustomShipImages();
@@ -837,8 +837,8 @@ public class FormShipyard extends form {
         for (ShipSize size : yard.AvailableSizes()) {
             sizes.add(size);
             selSize.Items.addElement(Functions.StringVars(
-                        Strings.ShipyardSizeItem, Strings.Sizes[size.getId()],
-                        Functions.Multiples(Shipyard.MAX_UNITS[size.getId()], Strings.ShipyardUnit)));
+                    Strings.ShipyardSizeItem, Strings.Sizes[size.getId()],
+                    Functions.Multiples(Shipyard.MAX_UNITS[size.getId()], Strings.ShipyardUnit)));
         }
     }
 
@@ -854,14 +854,14 @@ public class FormShipyard extends form {
         selTemplate.Items.addElement(Constants.ShipTemplateSeparator);
         // Add the buyable ship spec templates.
         for (ShipSpec spec : Constants.ShipSpecs) {
-            if (sizes.contains(spec.getSize()) && spec.Type().getId() <= Constants.MaxShip) {
+            if (sizes.contains(spec.getSize()) && Constants.MaxShip >= spec.Type().getId()) {
                 Object obj = new ShipTemplate(spec, spec.Name() + Strings.ShipNameTemplateSuffixDefault);
                 selTemplate.Items.addElement(obj);
             }
         }
         selTemplate.Items.addElement(Constants.ShipTemplateSeparator);
         // Add the user-created templates.
-        ArrayList<ShipTemplate> userTemplates = new ArrayList<>();
+        List<ShipTemplate> userTemplates = new ArrayList<>();
         for (String fileName : Directory.getFiles(Constants.CustomTemplatesDirectory, "*.sst")) {
             ShipTemplate template = new ShipTemplate((Hashtable) Functions.LoadFile(fileName, true, this));
             if (sizes.contains(template.Size())) {
@@ -880,7 +880,7 @@ public class FormShipyard extends form {
     }
 
     private void SetTemplateModified() {
-        if (!loading && selTemplate.Items.getSize() > 0) {
+        if (!loading && 0 < selTemplate.Items.getSize()) {
             if (!selTemplate.Items.getElementAt(0).toString().equals(Strings.ShipNameModified)) {
                 selTemplate.Items.insertElementAt(Strings.ShipNameModified, 0);
             }
@@ -911,13 +911,13 @@ public class FormShipyard extends form {
     private void UpdateCalculatedFigures() {
         // Fix the fuel value to be a multiple of the per unit value less the super.
         int extraFuel = numFuelTanks.getValue() - yard.BaseFuel();
-        if (extraFuel % yard.PerUnitFuel() > 0 && numFuelTanks.getValue() < numFuelTanks.getMaximum()) {
+        if (0 < extraFuel % yard.PerUnitFuel() && numFuelTanks.getValue() < numFuelTanks.getMaximum()) {
             numFuelTanks.setValue(Math.max(numFuelTanks.getMinimum(),
                     Math.min(numFuelTanks.getMaximum(), (extraFuel + yard.PerUnitFuel()) / yard.PerUnitFuel() * yard.PerUnitFuel() + yard.BaseFuel())));
         }
         // Fix the hull value to be a multiple of the unit value less the super.
         int extraHull = numHullStrength.getValue() - yard.BaseHull();
-        if (extraHull % yard.PerUnitHull() > 0) {
+        if (0 < extraHull % yard.PerUnitHull()) {
             numHullStrength.setValue(Math.max(numHullStrength.getMinimum(), (extraHull + yard.PerUnitHull()) / yard.PerUnitHull() * yard.PerUnitHull() + yard.BaseHull()));
         }
         yard.ShipSpec().CargoBays(numCargoBays.getValue());
@@ -930,16 +930,16 @@ public class FormShipyard extends form {
         yard.CalculateDependantVariables();
         labelUnitsUsed.setText(yard.UnitsUsed() + "");
         labelPct.setText(Functions.FormatPercent(yard.PercentOfMaxUnits()));
-        if (yard.PercentOfMaxUnits() >= Shipyard.PENALTY_FIRST_PCT) {
+        if (Shipyard.PENALTY_FIRST_PCT <= yard.PercentOfMaxUnits()) {
             labelPct.setFont(labelSkillLabel.getFont());
         } else {
             labelPct.setFont(labelPctLabel.getFont());
         }
         if (yard.UnitsUsed() > yard.MaxUnits()) {
             labelPct.setForegroundColor(Color.red);
-        } else if (yard.PercentOfMaxUnits() >= Shipyard.PENALTY_SECOND_PCT) {
+        } else if (Shipyard.PENALTY_SECOND_PCT <= yard.PercentOfMaxUnits()) {
             labelPct.setForegroundColor(Color.orange);
-        } else if (yard.PercentOfMaxUnits() >= Shipyard.PENALTY_FIRST_PCT) {
+        } else if (Shipyard.PENALTY_FIRST_PCT <= yard.PercentOfMaxUnits()) {
             labelPct.setForegroundColor(Color.yellow);
         } else {
             labelPct.setForegroundColor(labelPctLabel.getForegroundColor());
@@ -959,15 +959,15 @@ public class FormShipyard extends form {
 
     private void UpdateShip() {
         yard.ShipSpec().ImageIndex(imgTypes[imgIndex].getId());
-        pictureShip.setImage((imgIndex > Constants.MaxShip ? customImages[0] : Constants.ShipSpecs[imgTypes[imgIndex].getId()].Image()));
-        labelImage.setText((imgIndex > Constants.MaxShip ? Strings.ShipNameCustomShip : Constants.ShipSpecs[imgTypes[imgIndex].getId()].Name()));
+        pictureShip.setImage((Constants.MaxShip < imgIndex ? customImages[0] : Constants.ShipSpecs[imgTypes[imgIndex].getId()].Image()));
+        labelImage.setText((Constants.MaxShip < imgIndex ? Strings.ShipNameCustomShip : Constants.ShipSpecs[imgTypes[imgIndex].getId()].Name()));
     }
 
     private void buttonConstruct_Click(Object sender, EventData e) {
         if (ConstructButtonEnabled()) {
             if (commander.TradeShip(yard.ShipSpec(), yard.TotalCost(), textName.getText(), this)) {
                 Strings.ShipNames[ShipType.Custom.getId()] = textName.getText();
-                if (game.getQuestStatusScarab() == SpecialEvent.StatusScarabDone) {
+                if (SpecialEvent.StatusScarabDone == game.getQuestStatusScarab()) {
                     game.setQuestStatusScarab(SpecialEvent.StatusScarabNotStarted);
                 }
                 // Replace the current custom images with the new ones.
@@ -983,7 +983,7 @@ public class FormShipyard extends form {
 
     private void buttonConstruct_MouseEnter(Object sender, EventData e) {
         labelDisabledName.setVisible(textName.getText().isEmpty());
-        labelDisabledPct.setVisible(yard.PercentOfMaxUnits() > 100);
+        labelDisabledPct.setVisible(100 < yard.PercentOfMaxUnits());
     }
 
     private void buttonConstruct_MouseLeave(Object sender, EventData e) {
@@ -1009,9 +1009,9 @@ public class FormShipyard extends form {
 
     private void buttonSave_Click(Object sender, EventData e) {
         if (SaveButtonEnabled()) {
-            if (dialogSave.ShowDialog(this) == DialogResult.OK) {
+            if (DialogResult.OK == dialogSave.ShowDialog(this)) {
                 ShipTemplate template = new ShipTemplate(yard.ShipSpec(), textName.getText());
-                if (imgIndex > Constants.MaxShip) {
+                if (Constants.MaxShip < imgIndex) {
                     template.ImageIndex(ShipType.Custom.getId());
                     template.Images(customImages);
                 } else {
@@ -1032,14 +1032,14 @@ public class FormShipyard extends form {
     }
 
     private void buttonSetCustomImage_Click(Object sender, EventData e) {
-        if (dialogOpen.ShowDialog(this) == DialogResult.OK) {
+        if (DialogResult.OK == dialogOpen.ShowDialog(this)) {
             String baseFileName = Path.removeExtension(dialogOpen.getFileName());
             String ext = Path.getExtension(dialogOpen.getFileName());
             Bitmap image = GetImageFile(baseFileName + ext);
             Bitmap imageDamaged = GetImageFile(baseFileName + "d" + ext);
             Bitmap imageShields = GetImageFile(baseFileName + "s" + ext);
             Bitmap imageShieldsDamaged = GetImageFile(baseFileName + "sd" + ext);
-            if (image != null && imageDamaged != null && imageShields != null && imageShieldsDamaged != null) {
+            if (null != image && null != imageDamaged && null != imageShields && null != imageShieldsDamaged) {
                 customImages[Constants.ShipImgOffsetNormal] = image;
                 customImages[Constants.ShipImgOffsetDamage] = imageDamaged;
                 customImages[Constants.ShipImgOffsetShield] = imageShields;

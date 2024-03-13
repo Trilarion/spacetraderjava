@@ -1,8 +1,8 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.model.crew.Commander;
 import org.spacetrader.controller.Functions;
 import org.spacetrader.controller.Game;
+import org.spacetrader.model.crew.Commander;
 import org.winforms.Button;
 import org.winforms.Label;
 import org.winforms.*;
@@ -24,7 +24,7 @@ public class FormPayBackLoan extends form {
         Button buttonMax = new Button();
         Button buttonNothing = new Button();
         Label labelStatement = new Label();
-                suspendLayout();
+        suspendLayout();
         // labelQuestion
         labelQuestion.setAutoSize(true);
         labelQuestion.setLocation(new Point(8, 24));
@@ -89,7 +89,7 @@ public class FormPayBackLoan extends form {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Pay Back Loan");
-                resumeLayout(false);
+        resumeLayout(false);
         Game game = Game.getCurrentGame();
         Commander commander = game.Commander();
         int max = Math.min(commander.getDebt(), commander.getCash());

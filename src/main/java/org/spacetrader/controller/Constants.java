@@ -3,8 +3,6 @@ package org.spacetrader.controller;
 import org.spacetrader.model.PoliceRecord;
 import org.spacetrader.model.PoliticalSystem;
 import org.spacetrader.model.Reputation;
-import org.spacetrader.model.enums.CrewMemberId;
-import org.spacetrader.model.enums.TechLevel;
 import org.spacetrader.model.cargo.TradeItem;
 import org.spacetrader.model.cargo.TradeItemType;
 import org.spacetrader.model.enums.*;
@@ -102,7 +100,7 @@ public class Constants {
     public static final int ScorePlunderTrader = -2;
     public static final int ScoreTrafficking = -1;
     public static final String ShipTemplateSeparator = "----------------------------";
-    public static final Weapon[] WeaponObjects = new Weapon[]{
+    public static final Weapon[] WeaponObjects = {
             new Weapon(WeaponType.PulseLaser, 15, false, 2000, TechLevel.t5, 50),
             new Weapon(WeaponType.BeamLaser, 25, false, 12500, TechLevel.t6, 35),
             new Weapon(WeaponType.MilitaryLaser, 35, false, 35000, TechLevel.t7, 15),
@@ -110,13 +108,13 @@ public class Constants {
             new Weapon(WeaponType.PhotonDisruptor, 20, true, 15000, TechLevel.t6, 0),
             new Weapon(WeaponType.QuantumDisruptor, 60, true, 50000, TechLevel.t8, 0)
     };
-    public static final Shield[] Shields = new Shield[]{
+    public static final Shield[] Shields = {
             new Shield(ShieldType.Energy, 100, 5000, TechLevel.t5, 70),
             new Shield(ShieldType.Reflective, 200, 20000, TechLevel.t6, 30),
             // The weapons below cannot be bought
             new Shield(ShieldType.Lightning, 350, 45000, TechLevel.t8, 0)
     };
-    public static final Gadget[] Gadgets = new Gadget[]{
+    public static final Gadget[] Gadgets = {
             new Gadget(GadgetType.ExtraCargoBays, SkillType.NA, 2500, TechLevel.t4, 35), // 5 extra holds
             new Gadget(GadgetType.AutoRepairSystem, SkillType.Engineer, 7500, TechLevel.t5, 20), // Increases engineer's effectivity
             new Gadget(GadgetType.NavigatingSystem, SkillType.Pilot, 15000, TechLevel.t6, 20), // Increases pilot's effectivity
@@ -126,9 +124,9 @@ public class Constants {
             new Gadget(GadgetType.FuelCompactor, SkillType.NA, 30000, TechLevel.t8, 0),
             new Gadget(GadgetType.HiddenCargoBays, SkillType.NA, 60000, TechLevel.t8, 0)
     };
-    public static String CurrentVersion = "2.00";
+    public static final String CurrentVersion = "2.00";
     // TODO many of these can become enums.
-    public static PoliceRecord[] PoliceRecords = new PoliceRecord[]{
+    public static final PoliceRecord[] PoliceRecords = {
             new PoliceRecord(PoliceRecordType.Psychopath, PoliceRecordScorePsychopath),
             new PoliceRecord(PoliceRecordType.Villain, PoliceRecordScoreVillain),
             new PoliceRecord(PoliceRecordType.Criminal, PoliceRecordScoreCriminal),
@@ -140,7 +138,7 @@ public class Constants {
             new PoliceRecord(PoliceRecordType.Liked, PoliceRecordScoreLiked),
             new PoliceRecord(PoliceRecordType.Hero, PoliceRecordScoreHero)
     };
-    public static PoliticalSystem[] PoliticalSystems = new PoliticalSystem[]{
+    public static final PoliticalSystem[] PoliticalSystems = {
             new PoliticalSystem(PoliticalSystemType.Anarchy, 0, Activity.Absent, Activity.Swarms, Activity.Minimal,
                     TechLevel.t0, TechLevel.t5, 7, true, true, TradeItemType.Food),
             new PoliticalSystem(PoliticalSystemType.Capitalist, 2, Activity.Some, Activity.Few, Activity.Swarms,
@@ -176,7 +174,7 @@ public class Constants {
             new PoliticalSystem(PoliticalSystemType.Theocracy, 5, Activity.Abundant, Activity.Minimal, Activity.Moderate,
                     TechLevel.t0, TechLevel.t4, 0, true, true, TradeItemType.Narcotics)
     };
-    public static Reputation[] Reputations = new Reputation[]{
+    public static final Reputation[] Reputations = {
             new Reputation(ReputationType.Harmless, ReputationScoreHarmless),
             new Reputation(ReputationType.MostlyHarmless, ReputationScoreMostlyHarmless),
             new Reputation(ReputationType.Poor, ReputationScorePoor),
@@ -187,7 +185,7 @@ public class Constants {
             new Reputation(ReputationType.Deadly, ReputationScoreDeadly),
             new Reputation(ReputationType.Elite, ReputationScoreElite)
     };
-    public static Rectangle[] ShipImageOffsets = new Rectangle[]{
+    public static final Rectangle[] ShipImageOffsets = {
             // We only care about X and Width, so set Y and Height to 0.
             new Rectangle(22, 0, 19, 0), // Flea
             new Rectangle(18, 0, 27, 0), // Gnat
@@ -207,7 +205,7 @@ public class Constants {
             new Rectangle(2, 0, 60, 0), // Custom
             new Rectangle(2, 0, 60, 0) // Scorpion
     };
-    public static ShipSpec[] ShipSpecs = new ShipSpec[]{
+    public static final ShipSpec[] ShipSpecs = {
             //           Type                  ShipSize        Bays W  S  G  Cr F   FC Hull RC  Price   %   Police             Pirates           Traders          MinTechLevel
             new ShipSpec(ShipType.Flea, ShipSize.Tiny, 10, 0, 0, 0, 1, 20, 1, 25, 1, 2000, 2, Activity.NA, Activity.NA, Activity.Absent, TechLevel.t4),
             new ShipSpec(ShipType.Gnat, ShipSize.Small, 15, 1, 0, 1, 1, 14, 1, 100, 2, 10000, 28, Activity.Absent, Activity.Absent, Activity.Absent, TechLevel.t5),
@@ -227,18 +225,18 @@ public class Constants {
             new ShipSpec(ShipType.Bottle, ShipSize.Small, 0, 0, 0, 0, 0, 1, 1, 10, 1, 100, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.t8),
             new ShipSpec(ShipType.Custom, ShipSize.Huge, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.t8),
             new ShipSpec(ShipType.Scorpion, ShipSize.Huge, 30, 2, 2, 2, 2, 1, 1, 300, 1, 500000, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.t8)};
-    public static Shipyard[] Shipyards = new Shipyard[]{
+    public static final Shipyard[] Shipyards = {
             new Shipyard(ShipyardId.Corellian, ShipSize.Large, ShipyardSkill.CrewQuarters),
             new Shipyard(ShipyardId.Incom, ShipSize.Medium, ShipyardSkill.ShieldSlotUnits),
             new Shipyard(ShipyardId.Kuat, ShipSize.Huge, ShipyardSkill.HullPerUnit),
             new Shipyard(ShipyardId.Sienar, ShipSize.Tiny, ShipyardSkill.WeaponSlotUnits),
             new Shipyard(ShipyardId.Sorosuub, ShipSize.Small, ShipyardSkill.FuelBase)
     };
-    public static CrewMemberId[] SpecialCrewMemberIds = new CrewMemberId[]{
+    public static final CrewMemberId[] SpecialCrewMemberIds = {
             CrewMemberId.Commander, CrewMemberId.Dragonfly, CrewMemberId.FamousCaptain, CrewMemberId.Jarek, CrewMemberId.Opponent,
             CrewMemberId.Princess, CrewMemberId.Scarab, CrewMemberId.Scorpion, CrewMemberId.SpaceMonster, CrewMemberId.Wild
     };
-    public static SpecialEvent[] SpecialEvents = new SpecialEvent[]{
+    public static final SpecialEvent[] SpecialEvents = {
             new SpecialEvent(SpecialEventType.Artifact, 0, 1, false),
             new SpecialEvent(SpecialEventType.ArtifactDelivery, -20000, 0, true),
             new SpecialEvent(SpecialEventType.CargoForSale, 1000, 3, false),
@@ -286,7 +284,7 @@ public class Constants {
             new SpecialEvent(SpecialEventType.PrincessQuantum, 0, 0, false),
             new SpecialEvent(SpecialEventType.PrincessReturned, 0, 0, true)
     };
-    public static TradeItem[] TradeItems = new TradeItem[]{
+    public static final TradeItem[] TradeItems = {
             new TradeItem(TradeItemType.Water, TechLevel.t0, TechLevel.t0, TechLevel.t2, 30, 3, 4, SystemPressure.Drought, SpecialResource.SweetOceans, SpecialResource.Desert, 30, 50, 1),
             new TradeItem(TradeItemType.Furs, TechLevel.t0, TechLevel.t0, TechLevel.t0, 250, 10, 10, SystemPressure.Cold, SpecialResource.RichFauna, SpecialResource.Lifeless, 230, 280, 5),
             new TradeItem(TradeItemType.Food, TechLevel.t1, TechLevel.t0, TechLevel.t1, 100, 5, 5, SystemPressure.CropFailure, SpecialResource.RichSoil, SpecialResource.PoorSoil, 90, 160, 5),
@@ -299,7 +297,7 @@ public class Constants {
             new TradeItem(TradeItemType.Robots, TechLevel.t6, TechLevel.t4, TechLevel.t7, 5000, -150, 100, SystemPressure.Employment, SpecialResource.NA, SpecialResource.NA, 3500, 5000, 100)
     };
     // This comes at the end because it depends on other Constant Arrays
-    public static Equipment[] EquipmentForSale = new Equipment[]{
+    public static final Equipment[] EquipmentForSale = {
             WeaponObjects[WeaponType.PulseLaser.id],
             WeaponObjects[WeaponType.BeamLaser.id],
             WeaponObjects[WeaponType.MilitaryLaser.id],

@@ -33,7 +33,7 @@ public class MonsterQuestCellRenderer extends JPanel implements ListCellRenderer
         label2.setToolTipText("The name of the quest.");
 
         GroupLayout layout = new GroupLayout(this);
-        this.setLayout(layout);
+        setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
@@ -57,7 +57,7 @@ public class MonsterQuestCellRenderer extends JPanel implements ListCellRenderer
         setForeground((isSelected) ? list.getSelectionForeground() : list.getForeground());
         label1.setText(value.system);
         label2.setText(String.format("{0}. {1}", index, value.quest));
-        return this;
+        return this;  // TODO do not return this
     }
 
 }

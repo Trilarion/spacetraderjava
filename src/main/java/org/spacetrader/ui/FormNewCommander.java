@@ -3,8 +3,8 @@ package org.spacetrader.ui;
 import org.spacetrader.model.enums.Difficulty;
 import org.winforms.Button;
 import org.winforms.Label;
-import org.winforms.*;
 import org.winforms.TextField;
+import org.winforms.*;
 import org.winforms.enums.*;
 
 import java.awt.*;
@@ -39,7 +39,7 @@ public class FormNewCommander extends form {
         buttonOk = new Button();
         Label labelPointsRemaining = new Label();
         labelPoints = new Label();
-                                        suspendLayout();
+        suspendLayout();
         // labelName
         labelName.setAutoSize(true);
         labelName.setLocation(new Point(8, 8));
@@ -265,13 +265,13 @@ public class FormNewCommander extends form {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("New Commander");
-                                        resumeLayout(false);
+        resumeLayout(false);
         selDifficulty.setSelectedIndex(2);
     }
 
 
     private void UpdateOkEnabled() {
-        buttonOk.setEnabled(labelPoints.getText().equals("0") && !textName.getText().isEmpty());
+        buttonOk.setEnabled("0".equals(labelPoints.getText()) && !textName.getText().isEmpty());
     }
 
     private void num_ValueChanged(Object sender, EventData e) {

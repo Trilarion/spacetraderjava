@@ -39,7 +39,7 @@ public class Window extends Control implements Pane {
 
     public void showWindow() {
         EventHandler<Object, EventData> loadHandler = onLoad;
-        if (loadHandler != null) {
+        if (null != loadHandler) {
             loadHandler.handle(this, null);
         }
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

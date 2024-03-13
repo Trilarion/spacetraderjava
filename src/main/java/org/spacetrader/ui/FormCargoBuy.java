@@ -1,10 +1,10 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.model.crew.Commander;
 import org.spacetrader.controller.Constants;
 import org.spacetrader.controller.Functions;
 import org.spacetrader.controller.Game;
 import org.spacetrader.model.cargo.CargoBuyOperation;
+import org.spacetrader.model.crew.Commander;
 import org.winforms.Button;
 import org.winforms.Label;
 import org.winforms.*;
@@ -28,7 +28,7 @@ public class FormCargoBuy extends form {
         Button buttonNone = new Button();
         Label labelAvailable = new Label();
         Label labelAfford = new Label();
-                suspendLayout();
+        suspendLayout();
         // labelQuestion
         labelQuestion.setAutoSize(true);
         labelQuestion.setLocation(new Point(8, 24));
@@ -113,7 +113,7 @@ public class FormCargoBuy extends form {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Buy Xxxxxxxxxx");
-                resumeLayout(false);
+        resumeLayout(false);
         numAmount.setMaximum(maxAmount);
         numAmount.setValue(numAmount.getMinimum());
         setText(Functions.StringVars(Strings.CargoTitle, Strings.CargoBuyOps[op.id], Constants.TradeItems[item].Name()));

@@ -20,7 +20,7 @@ public class StatusBar extends Control {
     }
 
     private void add(StatusBarPanel panel) {
-        asJStatusBar().addSection(panel.asJStatusBarSection(), panel.autoSize == StatusBarPanelAutoSize.Spring);
+        asJStatusBar().addSection(panel.asJStatusBarSection(), StatusBarPanelAutoSize.Spring == panel.autoSize);
         panel.asJStatusBarSection().addMouseListener(new MouseAdapterExtension(this, panel));
     }
 

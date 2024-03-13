@@ -35,7 +35,7 @@ public class ResourceManager {
 
     public Object getObject(String s) {
         String objectType = properties.getProperty(s + ".type", null);
-        if (objectType == null) {
+        if (null == objectType) {
             throw new Error("No object type for: " + s);
         }
         switch (objectType) {

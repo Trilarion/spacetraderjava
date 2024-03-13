@@ -14,7 +14,7 @@ public class wfPanel extends JPanel {  // TODO there is another Panel, what is t
     private static final long serialVersionUID = 1L;
     private final Pane form;
     Map<Component, Integer> tabOrderMap = new HashMap<>(0);
-    Image backgroundImage = null;
+    Image backgroundImage;
 
     public wfPanel(Pane wp) {
         super(null); // That's what winforms use.
@@ -35,13 +35,13 @@ public class wfPanel extends JPanel {  // TODO there is another Panel, what is t
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (backgroundImage != null) {
-            g.drawImage(backgroundImage.asSwingImage(), 0, 0, this.getWidth(), this.getHeight(), null);
+        if (null != backgroundImage) {
+            g.drawImage(backgroundImage.asSwingImage(), 0, 0, getWidth(), getHeight(), null);
         }
     }
 
     public void setFocusOrder(Component c, int i) {
-        if (i == -1) {
+        if (-1 == i) {
             tabOrderMap.remove(c);
         } else {
             tabOrderMap.put(c, i);
@@ -60,18 +60,18 @@ public class wfPanel extends JPanel {  // TODO there is another Panel, what is t
 
     public void addAll(Collection<? extends Control> c) {
         for (Control wc : c) {
-            this.add(wc);
+            add(wc);
         }
     }
 
     public void addAll(Control... coll) {
         for (Control Control : coll) {
-            this.add(Control);
+            add(Control);
         }
     }
 
     void handleDialogResult(final Button b) {
-        if (b.dialogResult != null) {
+        if (null != b.dialogResult) {
             b.setClick(new ChainedEventHandler<>(b.click) {
                 @Override
                 public void instanceHandle(Object sender, EventData e) {

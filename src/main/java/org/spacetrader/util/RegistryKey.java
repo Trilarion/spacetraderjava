@@ -10,7 +10,7 @@ public class RegistryKey {
     private final File file;
 
     public RegistryKey(File regfile) {
-        this.file = regfile;
+        file = regfile;
         FileInputStream stream = null;
         try {
             regfile.createNewFile();
@@ -19,7 +19,7 @@ public class RegistryKey {
         } catch (IOException e) {
             throw new Error("Can't create/load regfile.");
         } finally {
-            if (stream != null) {
+            if (null != stream) {
                 try {
                     stream.close();
                 } catch (IOException e) {

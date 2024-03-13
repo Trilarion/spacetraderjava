@@ -56,7 +56,7 @@ public class FormOptions extends form {
         Button buttonLoad = new Button();
         checkBoxNewspaperShow = new CheckBox();
         checkBoxDisable = new CheckBox();
-                suspendLayout();
+        suspendLayout();
         // buttonOk
         buttonOk.setDialogResult(DialogResult.OK);
         buttonOk.setFlatStyle(FlatStyle.Flat);
@@ -340,9 +340,9 @@ public class FormOptions extends form {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Options");
-                resumeLayout(false);
+        resumeLayout(false);
         Game game = Game.getCurrentGame();
-        if (game != null) {
+        if (null != game) {
             opts.CopyValues(game.Options());
         } else {
             opts.LoadFromDefaults(false, this);
