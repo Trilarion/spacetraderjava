@@ -1,7 +1,7 @@
 package org.winforms;
 
 // TODO purpose?, documentation of usage
-public class LinkHolder {
+public class LinkHolder {  // TODO this does nothing
     public void add(int start, int length, String name) {
     }
 

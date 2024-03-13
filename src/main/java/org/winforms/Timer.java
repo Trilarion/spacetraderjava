@@ -14,7 +14,7 @@ public class Timer {
         }
     });
 
-    public Timer(IContainer components) {
+    public Timer() {
     }
 
     public void setInterval(int interval) {

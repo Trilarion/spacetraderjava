@@ -7,9 +7,9 @@ import java.util.ArrayList;
 public class ImageList {
     public Object ColorDepth;
     private wfImage[] images;
-    private FormSize size;
+    private SizeF size;
 
-    public ImageList(IContainer components) {
+    public ImageList() {
     }
 
     public void Draw(Graphics graphics, int x, int y, int imageIndex) {
@@ -34,7 +34,7 @@ public class ImageList {
         }
     }
 
-    public void setImageSize(FormSize imageSize) {
+    public void setImageSize(SizeF imageSize) {
         size = imageSize;
     }
 }

@@ -1,6 +1,6 @@
 package org.winforms;
 
 
-public class CancelEventData extends EventData {
+public class CancelEventData implements EventData {
     public boolean Cancel;
 }

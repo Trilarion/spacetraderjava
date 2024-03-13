@@ -20,13 +20,13 @@ public class Graphics {
         impl.drawLine(x1, y1, x2, y2);
     }
 
-    public void FillRectangle(Brush brush, int x, int y, int width, int height) {
-        impl.setColor(brush.color);
+    public void FillRectangle(Pen pen, int x, int y, int width, int height) {
+        impl.setColor(pen.color);
         impl.fillRect(x, y, width, height);
     }
 
-    public void FillPolygon(Brush brush, Point[] points) {
-        impl.setColor(brush.color);
+    public void FillPolygon(Pen pen, Point[] points) {
+        impl.setColor(pen.color);
         int[] xs = new int[points.length];
         int[] ys = new int[points.length];
         for (int i = 0; i < points.length; i++) {
@@ -37,8 +37,8 @@ public class Graphics {
         impl.fillPolygon(xs, ys, points.length);
     }
 
-    public void DrawString(String text, Font font, Brush Brush, int x, int y) {
-        impl.setColor(Brush.color);
+    public void DrawString(String text, Font font, Pen pen, int x, int y) {
+        impl.setColor(pen.color);
         impl.setFont(font);
         impl.drawString(text, x, y);
     }

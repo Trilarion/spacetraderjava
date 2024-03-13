@@ -28,7 +28,7 @@ public class FormFind extends wfForm {
         labelText.setAutoSize(true);
         labelText.setLocation(new Point(8, 8));
         labelText.setName("labelText");
-        labelText.setSize(new FormSize(177, 13));
+        labelText.setSize(new SizeF(13, 177));
         labelText.setTabIndex(3);
         labelText.setText("Which system are you looking for?");
         // buttonOk
@@ -36,7 +36,7 @@ public class FormFind extends wfForm {
         buttonOk.setFlatStyle(FlatStyle.Flat);
         buttonOk.setLocation(new Point(43, 68));
         buttonOk.setName("buttonOk");
-        buttonOk.setSize(new FormSize(40, 22));
+        buttonOk.setSize(new SizeF(22, 40));
         buttonOk.setTabIndex(3);
         buttonOk.setText("Ok");
         // buttonCancel
@@ -44,26 +44,26 @@ public class FormFind extends wfForm {
         buttonCancel.setFlatStyle(FlatStyle.Flat);
         buttonCancel.setLocation(new Point(91, 68));
         buttonCancel.setName("buttonCancel");
-        buttonCancel.setSize(new FormSize(50, 22));
+        buttonCancel.setSize(new SizeF(22, 50));
         buttonCancel.setTabIndex(4);
         buttonCancel.setText("Cancel");
         // txtSystem
         txtSystem.setLocation(new Point(8, 24));
         txtSystem.setName("txtSystem");
-        txtSystem.setSize(new FormSize(168, 20));
+        txtSystem.setSize(new SizeF(20, 168));
         txtSystem.setTabIndex(1);
         txtSystem.setText("");
         // checkBoxTrack
         checkBoxTrack.setLocation(new Point(8, 48));
         checkBoxTrack.setName("checkBoxTrack");
-        checkBoxTrack.setSize(new FormSize(112, 16));
+        checkBoxTrack.setSize(new SizeF(16, 112));
         checkBoxTrack.setTabIndex(2);
         checkBoxTrack.setText("Track this system");
         // FormFind
         setAcceptButton(buttonOk);
-        setAutoScaleBaseSize(new FormSize(5, 13));
+        setAutoScaleBaseSize(new SizeF(13, 5));
         setCancelButton(buttonCancel);
-        setClientSize(new FormSize(184, 97));
+        setClientSize(new SizeF(97, 184));
         setControlBox(false);
         Controls.addAll(checkBoxTrack, txtSystem, buttonCancel, buttonOk, labelText);
         setFormBorderStyle(FormBorderStyle.FixedDialog);
@@ -73,8 +73,8 @@ public class FormFind extends wfForm {
         setText("Find System");
         Closed = new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                FormFind_Closed(sender, e);
+            public void handle(Object sender, EventData data) {
+                FormFind_Closed(sender, data);
             }
         };
         ResumeLayout(false);

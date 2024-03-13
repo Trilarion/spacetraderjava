@@ -40,30 +40,30 @@ public class FormViewShip extends wfForm {
         labelTypeLabel.setAutoSize(true);
         labelTypeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelTypeLabel.setLocation(new Point(8, 8));
-        labelTypeLabel.setSize(new FormSize(34, 13));
+        labelTypeLabel.setSize(new SizeF(13, 34));
         labelTypeLabel.setTabIndex(2);
         labelTypeLabel.setText("Type:");
         // labelType
         labelType.setLocation(new Point(80, 8));
-        labelType.setSize(new FormSize(100, 13));
+        labelType.setSize(new SizeF(13, 100));
         labelType.setTabIndex(4);
         labelType.setText("Grasshopper");
         // buttonClose
         buttonClose.setDialogResult(DialogResult.Cancel);
         buttonClose.setLocation(new Point(-32, -32));
-        buttonClose.setSize(new FormSize(32, 32));
+        buttonClose.setSize(new SizeF(32, 32));
         buttonClose.setTabIndex(32);
         buttonClose.setTabStop(false);
         buttonClose.setText("X");
         // labelEquipLabel
         labelEquipLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelEquipLabel.setLocation(new Point(8, 34));
-        labelEquipLabel.setSize(new FormSize(64, 176));
+        labelEquipLabel.setSize(new SizeF(176, 64));
         labelEquipLabel.setTabIndex(43);
         labelEquipLabel.setText("Hull:\r\n\r\nEquipment:\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nUnfilled:");
         // labelEquip
         labelEquip.setLocation(new Point(80, 34));
-        labelEquip.setSize(new FormSize(120, 176));
+        labelEquip.setSize(new SizeF(176, 120));
         labelEquip.setTabIndex(44);
         labelEquip.setText("Hardened\r\n\r\n1 Military Laser\r\n1 Morgan's Laser\r\n1 Energy Shield\r\n1 Reflective Shi"
                 + "eld\r\n1 Lightning Shield\r\nNavigating System\r\nAuto-Repair System\r\n10 Extra Cargo Bays\r\nAn Escape Pod\r\n"
@@ -71,19 +71,19 @@ public class FormViewShip extends wfForm {
         // boxSpecialCargo
         boxSpecialCargo.Controls.addAll(labelSpecialCargo);
         boxSpecialCargo.setLocation(new Point(192, 8));
-        boxSpecialCargo.setSize(new FormSize(200, 204));
+        boxSpecialCargo.setSize(new SizeF(204, 200));
         boxSpecialCargo.setTabIndex(64);
         boxSpecialCargo.setTabStop(false);
         boxSpecialCargo.setText("Special Cargo");
         // labelSpecialCargo
         labelSpecialCargo.setLocation(new Point(8, 16));
-        labelSpecialCargo.setSize(new FormSize(190, 176));
+        labelSpecialCargo.setSize(new SizeF(176, 190));
         labelSpecialCargo.setTabIndex(0);
         labelSpecialCargo.setText("No special items.");
         // FormViewShip
-        setAutoScaleBaseSize(new FormSize(5, 13));
+        setAutoScaleBaseSize(new SizeF(13, 5));
         setCancelButton(buttonClose);
-        setClientSize(new FormSize(402, 219));
+        setClientSize(new SizeF(219, 402));
         Controls.addAll(Arrays.asList(boxSpecialCargo, labelEquip, labelEquipLabel, buttonClose, labelTypeLabel, labelType));
         setFormBorderStyle(FormBorderStyle.FixedDialog);
         setMaximizeBox(false);

@@ -71,11 +71,11 @@ public class wfPanel extends JPanel {
     }
 
     void handleDialogResult(final Button b) {
-        if (b.DialogResult != null) {
+        if (b.dialogResult != null) {
             b.setClick(new ChainedEventHandler<>(b.click) {
                 @Override
                 public void instanceHandle(Object sender, EventData e) {
-                    form.setResult(b.DialogResult);
+                    form.setResult(b.dialogResult);
                     form.dispose();
                 }
             });

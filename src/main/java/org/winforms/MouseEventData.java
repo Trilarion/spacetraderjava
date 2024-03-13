@@ -3,7 +3,7 @@ package org.winforms;
 import java.awt.event.MouseEvent;
 
 
-public class MouseEventData extends EventData {
+public class MouseEventData implements EventData {
     public final MouseButtons Button;
     public final int X, Y;
 

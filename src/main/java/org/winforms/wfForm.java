@@ -17,7 +17,7 @@ public class wfForm extends wfControl implements wfPane {
     protected EventHandler<Object, EventData> Closed;
     DialogResult result;
     // Must encapsulate most of these.
-    private FormSize AutoScaleBaseSize;
+    private SizeF AutoScaleBaseSize;
     private boolean ShowInTaskbar;
     private boolean MinimizeBox;
     private boolean MaximizeBox;
@@ -82,13 +82,14 @@ public class wfForm extends wfControl implements wfPane {
     }
 
     public void PerformLayout() {
+        // TODO implementation?
     }
 
-    public FormSize getAutoScaleBaseSize() {
+    public SizeF getAutoScaleBaseSize() {
         return AutoScaleBaseSize;
     }
 
-    public void setAutoScaleBaseSize(FormSize autoScaleBaseSize) {
+    public void setAutoScaleBaseSize(SizeF autoScaleBaseSize) {
         AutoScaleBaseSize = autoScaleBaseSize;
     }
 

@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 // TODO documentation of usage
-public class PictureBox extends wfControl implements ISupportInitialize {
+public class PictureBox extends wfControl {
     private final ImageMouseListener mouseListener;
     public PictureBoxSizeMode SizeMode;
 

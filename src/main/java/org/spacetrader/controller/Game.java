@@ -38,7 +38,7 @@ public class Game extends SerializableObject {
     public static final int GalaxyWidth = 154;
     public static final int MinDistance = 7;
     private static Game game; // TODO this doesn't work, is a singleton pattern intended, than how to serialize, better have a even bigger singleton (World)
-    private Commander commander;
+    private final Commander commander;
     // Game Data
     private StarSystem[] universe;
     private int[] wormholes = new int[6];

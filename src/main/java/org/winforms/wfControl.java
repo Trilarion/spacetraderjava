@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.MouseListener;
 
 // TODO documentation of usage
-public class wfControl implements ISupportInitialize {
+public class wfControl {  // make generic for the type of component that we get
 
     protected final Component swingComponent;
     EventHandler<Object, EventData> click;
@@ -16,11 +16,6 @@ public class wfControl implements ISupportInitialize {
     private Color ForeColor;
     private int tabIndex;
     private Color BackColor;
-
-    @Deprecated
-    public wfControl() {
-        this(null);
-    }
 
     public wfControl(Component swingComponent) {
         super();
@@ -135,11 +130,11 @@ public class wfControl implements ISupportInitialize {
     }
 
     public void ResumeLayout(boolean b) {
-        // TODO Auto-generated method stub
+        // TODO implementation?
     }
 
     public void setAutoSize(boolean autoSize) {
-        // /TODO impl.
+        // TODO implementation?
     }
 
     @Deprecated
@@ -155,6 +150,7 @@ public class wfControl implements ISupportInitialize {
     }
 
     public void setEnter(EventHandler<Object, EventData> enter) {
+        // TODO implementation?
     }
 
     public void setLocation(Point location) {
@@ -162,9 +158,11 @@ public class wfControl implements ISupportInitialize {
     }
 
     public void setMouseEnter(EventHandler<Object, EventData> mouseEnter) {
+        // TODO implementation?
     }
 
     public void setMouseLeave(EventHandler<Object, EventData> mouseLeave) {
+        // TODO implementation?
     }
 
     Dimension getSize() {
@@ -181,16 +179,7 @@ public class wfControl implements ISupportInitialize {
     }
 
     public void SuspendLayout() {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void beginInit() {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void endInit() {
-        // TODO Auto-generated method stub
+        // TODO implementation?
+        
     }
 }

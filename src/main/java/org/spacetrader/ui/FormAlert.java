@@ -19,13 +19,12 @@ public class FormAlert extends wfForm {
 
     private FormAlert() {
 
-        IContainer components = new Container();
         ResourceManager resources = new ResourceManager(FormAlert.class);
         labelText = new Label();
         button1 = new Button();
         button2 = new Button();
-        ilImages = new ImageList(components);
-        timerTick = new Timer(components);
+        ilImages = new ImageList();
+        timerTick = new Timer();
         SuspendLayout();
         // labelText
         labelText.setLocation(new java.awt.Point(8, 8));
@@ -37,7 +36,7 @@ public class FormAlert extends wfForm {
         button1.setFlatStyle(FlatStyle.Flat);
         button1.setLocation(new java.awt.Point(115, 32));
         button1.setName("button1");
-        button1.setSize(new FormSize(40, 22));
+        button1.setSize(new SizeF(22, 40));
         button1.setTabIndex(1);
         button1.setText("Ok");
         // button2
@@ -45,26 +44,26 @@ public class FormAlert extends wfForm {
         button2.setFlatStyle(FlatStyle.Flat);
         button2.setLocation(new java.awt.Point(200, 32));
         button2.setName("button2");
-        button2.setSize(new FormSize(40, 22));
+        button2.setSize(new SizeF(22, 40));
         button2.setTabIndex(2);
         button2.setText("No");
         button2.setVisible(false);
         // ilImages
         ilImages.ColorDepth = ColorDepth.Depth24Bit;
-        ilImages.setImageSize(new FormSize(160, 160));
+        ilImages.setImageSize(new SizeF(160, 160));
         ilImages.setImageStream(((ImageListStreamer) (resources.GetObject("ilImages.ImageStream"))));
         ilImages.setTransparentColor(null);
         // timerTick
         timerTick.setInterval(4000);
         timerTick.Tick = new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
+            public void handle(Object sender, EventData data) {
                 timerTick_Tick();
             }
         };
         // FormAlert
-        setAutoScaleBaseSize(new FormSize(5, 13));
-        setClientSize(new FormSize(270, 63));
+        setAutoScaleBaseSize(new SizeF(13, 5));
+        setClientSize(new SizeF(63, 270));
         setControlBox(false);
         Controls.add(button2);
         Controls.add(button1);
@@ -76,8 +75,8 @@ public class FormAlert extends wfForm {
         setText("Title");
         setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                FormAlert_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                FormAlert_Click(sender, data);
             }
         });
         ResumeLayout(false);

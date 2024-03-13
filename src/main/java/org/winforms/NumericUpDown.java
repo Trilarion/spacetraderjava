@@ -37,7 +37,7 @@ public class NumericUpDown extends wfControl {
     }
 
     public void Select(int i, int length) {
-        //TODO Auto-generated method stub
+        // TODO implement
     }
 
     public void setValueChanged(final EventHandler<Object, EventData> valueChanged) {
@@ -82,6 +82,7 @@ public class NumericUpDown extends wfControl {
     }
 
     public void setLeave(EventHandler<Object, EventData> leave) {
+        // TODO implement (or do nothing)
     }
 
     public int getValue() {

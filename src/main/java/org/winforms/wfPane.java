@@ -6,6 +6,7 @@ import java.awt.*;
 
 // TODO documentation of usage
 public interface wfPane {
+
     Component asSwingObject();
 
     void dispose();

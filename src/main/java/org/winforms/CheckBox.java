@@ -6,6 +6,7 @@ import javax.swing.event.ChangeListener;
 
 
 public class CheckBox extends wfControl {
+
     public CheckBox() {
         super(new JCheckBox());
     }

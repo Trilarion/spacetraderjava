@@ -11,9 +11,10 @@ import java.io.File;
 public class FileDialog {
     protected final JFileChooser chooser = new JFileChooser();
     private String buttonText;
-    private String Filter;
+    private String filter; // TODO why is filter not used, use?
 
     public void setTitle(String title) {
+        chooser.setDialogTitle(title);
     }
 
     protected void setButtonText(String text) {
@@ -52,6 +53,7 @@ public class FileDialog {
     }
 
     public void setDefaultExt(String defaultExt) {
+        // TODO implement
     }
 
     public String getFileName() {

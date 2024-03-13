@@ -31,42 +31,42 @@ public class FormCosts extends wfForm {
         buttonClose.setDialogResult(DialogResult.Cancel);
         buttonClose.setLocation(new Point(-32, -32));
         buttonClose.setName("buttonClose");
-        buttonClose.setSize(new FormSize(32, 32));
+        buttonClose.setSize(new SizeF(32, 32));
         buttonClose.setTabIndex(32);
         buttonClose.setTabStop(false);
         buttonClose.setText("X");
         // labelMerc
         labelMerc.setLocation(new Point(104, 8));
         labelMerc.setName("labelMerc");
-        labelMerc.setSize(new FormSize(39, 13));
+        labelMerc.setSize(new SizeF(13, 39));
         labelMerc.setTabIndex(36);
         labelMerc.setText("888 cr.");
         labelMerc.TextAlign = ContentAlignment.TopRight;
         // labelIns
         labelIns.setLocation(new Point(104, 24));
         labelIns.setName("labelIns");
-        labelIns.setSize(new FormSize(39, 13));
+        labelIns.setSize(new SizeF(13, 39));
         labelIns.setTabIndex(40);
         labelIns.setText("888 cr.");
         labelIns.TextAlign = ContentAlignment.TopRight;
         // labelInt
         labelInt.setLocation(new Point(104, 40));
         labelInt.setName("labelInt");
-        labelInt.setSize(new FormSize(39, 13));
+        labelInt.setSize(new SizeF(13, 39));
         labelInt.setTabIndex(44);
         labelInt.setText("888 cr.");
         labelInt.TextAlign = ContentAlignment.TopRight;
         // labelTax
         labelTax.setLocation(new Point(104, 56));
         labelTax.setName("labelTax");
-        labelTax.setSize(new FormSize(39, 13));
+        labelTax.setSize(new SizeF(13, 39));
         labelTax.setTabIndex(48);
         labelTax.setText("888 cr.");
         labelTax.TextAlign = ContentAlignment.TopRight;
         // labelTotal
         labelTotal.setLocation(new Point(104, 79));
         labelTotal.setName("labelTotal");
-        labelTotal.setSize(new FormSize(39, 13));
+        labelTotal.setSize(new SizeF(13, 39));
         labelTotal.setTabIndex(52);
         labelTotal.setText("888 cr.");
         labelTotal.TextAlign = ContentAlignment.TopRight;
@@ -75,7 +75,7 @@ public class FormCosts extends wfForm {
         labelTotalLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelTotalLabel.setLocation(new Point(8, 79));
         labelTotalLabel.setName("labelTotalLabel");
-        labelTotalLabel.setSize(new FormSize(34, 13));
+        labelTotalLabel.setSize(new SizeF(13, 34));
         labelTotalLabel.setTabIndex(7);
         labelTotalLabel.setText("Total:");
         // labelTaxLabel
@@ -83,7 +83,7 @@ public class FormCosts extends wfForm {
         labelTaxLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelTaxLabel.setLocation(new Point(8, 56));
         labelTaxLabel.setName("labelTaxLabel");
-        labelTaxLabel.setSize(new FormSize(84, 13));
+        labelTaxLabel.setSize(new SizeF(13, 84));
         labelTaxLabel.setTabIndex(6);
         labelTaxLabel.setText("Wormhole Tax:");
         // labelIntLabel
@@ -91,7 +91,7 @@ public class FormCosts extends wfForm {
         labelIntLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelIntLabel.setLocation(new Point(8, 40));
         labelIntLabel.setName("labelIntLabel");
-        labelIntLabel.setSize(new FormSize(47, 13));
+        labelIntLabel.setSize(new SizeF(13, 47));
         labelIntLabel.setTabIndex(5);
         labelIntLabel.setText("Interest:");
         // labelMercLabel
@@ -99,7 +99,7 @@ public class FormCosts extends wfForm {
         labelMercLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelMercLabel.setLocation(new Point(8, 8));
         labelMercLabel.setName("labelMercLabel");
-        labelMercLabel.setSize(new FormSize(72, 13));
+        labelMercLabel.setSize(new SizeF(13, 72));
         labelMercLabel.setTabIndex(4);
         labelMercLabel.setText("Mercenaries:");
         // labelInsLabel
@@ -107,20 +107,20 @@ public class FormCosts extends wfForm {
         labelInsLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelInsLabel.setLocation(new Point(8, 24));
         labelInsLabel.setName("labelInsLabel");
-        labelInsLabel.setSize(new FormSize(59, 13));
+        labelInsLabel.setSize(new SizeF(13, 59));
         labelInsLabel.setTabIndex(3);
         labelInsLabel.setText("Insurance:");
         // pictureLine
         pictureLine.setBackColor(Color.darkGray);
         pictureLine.setLocation(new Point(6, 73));
         pictureLine.setName("pictureLine");
-        pictureLine.setSize(new FormSize(138, 1));
+        pictureLine.setSize(new SizeF(1, 138));
         pictureLine.setTabIndex(134);
         pictureLine.setTabStop(false);
         // FormCosts
-        setAutoScaleBaseSize(new FormSize(5, 13));
+        setAutoScaleBaseSize(new SizeF(13, 5));
         setCancelButton(buttonClose);
-        setClientSize(new FormSize(148, 99));
+        setClientSize(new SizeF(99, 148));
         Controls.addAll(pictureLine, labelTotal, labelTax, labelInt, labelIns, labelMerc, buttonClose, labelInsLabel, labelTotalLabel, labelTaxLabel, labelIntLabel, labelMercLabel);
         setFormBorderStyle(FormBorderStyle.FixedDialog);
         setMaximizeBox(false);

@@ -30,15 +30,15 @@ public class FormViewQuests extends wfForm {
         buttonClose.setDialogResult(DialogResult.Cancel);
         buttonClose.setLocation(new Point(-32, -32));
         buttonClose.setName("buttonClose");
-        buttonClose.setSize(new FormSize(32, 32));
+        buttonClose.setSize(new SizeF(32, 32));
         buttonClose.setTabIndex(32);
         buttonClose.setTabStop(false);
         buttonClose.setText("X");
         // labelQuests
-        labelQuests.LinkArea = new LinkArea(0, 0);
+        labelQuests.linkArea = new LinkArea(0, 0);
         labelQuests.setLocation(new Point(8, 8));
         labelQuests.setName("labelQuests");
-        labelQuests.setSize(new FormSize(368, 312));
+        labelQuests.setSize(new SizeF(312, 368));
         labelQuests.setTabIndex(44);
         labelQuests.setText("Kill the space monster at Acamar.\n\n"
                 + "Get your lightning shield at Zalkon.\n\n"
@@ -52,16 +52,16 @@ public class FormViewQuests extends wfForm {
                 + "Smuggle Jonathan Wild to Kravat. Wild is getting impatient, and will no longer aid your crew along the way.\n\n"
                 + "Get rid of those pesky tribbles.\n\n"
                 + "Claim your moon at Utopia.");
-        labelQuests.LinkClicked = new EventHandler<>() {
+        labelQuests.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData e) {
-                labelQuests_LinkClicked(sender, e);
+            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+                labelQuests_LinkClicked(sender, data);
             }
         };
         // FormViewQuests
-        setAutoScaleBaseSize(new FormSize(5, 13));
+        setAutoScaleBaseSize(new SizeF(13, 5));
         setCancelButton(buttonClose);
-        setClientSize(new FormSize(378, 325));
+        setClientSize(new SizeF(325, 378));
         Controls.addAll(Arrays.asList(buttonClose, labelQuests));
         setFormBorderStyle(FormBorderStyle.FixedDialog);
         setMaximizeBox(false);
@@ -201,7 +201,7 @@ public class FormViewQuests extends wfForm {
                 int start = 0;
                 int index = -1;
                 while ((index = labelQuests.getText().indexOf(systemName, start)) >= 0) {
-                    labelQuests.Links.add(index, systemName.length(), systemName);
+                    labelQuests.links.add(index, systemName.length(), systemName);
                     start = index + systemName.length();
                 }
             }

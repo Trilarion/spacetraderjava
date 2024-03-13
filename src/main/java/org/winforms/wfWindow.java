@@ -16,7 +16,7 @@ public class wfWindow extends wfControl implements wfPane {
     protected FormWindowState WindowState;
     DialogResult result;
     // Must encapsulate most of these.
-    private FormSize AutoScaleBaseSize;
+    private SizeF AutoScaleBaseSize;
     private FormBorderStyle FormBorderStyle;
     private boolean ControlBox;
     private boolean MinimizeBox;
@@ -59,11 +59,11 @@ public class wfWindow extends wfControl implements wfPane {
         System.exit(0);
     }
 
-    public FormSize getAutoScaleBaseSize() {
+    public SizeF getAutoScaleBaseSize() {
         return AutoScaleBaseSize;
     }
 
-    public void setAutoScaleBaseSize(FormSize autoScaleBaseSize) {
+    public void setAutoScaleBaseSize(SizeF autoScaleBaseSize) {
         AutoScaleBaseSize = autoScaleBaseSize;
     }
 
@@ -88,7 +88,7 @@ public class wfWindow extends wfControl implements wfPane {
     }
 
     public void setStartPosition(FormStartPosition startPosition) {
-        //TODO implmnt method.
+        // TODO implementation?
     }
 
     public void setMenu(MainMenu menu) {

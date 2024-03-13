@@ -28,25 +28,24 @@ public class FormCargoSell extends wfForm {
         Button buttonNone = new Button();
         Label labelPaid = new Label();
         Label labelProfit = new Label();
-        ((ISupportInitialize) (numAmount)).beginInit();
-        SuspendLayout();
+                SuspendLayout();
         // labelQuestion
         labelQuestion.setLocation(new Point(8, 50));
         labelQuestion.setName("labelQuestion");
-        labelQuestion.setSize(new FormSize(160, 13));
+        labelQuestion.setSize(new SizeF(13, 160));
         labelQuestion.setTabIndex(1);
         labelQuestion.setText("How many do you want to sell?");
         // labelStatement
         labelStatement.setLocation(new Point(8, 8));
         labelStatement.setName("labelStatement");
-        labelStatement.setSize(new FormSize(302, 13));
+        labelStatement.setSize(new SizeF(13, 302));
         labelStatement.setTabIndex(3);
         labelStatement.setText("The trader wants to by Machines, and offers 8,888 cr. each.");
         // numAmount
         numAmount.setLocation(new Point(168, 48));
         numAmount.setMinimum(1);
         numAmount.setName("numAmount");
-        numAmount.setSize(new FormSize(38, 20));
+        numAmount.setSize(new SizeF(20, 38));
         numAmount.setTabIndex(1);
         numAmount.setValue(88);
         // buttonOk
@@ -54,7 +53,7 @@ public class FormCargoSell extends wfForm {
         buttonOk.setFlatStyle(FlatStyle.Flat);
         buttonOk.setLocation(new Point(83, 74));
         buttonOk.setName("buttonOk");
-        buttonOk.setSize(new FormSize(41, 22));
+        buttonOk.setSize(new SizeF(22, 41));
         buttonOk.setTabIndex(2);
         buttonOk.setText("Ok");
         // buttonAll
@@ -62,13 +61,13 @@ public class FormCargoSell extends wfForm {
         buttonAll.setFlatStyle(FlatStyle.Flat);
         buttonAll.setLocation(new Point(131, 74));
         buttonAll.setName("buttonAll");
-        buttonAll.setSize(new FormSize(41, 22));
+        buttonAll.setSize(new SizeF(22, 41));
         buttonAll.setTabIndex(3);
         buttonAll.setText("All");
         buttonAll.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonAll_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonAll_Click(sender, data);
             }
         });
         // buttonNone
@@ -76,26 +75,26 @@ public class FormCargoSell extends wfForm {
         buttonNone.setFlatStyle(FlatStyle.Flat);
         buttonNone.setLocation(new Point(179, 74));
         buttonNone.setName("buttonNone");
-        buttonNone.setSize(new FormSize(41, 22));
+        buttonNone.setSize(new SizeF(22, 41));
         buttonNone.setTabIndex(4);
         buttonNone.setText("None");
         // labelPaid
         labelPaid.setLocation(new Point(8, 21));
         labelPaid.setName("labelPaid");
-        labelPaid.setSize(new FormSize(280, 13));
+        labelPaid.setSize(new SizeF(13, 280));
         labelPaid.setTabIndex(5);
         labelPaid.setText("You paid about 8,888 cr. per unit, and can sell 88 units.");
         // labelProfit
         labelProfit.setLocation(new Point(8, 34));
         labelProfit.setName("labelProfit");
-        labelProfit.setSize(new FormSize(200, 13));
+        labelProfit.setSize(new SizeF(13, 200));
         labelProfit.setTabIndex(6);
         labelProfit.setText("It costs 8,888 cr. per unit for disposal.");
         // FormCargoSell
         setAcceptButton(buttonOk);
-        setAutoScaleBaseSize(new FormSize(5, 13));
+        setAutoScaleBaseSize(new SizeF(13, 5));
         setCancelButton(buttonNone);
-        setClientSize(new FormSize(302, 105));
+        setClientSize(new SizeF(105, 302));
         setControlBox(false);
         Controls.add(labelProfit);
         Controls.add(labelPaid);
@@ -110,8 +109,7 @@ public class FormCargoSell extends wfForm {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Sell Xxxxxxxxxx");
-        ((ISupportInitialize) (numAmount)).endInit();
-        ResumeLayout(false);
+                ResumeLayout(false);
         Game game = Game.getCurrentGame();
         Commander commander = game.Commander();
         int cost = commander.PriceCargo()[item] / commander.getShip().Cargo()[item];

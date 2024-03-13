@@ -78,200 +78,200 @@ public class FormMonster extends wfForm {
         // buttonClose
         buttonClose.setDialogResult(DialogResult.Cancel);
         buttonClose.setLocation(new Point(-32, -32));
-        buttonClose.setSize(new FormSize(32, 32));
+        buttonClose.setSize(new SizeF(32, 32));
         buttonClose.setTabIndex(32);
         buttonClose.setTabStop(false);
         buttonClose.setText("X");
         // pictureLine1
         pictureLine1.setBackColor(Color.darkGray);
         pictureLine1.setLocation(new Point(4, 40));
-        pictureLine1.setSize(new FormSize(609, 1));
+        pictureLine1.setSize(new SizeF(1, 609));
         pictureLine1.setTabIndex(133);
         pictureLine1.setTabStop(false);
         // pictureLine0
         pictureLine0.setBackColor(Color.darkGray);
         pictureLine0.setLocation(new Point(234, 8));
-        pictureLine0.setSize(new FormSize(1, 347));
+        pictureLine0.setSize(new SizeF(347, 1));
         pictureLine0.setTabIndex(132);
         pictureLine0.setTabStop(false);
         // labelQuestsLabel
         labelQuestsLabel.setAutoSize(true);
         labelQuestsLabel.setFont(new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelQuestsLabel.setLocation(new Point(88, 4));
-        labelQuestsLabel.setSize(new FormSize(50, 19));
+        labelQuestsLabel.setSize(new SizeF(19, 50));
         labelQuestsLabel.setTabIndex(134);
         labelQuestsLabel.setText("Quests");
         // labelMercLabel
         labelMercLabel.setAutoSize(true);
         labelMercLabel.setFont(new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelMercLabel.setLocation(new Point(348, 4));
-        labelMercLabel.setSize(new FormSize(84, 19));
+        labelMercLabel.setSize(new SizeF(19, 84));
         labelMercLabel.setTabIndex(141);
         labelMercLabel.setText("Mercenaries");
         // labelMercSkillLabelPilot
         labelMercSkillLabelPilot.setAutoSize(true);
         labelMercSkillLabelPilot.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelMercSkillLabelPilot.setLocation(new Point(341, 24));
-        labelMercSkillLabelPilot.setSize(new FormSize(12, 16));
+        labelMercSkillLabelPilot.setSize(new SizeF(16, 12));
         labelMercSkillLabelPilot.setTabIndex(7);
         labelMercSkillLabelPilot.setTabStop(true);
         labelMercSkillLabelPilot.setText("P");
         labelMercSkillLabelPilot.TextAlign = ContentAlignment.TopRight;
-        labelMercSkillLabelPilot.LinkClicked = new EventHandler<>() {
+        labelMercSkillLabelPilot.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData e) {
-                SortLinkClicked(sender, e);
+            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+                SortLinkClicked(sender, data);
             }
         };
         // labelMercSkillLabelFighter
         labelMercSkillLabelFighter.setAutoSize(true);
         labelMercSkillLabelFighter.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelMercSkillLabelFighter.setLocation(new Point(362, 24));
-        labelMercSkillLabelFighter.setSize(new FormSize(11, 16));
+        labelMercSkillLabelFighter.setSize(new SizeF(16, 11));
         labelMercSkillLabelFighter.setTabIndex(8);
         labelMercSkillLabelFighter.setTabStop(true);
         labelMercSkillLabelFighter.setText("F");
         labelMercSkillLabelFighter.TextAlign = ContentAlignment.TopRight;
-        labelMercSkillLabelFighter.LinkClicked = new EventHandler<>() {
+        labelMercSkillLabelFighter.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData e) {
-                SortLinkClicked(sender, e);
+            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+                SortLinkClicked(sender, data);
             }
         };
         // labelMercSkillLabelTrader
         labelMercSkillLabelTrader.setAutoSize(true);
         labelMercSkillLabelTrader.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelMercSkillLabelTrader.setLocation(new Point(382, 24));
-        labelMercSkillLabelTrader.setSize(new FormSize(11, 16));
+        labelMercSkillLabelTrader.setSize(new SizeF(16, 11));
         labelMercSkillLabelTrader.setTabIndex(9);
         labelMercSkillLabelTrader.setTabStop(true);
         labelMercSkillLabelTrader.setText("T");
         labelMercSkillLabelTrader.TextAlign = ContentAlignment.TopRight;
-        labelMercSkillLabelTrader.LinkClicked = new EventHandler<>() {
+        labelMercSkillLabelTrader.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData e) {
-                SortLinkClicked(sender, e);
+            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+                SortLinkClicked(sender, data);
             }
         };
         // labelMercSkillLabelEngineer
         labelMercSkillLabelEngineer.setAutoSize(true);
         labelMercSkillLabelEngineer.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelMercSkillLabelEngineer.setLocation(new Point(401, 24));
-        labelMercSkillLabelEngineer.setSize(new FormSize(12, 16));
+        labelMercSkillLabelEngineer.setSize(new SizeF(16, 12));
         labelMercSkillLabelEngineer.setTabIndex(10);
         labelMercSkillLabelEngineer.setTabStop(true);
         labelMercSkillLabelEngineer.setText("E");
         labelMercSkillLabelEngineer.TextAlign = ContentAlignment.TopRight;
-        labelMercSkillLabelEngineer.LinkClicked = new EventHandler<>() {
+        labelMercSkillLabelEngineer.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData e) {
-                SortLinkClicked(sender, e);
+            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+                SortLinkClicked(sender, data);
             }
         };
         // labelMercSystemLabel
         labelMercSystemLabel.setAutoSize(true);
         labelMercSystemLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelMercSystemLabel.setLocation(new Point(425, 24));
-        labelMercSystemLabel.setSize(new FormSize(43, 16));
+        labelMercSystemLabel.setSize(new SizeF(16, 43));
         labelMercSystemLabel.setTabIndex(11);
         labelMercSystemLabel.setTabStop(true);
         labelMercSystemLabel.setText("System");
-        labelMercSystemLabel.LinkClicked = new EventHandler<>() {
+        labelMercSystemLabel.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData e) {
-                SortLinkClicked(sender, e);
+            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+                SortLinkClicked(sender, data);
             }
         };
         // labelQuestSystemLabel
         labelQuestSystemLabel.setAutoSize(true);
         labelQuestSystemLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelQuestSystemLabel.setLocation(new Point(13, 24));
-        labelQuestSystemLabel.setSize(new FormSize(43, 16));
+        labelQuestSystemLabel.setSize(new SizeF(16, 43));
         labelQuestSystemLabel.setTabIndex(1);
         labelQuestSystemLabel.setTabStop(true);
         labelQuestSystemLabel.setText("System");
-        labelQuestSystemLabel.LinkClicked = new EventHandler<>() {
+        labelQuestSystemLabel.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData e) {
-                SortLinkClicked(sender, e);
+            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+                SortLinkClicked(sender, data);
             }
         };
         // labelQuestDescLabel
         labelQuestDescLabel.setAutoSize(true);
         labelQuestDescLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelQuestDescLabel.setLocation(new Point(85, 24));
-        labelQuestDescLabel.setSize(new FormSize(63, 16));
+        labelQuestDescLabel.setSize(new SizeF(16, 63));
         labelQuestDescLabel.setTabIndex(2);
         labelQuestDescLabel.setTabStop(true);
         labelQuestDescLabel.setText("Description");
-        labelQuestDescLabel.LinkClicked = new EventHandler<>() {
+        labelQuestDescLabel.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData e) {
-                SortLinkClicked(sender, e);
+            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+                SortLinkClicked(sender, data);
             }
         };
         // labelMercIDLabel
         labelMercIDLabel.setAutoSize(true);
         labelMercIDLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelMercIDLabel.setLocation(new Point(247, 24));
-        labelMercIDLabel.setSize(new FormSize(16, 16));
+        labelMercIDLabel.setSize(new SizeF(16, 16));
         labelMercIDLabel.setTabIndex(5);
         labelMercIDLabel.setTabStop(true);
         labelMercIDLabel.setText("ID");
         labelMercIDLabel.TextAlign = ContentAlignment.TopRight;
-        labelMercIDLabel.LinkClicked = new EventHandler<>() {
+        labelMercIDLabel.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData e) {
-                SortLinkClicked(sender, e);
+            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+                SortLinkClicked(sender, data);
             }
         };
         // labelMercNameLabel
         labelMercNameLabel.setAutoSize(true);
         labelMercNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelMercNameLabel.setLocation(new Point(268, 24));
-        labelMercNameLabel.setSize(new FormSize(35, 16));
+        labelMercNameLabel.setSize(new SizeF(16, 35));
         labelMercNameLabel.setTabIndex(6);
         labelMercNameLabel.setTabStop(true);
         labelMercNameLabel.setText("Name");
-        labelMercNameLabel.LinkClicked = new EventHandler<>() {
+        labelMercNameLabel.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData e) {
-                SortLinkClicked(sender, e);
+            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+                SortLinkClicked(sender, data);
             }
         };
         // labelShipyardsDescLabel
         labelShipyardsDescLabel.setAutoSize(true);
         labelShipyardsDescLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelShipyardsDescLabel.setLocation(new Point(85, 258));
-        labelShipyardsDescLabel.setSize(new FormSize(63, 16));
+        labelShipyardsDescLabel.setSize(new SizeF(16, 63));
         labelShipyardsDescLabel.setTabIndex(4);
         labelShipyardsDescLabel.setTabStop(true);
         labelShipyardsDescLabel.setText("Description");
-        labelShipyardsDescLabel.LinkClicked = new EventHandler<>() {
+        labelShipyardsDescLabel.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData e) {
-                SortLinkClicked(sender, e);
+            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+                SortLinkClicked(sender, data);
             }
         };
         // labelShipyardsSystemLabel
         labelShipyardsSystemLabel.setAutoSize(true);
         labelShipyardsSystemLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelShipyardsSystemLabel.setLocation(new Point(13, 258));
-        labelShipyardsSystemLabel.setSize(new FormSize(43, 16));
+        labelShipyardsSystemLabel.setSize(new SizeF(16, 43));
         labelShipyardsSystemLabel.setTabIndex(3);
         labelShipyardsSystemLabel.setTabStop(true);
         labelShipyardsSystemLabel.setText("System");
-        labelShipyardsSystemLabel.LinkClicked = new EventHandler<>() {
+        labelShipyardsSystemLabel.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData e) {
-                SortLinkClicked(sender, e);
+            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+                SortLinkClicked(sender, data);
             }
         };
         // labelShipyardsLabel
         labelShipyardsLabel.setAutoSize(true);
         labelShipyardsLabel.setFont(new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelShipyardsLabel.setLocation(new Point(79, 238));
-        labelShipyardsLabel.setSize(new FormSize(68, 19));
+        labelShipyardsLabel.setSize(new SizeF(19, 68));
         labelShipyardsLabel.setTabIndex(155);
         labelShipyardsLabel.setText("Shipyards");
         // pnlMercs
@@ -286,57 +286,57 @@ public class FormMonster extends wfForm {
         pnlMercs.Controls.add(labelMercNames);
         pnlMercs.Controls.add(labelMercSystems2);
         pnlMercs.setLocation(new Point(239, 44));
-        pnlMercs.setSize(new FormSize(371, 307));
+        pnlMercs.setSize(new SizeF(307, 371));
         pnlMercs.setTabIndex(158);
         // labelMercSkillsPilot
         labelMercSkillsPilot.setLocation(new Point(93, 4));
-        labelMercSkillsPilot.setSize(new FormSize(20, 563));
+        labelMercSkillsPilot.setSize(new SizeF(563, 20));
         labelMercSkillsPilot.setTabIndex(144);
         labelMercSkillsPilot.TextAlign = ContentAlignment.TopRight;
         // labelMercSkillsFighter
         labelMercSkillsFighter.setLocation(new Point(113, 4));
-        labelMercSkillsFighter.setSize(new FormSize(20, 563));
+        labelMercSkillsFighter.setSize(new SizeF(563, 20));
         labelMercSkillsFighter.setTabIndex(145);
         labelMercSkillsFighter.TextAlign = ContentAlignment.TopRight;
         // labelMercSkillsTrader
         labelMercSkillsTrader.setLocation(new Point(133, 4));
-        labelMercSkillsTrader.setSize(new FormSize(20, 563));
+        labelMercSkillsTrader.setSize(new SizeF(563, 20));
         labelMercSkillsTrader.setTabIndex(146);
         labelMercSkillsTrader.TextAlign = ContentAlignment.TopRight;
         // labelMercSkillsEngineer
         labelMercSkillsEngineer.setLocation(new Point(153, 4));
-        labelMercSkillsEngineer.setSize(new FormSize(20, 563));
+        labelMercSkillsEngineer.setSize(new SizeF(563, 20));
         labelMercSkillsEngineer.setTabIndex(147);
         labelMercSkillsEngineer.TextAlign = ContentAlignment.TopRight;
         // labelMercSystems
-        labelMercSystems.LinkArea = new LinkArea(0, 0);
+        labelMercSystems.linkArea = new LinkArea(0, 0);
         labelMercSystems.setLocation(new Point(185, 4));
-        labelMercSystems.setSize(new FormSize(160, 387));
+        labelMercSystems.setSize(new SizeF(387, 160));
         labelMercSystems.setTabIndex(14);
-        labelMercSystems.LinkClicked = new EventHandler<>() {
+        labelMercSystems.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData e) {
-                SystemLinkClicked(sender, e);
+            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+                SystemLinkClicked(sender, data);
             }
         };
         // labelMercIds
         labelMercIds.setLocation(new Point(0, 4));
-        labelMercIds.setSize(new FormSize(23, 563));
+        labelMercIds.setSize(new SizeF(563, 23));
         labelMercIds.setTabIndex(142);
         labelMercIds.TextAlign = ContentAlignment.TopRight;
         // labelMercNames
         labelMercNames.setLocation(new Point(28, 4));
-        labelMercNames.setSize(new FormSize(69, 563));
+        labelMercNames.setSize(new SizeF(563, 69));
         labelMercNames.setTabIndex(141);
         // labelMercSystems2
-        labelMercSystems2.LinkArea = new LinkArea(0, 0);
+        labelMercSystems2.linkArea = new LinkArea(0, 0);
         labelMercSystems2.setLocation(new Point(185, 391));
-        labelMercSystems2.setSize(new FormSize(160, 175));
+        labelMercSystems2.setSize(new SizeF(175, 160));
         labelMercSystems2.setTabIndex(148);
-        labelMercSystems2.LinkClicked = new EventHandler<>() {
+        labelMercSystems2.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData e) {
-                SystemLinkClicked(sender, e);
+            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+                SystemLinkClicked(sender, data);
             }
         };
         // pnlQuests
@@ -345,21 +345,21 @@ public class FormMonster extends wfForm {
         pnlQuests.Controls.add(labelQuests);
         pnlQuests.Controls.add(labelQuestSystems);
         pnlQuests.setLocation(new Point(8, 44));
-        pnlQuests.setSize(new FormSize(222, 182));
+        pnlQuests.setSize(new SizeF(182, 222));
         pnlQuests.setTabIndex(159);
         // labelQuests
         labelQuests.setLocation(new Point(76, 4));
-        labelQuests.setSize(new FormSize(120, 350));
+        labelQuests.setSize(new SizeF(350, 120));
         labelQuests.setTabIndex(48);
         // labelQuestSystems
-        labelQuestSystems.LinkArea = new LinkArea(0, 0);
+        labelQuestSystems.linkArea = new LinkArea(0, 0);
         labelQuestSystems.setLocation(new Point(4, 4));
-        labelQuestSystems.setSize(new FormSize(68, 350));
+        labelQuestSystems.setSize(new SizeF(350, 68));
         labelQuestSystems.setTabIndex(12);
-        labelQuestSystems.LinkClicked = new EventHandler<>() {
+        labelQuestSystems.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData e) {
-                SystemLinkClicked(sender, e);
+            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+                SystemLinkClicked(sender, data);
             }
         };
         // pnlShipyards
@@ -367,33 +367,33 @@ public class FormMonster extends wfForm {
         pnlShipyards.Controls.add(labelShipyards);
         pnlShipyards.Controls.add(labelShipyardSystems);
         pnlShipyards.setLocation(new Point(8, 278));
-        pnlShipyards.setSize(new FormSize(222, 73));
+        pnlShipyards.setSize(new SizeF(73, 222));
         pnlShipyards.setTabIndex(160);
         // labelShipyards
         labelShipyards.setLocation(new Point(76, 4));
-        labelShipyards.setSize(new FormSize(120, 63));
+        labelShipyards.setSize(new SizeF(63, 120));
         labelShipyards.setTabIndex(158);
         // labelShipyardSystems
-        labelShipyardSystems.LinkArea = new LinkArea(0, 0);
+        labelShipyardSystems.linkArea = new LinkArea(0, 0);
         labelShipyardSystems.setLocation(new Point(4, 4));
-        labelShipyardSystems.setSize(new FormSize(68, 63));
+        labelShipyardSystems.setSize(new SizeF(63, 68));
         labelShipyardSystems.setTabIndex(13);
-        labelShipyardSystems.LinkClicked = new EventHandler<>() {
+        labelShipyardSystems.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData e) {
-                SystemLinkClicked(sender, e);
+            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+                SystemLinkClicked(sender, data);
             }
         };
         // pictureLine2
         pictureLine2.setBackColor(Color.darkGray);
         pictureLine2.setLocation(new Point(4, 274));
-        pictureLine2.setSize(new FormSize(222, 1));
+        pictureLine2.setSize(new SizeF(1, 222));
         pictureLine2.setTabIndex(161);
         pictureLine2.setTabStop(false);
         // FormMonster
-        setAutoScaleBaseSize(new FormSize(5, 13));
+        setAutoScaleBaseSize(new SizeF(13, 5));
         setCancelButton(buttonClose);
-        setClientSize(new FormSize(617, 358));
+        setClientSize(new SizeF(358, 617));
         Controls.add(pictureLine2);
         Controls.add(pnlShipyards);
         Controls.add(pnlQuests);
@@ -603,8 +603,8 @@ public class FormMonster extends wfForm {
         labelMercSkillsEngineer.setText("");
         labelMercSystems.setText("");
         labelMercSystems2.setText("");
-        labelMercSystems.Links.clear();
-        labelMercSystems2.Links.clear();
+        labelMercSystems.links.clear();
+        labelMercSystems2.links.clear();
         for (int i = 0; i < mercIds.length; i++) {
             CrewMember merc = game.Mercenaries()[mercIds[i]];
             boolean link = merc.CurrentSystem() != null && !commander.getShip().HasCrew(merc.Id());
@@ -618,13 +618,13 @@ public class FormMonster extends wfForm {
                 int start = labelMercSystems.getText().length();
                 labelMercSystems.setText(labelMercSystems.getText() + (CurrentSystemDisplay(merc) + Strings.newline));
                 if (link) {
-                    labelMercSystems.Links.add(start, merc.CurrentSystem().Name().length(), merc.CurrentSystem().Name());
+                    labelMercSystems.links.add(start, merc.CurrentSystem().Name().length(), merc.CurrentSystem().Name());
                 }
             } else {
                 int start = labelMercSystems2.getText().length();
                 labelMercSystems2.setText(labelMercSystems2.getText() + (CurrentSystemDisplay(merc) + Strings.newline));
                 if (link) {
-                    labelMercSystems2.Links.add(start, merc.CurrentSystem().Name().length(), merc.CurrentSystem().Name());
+                    labelMercSystems2.links.add(start, merc.CurrentSystem().Name().length(), merc.CurrentSystem().Name());
                 }
             }
         }
@@ -641,13 +641,13 @@ public class FormMonster extends wfForm {
     private void UpdateQuests() {
         labelQuestSystems.setText("");
         labelQuests.setText("");
-        labelQuestSystems.Links.clear();
+        labelQuestSystems.links.clear();
         for (Integer questSystemId : questSystemIds) {
             StarSystem system = game.Universe()[questSystemId];
             int start = labelQuestSystems.getText().length();
             labelQuestSystems.setText(labelQuestSystems.getText() + (system.Name() + Strings.newline));
             labelQuests.setText(labelQuests.getText() + (system.SpecialEvent().Title() + Strings.newline));
-            labelQuestSystems.Links.add(start, system.Name().length(), system.Name());
+            labelQuestSystems.links.add(start, system.Name().length(), system.Name());
         }
         labelQuestSystems.setText(labelQuestSystems.getText().trim());
         labelQuests.setText(labelQuests.getText().trim());
@@ -656,13 +656,13 @@ public class FormMonster extends wfForm {
     private void UpdateShipyards() {
         labelShipyardSystems.setText("");
         labelShipyards.setText("");
-        labelShipyardSystems.Links.clear();
+        labelShipyardSystems.links.clear();
         for (Integer shipyardSystemId : shipyardSystemIds) {
             StarSystem system = game.Universe()[shipyardSystemId];
             int start = labelShipyardSystems.getText().length();
             labelShipyardSystems.setText(labelShipyardSystems.getText() + (system.Name() + Strings.newline));
             labelShipyards.setText(labelShipyards.getText() + (system.Shipyard().Name() + Strings.newline));
-            labelShipyardSystems.Links.add(start, system.Name().length(), system.Name());
+            labelShipyardSystems.links.add(start, system.Name().length(), system.Name());
         }
         labelShipyardSystems.setText(labelShipyardSystems.getText().trim());
         labelShipyards.setText(labelShipyards.getText().trim());

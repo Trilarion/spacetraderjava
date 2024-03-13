@@ -23,13 +23,12 @@ public class FormBuyRepairs extends wfForm {
         Button buttonOk = new Button();
         Button buttonMax = new Button();
         Button buttonNothing = new Button();
-        ((ISupportInitialize) (numAmount)).beginInit();
-        SuspendLayout();
+                SuspendLayout();
         // labelQuestion
         labelQuestion.setAutoSize(true);
         labelQuestion.setLocation(new Point(8, 8));
         labelQuestion.setName("labelQuestion");
-        labelQuestion.setSize(new FormSize(227, 13));
+        labelQuestion.setSize(new SizeF(13, 227));
         labelQuestion.setTabIndex(3);
         labelQuestion.setText("How much do you want to spend on repairs?");
         // numAmount
@@ -37,7 +36,7 @@ public class FormBuyRepairs extends wfForm {
         numAmount.setMaximum(999);
         numAmount.setMinimum(1);
         numAmount.setName("numAmount");
-        numAmount.setSize(new FormSize(44, 20));
+        numAmount.setSize(new SizeF(20, 44));
         numAmount.setTabIndex(1);
         numAmount.setValue(888);
         // buttonOk
@@ -45,7 +44,7 @@ public class FormBuyRepairs extends wfForm {
         buttonOk.setFlatStyle(FlatStyle.Flat);
         buttonOk.setLocation(new Point(69, 32));
         buttonOk.setName("buttonOk");
-        buttonOk.setSize(new FormSize(41, 22));
+        buttonOk.setSize(new SizeF(22, 41));
         buttonOk.setTabIndex(2);
         buttonOk.setText("Ok");
         // buttonMax
@@ -53,7 +52,7 @@ public class FormBuyRepairs extends wfForm {
         buttonMax.setFlatStyle(FlatStyle.Flat);
         buttonMax.setLocation(new Point(117, 32));
         buttonMax.setName("buttonMax");
-        buttonMax.setSize(new FormSize(41, 22));
+        buttonMax.setSize(new SizeF(22, 41));
         buttonMax.setTabIndex(3);
         buttonMax.setText("Max");
         // buttonNothing
@@ -61,14 +60,14 @@ public class FormBuyRepairs extends wfForm {
         buttonNothing.setFlatStyle(FlatStyle.Flat);
         buttonNothing.setLocation(new Point(165, 32));
         buttonNothing.setName("buttonNothing");
-        buttonNothing.setSize(new FormSize(53, 22));
+        buttonNothing.setSize(new SizeF(22, 53));
         buttonNothing.setTabIndex(4);
         buttonNothing.setText("Nothing");
         // FormBuyRepairs
         setAcceptButton(buttonOk);
-        setAutoScaleBaseSize(new FormSize(5, 13));
+        setAutoScaleBaseSize(new SizeF(13, 5));
         setCancelButton(buttonNothing);
-        setClientSize(new FormSize(286, 63));
+        setClientSize(new SizeF(63, 286));
         setControlBox(false);
         Controls.addAll(Arrays.asList(buttonNothing, buttonMax, buttonOk, numAmount, labelQuestion));
         setFormBorderStyle(FormBorderStyle.FixedDialog);
@@ -76,8 +75,7 @@ public class FormBuyRepairs extends wfForm {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Hull Repair");
-        ((ISupportInitialize) (numAmount)).endInit();
-        ResumeLayout(false);
+                ResumeLayout(false);
         Game game = Game.getCurrentGame();
         Commander commander = game.Commander();
         numAmount.setMaximum(Math.min(commander.getCash(), (commander.getShip().HullStrength() - commander.getShip().getHull()) * commander.getShip().getRepairCost()));

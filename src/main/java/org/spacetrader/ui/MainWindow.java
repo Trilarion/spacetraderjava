@@ -20,7 +20,6 @@ import org.spacetrader.util.Directory;
 import org.spacetrader.util.RegistryKey;
 import org.spacetrader.util.Util;
 import org.winforms.Button;
-import org.winforms.Container;
 import org.winforms.Font;
 import org.winforms.Icon;
 import org.winforms.Label;
@@ -49,8 +48,8 @@ public class MainWindow extends wfWindow {
     private final int OFF_X = 3;
     private final int OFF_Y = 3;
     private final int OFF_X_WORM = OFF_X + 1;
-    private final Pen DEFAULT_PEN = new Pen(Color.black);
-    private final Brush DEFAULT_BRUSH = new SolidBrush(Color.white);
+    private final Pen PEN_BLACK = new Pen(Color.black);
+    private final Pen PEN_WHITE = new Pen(Color.white);
     private final Button buttonDesign;
     private final Button buttonNews;
     private final Button buttonSpecial;
@@ -124,7 +123,6 @@ public class MainWindow extends wfWindow {
     private int SaveGameDays = -1;
 
     public MainWindow() {
-        IContainer components = new Container();
         ResourceManager resources = new ResourceManager(Main.class);
         MainMenu mnuMain = new MainMenu();
         SubMenu mnuGame = new SubMenu();
@@ -332,17 +330,13 @@ public class MainWindow extends wfWindow {
         PictureBox pictureLine = new PictureBox();
         dlgOpen = new OpenFileDialog();
         dlgSave = new SaveFileDialog();
-        ilChartImages = new ImageList(components);
-        ilShipImages = new ImageList(components);
-        ilDirectionImages = new ImageList(components);
-        tipSpecial = new ToolTip(components);
-        tipMerc = new ToolTip(components);
-        ilEquipmentImages = new ImageList(components);
-        ((ISupportInitialize) (statusBarPanelCash)).beginInit();
-        ((ISupportInitialize) (statusBarPanelBays)).beginInit();
-        ((ISupportInitialize) (statusBarPanelCosts)).beginInit();
-        ((ISupportInitialize) (statusBarPanelExtra)).beginInit();
-        boxShortRangeChart.SuspendLayout();
+        ilChartImages = new ImageList();
+        ilShipImages = new ImageList();
+        ilDirectionImages = new ImageList();
+        tipSpecial = new ToolTip();
+        tipMerc = new ToolTip();
+        ilEquipmentImages = new ImageList();
+                                        boxShortRangeChart.SuspendLayout();
         boxGalacticChart.SuspendLayout();
         boxTargetSystem.SuspendLayout();
         boxCargo.SuspendLayout();
@@ -363,8 +357,8 @@ public class MainWindow extends wfWindow {
         mnuGameNew.setText("&New...");
         mnuGameNew.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                mnuGameNew_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                mnuGameNew_Click(sender, data);
             }
         });
         // mnuGameLoad
@@ -373,8 +367,8 @@ public class MainWindow extends wfWindow {
         mnuGameLoad.setText("&Load...");
         mnuGameLoad.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                mnuGameLoad_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                mnuGameLoad_Click(sender, data);
             }
         });
         // mnuGameSave
@@ -384,8 +378,8 @@ public class MainWindow extends wfWindow {
         mnuGameSave.setText("&Save");
         mnuGameSave.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                mnuGameSave_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                mnuGameSave_Click(sender, data);
             }
         });
         // mnuGameSaveAs
@@ -395,8 +389,8 @@ public class MainWindow extends wfWindow {
         mnuGameSaveAs.setText("Save &As...");
         mnuGameSaveAs.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                mnuGameSaveAs_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                mnuGameSaveAs_Click(sender, data);
             }
         });
         // mnuGameLine1
@@ -408,8 +402,8 @@ public class MainWindow extends wfWindow {
         mnuRetire.setText("&Retire");
         mnuRetire.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                mnuRetire_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                mnuRetire_Click(sender, data);
             }
         });
         // mnuGameLine2
@@ -420,8 +414,8 @@ public class MainWindow extends wfWindow {
         mnuGameExit.setText("E&xit");
         mnuGameExit.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                mnuGameExit_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                mnuGameExit_Click(sender, data);
             }
         });
         // mnuView
@@ -437,8 +431,8 @@ public class MainWindow extends wfWindow {
         mnuViewCommander.setText("&Commander Status");
         mnuViewCommander.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                mnuViewCommander_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                mnuViewCommander_Click(sender, data);
             }
         });
         // mnuViewShip
@@ -448,8 +442,8 @@ public class MainWindow extends wfWindow {
         mnuViewShip.setText("&Ship");
         mnuViewShip.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                mnuViewShip_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                mnuViewShip_Click(sender, data);
             }
         });
         // mnuViewPersonnel
@@ -459,8 +453,8 @@ public class MainWindow extends wfWindow {
         mnuViewPersonnel.setText("&Personnel");
         mnuViewPersonnel.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                mnuViewPersonnel_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                mnuViewPersonnel_Click(sender, data);
             }
         });
         // mnuViewQuests
@@ -470,8 +464,8 @@ public class MainWindow extends wfWindow {
         mnuViewQuests.setText("&Quests");
         mnuViewQuests.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                mnuViewQuests_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                mnuViewQuests_Click(sender, data);
             }
         });
         // mnuViewBank
@@ -481,8 +475,8 @@ public class MainWindow extends wfWindow {
         mnuViewBank.setText("&Bank");
         mnuViewBank.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                mnuViewBank_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                mnuViewBank_Click(sender, data);
             }
         });
         // mnuViewLine1
@@ -493,8 +487,8 @@ public class MainWindow extends wfWindow {
         mnuHighScores.setText("&High Scores");
         mnuHighScores.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                mnuHighScores_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                mnuHighScores_Click(sender, data);
             }
         });
         // mnuViewLine2
@@ -505,8 +499,8 @@ public class MainWindow extends wfWindow {
         mnuOptions.setText("Options");
         mnuOptions.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                mnuOptions_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                mnuOptions_Click(sender, data);
             }
         });
         // mnuHelp
@@ -518,46 +512,46 @@ public class MainWindow extends wfWindow {
         mnuHelpAbout.setText("&About Space Trader");
         mnuHelpAbout.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                mnuHelpAbout_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                mnuHelpAbout_Click(sender, data);
             }
         });
         // pictureGalacticChart
         pictureGalacticChart.setBackColor(Color.white);
         pictureGalacticChart.setLocation(new Point(8, 16));
         pictureGalacticChart.setName("pictureGalacticChart");
-        pictureGalacticChart.setSize(new FormSize(160, 116));
+        pictureGalacticChart.setSize(new SizeF(116, 160));
         pictureGalacticChart.setTabIndex(0);
         pictureGalacticChart.setTabStop(false);
         pictureGalacticChart.setPaint(new EventHandler<>() {
             @Override
-            public void handle(Object sender, PaintEventData e) {
-                pictureGalacticChart_Paint(sender, e);
+            public void handle(Object sender, PaintEventData data) {
+                pictureGalacticChart_Paint(sender, data);
             }
         });
         pictureGalacticChart.setMouseDown(new EventHandler<>() {
             @Override
-            public void handle(Object sender, MouseEventData e) {
-                pictureGalacticChart_MouseDown(sender, e);
+            public void handle(Object sender, MouseEventData data) {
+                pictureGalacticChart_MouseDown(sender, data);
             }
         });
         // pictureShortRangeChart
         pictureShortRangeChart.setBackColor(Color.white);
         pictureShortRangeChart.setLocation(new Point(8, 16));
         pictureShortRangeChart.setName("pictureShortRangeChart");
-        pictureShortRangeChart.setSize(new FormSize(160, 145));
+        pictureShortRangeChart.setSize(new SizeF(145, 160));
         pictureShortRangeChart.setTabIndex(1);
         pictureShortRangeChart.setTabStop(false);
         pictureShortRangeChart.setPaint(new EventHandler<>() {
             @Override
-            public void handle(Object sender, PaintEventData e) {
-                pictureShortRangeChart_Paint(sender, e);
+            public void handle(Object sender, PaintEventData data) {
+                pictureShortRangeChart_Paint(sender, data);
             }
         });
         pictureShortRangeChart.setMouseDown(new EventHandler<>() {
             @Override
-            public void handle(Object sender, MouseEventData e) {
-                pictureShortRangeChart_MouseDown(sender, e);
+            public void handle(Object sender, MouseEventData data) {
+                pictureShortRangeChart_MouseDown(sender, data);
             }
         });
         // statusBar
@@ -565,13 +559,13 @@ public class MainWindow extends wfWindow {
         statusBar.setName("statusBar");
         statusBar.Panels.addAll(Arrays.asList(statusBarPanelCash, statusBarPanelBays, statusBarPanelCosts, statusBarPanelExtra));
         statusBar.ShowPanels = true;
-        statusBar.setSize(new FormSize(768, 24));
+        statusBar.setSize(new SizeF(24, 768));
         statusBar.SizingGrip = false;
         statusBar.setTabIndex(2);
         statusBar.PanelClick = new EventHandler<>() {
             @Override
-            public void handle(Object sender, StatusBarPanelClickEventData e) {
-                statusBar_PanelClick(sender, e);
+            public void handle(Object sender, StatusBarPanelClickEventData data) {
+                statusBar_PanelClick(sender, data);
             }
         };
         // statusBarPanelCash
@@ -596,7 +590,7 @@ public class MainWindow extends wfWindow {
         boxShortRangeChart.Controls.add(pictureShortRangeChart);
         boxShortRangeChart.setLocation(new Point(364, 306));
         boxShortRangeChart.setName("boxShortRangeChart");
-        boxShortRangeChart.setSize(new FormSize(176, 168));
+        boxShortRangeChart.setSize(new SizeF(168, 176));
         boxShortRangeChart.setTabIndex(6);
         boxShortRangeChart.setTabStop(false);
         boxShortRangeChart.setText("Short-Range Chart");
@@ -610,46 +604,46 @@ public class MainWindow extends wfWindow {
         boxGalacticChart.Controls.add(pictureGalacticChart);
         boxGalacticChart.setLocation(new Point(180, 306));
         boxGalacticChart.setName("boxGalacticChart");
-        boxGalacticChart.setSize(new FormSize(176, 168));
+        boxGalacticChart.setSize(new SizeF(168, 176));
         boxGalacticChart.setTabIndex(5);
         boxGalacticChart.setTabStop(false);
         boxGalacticChart.setText("Galactic Chart");
         // labelWormhole
         labelWormhole.setLocation(new Point(8, 148));
         labelWormhole.setName("labelWormhole");
-        labelWormhole.setSize(new FormSize(72, 13));
+        labelWormhole.setSize(new SizeF(13, 72));
         labelWormhole.setTabIndex(29);
         labelWormhole.setText("Tarchannen");
         // labelWormholeLabel
         labelWormholeLabel.setLocation(new Point(8, 135));
         labelWormholeLabel.setName("labelWormholeLabel");
-        labelWormholeLabel.setSize(new FormSize(72, 13));
+        labelWormholeLabel.setSize(new SizeF(13, 72));
         labelWormholeLabel.setTabIndex(28);
         labelWormholeLabel.setText("Wormhole to");
         // buttonJump
         buttonJump.setFlatStyle(FlatStyle.Flat);
         buttonJump.setLocation(new Point(81, 138));
         buttonJump.setName("buttonJump");
-        buttonJump.setSize(new FormSize(42, 22));
+        buttonJump.setSize(new SizeF(22, 42));
         buttonJump.setTabIndex(55);
         buttonJump.setText("Jump");
         buttonJump.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonJump_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonJump_Click(sender, data);
             }
         });
         // buttonFind
         buttonFind.setFlatStyle(FlatStyle.Flat);
         buttonFind.setLocation(new Point(132, 138));
         buttonFind.setName("buttonFind");
-        buttonFind.setSize(new FormSize(36, 22));
+        buttonFind.setSize(new SizeF(22, 36));
         buttonFind.setTabIndex(56);
         buttonFind.setText("Find");
         buttonFind.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonFind_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonFind_Click(sender, data);
             }
         });
         // boxTargetSystem
@@ -677,7 +671,7 @@ public class MainWindow extends wfWindow {
         boxTargetSystem.Controls.add(labelTargetNameLabel);
         boxTargetSystem.setLocation(new Point(548, 306));
         boxTargetSystem.setName("boxTargetSystem");
-        boxTargetSystem.setSize(new FormSize(216, 168));
+        boxTargetSystem.setSize(new SizeF(168, 216));
         boxTargetSystem.setTabIndex(7);
         boxTargetSystem.setTabStop(false);
         boxTargetSystem.setText("Target System");
@@ -685,101 +679,101 @@ public class MainWindow extends wfWindow {
         buttonTrack.setFlatStyle(FlatStyle.Flat);
         buttonTrack.setLocation(new Point(160, 140));
         buttonTrack.setName("buttonTrack");
-        buttonTrack.setSize(new FormSize(44, 22));
+        buttonTrack.setSize(new SizeF(22, 44));
         buttonTrack.setTabIndex(60);
         buttonTrack.setText("Track");
         buttonTrack.setVisible(false);
         buttonTrack.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonTrack_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonTrack_Click(sender, data);
             }
         });
         // buttonNextSystem
         buttonNextSystem.setFlatStyle(FlatStyle.Flat);
         buttonNextSystem.setLocation(new Point(186, 16));
         buttonNextSystem.setName("buttonNextSystem");
-        buttonNextSystem.setSize(new FormSize(18, 18));
+        buttonNextSystem.setSize(new SizeF(18, 18));
         buttonNextSystem.setTabIndex(58);
         buttonNextSystem.setText(">");
         buttonNextSystem.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonNextSystem_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonNextSystem_Click(sender, data);
             }
         });
         // buttonPrevSystem
         buttonPrevSystem.setFlatStyle(FlatStyle.Flat);
         buttonPrevSystem.setLocation(new Point(160, 16));
         buttonPrevSystem.setName("buttonPrevSystem");
-        buttonPrevSystem.setSize(new FormSize(18, 18));
+        buttonPrevSystem.setSize(new SizeF(18, 18));
         buttonPrevSystem.setTabIndex(57);
         buttonPrevSystem.setText("<");
         buttonPrevSystem.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonPrevSystem_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonPrevSystem_Click(sender, data);
             }
         });
         // labelTargetOutOfRange
         labelTargetOutOfRange.setLocation(new Point(8, 144));
         labelTargetOutOfRange.setName("labelTargetOutOfRange");
-        labelTargetOutOfRange.setSize(new FormSize(144, 13));
+        labelTargetOutOfRange.setSize(new SizeF(13, 144));
         labelTargetOutOfRange.setTabIndex(17);
         labelTargetOutOfRange.setText("This system is out of range.");
         // buttonWarp
         buttonWarp.setFlatStyle(FlatStyle.Flat);
         buttonWarp.setLocation(new Point(160, 98));
         buttonWarp.setName("buttonWarp");
-        buttonWarp.setSize(new FormSize(44, 44));
+        buttonWarp.setSize(new SizeF(44, 44));
         buttonWarp.setTabIndex(59);
         buttonWarp.setText("Warp");
         buttonWarp.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonWarp_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonWarp_Click(sender, data);
             }
         });
         // labelTargetPolSys
         labelTargetPolSys.setLocation(new Point(88, 64));
         labelTargetPolSys.setName("labelTargetPolSys");
-        labelTargetPolSys.setSize(new FormSize(91, 13));
+        labelTargetPolSys.setSize(new SizeF(13, 91));
         labelTargetPolSys.setTabIndex(15);
         labelTargetPolSys.setText("Communist State");
         // labelTargetSize
         labelTargetSize.setLocation(new Point(88, 32));
         labelTargetSize.setName("labelTargetSize");
-        labelTargetSize.setSize(new FormSize(45, 13));
+        labelTargetSize.setSize(new SizeF(13, 45));
         labelTargetSize.setTabIndex(14);
         labelTargetSize.setText("Medium");
         // labelTargetTech
         labelTargetTech.setLocation(new Point(88, 48));
         labelTargetTech.setName("labelTargetTech");
-        labelTargetTech.setSize(new FormSize(82, 13));
+        labelTargetTech.setSize(new SizeF(13, 82));
         labelTargetTech.setTabIndex(13);
         labelTargetTech.setText("Pre-Agricultural");
         // labelTargetDistance
         labelTargetDistance.setLocation(new Point(88, 128));
         labelTargetDistance.setName("labelTargetDistance");
-        labelTargetDistance.setSize(new FormSize(66, 13));
+        labelTargetDistance.setSize(new SizeF(13, 66));
         labelTargetDistance.setTabIndex(12);
         labelTargetDistance.setText("888 parsecs");
         // labelTargetPirates
         labelTargetPirates.setLocation(new Point(88, 112));
         labelTargetPirates.setName("labelTargetPirates");
-        labelTargetPirates.setSize(new FormSize(53, 13));
+        labelTargetPirates.setSize(new SizeF(13, 53));
         labelTargetPirates.setTabIndex(11);
         labelTargetPirates.setText("Abundant");
         // labelTargetPolice
         labelTargetPolice.setLocation(new Point(88, 96));
         labelTargetPolice.setName("labelTargetPolice");
-        labelTargetPolice.setSize(new FormSize(53, 13));
+        labelTargetPolice.setSize(new SizeF(13, 53));
         labelTargetPolice.setTabIndex(10);
         labelTargetPolice.setText("Abundant");
         // labelTargetResource
         labelTargetResource.setLocation(new Point(88, 80));
         labelTargetResource.setName("labelTargetResource");
-        labelTargetResource.setSize(new FormSize(105, 13));
+        labelTargetResource.setSize(new SizeF(13, 105));
         labelTargetResource.setTabIndex(9);
         labelTargetResource.setText("Sweetwater Oceans");
         // labelTargetDistanceLabel
@@ -788,7 +782,7 @@ public class MainWindow extends wfWindow {
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelTargetDistanceLabel.setLocation(new Point(8, 128));
         labelTargetDistanceLabel.setName("labelTargetDistanceLabel");
-        labelTargetDistanceLabel.setSize(new FormSize(53, 16));
+        labelTargetDistanceLabel.setSize(new SizeF(16, 53));
         labelTargetDistanceLabel.setTabIndex(8);
         labelTargetDistanceLabel.setText("Distance:");
         // labelTargetPiratesLabel
@@ -797,7 +791,7 @@ public class MainWindow extends wfWindow {
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelTargetPiratesLabel.setLocation(new Point(8, 112));
         labelTargetPiratesLabel.setName("labelTargetPiratesLabel");
-        labelTargetPiratesLabel.setSize(new FormSize(44, 16));
+        labelTargetPiratesLabel.setSize(new SizeF(16, 44));
         labelTargetPiratesLabel.setTabIndex(7);
         labelTargetPiratesLabel.setText("Pirates:");
         // labelTargetPoliceLabel
@@ -806,7 +800,7 @@ public class MainWindow extends wfWindow {
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelTargetPoliceLabel.setLocation(new Point(8, 96));
         labelTargetPoliceLabel.setName("labelTargetPoliceLabel");
-        labelTargetPoliceLabel.setSize(new FormSize(40, 16));
+        labelTargetPoliceLabel.setSize(new SizeF(16, 40));
         labelTargetPoliceLabel.setTabIndex(6);
         labelTargetPoliceLabel.setText("Police:");
         // labelTargetResourceLabel
@@ -815,7 +809,7 @@ public class MainWindow extends wfWindow {
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelTargetResourceLabel.setLocation(new Point(8, 80));
         labelTargetResourceLabel.setName("labelTargetResourceLabel");
-        labelTargetResourceLabel.setSize(new FormSize(58, 16));
+        labelTargetResourceLabel.setSize(new SizeF(16, 58));
         labelTargetResourceLabel.setTabIndex(5);
         labelTargetResourceLabel.setText("Resource:");
         // labelTargetGovtLabel
@@ -824,7 +818,7 @@ public class MainWindow extends wfWindow {
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelTargetGovtLabel.setLocation(new Point(8, 64));
         labelTargetGovtLabel.setName("labelTargetGovtLabel");
-        labelTargetGovtLabel.setSize(new FormSize(72, 16));
+        labelTargetGovtLabel.setSize(new SizeF(16, 72));
         labelTargetGovtLabel.setTabIndex(4);
         labelTargetGovtLabel.setText("Government:");
         // labelTargetTechLabel
@@ -833,7 +827,7 @@ public class MainWindow extends wfWindow {
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelTargetTechLabel.setLocation(new Point(8, 48));
         labelTargetTechLabel.setName("labelTargetTechLabel");
-        labelTargetTechLabel.setSize(new FormSize(65, 16));
+        labelTargetTechLabel.setSize(new SizeF(16, 65));
         labelTargetTechLabel.setTabIndex(3);
         labelTargetTechLabel.setText("Tech Level:");
         // labelTargetSizeLabel
@@ -842,13 +836,13 @@ public class MainWindow extends wfWindow {
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelTargetSizeLabel.setLocation(new Point(8, 32));
         labelTargetSizeLabel.setName("labelTargetSizeLabel");
-        labelTargetSizeLabel.setSize(new FormSize(31, 16));
+        labelTargetSizeLabel.setSize(new SizeF(16, 31));
         labelTargetSizeLabel.setTabIndex(2);
         labelTargetSizeLabel.setText("Size:");
         // labelTargetName
         labelTargetName.setLocation(new Point(88, 16));
         labelTargetName.setName("labelTargetName");
-        labelTargetName.setSize(new FormSize(65, 13));
+        labelTargetName.setSize(new SizeF(13, 65));
         labelTargetName.setTabIndex(1);
         labelTargetName.setText("Tarchannen");
         // labelTargetNameLabel
@@ -857,7 +851,7 @@ public class MainWindow extends wfWindow {
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelTargetNameLabel.setLocation(new Point(8, 16));
         labelTargetNameLabel.setName("labelTargetNameLabel");
-        labelTargetNameLabel.setSize(new FormSize(39, 16));
+        labelTargetNameLabel.setSize(new SizeF(16, 39));
         labelTargetNameLabel.setTabIndex(0);
         labelTargetNameLabel.setText("Name:");
         // boxCargo
@@ -974,7 +968,7 @@ public class MainWindow extends wfWindow {
         boxCargo.Controls.add(labelTradeCommodity7);
         boxCargo.setLocation(new Point(252, 2));
         boxCargo.setName("boxCargo");
-        boxCargo.setSize(new FormSize(512, 300));
+        boxCargo.setSize(new SizeF(300, 512));
         boxCargo.setTabIndex(8);
         boxCargo.setTabStop(false);
         boxCargo.setText("Cargo");
@@ -982,48 +976,48 @@ public class MainWindow extends wfWindow {
         pictureCargoLine3.setBackColor(Color.darkGray);
         pictureCargoLine3.setLocation(new Point(8, 52));
         pictureCargoLine3.setName("pictureCargoLine3");
-        pictureCargoLine3.setSize(new FormSize(496, 1));
+        pictureCargoLine3.setSize(new SizeF(1, 496));
         pictureCargoLine3.setTabIndex(131);
         pictureCargoLine3.setTabStop(false);
         // pictureCargoLine2
         pictureCargoLine2.setBackColor(Color.darkGray);
         pictureCargoLine2.setLocation(new Point(352, 32));
         pictureCargoLine2.setName("pictureCargoLine2");
-        pictureCargoLine2.setSize(new FormSize(1, 262));
+        pictureCargoLine2.setSize(new SizeF(262, 1));
         pictureCargoLine2.setTabIndex(130);
         pictureCargoLine2.setTabStop(false);
         // pictureCargoLine0
         pictureCargoLine0.setBackColor(Color.darkGray);
         pictureCargoLine0.setLocation(new Point(71, 32));
         pictureCargoLine0.setName("pictureCargoLine0");
-        pictureCargoLine0.setSize(new FormSize(1, 262));
+        pictureCargoLine0.setSize(new SizeF(262, 1));
         pictureCargoLine0.setTabIndex(129);
         pictureCargoLine0.setTabStop(false);
         // pictureCargoLine1
         pictureCargoLine1.setBackColor(Color.darkGray);
         pictureCargoLine1.setLocation(new Point(218, 32));
         pictureCargoLine1.setName("pictureCargoLine1");
-        pictureCargoLine1.setSize(new FormSize(1, 262));
+        pictureCargoLine1.setSize(new SizeF(262, 1));
         pictureCargoLine1.setTabIndex(128);
         pictureCargoLine1.setTabStop(false);
         // labelTargetPct9
         labelTargetPct9.setLocation(new Point(466, 276));
         labelTargetPct9.setName("labelTargetPct9");
-        labelTargetPct9.setSize(new FormSize(37, 13));
+        labelTargetPct9.setSize(new SizeF(13, 37));
         labelTargetPct9.setTabIndex(127);
         labelTargetPct9.setText("--------");
         labelTargetPct9.TextAlign = ContentAlignment.TopRight;
         // labelTargetDiff9
         labelTargetDiff9.setLocation(new Point(410, 276));
         labelTargetDiff9.setName("labelTargetDiff9");
-        labelTargetDiff9.setSize(new FormSize(52, 13));
+        labelTargetDiff9.setSize(new SizeF(13, 52));
         labelTargetDiff9.setTabIndex(126);
         labelTargetDiff9.setText("------------");
         labelTargetDiff9.TextAlign = ContentAlignment.TopRight;
         // labelTargetPrice9
         labelTargetPrice9.setLocation(new Point(358, 276));
         labelTargetPrice9.setName("labelTargetPrice9");
-        labelTargetPrice9.setSize(new FormSize(48, 13));
+        labelTargetPrice9.setSize(new SizeF(13, 48));
         labelTargetPrice9.setTabIndex(125);
         labelTargetPrice9.setText("-----------");
         labelTargetPrice9.TextAlign = ContentAlignment.TopRight;
@@ -1031,32 +1025,32 @@ public class MainWindow extends wfWindow {
         buttonBuyMax9.setFlatStyle(FlatStyle.Flat);
         buttonBuyMax9.setLocation(new Point(262, 272));
         buttonBuyMax9.setName("buttonBuyMax9");
-        buttonBuyMax9.setSize(new FormSize(36, 22));
+        buttonBuyMax9.setSize(new SizeF(22, 36));
         buttonBuyMax9.setTabIndex(51);
         buttonBuyMax9.setText("Max");
         buttonBuyMax9.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // buttonBuyQty9
         buttonBuyQty9.setFlatStyle(FlatStyle.Flat);
         buttonBuyQty9.setLocation(new Point(227, 272));
         buttonBuyQty9.setName("buttonBuyQty9");
-        buttonBuyQty9.setSize(new FormSize(28, 22));
+        buttonBuyQty9.setSize(new SizeF(22, 28));
         buttonBuyQty9.setTabIndex(50);
         buttonBuyQty9.setText("88");
         buttonBuyQty9.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // labelBuyPrice9
         labelBuyPrice9.setLocation(new Point(302, 276));
         labelBuyPrice9.setName("labelBuyPrice9");
-        labelBuyPrice9.setSize(new FormSize(48, 13));
+        labelBuyPrice9.setSize(new SizeF(13, 48));
         labelBuyPrice9.setTabIndex(122);
         labelBuyPrice9.setText("not sold");
         labelBuyPrice9.TextAlign = ContentAlignment.TopRight;
@@ -1064,53 +1058,53 @@ public class MainWindow extends wfWindow {
         buttonSellAll9.setFlatStyle(FlatStyle.Flat);
         buttonSellAll9.setLocation(new Point(115, 272));
         buttonSellAll9.setName("buttonSellAll9");
-        buttonSellAll9.setSize(new FormSize(44, 22));
+        buttonSellAll9.setSize(new SizeF(22, 44));
         buttonSellAll9.setTabIndex(49);
         buttonSellAll9.setText("Dump");
         buttonSellAll9.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // buttonSellQty9
         buttonSellQty9.setFlatStyle(FlatStyle.Flat);
         buttonSellQty9.setLocation(new Point(80, 272));
         buttonSellQty9.setName("buttonSellQty9");
-        buttonSellQty9.setSize(new FormSize(28, 22));
+        buttonSellQty9.setSize(new SizeF(22, 28));
         buttonSellQty9.setTabIndex(48);
         buttonSellQty9.setText("88");
         buttonSellQty9.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // labelSellPrice9
         labelSellPrice9.setLocation(new Point(163, 276));
         labelSellPrice9.setName("labelSellPrice9");
-        labelSellPrice9.setSize(new FormSize(48, 13));
+        labelSellPrice9.setSize(new SizeF(13, 48));
         labelSellPrice9.setTabIndex(119);
         labelSellPrice9.setText("no trade");
         labelSellPrice9.TextAlign = ContentAlignment.TopRight;
         // labelTargetPct8
         labelTargetPct8.setLocation(new Point(466, 252));
         labelTargetPct8.setName("labelTargetPct8");
-        labelTargetPct8.setSize(new FormSize(37, 13));
+        labelTargetPct8.setSize(new SizeF(13, 37));
         labelTargetPct8.setTabIndex(118);
         labelTargetPct8.setText("-888%");
         labelTargetPct8.TextAlign = ContentAlignment.TopRight;
         // labelTargetDiff8
         labelTargetDiff8.setLocation(new Point(410, 252));
         labelTargetDiff8.setName("labelTargetDiff8");
-        labelTargetDiff8.setSize(new FormSize(52, 13));
+        labelTargetDiff8.setSize(new SizeF(13, 52));
         labelTargetDiff8.setTabIndex(117);
         labelTargetDiff8.setText("-8,888 cr.");
         labelTargetDiff8.TextAlign = ContentAlignment.TopRight;
         // labelTargetPrice8
         labelTargetPrice8.setLocation(new Point(358, 252));
         labelTargetPrice8.setName("labelTargetPrice8");
-        labelTargetPrice8.setSize(new FormSize(48, 13));
+        labelTargetPrice8.setSize(new SizeF(13, 48));
         labelTargetPrice8.setTabIndex(116);
         labelTargetPrice8.setText("8,888 cr.");
         labelTargetPrice8.TextAlign = ContentAlignment.TopRight;
@@ -1118,32 +1112,32 @@ public class MainWindow extends wfWindow {
         buttonBuyMax8.setFlatStyle(FlatStyle.Flat);
         buttonBuyMax8.setLocation(new Point(262, 248));
         buttonBuyMax8.setName("buttonBuyMax8");
-        buttonBuyMax8.setSize(new FormSize(36, 22));
+        buttonBuyMax8.setSize(new SizeF(22, 36));
         buttonBuyMax8.setTabIndex(47);
         buttonBuyMax8.setText("Max");
         buttonBuyMax8.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // buttonBuyQty8
         buttonBuyQty8.setFlatStyle(FlatStyle.Flat);
         buttonBuyQty8.setLocation(new Point(227, 248));
         buttonBuyQty8.setName("buttonBuyQty8");
-        buttonBuyQty8.setSize(new FormSize(28, 22));
+        buttonBuyQty8.setSize(new SizeF(22, 28));
         buttonBuyQty8.setTabIndex(46);
         buttonBuyQty8.setText("88");
         buttonBuyQty8.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // labelBuyPrice8
         labelBuyPrice8.setLocation(new Point(302, 252));
         labelBuyPrice8.setName("labelBuyPrice8");
-        labelBuyPrice8.setSize(new FormSize(48, 13));
+        labelBuyPrice8.setSize(new SizeF(13, 48));
         labelBuyPrice8.setTabIndex(113);
         labelBuyPrice8.setText("8,888 cr.");
         labelBuyPrice8.TextAlign = ContentAlignment.TopRight;
@@ -1151,39 +1145,39 @@ public class MainWindow extends wfWindow {
         buttonSellAll8.setFlatStyle(FlatStyle.Flat);
         buttonSellAll8.setLocation(new Point(115, 248));
         buttonSellAll8.setName("buttonSellAll8");
-        buttonSellAll8.setSize(new FormSize(44, 22));
+        buttonSellAll8.setSize(new SizeF(22, 44));
         buttonSellAll8.setTabIndex(45);
         buttonSellAll8.setText("All");
         buttonSellAll8.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // buttonSellQty8
         buttonSellQty8.setFlatStyle(FlatStyle.Flat);
         buttonSellQty8.setLocation(new Point(80, 248));
         buttonSellQty8.setName("buttonSellQty8");
-        buttonSellQty8.setSize(new FormSize(28, 22));
+        buttonSellQty8.setSize(new SizeF(22, 28));
         buttonSellQty8.setTabIndex(44);
         buttonSellQty8.setText("88");
         buttonSellQty8.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // labelSellPrice8
         labelSellPrice8.setLocation(new Point(163, 252));
         labelSellPrice8.setName("labelSellPrice8");
-        labelSellPrice8.setSize(new FormSize(48, 13));
+        labelSellPrice8.setSize(new SizeF(13, 48));
         labelSellPrice8.setTabIndex(110);
         labelSellPrice8.setText("8,888 cr.");
         labelSellPrice8.TextAlign = ContentAlignment.TopRight;
         // labelTargetPct7
         labelTargetPct7.setLocation(new Point(466, 228));
         labelTargetPct7.setName("labelTargetPct7");
-        labelTargetPct7.setSize(new FormSize(37, 13));
+        labelTargetPct7.setSize(new SizeF(13, 37));
         labelTargetPct7.setTabIndex(109);
         labelTargetPct7.setText("-888%");
         labelTargetPct7.TextAlign = ContentAlignment.TopRight;
@@ -1192,14 +1186,14 @@ public class MainWindow extends wfWindow {
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte) (0))));
         labelTargetDiff7.setLocation(new Point(410, 228));
         labelTargetDiff7.setName("labelTargetDiff7");
-        labelTargetDiff7.setSize(new FormSize(52, 13));
+        labelTargetDiff7.setSize(new SizeF(13, 52));
         labelTargetDiff7.setTabIndex(108);
         labelTargetDiff7.setText("-8,888 cr.");
         labelTargetDiff7.TextAlign = ContentAlignment.TopRight;
         // labelTargetPrice7
         labelTargetPrice7.setLocation(new Point(358, 228));
         labelTargetPrice7.setName("labelTargetPrice7");
-        labelTargetPrice7.setSize(new FormSize(48, 13));
+        labelTargetPrice7.setSize(new SizeF(13, 48));
         labelTargetPrice7.setTabIndex(107);
         labelTargetPrice7.setText("8,888 cr.");
         labelTargetPrice7.TextAlign = ContentAlignment.TopRight;
@@ -1207,32 +1201,32 @@ public class MainWindow extends wfWindow {
         buttonBuyMax7.setFlatStyle(FlatStyle.Flat);
         buttonBuyMax7.setLocation(new Point(262, 224));
         buttonBuyMax7.setName("buttonBuyMax7");
-        buttonBuyMax7.setSize(new FormSize(36, 22));
+        buttonBuyMax7.setSize(new SizeF(22, 36));
         buttonBuyMax7.setTabIndex(43);
         buttonBuyMax7.setText("Max");
         buttonBuyMax7.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // buttonBuyQty7
         buttonBuyQty7.setFlatStyle(FlatStyle.Flat);
         buttonBuyQty7.setLocation(new Point(227, 224));
         buttonBuyQty7.setName("buttonBuyQty7");
-        buttonBuyQty7.setSize(new FormSize(28, 22));
+        buttonBuyQty7.setSize(new SizeF(22, 28));
         buttonBuyQty7.setTabIndex(42);
         buttonBuyQty7.setText("88");
         buttonBuyQty7.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // labelBuyPrice7
         labelBuyPrice7.setLocation(new Point(302, 228));
         labelBuyPrice7.setName("labelBuyPrice7");
-        labelBuyPrice7.setSize(new FormSize(48, 13));
+        labelBuyPrice7.setSize(new SizeF(13, 48));
         labelBuyPrice7.setTabIndex(104);
         labelBuyPrice7.setText("8,888 cr.");
         labelBuyPrice7.TextAlign = ContentAlignment.TopRight;
@@ -1240,53 +1234,53 @@ public class MainWindow extends wfWindow {
         buttonSellAll7.setFlatStyle(FlatStyle.Flat);
         buttonSellAll7.setLocation(new Point(115, 224));
         buttonSellAll7.setName("buttonSellAll7");
-        buttonSellAll7.setSize(new FormSize(44, 22));
+        buttonSellAll7.setSize(new SizeF(22, 44));
         buttonSellAll7.setTabIndex(41);
         buttonSellAll7.setText("All");
         buttonSellAll7.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // buttonSellQty7
         buttonSellQty7.setFlatStyle(FlatStyle.Flat);
         buttonSellQty7.setLocation(new Point(80, 224));
         buttonSellQty7.setName("buttonSellQty7");
-        buttonSellQty7.setSize(new FormSize(28, 22));
+        buttonSellQty7.setSize(new SizeF(22, 28));
         buttonSellQty7.setTabIndex(40);
         buttonSellQty7.setText("88");
         buttonSellQty7.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // labelSellPrice7
         labelSellPrice7.setLocation(new Point(163, 228));
         labelSellPrice7.setName("labelSellPrice7");
-        labelSellPrice7.setSize(new FormSize(48, 13));
+        labelSellPrice7.setSize(new SizeF(13, 48));
         labelSellPrice7.setTabIndex(101);
         labelSellPrice7.setText("8,888 cr.");
         labelSellPrice7.TextAlign = ContentAlignment.TopRight;
         // labelTargetPct6
         labelTargetPct6.setLocation(new Point(466, 204));
         labelTargetPct6.setName("labelTargetPct6");
-        labelTargetPct6.setSize(new FormSize(37, 13));
+        labelTargetPct6.setSize(new SizeF(13, 37));
         labelTargetPct6.setTabIndex(100);
         labelTargetPct6.setText("-888%");
         labelTargetPct6.TextAlign = ContentAlignment.TopRight;
         // labelTargetDiff6
         labelTargetDiff6.setLocation(new Point(410, 204));
         labelTargetDiff6.setName("labelTargetDiff6");
-        labelTargetDiff6.setSize(new FormSize(52, 13));
+        labelTargetDiff6.setSize(new SizeF(13, 52));
         labelTargetDiff6.setTabIndex(99);
         labelTargetDiff6.setText("-8,888 cr.");
         labelTargetDiff6.TextAlign = ContentAlignment.TopRight;
         // labelTargetPrice6
         labelTargetPrice6.setLocation(new Point(358, 204));
         labelTargetPrice6.setName("labelTargetPrice6");
-        labelTargetPrice6.setSize(new FormSize(48, 13));
+        labelTargetPrice6.setSize(new SizeF(13, 48));
         labelTargetPrice6.setTabIndex(98);
         labelTargetPrice6.setText("8,888 cr.");
         labelTargetPrice6.TextAlign = ContentAlignment.TopRight;
@@ -1294,32 +1288,32 @@ public class MainWindow extends wfWindow {
         buttonBuyMax6.setFlatStyle(FlatStyle.Flat);
         buttonBuyMax6.setLocation(new Point(262, 200));
         buttonBuyMax6.setName("buttonBuyMax6");
-        buttonBuyMax6.setSize(new FormSize(36, 22));
+        buttonBuyMax6.setSize(new SizeF(22, 36));
         buttonBuyMax6.setTabIndex(39);
         buttonBuyMax6.setText("Max");
         buttonBuyMax6.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // buttonBuyQty6
         buttonBuyQty6.setFlatStyle(FlatStyle.Flat);
         buttonBuyQty6.setLocation(new Point(227, 200));
         buttonBuyQty6.setName("buttonBuyQty6");
-        buttonBuyQty6.setSize(new FormSize(28, 22));
+        buttonBuyQty6.setSize(new SizeF(22, 28));
         buttonBuyQty6.setTabIndex(38);
         buttonBuyQty6.setText("88");
         buttonBuyQty6.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // labelBuyPrice6
         labelBuyPrice6.setLocation(new Point(302, 204));
         labelBuyPrice6.setName("labelBuyPrice6");
-        labelBuyPrice6.setSize(new FormSize(48, 13));
+        labelBuyPrice6.setSize(new SizeF(13, 48));
         labelBuyPrice6.setTabIndex(95);
         labelBuyPrice6.setText("8,888 cr.");
         labelBuyPrice6.TextAlign = ContentAlignment.TopRight;
@@ -1327,53 +1321,53 @@ public class MainWindow extends wfWindow {
         buttonSellAll6.setFlatStyle(FlatStyle.Flat);
         buttonSellAll6.setLocation(new Point(115, 200));
         buttonSellAll6.setName("buttonSellAll6");
-        buttonSellAll6.setSize(new FormSize(44, 22));
+        buttonSellAll6.setSize(new SizeF(22, 44));
         buttonSellAll6.setTabIndex(37);
         buttonSellAll6.setText("All");
         buttonSellAll6.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // buttonSellQty6
         buttonSellQty6.setFlatStyle(FlatStyle.Flat);
         buttonSellQty6.setLocation(new Point(80, 200));
         buttonSellQty6.setName("buttonSellQty6");
-        buttonSellQty6.setSize(new FormSize(28, 22));
+        buttonSellQty6.setSize(new SizeF(22, 28));
         buttonSellQty6.setTabIndex(36);
         buttonSellQty6.setText("88");
         buttonSellQty6.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // labelSellPrice6
         labelSellPrice6.setLocation(new Point(163, 204));
         labelSellPrice6.setName("labelSellPrice6");
-        labelSellPrice6.setSize(new FormSize(48, 13));
+        labelSellPrice6.setSize(new SizeF(13, 48));
         labelSellPrice6.setTabIndex(92);
         labelSellPrice6.setText("8,888 cr.");
         labelSellPrice6.TextAlign = ContentAlignment.TopRight;
         // labelTargetPct5
         labelTargetPct5.setLocation(new Point(466, 180));
         labelTargetPct5.setName("labelTargetPct5");
-        labelTargetPct5.setSize(new FormSize(37, 13));
+        labelTargetPct5.setSize(new SizeF(13, 37));
         labelTargetPct5.setTabIndex(91);
         labelTargetPct5.setText("-888%");
         labelTargetPct5.TextAlign = ContentAlignment.TopRight;
         // labelTargetDiff5
         labelTargetDiff5.setLocation(new Point(410, 180));
         labelTargetDiff5.setName("labelTargetDiff5");
-        labelTargetDiff5.setSize(new FormSize(52, 13));
+        labelTargetDiff5.setSize(new SizeF(13, 52));
         labelTargetDiff5.setTabIndex(90);
         labelTargetDiff5.setText("-8,888 cr.");
         labelTargetDiff5.TextAlign = ContentAlignment.TopRight;
         // labelTargetPrice5
         labelTargetPrice5.setLocation(new Point(358, 180));
         labelTargetPrice5.setName("labelTargetPrice5");
-        labelTargetPrice5.setSize(new FormSize(48, 13));
+        labelTargetPrice5.setSize(new SizeF(13, 48));
         labelTargetPrice5.setTabIndex(89);
         labelTargetPrice5.setText("8,888 cr.");
         labelTargetPrice5.TextAlign = ContentAlignment.TopRight;
@@ -1381,32 +1375,32 @@ public class MainWindow extends wfWindow {
         buttonBuyMax5.setFlatStyle(FlatStyle.Flat);
         buttonBuyMax5.setLocation(new Point(262, 176));
         buttonBuyMax5.setName("buttonBuyMax5");
-        buttonBuyMax5.setSize(new FormSize(36, 22));
+        buttonBuyMax5.setSize(new SizeF(22, 36));
         buttonBuyMax5.setTabIndex(35);
         buttonBuyMax5.setText("Max");
         buttonBuyMax5.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // buttonBuyQty5
         buttonBuyQty5.setFlatStyle(FlatStyle.Flat);
         buttonBuyQty5.setLocation(new Point(227, 176));
         buttonBuyQty5.setName("buttonBuyQty5");
-        buttonBuyQty5.setSize(new FormSize(28, 22));
+        buttonBuyQty5.setSize(new SizeF(22, 28));
         buttonBuyQty5.setTabIndex(34);
         buttonBuyQty5.setText("88");
         buttonBuyQty5.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // labelBuyPrice5
         labelBuyPrice5.setLocation(new Point(302, 180));
         labelBuyPrice5.setName("labelBuyPrice5");
-        labelBuyPrice5.setSize(new FormSize(48, 13));
+        labelBuyPrice5.setSize(new SizeF(13, 48));
         labelBuyPrice5.setTabIndex(86);
         labelBuyPrice5.setText("8,888 cr.");
         labelBuyPrice5.TextAlign = ContentAlignment.TopRight;
@@ -1414,53 +1408,53 @@ public class MainWindow extends wfWindow {
         buttonSellAll5.setFlatStyle(FlatStyle.Flat);
         buttonSellAll5.setLocation(new Point(115, 176));
         buttonSellAll5.setName("buttonSellAll5");
-        buttonSellAll5.setSize(new FormSize(44, 22));
+        buttonSellAll5.setSize(new SizeF(22, 44));
         buttonSellAll5.setTabIndex(33);
         buttonSellAll5.setText("All");
         buttonSellAll5.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // buttonSellQty5
         buttonSellQty5.setFlatStyle(FlatStyle.Flat);
         buttonSellQty5.setLocation(new Point(80, 176));
         buttonSellQty5.setName("buttonSellQty5");
-        buttonSellQty5.setSize(new FormSize(28, 22));
+        buttonSellQty5.setSize(new SizeF(22, 28));
         buttonSellQty5.setTabIndex(32);
         buttonSellQty5.setText("88");
         buttonSellQty5.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // labelSellPrice5
         labelSellPrice5.setLocation(new Point(163, 180));
         labelSellPrice5.setName("labelSellPrice5");
-        labelSellPrice5.setSize(new FormSize(48, 13));
+        labelSellPrice5.setSize(new SizeF(13, 48));
         labelSellPrice5.setTabIndex(83);
         labelSellPrice5.setText("8,888 cr.");
         labelSellPrice5.TextAlign = ContentAlignment.TopRight;
         // labelTargetPct4
         labelTargetPct4.setLocation(new Point(466, 156));
         labelTargetPct4.setName("labelTargetPct4");
-        labelTargetPct4.setSize(new FormSize(37, 13));
+        labelTargetPct4.setSize(new SizeF(13, 37));
         labelTargetPct4.setTabIndex(82);
         labelTargetPct4.setText("-888%");
         labelTargetPct4.TextAlign = ContentAlignment.TopRight;
         // labelTargetDiff4
         labelTargetDiff4.setLocation(new Point(410, 156));
         labelTargetDiff4.setName("labelTargetDiff4");
-        labelTargetDiff4.setSize(new FormSize(52, 13));
+        labelTargetDiff4.setSize(new SizeF(13, 52));
         labelTargetDiff4.setTabIndex(81);
         labelTargetDiff4.setText("-8,888 cr.");
         labelTargetDiff4.TextAlign = ContentAlignment.TopRight;
         // labelTargetPrice4
         labelTargetPrice4.setLocation(new Point(358, 156));
         labelTargetPrice4.setName("labelTargetPrice4");
-        labelTargetPrice4.setSize(new FormSize(48, 13));
+        labelTargetPrice4.setSize(new SizeF(13, 48));
         labelTargetPrice4.setTabIndex(80);
         labelTargetPrice4.setText("8,888 cr.");
         labelTargetPrice4.TextAlign = ContentAlignment.TopRight;
@@ -1468,32 +1462,32 @@ public class MainWindow extends wfWindow {
         buttonBuyMax4.setFlatStyle(FlatStyle.Flat);
         buttonBuyMax4.setLocation(new Point(262, 152));
         buttonBuyMax4.setName("buttonBuyMax4");
-        buttonBuyMax4.setSize(new FormSize(36, 22));
+        buttonBuyMax4.setSize(new SizeF(22, 36));
         buttonBuyMax4.setTabIndex(31);
         buttonBuyMax4.setText("Max");
         buttonBuyMax4.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // buttonBuyQty4
         buttonBuyQty4.setFlatStyle(FlatStyle.Flat);
         buttonBuyQty4.setLocation(new Point(227, 152));
         buttonBuyQty4.setName("buttonBuyQty4");
-        buttonBuyQty4.setSize(new FormSize(28, 22));
+        buttonBuyQty4.setSize(new SizeF(22, 28));
         buttonBuyQty4.setTabIndex(30);
         buttonBuyQty4.setText("88");
         buttonBuyQty4.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // labelBuyPrice4
         labelBuyPrice4.setLocation(new Point(302, 156));
         labelBuyPrice4.setName("labelBuyPrice4");
-        labelBuyPrice4.setSize(new FormSize(48, 13));
+        labelBuyPrice4.setSize(new SizeF(13, 48));
         labelBuyPrice4.setTabIndex(77);
         labelBuyPrice4.setText("8,888 cr.");
         labelBuyPrice4.TextAlign = ContentAlignment.TopRight;
@@ -1501,53 +1495,53 @@ public class MainWindow extends wfWindow {
         buttonSellAll4.setFlatStyle(FlatStyle.Flat);
         buttonSellAll4.setLocation(new Point(115, 152));
         buttonSellAll4.setName("buttonSellAll4");
-        buttonSellAll4.setSize(new FormSize(44, 22));
+        buttonSellAll4.setSize(new SizeF(22, 44));
         buttonSellAll4.setTabIndex(29);
         buttonSellAll4.setText("All");
         buttonSellAll4.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // buttonSellQty4
         buttonSellQty4.setFlatStyle(FlatStyle.Flat);
         buttonSellQty4.setLocation(new Point(80, 152));
         buttonSellQty4.setName("buttonSellQty4");
-        buttonSellQty4.setSize(new FormSize(28, 22));
+        buttonSellQty4.setSize(new SizeF(22, 28));
         buttonSellQty4.setTabIndex(28);
         buttonSellQty4.setText("88");
         buttonSellQty4.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // labelSellPrice4
         labelSellPrice4.setLocation(new Point(163, 156));
         labelSellPrice4.setName("labelSellPrice4");
-        labelSellPrice4.setSize(new FormSize(48, 13));
+        labelSellPrice4.setSize(new SizeF(13, 48));
         labelSellPrice4.setTabIndex(74);
         labelSellPrice4.setText("8,888 cr.");
         labelSellPrice4.TextAlign = ContentAlignment.TopRight;
         // labelTargetPct3
         labelTargetPct3.setLocation(new Point(466, 132));
         labelTargetPct3.setName("labelTargetPct3");
-        labelTargetPct3.setSize(new FormSize(37, 13));
+        labelTargetPct3.setSize(new SizeF(13, 37));
         labelTargetPct3.setTabIndex(73);
         labelTargetPct3.setText("-888%");
         labelTargetPct3.TextAlign = ContentAlignment.TopRight;
         // labelTargetDiff3
         labelTargetDiff3.setLocation(new Point(410, 132));
         labelTargetDiff3.setName("labelTargetDiff3");
-        labelTargetDiff3.setSize(new FormSize(52, 13));
+        labelTargetDiff3.setSize(new SizeF(13, 52));
         labelTargetDiff3.setTabIndex(72);
         labelTargetDiff3.setText("-8,888 cr.");
         labelTargetDiff3.TextAlign = ContentAlignment.TopRight;
         // labelTargetPrice3
         labelTargetPrice3.setLocation(new Point(358, 132));
         labelTargetPrice3.setName("labelTargetPrice3");
-        labelTargetPrice3.setSize(new FormSize(48, 13));
+        labelTargetPrice3.setSize(new SizeF(13, 48));
         labelTargetPrice3.setTabIndex(71);
         labelTargetPrice3.setText("8,888 cr.");
         labelTargetPrice3.TextAlign = ContentAlignment.TopRight;
@@ -1555,32 +1549,32 @@ public class MainWindow extends wfWindow {
         buttonBuyMax3.setFlatStyle(FlatStyle.Flat);
         buttonBuyMax3.setLocation(new Point(262, 128));
         buttonBuyMax3.setName("buttonBuyMax3");
-        buttonBuyMax3.setSize(new FormSize(36, 22));
+        buttonBuyMax3.setSize(new SizeF(22, 36));
         buttonBuyMax3.setTabIndex(27);
         buttonBuyMax3.setText("Max");
         buttonBuyMax3.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // buttonBuyQty3
         buttonBuyQty3.setFlatStyle(FlatStyle.Flat);
         buttonBuyQty3.setLocation(new Point(227, 128));
         buttonBuyQty3.setName("buttonBuyQty3");
-        buttonBuyQty3.setSize(new FormSize(28, 22));
+        buttonBuyQty3.setSize(new SizeF(22, 28));
         buttonBuyQty3.setTabIndex(26);
         buttonBuyQty3.setText("88");
         buttonBuyQty3.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // labelBuyPrice3
         labelBuyPrice3.setLocation(new Point(302, 132));
         labelBuyPrice3.setName("labelBuyPrice3");
-        labelBuyPrice3.setSize(new FormSize(48, 13));
+        labelBuyPrice3.setSize(new SizeF(13, 48));
         labelBuyPrice3.setTabIndex(68);
         labelBuyPrice3.setText("8,888 cr.");
         labelBuyPrice3.TextAlign = ContentAlignment.TopRight;
@@ -1588,53 +1582,53 @@ public class MainWindow extends wfWindow {
         buttonSellAll3.setFlatStyle(FlatStyle.Flat);
         buttonSellAll3.setLocation(new Point(115, 128));
         buttonSellAll3.setName("buttonSellAll3");
-        buttonSellAll3.setSize(new FormSize(44, 22));
+        buttonSellAll3.setSize(new SizeF(22, 44));
         buttonSellAll3.setTabIndex(25);
         buttonSellAll3.setText("All");
         buttonSellAll3.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // buttonSellQty3
         buttonSellQty3.setFlatStyle(FlatStyle.Flat);
         buttonSellQty3.setLocation(new Point(80, 128));
         buttonSellQty3.setName("buttonSellQty3");
-        buttonSellQty3.setSize(new FormSize(28, 22));
+        buttonSellQty3.setSize(new SizeF(22, 28));
         buttonSellQty3.setTabIndex(24);
         buttonSellQty3.setText("88");
         buttonSellQty3.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // labelSellPrice3
         labelSellPrice3.setLocation(new Point(163, 132));
         labelSellPrice3.setName("labelSellPrice3");
-        labelSellPrice3.setSize(new FormSize(48, 13));
+        labelSellPrice3.setSize(new SizeF(13, 48));
         labelSellPrice3.setTabIndex(65);
         labelSellPrice3.setText("8,888 cr.");
         labelSellPrice3.TextAlign = ContentAlignment.TopRight;
         // labelTargetPct2
         labelTargetPct2.setLocation(new Point(466, 108));
         labelTargetPct2.setName("labelTargetPct2");
-        labelTargetPct2.setSize(new FormSize(37, 13));
+        labelTargetPct2.setSize(new SizeF(13, 37));
         labelTargetPct2.setTabIndex(64);
         labelTargetPct2.setText("-888%");
         labelTargetPct2.TextAlign = ContentAlignment.TopRight;
         // labelTargetDiff2
         labelTargetDiff2.setLocation(new Point(410, 108));
         labelTargetDiff2.setName("labelTargetDiff2");
-        labelTargetDiff2.setSize(new FormSize(52, 13));
+        labelTargetDiff2.setSize(new SizeF(13, 52));
         labelTargetDiff2.setTabIndex(63);
         labelTargetDiff2.setText("-8,888 cr.");
         labelTargetDiff2.TextAlign = ContentAlignment.TopRight;
         // labelTargetPrice2
         labelTargetPrice2.setLocation(new Point(358, 108));
         labelTargetPrice2.setName("labelTargetPrice2");
-        labelTargetPrice2.setSize(new FormSize(48, 13));
+        labelTargetPrice2.setSize(new SizeF(13, 48));
         labelTargetPrice2.setTabIndex(62);
         labelTargetPrice2.setText("8,888 cr.");
         labelTargetPrice2.TextAlign = ContentAlignment.TopRight;
@@ -1642,32 +1636,32 @@ public class MainWindow extends wfWindow {
         buttonBuyMax2.setFlatStyle(FlatStyle.Flat);
         buttonBuyMax2.setLocation(new Point(262, 104));
         buttonBuyMax2.setName("buttonBuyMax2");
-        buttonBuyMax2.setSize(new FormSize(36, 22));
+        buttonBuyMax2.setSize(new SizeF(22, 36));
         buttonBuyMax2.setTabIndex(23);
         buttonBuyMax2.setText("Max");
         buttonBuyMax2.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // buttonBuyQty2
         buttonBuyQty2.setFlatStyle(FlatStyle.Flat);
         buttonBuyQty2.setLocation(new Point(227, 104));
         buttonBuyQty2.setName("buttonBuyQty2");
-        buttonBuyQty2.setSize(new FormSize(28, 22));
+        buttonBuyQty2.setSize(new SizeF(22, 28));
         buttonBuyQty2.setTabIndex(22);
         buttonBuyQty2.setText("88");
         buttonBuyQty2.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // labelBuyPrice2
         labelBuyPrice2.setLocation(new Point(302, 108));
         labelBuyPrice2.setName("labelBuyPrice2");
-        labelBuyPrice2.setSize(new FormSize(48, 13));
+        labelBuyPrice2.setSize(new SizeF(13, 48));
         labelBuyPrice2.setTabIndex(59);
         labelBuyPrice2.setText("8,888 cr.");
         labelBuyPrice2.TextAlign = ContentAlignment.TopRight;
@@ -1675,53 +1669,53 @@ public class MainWindow extends wfWindow {
         buttonSellAll2.setFlatStyle(FlatStyle.Flat);
         buttonSellAll2.setLocation(new Point(115, 104));
         buttonSellAll2.setName("buttonSellAll2");
-        buttonSellAll2.setSize(new FormSize(44, 22));
+        buttonSellAll2.setSize(new SizeF(22, 44));
         buttonSellAll2.setTabIndex(21);
         buttonSellAll2.setText("All");
         buttonSellAll2.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // buttonSellQty2
         buttonSellQty2.setFlatStyle(FlatStyle.Flat);
         buttonSellQty2.setLocation(new Point(80, 104));
         buttonSellQty2.setName("buttonSellQty2");
-        buttonSellQty2.setSize(new FormSize(28, 22));
+        buttonSellQty2.setSize(new SizeF(22, 28));
         buttonSellQty2.setTabIndex(20);
         buttonSellQty2.setText("88");
         buttonSellQty2.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // labelSellPrice2
         labelSellPrice2.setLocation(new Point(163, 108));
         labelSellPrice2.setName("labelSellPrice2");
-        labelSellPrice2.setSize(new FormSize(48, 13));
+        labelSellPrice2.setSize(new SizeF(13, 48));
         labelSellPrice2.setTabIndex(56);
         labelSellPrice2.setText("8,888 cr.");
         labelSellPrice2.TextAlign = ContentAlignment.TopRight;
         // labelTargetPct1
         labelTargetPct1.setLocation(new Point(466, 84));
         labelTargetPct1.setName("labelTargetPct1");
-        labelTargetPct1.setSize(new FormSize(37, 13));
+        labelTargetPct1.setSize(new SizeF(13, 37));
         labelTargetPct1.setTabIndex(55);
         labelTargetPct1.setText("-888%");
         labelTargetPct1.TextAlign = ContentAlignment.TopRight;
         // labelTargetDiff1
         labelTargetDiff1.setLocation(new Point(410, 84));
         labelTargetDiff1.setName("labelTargetDiff1");
-        labelTargetDiff1.setSize(new FormSize(52, 13));
+        labelTargetDiff1.setSize(new SizeF(13, 52));
         labelTargetDiff1.setTabIndex(54);
         labelTargetDiff1.setText("-8,888 cr.");
         labelTargetDiff1.TextAlign = ContentAlignment.TopRight;
         // labelTargetPrice1
         labelTargetPrice1.setLocation(new Point(358, 84));
         labelTargetPrice1.setName("labelTargetPrice1");
-        labelTargetPrice1.setSize(new FormSize(48, 13));
+        labelTargetPrice1.setSize(new SizeF(13, 48));
         labelTargetPrice1.setTabIndex(53);
         labelTargetPrice1.setText("8,888 cr.");
         labelTargetPrice1.TextAlign = ContentAlignment.TopRight;
@@ -1729,32 +1723,32 @@ public class MainWindow extends wfWindow {
         buttonBuyMax1.setFlatStyle(FlatStyle.Flat);
         buttonBuyMax1.setLocation(new Point(262, 80));
         buttonBuyMax1.setName("buttonBuyMax1");
-        buttonBuyMax1.setSize(new FormSize(36, 22));
+        buttonBuyMax1.setSize(new SizeF(22, 36));
         buttonBuyMax1.setTabIndex(19);
         buttonBuyMax1.setText("Max");
         buttonBuyMax1.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // buttonBuyQty1
         buttonBuyQty1.setFlatStyle(FlatStyle.Flat);
         buttonBuyQty1.setLocation(new Point(227, 80));
         buttonBuyQty1.setName("buttonBuyQty1");
-        buttonBuyQty1.setSize(new FormSize(28, 22));
+        buttonBuyQty1.setSize(new SizeF(22, 28));
         buttonBuyQty1.setTabIndex(18);
         buttonBuyQty1.setText("88");
         buttonBuyQty1.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // labelBuyPrice1
         labelBuyPrice1.setLocation(new Point(302, 84));
         labelBuyPrice1.setName("labelBuyPrice1");
-        labelBuyPrice1.setSize(new FormSize(48, 13));
+        labelBuyPrice1.setSize(new SizeF(13, 48));
         labelBuyPrice1.setTabIndex(50);
         labelBuyPrice1.setText("8,888 cr.");
         labelBuyPrice1.TextAlign = ContentAlignment.TopRight;
@@ -1762,41 +1756,41 @@ public class MainWindow extends wfWindow {
         labelTargetPctLabel.setAutoSize(true);
         labelTargetPctLabel.setLocation(new Point(476, 34));
         labelTargetPctLabel.setName("labelTargetPctLabel");
-        labelTargetPctLabel.setSize(new FormSize(14, 16));
+        labelTargetPctLabel.setSize(new SizeF(16, 14));
         labelTargetPctLabel.setTabIndex(49);
         labelTargetPctLabel.setText("%");
         // labelTargetDiffLabel
         labelTargetDiffLabel.setAutoSize(true);
         labelTargetDiffLabel.setLocation(new Point(424, 34));
         labelTargetDiffLabel.setName("labelTargetDiffLabel");
-        labelTargetDiffLabel.setSize(new FormSize(18, 16));
+        labelTargetDiffLabel.setSize(new SizeF(16, 18));
         labelTargetDiffLabel.setTabIndex(48);
         labelTargetDiffLabel.setText("+/-");
         // labelTargetPriceLabel
         labelTargetPriceLabel.setAutoSize(true);
         labelTargetPriceLabel.setLocation(new Point(360, 34));
         labelTargetPriceLabel.setName("labelTargetPriceLabel");
-        labelTargetPriceLabel.setSize(new FormSize(30, 16));
+        labelTargetPriceLabel.setSize(new SizeF(16, 30));
         labelTargetPriceLabel.setTabIndex(47);
         labelTargetPriceLabel.setText("Price");
         // labelTargetPct0
         labelTargetPct0.setLocation(new Point(466, 60));
         labelTargetPct0.setName("labelTargetPct0");
-        labelTargetPct0.setSize(new FormSize(37, 13));
+        labelTargetPct0.setSize(new SizeF(13, 37));
         labelTargetPct0.setTabIndex(46);
         labelTargetPct0.setText("-888%");
         labelTargetPct0.TextAlign = ContentAlignment.TopRight;
         // labelTargetDiff0
         labelTargetDiff0.setLocation(new Point(410, 60));
         labelTargetDiff0.setName("labelTargetDiff0");
-        labelTargetDiff0.setSize(new FormSize(52, 13));
+        labelTargetDiff0.setSize(new SizeF(13, 52));
         labelTargetDiff0.setTabIndex(45);
         labelTargetDiff0.setText("-8,888 cr.");
         labelTargetDiff0.TextAlign = ContentAlignment.TopRight;
         // labelTargetPrice0
         labelTargetPrice0.setLocation(new Point(358, 60));
         labelTargetPrice0.setName("labelTargetPrice0");
-        labelTargetPrice0.setSize(new FormSize(48, 13));
+        labelTargetPrice0.setSize(new SizeF(13, 48));
         labelTargetPrice0.setTabIndex(44);
         labelTargetPrice0.setText("8,888 cr.");
         labelTargetPrice0.TextAlign = ContentAlignment.TopRight;
@@ -1804,32 +1798,32 @@ public class MainWindow extends wfWindow {
         buttonBuyMax0.setFlatStyle(FlatStyle.Flat);
         buttonBuyMax0.setLocation(new Point(262, 56));
         buttonBuyMax0.setName("buttonBuyMax0");
-        buttonBuyMax0.setSize(new FormSize(36, 22));
+        buttonBuyMax0.setSize(new SizeF(22, 36));
         buttonBuyMax0.setTabIndex(15);
         buttonBuyMax0.setText("Max");
         buttonBuyMax0.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // buttonBuyQty0
         buttonBuyQty0.setFlatStyle(FlatStyle.Flat);
         buttonBuyQty0.setLocation(new Point(227, 56));
         buttonBuyQty0.setName("buttonBuyQty0");
-        buttonBuyQty0.setSize(new FormSize(28, 22));
+        buttonBuyQty0.setSize(new SizeF(22, 28));
         buttonBuyQty0.setTabIndex(14);
         buttonBuyQty0.setText("88");
         buttonBuyQty0.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // labelBuyPrice0
         labelBuyPrice0.setLocation(new Point(302, 60));
         labelBuyPrice0.setName("labelBuyPrice0");
-        labelBuyPrice0.setSize(new FormSize(48, 13));
+        labelBuyPrice0.setSize(new SizeF(13, 48));
         labelBuyPrice0.setTabIndex(41);
         labelBuyPrice0.setText("8,888 cr.");
         labelBuyPrice0.TextAlign = ContentAlignment.TopRight;
@@ -1837,32 +1831,32 @@ public class MainWindow extends wfWindow {
         buttonSellAll1.setFlatStyle(FlatStyle.Flat);
         buttonSellAll1.setLocation(new Point(115, 80));
         buttonSellAll1.setName("buttonSellAll1");
-        buttonSellAll1.setSize(new FormSize(44, 22));
+        buttonSellAll1.setSize(new SizeF(22, 44));
         buttonSellAll1.setTabIndex(17);
         buttonSellAll1.setText("All");
         buttonSellAll1.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // buttonSellQty1
         buttonSellQty1.setFlatStyle(FlatStyle.Flat);
         buttonSellQty1.setLocation(new Point(80, 80));
         buttonSellQty1.setName("buttonSellQty1");
-        buttonSellQty1.setSize(new FormSize(28, 22));
+        buttonSellQty1.setSize(new SizeF(22, 28));
         buttonSellQty1.setTabIndex(16);
         buttonSellQty1.setText("88");
         buttonSellQty1.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // labelSellPrice1
         labelSellPrice1.setLocation(new Point(163, 84));
         labelSellPrice1.setName("labelSellPrice1");
-        labelSellPrice1.setSize(new FormSize(48, 13));
+        labelSellPrice1.setSize(new SizeF(13, 48));
         labelSellPrice1.setTabIndex(38);
         labelSellPrice1.setText("8,888 cr.");
         labelSellPrice1.TextAlign = ContentAlignment.TopRight;
@@ -1870,32 +1864,32 @@ public class MainWindow extends wfWindow {
         buttonSellAll0.setFlatStyle(FlatStyle.Flat);
         buttonSellAll0.setLocation(new Point(115, 56));
         buttonSellAll0.setName("buttonSellAll0");
-        buttonSellAll0.setSize(new FormSize(44, 22));
+        buttonSellAll0.setSize(new SizeF(22, 44));
         buttonSellAll0.setTabIndex(13);
         buttonSellAll0.setText("All");
         buttonSellAll0.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // buttonSellQty0
         buttonSellQty0.setFlatStyle(FlatStyle.Flat);
         buttonSellQty0.setLocation(new Point(80, 56));
         buttonSellQty0.setName("buttonSellQty0");
-        buttonSellQty0.setSize(new FormSize(28, 22));
+        buttonSellQty0.setSize(new SizeF(22, 28));
         buttonSellQty0.setTabIndex(12);
         buttonSellQty0.setText("88");
         buttonSellQty0.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuySell_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuySell_Click(sender, data);
             }
         });
         // labelSellPrice0
         labelSellPrice0.setLocation(new Point(163, 60));
         labelSellPrice0.setName("labelSellPrice0");
-        labelSellPrice0.setSize(new FormSize(48, 13));
+        labelSellPrice0.setSize(new SizeF(13, 48));
         labelSellPrice0.setTabIndex(35);
         labelSellPrice0.setText("8,888 cr.");
         labelSellPrice0.TextAlign = ContentAlignment.TopRight;
@@ -1903,14 +1897,14 @@ public class MainWindow extends wfWindow {
         labelTradeTarget.setAutoSize(true);
         labelTradeTarget.setLocation(new Point(391, 16));
         labelTradeTarget.setName("labelTradeTarget");
-        labelTradeTarget.setSize(new FormSize(78, 16));
+        labelTradeTarget.setSize(new SizeF(16, 78));
         labelTradeTarget.setTabIndex(28);
         labelTradeTarget.setText("Target System");
         // labelBuy
         labelBuy.setAutoSize(true);
         labelBuy.setLocation(new Point(273, 34));
         labelBuy.setName("labelBuy");
-        labelBuy.setSize(new FormSize(24, 16));
+        labelBuy.setSize(new SizeF(16, 24));
         labelBuy.setTabIndex(27);
         labelBuy.setText("Buy");
         // labelSell
@@ -1919,77 +1913,77 @@ public class MainWindow extends wfWindow {
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte) (0))));
         labelSell.setLocation(new Point(132, 34));
         labelSell.setName("labelSell");
-        labelSell.setSize(new FormSize(23, 16));
+        labelSell.setSize(new SizeF(16, 23));
         labelSell.setTabIndex(26);
         labelSell.setText("Sell");
         // labelTradeCommodity9
         labelTradeCommodity9.setAutoSize(true);
         labelTradeCommodity9.setLocation(new Point(8, 276));
         labelTradeCommodity9.setName("labelTradeCommodity9");
-        labelTradeCommodity9.setSize(new FormSize(40, 16));
+        labelTradeCommodity9.setSize(new SizeF(16, 40));
         labelTradeCommodity9.setTabIndex(25);
         labelTradeCommodity9.setText("Robots");
         // labelTradeCommodity8
         labelTradeCommodity8.setAutoSize(true);
         labelTradeCommodity8.setLocation(new Point(8, 252));
         labelTradeCommodity8.setName("labelTradeCommodity8");
-        labelTradeCommodity8.setSize(new FormSize(51, 16));
+        labelTradeCommodity8.setSize(new SizeF(16, 51));
         labelTradeCommodity8.setTabIndex(24);
         labelTradeCommodity8.setText("Narcotics");
         // labelTradeCommodity2
         labelTradeCommodity2.setAutoSize(true);
         labelTradeCommodity2.setLocation(new Point(8, 108));
         labelTradeCommodity2.setName("labelTradeCommodity2");
-        labelTradeCommodity2.setSize(new FormSize(30, 16));
+        labelTradeCommodity2.setSize(new SizeF(16, 30));
         labelTradeCommodity2.setTabIndex(23);
         labelTradeCommodity2.setText("Food");
         // labelTradeCommodity0
         labelTradeCommodity0.setAutoSize(true);
         labelTradeCommodity0.setLocation(new Point(8, 60));
         labelTradeCommodity0.setName("labelTradeCommodity0");
-        labelTradeCommodity0.setSize(new FormSize(34, 16));
+        labelTradeCommodity0.setSize(new SizeF(16, 34));
         labelTradeCommodity0.setTabIndex(22);
         labelTradeCommodity0.setText("Water");
         // labelTradeCommodity1
         labelTradeCommodity1.setAutoSize(true);
         labelTradeCommodity1.setLocation(new Point(8, 84));
         labelTradeCommodity1.setName("labelTradeCommodity1");
-        labelTradeCommodity1.setSize(new FormSize(27, 16));
+        labelTradeCommodity1.setSize(new SizeF(16, 27));
         labelTradeCommodity1.setTabIndex(21);
         labelTradeCommodity1.setText("Furs");
         // labelTradeCommodity6
         labelTradeCommodity6.setAutoSize(true);
         labelTradeCommodity6.setLocation(new Point(8, 204));
         labelTradeCommodity6.setName("labelTradeCommodity6");
-        labelTradeCommodity6.setSize(new FormSize(50, 16));
+        labelTradeCommodity6.setSize(new SizeF(16, 50));
         labelTradeCommodity6.setTabIndex(20);
         labelTradeCommodity6.setText("Medicine");
         // labelTradeCommodity5
         labelTradeCommodity5.setAutoSize(true);
         labelTradeCommodity5.setLocation(new Point(8, 180));
         labelTradeCommodity5.setName("labelTradeCommodity5");
-        labelTradeCommodity5.setSize(new FormSize(49, 16));
+        labelTradeCommodity5.setSize(new SizeF(16, 49));
         labelTradeCommodity5.setTabIndex(19);
         labelTradeCommodity5.setText("Firearms");
         // labelTradeCommodity4
         labelTradeCommodity4.setAutoSize(true);
         labelTradeCommodity4.setLocation(new Point(8, 156));
         labelTradeCommodity4.setName("labelTradeCommodity4");
-        labelTradeCommodity4.setSize(new FormSize(41, 16));
+        labelTradeCommodity4.setSize(new SizeF(16, 41));
         labelTradeCommodity4.setTabIndex(18);
         labelTradeCommodity4.setText("Games");
         // labelTradeCommodity3
         labelTradeCommodity3.setAutoSize(true);
         labelTradeCommodity3.setLocation(new Point(8, 132));
         labelTradeCommodity3.setName("labelTradeCommodity3");
-        labelTradeCommodity3.setSize(new FormSize(23, 16));
+        labelTradeCommodity3.setSize(new SizeF(16, 23));
         labelTradeCommodity3.setTabIndex(17);
         labelTradeCommodity3.setText("Ore");
         // labelTradeCommodity7
         labelTradeCommodity7.setAutoSize(true);
         labelTradeCommodity7.setLocation(new Point(8, 228));
         labelTradeCommodity7.setName("labelTradeCommodity7");
-        labelTradeCommodity7.setSize(new FormSize(53, 16));
+        labelTradeCommodity7.setSize(new SizeF(16, 53));
         labelTradeCommodity7.setTabIndex(16);
         labelTradeCommodity7.setText("Machines");
         // boxSystem
@@ -2014,7 +2008,7 @@ public class MainWindow extends wfWindow {
         boxSystem.Controls.add(labelSystemNameLabel);
         boxSystem.setLocation(new Point(4, 2));
         boxSystem.setName("boxSystem");
-        boxSystem.setSize(new FormSize(240, 206));
+        boxSystem.setSize(new SizeF(206, 240));
         boxSystem.setTabIndex(1);
         boxSystem.setTabStop(false);
         boxSystem.setText("System Info");
@@ -2022,13 +2016,13 @@ public class MainWindow extends wfWindow {
         buttonMerc.setFlatStyle(FlatStyle.Flat);
         buttonMerc.setLocation(new Point(118, 174));
         buttonMerc.setName("buttonMerc");
-        buttonMerc.setSize(new FormSize(112, 22));
+        buttonMerc.setSize(new SizeF(22, 112));
         buttonMerc.setTabIndex(3);
         buttonMerc.setText("Mercenary For Hire");
         buttonMerc.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonMerc_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonMerc_Click(sender, data);
             }
         });
         // buttonSpecial
@@ -2036,75 +2030,75 @@ public class MainWindow extends wfWindow {
         buttonSpecial.setFlatStyle(FlatStyle.Flat);
         buttonSpecial.setLocation(new Point(58, 174));
         buttonSpecial.setName("buttonSpecial");
-        buttonSpecial.setSize(new FormSize(52, 22));
+        buttonSpecial.setSize(new SizeF(22, 52));
         buttonSpecial.setTabIndex(2);
         buttonSpecial.setText("Special");
         buttonSpecial.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonSpecial_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonSpecial_Click(sender, data);
             }
         });
         // buttonNews
         buttonNews.setFlatStyle(FlatStyle.Flat);
         buttonNews.setLocation(new Point(8, 174));
         buttonNews.setName("buttonNews");
-        buttonNews.setSize(new FormSize(42, 22));
+        buttonNews.setSize(new SizeF(22, 42));
         buttonNews.setTabIndex(1);
         buttonNews.setText("News");
         buttonNews.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonNews_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonNews_Click(sender, data);
             }
         });
         // labelSystemPressure
         labelSystemPressure.setLocation(new Point(8, 147));
         labelSystemPressure.setName("labelSystemPressure");
-        labelSystemPressure.setSize(new FormSize(168, 16));
+        labelSystemPressure.setSize(new SizeF(16, 168));
         labelSystemPressure.setTabIndex(18);
         labelSystemPressure.setText("suffering from extreme boredom.");
         // labelSystemPressurePre
         labelSystemPressurePre.setAutoSize(true);
         labelSystemPressurePre.setLocation(new Point(8, 134));
         labelSystemPressurePre.setName("labelSystemPressurePre");
-        labelSystemPressurePre.setSize(new FormSize(122, 16));
+        labelSystemPressurePre.setSize(new SizeF(16, 122));
         labelSystemPressurePre.setTabIndex(17);
         labelSystemPressurePre.setText("This system is currently");
         // labelSystemPolSys
         labelSystemPolSys.setLocation(new Point(88, 64));
         labelSystemPolSys.setName("labelSystemPolSys");
-        labelSystemPolSys.setSize(new FormSize(91, 13));
+        labelSystemPolSys.setSize(new SizeF(13, 91));
         labelSystemPolSys.setTabIndex(15);
         labelSystemPolSys.setText("Cybernetic State");
         // labelSystemSize
         labelSystemSize.setLocation(new Point(88, 32));
         labelSystemSize.setName("labelSystemSize");
-        labelSystemSize.setSize(new FormSize(45, 13));
+        labelSystemSize.setSize(new SizeF(13, 45));
         labelSystemSize.setTabIndex(14);
         labelSystemSize.setText("Medium");
         // labelSystemTech
         labelSystemTech.setLocation(new Point(88, 48));
         labelSystemTech.setName("labelSystemTech");
-        labelSystemTech.setSize(new FormSize(82, 13));
+        labelSystemTech.setSize(new SizeF(13, 82));
         labelSystemTech.setTabIndex(13);
         labelSystemTech.setText("Pre-Agricultural");
         // labelSystemPirates
         labelSystemPirates.setLocation(new Point(88, 112));
         labelSystemPirates.setName("labelSystemPirates");
-        labelSystemPirates.setSize(new FormSize(53, 13));
+        labelSystemPirates.setSize(new SizeF(13, 53));
         labelSystemPirates.setTabIndex(11);
         labelSystemPirates.setText("Abundant");
         // labelSystemPolice
         labelSystemPolice.setLocation(new Point(88, 96));
         labelSystemPolice.setName("labelSystemPolice");
-        labelSystemPolice.setSize(new FormSize(53, 13));
+        labelSystemPolice.setSize(new SizeF(13, 53));
         labelSystemPolice.setTabIndex(10);
         labelSystemPolice.setText("Moderate");
         // labelSystemResource
         labelSystemResource.setLocation(new Point(88, 80));
         labelSystemResource.setName("labelSystemResource");
-        labelSystemResource.setSize(new FormSize(105, 13));
+        labelSystemResource.setSize(new SizeF(13, 105));
         labelSystemResource.setTabIndex(9);
         labelSystemResource.setText("Sweetwater Oceans");
         // labelSystemPiratesLabel
@@ -2113,7 +2107,7 @@ public class MainWindow extends wfWindow {
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelSystemPiratesLabel.setLocation(new Point(8, 112));
         labelSystemPiratesLabel.setName("labelSystemPiratesLabel");
-        labelSystemPiratesLabel.setSize(new FormSize(44, 16));
+        labelSystemPiratesLabel.setSize(new SizeF(16, 44));
         labelSystemPiratesLabel.setTabIndex(7);
         labelSystemPiratesLabel.setText("Pirates:");
         // labelSystemPoliceLabel
@@ -2122,7 +2116,7 @@ public class MainWindow extends wfWindow {
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelSystemPoliceLabel.setLocation(new Point(8, 96));
         labelSystemPoliceLabel.setName("labelSystemPoliceLabel");
-        labelSystemPoliceLabel.setSize(new FormSize(40, 16));
+        labelSystemPoliceLabel.setSize(new SizeF(16, 40));
         labelSystemPoliceLabel.setTabIndex(6);
         labelSystemPoliceLabel.setText("Police:");
         // labelSystemResourceLabel
@@ -2131,7 +2125,7 @@ public class MainWindow extends wfWindow {
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelSystemResourceLabel.setLocation(new Point(8, 80));
         labelSystemResourceLabel.setName("labelSystemResourceLabel");
-        labelSystemResourceLabel.setSize(new FormSize(58, 16));
+        labelSystemResourceLabel.setSize(new SizeF(16, 58));
         labelSystemResourceLabel.setTabIndex(5);
         labelSystemResourceLabel.setText("Resource:");
         // labelSystemGovtLabel
@@ -2140,7 +2134,7 @@ public class MainWindow extends wfWindow {
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelSystemGovtLabel.setLocation(new Point(8, 64));
         labelSystemGovtLabel.setName("labelSystemGovtLabel");
-        labelSystemGovtLabel.setSize(new FormSize(72, 16));
+        labelSystemGovtLabel.setSize(new SizeF(16, 72));
         labelSystemGovtLabel.setTabIndex(4);
         labelSystemGovtLabel.setText("Government:");
         // labelSystemTechLabel
@@ -2149,7 +2143,7 @@ public class MainWindow extends wfWindow {
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelSystemTechLabel.setLocation(new Point(8, 48));
         labelSystemTechLabel.setName("labelSystemTechLabel");
-        labelSystemTechLabel.setSize(new FormSize(65, 16));
+        labelSystemTechLabel.setSize(new SizeF(16, 65));
         labelSystemTechLabel.setTabIndex(3);
         labelSystemTechLabel.setText("Tech Level:");
         // labelSystemSizeLabel
@@ -2158,13 +2152,13 @@ public class MainWindow extends wfWindow {
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelSystemSizeLabel.setLocation(new Point(8, 32));
         labelSystemSizeLabel.setName("labelSystemSizeLabel");
-        labelSystemSizeLabel.setSize(new FormSize(31, 16));
+        labelSystemSizeLabel.setSize(new SizeF(16, 31));
         labelSystemSizeLabel.setTabIndex(2);
         labelSystemSizeLabel.setText("Size:");
         // labelSystemName
         labelSystemName.setLocation(new Point(88, 16));
         labelSystemName.setName("labelSystemName");
-        labelSystemName.setSize(new FormSize(65, 13));
+        labelSystemName.setSize(new SizeF(13, 65));
         labelSystemName.setTabIndex(1);
         labelSystemName.setText("Tarchannen");
         // labelSystemNameLabel
@@ -2173,7 +2167,7 @@ public class MainWindow extends wfWindow {
                 new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
         labelSystemNameLabel.setLocation(new Point(8, 16));
         labelSystemNameLabel.setName("labelSystemNameLabel");
-        labelSystemNameLabel.setSize(new FormSize(39, 16));
+        labelSystemNameLabel.setSize(new SizeF(16, 39));
         labelSystemNameLabel.setTabIndex(0);
         labelSystemNameLabel.setText("Name:");
         // boxShipYard
@@ -2186,7 +2180,7 @@ public class MainWindow extends wfWindow {
         boxShipYard.Controls.add(labelShipsForSale);
         boxShipYard.setLocation(new Point(4, 306));
         boxShipYard.setName("boxShipYard");
-        boxShipYard.setSize(new FormSize(168, 168));
+        boxShipYard.setSize(new SizeF(168, 168));
         boxShipYard.setTabIndex(4);
         boxShipYard.setTabStop(false);
         boxShipYard.setText("Shipyard");
@@ -2194,70 +2188,70 @@ public class MainWindow extends wfWindow {
         buttonDesign.setFlatStyle(FlatStyle.Flat);
         buttonDesign.setLocation(new Point(8, 32));
         buttonDesign.setName("buttonDesign");
-        buttonDesign.setSize(new FormSize(54, 22));
+        buttonDesign.setSize(new SizeF(22, 54));
         buttonDesign.setTabIndex(55);
         buttonDesign.setText("Design");
         buttonDesign.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonDesign_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonDesign_Click(sender, data);
             }
         });
         // buttonPod
         buttonPod.setFlatStyle(FlatStyle.Flat);
         buttonPod.setLocation(new Point(98, 138));
         buttonPod.setName("buttonPod");
-        buttonPod.setSize(new FormSize(58, 22));
+        buttonPod.setSize(new SizeF(22, 58));
         buttonPod.setTabIndex(54);
         buttonPod.setText("Buy Pod");
         buttonPod.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonPod_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonPod_Click(sender, data);
             }
         });
         // labelEscapePod
         labelEscapePod.setLocation(new Point(8, 122));
         labelEscapePod.setName("labelEscapePod");
-        labelEscapePod.setSize(new FormSize(152, 26));
+        labelEscapePod.setSize(new SizeF(26, 152));
         labelEscapePod.setTabIndex(27);
         labelEscapePod.setText("You can buy an escape pod for  2,000 cr.");
         // buttonEquip
         buttonEquip.setFlatStyle(FlatStyle.Flat);
         buttonEquip.setLocation(new Point(43, 85));
         buttonEquip.setName("buttonEquip");
-        buttonEquip.setSize(new FormSize(113, 22));
+        buttonEquip.setSize(new SizeF(22, 113));
         buttonEquip.setTabIndex(53);
         buttonEquip.setText("Buy/Sell Equipment");
         buttonEquip.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonEquip_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonEquip_Click(sender, data);
             }
         });
         // buttonBuyShip
         buttonBuyShip.setFlatStyle(FlatStyle.Flat);
         buttonBuyShip.setLocation(new Point(70, 32));
         buttonBuyShip.setName("buttonBuyShip");
-        buttonBuyShip.setSize(new FormSize(86, 22));
+        buttonBuyShip.setSize(new SizeF(22, 86));
         buttonBuyShip.setTabIndex(52);
         buttonBuyShip.setText("View Ship Info");
         buttonBuyShip.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonBuyShip_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonBuyShip_Click(sender, data);
             }
         });
         // labelEquipForSale
         labelEquipForSale.setLocation(new Point(8, 69));
         labelEquipForSale.setName("labelEquipForSale");
-        labelEquipForSale.setSize(new FormSize(152, 13));
+        labelEquipForSale.setSize(new SizeF(13, 152));
         labelEquipForSale.setTabIndex(21);
         labelEquipForSale.setText("There is equipment for sale.");
         // labelShipsForSale
         labelShipsForSale.setLocation(new Point(8, 16));
         labelShipsForSale.setName("labelShipsForSale");
-        labelShipsForSale.setSize(new FormSize(152, 13));
+        labelShipsForSale.setSize(new SizeF(13, 152));
         labelShipsForSale.setTabIndex(20);
         labelShipsForSale.setText("There are new ships for sale.");
         // boxDock
@@ -2269,7 +2263,7 @@ public class MainWindow extends wfWindow {
         boxDock.Controls.add(labelRepairCost);
         boxDock.setLocation(new Point(4, 212));
         boxDock.setName("boxDock");
-        boxDock.setSize(new FormSize(240, 90));
+        boxDock.setSize(new SizeF(90, 240));
         boxDock.setTabIndex(2);
         boxDock.setTabStop(false);
         boxDock.setText("Dock");
@@ -2277,57 +2271,57 @@ public class MainWindow extends wfWindow {
         buttonRepair.setFlatStyle(FlatStyle.Flat);
         buttonRepair.setLocation(new Point(180, 56));
         buttonRepair.setName("buttonRepair");
-        buttonRepair.setSize(new FormSize(48, 22));
+        buttonRepair.setSize(new SizeF(22, 48));
         buttonRepair.setTabIndex(5);
         buttonRepair.setText("Repair");
         buttonRepair.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonRepair_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonRepair_Click(sender, data);
             }
         });
         // buttonFuel
         buttonFuel.setFlatStyle(FlatStyle.Flat);
         buttonFuel.setLocation(new Point(192, 18));
         buttonFuel.setName("buttonFuel");
-        buttonFuel.setSize(new FormSize(36, 22));
+        buttonFuel.setSize(new SizeF(22, 36));
         buttonFuel.setTabIndex(4);
         buttonFuel.setText("Fuel");
         buttonFuel.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                buttonFuel_Click(sender, e);
+            public void handle(Object sender, EventData data) {
+                buttonFuel_Click(sender, data);
             }
         });
         // labelFuelStatus
         labelFuelStatus.setLocation(new Point(8, 16));
         labelFuelStatus.setName("labelFuelStatus");
-        labelFuelStatus.setSize(new FormSize(162, 13));
+        labelFuelStatus.setSize(new SizeF(13, 162));
         labelFuelStatus.setTabIndex(20);
         labelFuelStatus.setText("You have fuel to fly 88 parsecs.");
         // labelFuelCost
         labelFuelCost.setLocation(new Point(8, 31));
         labelFuelCost.setName("labelFuelCost");
-        labelFuelCost.setSize(new FormSize(121, 13));
+        labelFuelCost.setSize(new SizeF(13, 121));
         labelFuelCost.setTabIndex(19);
         labelFuelCost.setText("A full tank costs 888 cr.");
         // labelHullStatus
         labelHullStatus.setLocation(new Point(8, 52));
         labelHullStatus.setName("labelHullStatus");
-        labelHullStatus.setSize(new FormSize(152, 13));
+        labelHullStatus.setSize(new SizeF(13, 152));
         labelHullStatus.setTabIndex(18);
         labelHullStatus.setText("Your hull strength is at 888%.");
         // labelRepairCost
         labelRepairCost.setLocation(new Point(8, 67));
         labelRepairCost.setName("labelRepairCost");
-        labelRepairCost.setSize(new FormSize(150, 13));
+        labelRepairCost.setSize(new SizeF(13, 150));
         labelRepairCost.setTabIndex(19);
         labelRepairCost.setText("Full repairs will cost 8,888 cr.");
         // pictureLine
         pictureLine.setBackColor(Color.darkGray);
         pictureLine.setLocation(new Point(0, 0));
         pictureLine.setName("pictureLine");
-        pictureLine.setSize(new FormSize(770, 1));
+        pictureLine.setSize(new SizeF(1, 770));
         pictureLine.setTabIndex(132);
         pictureLine.setTabStop(false);
         // dlgOpen
@@ -2336,24 +2330,24 @@ public class MainWindow extends wfWindow {
         dlgSave.setFileName("SpaceTrader.sav");
         dlgSave.setFilter("Saved-Game Files (*.sav)|*.sav|All Files (*.*)|*.*");
         // ilChartImages
-        ilChartImages.setImageSize(new FormSize(7, 7));
+        ilChartImages.setImageSize(new SizeF(7, 7));
         ilChartImages.setImageStream(((ImageListStreamer) (resources.GetObject("ilChartImages.ImageStream"))));
         ilChartImages.setTransparentColor(Color.white);
         // ilShipImages
-        ilShipImages.setImageSize(new FormSize(64, 52));
+        ilShipImages.setImageSize(new SizeF(52, 64));
         ilShipImages.setImageStream(((ImageListStreamer) (resources.GetObject("ilShipImages.ImageStream"))));
         ilShipImages.setTransparentColor(Color.white);
         // ilDirectionImages
-        ilDirectionImages.setImageSize(new FormSize(13, 13));
+        ilDirectionImages.setImageSize(new SizeF(13, 13));
         ilDirectionImages.setImageStream(((ImageListStreamer) (resources.GetObject("ilDirectionImages.ImageStream"))));
         ilDirectionImages.setTransparentColor(Color.white);
         // ilEquipmentImages
-        ilEquipmentImages.setImageSize(new FormSize(64, 52));
+        ilEquipmentImages.setImageSize(new SizeF(52, 64));
         ilEquipmentImages.setImageStream(((ImageListStreamer) (resources.GetObject("ilEquipmentImages.ImageStream"))));
         ilEquipmentImages.setTransparentColor(Color.white);
         // ApplicationST
-        setAutoScaleBaseSize(new FormSize(5, 13));
-        setClientSize(new FormSize(768, 505));
+        setAutoScaleBaseSize(new SizeF(13, 5));
+        setClientSize(new SizeF(505, 768));
         Controls.add(pictureLine);
         Controls.add(boxDock);
         Controls.add(boxCargo);
@@ -2373,21 +2367,17 @@ public class MainWindow extends wfWindow {
         setText("Space Trader");
         setClosing(new EventHandler<>() {
             @Override
-            public void handle(Object sender, CancelEventData e) {
-                SpaceTrader_Closing(sender, e);
+            public void handle(Object sender, CancelEventData data) {
+                SpaceTrader_Closing(sender, data);
             }
         });
         setLoad(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData e) {
-                SpaceTrader_Load(sender, e);
+            public void handle(Object sender, EventData data) {
+                SpaceTrader_Load(sender, data);
             }
         });
-        ((ISupportInitialize) (statusBarPanelCash)).endInit();
-        ((ISupportInitialize) (statusBarPanelBays)).endInit();
-        ((ISupportInitialize) (statusBarPanelCosts)).endInit();
-        ((ISupportInitialize) (statusBarPanelExtra)).endInit();
-        boxShortRangeChart.ResumeLayout(false);
+                                        boxShortRangeChart.ResumeLayout(false);
         boxGalacticChart.ResumeLayout(false);
         boxTargetSystem.ResumeLayout(false);
         boxCargo.ResumeLayout(false);
@@ -3329,14 +3319,14 @@ public class MainWindow extends wfWindow {
             StarSystem currentSys = commander.CurrentSystem();
             int fuel = commander.getShip().getFuel();
             if (fuel > 0) {
-                e.Graphics.DrawEllipse(DEFAULT_PEN, currentSys.X() + OFF_X - fuel, currentSys.Y() + OFF_Y - fuel, fuel * 2, fuel * 2);
+                e.Graphics.DrawEllipse(PEN_BLACK, currentSys.X() + OFF_X - fuel, currentSys.Y() + OFF_Y - fuel, fuel * 2, fuel * 2);
             }
             int index = game.SelectedSystemId().getId();
             if (game.TargetWormhole()) {
                 int destination = wormholes[(Util.bruteSeek(wormholes, index) + 1) % wormholes.length];
                 StarSystem destinationSystem = universe[destination];
                 e.Graphics.DrawLine(
-                        DEFAULT_PEN, targetSys.X() + OFF_X_WORM + OFF_X,
+                        PEN_BLACK, targetSys.X() + OFF_X_WORM + OFF_X,
                         targetSys.Y() + OFF_Y, destinationSystem.X() + OFF_X, destinationSystem.Y() + OFF_Y);
             }
             for (int i = 0; i < universe.length; i++) {
@@ -3350,10 +3340,10 @@ public class MainWindow extends wfWindow {
                 wfImage image = ilChartImages.getImages()[imageIndex];
                 if (universe[i] == game.TrackedSystem()) {
                     e.Graphics.DrawLine(
-                            DEFAULT_PEN, universe[i].X(), universe[i].Y(),
+                            PEN_BLACK, universe[i].X(), universe[i].Y(),
                             universe[i].X() + image.getWidth() - 1, universe[i].Y() + image.getHeight() - 1);
                     e.Graphics.DrawLine(
-                            DEFAULT_PEN, universe[i].X(), universe[i].Y() + image.getHeight() - 1,
+                            PEN_BLACK, universe[i].X(), universe[i].Y() + image.getHeight() - 1,
                             universe[i].X() + image.getWidth() - 1, universe[i].Y());
                 }
                 ilChartImages.Draw(e.Graphics, universe[i].X(), universe[i].Y(), imageIndex);
@@ -3364,7 +3354,7 @@ public class MainWindow extends wfWindow {
                 }
             }
         } else {
-            e.Graphics.FillRectangle(DEFAULT_BRUSH, 0, 0, pictureGalacticChart.getWidth(), pictureGalacticChart.getHeight());
+            e.Graphics.FillRectangle(PEN_WHITE, 0, 0, pictureGalacticChart.getWidth(), pictureGalacticChart.getHeight());
         }
     }
 
@@ -3402,17 +3392,17 @@ public class MainWindow extends wfWindow {
 
     private void pictureShortRangeChart_Paint(Object sender, PaintEventData e) {
         if (game == null) {
-            e.Graphics.FillRectangle(DEFAULT_BRUSH, 0, 0, pictureShortRangeChart.getWidth(), pictureShortRangeChart.getHeight());
+            e.Graphics.FillRectangle(PEN_WHITE, 0, 0, pictureShortRangeChart.getWidth(), pictureShortRangeChart.getHeight());
         } else {
             int[] wormholes = game.Wormholes();
             int fuel = commander.getShip().getFuel();
             int centerX = pictureShortRangeChart.getWidth() / 2;
             int centerY = pictureShortRangeChart.getHeight() / 2;
             int delta = pictureShortRangeChart.getHeight() / (Constants.MaxRange * 2);
-            e.Graphics.DrawLine(DEFAULT_PEN, centerX - 1, centerY - 1, centerX + 1, centerY + 1);
-            e.Graphics.DrawLine(DEFAULT_PEN, centerX - 1, centerY + 1, centerX + 1, centerY - 1);
+            e.Graphics.DrawLine(PEN_BLACK, centerX - 1, centerY - 1, centerX + 1, centerY + 1);
+            e.Graphics.DrawLine(PEN_BLACK, centerX - 1, centerY + 1, centerX + 1, centerY - 1);
             if (fuel > 0) {
-                e.Graphics.DrawEllipse(DEFAULT_PEN, centerX - fuel * delta, centerY - fuel * delta, fuel * delta * 2, fuel * delta * 2);
+                e.Graphics.DrawEllipse(PEN_BLACK, centerX - fuel * delta, centerY - fuel * delta, fuel * delta * 2, fuel * delta * 2);
             }
             StarSystem currentSys = commander.CurrentSystem();
             StarSystem trackSys = game.TrackedSystem();
@@ -3423,14 +3413,14 @@ public class MainWindow extends wfWindow {
                     int dY = (int) Math.round(25 * (trackSys.Y() - currentSys.Y()) / (double) dist);
                     int dX2 = (int) Math.round(4 * (trackSys.Y() - currentSys.Y()) / (double) dist);
                     int dY2 = (int) Math.round(4 * (currentSys.X() - trackSys.X()) / (double) dist);
-                    e.Graphics.FillPolygon(new SolidBrush(new Color(220, 20, 60)), new Point[]{
+                    e.Graphics.FillPolygon(new Pen(new Color(220, 20, 60)), new Point[]{
                             new Point(centerX + dX, centerY + dY), new Point(centerX - dX2, centerY - dY2), new Point(centerX + dX2, centerY + dY2)
                     });
                 }
                 if (game.Options().getShowTrackedRange()) {
                     e.Graphics.DrawString(
                             Functions.StringVars("^1 to ^2.", Functions.Multiples(dist, Strings.DistanceUnit), trackSys.Name()),
-                            getFont(), new SolidBrush(Color.black), 0, pictureShortRangeChart.getHeight() - 13);
+                            getFont(), new Pen(Color.black), 0, pictureShortRangeChart.getHeight() - 13);
                 }
             }
             // First, draw the names, then the systems.
@@ -3444,12 +3434,12 @@ public class MainWindow extends wfWindow {
                         int y = centerY + (universe[i].Y() - currentSys.Y()) * delta;
                         if (j == 1) {
                             if (universe[i] == game.WarpSystem()) {
-                                e.Graphics.DrawLine(DEFAULT_PEN, x - 6, y, x + 6, y);
-                                e.Graphics.DrawLine(DEFAULT_PEN, x, y - 6, x, y + 6);
+                                e.Graphics.DrawLine(PEN_BLACK, x - 6, y, x + 6, y);
+                                e.Graphics.DrawLine(PEN_BLACK, x, y - 6, x, y + 6);
                             }
                             if (universe[i] == game.TrackedSystem()) {
-                                e.Graphics.DrawLine(DEFAULT_PEN, x - 5, y - 5, x + 5, y + 5);
-                                e.Graphics.DrawLine(DEFAULT_PEN, x - 5, y + 5, x + 5, y - 5);
+                                e.Graphics.DrawLine(PEN_BLACK, x - 5, y - 5, x + 5, y + 5);
+                                e.Graphics.DrawLine(PEN_BLACK, x - 5, y + 5, x + 5, y - 5);
                             }
                             int IMG_G_N = 0;
                             int IMG_G_V = 1;
@@ -3457,8 +3447,8 @@ public class MainWindow extends wfWindow {
                             if (Functions.WormholeExists(i, -1)) {
                                 int xW = x + 9;
                                 if (game.TargetWormhole() && universe[i] == game.SelectedSystem()) {
-                                    e.Graphics.DrawLine(DEFAULT_PEN, xW - 6, y, xW + 6, y);
-                                    e.Graphics.DrawLine(DEFAULT_PEN, xW, y - 6, xW, y + 6);
+                                    e.Graphics.DrawLine(PEN_BLACK, xW - 6, y, xW + 6, y);
+                                    e.Graphics.DrawLine(PEN_BLACK, xW, y - 6, xW, y + 6);
                                 }
                                 int IMG_G_W = 2;
                                 ilChartImages.Draw(e.Graphics, xW - OFF_X, y - OFF_Y, IMG_G_W);
@@ -3466,7 +3456,7 @@ public class MainWindow extends wfWindow {
                         } else {
                             Font font = new Font(getFont().FontFamily, 7);
                             SizeF size = e.Graphics.MeasureString(universe[i].Name(), getFont());
-                            e.Graphics.DrawString(universe[i].Name(), font, new SolidBrush(Color.black),
+                            e.Graphics.DrawString(universe[i].Name(), font, new Pen(Color.black),
                                     x - size.width / 2 + OFF_X, y /*- size.Height*/ - 5);
                             // implementations differ as to which point we start the string at. --aviv
                         }

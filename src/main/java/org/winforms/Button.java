@@ -7,10 +7,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-
+/**
+ * Wrapper around JButton
+ */
 public class Button extends wfControl {
+
     Action userAction;
-    DialogResult DialogResult;
+    DialogResult dialogResult;
 
     public Button() {
         super(new JButton());
@@ -35,7 +38,7 @@ public class Button extends wfControl {
     }
 
     public void setDialogResult(DialogResult dialogResult) {
-        DialogResult = dialogResult;
+        this.dialogResult = dialogResult;
     }
 
     @Override
