@@ -8,7 +8,7 @@ import org.spacetrader.model.enums.Activity;
 import org.spacetrader.model.enums.TechLevel;
 import org.spacetrader.model.ship.equipment.EquipmentType;
 import org.spacetrader.ui.Strings;
-import org.winforms.wfImage;
+import org.winforms.Image;
 
 import java.util.Hashtable;
 
@@ -169,7 +169,7 @@ public class ShipSpec extends SerializableObject {
     }
 
     public void UpdateCustomImageOffsetConstants() {
-        wfImage image = Game.getCurrentGame().getParentWindow().CustomShipImages()[0];
+        Image image = Game.getCurrentGame().getParentWindow().CustomShipImages()[0];
         int custIndex = ShipType.Custom.getId();
         // Find the first column of pixels that has a non-white pixel for the X value, and the last column for the width.
         int x = Functions.GetColumnOfFirstNonWhitePixel(image, 1);
@@ -274,15 +274,15 @@ public class ShipSpec extends SerializableObject {
         hullStrength = value;
     }
 
-    public wfImage Image() {
+    public Image Image() {
         return Game.getCurrentGame().getParentWindow().ShipImages().getImages()[ImageIndex() * Constants.ImagesPerShip + Constants.ShipImgOffsetNormal];
     }
 
-    public wfImage ImageDamaged() {
+    public Image ImageDamaged() {
         return Game.getCurrentGame().getParentWindow().ShipImages().getImages()[ImageIndex() * Constants.ImagesPerShip + Constants.ShipImgOffsetDamage];
     }
 
-    public wfImage ImageDamagedWithShields() {
+    public Image ImageDamagedWithShields() {
         return Game.getCurrentGame().getParentWindow().ShipImages().getImages()[ImageIndex() * Constants.ImagesPerShip + Constants.ShipImgOffsetShieldDamage];
     }
 
@@ -294,7 +294,7 @@ public class ShipSpec extends SerializableObject {
         imageIndex = (value == Type().getId() ? Constants.ShipImgUseDefault : value);
     }
 
-    public wfImage ImageWithShields() {
+    public Image ImageWithShields() {
         return Game.getCurrentGame().getParentWindow().ShipImages().getImages()[ImageIndex() * Constants.ImagesPerShip + Constants.ShipImgOffsetShield];
     }
 

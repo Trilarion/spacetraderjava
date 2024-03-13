@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class FormViewShip extends wfForm {
+public class FormViewShip extends form {
     private final Label labelSpecialCargo;
     private final Label labelEquipLabel;
     private final Label labelEquip;
@@ -34,36 +34,36 @@ public class FormViewShip extends wfForm {
         labelEquip = new Label();
         GroupBox boxSpecialCargo = new GroupBox();
         labelSpecialCargo = new Label();
-        boxSpecialCargo.SuspendLayout();
-        SuspendLayout();
+        boxSpecialCargo.suspendLayout();
+        suspendLayout();
         // labelTypeLabel
         labelTypeLabel.setAutoSize(true);
-        labelTypeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelTypeLabel.setFont(new Font("Microsoft Sans Serif", FontStyle.Bold, (int) 8.25F));
         labelTypeLabel.setLocation(new Point(8, 8));
-        labelTypeLabel.setSize(new SizeF(13, 34));
+        labelTypeLabel.setSize(new Dimension(34, 13));
         labelTypeLabel.setTabIndex(2);
         labelTypeLabel.setText("Type:");
         // labelType
         labelType.setLocation(new Point(80, 8));
-        labelType.setSize(new SizeF(13, 100));
+        labelType.setSize(new Dimension(100, 13));
         labelType.setTabIndex(4);
         labelType.setText("Grasshopper");
         // buttonClose
         buttonClose.setDialogResult(DialogResult.Cancel);
         buttonClose.setLocation(new Point(-32, -32));
-        buttonClose.setSize(new SizeF(32, 32));
+        buttonClose.setSize(new Dimension(32, 32));
         buttonClose.setTabIndex(32);
         buttonClose.setTabStop(false);
         buttonClose.setText("X");
         // labelEquipLabel
-        labelEquipLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelEquipLabel.setFont(new Font("Microsoft Sans Serif", FontStyle.Bold, (int) 8.25F));
         labelEquipLabel.setLocation(new Point(8, 34));
-        labelEquipLabel.setSize(new SizeF(176, 64));
+        labelEquipLabel.setSize(new Dimension(64, 176));
         labelEquipLabel.setTabIndex(43);
         labelEquipLabel.setText("Hull:\r\n\r\nEquipment:\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nUnfilled:");
         // labelEquip
         labelEquip.setLocation(new Point(80, 34));
-        labelEquip.setSize(new SizeF(176, 120));
+        labelEquip.setSize(new Dimension(120, 176));
         labelEquip.setTabIndex(44);
         labelEquip.setText("Hardened\r\n\r\n1 Military Laser\r\n1 Morgan's Laser\r\n1 Energy Shield\r\n1 Reflective Shi"
                 + "eld\r\n1 Lightning Shield\r\nNavigating System\r\nAuto-Repair System\r\n10 Extra Cargo Bays\r\nAn Escape Pod\r\n"
@@ -71,19 +71,19 @@ public class FormViewShip extends wfForm {
         // boxSpecialCargo
         boxSpecialCargo.Controls.addAll(labelSpecialCargo);
         boxSpecialCargo.setLocation(new Point(192, 8));
-        boxSpecialCargo.setSize(new SizeF(204, 200));
+        boxSpecialCargo.setSize(new Dimension(200, 204));
         boxSpecialCargo.setTabIndex(64);
         boxSpecialCargo.setTabStop(false);
         boxSpecialCargo.setText("Special Cargo");
         // labelSpecialCargo
         labelSpecialCargo.setLocation(new Point(8, 16));
-        labelSpecialCargo.setSize(new SizeF(176, 190));
+        labelSpecialCargo.setSize(new Dimension(190, 176));
         labelSpecialCargo.setTabIndex(0);
         labelSpecialCargo.setText("No special items.");
         // FormViewShip
-        setAutoScaleBaseSize(new SizeF(13, 5));
+        setAutoScaleBaseSize(new Dimension(5, 13));
         setCancelButton(buttonClose);
-        setClientSize(new SizeF(219, 402));
+        setClientSize(new Dimension(402, 219));
         Controls.addAll(Arrays.asList(boxSpecialCargo, labelEquip, labelEquipLabel, buttonClose, labelTypeLabel, labelType));
         setFormBorderStyle(FormBorderStyle.FixedDialog);
         setMaximizeBox(false);
@@ -91,8 +91,8 @@ public class FormViewShip extends wfForm {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Current Ship");
-        boxSpecialCargo.ResumeLayout(false);
-        ResumeLayout(false);
+        boxSpecialCargo.resumeLayout(false);
+        resumeLayout(false);
         labelType.setText(ship.Name());
         labelEquipLabel.setText("");
         labelEquip.setText("");

@@ -14,22 +14,22 @@ import org.winforms.enums.FormStartPosition;
 import java.awt.*;
 
 
-public class FormPayBackLoan extends wfForm {
-    private final NumericUpDown numAmount;
+public class FormPayBackLoan extends form {
+    private final Spinner numAmount;
 
     public FormPayBackLoan() {
         Label labelQuestion = new Label();
-        numAmount = new NumericUpDown();
+        numAmount = new Spinner();
         Button buttonOk = new Button();
         Button buttonMax = new Button();
         Button buttonNothing = new Button();
         Label labelStatement = new Label();
-                SuspendLayout();
+                suspendLayout();
         // labelQuestion
         labelQuestion.setAutoSize(true);
         labelQuestion.setLocation(new Point(8, 24));
         labelQuestion.setName("labelQuestion");
-        labelQuestion.setSize(new SizeF(13, 188));
+        labelQuestion.setSize(new Dimension(188, 13));
         labelQuestion.setTabIndex(3);
         labelQuestion.setText("How much do you want to pay back?");
         // numAmount
@@ -37,16 +37,16 @@ public class FormPayBackLoan extends wfForm {
         numAmount.setMaximum(999999);
         numAmount.setMinimum(1);
         numAmount.setName("numAmount");
-        numAmount.setSize(new SizeF(20, 58));
+        numAmount.setSize(new Dimension(58, 20));
         numAmount.setTabIndex(1);
-        numAmount.ThousandsSeparator = true;
+        numAmount.thousandsSeparator = true;
         numAmount.setValue(88888);
         // buttonOk
         buttonOk.setDialogResult(DialogResult.OK);
         buttonOk.setFlatStyle(FlatStyle.Flat);
         buttonOk.setLocation(new Point(58, 48));
         buttonOk.setName("buttonOk");
-        buttonOk.setSize(new SizeF(22, 41));
+        buttonOk.setSize(new Dimension(41, 22));
         buttonOk.setTabIndex(2);
         buttonOk.setText("Ok");
         // buttonMax
@@ -54,7 +54,7 @@ public class FormPayBackLoan extends wfForm {
         buttonMax.setFlatStyle(FlatStyle.Flat);
         buttonMax.setLocation(new Point(106, 48));
         buttonMax.setName("buttonMax");
-        buttonMax.setSize(new SizeF(22, 41));
+        buttonMax.setSize(new Dimension(41, 22));
         buttonMax.setTabIndex(3);
         buttonMax.setText("Max");
         buttonMax.setClick(new EventHandler<>() {
@@ -68,20 +68,20 @@ public class FormPayBackLoan extends wfForm {
         buttonNothing.setFlatStyle(FlatStyle.Flat);
         buttonNothing.setLocation(new Point(154, 48));
         buttonNothing.setName("buttonNothing");
-        buttonNothing.setSize(new SizeF(22, 53));
+        buttonNothing.setSize(new Dimension(53, 22));
         buttonNothing.setTabIndex(4);
         buttonNothing.setText("Nothing");
         // labelStatement
         labelStatement.setLocation(new Point(8, 8));
         labelStatement.setName("labelStatement");
-        labelStatement.setSize(new SizeF(13, 176));
+        labelStatement.setSize(new Dimension(176, 13));
         labelStatement.setTabIndex(5);
         labelStatement.setText("You have a debt of 88,888 credits.");
         // FormPayBackLoan
         setAcceptButton(buttonOk);
-        setAutoScaleBaseSize(new SizeF(13, 5));
+        setAutoScaleBaseSize(new Dimension(5, 13));
         setCancelButton(buttonNothing);
-        setClientSize(new SizeF(79, 264));
+        setClientSize(new Dimension(264, 79));
         setControlBox(false);
         Controls.addAll(labelStatement, buttonNothing, buttonMax, buttonOk, numAmount, labelQuestion);
         setFormBorderStyle(FormBorderStyle.FixedDialog);
@@ -89,7 +89,7 @@ public class FormPayBackLoan extends wfForm {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Pay Back Loan");
-                ResumeLayout(false);
+                resumeLayout(false);
         Game game = Game.getCurrentGame();
         Commander commander = game.Commander();
         int max = Math.min(commander.getDebt(), commander.getCash());

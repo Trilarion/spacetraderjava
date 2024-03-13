@@ -16,36 +16,36 @@ import org.winforms.enums.FormStartPosition;
 import java.awt.*;
 
 
-public class FormCargoSell extends wfForm {
-    private final NumericUpDown numAmount;
+public class FormCargoSell extends form {
+    private final Spinner numAmount;
 
     public FormCargoSell(int item, int maxAmount, CargoSellOperation op, int price) {
         Label labelQuestion = new Label();
         Label labelStatement = new Label();
-        numAmount = new NumericUpDown();
+        numAmount = new Spinner();
         Button buttonOk = new Button();
         Button buttonAll = new Button();
         Button buttonNone = new Button();
         Label labelPaid = new Label();
         Label labelProfit = new Label();
-                SuspendLayout();
+                suspendLayout();
         // labelQuestion
         labelQuestion.setLocation(new Point(8, 50));
         labelQuestion.setName("labelQuestion");
-        labelQuestion.setSize(new SizeF(13, 160));
+        labelQuestion.setSize(new Dimension(160, 13));
         labelQuestion.setTabIndex(1);
         labelQuestion.setText("How many do you want to sell?");
         // labelStatement
         labelStatement.setLocation(new Point(8, 8));
         labelStatement.setName("labelStatement");
-        labelStatement.setSize(new SizeF(13, 302));
+        labelStatement.setSize(new Dimension(302, 13));
         labelStatement.setTabIndex(3);
         labelStatement.setText("The trader wants to by Machines, and offers 8,888 cr. each.");
         // numAmount
         numAmount.setLocation(new Point(168, 48));
         numAmount.setMinimum(1);
         numAmount.setName("numAmount");
-        numAmount.setSize(new SizeF(20, 38));
+        numAmount.setSize(new Dimension(38, 20));
         numAmount.setTabIndex(1);
         numAmount.setValue(88);
         // buttonOk
@@ -53,7 +53,7 @@ public class FormCargoSell extends wfForm {
         buttonOk.setFlatStyle(FlatStyle.Flat);
         buttonOk.setLocation(new Point(83, 74));
         buttonOk.setName("buttonOk");
-        buttonOk.setSize(new SizeF(22, 41));
+        buttonOk.setSize(new Dimension(41, 22));
         buttonOk.setTabIndex(2);
         buttonOk.setText("Ok");
         // buttonAll
@@ -61,7 +61,7 @@ public class FormCargoSell extends wfForm {
         buttonAll.setFlatStyle(FlatStyle.Flat);
         buttonAll.setLocation(new Point(131, 74));
         buttonAll.setName("buttonAll");
-        buttonAll.setSize(new SizeF(22, 41));
+        buttonAll.setSize(new Dimension(41, 22));
         buttonAll.setTabIndex(3);
         buttonAll.setText("All");
         buttonAll.setClick(new EventHandler<>() {
@@ -75,26 +75,26 @@ public class FormCargoSell extends wfForm {
         buttonNone.setFlatStyle(FlatStyle.Flat);
         buttonNone.setLocation(new Point(179, 74));
         buttonNone.setName("buttonNone");
-        buttonNone.setSize(new SizeF(22, 41));
+        buttonNone.setSize(new Dimension(41, 22));
         buttonNone.setTabIndex(4);
         buttonNone.setText("None");
         // labelPaid
         labelPaid.setLocation(new Point(8, 21));
         labelPaid.setName("labelPaid");
-        labelPaid.setSize(new SizeF(13, 280));
+        labelPaid.setSize(new Dimension(280, 13));
         labelPaid.setTabIndex(5);
         labelPaid.setText("You paid about 8,888 cr. per unit, and can sell 88 units.");
         // labelProfit
         labelProfit.setLocation(new Point(8, 34));
         labelProfit.setName("labelProfit");
-        labelProfit.setSize(new SizeF(13, 200));
+        labelProfit.setSize(new Dimension(200, 13));
         labelProfit.setTabIndex(6);
         labelProfit.setText("It costs 8,888 cr. per unit for disposal.");
         // FormCargoSell
         setAcceptButton(buttonOk);
-        setAutoScaleBaseSize(new SizeF(13, 5));
+        setAutoScaleBaseSize(new Dimension(5, 13));
         setCancelButton(buttonNone);
-        setClientSize(new SizeF(105, 302));
+        setClientSize(new Dimension(302, 105));
         setControlBox(false);
         Controls.add(labelProfit);
         Controls.add(labelPaid);
@@ -109,7 +109,7 @@ public class FormCargoSell extends wfForm {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Sell Xxxxxxxxxx");
-                ResumeLayout(false);
+                resumeLayout(false);
         Game game = Game.getCurrentGame();
         Commander commander = game.Commander();
         int cost = commander.PriceCargo()[item] / commander.getShip().Cargo()[item];

@@ -8,8 +8,9 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 
 // TODO documentation of properties and usage
-public class ListBox extends wfControl {
-    public final MyListModel Items = new MyListModel();
+public class ListBox extends Control {
+
+    public final DefaultListModel Items = new DefaultListModel<Object>();
 
     public ListBox() {
         super(new JList<>());

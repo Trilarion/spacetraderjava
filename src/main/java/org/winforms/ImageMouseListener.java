@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
  * @author Gregory
  */
 class ImageMouseListener extends MouseAdapter {
+
     private final PictureBox pictureBox;
     public EventHandler<Object, MouseEventData> pressed;
 

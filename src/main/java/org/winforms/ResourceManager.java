@@ -33,7 +33,7 @@ public class ResourceManager {
         return path.substring(0, path.lastIndexOf('/') + 1);
     }
 
-    public Object GetObject(String s) {
+    public Object getObject(String s) {
         String objectType = properties.getProperty(s + ".type", null);
         if (objectType == null) {
             throw new Error("No object type for: " + s);
@@ -55,11 +55,11 @@ public class ResourceManager {
         }
     }
 
-    public Object getImage(String s) {
-        return new wfBitmap(classLoader.getResource(s.trim()));
+    public Object getImage(String string) {
+        return new Bitmap(classLoader.getResource(string.trim()));
     }
 
-    public String GetString(String s) {
-        return properties.getProperty(s);
+    public String getString(String string) {
+        return properties.getProperty(string);
     }
 }

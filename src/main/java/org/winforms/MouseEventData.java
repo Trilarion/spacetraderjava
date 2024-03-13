@@ -1,5 +1,7 @@
 package org.winforms;
 
+import org.winforms.enums.MouseButtons;
+
 import java.awt.event.MouseEvent;
 
 

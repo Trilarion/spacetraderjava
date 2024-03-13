@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 /**
  * Wrapper around JButton
  */
-public class Button extends wfControl {
+public class Button extends Control {
 
     Action userAction;
     DialogResult dialogResult;
@@ -65,5 +65,9 @@ public class Button extends wfControl {
             default:
                 throw new Error("Unknown FlatStyle");
         }
+    }
+
+    public void SetToolTip(String text) {  // TODO could be static in utils or so
+        asJButton().setToolTipText(text);
     }
 }

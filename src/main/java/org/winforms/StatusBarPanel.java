@@ -6,7 +6,8 @@ import java.awt.*;
 
 // TODO documentation of usage
 public class StatusBarPanel {
-    public final StatusBarPanelAutoSize AutoSize;
+
+    public final StatusBarPanelAutoSize autoSize;
     private final JStatusBarSection jpanel = new JStatusBarSection(" ");
 
     public StatusBarPanel() {
@@ -14,7 +15,7 @@ public class StatusBarPanel {
     }
 
     public StatusBarPanel(StatusBarPanelAutoSize autoSize) {
-        AutoSize = autoSize;
+        this.autoSize = autoSize;
     }
 
     public void setText(String text) {

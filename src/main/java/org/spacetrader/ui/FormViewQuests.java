@@ -18,19 +18,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class FormViewQuests extends wfForm {
+public class FormViewQuests extends form {
     private final Game game = Game.getCurrentGame();
     private final LinkLabel labelQuests;
 
     public FormViewQuests() {
         Button buttonClose = new Button();
         labelQuests = new LinkLabel();
-        SuspendLayout();
+        suspendLayout();
         // buttonClose
         buttonClose.setDialogResult(DialogResult.Cancel);
         buttonClose.setLocation(new Point(-32, -32));
         buttonClose.setName("buttonClose");
-        buttonClose.setSize(new SizeF(32, 32));
+        buttonClose.setSize(new Dimension(32, 32));
         buttonClose.setTabIndex(32);
         buttonClose.setTabStop(false);
         buttonClose.setText("X");
@@ -38,7 +38,7 @@ public class FormViewQuests extends wfForm {
         labelQuests.linkArea = new LinkArea(0, 0);
         labelQuests.setLocation(new Point(8, 8));
         labelQuests.setName("labelQuests");
-        labelQuests.setSize(new SizeF(312, 368));
+        labelQuests.setSize(new Dimension(368, 312));
         labelQuests.setTabIndex(44);
         labelQuests.setText("Kill the space monster at Acamar.\n\n"
                 + "Get your lightning shield at Zalkon.\n\n"
@@ -59,9 +59,9 @@ public class FormViewQuests extends wfForm {
             }
         };
         // FormViewQuests
-        setAutoScaleBaseSize(new SizeF(13, 5));
+        setAutoScaleBaseSize(new Dimension(5, 13));
         setCancelButton(buttonClose);
-        setClientSize(new SizeF(325, 378));
+        setClientSize(new Dimension(378, 325));
         Controls.addAll(Arrays.asList(buttonClose, labelQuests));
         setFormBorderStyle(FormBorderStyle.FixedDialog);
         setMaximizeBox(false);
@@ -70,7 +70,7 @@ public class FormViewQuests extends wfForm {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Quests");
-        ResumeLayout(false);
+        resumeLayout(false);
         UpdateAll();
     }
 
@@ -209,7 +209,7 @@ public class FormViewQuests extends wfForm {
     }
 
     private void labelQuests_LinkClicked(Object sender, LinkLabelLinkClickedEventData e) {
-        game.setSelectedSystemByName(e.Link.LinkData.toString());
+        game.setSelectedSystemByName(e.Link.linkData.toString());
         game.getParentWindow().UpdateAll();
         Close();
     }

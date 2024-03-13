@@ -25,7 +25,7 @@ import org.spacetrader.model.system.StarSystem;
 import org.spacetrader.ui.*;
 import org.spacetrader.util.Util;
 import org.winforms.enums.DialogResult;
-import org.winforms.wfPane;
+import org.winforms.Pane;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -985,7 +985,7 @@ public class Game extends SerializableObject {
         RecalculateBuyPrices(system);
     }
 
-    private void CargoBuy(int tradeItem, boolean max, wfPane owner, CargoBuyOperation op) {
+    private void CargoBuy(int tradeItem, boolean max, Pane owner, CargoBuyOperation op) {
         int freeBays = commander.getShip().FreeCargoBays();
         int[] items = null;
         int unitPrice = 0;
@@ -1040,7 +1040,7 @@ public class Game extends SerializableObject {
         }
     }
 
-    private void CargoSell(int tradeItem, boolean all, wfPane owner, CargoSellOperation op) {
+    private void CargoSell(int tradeItem, boolean all, Pane owner, CargoSellOperation op) {
         int qtyInHand = commander.getShip().Cargo()[tradeItem];
         int unitPrice;
         switch (op) {
@@ -1147,7 +1147,7 @@ public class Game extends SerializableObject {
         setQuestStatusPrincess(SpecialEvent.StatusPrincessRescued);
     }
 
-    private void EncounterScoop(wfPane owner) {
+    private void EncounterScoop(Pane owner) {
         // Chance 50% to picturek something up on Normal level, 33% on Hard level, 25% on Impossible level, and 100% on Easy or Beginner.
         if ((difficulty.getId() < Difficulty.Normal.getId() || Functions.GetRandom(difficulty.getId()) == 0)
                 && getOpponent().FilledCargoBays() > 0) {
@@ -1233,7 +1233,7 @@ public class Game extends SerializableObject {
         }
     }
 
-    private void EncounterWon(wfPane owner) {
+    private void EncounterWon(Pane owner) {
         if (getEncounterType().getId() >= EncounterType.PirateAttack.getId()
                 && getEncounterType().getId() <= EncounterType.PirateDisabled.getId()
                 && getOpponent().Type() != ShipType.Mantis
@@ -1363,7 +1363,7 @@ public class Game extends SerializableObject {
         return difficulty;
     }
 
-    public EncounterResult EncounterExecuteAction(wfPane owner) {
+    public EncounterResult EncounterExecuteAction(Pane owner) {
         EncounterResult result = EncounterResult.Continue;
         int prevCmdrHull = commander.getShip().getHull();
         int prevOppHull = getOpponent().getHull();
@@ -1477,7 +1477,7 @@ public class Game extends SerializableObject {
         return result;
     }
 
-    public EncounterResult EncounterVerifySurrender(wfPane owner) {
+    public EncounterResult EncounterVerifySurrender(Pane owner) {
         EncounterResult result = EncounterResult.Continue;
         if (getOpponent().Type() == ShipType.Mantis) {
             if (commander.getShip().ArtifactOnBoard()) {
@@ -1550,7 +1550,7 @@ public class Game extends SerializableObject {
         return result;
     }
 
-    public EncounterResult EncounterVerifyYield(wfPane owner) {
+    public EncounterResult EncounterVerifyYield(Pane owner) {
         EncounterResult result = EncounterResult.Continue;
         if (commander.getShip().IllegalSpecialCargo()) {
             if (FormAlert.Alert(AlertType.EncounterPoliceSurrender, owner, new String[]{
@@ -1936,7 +1936,7 @@ public class Game extends SerializableObject {
     }
 
     @SuppressWarnings("fallthrough")
-    public boolean EncounterVerifyAttack(wfPane owner) {
+    public boolean EncounterVerifyAttack(Pane owner) {
         boolean attack = true;
         if (commander.getShip().WeaponStrength() == 0) {
             FormAlert.Alert(AlertType.EncounterAttackNoWeapons, owner);
@@ -2036,7 +2036,7 @@ public class Game extends SerializableObject {
         return attack;
     }
 
-    public boolean EncounterVerifyBoard(wfPane owner) {
+    public boolean EncounterVerifyBoard(Pane owner) {
         boolean board = false;
         if (FormAlert.Alert(AlertType.EncounterMarieCeleste, owner) == DialogResult.Yes) {
             board = true;
@@ -2049,7 +2049,7 @@ public class Game extends SerializableObject {
         return board;
     }
 
-    public boolean EncounterVerifyBribe(wfPane owner) {
+    public boolean EncounterVerifyBribe(Pane owner) {
         boolean bribed = false;
         if (getEncounterType() == EncounterType.MarieCelestePolice) {
             FormAlert.Alert(AlertType.EncounterMarieCelesteNoBribe, owner);
@@ -2072,7 +2072,7 @@ public class Game extends SerializableObject {
         return bribed;
     }
 
-    public boolean EncounterVerifyFlee(wfPane owner) {
+    public boolean EncounterVerifyFlee(Pane owner) {
         setEncounterCmdrFleeing(false);
         if (getEncounterType() != EncounterType.PoliceInspect || commander.getShip().DetectableIllegalCargoOrPassengers()
                 || FormAlert.Alert(AlertType.EncounterPoliceNothingIllegal, owner) == DialogResult.Yes) {
@@ -2090,7 +2090,7 @@ public class Game extends SerializableObject {
         return getEncounterCmdrFleeing();
     }
 
-    public boolean EncounterVerifySubmit(wfPane owner) {
+    public boolean EncounterVerifySubmit(Pane owner) {
         boolean submit = false;
         if (commander.getShip().DetectableIllegalCargoOrPassengers()) {
             String str1 = commander.getShip().IllegalSpecialCargoDescription("", true, true);
@@ -2662,31 +2662,31 @@ public class Game extends SerializableObject {
         IncDays(term, getParentWindow());
     }
 
-    public void CargoBuySystem(int tradeItem, boolean max, wfPane owner) {
+    public void CargoBuySystem(int tradeItem, boolean max, Pane owner) {
         CargoBuy(tradeItem, max, owner, CargoBuyOperation.BuySystem);
     }
 
-    public void CargoBuyTrader(int tradeItem, wfPane owner) {
+    public void CargoBuyTrader(int tradeItem, Pane owner) {
         CargoBuy(tradeItem, false, owner, CargoBuyOperation.BuyTrader);
     }
 
-    public void CargoDump(int tradeItem, wfPane owner) {
+    public void CargoDump(int tradeItem, Pane owner) {
         CargoSell(tradeItem, false, owner, CargoSellOperation.Dump);
     }
 
-    public void CargoJettison(int tradeItem, boolean all, wfPane owner) {
+    public void CargoJettison(int tradeItem, boolean all, Pane owner) {
         CargoSell(tradeItem, all, owner, CargoSellOperation.Jettison);
     }
 
-    public void CargoPlunder(int tradeItem, boolean max, wfPane owner) {
+    public void CargoPlunder(int tradeItem, boolean max, Pane owner) {
         CargoBuy(tradeItem, max, owner, CargoBuyOperation.InPlunder);
     }
 
-    public void CargoSellSystem(int tradeItem, boolean all, wfPane owner) {
+    public void CargoSellSystem(int tradeItem, boolean all, Pane owner) {
         CargoSell(tradeItem, all, owner, CargoSellOperation.SellSystem);
     }
 
-    public void CargoSellTrader(int tradeItem, wfPane owner) {
+    public void CargoSellTrader(int tradeItem, Pane owner) {
         CargoSell(tradeItem, false, owner, CargoSellOperation.SellTrader);
     }
 
@@ -2702,7 +2702,7 @@ public class Game extends SerializableObject {
         setEncounterContinueFleeing(setEncounterContinueAttacking(setOpponentDisabled(false)));
     }
 
-    public void EncounterDrink(wfPane owner) {
+    public void EncounterDrink(Pane owner) {
         if (FormAlert.Alert(AlertType.EncounterDrinkContents, owner) == DialogResult.Yes) {
             if (getEncounterType() == EncounterType.BottleGood) {
                 // two points if you're on beginner-normal, one otherwise
@@ -2718,7 +2718,7 @@ public class Game extends SerializableObject {
         }
     }
 
-    public void EncounterMeet(wfPane owner) {
+    public void EncounterMeet(Pane owner) {
         AlertType initialAlert = AlertType.Alert;
         int skill = 0;
         EquipmentType equipType = EquipmentType.Gadget;
@@ -2756,7 +2756,7 @@ public class Game extends SerializableObject {
         }
     }
 
-    public void EncounterPlunder(wfPane owner) {
+    public void EncounterPlunder(Pane owner) {
         (new FormPlunder()).ShowDialog(owner);
         if (getEncounterType().getId() >= EncounterType.TraderAttack.getId()) {
             commander.setPoliceRecordScore(commander.getPoliceRecordScore() + Constants.ScorePlunderTrader);
@@ -2777,7 +2777,7 @@ public class Game extends SerializableObject {
         commander.setReputationScore(commander.getReputationScore() + (getOpponent().Type().getId() / 2 + 1));
     }
 
-    public void EncounterTrade(wfPane owner) {
+    public void EncounterTrade(Pane owner) {
         boolean buy = (getEncounterType() == EncounterType.TraderBuy);
         int item = (buy ? commander.getShip() : getOpponent()).getRandomTradeableItem();
         String alertStr = buy ? "selling" : "buying";
@@ -3117,7 +3117,7 @@ public class Game extends SerializableObject {
         }
     }
 
-    public void IncDays(int num, wfPane owner) {
+    public void IncDays(int num, Pane owner) {
         commander.setDays(commander.getDays() + num);
         if (commander.getInsurance()) {
             commander.NoClaim(commander.NoClaim() + num);

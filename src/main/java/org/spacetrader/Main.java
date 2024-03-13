@@ -18,7 +18,7 @@ public class Main {
         }
 
         MainWindow mainWindow = new MainWindow();
-        mainWindow.ShowWindow();
+        mainWindow.showWindow();
     }
 
 }

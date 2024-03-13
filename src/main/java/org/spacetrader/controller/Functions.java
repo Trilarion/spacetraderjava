@@ -8,6 +8,7 @@ import org.spacetrader.ui.FormAlert;
 import org.spacetrader.ui.Strings;
 import org.spacetrader.util.*;
 import org.winforms.Graphics;
+import org.winforms.Image;
 import org.winforms.Rectangle;
 import org.winforms.*;
 
@@ -48,8 +49,8 @@ public class Functions {
         return (int) Math.floor(Math.sqrt(Math.pow(a.X() - x, 2) + Math.pow(a.Y() - y, 2)));
     }
 
-    private static void DrawPartialImage(Graphics g, wfImage img, int start, int stop) {
-        g.DrawImage(img, 2 + start, 2, new Rectangle(start, 0, stop - start, img.getHeight()), GraphicsUnit.Pixel);
+    private static void DrawPartialImage(Graphics g, Image img, int start, int stop) {
+        g.drawImage(img, 2 + start, 2, new Rectangle(start, 0, stop - start, img.getHeight()));
     }
 
     public static String FormatNumber(int num) {
@@ -68,14 +69,14 @@ public class Functions {
         return String.format("%,d%%", num);
     }
 
-    public static int GetColumnOfFirstNonWhitePixel(wfImage image, int direction) {
-        wfBitmap bitmap = new wfBitmap(image);
+    public static int GetColumnOfFirstNonWhitePixel(Image image, int direction) {
+        Bitmap bitmap = new Bitmap(image);
         int step = direction < 0 ? -1 : 1;
         int col = step > 0 ? 0 : bitmap.getWidth() - 1;
         int stop = step > 0 ? bitmap.getWidth() : -1;
         for (; col != stop; col += step) {
             for (int row = 0; row < bitmap.getHeight(); row++) {
-                if (bitmap.ToArgb(col, row) != 0) {
+                if (bitmap.toArgb(col, row) != 0) {
                     return col;
                 }
             }
@@ -83,7 +84,7 @@ public class Functions {
         return -1;
     }
 
-    public static HighScoreRecord[] GetHighScores(wfPane owner) {
+    public static HighScoreRecord[] GetHighScores(Pane owner) {
         HighScoreRecord[] highScores = new HighScoreRecord[3];
         Object obj = LoadFile(Constants.HighScoreFile, true, owner);
         if (obj != null) {
@@ -120,7 +121,7 @@ public class Functions {
         return isInt;
     }
 
-    public static Object LoadFile(String fileName, boolean ignoreMissingFile, wfPane owner) {
+    public static Object LoadFile(String fileName, boolean ignoreMissingFile, Pane owner) {
         Object obj = null;
         FileInputStream inStream = null;
         try {
@@ -197,7 +198,7 @@ public class Functions {
         }
     }
 
-    public static boolean SaveFile(String fileName, Object toSerialize, wfPane owner) {
+    public static boolean SaveFile(String fileName, Object toSerialize, Pane owner) {
         System.out.println(fileName);
         FileOutputStream outStream = null;
         boolean saveOk = false;

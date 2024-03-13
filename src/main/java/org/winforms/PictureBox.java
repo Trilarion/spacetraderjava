@@ -7,20 +7,20 @@ import javax.swing.*;
 import java.awt.*;
 
 // TODO documentation of usage
-public class PictureBox extends wfControl {
+public class PictureBox extends Control {
     private final ImageMouseListener mouseListener;
     public PictureBoxSizeMode SizeMode;
 
     public PictureBox() {
-        super(new SpecialImageJLabel());
+        super(new ImageLabel());
         asJLabel().pictureBox = PictureBox.this;
         mouseListener = new ImageMouseListener(PictureBox.this);
         asJLabel().addMouseListener(mouseListener);
     }
 
     @Override
-    public void setBackColor(Color backColor) {
-        asJLabel().background = backColor;
+    public void setBackgroundColor(Color backgroundColor) {
+        asJLabel().background = backgroundColor;
     }
 
     @Override
@@ -34,15 +34,15 @@ public class PictureBox extends wfControl {
         }
     }
 
-    private SpecialImageJLabel asJLabel() {
-        return ((SpecialImageJLabel) swingComponent);
+    private ImageLabel asJLabel() {
+        return ((ImageLabel) swingComponent);
     }
 
-    public void Refresh() {
+    public void refresh() {
         asJLabel().repaint();
     }
 
-    public void setImage(wfImage image) {
+    public void setImage(Image image) {
         if (image != null) {
             asJLabel().setIcon(new ImageIcon(image.asSwingImage()));
         }
@@ -52,7 +52,7 @@ public class PictureBox extends wfControl {
         mouseListener.pressed = mouseDown;
     }
 
-    public void setPaint(EventHandler<Object, PaintEventData> paint) {
+    public void setPaint(EventHandler<Object, Graphics> paint) {
         if (asJLabel().paintEventHandler != null) {
             throw new Error("2 handlers same event");
         }

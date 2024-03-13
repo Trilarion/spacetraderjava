@@ -21,7 +21,7 @@ public class FileDialog {
         buttonText = text;
     }
 
-    public DialogResult ShowDialog(wfPane owner) {
+    public DialogResult ShowDialog(Pane owner) {
         int returnVal = chooser.showDialog(owner.asSwingObject(), buttonText);
         switch (returnVal) {
             case JFileChooser.CANCEL_OPTION:
@@ -43,7 +43,7 @@ public class FileDialog {
         String[] parts = filter.split("\\|");
         String desc = parts[0];
         String[] extensions = parts[1].split(";");
-        // I assume the format is "*.bmp;*.txt;*.gif".
+        // I assume the format is "*.bmp;*.text;*.gif".
         for (int i = 0; i < extensions.length; i++) {
             String extension = extensions[i];
             extensions[i] = extension.substring(extension.lastIndexOf('.') + 1);
@@ -62,5 +62,19 @@ public class FileDialog {
 
     public void setFileName(String fileName) {
         chooser.setSelectedFile(new File(fileName));
+    }
+
+    public static FileDialog createOpenFileDialog() {
+        FileDialog dialog = new FileDialog();
+        dialog.setTitle("Open");
+        dialog.setButtonText("Open");
+        return dialog;
+    }
+
+    public static FileDialog createSaveFileDialog() {  // TODO be able to set default file name extension
+        FileDialog dialog = new FileDialog();
+        dialog.setTitle("Save As");
+        dialog.setButtonText("Save");
+        return dialog;
     }
 }

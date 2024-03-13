@@ -9,14 +9,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 // TODO documentation of usage
-public class wfPanel extends JPanel {
+public class wfPanel extends JPanel {  // TODO there is another Panel, what is the difference to this Panel
 
     private static final long serialVersionUID = 1L;
-    private final wfPane form;
+    private final Pane form;
     Map<Component, Integer> tabOrderMap = new HashMap<>(0);
-    wfImage BackgroundImage = null;
+    Image backgroundImage = null;
 
-    public wfPanel(wfPane wp) {
+    public wfPanel(Pane wp) {
         super(null); // That's what winforms use.
         form = wp;
         setFocusTraversalPolicy(new SortingFocusTraversalPolicy(new Comparator<>() {
@@ -35,8 +35,8 @@ public class wfPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (BackgroundImage != null) {
-            g.drawImage(BackgroundImage.asSwingImage(), 0, 0, this.getWidth(), this.getHeight(), null);
+        if (backgroundImage != null) {
+            g.drawImage(backgroundImage.asSwingImage(), 0, 0, this.getWidth(), this.getHeight(), null);
         }
     }
 
@@ -48,7 +48,7 @@ public class wfPanel extends JPanel {
         }
     }
 
-    public void add(final wfControl wc) {
+    public void add(final Control wc) {
         if (wc instanceof Button) {
             handleDialogResult((Button) wc);
         }
@@ -58,15 +58,15 @@ public class wfPanel extends JPanel {
         c.addMouseListener(wc.getMouseListener());
     }
 
-    public void addAll(Collection<? extends wfControl> c) {
-        for (wfControl wc : c) {
+    public void addAll(Collection<? extends Control> c) {
+        for (Control wc : c) {
             this.add(wc);
         }
     }
 
-    public void addAll(wfControl... coll) {
-        for (wfControl wfControl : coll) {
-            this.add(wfControl);
+    public void addAll(Control... coll) {
+        for (Control Control : coll) {
+            this.add(Control);
         }
     }
 

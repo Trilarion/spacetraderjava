@@ -3,13 +3,13 @@ package org.spacetrader.model.ship;
 import org.spacetrader.controller.Constants;
 import org.spacetrader.controller.Game;
 import org.spacetrader.controller.SerializableObject;
-import org.winforms.wfImage;
+import org.winforms.Image;
 
 import java.util.Hashtable;
 
 public class ShipTemplate extends SerializableObject implements Comparable<ShipTemplate> {
 
-    private wfImage[] images = null;
+    private Image[] images = null;
     private ShipSize size = ShipSize.Tiny;
     private String name = null;
     private int imageIndex = ShipType.Custom.getId();
@@ -138,11 +138,11 @@ public class ShipTemplate extends SerializableObject implements Comparable<ShipT
         imageIndex = i;
     }
 
-    public wfImage[] Images() {
+    public Image[] Images() {
         return images;
     }
 
-    public void Images(wfImage[] is) {
+    public void Images(Image[] is) {
         images = is;
     }
 

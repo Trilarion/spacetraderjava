@@ -14,21 +14,21 @@ import java.awt.*;
 import java.util.Arrays;
 
 
-public class FormBuyFuel extends wfForm {
-    private final NumericUpDown numAmount;
+public class FormBuyFuel extends form {
+    private final Spinner numAmount;
 
     public FormBuyFuel() {
         Label labelQuestion = new Label();
-        numAmount = new NumericUpDown();
+        numAmount = new Spinner();
         Button buttonOk = new Button();
         Button buttonMax = new Button();
         Button buttonNothing = new Button();
-                SuspendLayout();
+                suspendLayout();
         // labelQuestion
         labelQuestion.setAutoSize(true);
         labelQuestion.setLocation(new Point(8, 8));
         labelQuestion.setName("labelQuestion");
-        labelQuestion.setSize(new SizeF(13, 211));
+        labelQuestion.setSize(new Dimension(211, 13));
         labelQuestion.setTabIndex(3);
         labelQuestion.setText("How much do you want to spend on fuel?");
         // numAmount
@@ -36,7 +36,7 @@ public class FormBuyFuel extends wfForm {
         numAmount.setMaximum(999);
         numAmount.setMinimum(1);
         numAmount.setName("numAmount");
-        numAmount.setSize(new SizeF(20, 44));
+        numAmount.setSize(new Dimension(44, 20));
         numAmount.setTabIndex(1);
         numAmount.setValue(888);
         // buttonOk
@@ -44,7 +44,7 @@ public class FormBuyFuel extends wfForm {
         buttonOk.setFlatStyle(FlatStyle.Flat);
         buttonOk.setLocation(new Point(61, 32));
         buttonOk.setName("buttonOk");
-        buttonOk.setSize(new SizeF(22, 41));
+        buttonOk.setSize(new Dimension(41, 22));
         buttonOk.setTabIndex(2);
         buttonOk.setText("Ok");
         // buttonMax
@@ -52,7 +52,7 @@ public class FormBuyFuel extends wfForm {
         buttonMax.setFlatStyle(FlatStyle.Flat);
         buttonMax.setLocation(new Point(109, 32));
         buttonMax.setName("buttonMax");
-        buttonMax.setSize(new SizeF(22, 41));
+        buttonMax.setSize(new Dimension(41, 22));
         buttonMax.setTabIndex(3);
         buttonMax.setText("Max");
         buttonMax.setClick(new EventHandler<>() {
@@ -66,14 +66,14 @@ public class FormBuyFuel extends wfForm {
         buttonNothing.setFlatStyle(FlatStyle.Flat);
         buttonNothing.setLocation(new Point(157, 32));
         buttonNothing.setName("buttonNothing");
-        buttonNothing.setSize(new SizeF(22, 53));
+        buttonNothing.setSize(new Dimension(53, 22));
         buttonNothing.setTabIndex(4);
         buttonNothing.setText("Nothing");
         // FormBuyFuel
         setAcceptButton(buttonOk);
-        setAutoScaleBaseSize(new SizeF(13, 5));
+        setAutoScaleBaseSize(new Dimension(5, 13));
         setCancelButton(buttonNothing);
-        setClientSize(new SizeF(63, 270));
+        setClientSize(new Dimension(270, 63));
         setControlBox(false);
         Controls.addAll(Arrays.asList(buttonNothing, buttonMax, buttonOk, numAmount, labelQuestion));
         setFormBorderStyle(FormBorderStyle.FixedDialog);
@@ -81,7 +81,7 @@ public class FormBuyFuel extends wfForm {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Buy Fuel");
-                ResumeLayout(false);
+                resumeLayout(false);
         Game game = Game.getCurrentGame();
         Commander commander = game.Commander();
         numAmount.setMaximum(Math.min(commander.getCash(), (commander.getShip().FuelTanks() - commander.getShip().getFuel()) * commander.getShip().getFuelCost()));

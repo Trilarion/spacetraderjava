@@ -9,7 +9,7 @@ import java.awt.Dialog.ModalityType;
 import java.awt.*;
 
 // TODO documentation of usage
-public class wfForm extends wfControl implements wfPane {
+public class form extends Control implements Pane {
 
     protected final wfPanel Controls;
     private final JDialog jdialog;
@@ -17,7 +17,7 @@ public class wfForm extends wfControl implements wfPane {
     protected EventHandler<Object, EventData> Closed;
     DialogResult result;
     // Must encapsulate most of these.
-    private SizeF AutoScaleBaseSize;
+    private Dimension AutoScaleBaseSize;
     private boolean ShowInTaskbar;
     private boolean MinimizeBox;
     private boolean MaximizeBox;
@@ -27,9 +27,9 @@ public class wfForm extends wfControl implements wfPane {
     private Button AcceptButton;
     private Button CancelButton;
     private String Title;
-    private wfPane parent;
+    private Pane parent;
 
-    public wfForm() {
+    public form() {
         // super(new WinformJPanel());
         super(new JDialog());
         jdialog = (JDialog) swingComponent;
@@ -40,7 +40,7 @@ public class wfForm extends wfControl implements wfPane {
         jdialog.setResizable(false);
     }
 
-    // ///////////// implementation ends here.
+    
     public Graphics CreateGraphics() {
         return new Graphics(jdialog.getGraphics());
     }
@@ -50,7 +50,7 @@ public class wfForm extends wfControl implements wfPane {
     }
 
     // This should be "modal", i.e. - parent is blocked.
-    public DialogResult ShowDialog(wfPane owner) {
+    public DialogResult ShowDialog(Pane owner) {
         parent = owner;
 
         fixLocation();
@@ -85,11 +85,11 @@ public class wfForm extends wfControl implements wfPane {
         // TODO implementation?
     }
 
-    public SizeF getAutoScaleBaseSize() {
+    public Dimension getAutoScaleBaseSize() {
         return AutoScaleBaseSize;
     }
 
-    public void setAutoScaleBaseSize(SizeF autoScaleBaseSize) {
+    public void setAutoScaleBaseSize(Dimension autoScaleBaseSize) {
         AutoScaleBaseSize = autoScaleBaseSize;
     }
 
@@ -211,11 +211,11 @@ public class wfForm extends wfControl implements wfPane {
         result = dialogResult;
     }
 
-    protected wfImage getBackgroundImage() {
-        return panel.BackgroundImage;
+    protected Image getBackgroundImage() {
+        return panel.backgroundImage;
     }
 
-    protected void setBackgroundImage(wfImage backgroundImage) {
-        panel.BackgroundImage = backgroundImage;
+    protected void setBackgroundImage(Image backgroundImage) {
+        panel.backgroundImage = backgroundImage;
     }
 }

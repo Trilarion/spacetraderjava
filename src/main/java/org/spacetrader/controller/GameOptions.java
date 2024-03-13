@@ -1,6 +1,6 @@
 package org.spacetrader.controller;
 
-import org.winforms.wfPane;
+import org.winforms.Pane;
 
 import java.util.Hashtable;
 
@@ -142,7 +142,7 @@ public class GameOptions extends SerializableObject {
         LoadFromDefaults(errorIfFileNotFound, null);
     }
 
-    public void LoadFromDefaults(boolean errorIfFileNotFound, wfPane owner) {
+    public void LoadFromDefaults(boolean errorIfFileNotFound, Pane owner) {
         GameOptions defaults = null;
         Object obj = Functions.LoadFile(Constants.DefaultSettingsFile, !errorIfFileNotFound, owner);
         if (obj == null) {
@@ -153,7 +153,7 @@ public class GameOptions extends SerializableObject {
         CopyValues(defaults);
     }
 
-    public void SaveAsDefaults(wfPane owner) {
+    public void SaveAsDefaults(Pane owner) {
         Functions.SaveFile(Constants.DefaultSettingsFile, Serialize(), owner);
     }
 

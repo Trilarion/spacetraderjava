@@ -7,6 +7,7 @@ import org.spacetrader.model.events.EncounterResult;
 import org.spacetrader.model.ship.Ship;
 import org.winforms.Button;
 import org.winforms.Font;
+import org.winforms.Graphics;
 import org.winforms.Label;
 import org.winforms.*;
 import org.winforms.enums.*;
@@ -14,7 +15,7 @@ import org.winforms.enums.*;
 import java.awt.*;
 
 
-public class FormEncounter extends wfForm {
+public class FormEncounter extends form {
     private final Game game = Game.getCurrentGame();
     private final Commander commander = game.Commander();
     private final Ship commandership = commander.getShip();
@@ -150,104 +151,104 @@ public class FormEncounter extends wfForm {
         pictureTribbles54 = new PictureBox();
         pictureTribbles55 = new PictureBox();
         timerTick = new Timer();
-        SuspendLayout();
+        suspendLayout();
         // labelEncounter
         labelEncounter.setLocation(new Point(8, 152));
         labelEncounter.setName("labelEncounter");
-        labelEncounter.setSize(new SizeF(26, 232));
+        labelEncounter.setSize(new Dimension(232, 26));
         labelEncounter.setTabIndex(0);
         labelEncounter.setText("At 20 clicks from Tarchannen, you encounter the famous Captain Ahab.");
         // pictureShipYou
-        pictureShipYou.setBackColor(Color.white);
+        pictureShipYou.setBackgroundColor(Color.white);
         pictureShipYou.setBorderStyle(BorderStyle.FixedSingle);
         pictureShipYou.setLocation(new Point(26, 24));
         pictureShipYou.setName("pictureShipYou");
-        pictureShipYou.setSize(new SizeF(58, 70));
+        pictureShipYou.setSize(new Dimension(70, 58));
         pictureShipYou.setTabIndex(13);
         pictureShipYou.setTabStop(false);
         pictureShipYou.setPaint(new EventHandler<>() {
             @Override
-            public void handle(Object sender, PaintEventData data) {
+            public void handle(Object sender, Graphics data) {
                 pictureShipYou_Paint(sender, data);
             }
         });
         // pictureShipOpponent
-        pictureShipOpponent.setBackColor(Color.white);
+        pictureShipOpponent.setBackgroundColor(Color.white);
         pictureShipOpponent.setBorderStyle(BorderStyle.FixedSingle);
         pictureShipOpponent.setLocation(new Point(138, 24));
         pictureShipOpponent.setName("pictureShipOpponent");
-        pictureShipOpponent.setSize(new SizeF(58, 70));
+        pictureShipOpponent.setSize(new Dimension(70, 58));
         pictureShipOpponent.setTabIndex(14);
         pictureShipOpponent.setTabStop(false);
         pictureShipOpponent.setPaint(new EventHandler<>() {
             @Override
-            public void handle(Object sender, PaintEventData data) {
+            public void handle(Object sender, Graphics data) {
                 pictureShipOpponent_Paint(sender, data);
             }
         });
         // labelAction
         labelAction.setLocation(new Point(8, 192));
         labelAction.setName("labelAction");
-        labelAction.setSize(new SizeF(39, 232));
+        labelAction.setSize(new Dimension(232, 39));
         labelAction.setTabIndex(15);
         labelAction.setText("\"We know you removed illegal goods from the Marie Celeste. You must give them up at once!\"");
         // labelOpponentLabel
         labelOpponentLabel.setAutoSize(true);
-        labelOpponentLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelOpponentLabel.setFont(new Font("Microsoft Sans Serif", FontStyle.Bold, (int) 8.25F));
         labelOpponentLabel.setLocation(new Point(141, 8));
         labelOpponentLabel.setName("labelOpponentLabel");
-        labelOpponentLabel.setSize(new SizeF(16, 59));
+        labelOpponentLabel.setSize(new Dimension(59, 16));
         labelOpponentLabel.setTabIndex(16);
         labelOpponentLabel.setText("Opponent:");
         // labelYouLabel
         labelYouLabel.setAutoSize(true);
-        labelYouLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelYouLabel.setFont(new Font("Microsoft Sans Serif", FontStyle.Bold, (int) 8.25F));
         labelYouLabel.setLocation(new Point(45, 8));
         labelYouLabel.setName("labelYouLabel");
-        labelYouLabel.setSize(new SizeF(16, 28));
+        labelYouLabel.setSize(new Dimension(28, 16));
         labelYouLabel.setTabIndex(17);
         labelYouLabel.setText("You:");
         // labelOpponentShip
         labelOpponentShip.setLocation(new Point(138, 88));
         labelOpponentShip.setName("labelOpponentShip");
-        labelOpponentShip.setSize(new SizeF(13, 80));
+        labelOpponentShip.setSize(new Dimension(80, 13));
         labelOpponentShip.setTabIndex(18);
         labelOpponentShip.setText("Space Monster");
         // labelYouShip
         labelYouShip.setLocation(new Point(26, 88));
         labelYouShip.setName("labelYouShip");
-        labelYouShip.setSize(new SizeF(13, 100));
+        labelYouShip.setSize(new Dimension(100, 13));
         labelYouShip.setTabIndex(19);
         labelYouShip.setText("Grasshopper");
         // labelYouHull
         labelYouHull.setLocation(new Point(26, 104));
         labelYouHull.setName("labelYouHull");
-        labelYouHull.setSize(new SizeF(13, 68));
+        labelYouHull.setSize(new Dimension(68, 13));
         labelYouHull.setTabIndex(20);
         labelYouHull.setText("Hull at 100%");
         // labelYouShields
         labelYouShields.setLocation(new Point(26, 120));
         labelYouShields.setName("labelYouShields");
-        labelYouShields.setSize(new SizeF(13, 86));
+        labelYouShields.setSize(new Dimension(86, 13));
         labelYouShields.setTabIndex(21);
         labelYouShields.setText("Shields at 100%");
         // labelOpponentShields
         labelOpponentShields.setLocation(new Point(138, 120));
         labelOpponentShields.setName("labelOpponentShields");
-        labelOpponentShields.setSize(new SizeF(13, 86));
+        labelOpponentShields.setSize(new Dimension(86, 13));
         labelOpponentShields.setTabIndex(23);
         labelOpponentShields.setText("Shields at 100%");
         // labelOpponentHull
         labelOpponentHull.setLocation(new Point(138, 104));
         labelOpponentHull.setName("labelOpponentHull");
-        labelOpponentHull.setSize(new SizeF(13, 68));
+        labelOpponentHull.setSize(new Dimension(68, 13));
         labelOpponentHull.setTabIndex(22);
         labelOpponentHull.setText("Hull at 100%");
         // buttonAttack
         buttonAttack.setFlatStyle(FlatStyle.Flat);
         buttonAttack.setLocation(new Point(8, 240));
         buttonAttack.setName("buttonAttack");
-        buttonAttack.setSize(new SizeF(22, 46));
+        buttonAttack.setSize(new Dimension(46, 22));
         buttonAttack.setTabIndex(24);
         buttonAttack.setText("Attack");
         buttonAttack.setVisible(false);
@@ -261,7 +262,7 @@ public class FormEncounter extends wfForm {
         buttonFlee.setFlatStyle(FlatStyle.Flat);
         buttonFlee.setLocation(new Point(62, 240));
         buttonFlee.setName("buttonFlee");
-        buttonFlee.setSize(new SizeF(22, 36));
+        buttonFlee.setSize(new Dimension(36, 22));
         buttonFlee.setTabIndex(25);
         buttonFlee.setText("Flee");
         buttonFlee.setVisible(false);
@@ -275,7 +276,7 @@ public class FormEncounter extends wfForm {
         buttonSubmit.setFlatStyle(FlatStyle.Flat);
         buttonSubmit.setLocation(new Point(106, 240));
         buttonSubmit.setName("buttonSubmit");
-        buttonSubmit.setSize(new SizeF(22, 49));
+        buttonSubmit.setSize(new Dimension(49, 22));
         buttonSubmit.setTabIndex(26);
         buttonSubmit.setText("Submit");
         buttonSubmit.setVisible(false);
@@ -289,7 +290,7 @@ public class FormEncounter extends wfForm {
         buttonBribe.setFlatStyle(FlatStyle.Flat);
         buttonBribe.setLocation(new Point(163, 240));
         buttonBribe.setName("buttonBribe");
-        buttonBribe.setSize(new SizeF(22, 41));
+        buttonBribe.setSize(new Dimension(41, 22));
         buttonBribe.setTabIndex(27);
         buttonBribe.setText("Bribe");
         buttonBribe.setVisible(false);
@@ -303,7 +304,7 @@ public class FormEncounter extends wfForm {
         buttonSurrender.setFlatStyle(FlatStyle.Flat);
         buttonSurrender.setLocation(new Point(106, 240));
         buttonSurrender.setName("buttonSurrender");
-        buttonSurrender.setSize(new SizeF(22, 65));
+        buttonSurrender.setSize(new Dimension(65, 22));
         buttonSurrender.setTabIndex(28);
         buttonSurrender.setText("Surrender");
         buttonSurrender.setVisible(false);
@@ -317,7 +318,7 @@ public class FormEncounter extends wfForm {
         buttonIgnore.setFlatStyle(FlatStyle.Flat);
         buttonIgnore.setLocation(new Point(62, 240));
         buttonIgnore.setName("buttonIgnore");
-        buttonIgnore.setSize(new SizeF(22, 46));
+        buttonIgnore.setSize(new Dimension(46, 22));
         buttonIgnore.setTabIndex(29);
         buttonIgnore.setText("Ignore");
         buttonIgnore.setVisible(false);
@@ -331,7 +332,7 @@ public class FormEncounter extends wfForm {
         buttonTrade.setFlatStyle(FlatStyle.Flat);
         buttonTrade.setLocation(new Point(116, 240));
         buttonTrade.setName("buttonTrade");
-        buttonTrade.setSize(new SizeF(22, 44));
+        buttonTrade.setSize(new Dimension(44, 22));
         buttonTrade.setTabIndex(30);
         buttonTrade.setText("Trade");
         buttonTrade.setVisible(false);
@@ -345,7 +346,7 @@ public class FormEncounter extends wfForm {
         buttonPlunder.setFlatStyle(FlatStyle.Flat);
         buttonPlunder.setLocation(new Point(62, 240));
         buttonPlunder.setName("buttonPlunder");
-        buttonPlunder.setSize(new SizeF(22, 53));
+        buttonPlunder.setSize(new Dimension(53, 22));
         buttonPlunder.setTabIndex(31);
         buttonPlunder.setText("Plunder");
         buttonPlunder.setVisible(false);
@@ -359,7 +360,7 @@ public class FormEncounter extends wfForm {
         buttonBoard.setFlatStyle(FlatStyle.Flat);
         buttonBoard.setLocation(new Point(8, 240));
         buttonBoard.setName("buttonBoard");
-        buttonBoard.setSize(new SizeF(22, 44));
+        buttonBoard.setSize(new Dimension(44, 22));
         buttonBoard.setTabIndex(32);
         buttonBoard.setText("Board");
         buttonBoard.setVisible(false);
@@ -373,7 +374,7 @@ public class FormEncounter extends wfForm {
         buttonMeet.setFlatStyle(FlatStyle.Flat);
         buttonMeet.setLocation(new Point(116, 240));
         buttonMeet.setName("buttonMeet");
-        buttonMeet.setSize(new SizeF(22, 39));
+        buttonMeet.setSize(new Dimension(39, 22));
         buttonMeet.setTabIndex(34);
         buttonMeet.setText("Meet");
         buttonMeet.setVisible(false);
@@ -387,7 +388,7 @@ public class FormEncounter extends wfForm {
         buttonDrink.setFlatStyle(FlatStyle.Flat);
         buttonDrink.setLocation(new Point(8, 240));
         buttonDrink.setName("buttonDrink");
-        buttonDrink.setSize(new SizeF(22, 41));
+        buttonDrink.setSize(new Dimension(41, 22));
         buttonDrink.setTabIndex(35);
         buttonDrink.setText("Drink");
         buttonDrink.setVisible(false);
@@ -401,7 +402,7 @@ public class FormEncounter extends wfForm {
         buttonInt.setFlatStyle(FlatStyle.Flat);
         buttonInt.setLocation(new Point(179, 240));
         buttonInt.setName("buttonInt");
-        buttonInt.setSize(new SizeF(22, 30));
+        buttonInt.setSize(new Dimension(30, 22));
         buttonInt.setTabIndex(36);
         buttonInt.setText("Int.");
         buttonInt.setVisible(false);
@@ -415,7 +416,7 @@ public class FormEncounter extends wfForm {
         buttonYield.setFlatStyle(FlatStyle.Flat);
         buttonYield.setLocation(new Point(106, 240));
         buttonYield.setName("buttonYield");
-        buttonYield.setSize(new SizeF(22, 39));
+        buttonYield.setSize(new Dimension(39, 22));
         buttonYield.setTabIndex(37);
         buttonYield.setText("Yield");
         buttonYield.setVisible(false);
@@ -428,29 +429,29 @@ public class FormEncounter extends wfForm {
         // pictureContinuous
         pictureContinuous.setLocation(new Point(214, 247));
         pictureContinuous.setName("pictureContinuous");
-        pictureContinuous.setSize(new SizeF(9, 9));
+        pictureContinuous.setSize(new Dimension(9, 9));
         pictureContinuous.setTabIndex(38);
         pictureContinuous.setTabStop(false);
         pictureContinuous.setVisible(false);
         // ilContinuous
-        ilContinuous.setImageSize(new SizeF(9, 9));
-        ilContinuous.setImageStream(((ImageListStreamer) (resources.GetObject("ilContinuous.ImageStream"))));
+        ilContinuous.setImageSize(new Dimension(9, 9));
+        ilContinuous.setImageStream(((ImageListStreamer) (resources.getObject("ilContinuous.ImageStream"))));
         ilContinuous.setTransparentColor(Color.white);
         // pictureEncounterType
         pictureEncounterType.setLocation(new Point(220, 2));
         pictureEncounterType.setName("pictureEncounterType");
-        pictureEncounterType.setSize(new SizeF(12, 12));
+        pictureEncounterType.setSize(new Dimension(12, 12));
         pictureEncounterType.setTabIndex(39);
         pictureEncounterType.setTabStop(false);
         // ilEncounterType
-        ilEncounterType.setImageSize(new SizeF(12, 12));
-        ilEncounterType.setImageStream(((ImageListStreamer) (resources.GetObject("ilEncounterType.ImageStream"))));
+        ilEncounterType.setImageSize(new Dimension(12, 12));
+        ilEncounterType.setImageStream(((ImageListStreamer) (resources.getObject("ilEncounterType.ImageStream"))));
         ilEncounterType.setTransparentColor(Color.white);
         // pictureTribbles00
-        pictureTribbles00.setBackColor(SystemColors.Control);
+        pictureTribbles00.setBackgroundColor(SystemColors.Control);
         pictureTribbles00.setLocation(new Point(16, 16));
         pictureTribbles00.setName("pictureTribbles00");
-        pictureTribbles00.setSize(new SizeF(12, 12));
+        pictureTribbles00.setSize(new Dimension(12, 12));
         pictureTribbles00.setTabIndex(41);
         pictureTribbles00.setTabStop(false);
         pictureTribbles00.setVisible(false);
@@ -461,14 +462,14 @@ public class FormEncounter extends wfForm {
             }
         });
         // ilTribbles
-        ilTribbles.setImageSize(new SizeF(12, 12));
-        ilTribbles.setImageStream(((ImageListStreamer) (resources.GetObject("ilTribbles.ImageStream"))));
+        ilTribbles.setImageSize(new Dimension(12, 12));
+        ilTribbles.setImageStream(((ImageListStreamer) (resources.getObject("ilTribbles.ImageStream"))));
         ilTribbles.setTransparentColor(Color.white);
         // pictureTribbles50
-        pictureTribbles50.setBackColor(SystemColors.Control);
+        pictureTribbles50.setBackgroundColor(SystemColors.Control);
         pictureTribbles50.setLocation(new Point(16, 224));
         pictureTribbles50.setName("pictureTribbles50");
-        pictureTribbles50.setSize(new SizeF(12, 12));
+        pictureTribbles50.setSize(new Dimension(12, 12));
         pictureTribbles50.setTabIndex(42);
         pictureTribbles50.setTabStop(false);
         pictureTribbles50.setVisible(false);
@@ -479,10 +480,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles10
-        pictureTribbles10.setBackColor(SystemColors.Control);
+        pictureTribbles10.setBackgroundColor(SystemColors.Control);
         pictureTribbles10.setLocation(new Point(8, 56));
         pictureTribbles10.setName("pictureTribbles10");
-        pictureTribbles10.setSize(new SizeF(12, 12));
+        pictureTribbles10.setSize(new Dimension(12, 12));
         pictureTribbles10.setTabIndex(43);
         pictureTribbles10.setTabStop(false);
         pictureTribbles10.setVisible(false);
@@ -493,10 +494,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles40
-        pictureTribbles40.setBackColor(SystemColors.Control);
+        pictureTribbles40.setBackgroundColor(SystemColors.Control);
         pictureTribbles40.setLocation(new Point(8, 184));
         pictureTribbles40.setName("pictureTribbles40");
-        pictureTribbles40.setSize(new SizeF(12, 12));
+        pictureTribbles40.setSize(new Dimension(12, 12));
         pictureTribbles40.setTabIndex(44);
         pictureTribbles40.setTabStop(false);
         pictureTribbles40.setVisible(false);
@@ -507,10 +508,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles20
-        pictureTribbles20.setBackColor(SystemColors.Control);
+        pictureTribbles20.setBackgroundColor(SystemColors.Control);
         pictureTribbles20.setLocation(new Point(8, 96));
         pictureTribbles20.setName("pictureTribbles20");
-        pictureTribbles20.setSize(new SizeF(12, 12));
+        pictureTribbles20.setSize(new Dimension(12, 12));
         pictureTribbles20.setTabIndex(45);
         pictureTribbles20.setTabStop(false);
         pictureTribbles20.setVisible(false);
@@ -521,10 +522,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles30
-        pictureTribbles30.setBackColor(SystemColors.Control);
+        pictureTribbles30.setBackgroundColor(SystemColors.Control);
         pictureTribbles30.setLocation(new Point(16, 136));
         pictureTribbles30.setName("pictureTribbles30");
-        pictureTribbles30.setSize(new SizeF(12, 12));
+        pictureTribbles30.setSize(new Dimension(12, 12));
         pictureTribbles30.setTabIndex(46);
         pictureTribbles30.setTabStop(false);
         pictureTribbles30.setVisible(false);
@@ -535,10 +536,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles04
-        pictureTribbles04.setBackColor(SystemColors.Control);
+        pictureTribbles04.setBackgroundColor(SystemColors.Control);
         pictureTribbles04.setLocation(new Point(176, 8));
         pictureTribbles04.setName("pictureTribbles04");
-        pictureTribbles04.setSize(new SizeF(12, 12));
+        pictureTribbles04.setSize(new Dimension(12, 12));
         pictureTribbles04.setTabIndex(47);
         pictureTribbles04.setTabStop(false);
         pictureTribbles04.setVisible(false);
@@ -549,10 +550,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles03
-        pictureTribbles03.setBackColor(SystemColors.Control);
+        pictureTribbles03.setBackgroundColor(SystemColors.Control);
         pictureTribbles03.setLocation(new Point(128, 8));
         pictureTribbles03.setName("pictureTribbles03");
-        pictureTribbles03.setSize(new SizeF(12, 12));
+        pictureTribbles03.setSize(new Dimension(12, 12));
         pictureTribbles03.setTabIndex(48);
         pictureTribbles03.setTabStop(false);
         pictureTribbles03.setVisible(false);
@@ -563,10 +564,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles02
-        pictureTribbles02.setBackColor(SystemColors.Control);
+        pictureTribbles02.setBackgroundColor(SystemColors.Control);
         pictureTribbles02.setLocation(new Point(96, 16));
         pictureTribbles02.setName("pictureTribbles02");
-        pictureTribbles02.setSize(new SizeF(12, 12));
+        pictureTribbles02.setSize(new Dimension(12, 12));
         pictureTribbles02.setTabIndex(49);
         pictureTribbles02.setTabStop(false);
         pictureTribbles02.setVisible(false);
@@ -577,10 +578,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles01
-        pictureTribbles01.setBackColor(SystemColors.Control);
+        pictureTribbles01.setBackgroundColor(SystemColors.Control);
         pictureTribbles01.setLocation(new Point(56, 8));
         pictureTribbles01.setName("pictureTribbles01");
-        pictureTribbles01.setSize(new SizeF(12, 12));
+        pictureTribbles01.setSize(new Dimension(12, 12));
         pictureTribbles01.setTabIndex(50);
         pictureTribbles01.setTabStop(false);
         pictureTribbles01.setVisible(false);
@@ -591,10 +592,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles05
-        pictureTribbles05.setBackColor(SystemColors.Control);
+        pictureTribbles05.setBackgroundColor(SystemColors.Control);
         pictureTribbles05.setLocation(new Point(208, 16));
         pictureTribbles05.setName("pictureTribbles05");
-        pictureTribbles05.setSize(new SizeF(12, 12));
+        pictureTribbles05.setSize(new Dimension(12, 12));
         pictureTribbles05.setTabIndex(51);
         pictureTribbles05.setTabStop(false);
         pictureTribbles05.setVisible(false);
@@ -605,10 +606,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles11
-        pictureTribbles11.setBackColor(SystemColors.Control);
+        pictureTribbles11.setBackgroundColor(SystemColors.Control);
         pictureTribbles11.setLocation(new Point(32, 80));
         pictureTribbles11.setName("pictureTribbles11");
-        pictureTribbles11.setSize(new SizeF(12, 12));
+        pictureTribbles11.setSize(new Dimension(12, 12));
         pictureTribbles11.setTabIndex(52);
         pictureTribbles11.setTabStop(false);
         pictureTribbles11.setVisible(false);
@@ -619,10 +620,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles12
-        pictureTribbles12.setBackColor(SystemColors.Control);
+        pictureTribbles12.setBackgroundColor(SystemColors.Control);
         pictureTribbles12.setLocation(new Point(88, 56));
         pictureTribbles12.setName("pictureTribbles12");
-        pictureTribbles12.setSize(new SizeF(12, 12));
+        pictureTribbles12.setSize(new Dimension(12, 12));
         pictureTribbles12.setTabIndex(53);
         pictureTribbles12.setTabStop(false);
         pictureTribbles12.setVisible(false);
@@ -633,10 +634,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles13
-        pictureTribbles13.setBackColor(SystemColors.Control);
+        pictureTribbles13.setBackgroundColor(SystemColors.Control);
         pictureTribbles13.setLocation(new Point(128, 40));
         pictureTribbles13.setName("pictureTribbles13");
-        pictureTribbles13.setSize(new SizeF(12, 12));
+        pictureTribbles13.setSize(new Dimension(12, 12));
         pictureTribbles13.setTabIndex(54);
         pictureTribbles13.setTabStop(false);
         pictureTribbles13.setVisible(false);
@@ -647,10 +648,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles14
-        pictureTribbles14.setBackColor(SystemColors.Control);
+        pictureTribbles14.setBackgroundColor(SystemColors.Control);
         pictureTribbles14.setLocation(new Point(192, 72));
         pictureTribbles14.setName("pictureTribbles14");
-        pictureTribbles14.setSize(new SizeF(12, 12));
+        pictureTribbles14.setSize(new Dimension(12, 12));
         pictureTribbles14.setTabIndex(55);
         pictureTribbles14.setTabStop(false);
         pictureTribbles14.setVisible(false);
@@ -661,10 +662,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles15
-        pictureTribbles15.setBackColor(SystemColors.Control);
+        pictureTribbles15.setBackgroundColor(SystemColors.Control);
         pictureTribbles15.setLocation(new Point(216, 48));
         pictureTribbles15.setName("pictureTribbles15");
-        pictureTribbles15.setSize(new SizeF(12, 12));
+        pictureTribbles15.setSize(new Dimension(12, 12));
         pictureTribbles15.setTabIndex(56);
         pictureTribbles15.setTabStop(false);
         pictureTribbles15.setVisible(false);
@@ -675,10 +676,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles21
-        pictureTribbles21.setBackColor(SystemColors.Control);
+        pictureTribbles21.setBackgroundColor(SystemColors.Control);
         pictureTribbles21.setLocation(new Point(56, 96));
         pictureTribbles21.setName("pictureTribbles21");
-        pictureTribbles21.setSize(new SizeF(12, 12));
+        pictureTribbles21.setSize(new Dimension(12, 12));
         pictureTribbles21.setTabIndex(57);
         pictureTribbles21.setTabStop(false);
         pictureTribbles21.setVisible(false);
@@ -689,10 +690,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles22
-        pictureTribbles22.setBackColor(SystemColors.Control);
+        pictureTribbles22.setBackgroundColor(SystemColors.Control);
         pictureTribbles22.setLocation(new Point(96, 80));
         pictureTribbles22.setName("pictureTribbles22");
-        pictureTribbles22.setSize(new SizeF(12, 12));
+        pictureTribbles22.setSize(new Dimension(12, 12));
         pictureTribbles22.setTabIndex(58);
         pictureTribbles22.setTabStop(false);
         pictureTribbles22.setVisible(false);
@@ -703,10 +704,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles23
-        pictureTribbles23.setBackColor(SystemColors.Control);
+        pictureTribbles23.setBackgroundColor(SystemColors.Control);
         pictureTribbles23.setLocation(new Point(136, 88));
         pictureTribbles23.setName("pictureTribbles23");
-        pictureTribbles23.setSize(new SizeF(12, 12));
+        pictureTribbles23.setSize(new Dimension(12, 12));
         pictureTribbles23.setTabIndex(59);
         pictureTribbles23.setTabStop(false);
         pictureTribbles23.setVisible(false);
@@ -717,10 +718,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles24
-        pictureTribbles24.setBackColor(SystemColors.Control);
+        pictureTribbles24.setBackgroundColor(SystemColors.Control);
         pictureTribbles24.setLocation(new Point(176, 104));
         pictureTribbles24.setName("pictureTribbles24");
-        pictureTribbles24.setSize(new SizeF(12, 12));
+        pictureTribbles24.setSize(new Dimension(12, 12));
         pictureTribbles24.setTabIndex(60);
         pictureTribbles24.setTabStop(false);
         pictureTribbles24.setVisible(false);
@@ -731,10 +732,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles25
-        pictureTribbles25.setBackColor(SystemColors.Control);
+        pictureTribbles25.setBackgroundColor(SystemColors.Control);
         pictureTribbles25.setLocation(new Point(216, 96));
         pictureTribbles25.setName("pictureTribbles25");
-        pictureTribbles25.setSize(new SizeF(12, 12));
+        pictureTribbles25.setSize(new Dimension(12, 12));
         pictureTribbles25.setTabIndex(61);
         pictureTribbles25.setTabStop(false);
         pictureTribbles25.setVisible(false);
@@ -745,10 +746,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles31
-        pictureTribbles31.setBackColor(SystemColors.Control);
+        pictureTribbles31.setBackgroundColor(SystemColors.Control);
         pictureTribbles31.setLocation(new Point(56, 128));
         pictureTribbles31.setName("pictureTribbles31");
-        pictureTribbles31.setSize(new SizeF(12, 12));
+        pictureTribbles31.setSize(new Dimension(12, 12));
         pictureTribbles31.setTabIndex(62);
         pictureTribbles31.setTabStop(false);
         pictureTribbles31.setVisible(false);
@@ -759,10 +760,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles32
-        pictureTribbles32.setBackColor(SystemColors.Control);
+        pictureTribbles32.setBackgroundColor(SystemColors.Control);
         pictureTribbles32.setLocation(new Point(96, 120));
         pictureTribbles32.setName("pictureTribbles32");
-        pictureTribbles32.setSize(new SizeF(12, 12));
+        pictureTribbles32.setSize(new Dimension(12, 12));
         pictureTribbles32.setTabIndex(63);
         pictureTribbles32.setTabStop(false);
         pictureTribbles32.setVisible(false);
@@ -773,10 +774,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles33
-        pictureTribbles33.setBackColor(SystemColors.Control);
+        pictureTribbles33.setBackgroundColor(SystemColors.Control);
         pictureTribbles33.setLocation(new Point(128, 128));
         pictureTribbles33.setName("pictureTribbles33");
-        pictureTribbles33.setSize(new SizeF(12, 12));
+        pictureTribbles33.setSize(new Dimension(12, 12));
         pictureTribbles33.setTabIndex(64);
         pictureTribbles33.setTabStop(false);
         pictureTribbles33.setVisible(false);
@@ -787,10 +788,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles34
-        pictureTribbles34.setBackColor(SystemColors.Control);
+        pictureTribbles34.setBackgroundColor(SystemColors.Control);
         pictureTribbles34.setLocation(new Point(168, 144));
         pictureTribbles34.setName("pictureTribbles34");
-        pictureTribbles34.setSize(new SizeF(12, 12));
+        pictureTribbles34.setSize(new Dimension(12, 12));
         pictureTribbles34.setTabIndex(65);
         pictureTribbles34.setTabStop(false);
         pictureTribbles34.setVisible(false);
@@ -801,10 +802,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles35
-        pictureTribbles35.setBackColor(SystemColors.Control);
+        pictureTribbles35.setBackgroundColor(SystemColors.Control);
         pictureTribbles35.setLocation(new Point(208, 128));
         pictureTribbles35.setName("pictureTribbles35");
-        pictureTribbles35.setSize(new SizeF(12, 12));
+        pictureTribbles35.setSize(new Dimension(12, 12));
         pictureTribbles35.setTabIndex(66);
         pictureTribbles35.setTabStop(false);
         pictureTribbles35.setVisible(false);
@@ -815,10 +816,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles41
-        pictureTribbles41.setBackColor(SystemColors.Control);
+        pictureTribbles41.setBackgroundColor(SystemColors.Control);
         pictureTribbles41.setLocation(new Point(48, 176));
         pictureTribbles41.setName("pictureTribbles41");
-        pictureTribbles41.setSize(new SizeF(12, 12));
+        pictureTribbles41.setSize(new Dimension(12, 12));
         pictureTribbles41.setTabIndex(67);
         pictureTribbles41.setTabStop(false);
         pictureTribbles41.setVisible(false);
@@ -829,10 +830,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles51
-        pictureTribbles51.setBackColor(SystemColors.Control);
+        pictureTribbles51.setBackgroundColor(SystemColors.Control);
         pictureTribbles51.setLocation(new Point(64, 216));
         pictureTribbles51.setName("pictureTribbles51");
-        pictureTribbles51.setSize(new SizeF(12, 12));
+        pictureTribbles51.setSize(new Dimension(12, 12));
         pictureTribbles51.setTabIndex(68);
         pictureTribbles51.setTabStop(false);
         pictureTribbles51.setVisible(false);
@@ -843,10 +844,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles42
-        pictureTribbles42.setBackColor(SystemColors.Control);
+        pictureTribbles42.setBackgroundColor(SystemColors.Control);
         pictureTribbles42.setLocation(new Point(88, 168));
         pictureTribbles42.setName("pictureTribbles42");
-        pictureTribbles42.setSize(new SizeF(12, 12));
+        pictureTribbles42.setSize(new Dimension(12, 12));
         pictureTribbles42.setTabIndex(69);
         pictureTribbles42.setTabStop(false);
         pictureTribbles42.setVisible(false);
@@ -857,10 +858,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles52
-        pictureTribbles52.setBackColor(SystemColors.Control);
+        pictureTribbles52.setBackgroundColor(SystemColors.Control);
         pictureTribbles52.setLocation(new Point(96, 224));
         pictureTribbles52.setName("pictureTribbles52");
-        pictureTribbles52.setSize(new SizeF(12, 12));
+        pictureTribbles52.setSize(new Dimension(12, 12));
         pictureTribbles52.setTabIndex(70);
         pictureTribbles52.setTabStop(false);
         pictureTribbles52.setVisible(false);
@@ -871,10 +872,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles43
-        pictureTribbles43.setBackColor(SystemColors.Control);
+        pictureTribbles43.setBackgroundColor(SystemColors.Control);
         pictureTribbles43.setLocation(new Point(136, 176));
         pictureTribbles43.setName("pictureTribbles43");
-        pictureTribbles43.setSize(new SizeF(12, 12));
+        pictureTribbles43.setSize(new Dimension(12, 12));
         pictureTribbles43.setTabIndex(71);
         pictureTribbles43.setTabStop(false);
         pictureTribbles43.setVisible(false);
@@ -885,10 +886,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles53
-        pictureTribbles53.setBackColor(SystemColors.Control);
+        pictureTribbles53.setBackgroundColor(SystemColors.Control);
         pictureTribbles53.setLocation(new Point(144, 216));
         pictureTribbles53.setName("pictureTribbles53");
-        pictureTribbles53.setSize(new SizeF(12, 12));
+        pictureTribbles53.setSize(new Dimension(12, 12));
         pictureTribbles53.setTabIndex(72);
         pictureTribbles53.setTabStop(false);
         pictureTribbles53.setVisible(false);
@@ -899,10 +900,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles44
-        pictureTribbles44.setBackColor(SystemColors.Control);
+        pictureTribbles44.setBackgroundColor(SystemColors.Control);
         pictureTribbles44.setLocation(new Point(184, 184));
         pictureTribbles44.setName("pictureTribbles44");
-        pictureTribbles44.setSize(new SizeF(12, 12));
+        pictureTribbles44.setSize(new Dimension(12, 12));
         pictureTribbles44.setTabIndex(73);
         pictureTribbles44.setTabStop(false);
         pictureTribbles44.setVisible(false);
@@ -913,10 +914,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles45
-        pictureTribbles45.setBackColor(SystemColors.Control);
+        pictureTribbles45.setBackgroundColor(SystemColors.Control);
         pictureTribbles45.setLocation(new Point(216, 176));
         pictureTribbles45.setName("pictureTribbles45");
-        pictureTribbles45.setSize(new SizeF(12, 12));
+        pictureTribbles45.setSize(new Dimension(12, 12));
         pictureTribbles45.setTabIndex(74);
         pictureTribbles45.setTabStop(false);
         pictureTribbles45.setVisible(false);
@@ -927,10 +928,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles54
-        pictureTribbles54.setBackColor(SystemColors.Control);
+        pictureTribbles54.setBackgroundColor(SystemColors.Control);
         pictureTribbles54.setLocation(new Point(176, 224));
         pictureTribbles54.setName("pictureTribbles54");
-        pictureTribbles54.setSize(new SizeF(12, 12));
+        pictureTribbles54.setSize(new Dimension(12, 12));
         pictureTribbles54.setTabIndex(75);
         pictureTribbles54.setTabStop(false);
         pictureTribbles54.setVisible(false);
@@ -941,10 +942,10 @@ public class FormEncounter extends wfForm {
             }
         });
         // pictureTribbles55
-        pictureTribbles55.setBackColor(SystemColors.Control);
+        pictureTribbles55.setBackgroundColor(SystemColors.Control);
         pictureTribbles55.setLocation(new Point(208, 216));
         pictureTribbles55.setName("pictureTribbles55");
-        pictureTribbles55.setSize(new SizeF(12, 12));
+        pictureTribbles55.setSize(new Dimension(12, 12));
         pictureTribbles55.setTabIndex(76);
         pictureTribbles55.setTabStop(false);
         pictureTribbles55.setVisible(false);
@@ -956,15 +957,15 @@ public class FormEncounter extends wfForm {
         });
         // timerTick
         timerTick.setInterval(1000);
-        timerTick.Tick = new EventHandler<>() {
+        timerTick.tick = new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 timerTick_Tick(sender, data);
             }
         };
         // FormEncounter
-        setAutoScaleBaseSize(new SizeF(13, 5));
-        setClientSize(new SizeF(271, 234));
+        setAutoScaleBaseSize(new Dimension(5, 13));
+        setClientSize(new Dimension(234, 271));
         setControlBox(false);
         Controls.add(pictureTribbles55);
         Controls.add(pictureTribbles54);
@@ -1036,7 +1037,7 @@ public class FormEncounter extends wfForm {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Encounter");
-        ResumeLayout(false);
+        resumeLayout(false);
         // Set up the Game encounter variables.
         game.EncounterBegin();
         // Enable the control box (the X button) if cheats are enabled.
@@ -1208,8 +1209,8 @@ public class FormEncounter extends wfForm {
         labelYouShields.setText(commandership.ShieldText());
         labelOpponentHull.setText(opponent.HullText());
         labelOpponentShields.setText(opponent.ShieldText());
-        pictureShipYou.Refresh();
-        pictureShipOpponent.Refresh();
+        pictureShipYou.refresh();
+        pictureShipOpponent.refresh();
     }
 
     private void UpdateTribbles() {
@@ -1309,12 +1310,12 @@ public class FormEncounter extends wfForm {
         }
     }
 
-    private void pictureShipOpponent_Paint(Object sender, PaintEventData e) {
-        Functions.PaintShipImage(opponent, e.Graphics, pictureShipOpponent.getBackColor());
+    private void pictureShipOpponent_Paint(Object sender, Graphics graphics) {
+        Functions.PaintShipImage(opponent, graphics, pictureShipOpponent.getBackgroundColor());
     }
 
-    private void pictureShipYou_Paint(Object sender, PaintEventData e) {
-        Functions.PaintShipImage(commandership, e.Graphics, pictureShipYou.getBackColor());
+    private void pictureShipYou_Paint(Object sender, Graphics graphics) {
+        Functions.PaintShipImage(commandership, graphics, pictureShipYou.getBackgroundColor());
     }
 
     private void pictureTribbles_Click(Object sender, EventData e) {

@@ -1,7 +1,6 @@
 package org.winforms;
 
 import javax.swing.*;
-import java.awt.Graphics;
 import java.awt.*;
 
 
@@ -10,20 +9,21 @@ import java.awt.*;
  *
  * @author Gregory
  */
-class SpecialImageJLabel extends JLabel {  // TODO better name and documentation of usage
+class ImageLabel extends JLabel {  // TODO better name and documentation of usage
+
     private static final long serialVersionUID = 1L;
-    EventHandler<Object, PaintEventData> paintEventHandler;
+    EventHandler<Object, Graphics> paintEventHandler;
     PictureBox pictureBox;
     Color background;
 
     @Override
-    public void paintComponent(Graphics graphics) {
+    public void paintComponent(java.awt.Graphics graphics) {
         tryBackground(background, graphics);
         tryEventHandler(paintEventHandler, graphics);
         super.paintComponent(graphics);
     }
 
-    private void tryBackground(Color background, Graphics graphics) {
+    private void tryBackground(Color background, java.awt.Graphics graphics) {
         if (background == null) {
             return;
         }
@@ -31,9 +31,9 @@ class SpecialImageJLabel extends JLabel {  // TODO better name and documentation
         graphics.fillRect(0, 0, getWidth(), getHeight());
     }
 
-    private void tryEventHandler(EventHandler<Object, PaintEventData> handler, Graphics graphics) {
+    private void tryEventHandler(EventHandler<Object, Graphics> handler, java.awt.Graphics graphics) {
         if (handler != null) {
-            handler.handle(pictureBox, new PaintEventData(graphics));
+            handler.handle(pictureBox, new Graphics(graphics));
         }
     }
 }

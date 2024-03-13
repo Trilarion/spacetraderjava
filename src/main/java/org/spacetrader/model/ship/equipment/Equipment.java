@@ -5,7 +5,7 @@ import org.spacetrader.controller.Game;
 import org.spacetrader.controller.SerializableObject;
 import org.spacetrader.model.enums.TechLevel;
 import org.spacetrader.ui.Strings;
-import org.winforms.wfImage;
+import org.winforms.Image;
 
 import java.util.Hashtable;
 
@@ -71,7 +71,7 @@ abstract public class Equipment extends SerializableObject implements Cloneable 
         return equipType;
     }
 
-    public wfImage Image() {
+    public Image Image() {
         return Game.getCurrentGame().getParentWindow().EquipmentImages().getImages()[BaseImageIndex() + SubType().asInteger()];
     }
 

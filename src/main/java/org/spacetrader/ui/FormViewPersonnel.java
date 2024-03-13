@@ -15,7 +15,7 @@ import org.winforms.enums.*;
 import java.awt.*;
 
 
-public class FormViewPersonnel extends wfForm {
+public class FormViewPersonnel extends form {
     private final Game game = Game.getCurrentGame();
     private final Commander commander = game.Commander();
     private final Ship ship = commander.getShip();
@@ -57,15 +57,15 @@ public class FormViewPersonnel extends wfForm {
         labelPilotLabel = new Label();
         labelCrewNoQuarters = new Label();
         labelForHireNone = new Label();
-        boxCurrentCrew.SuspendLayout();
-        boxForHire.SuspendLayout();
-        boxInfo.SuspendLayout();
-        SuspendLayout();
+        boxCurrentCrew.suspendLayout();
+        boxForHire.suspendLayout();
+        boxInfo.suspendLayout();
+        suspendLayout();
         // buttonClose
         buttonClose.setDialogResult(DialogResult.Cancel);
         buttonClose.setLocation(new Point(-32, -32));
         buttonClose.setName("buttonClose");
-        buttonClose.setSize(new SizeF(32, 32));
+        buttonClose.setSize(new Dimension(32, 32));
         buttonClose.setTabIndex(32);
         buttonClose.setTabStop(false);
         buttonClose.setText("X");
@@ -74,7 +74,7 @@ public class FormViewPersonnel extends wfForm {
         boxCurrentCrew.Controls.add(listCrew);
         boxCurrentCrew.setLocation(new Point(8, 8));
         boxCurrentCrew.setName("boxCurrentCrew");
-        boxCurrentCrew.setSize(new SizeF(114, 144));
+        boxCurrentCrew.setSize(new Dimension(144, 114));
         boxCurrentCrew.setTabIndex(33);
         boxCurrentCrew.setTabStop(false);
         boxCurrentCrew.setText("Current Crew");
@@ -82,7 +82,7 @@ public class FormViewPersonnel extends wfForm {
         listCrew.setBorderStyle(BorderStyle.FixedSingle);
         listCrew.setLocation(new Point(8, 24));
         listCrew.setName("listCrew");
-        listCrew.setSize(new SizeF(80, 126));
+        listCrew.setSize(new Dimension(126, 80));
         listCrew.setTabIndex(6);
         listCrew.setDoubleClick(new EventHandler<>() {
             @Override
@@ -101,7 +101,7 @@ public class FormViewPersonnel extends wfForm {
         boxForHire.Controls.add(listForHire);
         boxForHire.setLocation(new Point(160, 8));
         boxForHire.setName("boxForHire");
-        boxForHire.setSize(new SizeF(114, 144));
+        boxForHire.setSize(new Dimension(144, 114));
         boxForHire.setTabIndex(34);
         boxForHire.setTabStop(false);
         boxForHire.setText("Mercenaries For Hire");
@@ -109,7 +109,7 @@ public class FormViewPersonnel extends wfForm {
         listForHire.setBorderStyle(BorderStyle.FixedSingle);
         listForHire.setLocation(new Point(8, 24));
         listForHire.setName("listForHire");
-        listForHire.setSize(new SizeF(80, 126));
+        listForHire.setSize(new Dimension(126, 80));
         listForHire.setTabIndex(5);
         listForHire.setDoubleClick(new EventHandler<>() {
             @Override
@@ -137,7 +137,7 @@ public class FormViewPersonnel extends wfForm {
         boxInfo.Controls.add(labelPilotLabel);
         boxInfo.setLocation(new Point(312, 8));
         boxInfo.setName("boxInfo");
-        boxInfo.setSize(new SizeF(114, 168));
+        boxInfo.setSize(new Dimension(168, 114));
         boxInfo.setTabIndex(35);
         boxInfo.setTabStop(false);
         boxInfo.setText("Mercenary Information");
@@ -145,7 +145,7 @@ public class FormViewPersonnel extends wfForm {
         buttonHireFire.setFlatStyle(FlatStyle.Flat);
         buttonHireFire.setLocation(new Point(120, 80));
         buttonHireFire.setName("buttonHireFire");
-        buttonHireFire.setSize(new SizeF(22, 36));
+        buttonHireFire.setSize(new Dimension(36, 22));
         buttonHireFire.setTabIndex(4);
         buttonHireFire.setText("Hire");
         buttonHireFire.setClick(new EventHandler<>() {
@@ -157,86 +157,86 @@ public class FormViewPersonnel extends wfForm {
         // labelRate
         labelRate.setLocation(new Point(104, 40));
         labelRate.setName("labelRate");
-        labelRate.setSize(new SizeF(13, 59));
+        labelRate.setSize(new Dimension(59, 13));
         labelRate.setTabIndex(97);
         labelRate.setText("88 cr. daily");
         // labelName
-        labelName.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+        labelName.setFont(new Font("Microsoft Sans Serif", FontStyle.Bold, (int) 8.25F));
         labelName.setLocation(new Point(12, 18));
         labelName.setName("labelName");
-        labelName.setSize(new SizeF(13, 72));
+        labelName.setSize(new Dimension(72, 13));
         labelName.setTabIndex(96);
         labelName.setText("Xxxxxxxxxxx");
         // labelEngineer
         labelEngineer.setLocation(new Point(64, 88));
         labelEngineer.setName("labelEngineer");
-        labelEngineer.setSize(new SizeF(13, 17));
+        labelEngineer.setSize(new Dimension(17, 13));
         labelEngineer.setTabIndex(95);
         labelEngineer.setText("88");
         // labelTrader
         labelTrader.setLocation(new Point(64, 72));
         labelTrader.setName("labelTrader");
-        labelTrader.setSize(new SizeF(13, 17));
+        labelTrader.setSize(new Dimension(17, 13));
         labelTrader.setTabIndex(94);
         labelTrader.setText("88");
         // labelFighter
         labelFighter.setLocation(new Point(64, 56));
         labelFighter.setName("labelFighter");
-        labelFighter.setSize(new SizeF(13, 17));
+        labelFighter.setSize(new Dimension(17, 13));
         labelFighter.setTabIndex(93);
         labelFighter.setText("88");
         // labelPilot
         labelPilot.setLocation(new Point(64, 40));
         labelPilot.setName("labelPilot");
-        labelPilot.setSize(new SizeF(13, 17));
+        labelPilot.setSize(new Dimension(17, 13));
         labelPilot.setTabIndex(92);
         labelPilot.setText("88");
         // labelEngineerLabel
         labelEngineerLabel.setAutoSize(true);
         labelEngineerLabel.setLocation(new Point(12, 88));
         labelEngineerLabel.setName("labelEngineerLabel");
-        labelEngineerLabel.setSize(new SizeF(16, 53));
+        labelEngineerLabel.setSize(new Dimension(53, 16));
         labelEngineerLabel.setTabIndex(91);
         labelEngineerLabel.setText("Engineer:");
         // labelTraderLabel
         labelTraderLabel.setAutoSize(true);
         labelTraderLabel.setLocation(new Point(12, 72));
         labelTraderLabel.setName("labelTraderLabel");
-        labelTraderLabel.setSize(new SizeF(16, 41));
+        labelTraderLabel.setSize(new Dimension(41, 16));
         labelTraderLabel.setTabIndex(90);
         labelTraderLabel.setText("Trader:");
         // labelFighterLabel
         labelFighterLabel.setAutoSize(true);
         labelFighterLabel.setLocation(new Point(12, 56));
         labelFighterLabel.setName("labelFighterLabel");
-        labelFighterLabel.setSize(new SizeF(16, 43));
+        labelFighterLabel.setSize(new Dimension(43, 16));
         labelFighterLabel.setTabIndex(89);
         labelFighterLabel.setText("Fighter:");
         // labelPilotLabel
         labelPilotLabel.setAutoSize(true);
         labelPilotLabel.setLocation(new Point(12, 40));
         labelPilotLabel.setName("labelPilotLabel");
-        labelPilotLabel.setSize(new SizeF(16, 29));
+        labelPilotLabel.setSize(new Dimension(29, 16));
         labelPilotLabel.setTabIndex(88);
         labelPilotLabel.setText("Pilot:");
         // labelCrewNoQuarters
         labelCrewNoQuarters.setLocation(new Point(16, 24));
         labelCrewNoQuarters.setName("labelCrewNoQuarters");
-        labelCrewNoQuarters.setSize(new SizeF(16, 120));
+        labelCrewNoQuarters.setSize(new Dimension(120, 16));
         labelCrewNoQuarters.setTabIndex(7);
         labelCrewNoQuarters.setText("No quarters available");
         labelCrewNoQuarters.setVisible(false);
         // labelForHireNone
         labelForHireNone.setLocation(new Point(16, 24));
         labelForHireNone.setName("labelForHireNone");
-        labelForHireNone.setSize(new SizeF(16, 120));
+        labelForHireNone.setSize(new Dimension(120, 16));
         labelForHireNone.setTabIndex(8);
         labelForHireNone.setText("No one for hire");
         labelForHireNone.setVisible(false);
         // FormViewPersonnel
-        setAutoScaleBaseSize(new SizeF(13, 5));
+        setAutoScaleBaseSize(new Dimension(5, 13));
         setCancelButton(buttonClose);
-        setClientSize(new SizeF(129, 488));
+        setClientSize(new Dimension(488, 129));
         Controls.add(boxInfo);
         Controls.add(boxForHire);
         Controls.add(boxCurrentCrew);
@@ -248,10 +248,10 @@ public class FormViewPersonnel extends wfForm {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Personnel");
-        boxCurrentCrew.ResumeLayout(false);
-        boxForHire.ResumeLayout(false);
-        boxInfo.ResumeLayout(false);
-        ResumeLayout(false);
+        boxCurrentCrew.resumeLayout(false);
+        boxForHire.resumeLayout(false);
+        boxInfo.resumeLayout(false);
+        resumeLayout(false);
         UpdateAll();
     }
 
@@ -273,9 +273,9 @@ public class FormViewPersonnel extends wfForm {
         listCrew.Items.clear();
         for (int i = 1; i < crew.length; i++) {
             if (crew[i] == null) {
-                listCrew.Items.add(Strings.PersonnelVacancy);
+                listCrew.Items.addElement(Strings.PersonnelVacancy);
             } else {
-                listCrew.Items.add(crew[i]);
+                listCrew.Items.addElement(crew[i]);
             }
         }
         boolean entries = (!listCrew.Items.isEmpty());
@@ -292,7 +292,7 @@ public class FormViewPersonnel extends wfForm {
         CrewMember[] mercs = commander.CurrentSystem().MercenariesForHire();
         listForHire.Items.clear();
         for (CrewMember merc : mercs) {
-            listForHire.Items.add(merc);
+            listForHire.Items.addElement(merc);
         }
         boolean entries = (!listForHire.Items.isEmpty());
         listForHire.setVisible(entries);

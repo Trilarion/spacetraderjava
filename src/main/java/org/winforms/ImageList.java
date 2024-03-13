@@ -3,38 +3,38 @@ package org.winforms;
 import java.awt.*;
 import java.util.ArrayList;
 
-
+// TODO document implementation and usage
 public class ImageList {
-    public Object ColorDepth;
-    private wfImage[] images;
-    private SizeF size;
+    public Object colorDepth;
+    private Image[] images;
+    private Dimension size;
 
     public ImageList() {
     }
 
-    public void Draw(Graphics graphics, int x, int y, int imageIndex) {
-        graphics.DrawImage(images[imageIndex], x, y, new Rectangle(0, 0, size.width, size.height), 0);
+    public void draw(Graphics graphics, int x, int y, int imageIndex) {
+        graphics.drawImage(images[imageIndex], x, y, new Rectangle(0, 0, size.width, size.height));
     }
 
-    public wfImage[] getImages() {
+    public Image[] getImages() {
         return images;
     }
 
     public void setImageStream(ImageListStreamer imageStream) {
-        ArrayList<wfImage> al = new ArrayList<>();
-        for (wfImage image : imageStream.images) {
+        ArrayList<Image> al = new ArrayList<>();
+        for (Image image : imageStream.images) {
             al.add(image);
         }
-        images = al.toArray(new wfImage[0]);
+        images = al.toArray(new Image[0]);
     }
 
     public void setTransparentColor(Color transparentColor) {
-        for (wfImage image : images) {
+        for (Image image : images) {
             image.setTransparentColor(transparentColor);
         }
     }
 
-    public void setImageSize(SizeF imageSize) {
+    public void setImageSize(Dimension imageSize) {
         size = imageSize;
     }
 }

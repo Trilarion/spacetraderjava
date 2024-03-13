@@ -13,22 +13,22 @@ import java.awt.*;
 import java.util.Arrays;
 
 
-public class FormGetLoan extends wfForm {
-    private final NumericUpDown numAmount;
+public class FormGetLoan extends form {
+    private final Spinner numAmount;
 
     public FormGetLoan(int max) {
         Label labelQuestion = new Label();
-        numAmount = new NumericUpDown();
+        numAmount = new Spinner();
         Button buttonOk = new Button();
         Button buttonMax = new Button();
         Button buttonNothing = new Button();
         Label labelStatement = new Label();
-                SuspendLayout();
+                suspendLayout();
         // labelQuestion
         labelQuestion.setAutoSize(true);
         labelQuestion.setLocation(new Point(8, 24));
         labelQuestion.setName("labelQuestion");
-        labelQuestion.setSize(new SizeF(13, 178));
+        labelQuestion.setSize(new Dimension(178, 13));
         labelQuestion.setTabIndex(3);
         labelQuestion.setText("How much do you want to borrow?");
         // numAmount
@@ -36,16 +36,16 @@ public class FormGetLoan extends wfForm {
         numAmount.setMaximum(99999);
         numAmount.setMinimum(1);
         numAmount.setName("numAmount");
-        numAmount.setSize(new SizeF(20, 58));
+        numAmount.setSize(new Dimension(58, 20));
         numAmount.setTabIndex(1);
-        numAmount.ThousandsSeparator = true;
+        numAmount.thousandsSeparator = true;
         numAmount.setValue(88888);
         // buttonOk
         buttonOk.setDialogResult(DialogResult.OK);
         buttonOk.setFlatStyle(FlatStyle.Flat);
         buttonOk.setLocation(new Point(52, 48));
         buttonOk.setName("buttonOk");
-        buttonOk.setSize(new SizeF(22, 41));
+        buttonOk.setSize(new Dimension(41, 22));
         buttonOk.setTabIndex(2);
         buttonOk.setText("Ok");
         // buttonMax
@@ -53,7 +53,7 @@ public class FormGetLoan extends wfForm {
         buttonMax.setFlatStyle(FlatStyle.Flat);
         buttonMax.setLocation(new Point(100, 48));
         buttonMax.setName("buttonMax");
-        buttonMax.setSize(new SizeF(22, 41));
+        buttonMax.setSize(new Dimension(41, 22));
         buttonMax.setTabIndex(3);
         buttonMax.setText("Max");
         buttonMax.setClick(new EventHandler<>() {
@@ -67,20 +67,20 @@ public class FormGetLoan extends wfForm {
         buttonNothing.setFlatStyle(FlatStyle.Flat);
         buttonNothing.setLocation(new Point(148, 48));
         buttonNothing.setName("buttonNothing");
-        buttonNothing.setSize(new SizeF(22, 53));
+        buttonNothing.setSize(new Dimension(53, 22));
         buttonNothing.setTabIndex(4);
         buttonNothing.setText("Nothing");
         // labelStatement
         labelStatement.setLocation(new Point(8, 8));
         labelStatement.setName("labelStatement");
-        labelStatement.setSize(new SizeF(13, 189));
+        labelStatement.setSize(new Dimension(189, 13));
         labelStatement.setTabIndex(5);
         labelStatement.setText("You can borrow up to 88,888 credits.");
         // FormGetLoan
         setAcceptButton(buttonOk);
-        setAutoScaleBaseSize(new SizeF(13, 5));
+        setAutoScaleBaseSize(new Dimension(5, 13));
         setCancelButton(buttonNothing);
-        setClientSize(new SizeF(79, 252));
+        setClientSize(new Dimension(252, 79));
         setControlBox(false);
         Controls.addAll(Arrays.asList(labelStatement, buttonNothing, buttonMax, buttonOk, numAmount, labelQuestion));
         setFormBorderStyle(FormBorderStyle.FixedDialog);
@@ -88,7 +88,7 @@ public class FormGetLoan extends wfForm {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Get Loan");
-                ResumeLayout(false);
+                resumeLayout(false);
         numAmount.setMaximum(max);
         numAmount.setValue(numAmount.getMinimum());
         labelStatement.setText(Functions.StringVars("You can borrow up to ^1.", Functions.Multiples(max, Strings.MoneyUnit)));

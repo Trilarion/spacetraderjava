@@ -14,7 +14,7 @@ import org.spacetrader.model.ship.equipment.WeaponType;
 import org.spacetrader.ui.FormAlert;
 import org.spacetrader.ui.Strings;
 import org.winforms.enums.DialogResult;
-import org.winforms.wfPane;
+import org.winforms.Pane;
 
 import java.util.Hashtable;
 
@@ -90,11 +90,11 @@ public class Commander extends CrewMember {
         return hash;
     }
 
-    public boolean TradeShip(ShipSpec specToBuy, int netPrice, wfPane owner) {
+    public boolean TradeShip(ShipSpec specToBuy, int netPrice, Pane owner) {
         return TradeShip(specToBuy, netPrice, specToBuy.Name(), owner);
     }
 
-    public boolean TradeShip(ShipSpec specToBuy, int netPrice, String newShipName, wfPane owner) {
+    public boolean TradeShip(ShipSpec specToBuy, int netPrice, String newShipName, Pane owner) {
         boolean traded = false;
         if (netPrice > 0 && getDebt() > 0) {
             FormAlert.Alert(AlertType.DebtNoBuy, owner);

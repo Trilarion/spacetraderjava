@@ -1,10 +1,10 @@
 package org.winforms;
 
-
+// TODO document implementation and usage (and why is it called streamer?)
 public class ImageListStreamer {
-    final Iterable<wfImage> images;
+    final Iterable<Image> images;
 
-    public ImageListStreamer(Iterable<wfImage> images) {
+    public ImageListStreamer(Iterable<Image> images) {
         this.images = images;
     }
 }

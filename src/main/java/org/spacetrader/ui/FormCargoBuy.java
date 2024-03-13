@@ -16,30 +16,30 @@ import org.winforms.enums.FormStartPosition;
 import java.awt.*;
 
 
-public class FormCargoBuy extends wfForm {
-    private final NumericUpDown numAmount;
+public class FormCargoBuy extends form {
+    private final Spinner numAmount;
 
     public FormCargoBuy(int item, int maxAmount, CargoBuyOperation op) {
         Label labelQuestion = new Label();
         Label labelStatement = new Label();
-        numAmount = new NumericUpDown();
+        numAmount = new Spinner();
         Button buttonOk = new Button();
         Button buttonAll = new Button();
         Button buttonNone = new Button();
         Label labelAvailable = new Label();
         Label labelAfford = new Label();
-                SuspendLayout();
+                suspendLayout();
         // labelQuestion
         labelQuestion.setAutoSize(true);
         labelQuestion.setLocation(new Point(8, 24));
         labelQuestion.setName("labelQuestion");
-        labelQuestion.setSize(new SizeF(16, 161));
+        labelQuestion.setSize(new Dimension(161, 16));
         labelQuestion.setTabIndex(1);
         labelQuestion.setText("How many do you want to buy?");
         // labelStatement
         labelStatement.setLocation(new Point(8, 8));
         labelStatement.setName("labelStatement");
-        labelStatement.setSize(new SizeF(13, 326));
+        labelStatement.setSize(new Dimension(326, 13));
         labelStatement.setTabIndex(3);
         labelStatement.setText("The trader wants to sell Machines for the price of 8,888 cr. each.");
         // numAmount
@@ -47,7 +47,7 @@ public class FormCargoBuy extends wfForm {
         numAmount.setMaximum(999);
         numAmount.setMinimum(1);
         numAmount.setName("numAmount");
-        numAmount.setSize(new SizeF(20, 44));
+        numAmount.setSize(new Dimension(44, 20));
         numAmount.setTabIndex(1);
         numAmount.setValue(1);
         // buttonOk
@@ -55,7 +55,7 @@ public class FormCargoBuy extends wfForm {
         buttonOk.setFlatStyle(FlatStyle.Flat);
         buttonOk.setLocation(new Point(95, 48));
         buttonOk.setName("buttonOk");
-        buttonOk.setSize(new SizeF(22, 41));
+        buttonOk.setSize(new Dimension(41, 22));
         buttonOk.setTabIndex(2);
         buttonOk.setText("Ok");
         // buttonAll
@@ -63,7 +63,7 @@ public class FormCargoBuy extends wfForm {
         buttonAll.setFlatStyle(FlatStyle.Flat);
         buttonAll.setLocation(new Point(143, 48));
         buttonAll.setName("buttonAll");
-        buttonAll.setSize(new SizeF(22, 41));
+        buttonAll.setSize(new Dimension(41, 22));
         buttonAll.setTabIndex(3);
         buttonAll.setText("All");
         buttonAll.setClick(new EventHandler<>() {
@@ -77,28 +77,28 @@ public class FormCargoBuy extends wfForm {
         buttonNone.setFlatStyle(FlatStyle.Flat);
         buttonNone.setLocation(new Point(191, 48));
         buttonNone.setName("buttonNone");
-        buttonNone.setSize(new SizeF(22, 41));
+        buttonNone.setSize(new Dimension(41, 22));
         buttonNone.setTabIndex(4);
         buttonNone.setText("None");
         // labelAvailable
         labelAvailable.setLocation(new Point(8, 21));
         labelAvailable.setName("labelAvailable");
-        labelAvailable.setSize(new SizeF(13, 163));
+        labelAvailable.setSize(new Dimension(163, 13));
         labelAvailable.setTabIndex(5);
         labelAvailable.setText("The trader has 88 units for sale.");
         labelAvailable.setVisible(false);
         // labelAfford
         labelAfford.setLocation(new Point(8, 34));
         labelAfford.setName("labelAfford");
-        labelAfford.setSize(new SizeF(13, 157));
+        labelAfford.setSize(new Dimension(157, 13));
         labelAfford.setTabIndex(6);
         labelAfford.setText("You can afford to buy 88 units.");
         labelAfford.setVisible(false);
         // FormCargoBuy
         setAcceptButton(buttonOk);
-        setAutoScaleBaseSize(new SizeF(13, 5));
+        setAutoScaleBaseSize(new Dimension(5, 13));
         setCancelButton(buttonNone);
-        setClientSize(new SizeF(105, 326));
+        setClientSize(new Dimension(326, 105));
         setControlBox(false);
         Controls.add(buttonNone);
         Controls.add(buttonAll);
@@ -113,7 +113,7 @@ public class FormCargoBuy extends wfForm {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Buy Xxxxxxxxxx");
-                ResumeLayout(false);
+                resumeLayout(false);
         numAmount.setMaximum(maxAmount);
         numAmount.setValue(numAmount.getMinimum());
         setText(Functions.StringVars(Strings.CargoTitle, Strings.CargoBuyOps[op.id], Constants.TradeItems[item].Name()));

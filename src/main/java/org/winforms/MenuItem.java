@@ -6,8 +6,9 @@ import java.awt.event.ActionListener;
 
 
 public class MenuItem {
-    public Shortcut Shortcut;
-    public int Index;
+
+    public Shortcut shortcut;
+    public int index;
     protected JMenuItem swingVersion;
 
     public MenuItem() {

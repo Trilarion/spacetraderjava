@@ -4,12 +4,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 // TODO documentation of usage
-public class wfMouseListener extends MouseAdapter {
+public class MouseListener extends MouseAdapter {
     private final EventHandler<Object, EventData> normalClick;
     private final EventHandler<Object, EventData> doubleClick;
     private final Object sender;
 
-    public wfMouseListener(Object o, EventHandler<Object, EventData> e1, EventHandler<Object, EventData> e2) {
+    public MouseListener(Object o, EventHandler<Object, EventData> e1, EventHandler<Object, EventData> e2) {
         sender = o;
         normalClick = e1;
         doubleClick = e2;

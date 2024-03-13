@@ -5,7 +5,7 @@ import org.winforms.enums.DialogResult;
 import java.awt.*;
 
 // TODO documentation of usage
-public interface wfPane {
+public interface Pane {
 
     Component asSwingObject();
 

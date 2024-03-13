@@ -7,26 +7,27 @@ import org.spacetrader.model.events.SpecialEventType;
 import org.winforms.Button;
 import org.winforms.Label;
 import org.winforms.*;
+import org.winforms.TextField;
 import org.winforms.enums.*;
 
 import java.awt.*;
 import java.util.Arrays;
 
 
-public class FormTest extends wfForm {
+public class FormTest extends form {
     private final ComboBox selAlertType;
     private final ComboBox selSpecialEvent;
-    private final TextBox txtValue1;
-    private final TextBox txtValue2;
-    private final TextBox txtValue3;
+    private final TextField textValue1;
+    private final TextField textValue2;
+    private final TextField textValue3;
 
     public FormTest() {
         Label labelAlertType = new Label();
         GroupBox boxAlert = new GroupBox();
         Button buttonTestAlert = new Button();
-        txtValue3 = new TextBox();
-        txtValue2 = new TextBox();
-        txtValue1 = new TextBox();
+        textValue3 = new TextField();
+        textValue2 = new TextField();
+        textValue1 = new TextField();
         selAlertType = new ComboBox();
         Label labelValue3 = new Label();
         Label labelValue1 = new Label();
@@ -35,21 +36,21 @@ public class FormTest extends wfForm {
         Button buttonTestSpecialEvent = new Button();
         selSpecialEvent = new ComboBox();
         Label labelSpecialEvent = new Label();
-        boxAlert.SuspendLayout();
-        groupBox1.SuspendLayout();
-        SuspendLayout();
+        boxAlert.suspendLayout();
+        groupBox1.suspendLayout();
+        suspendLayout();
         // labelAlertType
         labelAlertType.setAutoSize(true);
         labelAlertType.setLocation(new Point(8, 19));
         labelAlertType.setName("labelAlertType");
-        labelAlertType.setSize(new SizeF(13, 56));
+        labelAlertType.setSize(new Dimension(56, 13));
         labelAlertType.setTabIndex(0);
         labelAlertType.setText("Alert Type");
         // boxAlert
-        boxAlert.Controls.addAll(buttonTestAlert, txtValue3, txtValue2, txtValue1, selAlertType, labelValue3, labelValue1, labelValue2, labelAlertType);
+        boxAlert.Controls.addAll(buttonTestAlert, textValue3, textValue2, textValue1, selAlertType, labelValue3, labelValue1, labelValue2, labelAlertType);
         boxAlert.setLocation(new Point(8, 8));
         boxAlert.setName("boxAlert");
-        boxAlert.setSize(new SizeF(152, 200));
+        boxAlert.setSize(new Dimension(200, 152));
         boxAlert.setTabIndex(1);
         boxAlert.setTabStop(false);
         boxAlert.setText("Test Alert");
@@ -57,7 +58,7 @@ public class FormTest extends wfForm {
         buttonTestAlert.setFlatStyle(FlatStyle.Flat);
         buttonTestAlert.setLocation(new Point(80, 120));
         buttonTestAlert.setName("buttonTestAlert");
-        buttonTestAlert.setSize(new SizeF(22, 41));
+        buttonTestAlert.setSize(new Dimension(41, 22));
         buttonTestAlert.setTabIndex(8);
         buttonTestAlert.setText("Test");
         buttonTestAlert.setClick(new EventHandler<>() {
@@ -66,56 +67,56 @@ public class FormTest extends wfForm {
                 buttonTestAlert_Click();
             }
         });
-        // txtValue3
-        txtValue3.setLocation(new Point(72, 88));
-        txtValue3.setName("txtValue3");
-        txtValue3.setSize(new SizeF(20, 120));
-        txtValue3.setTabIndex(7);
-        txtValue3.setText("");
-        // txtValue2
-        txtValue2.setLocation(new Point(72, 64));
-        txtValue2.setName("txtValue2");
-        txtValue2.setSize(new SizeF(20, 120));
-        txtValue2.setTabIndex(6);
-        txtValue2.setText("");
-        // txtValue1
-        txtValue1.setLocation(new Point(72, 40));
-        txtValue1.setName("txtValue1");
-        txtValue1.setSize(new SizeF(20, 120));
-        txtValue1.setTabIndex(5);
-        txtValue1.setText("");
+        // textValue3
+        textValue3.setLocation(new Point(72, 88));
+        textValue3.setName("textValue3");
+        textValue3.setSize(new Dimension(120, 20));
+        textValue3.setTabIndex(7);
+        textValue3.setText("");
+        // textValue2
+        textValue2.setLocation(new Point(72, 64));
+        textValue2.setName("textValue2");
+        textValue2.setSize(new Dimension(120, 20));
+        textValue2.setTabIndex(6);
+        textValue2.setText("");
+        // textValue1
+        textValue1.setLocation(new Point(72, 40));
+        textValue1.setName("textValue1");
+        textValue1.setSize(new Dimension(120, 20));
+        textValue1.setTabIndex(5);
+        textValue1.setText("");
         // selAlertType
         selAlertType.DropDownStyle = ComboBoxStyle.DropDownList;
         selAlertType.setLocation(new Point(72, 16));
         selAlertType.setName("selAlertType");
-        selAlertType.setSize(new SizeF(21, 120));
+        selAlertType.setSize(new Dimension(120, 21));
         selAlertType.setTabIndex(4);
         // labelValue3
         labelValue3.setAutoSize(true);
         labelValue3.setLocation(new Point(8, 91));
         labelValue3.setName("labelValue3");
-        labelValue3.setSize(new SizeF(13, 43));
+        labelValue3.setSize(new Dimension(43, 13));
         labelValue3.setTabIndex(3);
         labelValue3.setText("Value 3");
         // labelValue1
         labelValue1.setAutoSize(true);
         labelValue1.setLocation(new Point(8, 43));
         labelValue1.setName("labelValue1");
-        labelValue1.setSize(new SizeF(13, 43));
+        labelValue1.setSize(new Dimension(43, 13));
         labelValue1.setTabIndex(2);
         labelValue1.setText("Value 1");
         // labelValue2
         labelValue2.setAutoSize(true);
         labelValue2.setLocation(new Point(8, 67));
         labelValue2.setName("labelValue2");
-        labelValue2.setSize(new SizeF(13, 43));
+        labelValue2.setSize(new Dimension(43, 13));
         labelValue2.setTabIndex(1);
         labelValue2.setText("Value 2");
         // groupBox1
         groupBox1.Controls.addAll(buttonTestSpecialEvent, selSpecialEvent, labelSpecialEvent);
         groupBox1.setLocation(new Point(8, 168));
         groupBox1.setName("groupBox1");
-        groupBox1.setSize(new SizeF(80, 200));
+        groupBox1.setSize(new Dimension(200, 80));
         groupBox1.setTabIndex(2);
         groupBox1.setTabStop(false);
         groupBox1.setText("Test Special Alert");
@@ -123,7 +124,7 @@ public class FormTest extends wfForm {
         buttonTestSpecialEvent.setFlatStyle(FlatStyle.Flat);
         buttonTestSpecialEvent.setLocation(new Point(80, 48));
         buttonTestSpecialEvent.setName("buttonTestSpecialEvent");
-        buttonTestSpecialEvent.setSize(new SizeF(22, 41));
+        buttonTestSpecialEvent.setSize(new Dimension(41, 22));
         buttonTestSpecialEvent.setTabIndex(8);
         buttonTestSpecialEvent.setText("Test");
         buttonTestSpecialEvent.setClick(new EventHandler<>() {
@@ -136,18 +137,18 @@ public class FormTest extends wfForm {
         selSpecialEvent.DropDownStyle = ComboBoxStyle.DropDownList;
         selSpecialEvent.setLocation(new Point(88, 16));
         selSpecialEvent.setName("selSpecialEvent");
-        selSpecialEvent.setSize(new SizeF(21, 104));
+        selSpecialEvent.setSize(new Dimension(104, 21));
         selSpecialEvent.setTabIndex(4);
         // labelSpecialEvent
         labelSpecialEvent.setAutoSize(true);
         labelSpecialEvent.setLocation(new Point(8, 19));
         labelSpecialEvent.setName("labelSpecialEvent");
-        labelSpecialEvent.setSize(new SizeF(13, 73));
+        labelSpecialEvent.setSize(new Dimension(73, 13));
         labelSpecialEvent.setTabIndex(0);
         labelSpecialEvent.setText("Special Event");
         // FormTest
-        setAutoScaleBaseSize(new SizeF(13, 5));
-        setClientSize(new SizeF(255, 370));
+        setAutoScaleBaseSize(new Dimension(5, 13));
+        setClientSize(new Dimension(370, 255));
         Controls.addAll(Arrays.asList(groupBox1, boxAlert));
         setFormBorderStyle(FormBorderStyle.FixedDialog);
         setMaximizeBox(false);
@@ -156,9 +157,9 @@ public class FormTest extends wfForm {
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Test");
-        boxAlert.ResumeLayout(false);
-        groupBox1.ResumeLayout(false);
-        ResumeLayout(false);
+        boxAlert.resumeLayout(false);
+        groupBox1.resumeLayout(false);
+        resumeLayout(false);
         AlertType[] alerts = Arrays.copyOfRange(AlertType.values(), AlertType.Alert.ordinal(), AlertType.WildWontStayAboardReactor.ordinal());
         for (AlertType type : alerts) {
             selAlertType.Items.addElement(type);
@@ -174,7 +175,7 @@ public class FormTest extends wfForm {
 
     private void buttonTestAlert_Click() {
         FormAlert.Alert(AlertType.Alert, this, "Result", "The result was " + FormAlert.Alert((AlertType) selAlertType.getSelectedItem(),
-                this, txtValue1.getText(), txtValue2.getText(), txtValue3.getText()).toString());
+                this, textValue1.getText(), textValue2.getText(), textValue3.getText()).toString());
     }
 
     private void buttonTestSpecialEvent_Click() {

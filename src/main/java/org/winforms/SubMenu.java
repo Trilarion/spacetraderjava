@@ -3,7 +3,7 @@ package org.winforms;
 import javax.swing.*;
 
 // TODO documentation of usage
-public class SubMenu extends MenuItem {
+public class SubMenu extends MenuItem {  // TODO difference to MenuItem
     public SubMenu() {
         super(new JMenu());
     }

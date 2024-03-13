@@ -6,13 +6,14 @@ import javax.swing.*;
 
 
 // TODO documentation
-public class Label extends wfControl {
+public class Label extends Control {
+
     private static final String NEWLINE_LITERAL = "\n";
     private static final String END = "</HTML>";
     private static final String START = "<HTML>";
     private static final String NEWLINE = "<br>";
-    public ContentAlignment ImageAlign;
-    public ContentAlignment TextAlign;
+    public ContentAlignment imageAlignment;
+    public ContentAlignment textAlignment;
     private boolean convertedToHtml;
 
     public Label() {
@@ -38,7 +39,7 @@ public class Label extends wfControl {
         ((JLabel) swingComponent).setText(text);
     }
 
-    public void setImage(wfImage image) {
+    public void setImage(Image image) {
         ((JLabel) swingComponent).setIcon(new ImageIcon(image.asSwingImage()));
     }
 }

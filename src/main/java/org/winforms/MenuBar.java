@@ -3,8 +3,8 @@ package org.winforms;
 import javax.swing.*;
 
 
-public class MainMenu extends wfControl {
-    public MainMenu() {
+public class MenuBar extends Control {
+    public MenuBar() {
         super(new JMenuBar());
     }
 

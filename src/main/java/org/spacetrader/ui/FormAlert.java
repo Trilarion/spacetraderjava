@@ -5,10 +5,15 @@ import org.spacetrader.controller.Game;
 import org.spacetrader.model.enums.AlertType;
 import org.spacetrader.model.enums.GameEndType;
 import org.winforms.*;
+import org.winforms.Button;
+import org.winforms.Graphics;
+import org.winforms.Label;
 import org.winforms.enums.*;
 
+import java.awt.*;
 
-public class FormAlert extends wfForm {
+
+public class FormAlert extends form {
     private static final String _80_CHARS = "01234567890123456789012345678901234567890123456789012345678901234567890123456789";
     private static final int SPLASH_INDEX = 4;
     private final Button button1;
@@ -25,7 +30,7 @@ public class FormAlert extends wfForm {
         button2 = new Button();
         ilImages = new ImageList();
         timerTick = new Timer();
-        SuspendLayout();
+        suspendLayout();
         // labelText
         labelText.setLocation(new java.awt.Point(8, 8));
         labelText.setName("labelText");
@@ -36,7 +41,7 @@ public class FormAlert extends wfForm {
         button1.setFlatStyle(FlatStyle.Flat);
         button1.setLocation(new java.awt.Point(115, 32));
         button1.setName("button1");
-        button1.setSize(new SizeF(22, 40));
+        button1.setSize(new Dimension(40, 22));
         button1.setTabIndex(1);
         button1.setText("Ok");
         // button2
@@ -44,26 +49,26 @@ public class FormAlert extends wfForm {
         button2.setFlatStyle(FlatStyle.Flat);
         button2.setLocation(new java.awt.Point(200, 32));
         button2.setName("button2");
-        button2.setSize(new SizeF(22, 40));
+        button2.setSize(new Dimension(40, 22));
         button2.setTabIndex(2);
         button2.setText("No");
         button2.setVisible(false);
         // ilImages
-        ilImages.ColorDepth = ColorDepth.Depth24Bit;
-        ilImages.setImageSize(new SizeF(160, 160));
-        ilImages.setImageStream(((ImageListStreamer) (resources.GetObject("ilImages.ImageStream"))));
+        ilImages.colorDepth = ColorDepth.Depth24Bit;
+        ilImages.setImageSize(new Dimension(160, 160));
+        ilImages.setImageStream(((ImageListStreamer) (resources.getObject("ilImages.ImageStream"))));
         ilImages.setTransparentColor(null);
         // timerTick
         timerTick.setInterval(4000);
-        timerTick.Tick = new EventHandler<>() {
+        timerTick.tick = new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 timerTick_Tick();
             }
         };
         // FormAlert
-        setAutoScaleBaseSize(new SizeF(13, 5));
-        setClientSize(new SizeF(63, 270));
+        setAutoScaleBaseSize(new Dimension(5, 13));
+        setClientSize(new Dimension(270, 63));
         setControlBox(false);
         Controls.add(button2);
         Controls.add(button1);
@@ -79,7 +84,7 @@ public class FormAlert extends wfForm {
                 FormAlert_Click(sender, data);
             }
         });
-        ResumeLayout(false);
+        resumeLayout(false);
     }
 
     public FormAlert(String title, String text, String button1Text, DialogResult button1Result, String button2Text, DialogResult button2Result, String[] args) {
@@ -90,17 +95,17 @@ public class FormAlert extends wfForm {
             title = Functions.StringVars(title, args);
             text = Functions.StringVars(text, args);
         }
-        labelText.setWidth(g.MeasureString((text.length() > 80 ? _80_CHARS : text), getFont()).width + 25);
+        labelText.setWidth(g.measureString((text.length() > 80 ? _80_CHARS : text), getFont()).width + 25);
         labelText.setText(text);
         labelText.setHeight(30 + 30 * text.length() / 80);
         // Size the buttons.
         button1.setText(button1Text);
         button1.setDialogResult(button1Result);
-        button1.setWidth(Math.max(40, g.MeasureString(button1.getText(), getFont()).width + 35));
+        button1.setWidth(Math.max(40, g.measureString(button1.getText(), getFont()).width + 35));
         int buttonWidth = button1.getWidth();
         if (button2Text != null) {
             button2.setText(button2Text);
-            button2.setWidth(Math.max((int) Math.ceil(g.MeasureString(button2.getText(), getFont()).width) + 10, 40));
+            button2.setWidth(Math.max((int) Math.ceil(g.measureString(button2.getText(), getFont()).width) + 10, 40));
             button2.setVisible(true);
             button2.setDialogResult(button2Result);
             buttonWidth += button2.getWidth() + 6;
@@ -130,7 +135,7 @@ public class FormAlert extends wfForm {
         setCancelButton(button1);
         // Set the background image.
         setBackgroundImage(ilImages.getImages()[imageIndex]);
-        setClientSize((new SizeF(getBackgroundImage().getWidth(), getBackgroundImage().getHeight())));
+        setClientSize((new Dimension(getBackgroundImage().getHeight(), getBackgroundImage().getWidth())));
         // Set the title.
         setText(title);
         // If this is the splash screen, get rid of the title bar and start the timer.
@@ -140,23 +145,23 @@ public class FormAlert extends wfForm {
         }
     }
 
-    public static DialogResult Alert(AlertType at, wfPane wp) {
+    public static DialogResult Alert(AlertType at, Pane wp) {
         return Alert(at, wp, new String[]{});
     }
 
-    public static DialogResult Alert(AlertType at, wfPane wp, String s) {
+    public static DialogResult Alert(AlertType at, Pane wp, String s) {
         return Alert(at, wp, new String[]{s});
     }
 
-    public static DialogResult Alert(AlertType at, wfPane wp, String s, String t) {
+    public static DialogResult Alert(AlertType at, Pane wp, String s, String t) {
         return Alert(at, wp, new String[]{s, t});
     }
 
-    public static DialogResult Alert(AlertType at, wfPane wp, String s, String t, String u) {
+    public static DialogResult Alert(AlertType at, Pane wp, String s, String t, String u) {
         return Alert(at, wp, new String[]{s, t, u});
     }
 
-    public static DialogResult Alert(AlertType at, wfPane wp, String[] ss) {
+    public static DialogResult Alert(AlertType at, Pane wp, String[] ss) {
         DialogResult dr = DialogResult.None;
         if (ss.length == 0) {
             ss = null;

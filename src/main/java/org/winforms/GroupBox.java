@@ -5,8 +5,9 @@ import org.winforms.enums.AnchorStyles;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
+// TODO document implementation and usage
+public class GroupBox extends Control {
 
-public class GroupBox extends wfControl {
     public final wfPanel Controls;
     private final TitledBorder border;
     public AnchorStyles Anchor;

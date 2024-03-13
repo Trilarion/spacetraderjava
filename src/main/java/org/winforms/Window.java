@@ -8,38 +8,36 @@ import javax.swing.*;
 import java.awt.*;
 
 // TODO documentation of usage
-public class wfWindow extends wfControl implements wfPane {
+public class Window extends Control implements Pane {
 
-    protected final wfPanel Controls;
+    protected final wfPanel controls;
     private final JFrame frame;
     protected Integer Left, Top;
-    protected FormWindowState WindowState;
+    protected FormWindowState windowState;
     DialogResult result;
     // Must encapsulate most of these.
-    private SizeF AutoScaleBaseSize;
-    private FormBorderStyle FormBorderStyle;
-    private boolean ControlBox;
-    private boolean MinimizeBox;
-    private boolean MaximizeBox;
-    private EventHandler<Object, CancelEventData> Closing;
-    private String Title;
+    private Dimension autoScaleBaseSize;
+    private FormBorderStyle formBorderStyle;
+    private boolean controlBox;
+    private boolean minimizeBox;
+    private boolean maximizeBox;
+    private EventHandler<Object, CancelEventData> closing;
+    private String title;
     private EventHandler<Object, EventData> onLoad;
 
-    public wfWindow() {
+    public Window() {
         // super(new WinformJPanel());
         super(new JFrame());
         frame = (JFrame) swingComponent;
         // panel = (WinformJPanel)swingVersion;
         wfPanel panel = new wfPanel(this);
         frame.getContentPane().add(panel, BorderLayout.CENTER);
-        Controls = panel;
+        controls = panel;
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    // ///////////// implementation ends here.
-
-    public void ShowWindow() {
+    public void showWindow() {
         EventHandler<Object, EventData> loadHandler = onLoad;
         if (loadHandler != null) {
             loadHandler.handle(this, null);
@@ -54,25 +52,25 @@ public class wfWindow extends wfControl implements wfPane {
         frame.setLocationRelativeTo(null);
     }
 
-    public void Close() {
+    public void close() {
         // TODO am I sure I want this?
         System.exit(0);
     }
 
-    public SizeF getAutoScaleBaseSize() {
-        return AutoScaleBaseSize;
+    public Dimension getAutoScaleBaseSize() {
+        return autoScaleBaseSize;
     }
 
-    public void setAutoScaleBaseSize(SizeF autoScaleBaseSize) {
-        AutoScaleBaseSize = autoScaleBaseSize;
+    public void setAutoScaleBaseSize(Dimension autoScaleBaseSize) {
+        this.autoScaleBaseSize = autoScaleBaseSize;
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
     }
 
     public void setLoad(EventHandler<Object, EventData> load) {
@@ -80,43 +78,43 @@ public class wfWindow extends wfControl implements wfPane {
     }
 
     public EventHandler<Object, CancelEventData> getClosing() {
-        return Closing;
+        return closing;
     }
 
     public void setClosing(EventHandler<Object, CancelEventData> closing) {
-        Closing = closing;
+        this.closing = closing;
     }
 
     public void setStartPosition(FormStartPosition startPosition) {
         // TODO implementation?
     }
 
-    public void setMenu(MainMenu menu) {
+    public void setMenu(MenuBar menu) {
         frame.getContentPane().add(menu.asSwingObject(), BorderLayout.PAGE_START);
     }
 
     public boolean getControlBox() {
-        return ControlBox;
+        return controlBox;
     }
 
     public void setControlBox(boolean controlBox) {
-        ControlBox = controlBox;
+        this.controlBox = controlBox;
     }
 
     public boolean getMinimizeBox() {
-        return MinimizeBox;
+        return minimizeBox;
     }
 
     public void setMinimizeBox(boolean minimizeBox) {
-        MinimizeBox = minimizeBox;
+        this.minimizeBox = minimizeBox;
     }
 
     public boolean getMaximizeBox() {
-        return MaximizeBox;
+        return maximizeBox;
     }
 
     public void setMaximizeBox(boolean maximizeBox) {
-        MaximizeBox = maximizeBox;
+        this.maximizeBox = maximizeBox;
     }
 
     public void setIcon(Icon icon) {
@@ -125,11 +123,11 @@ public class wfWindow extends wfControl implements wfPane {
     }
 
     public FormBorderStyle getFormBorderStyle() {
-        return FormBorderStyle;
+        return formBorderStyle;
     }
 
     public void setFormBorderStyle(FormBorderStyle formBorderStyle) {
-        FormBorderStyle = formBorderStyle;
+        this.formBorderStyle = formBorderStyle;
     }
 
     public void setClientSize(Dimension clientSize) {
@@ -159,7 +157,7 @@ public class wfWindow extends wfControl implements wfPane {
         result = dialogResult;
     }
 
-    protected enum FormWindowState {
+    protected enum FormWindowState {  // TODO need for this
         Normal
     }
 }

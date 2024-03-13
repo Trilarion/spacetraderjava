@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.net.URL;
 
 // TODO documentation of usage
-public class wfBitmap extends wfImage implements Icon, Serializable {
+public class Bitmap extends Image implements Icon, Serializable {
 
     private static final long serialVersionUID = 2134761799614301086L;
     final URL imageUrl;
@@ -19,12 +19,12 @@ public class wfBitmap extends wfImage implements Icon, Serializable {
     transient boolean transSet = false;
     Color transparent = null;
 
-    public wfBitmap(wfImage source) {
-        image = ((wfBitmap) source).image;  // TODO casts necessary?
-        imageUrl = ((wfBitmap) source).imageUrl;
+    public Bitmap(Image source) {
+        image = ((Bitmap) source).image;  // TODO casts necessary?
+        imageUrl = ((Bitmap) source).imageUrl;
     }
 
-    public wfBitmap(String fileName) {
+    public Bitmap(String fileName) { // TODO move the reading of the Image to some static helper class
         try {
             File input = new File(fileName);
             imageUrl = input.toURI().toURL();
@@ -34,7 +34,7 @@ public class wfBitmap extends wfImage implements Icon, Serializable {
         }
     }
 
-    public wfBitmap(URL imageUrl) {
+    public Bitmap(URL imageUrl) {
         try {
             this.imageUrl = imageUrl;
             image = ImageIO.read(imageUrl);
@@ -44,7 +44,7 @@ public class wfBitmap extends wfImage implements Icon, Serializable {
     }
 
     @Override
-    public Image asSwingImage() {
+    public java.awt.Image asSwingImage() {
         return image;
     }
 
@@ -103,7 +103,7 @@ public class wfBitmap extends wfImage implements Icon, Serializable {
         setTransparentColor(transparent);
     }
 
-    public int ToArgb(int col, int row) {
+    public int toArgb(int col, int row) {
         // note that alpha is ignored.
         return image.getRGB(col, row);
     }

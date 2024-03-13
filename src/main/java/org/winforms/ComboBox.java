@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class ComboBox extends wfControl {
+public class ComboBox extends Control {
     public final DefaultComboBoxModel Items = new DefaultComboBoxModel<Object>();
     public ComboBoxStyle DropDownStyle;
 

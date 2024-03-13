@@ -5,8 +5,9 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 // TODO documentation of usage
-public class TextBox extends wfControl {
-    public TextBox() {
+public class TextField extends Control {
+
+    public TextField() {
         super(new JTextField());
     }
 
@@ -18,12 +19,12 @@ public class TextBox extends wfControl {
 
             @Override
             public void insertUpdate(DocumentEvent e) {
-                valueChanged.handle(TextBox.this, null);
+                valueChanged.handle(TextField.this, null);
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                valueChanged.handle(TextBox.this, null);
+                valueChanged.handle(TextField.this, null);
             }
         });
     }

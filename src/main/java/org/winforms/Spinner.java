@@ -10,12 +10,13 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 // TODO control in name, better name?
-public class NumericUpDown extends wfControl {
-    private final SpinnerNumberModel model = new SpinnerNumberModel();
-    public HorizontalAlignment TextAlign;
-    public boolean ThousandsSeparator;
+public class Spinner extends Control {
 
-    public NumericUpDown() {
+    private final SpinnerNumberModel model = new SpinnerNumberModel();
+    public HorizontalAlignment textAlignment;
+    public boolean thousandsSeparator;
+
+    public Spinner() {
         super(new JSpinner());
         JSpinner spinner = asJSpinner();
         spinner.setModel(model);
@@ -36,7 +37,7 @@ public class NumericUpDown extends wfControl {
         });
     }
 
-    public void Select(int i, int length) {
+    public void select(int i, int length) {
         // TODO implement
     }
 
@@ -44,7 +45,7 @@ public class NumericUpDown extends wfControl {
         asJSpinner().addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                valueChanged.handle(NumericUpDown.this, null);
+                valueChanged.handle(Spinner.this, null);
             }
         });
     }

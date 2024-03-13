@@ -4,20 +4,19 @@ import org.winforms.enums.BorderStyle;
 
 import java.awt.Font;
 import java.awt.*;
-import java.awt.event.MouseListener;
 
 // TODO documentation of usage
-public class wfControl {  // make generic for the type of component that we get
+public class Control {  // make generic for the type of component that we get
 
     protected final Component swingComponent;
     EventHandler<Object, EventData> click;
     EventHandler<Object, EventData> doubleClick;
-    private String Name;
-    private Color ForeColor;
+    private String name;
+    private Color foregroundColor;
     private int tabIndex;
-    private Color BackColor;
+    private Color backgroundColor;
 
-    public wfControl(Component swingComponent) {
+    public Control(Component swingComponent) {
         super();
         this.swingComponent = swingComponent;
     }
@@ -26,8 +25,8 @@ public class wfControl {  // make generic for the type of component that we get
         this.doubleClick = doubleClick;
     }
 
-    public MouseListener getMouseListener() {
-        return new wfMouseListener(this, click, doubleClick);
+    public java.awt.event.MouseListener getMouseListener() {
+        return new MouseListener(this, click, doubleClick);
     }
 
     public int getTabIndex() {
@@ -42,15 +41,15 @@ public class wfControl {  // make generic for the type of component that we get
         return swingComponent;
     }
 
-    public Color getBackColor() {
-        return BackColor;
+    public Color getBackgroundColor() {
+        return backgroundColor;
     }
 
     /**
      * TODO not really deprecated, just doesn't work.
      */
-    public void setBackColor(Color backColor) {
-        BackColor = backColor;
+    public void setBackgroundColor(Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
     }
 
     public org.winforms.Font getFont() {
@@ -62,12 +61,12 @@ public class wfControl {  // make generic for the type of component that we get
         swingComponent.setFont(font);
     }
 
-    public Color getForeColor() {
-        return ForeColor;
+    public Color getForegroundColor() {
+        return foregroundColor;
     }
 
-    public void setForeColor(Color foreColor) {
-        ForeColor = foreColor;
+    public void setForegroundColor(Color foregroundColor) {
+        this.foregroundColor = foregroundColor;
     }
 
     public int getHeight() {
@@ -91,14 +90,14 @@ public class wfControl {  // make generic for the type of component that we get
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     /**
      * I think this is nothing.
      */
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public int getTop() {
@@ -129,7 +128,7 @@ public class wfControl {  // make generic for the type of component that we get
         setSize(size);
     }
 
-    public void ResumeLayout(boolean b) {
+    public void resumeLayout(boolean b) {
         // TODO implementation?
     }
 
@@ -178,7 +177,7 @@ public class wfControl {  // make generic for the type of component that we get
         swingComponent.setFocusable(tabStop);
     }
 
-    public void SuspendLayout() {
+    public void suspendLayout() {
         // TODO implementation?
         
     }

@@ -4,7 +4,7 @@ import org.spacetrader.util.Convertor;
 import org.spacetrader.util.Lisp;
 import org.winforms.ImageListStreamer;
 import org.winforms.ResourceManager;
-import org.winforms.wfImage;
+import org.winforms.Image;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -29,10 +29,10 @@ public class ImageStreamResourceManager extends ResourceManager {
                 return left.compareTo(right);
             }
         });
-        Iterable<wfImage> images = Lisp.map(ls, new Convertor<>() {
+        Iterable<Image> images = Lisp.map(ls, new Convertor<>() {
             @Override
-            public wfImage convert(Entry<Object, Object> entry) {
-                return (wfImage) getImage((String) entry.getValue());
+            public Image convert(Entry<Object, Object> entry) {
+                return (Image) getImage((String) entry.getValue());
             }
         });
         return new ImageListStreamer(images);
