@@ -672,7 +672,7 @@ public class FormMonster extends form {
 
     private void SystemLinkClicked(Object sender, LinkLabelLinkClickedEventData e) {
         game.setSelectedSystemByName(e.Link.linkData.toString());
-        game.getParentWindow().UpdateAll();
+        game.getParentWindow().updateAll();
         Close();
     }
 

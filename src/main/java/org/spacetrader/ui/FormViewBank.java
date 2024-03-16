@@ -250,7 +250,7 @@ public class FormViewBank extends form {
                 commander.setCash(commander.getCash() + form.Amount());
                 commander.setDebt(commander.getDebt() + form.Amount());
                 UpdateAll();
-                game.getParentWindow().UpdateAll();
+                game.getParentWindow().updateAll();
             }
         }
     }
@@ -264,7 +264,7 @@ public class FormViewBank extends form {
                 commander.setCash(commander.getCash() - form.Amount());
                 commander.setDebt(commander.getDebt() - form.Amount());
                 UpdateAll();
-                game.getParentWindow().UpdateAll();
+                game.getParentWindow().updateAll();
             }
         }
     }
@@ -282,6 +282,6 @@ public class FormViewBank extends form {
             commander.NoClaim(0);
         }
         UpdateAll();
-        game.getParentWindow().UpdateAll();
+        game.getParentWindow().updateAll();
     }
 }

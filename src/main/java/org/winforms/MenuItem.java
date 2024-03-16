@@ -5,10 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class MenuItem {
+public class MenuItem {  // TODO composition or inheritance, in this case inheritance might be better?
 
-    public Shortcut shortcut;
-    public int index;
     protected JMenuItem swingVersion;
 
     public MenuItem() {

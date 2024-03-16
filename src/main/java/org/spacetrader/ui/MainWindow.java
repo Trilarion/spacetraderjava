@@ -23,6 +23,7 @@ import org.winforms.Button;
 import org.winforms.FileDialog;
 import org.winforms.Font;
 import org.winforms.Graphics;
+import org.winforms.Icon;
 import org.winforms.Image;
 import org.winforms.Label;
 import org.winforms.MenuBar;
@@ -31,7 +32,9 @@ import org.winforms.Window;
 import org.winforms.*;
 import org.winforms.enums.*;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.Hashtable;
 
@@ -43,9 +46,9 @@ public class MainWindow extends Window {
     private final Label[] labelTargetPrice;
     private final Label[] labelTargetDiff;
     private final Label[] labelTargetPct;
-    private final Button[] buttonSellQty;
+    private final Button[] buttonSellQuantity;
     private final Button[] buttonSellAll;
-    private final Button[] buttonBuyQty;
+    private final Button[] buttonBuyQuantity;
     private final Button[] buttonBuyMax;
     private final String SAVE_ARRIVAL = "autosave_arrival.sav";
     private final String SAVE_DEPARTURE = "autosave_departure.sav";
@@ -126,15 +129,15 @@ public class MainWindow extends Window {
 
     public MainWindow() {
         ResourceManager resources = new ResourceManager(Main.class);
+        
+        // layout
         MenuBar menuMain = new MenuBar();
         SubMenu menuGame = new SubMenu();
         MenuItem menuGameNew = new MenuItem();
         MenuItem menuGameLoad = new MenuItem();
         menuGameSave = new MenuItem();
         menuGameSaveAs = new MenuItem();
-        MenuItem menuGameLine1 = new MenuItem();
         menuRetire = new MenuItem();
-        MenuItem menuGameLine2 = new MenuItem();
         MenuItem menuGameExit = new MenuItem();
         SubMenu menuView = new SubMenu();
         menuViewCommander = new MenuItem();
@@ -142,9 +145,7 @@ public class MainWindow extends Window {
         menuViewPersonnel = new MenuItem();
         menuViewQuests = new MenuItem();
         menuViewBank = new MenuItem();
-        MenuItem menuViewLine1 = new MenuItem();
         MenuItem menuHighScores = new MenuItem();
-        MenuItem menuViewLine2 = new MenuItem();
         MenuItem menuOptions = new MenuItem();
         SubMenu menuHelp = new SubMenu();
         MenuItem menuHelpAbout = new MenuItem();
@@ -192,79 +193,79 @@ public class MainWindow extends Window {
         Label labelTargetDiff9 = new Label();
         Label labelTargetPrice9 = new Label();
         Button buttonBuyMax9 = new Button();
-        Button buttonBuyQty9 = new Button();
+        Button buttonBuyQuantity9 = new Button();
         Label labelBuyPrice9 = new Label();
         Button buttonSellAll9 = new Button();
-        Button buttonSellQty9 = new Button();
+        Button buttonSellQuantity9 = new Button();
         Label labelSellPrice9 = new Label();
         Label labelTargetPct8 = new Label();
         Label labelTargetDiff8 = new Label();
         Label labelTargetPrice8 = new Label();
         Button buttonBuyMax8 = new Button();
-        Button buttonBuyQty8 = new Button();
+        Button buttonBuyQuantity8 = new Button();
         Label labelBuyPrice8 = new Label();
         Button buttonSellAll8 = new Button();
-        Button buttonSellQty8 = new Button();
+        Button buttonSellQuantity8 = new Button();
         Label labelSellPrice8 = new Label();
         Label labelTargetPct7 = new Label();
         Label labelTargetDiff7 = new Label();
         Label labelTargetPrice7 = new Label();
         Button buttonBuyMax7 = new Button();
-        Button buttonBuyQty7 = new Button();
+        Button buttonBuyQuantity7 = new Button();
         Label labelBuyPrice7 = new Label();
         Button buttonSellAll7 = new Button();
-        Button buttonSellQty7 = new Button();
+        Button buttonSellQuantity7 = new Button();
         Label labelSellPrice7 = new Label();
         Label labelTargetPct6 = new Label();
         Label labelTargetDiff6 = new Label();
         Label labelTargetPrice6 = new Label();
         Button buttonBuyMax6 = new Button();
-        Button buttonBuyQty6 = new Button();
+        Button buttonBuyQuantity6 = new Button();
         Label labelBuyPrice6 = new Label();
         Button buttonSellAll6 = new Button();
-        Button buttonSellQty6 = new Button();
+        Button buttonSellQuantity6 = new Button();
         Label labelSellPrice6 = new Label();
         Label labelTargetPct5 = new Label();
         Label labelTargetDiff5 = new Label();
         Label labelTargetPrice5 = new Label();
         Button buttonBuyMax5 = new Button();
-        Button buttonBuyQty5 = new Button();
+        Button buttonBuyQuantity5 = new Button();
         Label labelBuyPrice5 = new Label();
         Button buttonSellAll5 = new Button();
-        Button buttonSellQty5 = new Button();
+        Button buttonSellQuantity5 = new Button();
         Label labelSellPrice5 = new Label();
         Label labelTargetPct4 = new Label();
         Label labelTargetDiff4 = new Label();
         Label labelTargetPrice4 = new Label();
         Button buttonBuyMax4 = new Button();
-        Button buttonBuyQty4 = new Button();
+        Button buttonBuyQuantity4 = new Button();
         Label labelBuyPrice4 = new Label();
         Button buttonSellAll4 = new Button();
-        Button buttonSellQty4 = new Button();
+        Button buttonSellQuantity4 = new Button();
         Label labelSellPrice4 = new Label();
         Label labelTargetPct3 = new Label();
         Label labelTargetDiff3 = new Label();
         Label labelTargetPrice3 = new Label();
         Button buttonBuyMax3 = new Button();
-        Button buttonBuyQty3 = new Button();
+        Button buttonBuyQuantity3 = new Button();
         Label labelBuyPrice3 = new Label();
         Button buttonSellAll3 = new Button();
-        Button buttonSellQty3 = new Button();
+        Button buttonSellQuantity3 = new Button();
         Label labelSellPrice3 = new Label();
         Label labelTargetPct2 = new Label();
         Label labelTargetDiff2 = new Label();
         Label labelTargetPrice2 = new Label();
         Button buttonBuyMax2 = new Button();
-        Button buttonBuyQty2 = new Button();
+        Button buttonBuyQuantity2 = new Button();
         Label labelBuyPrice2 = new Label();
         Button buttonSellAll2 = new Button();
-        Button buttonSellQty2 = new Button();
+        Button buttonSellQuantity2 = new Button();
         Label labelSellPrice2 = new Label();
         Label labelTargetPct1 = new Label();
         Label labelTargetDiff1 = new Label();
         Label labelTargetPrice1 = new Label();
         Button buttonBuyMax1 = new Button();
-        Button buttonBuyQty1 = new Button();
+        Button buttonBuyQuantity1 = new Button();
         Label labelBuyPrice1 = new Label();
         Label labelTargetPctLabel = new Label();
         Label labelTargetDiffLabel = new Label();
@@ -273,13 +274,13 @@ public class MainWindow extends Window {
         Label labelTargetDiff0 = new Label();
         Label labelTargetPrice0 = new Label();
         Button buttonBuyMax0 = new Button();
-        Button buttonBuyQty0 = new Button();
+        Button buttonBuyQuantity0 = new Button();
         Label labelBuyPrice0 = new Label();
         Button buttonSellAll1 = new Button();
-        Button buttonSellQty1 = new Button();
+        Button buttonSellQuantity1 = new Button();
         Label labelSellPrice1 = new Label();
         Button buttonSellAll0 = new Button();
-        Button buttonSellQty0 = new Button();
+        Button buttonSellQuantity0 = new Button();
         Label labelSellPrice0 = new Label();
         Label labelTradeTarget = new Label();
         labelBuy = new Label();
@@ -345,14 +346,15 @@ public class MainWindow extends Window {
         // menuMain
         menuMain.addAll(menuGame, menuView, menuHelp);
         // menuGame
-        menuGame.index = 0;
-        menuGame.addAll(
-                menuGameNew, menuGameLoad, menuGameSave, menuGameSaveAs,
-                menuGameLine1, menuRetire, menuGameLine2, menuGameExit);
-        menuGame.setText("&Game");
+        menuGame.addAll(menuGameNew, menuGameLoad, menuGameSave, menuGameSaveAs);
+        menuGame.addSeparator();
+        menuGame.add(menuRetire);
+        menuGame.addSeparator();
+        menuGame.add(menuGameExit);
+        menuGame.setText("Game");
         // menuGameNew
-        menuGameNew.index = 0;
-        menuGameNew.setText("&New...");
+        menuGameNew.setText("New");
+        menuGameNew.asJMenuItem().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         menuGameNew.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
@@ -360,9 +362,8 @@ public class MainWindow extends Window {
             }
         });
         // menuGameLoad
-        menuGameLoad.index = 1;
-        menuGameLoad.shortcut = Shortcut.CtrlL;
-        menuGameLoad.setText("&Load...");
+        menuGameLoad.setText("Load");
+        menuGameLoad.asJMenuItem().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         menuGameLoad.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
@@ -371,9 +372,8 @@ public class MainWindow extends Window {
         });
         // menuGameSave
         menuGameSave.setEnabled(false);
-        menuGameSave.index = 2;
-        menuGameSave.shortcut = Shortcut.CtrlS;
-        menuGameSave.setText("&Save");
+        menuGameSave.setText("Save");
+        menuGameSave.asJMenuItem().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         menuGameSave.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
@@ -382,34 +382,25 @@ public class MainWindow extends Window {
         });
         // menuGameSaveAs
         menuGameSaveAs.setEnabled(false);
-        menuGameSaveAs.index = 3;
-        menuGameSaveAs.shortcut = Shortcut.CtrlA;
-        menuGameSaveAs.setText("Save &As...");
+        menuGameSaveAs.setText("Save As");
         menuGameSaveAs.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 menuGameSaveAs_Click(sender, data);
             }
         });
-        // menuGameLine1
-        menuGameLine1.index = 4;
-        menuGameLine1.setText("-");
         // menuRetire
         menuRetire.setEnabled(false);
-        menuRetire.index = 5;
-        menuRetire.setText("&Retire");
+        menuRetire.setText("Retire");
         menuRetire.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 menuRetire_Click(sender, data);
             }
         });
-        // menuGameLine2
-        menuGameLine2.index = 6;
-        menuGameLine2.setText("-");
         // menuGameExit
-        menuGameExit.index = 7;
-        menuGameExit.setText("E&xit");
+        menuGameExit.setText("Exit");
+        menuGameExit.asJMenuItem().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         menuGameExit.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
@@ -417,15 +408,14 @@ public class MainWindow extends Window {
             }
         });
         // menuView
-        menuView.index = 1;
-        menuView.addAll(
-                menuViewCommander, menuViewShip, menuViewPersonnel, menuViewQuests,
-                menuViewBank, menuViewLine1, menuHighScores, menuViewLine2, menuOptions);
-        menuView.setText("&View");
+        menuView.addAll(menuViewCommander, menuViewShip, menuViewPersonnel, menuViewQuests, menuViewBank);
+        menuView.addSeparator();
+        menuView.add(menuHighScores);
+        menuView.addSeparator();
+        menuView.add(menuOptions);
+        menuView.setText("View");
         // menuViewCommander
         menuViewCommander.setEnabled(false);
-        menuViewCommander.index = 0;
-        menuViewCommander.shortcut = Shortcut.CtrlC;
         menuViewCommander.setText("&Commander Status");
         menuViewCommander.setClick(new EventHandler<>() {
             @Override
@@ -435,9 +425,7 @@ public class MainWindow extends Window {
         });
         // menuViewShip
         menuViewShip.setEnabled(false);
-        menuViewShip.index = 1;
-        menuViewShip.shortcut = Shortcut.CtrlH;
-        menuViewShip.setText("&Ship");
+        menuViewShip.setText("Ship");
         menuViewShip.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
@@ -446,9 +434,7 @@ public class MainWindow extends Window {
         });
         // menuViewPersonnel
         menuViewPersonnel.setEnabled(false);
-        menuViewPersonnel.index = 2;
-        menuViewPersonnel.shortcut = Shortcut.CtrlP;
-        menuViewPersonnel.setText("&Personnel");
+        menuViewPersonnel.setText("Personnel");
         menuViewPersonnel.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
@@ -457,9 +443,7 @@ public class MainWindow extends Window {
         });
         // menuViewQuests
         menuViewQuests.setEnabled(false);
-        menuViewQuests.index = 3;
-        menuViewQuests.shortcut = Shortcut.CtrlQ;
-        menuViewQuests.setText("&Quests");
+        menuViewQuests.setText("Quests");
         menuViewQuests.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
@@ -468,32 +452,22 @@ public class MainWindow extends Window {
         });
         // menuViewBank
         menuViewBank.setEnabled(false);
-        menuViewBank.index = 4;
-        menuViewBank.shortcut = Shortcut.CtrlB;
-        menuViewBank.setText("&Bank");
+        menuViewBank.setText("Bank");
         menuViewBank.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 menuViewBank_Click(sender, data);
             }
         });
-        // menuViewLine1
-        menuViewLine1.index = 5;
-        menuViewLine1.setText("-");
         // menuHighScores
-        menuHighScores.index = 6;
-        menuHighScores.setText("&High Scores");
+        menuHighScores.setText("High Scores");
         menuHighScores.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 menuHighScores_Click(sender, data);
             }
         });
-        // menuViewLine2
-        menuViewLine2.index = 7;
-        menuViewLine2.setText("-");
         // menuOptions
-        menuOptions.index = 8;
         menuOptions.setText("Options");
         menuOptions.setClick(new EventHandler<>() {
             @Override
@@ -502,12 +476,11 @@ public class MainWindow extends Window {
             }
         });
         // menuHelp
-        menuHelp.index = 2;
         menuHelp.add(menuHelpAbout);
-        menuHelp.setText("&Help");
+        menuHelp.setText("Help");
         // menuHelpAbout
-        menuHelpAbout.index = 0;
-        menuHelpAbout.setText("&About Space Trader");
+        menuHelpAbout.setText("About Space Trader");
+        menuHelpAbout.asJMenuItem().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
         menuHelpAbout.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
@@ -553,7 +526,7 @@ public class MainWindow extends Window {
             }
         });
         // statusBar
-        statusBar.setLocation(new Point(0, 481));
+        statusBar.setLocation(new Point(0, 481)); // TODO layout hardcoded, use layout manager
         statusBar.setName("statusBar");
         statusBar.addAll(Arrays.asList(statusBarPanelCash, statusBarPanelBays, statusBarPanelCosts, statusBarPanelExtra));
         statusBar.showPanels = true;
@@ -831,7 +804,7 @@ public class MainWindow extends Window {
         // labelTargetSizeLabel
         labelTargetSizeLabel.setAutoSize(true);
         labelTargetSizeLabel.setFont(
-                new Font("Microsoft Sans Serif", FontStyle.Bold, (int) 8.25F));
+                new Font("Microsoft Sans Serif", FontStyle.Bold, (int) 8.25F)); // TODO many things repeating, like setAutoSize, setFont, ... move to convenience function
         labelTargetSizeLabel.setLocation(new Point(8, 32));
         labelTargetSizeLabel.setName("labelTargetSizeLabel");
         labelTargetSizeLabel.setSize(new Dimension(31, 16));
@@ -839,7 +812,7 @@ public class MainWindow extends Window {
         labelTargetSizeLabel.setText("Size:");
         // labelTargetName
         labelTargetName.setLocation(new Point(88, 16));
-        labelTargetName.setName("labelTargetName");
+        labelTargetName.setName("labelTargetName");  // TODO are these names really used for anything?
         labelTargetName.setSize(new Dimension(65, 13));
         labelTargetName.setTabIndex(1);
         labelTargetName.setText("Tarchannen");
@@ -862,79 +835,79 @@ public class MainWindow extends Window {
         boxCargo.Controls.add(labelTargetDiff9);
         boxCargo.Controls.add(labelTargetPrice9);
         boxCargo.Controls.add(buttonBuyMax9);
-        boxCargo.Controls.add(buttonBuyQty9);
+        boxCargo.Controls.add(buttonBuyQuantity9);
         boxCargo.Controls.add(labelBuyPrice9);
         boxCargo.Controls.add(buttonSellAll9);
-        boxCargo.Controls.add(buttonSellQty9);
+        boxCargo.Controls.add(buttonSellQuantity9);
         boxCargo.Controls.add(labelSellPrice9);
         boxCargo.Controls.add(labelTargetPct8);
         boxCargo.Controls.add(labelTargetDiff8);
         boxCargo.Controls.add(labelTargetPrice8);
         boxCargo.Controls.add(buttonBuyMax8);
-        boxCargo.Controls.add(buttonBuyQty8);
+        boxCargo.Controls.add(buttonBuyQuantity8);
         boxCargo.Controls.add(labelBuyPrice8);
         boxCargo.Controls.add(buttonSellAll8);
-        boxCargo.Controls.add(buttonSellQty8);
+        boxCargo.Controls.add(buttonSellQuantity8);
         boxCargo.Controls.add(labelSellPrice8);
         boxCargo.Controls.add(labelTargetPct7);
         boxCargo.Controls.add(labelTargetDiff7);
         boxCargo.Controls.add(labelTargetPrice7);
         boxCargo.Controls.add(buttonBuyMax7);
-        boxCargo.Controls.add(buttonBuyQty7);
+        boxCargo.Controls.add(buttonBuyQuantity7);
         boxCargo.Controls.add(labelBuyPrice7);
         boxCargo.Controls.add(buttonSellAll7);
-        boxCargo.Controls.add(buttonSellQty7);
+        boxCargo.Controls.add(buttonSellQuantity7);
         boxCargo.Controls.add(labelSellPrice7);
         boxCargo.Controls.add(labelTargetPct6);
         boxCargo.Controls.add(labelTargetDiff6);
         boxCargo.Controls.add(labelTargetPrice6);
         boxCargo.Controls.add(buttonBuyMax6);
-        boxCargo.Controls.add(buttonBuyQty6);
+        boxCargo.Controls.add(buttonBuyQuantity6);
         boxCargo.Controls.add(labelBuyPrice6);
         boxCargo.Controls.add(buttonSellAll6);
-        boxCargo.Controls.add(buttonSellQty6);
+        boxCargo.Controls.add(buttonSellQuantity6);
         boxCargo.Controls.add(labelSellPrice6);
         boxCargo.Controls.add(labelTargetPct5);
         boxCargo.Controls.add(labelTargetDiff5);
         boxCargo.Controls.add(labelTargetPrice5);
         boxCargo.Controls.add(buttonBuyMax5);
-        boxCargo.Controls.add(buttonBuyQty5);
+        boxCargo.Controls.add(buttonBuyQuantity5);
         boxCargo.Controls.add(labelBuyPrice5);
         boxCargo.Controls.add(buttonSellAll5);
-        boxCargo.Controls.add(buttonSellQty5);
+        boxCargo.Controls.add(buttonSellQuantity5);
         boxCargo.Controls.add(labelSellPrice5);
         boxCargo.Controls.add(labelTargetPct4);
         boxCargo.Controls.add(labelTargetDiff4);
         boxCargo.Controls.add(labelTargetPrice4);
         boxCargo.Controls.add(buttonBuyMax4);
-        boxCargo.Controls.add(buttonBuyQty4);
+        boxCargo.Controls.add(buttonBuyQuantity4);
         boxCargo.Controls.add(labelBuyPrice4);
         boxCargo.Controls.add(buttonSellAll4);
-        boxCargo.Controls.add(buttonSellQty4);
+        boxCargo.Controls.add(buttonSellQuantity4);
         boxCargo.Controls.add(labelSellPrice4);
         boxCargo.Controls.add(labelTargetPct3);
         boxCargo.Controls.add(labelTargetDiff3);
         boxCargo.Controls.add(labelTargetPrice3);
         boxCargo.Controls.add(buttonBuyMax3);
-        boxCargo.Controls.add(buttonBuyQty3);
+        boxCargo.Controls.add(buttonBuyQuantity3);
         boxCargo.Controls.add(labelBuyPrice3);
         boxCargo.Controls.add(buttonSellAll3);
-        boxCargo.Controls.add(buttonSellQty3);
+        boxCargo.Controls.add(buttonSellQuantity3);
         boxCargo.Controls.add(labelSellPrice3);
         boxCargo.Controls.add(labelTargetPct2);
         boxCargo.Controls.add(labelTargetDiff2);
         boxCargo.Controls.add(labelTargetPrice2);
         boxCargo.Controls.add(buttonBuyMax2);
-        boxCargo.Controls.add(buttonBuyQty2);
+        boxCargo.Controls.add(buttonBuyQuantity2);
         boxCargo.Controls.add(labelBuyPrice2);
         boxCargo.Controls.add(buttonSellAll2);
-        boxCargo.Controls.add(buttonSellQty2);
+        boxCargo.Controls.add(buttonSellQuantity2);
         boxCargo.Controls.add(labelSellPrice2);
         boxCargo.Controls.add(labelTargetPct1);
         boxCargo.Controls.add(labelTargetDiff1);
         boxCargo.Controls.add(labelTargetPrice1);
         boxCargo.Controls.add(buttonBuyMax1);
-        boxCargo.Controls.add(buttonBuyQty1);
+        boxCargo.Controls.add(buttonBuyQuantity1);
         boxCargo.Controls.add(labelBuyPrice1);
         boxCargo.Controls.add(labelTargetPctLabel);
         boxCargo.Controls.add(labelTargetDiffLabel);
@@ -943,13 +916,13 @@ public class MainWindow extends Window {
         boxCargo.Controls.add(labelTargetDiff0);
         boxCargo.Controls.add(labelTargetPrice0);
         boxCargo.Controls.add(buttonBuyMax0);
-        boxCargo.Controls.add(buttonBuyQty0);
+        boxCargo.Controls.add(buttonBuyQuantity0);
         boxCargo.Controls.add(labelBuyPrice0);
         boxCargo.Controls.add(buttonSellAll1);
-        boxCargo.Controls.add(buttonSellQty1);
+        boxCargo.Controls.add(buttonSellQuantity1);
         boxCargo.Controls.add(labelSellPrice1);
         boxCargo.Controls.add(buttonSellAll0);
-        boxCargo.Controls.add(buttonSellQty0);
+        boxCargo.Controls.add(buttonSellQuantity0);
         boxCargo.Controls.add(labelSellPrice0);
         boxCargo.Controls.add(labelTradeTarget);
         boxCargo.Controls.add(labelBuy);
@@ -1032,14 +1005,14 @@ public class MainWindow extends Window {
                 buttonBuySell_Click(sender, data);
             }
         });
-        // buttonBuyQty9
-        buttonBuyQty9.setFlatStyle(FlatStyle.Flat);
-        buttonBuyQty9.setLocation(new Point(227, 272));
-        buttonBuyQty9.setName("buttonBuyQty9");
-        buttonBuyQty9.setSize(new Dimension(28, 22));
-        buttonBuyQty9.setTabIndex(50);
-        buttonBuyQty9.setText("88");
-        buttonBuyQty9.setClick(new EventHandler<>() {
+        // buttonBuyQuantity9
+        buttonBuyQuantity9.setFlatStyle(FlatStyle.Flat);
+        buttonBuyQuantity9.setLocation(new Point(227, 272));
+        buttonBuyQuantity9.setName("buttonBuyQuantity9");
+        buttonBuyQuantity9.setSize(new Dimension(28, 22));
+        buttonBuyQuantity9.setTabIndex(50);
+        buttonBuyQuantity9.setText("88");
+        buttonBuyQuantity9.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonBuySell_Click(sender, data);
@@ -1065,14 +1038,14 @@ public class MainWindow extends Window {
                 buttonBuySell_Click(sender, data);
             }
         });
-        // buttonSellQty9
-        buttonSellQty9.setFlatStyle(FlatStyle.Flat);
-        buttonSellQty9.setLocation(new Point(80, 272));
-        buttonSellQty9.setName("buttonSellQty9");
-        buttonSellQty9.setSize(new Dimension(28, 22));
-        buttonSellQty9.setTabIndex(48);
-        buttonSellQty9.setText("88");
-        buttonSellQty9.setClick(new EventHandler<>() {
+        // buttonSellQuantity9
+        buttonSellQuantity9.setFlatStyle(FlatStyle.Flat);
+        buttonSellQuantity9.setLocation(new Point(80, 272));
+        buttonSellQuantity9.setName("buttonSellQuantity9");
+        buttonSellQuantity9.setSize(new Dimension(28, 22));
+        buttonSellQuantity9.setTabIndex(48);
+        buttonSellQuantity9.setText("88");
+        buttonSellQuantity9.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonBuySell_Click(sender, data);
@@ -1119,14 +1092,14 @@ public class MainWindow extends Window {
                 buttonBuySell_Click(sender, data);
             }
         });
-        // buttonBuyQty8
-        buttonBuyQty8.setFlatStyle(FlatStyle.Flat);
-        buttonBuyQty8.setLocation(new Point(227, 248));
-        buttonBuyQty8.setName("buttonBuyQty8");
-        buttonBuyQty8.setSize(new Dimension(28, 22));
-        buttonBuyQty8.setTabIndex(46);
-        buttonBuyQty8.setText("88");
-        buttonBuyQty8.setClick(new EventHandler<>() {
+        // buttonBuyQuantity8
+        buttonBuyQuantity8.setFlatStyle(FlatStyle.Flat);
+        buttonBuyQuantity8.setLocation(new Point(227, 248));
+        buttonBuyQuantity8.setName("buttonBuyQuantity8");
+        buttonBuyQuantity8.setSize(new Dimension(28, 22));
+        buttonBuyQuantity8.setTabIndex(46);
+        buttonBuyQuantity8.setText("88");
+        buttonBuyQuantity8.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonBuySell_Click(sender, data);
@@ -1152,14 +1125,14 @@ public class MainWindow extends Window {
                 buttonBuySell_Click(sender, data);
             }
         });
-        // buttonSellQty8
-        buttonSellQty8.setFlatStyle(FlatStyle.Flat);
-        buttonSellQty8.setLocation(new Point(80, 248));
-        buttonSellQty8.setName("buttonSellQty8");
-        buttonSellQty8.setSize(new Dimension(28, 22));
-        buttonSellQty8.setTabIndex(44);
-        buttonSellQty8.setText("88");
-        buttonSellQty8.setClick(new EventHandler<>() {
+        // buttonSellQuantity8
+        buttonSellQuantity8.setFlatStyle(FlatStyle.Flat);
+        buttonSellQuantity8.setLocation(new Point(80, 248));
+        buttonSellQuantity8.setName("buttonSellQuantity8");
+        buttonSellQuantity8.setSize(new Dimension(28, 22));
+        buttonSellQuantity8.setTabIndex(44);
+        buttonSellQuantity8.setText("88");
+        buttonSellQuantity8.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonBuySell_Click(sender, data);
@@ -1208,14 +1181,14 @@ public class MainWindow extends Window {
                 buttonBuySell_Click(sender, data);
             }
         });
-        // buttonBuyQty7
-        buttonBuyQty7.setFlatStyle(FlatStyle.Flat);
-        buttonBuyQty7.setLocation(new Point(227, 224));
-        buttonBuyQty7.setName("buttonBuyQty7");
-        buttonBuyQty7.setSize(new Dimension(28, 22));
-        buttonBuyQty7.setTabIndex(42);
-        buttonBuyQty7.setText("88");
-        buttonBuyQty7.setClick(new EventHandler<>() {
+        // buttonBuyQuantity7
+        buttonBuyQuantity7.setFlatStyle(FlatStyle.Flat);
+        buttonBuyQuantity7.setLocation(new Point(227, 224));
+        buttonBuyQuantity7.setName("buttonBuyQuantity7");
+        buttonBuyQuantity7.setSize(new Dimension(28, 22));
+        buttonBuyQuantity7.setTabIndex(42);
+        buttonBuyQuantity7.setText("88");
+        buttonBuyQuantity7.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonBuySell_Click(sender, data);
@@ -1241,14 +1214,14 @@ public class MainWindow extends Window {
                 buttonBuySell_Click(sender, data);
             }
         });
-        // buttonSellQty7
-        buttonSellQty7.setFlatStyle(FlatStyle.Flat);
-        buttonSellQty7.setLocation(new Point(80, 224));
-        buttonSellQty7.setName("buttonSellQty7");
-        buttonSellQty7.setSize(new Dimension(28, 22));
-        buttonSellQty7.setTabIndex(40);
-        buttonSellQty7.setText("88");
-        buttonSellQty7.setClick(new EventHandler<>() {
+        // buttonSellQuantity7
+        buttonSellQuantity7.setFlatStyle(FlatStyle.Flat);
+        buttonSellQuantity7.setLocation(new Point(80, 224));
+        buttonSellQuantity7.setName("buttonSellQuantity7");
+        buttonSellQuantity7.setSize(new Dimension(28, 22));
+        buttonSellQuantity7.setTabIndex(40);
+        buttonSellQuantity7.setText("88");
+        buttonSellQuantity7.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonBuySell_Click(sender, data);
@@ -1295,14 +1268,14 @@ public class MainWindow extends Window {
                 buttonBuySell_Click(sender, data);
             }
         });
-        // buttonBuyQty6
-        buttonBuyQty6.setFlatStyle(FlatStyle.Flat);
-        buttonBuyQty6.setLocation(new Point(227, 200));
-        buttonBuyQty6.setName("buttonBuyQty6");
-        buttonBuyQty6.setSize(new Dimension(28, 22));
-        buttonBuyQty6.setTabIndex(38);
-        buttonBuyQty6.setText("88");
-        buttonBuyQty6.setClick(new EventHandler<>() {
+        // buttonBuyQuantity6
+        buttonBuyQuantity6.setFlatStyle(FlatStyle.Flat);
+        buttonBuyQuantity6.setLocation(new Point(227, 200));
+        buttonBuyQuantity6.setName("buttonBuyQuantity6");
+        buttonBuyQuantity6.setSize(new Dimension(28, 22));
+        buttonBuyQuantity6.setTabIndex(38);
+        buttonBuyQuantity6.setText("88");
+        buttonBuyQuantity6.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonBuySell_Click(sender, data);
@@ -1328,14 +1301,14 @@ public class MainWindow extends Window {
                 buttonBuySell_Click(sender, data);
             }
         });
-        // buttonSellQty6
-        buttonSellQty6.setFlatStyle(FlatStyle.Flat);
-        buttonSellQty6.setLocation(new Point(80, 200));
-        buttonSellQty6.setName("buttonSellQty6");
-        buttonSellQty6.setSize(new Dimension(28, 22));
-        buttonSellQty6.setTabIndex(36);
-        buttonSellQty6.setText("88");
-        buttonSellQty6.setClick(new EventHandler<>() {
+        // buttonSellQuantity6
+        buttonSellQuantity6.setFlatStyle(FlatStyle.Flat);
+        buttonSellQuantity6.setLocation(new Point(80, 200));
+        buttonSellQuantity6.setName("buttonSellQuantity6");
+        buttonSellQuantity6.setSize(new Dimension(28, 22));
+        buttonSellQuantity6.setTabIndex(36);
+        buttonSellQuantity6.setText("88");
+        buttonSellQuantity6.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonBuySell_Click(sender, data);
@@ -1382,14 +1355,14 @@ public class MainWindow extends Window {
                 buttonBuySell_Click(sender, data);
             }
         });
-        // buttonBuyQty5
-        buttonBuyQty5.setFlatStyle(FlatStyle.Flat);
-        buttonBuyQty5.setLocation(new Point(227, 176));
-        buttonBuyQty5.setName("buttonBuyQty5");
-        buttonBuyQty5.setSize(new Dimension(28, 22));
-        buttonBuyQty5.setTabIndex(34);
-        buttonBuyQty5.setText("88");
-        buttonBuyQty5.setClick(new EventHandler<>() {
+        // buttonBuyQuantity5
+        buttonBuyQuantity5.setFlatStyle(FlatStyle.Flat);
+        buttonBuyQuantity5.setLocation(new Point(227, 176));
+        buttonBuyQuantity5.setName("buttonBuyQuantity5");
+        buttonBuyQuantity5.setSize(new Dimension(28, 22));
+        buttonBuyQuantity5.setTabIndex(34);
+        buttonBuyQuantity5.setText("88");
+        buttonBuyQuantity5.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonBuySell_Click(sender, data);
@@ -1415,14 +1388,14 @@ public class MainWindow extends Window {
                 buttonBuySell_Click(sender, data);
             }
         });
-        // buttonSellQty5
-        buttonSellQty5.setFlatStyle(FlatStyle.Flat);
-        buttonSellQty5.setLocation(new Point(80, 176));
-        buttonSellQty5.setName("buttonSellQty5");
-        buttonSellQty5.setSize(new Dimension(28, 22));
-        buttonSellQty5.setTabIndex(32);
-        buttonSellQty5.setText("88");
-        buttonSellQty5.setClick(new EventHandler<>() {
+        // buttonSellQuantity5
+        buttonSellQuantity5.setFlatStyle(FlatStyle.Flat);
+        buttonSellQuantity5.setLocation(new Point(80, 176));
+        buttonSellQuantity5.setName("buttonSellQuantity5");
+        buttonSellQuantity5.setSize(new Dimension(28, 22));
+        buttonSellQuantity5.setTabIndex(32);
+        buttonSellQuantity5.setText("88");
+        buttonSellQuantity5.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonBuySell_Click(sender, data);
@@ -1469,14 +1442,14 @@ public class MainWindow extends Window {
                 buttonBuySell_Click(sender, data);
             }
         });
-        // buttonBuyQty4
-        buttonBuyQty4.setFlatStyle(FlatStyle.Flat);
-        buttonBuyQty4.setLocation(new Point(227, 152));
-        buttonBuyQty4.setName("buttonBuyQty4");
-        buttonBuyQty4.setSize(new Dimension(28, 22));
-        buttonBuyQty4.setTabIndex(30);
-        buttonBuyQty4.setText("88");
-        buttonBuyQty4.setClick(new EventHandler<>() {
+        // buttonBuyQuantity4
+        buttonBuyQuantity4.setFlatStyle(FlatStyle.Flat);
+        buttonBuyQuantity4.setLocation(new Point(227, 152));
+        buttonBuyQuantity4.setName("buttonBuyQuantity4");
+        buttonBuyQuantity4.setSize(new Dimension(28, 22));
+        buttonBuyQuantity4.setTabIndex(30);
+        buttonBuyQuantity4.setText("88");
+        buttonBuyQuantity4.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonBuySell_Click(sender, data);
@@ -1502,14 +1475,14 @@ public class MainWindow extends Window {
                 buttonBuySell_Click(sender, data);
             }
         });
-        // buttonSellQty4
-        buttonSellQty4.setFlatStyle(FlatStyle.Flat);
-        buttonSellQty4.setLocation(new Point(80, 152));
-        buttonSellQty4.setName("buttonSellQty4");
-        buttonSellQty4.setSize(new Dimension(28, 22));
-        buttonSellQty4.setTabIndex(28);
-        buttonSellQty4.setText("88");
-        buttonSellQty4.setClick(new EventHandler<>() {
+        // buttonSellQuantity4
+        buttonSellQuantity4.setFlatStyle(FlatStyle.Flat);
+        buttonSellQuantity4.setLocation(new Point(80, 152));
+        buttonSellQuantity4.setName("buttonSellQuantity4");
+        buttonSellQuantity4.setSize(new Dimension(28, 22));
+        buttonSellQuantity4.setTabIndex(28);
+        buttonSellQuantity4.setText("88");
+        buttonSellQuantity4.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonBuySell_Click(sender, data);
@@ -1556,14 +1529,14 @@ public class MainWindow extends Window {
                 buttonBuySell_Click(sender, data);
             }
         });
-        // buttonBuyQty3
-        buttonBuyQty3.setFlatStyle(FlatStyle.Flat);
-        buttonBuyQty3.setLocation(new Point(227, 128));
-        buttonBuyQty3.setName("buttonBuyQty3");
-        buttonBuyQty3.setSize(new Dimension(28, 22));
-        buttonBuyQty3.setTabIndex(26);
-        buttonBuyQty3.setText("88");
-        buttonBuyQty3.setClick(new EventHandler<>() {
+        // buttonBuyQuantity3
+        buttonBuyQuantity3.setFlatStyle(FlatStyle.Flat);
+        buttonBuyQuantity3.setLocation(new Point(227, 128));
+        buttonBuyQuantity3.setName("buttonBuyQuantity3");
+        buttonBuyQuantity3.setSize(new Dimension(28, 22));
+        buttonBuyQuantity3.setTabIndex(26);
+        buttonBuyQuantity3.setText("88");
+        buttonBuyQuantity3.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonBuySell_Click(sender, data);
@@ -1589,14 +1562,14 @@ public class MainWindow extends Window {
                 buttonBuySell_Click(sender, data);
             }
         });
-        // buttonSellQty3
-        buttonSellQty3.setFlatStyle(FlatStyle.Flat);
-        buttonSellQty3.setLocation(new Point(80, 128));
-        buttonSellQty3.setName("buttonSellQty3");
-        buttonSellQty3.setSize(new Dimension(28, 22));
-        buttonSellQty3.setTabIndex(24);
-        buttonSellQty3.setText("88");
-        buttonSellQty3.setClick(new EventHandler<>() {
+        // buttonSellQuantity3
+        buttonSellQuantity3.setFlatStyle(FlatStyle.Flat);
+        buttonSellQuantity3.setLocation(new Point(80, 128));
+        buttonSellQuantity3.setName("buttonSellQuantity3");
+        buttonSellQuantity3.setSize(new Dimension(28, 22));
+        buttonSellQuantity3.setTabIndex(24);
+        buttonSellQuantity3.setText("88");
+        buttonSellQuantity3.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonBuySell_Click(sender, data);
@@ -1643,14 +1616,14 @@ public class MainWindow extends Window {
                 buttonBuySell_Click(sender, data);
             }
         });
-        // buttonBuyQty2
-        buttonBuyQty2.setFlatStyle(FlatStyle.Flat);
-        buttonBuyQty2.setLocation(new Point(227, 104));
-        buttonBuyQty2.setName("buttonBuyQty2");
-        buttonBuyQty2.setSize(new Dimension(28, 22));
-        buttonBuyQty2.setTabIndex(22);
-        buttonBuyQty2.setText("88");
-        buttonBuyQty2.setClick(new EventHandler<>() {
+        // buttonBuyQuantity2
+        buttonBuyQuantity2.setFlatStyle(FlatStyle.Flat);
+        buttonBuyQuantity2.setLocation(new Point(227, 104));
+        buttonBuyQuantity2.setName("buttonBuyQuantity2");
+        buttonBuyQuantity2.setSize(new Dimension(28, 22));
+        buttonBuyQuantity2.setTabIndex(22);
+        buttonBuyQuantity2.setText("88");
+        buttonBuyQuantity2.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonBuySell_Click(sender, data);
@@ -1676,14 +1649,14 @@ public class MainWindow extends Window {
                 buttonBuySell_Click(sender, data);
             }
         });
-        // buttonSellQty2
-        buttonSellQty2.setFlatStyle(FlatStyle.Flat);
-        buttonSellQty2.setLocation(new Point(80, 104));
-        buttonSellQty2.setName("buttonSellQty2");
-        buttonSellQty2.setSize(new Dimension(28, 22));
-        buttonSellQty2.setTabIndex(20);
-        buttonSellQty2.setText("88");
-        buttonSellQty2.setClick(new EventHandler<>() {
+        // buttonSellQuantity2
+        buttonSellQuantity2.setFlatStyle(FlatStyle.Flat);
+        buttonSellQuantity2.setLocation(new Point(80, 104));
+        buttonSellQuantity2.setName("buttonSellQuantity2");
+        buttonSellQuantity2.setSize(new Dimension(28, 22));
+        buttonSellQuantity2.setTabIndex(20);
+        buttonSellQuantity2.setText("88");
+        buttonSellQuantity2.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonBuySell_Click(sender, data);
@@ -1730,14 +1703,14 @@ public class MainWindow extends Window {
                 buttonBuySell_Click(sender, data);
             }
         });
-        // buttonBuyQty1
-        buttonBuyQty1.setFlatStyle(FlatStyle.Flat);
-        buttonBuyQty1.setLocation(new Point(227, 80));
-        buttonBuyQty1.setName("buttonBuyQty1");
-        buttonBuyQty1.setSize(new Dimension(28, 22));
-        buttonBuyQty1.setTabIndex(18);
-        buttonBuyQty1.setText("88");
-        buttonBuyQty1.setClick(new EventHandler<>() {
+        // buttonBuyQuantity1
+        buttonBuyQuantity1.setFlatStyle(FlatStyle.Flat);
+        buttonBuyQuantity1.setLocation(new Point(227, 80));
+        buttonBuyQuantity1.setName("buttonBuyQuantity1");
+        buttonBuyQuantity1.setSize(new Dimension(28, 22));
+        buttonBuyQuantity1.setTabIndex(18);
+        buttonBuyQuantity1.setText("88");
+        buttonBuyQuantity1.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonBuySell_Click(sender, data);
@@ -1805,14 +1778,14 @@ public class MainWindow extends Window {
                 buttonBuySell_Click(sender, data);
             }
         });
-        // buttonBuyQty0
-        buttonBuyQty0.setFlatStyle(FlatStyle.Flat);
-        buttonBuyQty0.setLocation(new Point(227, 56));
-        buttonBuyQty0.setName("buttonBuyQty0");
-        buttonBuyQty0.setSize(new Dimension(28, 22));
-        buttonBuyQty0.setTabIndex(14);
-        buttonBuyQty0.setText("88");
-        buttonBuyQty0.setClick(new EventHandler<>() {
+        // buttonBuyQuantity0
+        buttonBuyQuantity0.setFlatStyle(FlatStyle.Flat);
+        buttonBuyQuantity0.setLocation(new Point(227, 56));
+        buttonBuyQuantity0.setName("buttonBuyQuantity0");
+        buttonBuyQuantity0.setSize(new Dimension(28, 22));
+        buttonBuyQuantity0.setTabIndex(14);
+        buttonBuyQuantity0.setText("88");
+        buttonBuyQuantity0.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonBuySell_Click(sender, data);
@@ -1838,14 +1811,14 @@ public class MainWindow extends Window {
                 buttonBuySell_Click(sender, data);
             }
         });
-        // buttonSellQty1
-        buttonSellQty1.setFlatStyle(FlatStyle.Flat);
-        buttonSellQty1.setLocation(new Point(80, 80));
-        buttonSellQty1.setName("buttonSellQty1");
-        buttonSellQty1.setSize(new Dimension(28, 22));
-        buttonSellQty1.setTabIndex(16);
-        buttonSellQty1.setText("88");
-        buttonSellQty1.setClick(new EventHandler<>() {
+        // buttonSellQuantity1
+        buttonSellQuantity1.setFlatStyle(FlatStyle.Flat);
+        buttonSellQuantity1.setLocation(new Point(80, 80));
+        buttonSellQuantity1.setName("buttonSellQuantity1");
+        buttonSellQuantity1.setSize(new Dimension(28, 22));
+        buttonSellQuantity1.setTabIndex(16);
+        buttonSellQuantity1.setText("88");
+        buttonSellQuantity1.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonBuySell_Click(sender, data);
@@ -1871,14 +1844,14 @@ public class MainWindow extends Window {
                 buttonBuySell_Click(sender, data);
             }
         });
-        // buttonSellQty0
-        buttonSellQty0.setFlatStyle(FlatStyle.Flat);
-        buttonSellQty0.setLocation(new Point(80, 56));
-        buttonSellQty0.setName("buttonSellQty0");
-        buttonSellQty0.setSize(new Dimension(28, 22));
-        buttonSellQty0.setTabIndex(12);
-        buttonSellQty0.setText("88");
-        buttonSellQty0.setClick(new EventHandler<>() {
+        // buttonSellQuantity0
+        buttonSellQuantity0.setFlatStyle(FlatStyle.Flat);
+        buttonSellQuantity0.setLocation(new Point(80, 56));
+        buttonSellQuantity0.setName("buttonSellQuantity0");
+        buttonSellQuantity0.setSize(new Dimension(28, 22));
+        buttonSellQuantity0.setTabIndex(12);
+        buttonSellQuantity0.setText("88");
+        buttonSellQuantity0.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonBuySell_Click(sender, data);
@@ -2343,9 +2316,11 @@ public class MainWindow extends Window {
         ilEquipmentImages.setImageSize(new Dimension(64, 52));
         ilEquipmentImages.setImageStream(((ImageListStreamer) (resources.getObject("ilEquipmentImages.ImageStream"))));
         ilEquipmentImages.setTransparentColor(java.awt.Color.white);
-        // ApplicationST
+
+
+        // Space Trader Application
         setAutoScaleBaseSize(new Dimension(5, 13));
-        setClientSize(new Dimension(768, 505));
+        setClientSize(new Dimension(1000, 800));  // TODO adapt on screen size, this should be like the minimum size
         controls.add(pictureLine);
         controls.add(boxDock);
         controls.add(boxCargo);
@@ -2360,7 +2335,7 @@ public class MainWindow extends Window {
         setIcon(((Icon) (resources.getObject("$this.Icon"))));
         setMaximizeBox(false);
         setMenu(menuMain);
-        setName("SpaceTrader");
+        setName("SpaceTrader"); // TODO difference setName and setText
         setStartPosition(FormStartPosition.Manual);
         setText("Space Trader");
         setClosing(new EventHandler<>() {
@@ -2383,7 +2358,23 @@ public class MainWindow extends Window {
         boxShipYard.resumeLayout(false);
         boxDock.resumeLayout(false);
         resumeLayout(false);
-        InitFileStructure();
+
+        // Make sure all directories exists.
+        String[] paths = new String[]{
+                Constants.CustomDirectory,
+                Constants.CustomImagesDirectory,
+                Constants.CustomTemplatesDirectory,
+                Constants.DataDirectory,
+                Constants.SaveDirectory
+        };
+        for (String path : paths) {
+            if (!Directory.exists(path)) {
+                Directory.CreateDirectory(path);
+            }
+        }
+        dialogOpen.setInitialDirectory(Constants.SaveDirectory);
+        dialogSave.setInitialDirectory(Constants.SaveDirectory);
+
         labelSellPrice = new Label[]{
                 labelSellPrice0, labelSellPrice1, labelSellPrice2, labelSellPrice3, labelSellPrice4,
                 labelSellPrice5, labelSellPrice6, labelSellPrice7, labelSellPrice8, labelSellPrice9
@@ -2404,23 +2395,23 @@ public class MainWindow extends Window {
                 labelTargetPct0, labelTargetPct1, labelTargetPct2, labelTargetPct3, labelTargetPct4,
                 labelTargetPct5, labelTargetPct6, labelTargetPct7, labelTargetPct8, labelTargetPct9
         };
-        buttonSellQty = new Button[]{
-                buttonSellQty0, buttonSellQty1, buttonSellQty2, buttonSellQty3, buttonSellQty4,
-                buttonSellQty5, buttonSellQty6, buttonSellQty7, buttonSellQty8, buttonSellQty9
+        buttonSellQuantity = new Button[]{
+                buttonSellQuantity0, buttonSellQuantity1, buttonSellQuantity2, buttonSellQuantity3, buttonSellQuantity4,
+                buttonSellQuantity5, buttonSellQuantity6, buttonSellQuantity7, buttonSellQuantity8, buttonSellQuantity9
         };
         buttonSellAll = new Button[]{
                 buttonSellAll0, buttonSellAll1, buttonSellAll2, buttonSellAll3, buttonSellAll4,
                 buttonSellAll5, buttonSellAll6, buttonSellAll7, buttonSellAll8, buttonSellAll9
         };
-        buttonBuyQty = new Button[]{
-                buttonBuyQty0, buttonBuyQty1, buttonBuyQty2, buttonBuyQty3, buttonBuyQty4,
-                buttonBuyQty5, buttonBuyQty6, buttonBuyQty7, buttonBuyQty8, buttonBuyQty9
+        buttonBuyQuantity = new Button[]{
+                buttonBuyQuantity0, buttonBuyQuantity1, buttonBuyQuantity2, buttonBuyQuantity3, buttonBuyQuantity4,
+                buttonBuyQuantity5, buttonBuyQuantity6, buttonBuyQuantity7, buttonBuyQuantity8, buttonBuyQuantity9
         };
         buttonBuyMax = new Button[]{
                 buttonBuyMax0, buttonBuyMax1, buttonBuyMax2, buttonBuyMax3, buttonBuyMax4,
                 buttonBuyMax5, buttonBuyMax6, buttonBuyMax7, buttonBuyMax8, buttonBuyMax9
         };
-        MainWindow.this.UpdateAll();
+        updateAll();
     }
 
     private void AddHighScore(HighScoreRecord highScore) {
@@ -2432,7 +2423,7 @@ public class MainWindow extends Window {
 
     private void CargoBuy(int tradeItem, boolean max) {
         game.CargoBuySystem(tradeItem, max, this);
-        UpdateAll();
+        updateAll();
     }
 
     private void CargoSell(int tradeItem, boolean all) {
@@ -2441,7 +2432,7 @@ public class MainWindow extends Window {
         } else {
             game.CargoDump(tradeItem, this);
         }
-        UpdateAll();
+        updateAll();
     }
 
     private void ClearHighScores() {
@@ -2497,24 +2488,6 @@ public class MainWindow extends Window {
         return settingValue;
     }
 
-    // Make sure all directories exists.
-    private void InitFileStructure() {
-        String[] paths = new String[]{
-                Constants.CustomDirectory,
-                Constants.CustomImagesDirectory,
-                Constants.CustomTemplatesDirectory,
-                Constants.DataDirectory,
-                Constants.SaveDirectory
-        };
-        for (String path : paths) {
-            if (!Directory.exists(path)) {
-                Directory.CreateDirectory(path);
-            }
-        }
-        dialogOpen.setInitialDirectory(Constants.SaveDirectory);
-        dialogSave.setInitialDirectory(Constants.SaveDirectory);
-    }
-
     private void LoadGame(String fileName) {
         try {
             Object obj = Functions.LoadFile(fileName, false, this);
@@ -2524,7 +2497,7 @@ public class MainWindow extends Window {
                 SaveGameFile = fileName;
                 SaveGameDays = commander.getDays();
                 SetInGameControlsEnabled(true);
-                UpdateAll();
+                updateAll();
             }
         } catch (FutureVersionException ex) {
             FormAlert.Alert(AlertType.FileErrorOpen, this, fileName, Strings.FileFutureVersion);
@@ -2559,17 +2532,20 @@ public class MainWindow extends Window {
         }
     }
 
-    public void UpdateAll() {
-        UpdateCargo();
-        UpdateDock();
-        UpdateShipyard();
-        UpdateStatusBar();
-        UpdateSystemInfo();
-        UpdateTargetSystemInfo();
-        UpdateCharts();
+    /**
+     * Updates the whole content of the main window.
+     */
+    public void updateAll() {
+        updateCargo();
+        updateDock();
+        updateShipyard();
+        updateStatusBar();
+        updateSystemInfo();
+        updateTargetSystemInfo();
+        updateCharts();
     }
 
-    private void UpdateCargo() {
+    private void updateCargo() {
         if (game == null || commander.CurrentSystem() == null) {
             for (int i = 0; i < labelSellPrice.length; i++) {
                 labelSellPrice[i].setText("");
@@ -2577,9 +2553,9 @@ public class MainWindow extends Window {
                 labelTargetPrice[i].setText("");
                 labelTargetDiff[i].setText("");
                 labelTargetPct[i].setText("");
-                buttonSellQty[i].setVisible(false);
+                buttonSellQuantity[i].setVisible(false);
                 buttonSellAll[i].setVisible(false);
-                buttonBuyQty[i].setVisible(false);
+                buttonBuyQuantity[i].setVisible(false);
                 buttonBuyMax[i].setVisible(false);
             }
         } else {
@@ -2590,13 +2566,13 @@ public class MainWindow extends Window {
             for (int i = 0; i < labelSellPrice.length; i++) {
                 int price = warpSys == null ? 0 : Constants.TradeItems[i].getStandardPrice(warpSys);
                 labelSellPrice[i].setText(sell[i] > 0 ? Functions.FormatMoney(sell[i]) : "no trade");
-                buttonSellQty[i].setText("" + commander.getShip().Cargo()[i]);
-                buttonSellQty[i].setVisible(true);
+                buttonSellQuantity[i].setText("" + commander.getShip().Cargo()[i]);
+                buttonSellQuantity[i].setVisible(true);
                 buttonSellAll[i].setText(sell[i] > 0 ? "All" : "Dump");
                 buttonSellAll[i].setVisible(true);
                 labelBuyPrice[i].setText(buy[i] > 0 ? Functions.FormatMoney(buy[i]) : "not sold");
-                buttonBuyQty[i].setText("" + commander.CurrentSystem().TradeItems()[i]);
-                buttonBuyQty[i].setVisible(buy[i] > 0);
+                buttonBuyQuantity[i].setText("" + commander.CurrentSystem().TradeItems()[i]);
+                buttonBuyQuantity[i].setVisible(buy[i] > 0);
                 buttonBuyMax[i].setVisible(buy[i] > 0);
                 if (sell[i] * commander.getShip().Cargo()[i] > commander.PriceCargo()[i]) {
                     labelSellPrice[i].setFont(labelSystemNameLabel.getFont());
@@ -2627,7 +2603,7 @@ public class MainWindow extends Window {
         }
     }
 
-    private void UpdateCharts() {
+    private void updateCharts() {
         pictureGalacticChart.refresh();
         pictureShortRangeChart.refresh();
         if (game == null) {
@@ -2649,7 +2625,7 @@ public class MainWindow extends Window {
         }
     }
 
-    private void UpdateDock() {
+    private void updateDock() {
         if (game == null) {
             labelFuelStatus.setText("");
             labelFuelCost.setText("");
@@ -2677,7 +2653,7 @@ public class MainWindow extends Window {
         }
     }
 
-    private void UpdateShipyard() {
+    private void updateShipyard() {
         if (game == null) {
             labelShipsForSale.setText("");
             labelEquipForSale.setText("");
@@ -2709,7 +2685,7 @@ public class MainWindow extends Window {
         }
     }
 
-    public void UpdateStatusBar() {
+    public void updateStatusBar() {
         if (game == null) {
             statusBarPanelCash.setText("");
             statusBarPanelBays.setText("");
@@ -2724,7 +2700,7 @@ public class MainWindow extends Window {
         }
     }
 
-    private void UpdateSystemInfo() {
+    private void updateSystemInfo() {
         if (game == null || commander.CurrentSystem() == null) {
             labelSystemName.setText("");
             labelSystemSize.setText("");
@@ -2764,7 +2740,7 @@ public class MainWindow extends Window {
         }
     }
 
-    private void UpdateTargetSystemInfo() {
+    private void updateTargetSystemInfo() {
         buttonNextSystem.setVisible(game != null);
         buttonPrevSystem.setVisible(game != null);
         if (game == null || game.WarpSystem() == null) {
@@ -2816,7 +2792,7 @@ public class MainWindow extends Window {
 
     private void buttonBuySell_Click(Object sender, EventData e) {
         String name = ((Button) sender).getName();
-        boolean all = !name.contains("Qty");
+        boolean all = !name.contains("Quantity");
         int index = Integer.parseInt(name.substring(name.length() - 1));
         if (!name.contains("Buy")) {
             CargoSell(index, all);
@@ -2827,17 +2803,17 @@ public class MainWindow extends Window {
 
     private void buttonBuyShip_Click(Object sender, EventData e) {
         (new FormShipList()).ShowDialog(this);
-        UpdateAll();
+        updateAll();
     }
 
     private void buttonDesign_Click(Object sender, EventData e) {
         (new FormShipyard()).ShowDialog(this);
-        UpdateAll();
+        updateAll();
     }
 
     private void buttonEquip_Click(Object sender, EventData e) {
         (new FormEquipment()).ShowDialog(this);
-        UpdateAll();
+        updateAll();
     }
 
     private void buttonFind_Click(Object sender, EventData e) {
@@ -3070,7 +3046,7 @@ public class MainWindow extends Window {
                     game.setTrackedSystemId(game.SelectedSystemId());
                 }
             }
-            UpdateAll();
+            updateAll();
         }
     }
 
@@ -3080,7 +3056,7 @@ public class MainWindow extends Window {
             int toAdd = form.Amount() / commander.getShip().getFuelCost();
             commander.getShip().setFuel(commander.getShip().getFuel() + toAdd);
             commander.setCash(commander.getCash() - (toAdd * commander.getShip().getFuelCost()));
-            UpdateAll();
+            updateAll();
         }
     }
 
@@ -3102,13 +3078,13 @@ public class MainWindow extends Window {
             } catch (GameEndException ex) {
                 GameEnd();
             }
-            UpdateAll();
+            updateAll();
         }
     }
 
     private void buttonMerc_Click(Object sender, EventData e) {
         (new FormViewPersonnel()).ShowDialog(this);
-        UpdateAll();
+        updateAll();
     }
 
     private void buttonNews_Click(Object sender, EventData e) {
@@ -3117,20 +3093,20 @@ public class MainWindow extends Window {
 
     private void buttonNextSystem_Click(Object sender, EventData e) {
         game.SelectNextSystemWithinRange(true);
-        UpdateAll();
+        updateAll();
     }
 
     private void buttonPod_Click(Object sender, EventData e) {
         if (FormAlert.Alert(AlertType.EquipmentEscapePod, this) == DialogResult.Yes) {
             commander.setCash(commander.getCash() - 2000);
             commander.getShip().setEscapePod(true);
-            UpdateAll();
+            updateAll();
         }
     }
 
     private void buttonPrevSystem_Click(Object sender, EventData e) {
         game.SelectNextSystemWithinRange(false);
-        UpdateAll();
+        updateAll();
     }
 
     private void buttonRepair_Click(Object sender, EventData e) {
@@ -3139,7 +3115,7 @@ public class MainWindow extends Window {
             int toAdd = form.Amount() / commander.getShip().getRepairCost();
             commander.getShip().setHull(commander.getShip().getHull() + toAdd);
             commander.setCash(commander.getCash() - (toAdd * commander.getShip().getRepairCost()));
-            UpdateAll();
+            updateAll();
         }
     }
 
@@ -3170,12 +3146,12 @@ public class MainWindow extends Window {
                 }
             }
         }
-        UpdateAll();
+        updateAll();
     }
 
     private void buttonTrack_Click(Object sender, EventData e) {
         game.setTrackedSystemId(game.SelectedSystemId());
-        UpdateAll();
+        updateAll();
     }
 
     private void buttonWarp_Click(Object sender, EventData e) {
@@ -3190,7 +3166,7 @@ public class MainWindow extends Window {
         } catch (GameEndException ex) {
             GameEnd();
         }
-        UpdateAll();
+        updateAll();
     }
 
     private void menuGameExit_Click(Object sender, EventData e) {
@@ -3209,7 +3185,7 @@ public class MainWindow extends Window {
             SaveGameFile = null;
             SaveGameDays = 0;
             SetInGameControlsEnabled(true);
-            UpdateAll();
+            updateAll();
             if (game.Options().getNewsAutoShow()) {
                 game.ShowNewspaper();
             }
@@ -3252,7 +3228,7 @@ public class MainWindow extends Window {
         FormOptions form = new FormOptions();
         if (form.ShowDialog(this) == DialogResult.OK) {
             game.Options().CopyValues(form.Options());
-            UpdateAll();
+            updateAll();
         }
     }
 
@@ -3260,7 +3236,7 @@ public class MainWindow extends Window {
         if (FormAlert.Alert(AlertType.GameRetire, this) == DialogResult.Yes) {
             game.setEndStatus(GameEndType.Retired);
             GameEnd();
-            UpdateAll();
+            updateAll();
         }
     }
 
@@ -3304,7 +3280,7 @@ public class MainWindow extends Window {
                 }
             }
             if (clickedSystem) {
-                UpdateAll();
+                updateAll();
             }
         }
     }
@@ -3383,7 +3359,7 @@ public class MainWindow extends Window {
                 }
             }
             if (clickedSystem) {
-                UpdateAll();
+                updateAll();
             }
         }
     }

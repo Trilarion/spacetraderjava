@@ -210,7 +210,7 @@ public class FormViewQuests extends form {
 
     private void labelQuests_LinkClicked(Object sender, LinkLabelLinkClickedEventData e) {
         game.setSelectedSystemByName(e.Link.linkData.toString());
-        game.getParentWindow().UpdateAll();
+        game.getParentWindow().updateAll();
         Close();
     }
 }

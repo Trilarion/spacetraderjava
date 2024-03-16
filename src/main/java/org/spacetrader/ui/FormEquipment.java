@@ -517,7 +517,7 @@ public class FormEquipment extends form {
                 commander.setCash(commander.getCash() - selectedEquipment.Price());
                 DeselectAll();
                 UpdateSell();
-                game.getParentWindow().UpdateAll();
+                game.getParentWindow().updateAll();
             }
         }
     }
@@ -544,7 +544,7 @@ public class FormEquipment extends form {
                     commander.setCash(commander.getCash() + selectedEquipment.SellPrice());
                     ship.RemoveEquipment(selectedEquipment.EquipmentType(), slot);
                     UpdateSell();
-                    game.getParentWindow().UpdateAll();
+                    game.getParentWindow().updateAll();
                 }
             }
         }

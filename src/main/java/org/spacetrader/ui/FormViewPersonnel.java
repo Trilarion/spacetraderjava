@@ -342,7 +342,7 @@ public class FormViewPersonnel extends form {
                 if (DialogResult.Yes == FormAlert.Alert(AlertType.CrewFireMercenary, this, selectedCrewMember.Name())) {
                     ship.handleFire(selectedCrewMember.Id());
                     UpdateAll();
-                    game.getParentWindow().UpdateAll();
+                    game.getParentWindow().updateAll();
                 }
             } else {
                 if (0 == ship.FreeCrewQuarters()) {
@@ -350,7 +350,7 @@ public class FormViewPersonnel extends form {
                 } else {
                     ship.Hire(selectedCrewMember);
                     UpdateAll();
-                    game.getParentWindow().UpdateAll();
+                    game.getParentWindow().updateAll();
                 }
             }
         }

@@ -762,7 +762,7 @@ public class FormShipList extends form {
                 game.setQuestStatusScarab(SpecialEvent.StatusScarabNotStarted);
             }
             UpdateAll();
-            game.getParentWindow().UpdateAll();
+            game.getParentWindow().updateAll();
         }
     }
 

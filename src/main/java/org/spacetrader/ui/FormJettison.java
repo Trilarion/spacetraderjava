@@ -19,29 +19,29 @@ public class FormJettison extends form {
     private final Game game = Game.getCurrentGame();
     private final Commander commander = game.Commander();
     private final Label labelBays;
-    private final Button[] buttonJettisonQty;
+    private final Button[] buttonJettisonQuantity;
 
     public FormJettison() {
         Button buttonJettisonAll9 = new Button();
-        Button buttonJettisonQty9 = new Button();
+        Button buttonJettisonQuantity9 = new Button();
         Button buttonJettisonAll8 = new Button();
-        Button buttonJettisonQty8 = new Button();
+        Button buttonJettisonQuantity8 = new Button();
         Button buttonJettisonAll7 = new Button();
-        Button buttonJettisonQty7 = new Button();
+        Button buttonJettisonQuantity7 = new Button();
         Button buttonJettisonAll6 = new Button();
-        Button buttonJettisonQty6 = new Button();
+        Button buttonJettisonQuantity6 = new Button();
         Button buttonJettisonAll5 = new Button();
-        Button buttonJettisonQty5 = new Button();
+        Button buttonJettisonQuantity5 = new Button();
         Button buttonJettisonAll4 = new Button();
-        Button buttonJettisonQty4 = new Button();
+        Button buttonJettisonQuantity4 = new Button();
         Button buttonJettisonAll3 = new Button();
-        Button buttonJettisonQty3 = new Button();
+        Button buttonJettisonQuantity3 = new Button();
         Button buttonJettisonAll2 = new Button();
-        Button buttonJettisonQty2 = new Button();
+        Button buttonJettisonQuantity2 = new Button();
         Button buttonJettisonAll1 = new Button();
-        Button buttonJettisonQty1 = new Button();
+        Button buttonJettisonQuantity1 = new Button();
         Button buttonJettisonAll0 = new Button();
-        Button buttonJettisonQty0 = new Button();
+        Button buttonJettisonQuantity0 = new Button();
         Label labelTradeCommodity9 = new Label();
         Label labelTradeCommodity8 = new Label();
         Label labelTradeCommodity2 = new Label();
@@ -69,14 +69,14 @@ public class FormJettison extends form {
                 buttonJettison_Click(sender, data);
             }
         });
-        // buttonJettisonQty9
-        buttonJettisonQty9.setFlatStyle(FlatStyle.Flat);
-        buttonJettisonQty9.setLocation(new Point(68, 220));
-        buttonJettisonQty9.setName("buttonJettisonQty9");
-        buttonJettisonQty9.setSize(new Dimension(28, 22));
-        buttonJettisonQty9.setTabIndex(140);
-        buttonJettisonQty9.setText("88");
-        buttonJettisonQty9.setClick(new EventHandler<>() {
+        // buttonJettisonQuantity9
+        buttonJettisonQuantity9.setFlatStyle(FlatStyle.Flat);
+        buttonJettisonQuantity9.setLocation(new Point(68, 220));
+        buttonJettisonQuantity9.setName("buttonJettisonQuantity9");
+        buttonJettisonQuantity9.setSize(new Dimension(28, 22));
+        buttonJettisonQuantity9.setTabIndex(140);
+        buttonJettisonQuantity9.setText("88");
+        buttonJettisonQuantity9.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
@@ -95,14 +95,14 @@ public class FormJettison extends form {
                 buttonJettison_Click(sender, data);
             }
         });
-        // buttonJettisonQty8
-        buttonJettisonQty8.setFlatStyle(FlatStyle.Flat);
-        buttonJettisonQty8.setLocation(new Point(68, 196));
-        buttonJettisonQty8.setName("buttonJettisonQty8");
-        buttonJettisonQty8.setSize(new Dimension(28, 22));
-        buttonJettisonQty8.setTabIndex(138);
-        buttonJettisonQty8.setText("88");
-        buttonJettisonQty8.setClick(new EventHandler<>() {
+        // buttonJettisonQuantity8
+        buttonJettisonQuantity8.setFlatStyle(FlatStyle.Flat);
+        buttonJettisonQuantity8.setLocation(new Point(68, 196));
+        buttonJettisonQuantity8.setName("buttonJettisonQuantity8");
+        buttonJettisonQuantity8.setSize(new Dimension(28, 22));
+        buttonJettisonQuantity8.setTabIndex(138);
+        buttonJettisonQuantity8.setText("88");
+        buttonJettisonQuantity8.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
@@ -121,14 +121,14 @@ public class FormJettison extends form {
                 buttonJettison_Click(sender, data);
             }
         });
-        // buttonJettisonQty7
-        buttonJettisonQty7.setFlatStyle(FlatStyle.Flat);
-        buttonJettisonQty7.setLocation(new Point(68, 172));
-        buttonJettisonQty7.setName("buttonJettisonQty7");
-        buttonJettisonQty7.setSize(new Dimension(28, 22));
-        buttonJettisonQty7.setTabIndex(136);
-        buttonJettisonQty7.setText("88");
-        buttonJettisonQty7.setClick(new EventHandler<>() {
+        // buttonJettisonQuantity7
+        buttonJettisonQuantity7.setFlatStyle(FlatStyle.Flat);
+        buttonJettisonQuantity7.setLocation(new Point(68, 172));
+        buttonJettisonQuantity7.setName("buttonJettisonQuantity7");
+        buttonJettisonQuantity7.setSize(new Dimension(28, 22));
+        buttonJettisonQuantity7.setTabIndex(136);
+        buttonJettisonQuantity7.setText("88");
+        buttonJettisonQuantity7.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
@@ -147,14 +147,14 @@ public class FormJettison extends form {
                 buttonJettison_Click(sender, data);
             }
         });
-        // buttonJettisonQty6
-        buttonJettisonQty6.setFlatStyle(FlatStyle.Flat);
-        buttonJettisonQty6.setLocation(new Point(68, 148));
-        buttonJettisonQty6.setName("buttonJettisonQty6");
-        buttonJettisonQty6.setSize(new Dimension(28, 22));
-        buttonJettisonQty6.setTabIndex(134);
-        buttonJettisonQty6.setText("88");
-        buttonJettisonQty6.setClick(new EventHandler<>() {
+        // buttonJettisonQuantity6
+        buttonJettisonQuantity6.setFlatStyle(FlatStyle.Flat);
+        buttonJettisonQuantity6.setLocation(new Point(68, 148));
+        buttonJettisonQuantity6.setName("buttonJettisonQuantity6");
+        buttonJettisonQuantity6.setSize(new Dimension(28, 22));
+        buttonJettisonQuantity6.setTabIndex(134);
+        buttonJettisonQuantity6.setText("88");
+        buttonJettisonQuantity6.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
@@ -173,14 +173,14 @@ public class FormJettison extends form {
                 buttonJettison_Click(sender, data);
             }
         });
-        // buttonJettisonQty5
-        buttonJettisonQty5.setFlatStyle(FlatStyle.Flat);
-        buttonJettisonQty5.setLocation(new Point(68, 124));
-        buttonJettisonQty5.setName("buttonJettisonQty5");
-        buttonJettisonQty5.setSize(new Dimension(28, 22));
-        buttonJettisonQty5.setTabIndex(132);
-        buttonJettisonQty5.setText("88");
-        buttonJettisonQty5.setClick(new EventHandler<>() {
+        // buttonJettisonQuantity5
+        buttonJettisonQuantity5.setFlatStyle(FlatStyle.Flat);
+        buttonJettisonQuantity5.setLocation(new Point(68, 124));
+        buttonJettisonQuantity5.setName("buttonJettisonQuantity5");
+        buttonJettisonQuantity5.setSize(new Dimension(28, 22));
+        buttonJettisonQuantity5.setTabIndex(132);
+        buttonJettisonQuantity5.setText("88");
+        buttonJettisonQuantity5.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
@@ -199,14 +199,14 @@ public class FormJettison extends form {
                 buttonJettison_Click(sender, data);
             }
         });
-        // buttonJettisonQty4
-        buttonJettisonQty4.setFlatStyle(FlatStyle.Flat);
-        buttonJettisonQty4.setLocation(new Point(68, 100));
-        buttonJettisonQty4.setName("buttonJettisonQty4");
-        buttonJettisonQty4.setSize(new Dimension(28, 22));
-        buttonJettisonQty4.setTabIndex(130);
-        buttonJettisonQty4.setText("88");
-        buttonJettisonQty4.setClick(new EventHandler<>() {
+        // buttonJettisonQuantity4
+        buttonJettisonQuantity4.setFlatStyle(FlatStyle.Flat);
+        buttonJettisonQuantity4.setLocation(new Point(68, 100));
+        buttonJettisonQuantity4.setName("buttonJettisonQuantity4");
+        buttonJettisonQuantity4.setSize(new Dimension(28, 22));
+        buttonJettisonQuantity4.setTabIndex(130);
+        buttonJettisonQuantity4.setText("88");
+        buttonJettisonQuantity4.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
@@ -225,14 +225,14 @@ public class FormJettison extends form {
                 buttonJettison_Click(sender, data);
             }
         });
-        // buttonJettisonQty3
-        buttonJettisonQty3.setFlatStyle(FlatStyle.Flat);
-        buttonJettisonQty3.setLocation(new Point(68, 76));
-        buttonJettisonQty3.setName("buttonJettisonQty3");
-        buttonJettisonQty3.setSize(new Dimension(28, 22));
-        buttonJettisonQty3.setTabIndex(128);
-        buttonJettisonQty3.setText("88");
-        buttonJettisonQty3.setClick(new EventHandler<>() {
+        // buttonJettisonQuantity3
+        buttonJettisonQuantity3.setFlatStyle(FlatStyle.Flat);
+        buttonJettisonQuantity3.setLocation(new Point(68, 76));
+        buttonJettisonQuantity3.setName("buttonJettisonQuantity3");
+        buttonJettisonQuantity3.setSize(new Dimension(28, 22));
+        buttonJettisonQuantity3.setTabIndex(128);
+        buttonJettisonQuantity3.setText("88");
+        buttonJettisonQuantity3.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
@@ -251,14 +251,14 @@ public class FormJettison extends form {
                 buttonJettison_Click(sender, data);
             }
         });
-        // buttonJettisonQty2
-        buttonJettisonQty2.setFlatStyle(FlatStyle.Flat);
-        buttonJettisonQty2.setLocation(new Point(68, 52));
-        buttonJettisonQty2.setName("buttonJettisonQty2");
-        buttonJettisonQty2.setSize(new Dimension(28, 22));
-        buttonJettisonQty2.setTabIndex(126);
-        buttonJettisonQty2.setText("88");
-        buttonJettisonQty2.setClick(new EventHandler<>() {
+        // buttonJettisonQuantity2
+        buttonJettisonQuantity2.setFlatStyle(FlatStyle.Flat);
+        buttonJettisonQuantity2.setLocation(new Point(68, 52));
+        buttonJettisonQuantity2.setName("buttonJettisonQuantity2");
+        buttonJettisonQuantity2.setSize(new Dimension(28, 22));
+        buttonJettisonQuantity2.setTabIndex(126);
+        buttonJettisonQuantity2.setText("88");
+        buttonJettisonQuantity2.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
@@ -277,14 +277,14 @@ public class FormJettison extends form {
                 buttonJettison_Click(sender, data);
             }
         });
-        // buttonJettisonQty1
-        buttonJettisonQty1.setFlatStyle(FlatStyle.Flat);
-        buttonJettisonQty1.setLocation(new Point(68, 28));
-        buttonJettisonQty1.setName("buttonJettisonQty1");
-        buttonJettisonQty1.setSize(new Dimension(28, 22));
-        buttonJettisonQty1.setTabIndex(124);
-        buttonJettisonQty1.setText("88");
-        buttonJettisonQty1.setClick(new EventHandler<>() {
+        // buttonJettisonQuantity1
+        buttonJettisonQuantity1.setFlatStyle(FlatStyle.Flat);
+        buttonJettisonQuantity1.setLocation(new Point(68, 28));
+        buttonJettisonQuantity1.setName("buttonJettisonQuantity1");
+        buttonJettisonQuantity1.setSize(new Dimension(28, 22));
+        buttonJettisonQuantity1.setTabIndex(124);
+        buttonJettisonQuantity1.setText("88");
+        buttonJettisonQuantity1.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
@@ -303,14 +303,14 @@ public class FormJettison extends form {
                 buttonJettison_Click(sender, data);
             }
         });
-        // buttonJettisonQty0
-        buttonJettisonQty0.setFlatStyle(FlatStyle.Flat);
-        buttonJettisonQty0.setLocation(new Point(68, 4));
-        buttonJettisonQty0.setName("buttonJettisonQty0");
-        buttonJettisonQty0.setSize(new Dimension(28, 22));
-        buttonJettisonQty0.setTabIndex(122);
-        buttonJettisonQty0.setText("88");
-        buttonJettisonQty0.setClick(new EventHandler<>() {
+        // buttonJettisonQuantity0
+        buttonJettisonQuantity0.setFlatStyle(FlatStyle.Flat);
+        buttonJettisonQuantity0.setLocation(new Point(68, 4));
+        buttonJettisonQuantity0.setName("buttonJettisonQuantity0");
+        buttonJettisonQuantity0.setSize(new Dimension(28, 22));
+        buttonJettisonQuantity0.setTabIndex(122);
+        buttonJettisonQuantity0.setText("88");
+        buttonJettisonQuantity0.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
@@ -427,25 +427,25 @@ public class FormJettison extends form {
                 labelTradeCommodity3,
                 labelTradeCommodity7,
                 buttonJettisonAll9,
-                buttonJettisonQty9,
+                buttonJettisonQuantity9,
                 buttonJettisonAll8,
-                buttonJettisonQty8,
+                buttonJettisonQuantity8,
                 buttonJettisonAll7,
-                buttonJettisonQty7,
+                buttonJettisonQuantity7,
                 buttonJettisonAll6,
-                buttonJettisonQty6,
+                buttonJettisonQuantity6,
                 buttonJettisonAll5,
-                buttonJettisonQty5,
+                buttonJettisonQuantity5,
                 buttonJettisonAll4,
-                buttonJettisonQty4,
+                buttonJettisonQuantity4,
                 buttonJettisonAll3,
-                buttonJettisonQty3,
+                buttonJettisonQuantity3,
                 buttonJettisonAll2,
-                buttonJettisonQty2,
+                buttonJettisonQuantity2,
                 buttonJettisonAll1,
-                buttonJettisonQty1,
+                buttonJettisonQuantity1,
                 buttonJettisonAll0,
-                buttonJettisonQty0));
+                buttonJettisonQuantity0));
         setFormBorderStyle(FormBorderStyle.FixedDialog);
         setMaximizeBox(false);
         setMinimizeBox(false);
@@ -454,17 +454,17 @@ public class FormJettison extends form {
         setStartPosition(FormStartPosition.CenterParent);
         setText("Jettison Cargo");
         resumeLayout(false);
-        buttonJettisonQty = new Button[]{
-                buttonJettisonQty0,
-                buttonJettisonQty1,
-                buttonJettisonQty2,
-                buttonJettisonQty3,
-                buttonJettisonQty4,
-                buttonJettisonQty5,
-                buttonJettisonQty6,
-                buttonJettisonQty7,
-                buttonJettisonQty8,
-                buttonJettisonQty9
+        buttonJettisonQuantity = new Button[]{
+                buttonJettisonQuantity0,
+                buttonJettisonQuantity1,
+                buttonJettisonQuantity2,
+                buttonJettisonQuantity3,
+                buttonJettisonQuantity4,
+                buttonJettisonQuantity5,
+                buttonJettisonQuantity6,
+                buttonJettisonQuantity7,
+                buttonJettisonQuantity8,
+                buttonJettisonQuantity9
         };
         Button[] buttonJettisonAll = {
                 buttonJettisonAll0,
@@ -489,15 +489,15 @@ public class FormJettison extends form {
 
     private void UpdateAll() {
         Ship ship = commander.getShip();
-        for (int i = 0; i < buttonJettisonQty.length; i++) {
-            buttonJettisonQty[i].setText("" + ship.Cargo()[i]);
+        for (int i = 0; i < buttonJettisonQuantity.length; i++) {
+            buttonJettisonQuantity[i].setText("" + ship.Cargo()[i]);
         }
         labelBays.setText(ship.FilledCargoBays() + "/" + ship.CargoBays());
     }
 
     private void buttonJettison_Click(Object sender, EventData e) {
         String name = ((Button) sender).getName();
-        boolean all = !name.contains("Qty");
+        boolean all = !name.contains("Quantity");
         int index = Integer.parseInt(name.substring(name.length() - 1));
         Jettison(index, all);
     }

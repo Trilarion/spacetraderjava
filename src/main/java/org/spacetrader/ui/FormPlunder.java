@@ -15,30 +15,30 @@ import java.awt.*;
 
 public class FormPlunder extends form {
     private final Game game = Game.getCurrentGame();
-    private final Button[] buttonPlunderQty;
+    private final Button[] buttonPlunderQuantity;
     private final Label labelBays;
 
     public FormPlunder() {
         Button buttonPlunderAll9 = new Button();
-        Button buttonPlunderQty9 = new Button();
+        Button buttonPlunderQuantity9 = new Button();
         Button buttonPlunderAll8 = new Button();
-        Button buttonPlunderQty8 = new Button();
+        Button buttonPlunderQuantity8 = new Button();
         Button buttonPlunderAll7 = new Button();
-        Button buttonPlunderQty7 = new Button();
+        Button buttonPlunderQuantity7 = new Button();
         Button buttonPlunderAll6 = new Button();
-        Button buttonPlunderQty6 = new Button();
+        Button buttonPlunderQuantity6 = new Button();
         Button buttonPlunderAll5 = new Button();
-        Button buttonPlunderQty5 = new Button();
+        Button buttonPlunderQuantity5 = new Button();
         Button buttonPlunderAll4 = new Button();
-        Button buttonPlunderQty4 = new Button();
+        Button buttonPlunderQuantity4 = new Button();
         Button buttonPlunderAll3 = new Button();
-        Button buttonPlunderQty3 = new Button();
+        Button buttonPlunderQuantity3 = new Button();
         Button buttonPlunderAll2 = new Button();
-        Button buttonPlunderQty2 = new Button();
+        Button buttonPlunderQuantity2 = new Button();
         Button buttonPlunderAll1 = new Button();
-        Button buttonPlunderQty1 = new Button();
+        Button buttonPlunderQuantity1 = new Button();
         Button buttonPlunderAll0 = new Button();
-        Button buttonPlunderQty0 = new Button();
+        Button buttonPlunderQuantity0 = new Button();
         Label labelTradeCommodity9 = new Label();
         Label labelTradeCommodity8 = new Label();
         Label labelTradeCommodity2 = new Label();
@@ -67,14 +67,14 @@ public class FormPlunder extends form {
                 buttonPlunder_Click(sender, data);
             }
         });
-        // buttonPlunderQty9
-        buttonPlunderQty9.setFlatStyle(FlatStyle.Flat);
-        buttonPlunderQty9.setLocation(new Point(68, 220));
-        buttonPlunderQty9.setName("buttonPlunderQty9");
-        buttonPlunderQty9.setSize(new Dimension(28, 22));
-        buttonPlunderQty9.setTabIndex(140);
-        buttonPlunderQty9.setText("88");
-        buttonPlunderQty9.setClick(new EventHandler<>() {
+        // buttonPlunderQuantity9
+        buttonPlunderQuantity9.setFlatStyle(FlatStyle.Flat);
+        buttonPlunderQuantity9.setLocation(new Point(68, 220));
+        buttonPlunderQuantity9.setName("buttonPlunderQuantity9");
+        buttonPlunderQuantity9.setSize(new Dimension(28, 22));
+        buttonPlunderQuantity9.setTabIndex(140);
+        buttonPlunderQuantity9.setText("88");
+        buttonPlunderQuantity9.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
@@ -93,14 +93,14 @@ public class FormPlunder extends form {
                 buttonPlunder_Click(sender, data);
             }
         });
-        // buttonPlunderQty8
-        buttonPlunderQty8.setFlatStyle(FlatStyle.Flat);
-        buttonPlunderQty8.setLocation(new Point(68, 196));
-        buttonPlunderQty8.setName("buttonPlunderQty8");
-        buttonPlunderQty8.setSize(new Dimension(28, 22));
-        buttonPlunderQty8.setTabIndex(138);
-        buttonPlunderQty8.setText("88");
-        buttonPlunderQty8.setClick(new EventHandler<>() {
+        // buttonPlunderQuantity8
+        buttonPlunderQuantity8.setFlatStyle(FlatStyle.Flat);
+        buttonPlunderQuantity8.setLocation(new Point(68, 196));
+        buttonPlunderQuantity8.setName("buttonPlunderQuantity8");
+        buttonPlunderQuantity8.setSize(new Dimension(28, 22));
+        buttonPlunderQuantity8.setTabIndex(138);
+        buttonPlunderQuantity8.setText("88");
+        buttonPlunderQuantity8.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
@@ -119,14 +119,14 @@ public class FormPlunder extends form {
                 buttonPlunder_Click(sender, data);
             }
         });
-        // buttonPlunderQty7
-        buttonPlunderQty7.setFlatStyle(FlatStyle.Flat);
-        buttonPlunderQty7.setLocation(new Point(68, 172));
-        buttonPlunderQty7.setName("buttonPlunderQty7");
-        buttonPlunderQty7.setSize(new Dimension(28, 22));
-        buttonPlunderQty7.setTabIndex(136);
-        buttonPlunderQty7.setText("88");
-        buttonPlunderQty7.setClick(new EventHandler<>() {
+        // buttonPlunderQuantity7
+        buttonPlunderQuantity7.setFlatStyle(FlatStyle.Flat);
+        buttonPlunderQuantity7.setLocation(new Point(68, 172));
+        buttonPlunderQuantity7.setName("buttonPlunderQuantity7");
+        buttonPlunderQuantity7.setSize(new Dimension(28, 22));
+        buttonPlunderQuantity7.setTabIndex(136);
+        buttonPlunderQuantity7.setText("88");
+        buttonPlunderQuantity7.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
@@ -145,14 +145,14 @@ public class FormPlunder extends form {
                 buttonPlunder_Click(sender, data);
             }
         });
-        // buttonPlunderQty6
-        buttonPlunderQty6.setFlatStyle(FlatStyle.Flat);
-        buttonPlunderQty6.setLocation(new Point(68, 148));
-        buttonPlunderQty6.setName("buttonPlunderQty6");
-        buttonPlunderQty6.setSize(new Dimension(28, 22));
-        buttonPlunderQty6.setTabIndex(134);
-        buttonPlunderQty6.setText("88");
-        buttonPlunderQty6.setClick(new EventHandler<>() {
+        // buttonPlunderQuantity6
+        buttonPlunderQuantity6.setFlatStyle(FlatStyle.Flat);
+        buttonPlunderQuantity6.setLocation(new Point(68, 148));
+        buttonPlunderQuantity6.setName("buttonPlunderQuantity6");
+        buttonPlunderQuantity6.setSize(new Dimension(28, 22));
+        buttonPlunderQuantity6.setTabIndex(134);
+        buttonPlunderQuantity6.setText("88");
+        buttonPlunderQuantity6.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
@@ -171,14 +171,14 @@ public class FormPlunder extends form {
                 buttonPlunder_Click(sender, data);
             }
         });
-        // buttonPlunderQty5
-        buttonPlunderQty5.setFlatStyle(FlatStyle.Flat);
-        buttonPlunderQty5.setLocation(new Point(68, 124));
-        buttonPlunderQty5.setName("buttonPlunderQty5");
-        buttonPlunderQty5.setSize(new Dimension(28, 22));
-        buttonPlunderQty5.setTabIndex(132);
-        buttonPlunderQty5.setText("88");
-        buttonPlunderQty5.setClick(new EventHandler<>() {
+        // buttonPlunderQuantity5
+        buttonPlunderQuantity5.setFlatStyle(FlatStyle.Flat);
+        buttonPlunderQuantity5.setLocation(new Point(68, 124));
+        buttonPlunderQuantity5.setName("buttonPlunderQuantity5");
+        buttonPlunderQuantity5.setSize(new Dimension(28, 22));
+        buttonPlunderQuantity5.setTabIndex(132);
+        buttonPlunderQuantity5.setText("88");
+        buttonPlunderQuantity5.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
@@ -197,14 +197,14 @@ public class FormPlunder extends form {
                 buttonPlunder_Click(sender, data);
             }
         });
-        // buttonPlunderQty4
-        buttonPlunderQty4.setFlatStyle(FlatStyle.Flat);
-        buttonPlunderQty4.setLocation(new Point(68, 100));
-        buttonPlunderQty4.setName("buttonPlunderQty4");
-        buttonPlunderQty4.setSize(new Dimension(28, 22));
-        buttonPlunderQty4.setTabIndex(130);
-        buttonPlunderQty4.setText("88");
-        buttonPlunderQty4.setClick(new EventHandler<>() {
+        // buttonPlunderQuantity4
+        buttonPlunderQuantity4.setFlatStyle(FlatStyle.Flat);
+        buttonPlunderQuantity4.setLocation(new Point(68, 100));
+        buttonPlunderQuantity4.setName("buttonPlunderQuantity4");
+        buttonPlunderQuantity4.setSize(new Dimension(28, 22));
+        buttonPlunderQuantity4.setTabIndex(130);
+        buttonPlunderQuantity4.setText("88");
+        buttonPlunderQuantity4.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
@@ -223,14 +223,14 @@ public class FormPlunder extends form {
                 buttonPlunder_Click(sender, data);
             }
         });
-        // buttonPlunderQty3
-        buttonPlunderQty3.setFlatStyle(FlatStyle.Flat);
-        buttonPlunderQty3.setLocation(new Point(68, 76));
-        buttonPlunderQty3.setName("buttonPlunderQty3");
-        buttonPlunderQty3.setSize(new Dimension(28, 22));
-        buttonPlunderQty3.setTabIndex(128);
-        buttonPlunderQty3.setText("88");
-        buttonPlunderQty3.setClick(new EventHandler<>() {
+        // buttonPlunderQuantity3
+        buttonPlunderQuantity3.setFlatStyle(FlatStyle.Flat);
+        buttonPlunderQuantity3.setLocation(new Point(68, 76));
+        buttonPlunderQuantity3.setName("buttonPlunderQuantity3");
+        buttonPlunderQuantity3.setSize(new Dimension(28, 22));
+        buttonPlunderQuantity3.setTabIndex(128);
+        buttonPlunderQuantity3.setText("88");
+        buttonPlunderQuantity3.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
@@ -249,14 +249,14 @@ public class FormPlunder extends form {
                 buttonPlunder_Click(sender, data);
             }
         });
-        // buttonPlunderQty2
-        buttonPlunderQty2.setFlatStyle(FlatStyle.Flat);
-        buttonPlunderQty2.setLocation(new Point(68, 52));
-        buttonPlunderQty2.setName("buttonPlunderQty2");
-        buttonPlunderQty2.setSize(new Dimension(28, 22));
-        buttonPlunderQty2.setTabIndex(126);
-        buttonPlunderQty2.setText("88");
-        buttonPlunderQty2.setClick(new EventHandler<>() {
+        // buttonPlunderQuantity2
+        buttonPlunderQuantity2.setFlatStyle(FlatStyle.Flat);
+        buttonPlunderQuantity2.setLocation(new Point(68, 52));
+        buttonPlunderQuantity2.setName("buttonPlunderQuantity2");
+        buttonPlunderQuantity2.setSize(new Dimension(28, 22));
+        buttonPlunderQuantity2.setTabIndex(126);
+        buttonPlunderQuantity2.setText("88");
+        buttonPlunderQuantity2.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
@@ -275,14 +275,14 @@ public class FormPlunder extends form {
                 buttonPlunder_Click(sender, data);
             }
         });
-        // buttonPlunderQty1
-        buttonPlunderQty1.setFlatStyle(FlatStyle.Flat);
-        buttonPlunderQty1.setLocation(new Point(68, 28));
-        buttonPlunderQty1.setName("buttonPlunderQty1");
-        buttonPlunderQty1.setSize(new Dimension(28, 22));
-        buttonPlunderQty1.setTabIndex(124);
-        buttonPlunderQty1.setText("88");
-        buttonPlunderQty1.setClick(new EventHandler<>() {
+        // buttonPlunderQuantity1
+        buttonPlunderQuantity1.setFlatStyle(FlatStyle.Flat);
+        buttonPlunderQuantity1.setLocation(new Point(68, 28));
+        buttonPlunderQuantity1.setName("buttonPlunderQuantity1");
+        buttonPlunderQuantity1.setSize(new Dimension(28, 22));
+        buttonPlunderQuantity1.setTabIndex(124);
+        buttonPlunderQuantity1.setText("88");
+        buttonPlunderQuantity1.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
@@ -301,14 +301,14 @@ public class FormPlunder extends form {
                 buttonPlunder_Click(sender, data);
             }
         });
-        // buttonPlunderQty0
-        buttonPlunderQty0.setFlatStyle(FlatStyle.Flat);
-        buttonPlunderQty0.setLocation(new Point(68, 4));
-        buttonPlunderQty0.setName("buttonPlunderQty0");
-        buttonPlunderQty0.setSize(new Dimension(28, 22));
-        buttonPlunderQty0.setTabIndex(122);
-        buttonPlunderQty0.setText("88");
-        buttonPlunderQty0.setClick(new EventHandler<>() {
+        // buttonPlunderQuantity0
+        buttonPlunderQuantity0.setFlatStyle(FlatStyle.Flat);
+        buttonPlunderQuantity0.setLocation(new Point(68, 4));
+        buttonPlunderQuantity0.setName("buttonPlunderQuantity0");
+        buttonPlunderQuantity0.setSize(new Dimension(28, 22));
+        buttonPlunderQuantity0.setTabIndex(122);
+        buttonPlunderQuantity0.setText("88");
+        buttonPlunderQuantity0.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
@@ -438,25 +438,25 @@ public class FormPlunder extends form {
         Controls.add(labelTradeCommodity3);
         Controls.add(labelTradeCommodity7);
         Controls.add(buttonPlunderAll9);
-        Controls.add(buttonPlunderQty9);
+        Controls.add(buttonPlunderQuantity9);
         Controls.add(buttonPlunderAll8);
-        Controls.add(buttonPlunderQty8);
+        Controls.add(buttonPlunderQuantity8);
         Controls.add(buttonPlunderAll7);
-        Controls.add(buttonPlunderQty7);
+        Controls.add(buttonPlunderQuantity7);
         Controls.add(buttonPlunderAll6);
-        Controls.add(buttonPlunderQty6);
+        Controls.add(buttonPlunderQuantity6);
         Controls.add(buttonPlunderAll5);
-        Controls.add(buttonPlunderQty5);
+        Controls.add(buttonPlunderQuantity5);
         Controls.add(buttonPlunderAll4);
-        Controls.add(buttonPlunderQty4);
+        Controls.add(buttonPlunderQuantity4);
         Controls.add(buttonPlunderAll3);
-        Controls.add(buttonPlunderQty3);
+        Controls.add(buttonPlunderQuantity3);
         Controls.add(buttonPlunderAll2);
-        Controls.add(buttonPlunderQty2);
+        Controls.add(buttonPlunderQuantity2);
         Controls.add(buttonPlunderAll1);
-        Controls.add(buttonPlunderQty1);
+        Controls.add(buttonPlunderQuantity1);
         Controls.add(buttonPlunderAll0);
-        Controls.add(buttonPlunderQty0);
+        Controls.add(buttonPlunderQuantity0);
         setFormBorderStyle(FormBorderStyle.FixedDialog);
         setMaximizeBox(false);
         setMinimizeBox(false);
@@ -466,9 +466,9 @@ public class FormPlunder extends form {
         setText("Plunder Cargo");
         resumeLayout(false);
         PerformLayout();
-        buttonPlunderQty = new Button[]{
-                buttonPlunderQty0, buttonPlunderQty1, buttonPlunderQty2, buttonPlunderQty3, buttonPlunderQty4,
-                buttonPlunderQty5, buttonPlunderQty6, buttonPlunderQty7, buttonPlunderQty8, buttonPlunderQty9
+        buttonPlunderQuantity = new Button[]{
+                buttonPlunderQuantity0, buttonPlunderQuantity1, buttonPlunderQuantity2, buttonPlunderQuantity3, buttonPlunderQuantity4,
+                buttonPlunderQuantity5, buttonPlunderQuantity6, buttonPlunderQuantity7, buttonPlunderQuantity8, buttonPlunderQuantity9
         };
         Button[] buttonPlunderAll = {
                 buttonPlunderAll0, buttonPlunderAll1, buttonPlunderAll2, buttonPlunderAll3, buttonPlunderAll4,
@@ -486,8 +486,8 @@ public class FormPlunder extends form {
     private void UpdateAll() {
         Ship ship = game.Commander().getShip();
         Ship opp = game.getOpponent();
-        for (int i = 0; i < buttonPlunderQty.length; i++) {
-            buttonPlunderQty[i].setText("" + opp.Cargo()[i]);
+        for (int i = 0; i < buttonPlunderQuantity.length; i++) {
+            buttonPlunderQuantity[i].setText("" + opp.Cargo()[i]);
         }
         labelBays.setText(ship.FilledCargoBays() + "/" + ship.CargoBays());
     }
@@ -498,7 +498,7 @@ public class FormPlunder extends form {
 
     private void buttonPlunder_Click(Object sender, EventData e) {
         String name = ((Button) sender).getName();
-        boolean all = !name.contains("Qty");
+        boolean all = !name.contains("Quantity");
         int index = Integer.parseInt(name.substring(name.length() - 1));
         Plunder(index, all);
     }

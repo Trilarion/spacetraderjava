@@ -2291,7 +2291,7 @@ public class Game extends SerializableObject {
                 uneventful = false;
                 FormEncounter form = new FormEncounter();
                 form.ShowDialog(mainWindow);
-                mainWindow.UpdateStatusBar();
+                mainWindow.updateStatusBar();
                 switch (form.Result()) {
                     case Arrested:
                         clicks = 0;
@@ -3405,7 +3405,7 @@ public class Game extends SerializableObject {
                     || DialogResult.Yes == FormAlert.Alert(AlertType.ArrivalBuyNewspaper, getParentWindow(), Functions.Multiples(cost, "credit"))) {
                 commander.setCash(commander.getCash() - cost);
                 paidForNewspaper = true;
-                mainWindow.UpdateAll();
+                mainWindow.updateAll();
             }
         }
         if (paidForNewspaper) {
