@@ -121,7 +121,7 @@ public class FormMonster extends form {
         labelMercSkillLabelPilot.textAlignment = ContentAlignment.TopRight;
         labelMercSkillLabelPilot.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+            public void handle(Object sender, LinkLabelClickedEventData data) {
                 SortLinkClicked(sender, data);
             }
         };
@@ -136,7 +136,7 @@ public class FormMonster extends form {
         labelMercSkillLabelFighter.textAlignment = ContentAlignment.TopRight;
         labelMercSkillLabelFighter.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+            public void handle(Object sender, LinkLabelClickedEventData data) {
                 SortLinkClicked(sender, data);
             }
         };
@@ -151,7 +151,7 @@ public class FormMonster extends form {
         labelMercSkillLabelTrader.textAlignment = ContentAlignment.TopRight;
         labelMercSkillLabelTrader.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+            public void handle(Object sender, LinkLabelClickedEventData data) {
                 SortLinkClicked(sender, data);
             }
         };
@@ -166,7 +166,7 @@ public class FormMonster extends form {
         labelMercSkillLabelEngineer.textAlignment = ContentAlignment.TopRight;
         labelMercSkillLabelEngineer.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+            public void handle(Object sender, LinkLabelClickedEventData data) {
                 SortLinkClicked(sender, data);
             }
         };
@@ -180,7 +180,7 @@ public class FormMonster extends form {
         labelMercSystemLabel.setText("System");
         labelMercSystemLabel.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+            public void handle(Object sender, LinkLabelClickedEventData data) {
                 SortLinkClicked(sender, data);
             }
         };
@@ -194,7 +194,7 @@ public class FormMonster extends form {
         labelQuestSystemLabel.setText("System");
         labelQuestSystemLabel.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+            public void handle(Object sender, LinkLabelClickedEventData data) {
                 SortLinkClicked(sender, data);
             }
         };
@@ -208,7 +208,7 @@ public class FormMonster extends form {
         labelQuestDescLabel.setText("Description");
         labelQuestDescLabel.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+            public void handle(Object sender, LinkLabelClickedEventData data) {
                 SortLinkClicked(sender, data);
             }
         };
@@ -223,7 +223,7 @@ public class FormMonster extends form {
         labelMercIDLabel.textAlignment = ContentAlignment.TopRight;
         labelMercIDLabel.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+            public void handle(Object sender, LinkLabelClickedEventData data) {
                 SortLinkClicked(sender, data);
             }
         };
@@ -237,7 +237,7 @@ public class FormMonster extends form {
         labelMercNameLabel.setText("Name");
         labelMercNameLabel.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+            public void handle(Object sender, LinkLabelClickedEventData data) {
                 SortLinkClicked(sender, data);
             }
         };
@@ -251,7 +251,7 @@ public class FormMonster extends form {
         labelShipyardsDescLabel.setText("Description");
         labelShipyardsDescLabel.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+            public void handle(Object sender, LinkLabelClickedEventData data) {
                 SortLinkClicked(sender, data);
             }
         };
@@ -265,7 +265,7 @@ public class FormMonster extends form {
         labelShipyardsSystemLabel.setText("System");
         labelShipyardsSystemLabel.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+            public void handle(Object sender, LinkLabelClickedEventData data) {
                 SortLinkClicked(sender, data);
             }
         };
@@ -317,7 +317,7 @@ public class FormMonster extends form {
         labelMercSystems.setTabIndex(14);
         labelMercSystems.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+            public void handle(Object sender, LinkLabelClickedEventData data) {
                 SystemLinkClicked(sender, data);
             }
         };
@@ -337,7 +337,7 @@ public class FormMonster extends form {
         labelMercSystems2.setTabIndex(148);
         labelMercSystems2.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+            public void handle(Object sender, LinkLabelClickedEventData data) {
                 SystemLinkClicked(sender, data);
             }
         };
@@ -360,7 +360,7 @@ public class FormMonster extends form {
         labelQuestSystems.setTabIndex(12);
         labelQuestSystems.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+            public void handle(Object sender, LinkLabelClickedEventData data) {
                 SystemLinkClicked(sender, data);
             }
         };
@@ -382,7 +382,7 @@ public class FormMonster extends form {
         labelShipyardSystems.setTabIndex(13);
         labelShipyardSystems.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+            public void handle(Object sender, LinkLabelClickedEventData data) {
                 SystemLinkClicked(sender, data);
             }
         };
@@ -483,15 +483,15 @@ public class FormMonster extends form {
                 compareVal = A.Name().compareTo(B.Name());
             }
         } else {
-            StarSystem A = game.Universe()[a];
-            StarSystem B = game.Universe()[b];
+            StarSystem A = game.getUniverse()[a];
+            StarSystem B = game.getUniverse()[b];
             if ("D".equals(sortBy)) { // Description
                 String nameA = "";
                 String nameB = "";
                 switch (SomeStringsForSwitch.valueOf(sortWhat)) {
                     case Q: // Quests
-                        nameA = A.SpecialEvent().Title();
-                        nameB = B.SpecialEvent().Title();
+                        nameA = A.SpecialEvent().getTitle();
+                        nameB = B.SpecialEvent().getTitle();
                         break;
                     case S: // Shipyards
                         nameA = A.Shipyard().Name();
@@ -525,7 +525,7 @@ public class FormMonster extends form {
         // Populate the quest and shipyard system ids arrays.
         ArrayList<Integer> quests = new ArrayList<>();
         ArrayList<Integer> shipyards = new ArrayList<>();
-        for (StarSystem system : game.Universe()) {
+        for (StarSystem system : game.getUniverse()) {
             if (system.ShowSpecialButton()) {
                 quests.add(system.Id().getId());
             }
@@ -645,10 +645,10 @@ public class FormMonster extends form {
         labelQuests.setText("");
         labelQuestSystems.links.clear();
         for (Integer questSystemId : questSystemIds) {
-            StarSystem system = game.Universe()[questSystemId];
+            StarSystem system = game.getUniverse()[questSystemId];
             int start = labelQuestSystems.getText().length();
             labelQuestSystems.setText(labelQuestSystems.getText() + (system.Name() + Strings.newline));
-            labelQuests.setText(labelQuests.getText() + (system.SpecialEvent().Title() + Strings.newline));
+            labelQuests.setText(labelQuests.getText() + (system.SpecialEvent().getTitle() + Strings.newline));
             labelQuestSystems.links.add(start, system.Name().length(), system.Name());
         }
         labelQuestSystems.setText(labelQuestSystems.getText().trim());
@@ -660,7 +660,7 @@ public class FormMonster extends form {
         labelShipyards.setText("");
         labelShipyardSystems.links.clear();
         for (Integer shipyardSystemId : shipyardSystemIds) {
-            StarSystem system = game.Universe()[shipyardSystemId];
+            StarSystem system = game.getUniverse()[shipyardSystemId];
             int start = labelShipyardSystems.getText().length();
             labelShipyardSystems.setText(labelShipyardSystems.getText() + (system.Name() + Strings.newline));
             labelShipyards.setText(labelShipyards.getText() + (system.Shipyard().Name() + Strings.newline));
@@ -670,13 +670,13 @@ public class FormMonster extends form {
         labelShipyards.setText(labelShipyards.getText().trim());
     }
 
-    private void SystemLinkClicked(Object sender, LinkLabelLinkClickedEventData e) {
-        game.setSelectedSystemByName(e.Link.linkData.toString());
+    private void SystemLinkClicked(Object sender, LinkLabelClickedEventData e) {
+        game.setSelectedSystemByName(e.link.linkData.toString());
         game.getParentWindow().updateAll();
         Close();
     }
 
-    private void SortLinkClicked(Object sender, LinkLabelLinkClickedEventData e) {
+    private void SortLinkClicked(Object sender, LinkLabelClickedEventData e) {
         Sort(((LinkLabel) sender).getName().substring(3, 1), ((LinkLabel) sender).getText().substring(0, 1));
         UpdateAll();
     }

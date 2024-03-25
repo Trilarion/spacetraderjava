@@ -9,7 +9,6 @@ public interface Strings {
     String CargoSellStatementDump = "You can ^1 up to ^2.";
     String CargoTitle = "^1 ^2";
     String CargoUnit = "unit";
-    // TODO fix this line.
     String DistanceUnit = "parsec";
     String EncounterActionOppAttacks = "The ^1 attacks.";
     String EncounterHidePrincess = "the Princess";

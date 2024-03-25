@@ -54,7 +54,7 @@ public class FormViewQuests extends form {
                 + "Claim your moon at Utopia.");
         labelQuests.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelLinkClickedEventData data) {
+            public void handle(Object sender, LinkLabelClickedEventData data) {
                 labelQuests_LinkClicked(sender, data);
             }
         };
@@ -153,10 +153,10 @@ public class FormViewQuests extends form {
         if (SpecialEvent.StatusScarabHunting == game.getQuestStatusScarab()) {
             quests.add(Strings.QuestScarabFind);
         } else if (SpecialEvent.StatusScarabDestroyed == game.getQuestStatusScarab()) {
-            if (null == Constants.SpecialEvents[SpecialEventType.ScarabUpgradeHull.getId()].Location()) {
-                quests.add(Functions.StringVars(Strings.QuestScarabNotify, Constants.SpecialEvents[SpecialEventType.ScarabDestroyed.getId()].Location().Name()));
+            if (null == Constants.SpecialEvents[SpecialEventType.ScarabUpgradeHull.getId()].getLocation()) {
+                quests.add(Functions.StringVars(Strings.QuestScarabNotify, Constants.SpecialEvents[SpecialEventType.ScarabDestroyed.getId()].getLocation().Name()));
             } else {
-                quests.add(Functions.StringVars(Strings.QuestScarabHull, Constants.SpecialEvents[SpecialEventType.ScarabUpgradeHull.getId()].Location().Name()));
+                quests.add(Functions.StringVars(Strings.QuestScarabHull, Constants.SpecialEvents[SpecialEventType.ScarabUpgradeHull.getId()].getLocation().Name()));
             }
         }
         if (game.Commander().getShip().SculptureOnBoard()) {
@@ -208,8 +208,8 @@ public class FormViewQuests extends form {
         }
     }
 
-    private void labelQuests_LinkClicked(Object sender, LinkLabelLinkClickedEventData e) {
-        game.setSelectedSystemByName(e.Link.linkData.toString());
+    private void labelQuests_LinkClicked(Object sender, LinkLabelClickedEventData e) {
+        game.setSelectedSystemByName(e.link.linkData.toString());
         game.getParentWindow().updateAll();
         Close();
     }

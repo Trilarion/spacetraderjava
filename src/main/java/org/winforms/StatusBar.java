@@ -5,7 +5,7 @@ import org.winforms.enums.StatusBarPanelAutoSize;
 // TODO documentation of usage
 public class StatusBar extends Control {
 
-    public EventHandler<Object, StatusBarPanelClickEventData> panelClick;
+    public EventHandler<Object, StatusBarPanel> panelClick;
     public boolean showPanels;
     public boolean sizingGrip;
 

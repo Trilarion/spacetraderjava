@@ -47,7 +47,7 @@ public class FormTest extends form {
         labelAlertType.setTabIndex(0);
         labelAlertType.setText("Alert Type");
         // boxAlert
-        boxAlert.Controls.addAll(buttonTestAlert, textValue3, textValue2, textValue1, selAlertType, labelValue3, labelValue1, labelValue2, labelAlertType);
+        boxAlert.controls.addAll(buttonTestAlert, textValue3, textValue2, textValue1, selAlertType, labelValue3, labelValue1, labelValue2, labelAlertType);
         boxAlert.setLocation(new Point(8, 8));
         boxAlert.setName("boxAlert");
         boxAlert.setSize(new Dimension(200, 152));
@@ -113,7 +113,7 @@ public class FormTest extends form {
         labelValue2.setTabIndex(1);
         labelValue2.setText("Value 2");
         // groupBox1
-        groupBox1.Controls.addAll(buttonTestSpecialEvent, selSpecialEvent, labelSpecialEvent);
+        groupBox1.controls.addAll(buttonTestSpecialEvent, selSpecialEvent, labelSpecialEvent);
         groupBox1.setLocation(new Point(8, 168));
         groupBox1.setName("groupBox1");
         groupBox1.setSize(new Dimension(200, 80));
@@ -182,7 +182,7 @@ public class FormTest extends form {
         SpecialEvent se = Constants.SpecialEvents[((SpecialEventType) selSpecialEvent.getSelectedItem()).getId()];
         String button1, button2;
         DialogResult res1, res2;
-        if (se.MessageOnly()) {
+        if (se.isMessageOnly()) {
             button1 = "Ok";
             button2 = null;
             res1 = DialogResult.OK;
@@ -193,6 +193,6 @@ public class FormTest extends form {
             res1 = DialogResult.Yes;
             res2 = DialogResult.No;
         }
-        (new FormAlert(se.Title(), se.String(), button1, res1, button2, res2, null)).ShowDialog(this);
+        (new FormAlert(se.getTitle(), se.String(), button1, res1, button2, res2, null)).ShowDialog(this);
     }
 }

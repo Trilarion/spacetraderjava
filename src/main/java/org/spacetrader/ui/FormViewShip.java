@@ -71,7 +71,7 @@ public class FormViewShip extends form {
                 + "eld\r\n1 Lightning Shield\r\nNavigating System\r\nAuto-Repair System\r\n10 Extra Cargo Bays\r\nAn Escape Pod\r\n"
                 + "\r\n1 weapon slot\r\n1 gadget slot");
         // boxSpecialCargo
-        boxSpecialCargo.Controls.addAll(labelSpecialCargo);
+        boxSpecialCargo.controls.addAll(labelSpecialCargo);
         boxSpecialCargo.setLocation(new Point(192, 8));
         boxSpecialCargo.setSize(new Dimension(200, 204));
         boxSpecialCargo.setTabIndex(64);

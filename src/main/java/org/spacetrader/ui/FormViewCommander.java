@@ -130,7 +130,7 @@ public class FormViewCommander extends form {
         labelTime.setTabIndex(44);
         labelTime.setText("88,888 days");
         // boxSkills
-        boxSkills.Controls.addAll(labelEngineer, labelTrader, labelFighter, labelPilot, labelEngineerLabel, labelTraderLabel, labelFighterLabel, labelPilotLabel);
+        boxSkills.controls.addAll(labelEngineer, labelTrader, labelFighter, labelPilot, labelEngineerLabel, labelTraderLabel, labelFighterLabel, labelPilotLabel);
         boxSkills.setLocation(new Point(8, 64));
         boxSkills.setName("boxSkills");
         boxSkills.setSize(new Dimension(216, 56));
@@ -194,7 +194,7 @@ public class FormViewCommander extends form {
         labelPilotLabel.setTabIndex(49);
         labelPilotLabel.setText("Pilot:");
         // boxFinances
-        boxFinances.Controls.addAll(labelCash, labelDebt, labelNetWorth, labelNetWorthLabel, labelCashLabel, labelDebtLabel);
+        boxFinances.controls.addAll(labelCash, labelDebt, labelNetWorth, labelNetWorthLabel, labelCashLabel, labelDebtLabel);
         boxFinances.setLocation(new Point(8, 128));
         boxFinances.setName("boxFinances");
         boxFinances.setSize(new Dimension(216, 72));
@@ -223,7 +223,7 @@ public class FormViewCommander extends form {
         labelNetWorth.setText("8,888,888 cr.");
         labelNetWorth.textAlignment = ContentAlignment.TopRight;
         // boxNotoriety
-        boxNotoriety.Controls.addAll(labelBountyLabel, labelBounty, labelPoliceLabel, labelReputationLabel, labelKillsLabel, labelKills, labelReputation, labelRecord);
+        boxNotoriety.controls.addAll(labelBountyLabel, labelBounty, labelPoliceLabel, labelReputationLabel, labelKillsLabel, labelKills, labelReputation, labelRecord);
         boxNotoriety.setLocation(new Point(8, 208));
         boxNotoriety.setName("boxNotoriety");
         boxNotoriety.setSize(new Dimension(216, 88));

@@ -246,7 +246,7 @@ public class Functions {
     }
 
     public static boolean WormholeExists(StarSystem a, StarSystem b) {
-        StarSystem[] universe = Game.getCurrentGame().Universe();
+        StarSystem[] universe = Game.getCurrentGame().getUniverse();
         int[] wormholes = Game.getCurrentGame().Wormholes();
         int i = Util.bruteSeek(wormholes, a.Id().getId());
         return (0 <= i && (universe[wormholes[(i + 1) % wormholes.length]] == b));
@@ -255,6 +255,6 @@ public class Functions {
     public static StarSystem WormholeTarget(int a) {
         int[] wormholes = Game.getCurrentGame().Wormholes();
         int i = Util.bruteSeek(wormholes, a);
-        return (0 <= i ? (Game.getCurrentGame().Universe()[wormholes[(i + 1) % wormholes.length]]) : null);
+        return (0 <= i ? (Game.getCurrentGame().getUniverse()[wormholes[(i + 1) % wormholes.length]]) : null);
     }
 }

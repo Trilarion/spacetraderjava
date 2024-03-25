@@ -105,15 +105,15 @@ public class FormEquipment extends form {
         buttonClose.setTabStop(false);
         buttonClose.setText("X");
         // boxSell
-        boxSell.Controls.add(labelSellGadgetNoSlots);
-        boxSell.Controls.add(labelSellShieldNoSlots);
-        boxSell.Controls.add(labelSellWeaponNoSlots);
-        boxSell.Controls.add(labelSellGadgets);
-        boxSell.Controls.add(labelSellShields);
-        boxSell.Controls.add(labelSellWeapons);
-        boxSell.Controls.add(listSellGadget);
-        boxSell.Controls.add(listSellShield);
-        boxSell.Controls.add(listSellWeapon);
+        boxSell.controls.add(labelSellGadgetNoSlots);
+        boxSell.controls.add(labelSellShieldNoSlots);
+        boxSell.controls.add(labelSellWeaponNoSlots);
+        boxSell.controls.add(labelSellGadgets);
+        boxSell.controls.add(labelSellShields);
+        boxSell.controls.add(labelSellWeapons);
+        boxSell.controls.add(listSellGadget);
+        boxSell.controls.add(listSellShield);
+        boxSell.controls.add(listSellWeapon);
         boxSell.setLocation(new Point(4, 2));
         boxSell.setName("boxSell");
         boxSell.setSize(new Dimension(144, 304));
@@ -217,15 +217,15 @@ public class FormEquipment extends form {
             }
         });
         // boxBuy
-        boxBuy.Controls.add(labelBuyGadgetNone);
-        boxBuy.Controls.add(labelBuyShieldNone);
-        boxBuy.Controls.add(labelBuyWeaponNone);
-        boxBuy.Controls.add(labelBuyGadgets);
-        boxBuy.Controls.add(labelBuyShields);
-        boxBuy.Controls.add(labelBuyWeapons);
-        boxBuy.Controls.add(listBuyGadget);
-        boxBuy.Controls.add(listBuyShield);
-        boxBuy.Controls.add(listBuyWeapon);
+        boxBuy.controls.add(labelBuyGadgetNone);
+        boxBuy.controls.add(labelBuyShieldNone);
+        boxBuy.controls.add(labelBuyWeaponNone);
+        boxBuy.controls.add(labelBuyGadgets);
+        boxBuy.controls.add(labelBuyShields);
+        boxBuy.controls.add(labelBuyWeapons);
+        boxBuy.controls.add(listBuyGadget);
+        boxBuy.controls.add(listBuyShield);
+        boxBuy.controls.add(listBuyWeapon);
         boxBuy.setLocation(new Point(156, 2));
         boxBuy.setName("boxBuy");
         boxBuy.setSize(new Dimension(144, 304));
@@ -329,22 +329,22 @@ public class FormEquipment extends form {
             }
         });
         // boxShipInfo
-        boxShipInfo.Controls.add(labelCharge);
-        boxShipInfo.Controls.add(labelPower);
-        boxShipInfo.Controls.add(labelChargeLabel);
-        boxShipInfo.Controls.add(labelPowerLabel);
-        boxShipInfo.Controls.add(labelType);
-        boxShipInfo.Controls.add(labelTypeLabel);
-        boxShipInfo.Controls.add(labelNameLabel);
-        boxShipInfo.Controls.add(buttonSell);
-        boxShipInfo.Controls.add(buttonBuy);
-        boxShipInfo.Controls.add(labelBuyPriceLabel);
-        boxShipInfo.Controls.add(labelBuyPrice);
-        boxShipInfo.Controls.add(labelSellPriceLabel);
-        boxShipInfo.Controls.add(pictureEquipment);
-        boxShipInfo.Controls.add(labelSellPrice);
-        boxShipInfo.Controls.add(labelName);
-        boxShipInfo.Controls.add(labelDescription);
+        boxShipInfo.controls.add(labelCharge);
+        boxShipInfo.controls.add(labelPower);
+        boxShipInfo.controls.add(labelChargeLabel);
+        boxShipInfo.controls.add(labelPowerLabel);
+        boxShipInfo.controls.add(labelType);
+        boxShipInfo.controls.add(labelTypeLabel);
+        boxShipInfo.controls.add(labelNameLabel);
+        boxShipInfo.controls.add(buttonSell);
+        boxShipInfo.controls.add(buttonBuy);
+        boxShipInfo.controls.add(labelBuyPriceLabel);
+        boxShipInfo.controls.add(labelBuyPrice);
+        boxShipInfo.controls.add(labelSellPriceLabel);
+        boxShipInfo.controls.add(pictureEquipment);
+        boxShipInfo.controls.add(labelSellPrice);
+        boxShipInfo.controls.add(labelName);
+        boxShipInfo.controls.add(labelDescription);
         boxShipInfo.setLocation(new Point(308, 2));
         boxShipInfo.setName("boxShipInfo");
         boxShipInfo.setSize(new Dimension(208, 304));

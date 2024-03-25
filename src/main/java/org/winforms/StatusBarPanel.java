@@ -5,7 +5,7 @@ import org.winforms.enums.StatusBarPanelAutoSize;
 import java.awt.*;
 
 // TODO documentation of usage
-public class StatusBarPanel {
+public class StatusBarPanel implements EventData {
 
     public final StatusBarPanelAutoSize autoSize;
     private final JStatusBarSection jpanel = new JStatusBarSection(" ");

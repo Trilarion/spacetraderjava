@@ -358,7 +358,7 @@ public class Game extends SerializableObject {
             encounterType = commander.getShip().Cloaked() ? EncounterType.SpaceMonsterIgnore : EncounterType.SpaceMonsterAttack;
             showEncounter = true;
         } else if (arrivedViaWormhole && 20 == getClicks() && SpecialEventType.NA != WarpSystem().SpecialEventType()
-                && SpecialEventType.ScarabDestroyed == WarpSystem().SpecialEvent().Type()
+                && SpecialEventType.ScarabDestroyed == WarpSystem().SpecialEvent().getType()
                 && SpecialEvent.StatusScarabHunting == getQuestStatusScarab()) {
             // Encounter with the stolen Scarab
             opponent = scarab;
@@ -768,11 +768,11 @@ public class Game extends SerializableObject {
         // Assign the rest of the events randomly.
         if (goodUniverse) {
             for (int i = 0; i < Constants.SpecialEvents.length; i++) {
-                for (int j = 0; j < Constants.SpecialEvents[i].Occurrentrence(); j++) {
+                for (int j = 0; j < Constants.SpecialEvents[i].getOccurrence(); j++) {
                     do {
                         system = Functions.GetRandom(universe.length);
                     } while (SpecialEventType.NA != universe[system].SpecialEventType());
-                    universe[system].SpecialEventType(Constants.SpecialEvents[i].Type());
+                    universe[system].SpecialEventType(Constants.SpecialEvents[i].getType());
                 }
             }
         }
@@ -1636,7 +1636,7 @@ public class Game extends SerializableObject {
         return StarSystemId.NA == warpSystemId ? null : universe[warpSystemId.getId()];
     }
 
-    public StarSystem[] Universe() {
+    public StarSystem[] getUniverse() {
         return universe;
     }
 
@@ -2855,7 +2855,7 @@ public class Game extends SerializableObject {
                 FormAlert.Alert(AlertType.SpecialSealedCanisters, mainWindow);
                 int tradeItem = Functions.GetRandom(Constants.TradeItems.length);
                 ship.Cargo()[tradeItem] += 3;
-                commander.PriceCargo()[tradeItem] += commander.CurrentSystem().SpecialEvent().Price();
+                commander.PriceCargo()[tradeItem] += commander.CurrentSystem().SpecialEvent().getPrice();
                 break;
             case Dragonfly:
             case DragonflyBaratas:
@@ -3105,8 +3105,8 @@ public class Game extends SerializableObject {
                 RecalculateSellPrices(currentSys);
                 break;
         }
-        if (0 != currentSys.SpecialEvent().Price()) {
-            commander.setCash(commander.getCash() - currentSys.SpecialEvent().Price());
+        if (0 != currentSys.SpecialEvent().getPrice()) {
+            commander.setCash(commander.getCash() - currentSys.SpecialEvent().getPrice());
         }
         if (remove) {
             currentSys.SpecialEventType(SpecialEventType.NA);

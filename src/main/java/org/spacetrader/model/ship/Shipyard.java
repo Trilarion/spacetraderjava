@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-// TODo part of model
 // Represents a shipyard orbiting a solar system in the universe.
 // In a shipyard, the player can design his own ship and have it constructed, for a fee.
 public class Shipyard {

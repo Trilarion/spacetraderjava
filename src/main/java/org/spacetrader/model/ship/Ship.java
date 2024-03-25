@@ -185,7 +185,7 @@ public class Ship extends ShipSpec {
             Game.getCurrentGame().RecalculateBuyPrices(Game.getCurrentGame().Commander().CurrentSystem());
         }
         if (null != merc && !Util.arrayContains(Constants.SpecialCrewMemberIds, (merc.Id()))) {
-            StarSystem[] universe = Game.getCurrentGame().Universe();
+            StarSystem[] universe = Game.getCurrentGame().getUniverse();
             // The leaving Mercenary travels to a nearby random system.
             merc.setCurrentSystemId(StarSystemId.NA);
             while (StarSystemId.NA == merc.getCurrentSystemId()) {

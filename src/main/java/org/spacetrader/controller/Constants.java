@@ -78,7 +78,8 @@ public class Constants {
     public static final int PoliceRecordScoreTrusted = 10;
     public static final int PoliceRecordScoreLiked = 25;
     public static final int PoliceRecordScoreHero = 75;
-    public static final int ReputationScoreHarmless = 0;
+
+    public static final int ReputationScoreHarmless = 0;  // TODO enum
     public static final int ReputationScoreMostlyHarmless = 10;
     public static final int ReputationScorePoor = 20;
     public static final int ReputationScoreAverage = 40;
@@ -174,6 +175,7 @@ public class Constants {
             new PoliticalSystem(PoliticalSystemType.Theocracy, 5, Activity.Abundant, Activity.Minimal, Activity.Moderate,
                     TechLevel.t0, TechLevel.t4, 0, true, true, TradeItemType.Narcotics)
     };
+
     public static final Reputation[] Reputations = {
             new Reputation(ReputationType.Harmless, ReputationScoreHarmless),
             new Reputation(ReputationType.MostlyHarmless, ReputationScoreMostlyHarmless),

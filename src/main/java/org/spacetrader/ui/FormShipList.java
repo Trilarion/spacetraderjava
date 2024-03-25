@@ -509,7 +509,7 @@ public class FormShipList extends form {
             }
         });
         // boxShipInfo
-        boxShipInfo.Controls.addAll(labelCrew,
+        boxShipInfo.controls.addAll(labelCrew,
                 labelGadget,
                 labelShield,
                 labelWeapon,

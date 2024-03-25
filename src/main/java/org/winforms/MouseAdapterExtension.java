@@ -16,7 +16,7 @@ class MouseAdapterExtension extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (null != statusBar.panelClick) {
-            statusBar.panelClick.handle(source, new StatusBarPanelClickEventData(source));
+            statusBar.panelClick.handle(source, source);
         }
     }
 }

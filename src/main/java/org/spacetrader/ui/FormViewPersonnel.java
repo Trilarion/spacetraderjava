@@ -71,8 +71,8 @@ public class FormViewPersonnel extends form {
         buttonClose.setTabStop(false);
         buttonClose.setText("X");
         // boxCurrentCrew
-        boxCurrentCrew.Controls.add(labelCrewNoQuarters);
-        boxCurrentCrew.Controls.add(listCrew);
+        boxCurrentCrew.controls.add(labelCrewNoQuarters);
+        boxCurrentCrew.controls.add(listCrew);
         boxCurrentCrew.setLocation(new Point(8, 8));
         boxCurrentCrew.setName("boxCurrentCrew");
         boxCurrentCrew.setSize(new Dimension(144, 114));
@@ -98,8 +98,8 @@ public class FormViewPersonnel extends form {
             }
         });
         // boxForHire
-        boxForHire.Controls.add(labelForHireNone);
-        boxForHire.Controls.add(listForHire);
+        boxForHire.controls.add(labelForHireNone);
+        boxForHire.controls.add(listForHire);
         boxForHire.setLocation(new Point(160, 8));
         boxForHire.setName("boxForHire");
         boxForHire.setSize(new Dimension(144, 114));
@@ -125,17 +125,17 @@ public class FormViewPersonnel extends form {
             }
         });
         // boxInfo
-        boxInfo.Controls.add(buttonHireFire);
-        boxInfo.Controls.add(labelRate);
-        boxInfo.Controls.add(labelName);
-        boxInfo.Controls.add(labelEngineer);
-        boxInfo.Controls.add(labelTrader);
-        boxInfo.Controls.add(labelFighter);
-        boxInfo.Controls.add(labelPilot);
-        boxInfo.Controls.add(labelEngineerLabel);
-        boxInfo.Controls.add(labelTraderLabel);
-        boxInfo.Controls.add(labelFighterLabel);
-        boxInfo.Controls.add(labelPilotLabel);
+        boxInfo.controls.add(buttonHireFire);
+        boxInfo.controls.add(labelRate);
+        boxInfo.controls.add(labelName);
+        boxInfo.controls.add(labelEngineer);
+        boxInfo.controls.add(labelTrader);
+        boxInfo.controls.add(labelFighter);
+        boxInfo.controls.add(labelPilot);
+        boxInfo.controls.add(labelEngineerLabel);
+        boxInfo.controls.add(labelTraderLabel);
+        boxInfo.controls.add(labelFighterLabel);
+        boxInfo.controls.add(labelPilotLabel);
         boxInfo.setLocation(new Point(312, 8));
         boxInfo.setName("boxInfo");
         boxInfo.setSize(new Dimension(168, 114));

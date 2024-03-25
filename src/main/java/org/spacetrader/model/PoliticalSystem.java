@@ -8,11 +8,10 @@ import org.spacetrader.model.ship.ShipType;
 import org.spacetrader.ui.Strings;
 
 
-// TODO part of the model
 public class PoliticalSystem {
     private final PoliticalSystemType type;
     private final int reactionIllegal; // Reaction level of illegal goods 0 = total acceptance (determines how police reacts if they find you carry them)
-    private final Activity activityPolice; // Activity level of police force 0 = no police (determines occurrentrence rate)
+    private final Activity activityPolice; // Activity level of police force 0 = no police (determines occurrence rate)
     private final Activity activityPirates; // Activity level of pirates 0 = no pirates
     private final Activity activityTraders; // Activity level of traders 0 = no traders
     private final TechLevel minTech; // Minimum tech level needed

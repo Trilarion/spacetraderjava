@@ -6,23 +6,24 @@ import java.awt.event.MouseEvent;
 
 
 public class MouseEventData implements EventData {
-    public final MouseButtons Button;
-    public final int X, Y;
+    public final MouseButtons button;
+    public final int x, y;
 
     public MouseEventData(MouseEvent e) {
-        X = e.getX();
-        Y = e.getY();
-        Button = findMouseButton(e.getButton());
-    }
 
-    private MouseButtons findMouseButton(int button) {
-        switch (button) {
+        x = e.getX();
+        y = e.getY();
+
+        switch (e.getButton()) {
             case MouseEvent.BUTTON1:
-                return MouseButtons.Left;
+                button = MouseButtons.Left;
+                break;
             case MouseEvent.BUTTON2:
-                return MouseButtons.Right;
+                button = MouseButtons.Right;
+                break;
             default:
-                throw new Error("Unknown mouse button: " + button);
+                throw new RuntimeException("Unknown mouse button: " + e.getButton());
         }
     }
+
 }

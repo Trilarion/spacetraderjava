@@ -416,7 +416,7 @@ public class MainWindow extends Window {
         menuView.setText("View");
         // menuViewCommander
         menuViewCommander.setEnabled(false);
-        menuViewCommander.setText("&Commander Status");
+        menuViewCommander.setText("Commander Status");
         menuViewCommander.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
@@ -535,7 +535,7 @@ public class MainWindow extends Window {
         statusBar.setTabIndex(2);
         statusBar.panelClick = new EventHandler<>() {
             @Override
-            public void handle(Object sender, StatusBarPanelClickEventData data) {
+            public void handle(Object sender, StatusBarPanel data) {
                 statusBar_PanelClick(sender, data);
             }
         };
@@ -557,8 +557,8 @@ public class MainWindow extends Window {
         //statusBarPanelExtra.setWidth();
 
         // boxShortRangeChart
-        boxShortRangeChart.Anchor = AnchorStyles.Top_Right;
-        boxShortRangeChart.Controls.add(pictureShortRangeChart);
+        boxShortRangeChart.anchor = AnchorStyles.Top_Right;
+        boxShortRangeChart.controls.add(pictureShortRangeChart);
         boxShortRangeChart.setLocation(new Point(364, 306));
         boxShortRangeChart.setName("boxShortRangeChart");
         boxShortRangeChart.setSize(new Dimension(176, 168));
@@ -566,13 +566,13 @@ public class MainWindow extends Window {
         boxShortRangeChart.setTabStop(false);
         boxShortRangeChart.setText("Short-Range Chart");
         // boxGalacticChart
-        boxGalacticChart.Anchor = AnchorStyles.Top_Right;
+        boxGalacticChart.anchor = AnchorStyles.Top_Right;
         boxGalacticChart.setBackgroundColor(SystemColors.Control);
-        boxGalacticChart.Controls.add(labelWormhole);
-        boxGalacticChart.Controls.add(labelWormholeLabel);
-        boxGalacticChart.Controls.add(buttonJump);
-        boxGalacticChart.Controls.add(buttonFind);
-        boxGalacticChart.Controls.add(pictureGalacticChart);
+        boxGalacticChart.controls.add(labelWormhole);
+        boxGalacticChart.controls.add(labelWormholeLabel);
+        boxGalacticChart.controls.add(buttonJump);
+        boxGalacticChart.controls.add(buttonFind);
+        boxGalacticChart.controls.add(pictureGalacticChart);
         boxGalacticChart.setLocation(new Point(180, 306));
         boxGalacticChart.setName("boxGalacticChart");
         boxGalacticChart.setSize(new Dimension(176, 168));
@@ -618,28 +618,28 @@ public class MainWindow extends Window {
             }
         });
         // boxTargetSystem
-        boxTargetSystem.Anchor = AnchorStyles.Top_Right;
-        boxTargetSystem.Controls.add(buttonTrack);
-        boxTargetSystem.Controls.add(buttonNextSystem);
-        boxTargetSystem.Controls.add(buttonPrevSystem);
-        boxTargetSystem.Controls.add(labelTargetOutOfRange);
-        boxTargetSystem.Controls.add(buttonWarp);
-        boxTargetSystem.Controls.add(labelTargetPolSys);
-        boxTargetSystem.Controls.add(labelTargetSize);
-        boxTargetSystem.Controls.add(labelTargetTech);
-        boxTargetSystem.Controls.add(labelTargetDistance);
-        boxTargetSystem.Controls.add(labelTargetPirates);
-        boxTargetSystem.Controls.add(labelTargetPolice);
-        boxTargetSystem.Controls.add(labelTargetResource);
-        boxTargetSystem.Controls.add(labelTargetDistanceLabel);
-        boxTargetSystem.Controls.add(labelTargetPiratesLabel);
-        boxTargetSystem.Controls.add(labelTargetPoliceLabel);
-        boxTargetSystem.Controls.add(labelTargetResourceLabel);
-        boxTargetSystem.Controls.add(labelTargetGovtLabel);
-        boxTargetSystem.Controls.add(labelTargetTechLabel);
-        boxTargetSystem.Controls.add(labelTargetSizeLabel);
-        boxTargetSystem.Controls.add(labelTargetName);
-        boxTargetSystem.Controls.add(labelTargetNameLabel);
+        boxTargetSystem.anchor = AnchorStyles.Top_Right;
+        boxTargetSystem.controls.add(buttonTrack);
+        boxTargetSystem.controls.add(buttonNextSystem);
+        boxTargetSystem.controls.add(buttonPrevSystem);
+        boxTargetSystem.controls.add(labelTargetOutOfRange);
+        boxTargetSystem.controls.add(buttonWarp);
+        boxTargetSystem.controls.add(labelTargetPolSys);
+        boxTargetSystem.controls.add(labelTargetSize);
+        boxTargetSystem.controls.add(labelTargetTech);
+        boxTargetSystem.controls.add(labelTargetDistance);
+        boxTargetSystem.controls.add(labelTargetPirates);
+        boxTargetSystem.controls.add(labelTargetPolice);
+        boxTargetSystem.controls.add(labelTargetResource);
+        boxTargetSystem.controls.add(labelTargetDistanceLabel);
+        boxTargetSystem.controls.add(labelTargetPiratesLabel);
+        boxTargetSystem.controls.add(labelTargetPoliceLabel);
+        boxTargetSystem.controls.add(labelTargetResourceLabel);
+        boxTargetSystem.controls.add(labelTargetGovtLabel);
+        boxTargetSystem.controls.add(labelTargetTechLabel);
+        boxTargetSystem.controls.add(labelTargetSizeLabel);
+        boxTargetSystem.controls.add(labelTargetName);
+        boxTargetSystem.controls.add(labelTargetNameLabel);
         boxTargetSystem.setLocation(new Point(548, 306));
         boxTargetSystem.setName("boxTargetSystem");
         boxTargetSystem.setSize(new Dimension(216, 168));
@@ -826,117 +826,117 @@ public class MainWindow extends Window {
         labelTargetNameLabel.setTabIndex(0);
         labelTargetNameLabel.setText("Name:");
         // boxCargo
-        boxCargo.Anchor = AnchorStyles.Top_Right;
-        boxCargo.Controls.add(pictureCargoLine3);
-        boxCargo.Controls.add(pictureCargoLine2);
-        boxCargo.Controls.add(pictureCargoLine0);
-        boxCargo.Controls.add(pictureCargoLine1);
-        boxCargo.Controls.add(labelTargetPct9);
-        boxCargo.Controls.add(labelTargetDiff9);
-        boxCargo.Controls.add(labelTargetPrice9);
-        boxCargo.Controls.add(buttonBuyMax9);
-        boxCargo.Controls.add(buttonBuyQuantity9);
-        boxCargo.Controls.add(labelBuyPrice9);
-        boxCargo.Controls.add(buttonSellAll9);
-        boxCargo.Controls.add(buttonSellQuantity9);
-        boxCargo.Controls.add(labelSellPrice9);
-        boxCargo.Controls.add(labelTargetPct8);
-        boxCargo.Controls.add(labelTargetDiff8);
-        boxCargo.Controls.add(labelTargetPrice8);
-        boxCargo.Controls.add(buttonBuyMax8);
-        boxCargo.Controls.add(buttonBuyQuantity8);
-        boxCargo.Controls.add(labelBuyPrice8);
-        boxCargo.Controls.add(buttonSellAll8);
-        boxCargo.Controls.add(buttonSellQuantity8);
-        boxCargo.Controls.add(labelSellPrice8);
-        boxCargo.Controls.add(labelTargetPct7);
-        boxCargo.Controls.add(labelTargetDiff7);
-        boxCargo.Controls.add(labelTargetPrice7);
-        boxCargo.Controls.add(buttonBuyMax7);
-        boxCargo.Controls.add(buttonBuyQuantity7);
-        boxCargo.Controls.add(labelBuyPrice7);
-        boxCargo.Controls.add(buttonSellAll7);
-        boxCargo.Controls.add(buttonSellQuantity7);
-        boxCargo.Controls.add(labelSellPrice7);
-        boxCargo.Controls.add(labelTargetPct6);
-        boxCargo.Controls.add(labelTargetDiff6);
-        boxCargo.Controls.add(labelTargetPrice6);
-        boxCargo.Controls.add(buttonBuyMax6);
-        boxCargo.Controls.add(buttonBuyQuantity6);
-        boxCargo.Controls.add(labelBuyPrice6);
-        boxCargo.Controls.add(buttonSellAll6);
-        boxCargo.Controls.add(buttonSellQuantity6);
-        boxCargo.Controls.add(labelSellPrice6);
-        boxCargo.Controls.add(labelTargetPct5);
-        boxCargo.Controls.add(labelTargetDiff5);
-        boxCargo.Controls.add(labelTargetPrice5);
-        boxCargo.Controls.add(buttonBuyMax5);
-        boxCargo.Controls.add(buttonBuyQuantity5);
-        boxCargo.Controls.add(labelBuyPrice5);
-        boxCargo.Controls.add(buttonSellAll5);
-        boxCargo.Controls.add(buttonSellQuantity5);
-        boxCargo.Controls.add(labelSellPrice5);
-        boxCargo.Controls.add(labelTargetPct4);
-        boxCargo.Controls.add(labelTargetDiff4);
-        boxCargo.Controls.add(labelTargetPrice4);
-        boxCargo.Controls.add(buttonBuyMax4);
-        boxCargo.Controls.add(buttonBuyQuantity4);
-        boxCargo.Controls.add(labelBuyPrice4);
-        boxCargo.Controls.add(buttonSellAll4);
-        boxCargo.Controls.add(buttonSellQuantity4);
-        boxCargo.Controls.add(labelSellPrice4);
-        boxCargo.Controls.add(labelTargetPct3);
-        boxCargo.Controls.add(labelTargetDiff3);
-        boxCargo.Controls.add(labelTargetPrice3);
-        boxCargo.Controls.add(buttonBuyMax3);
-        boxCargo.Controls.add(buttonBuyQuantity3);
-        boxCargo.Controls.add(labelBuyPrice3);
-        boxCargo.Controls.add(buttonSellAll3);
-        boxCargo.Controls.add(buttonSellQuantity3);
-        boxCargo.Controls.add(labelSellPrice3);
-        boxCargo.Controls.add(labelTargetPct2);
-        boxCargo.Controls.add(labelTargetDiff2);
-        boxCargo.Controls.add(labelTargetPrice2);
-        boxCargo.Controls.add(buttonBuyMax2);
-        boxCargo.Controls.add(buttonBuyQuantity2);
-        boxCargo.Controls.add(labelBuyPrice2);
-        boxCargo.Controls.add(buttonSellAll2);
-        boxCargo.Controls.add(buttonSellQuantity2);
-        boxCargo.Controls.add(labelSellPrice2);
-        boxCargo.Controls.add(labelTargetPct1);
-        boxCargo.Controls.add(labelTargetDiff1);
-        boxCargo.Controls.add(labelTargetPrice1);
-        boxCargo.Controls.add(buttonBuyMax1);
-        boxCargo.Controls.add(buttonBuyQuantity1);
-        boxCargo.Controls.add(labelBuyPrice1);
-        boxCargo.Controls.add(labelTargetPctLabel);
-        boxCargo.Controls.add(labelTargetDiffLabel);
-        boxCargo.Controls.add(labelTargetPriceLabel);
-        boxCargo.Controls.add(labelTargetPct0);
-        boxCargo.Controls.add(labelTargetDiff0);
-        boxCargo.Controls.add(labelTargetPrice0);
-        boxCargo.Controls.add(buttonBuyMax0);
-        boxCargo.Controls.add(buttonBuyQuantity0);
-        boxCargo.Controls.add(labelBuyPrice0);
-        boxCargo.Controls.add(buttonSellAll1);
-        boxCargo.Controls.add(buttonSellQuantity1);
-        boxCargo.Controls.add(labelSellPrice1);
-        boxCargo.Controls.add(buttonSellAll0);
-        boxCargo.Controls.add(buttonSellQuantity0);
-        boxCargo.Controls.add(labelSellPrice0);
-        boxCargo.Controls.add(labelTradeTarget);
-        boxCargo.Controls.add(labelBuy);
-        boxCargo.Controls.add(labelSell);
-        boxCargo.Controls.add(labelTradeCommodity9);
-        boxCargo.Controls.add(labelTradeCommodity8);
-        boxCargo.Controls.add(labelTradeCommodity2);
-        boxCargo.Controls.add(labelTradeCommodity0);
-        boxCargo.Controls.add(labelTradeCommodity1);
-        boxCargo.Controls.add(labelTradeCommodity6);
-        boxCargo.Controls.add(labelTradeCommodity5);
-        boxCargo.Controls.add(labelTradeCommodity4);
-        boxCargo.Controls.add(labelTradeCommodity3);
-        boxCargo.Controls.add(labelTradeCommodity7);
+        boxCargo.anchor = AnchorStyles.Top_Right;
+        boxCargo.controls.add(pictureCargoLine3);
+        boxCargo.controls.add(pictureCargoLine2);
+        boxCargo.controls.add(pictureCargoLine0);
+        boxCargo.controls.add(pictureCargoLine1);
+        boxCargo.controls.add(labelTargetPct9);
+        boxCargo.controls.add(labelTargetDiff9);
+        boxCargo.controls.add(labelTargetPrice9);
+        boxCargo.controls.add(buttonBuyMax9);
+        boxCargo.controls.add(buttonBuyQuantity9);
+        boxCargo.controls.add(labelBuyPrice9);
+        boxCargo.controls.add(buttonSellAll9);
+        boxCargo.controls.add(buttonSellQuantity9);
+        boxCargo.controls.add(labelSellPrice9);
+        boxCargo.controls.add(labelTargetPct8);
+        boxCargo.controls.add(labelTargetDiff8);
+        boxCargo.controls.add(labelTargetPrice8);
+        boxCargo.controls.add(buttonBuyMax8);
+        boxCargo.controls.add(buttonBuyQuantity8);
+        boxCargo.controls.add(labelBuyPrice8);
+        boxCargo.controls.add(buttonSellAll8);
+        boxCargo.controls.add(buttonSellQuantity8);
+        boxCargo.controls.add(labelSellPrice8);
+        boxCargo.controls.add(labelTargetPct7);
+        boxCargo.controls.add(labelTargetDiff7);
+        boxCargo.controls.add(labelTargetPrice7);
+        boxCargo.controls.add(buttonBuyMax7);
+        boxCargo.controls.add(buttonBuyQuantity7);
+        boxCargo.controls.add(labelBuyPrice7);
+        boxCargo.controls.add(buttonSellAll7);
+        boxCargo.controls.add(buttonSellQuantity7);
+        boxCargo.controls.add(labelSellPrice7);
+        boxCargo.controls.add(labelTargetPct6);
+        boxCargo.controls.add(labelTargetDiff6);
+        boxCargo.controls.add(labelTargetPrice6);
+        boxCargo.controls.add(buttonBuyMax6);
+        boxCargo.controls.add(buttonBuyQuantity6);
+        boxCargo.controls.add(labelBuyPrice6);
+        boxCargo.controls.add(buttonSellAll6);
+        boxCargo.controls.add(buttonSellQuantity6);
+        boxCargo.controls.add(labelSellPrice6);
+        boxCargo.controls.add(labelTargetPct5);
+        boxCargo.controls.add(labelTargetDiff5);
+        boxCargo.controls.add(labelTargetPrice5);
+        boxCargo.controls.add(buttonBuyMax5);
+        boxCargo.controls.add(buttonBuyQuantity5);
+        boxCargo.controls.add(labelBuyPrice5);
+        boxCargo.controls.add(buttonSellAll5);
+        boxCargo.controls.add(buttonSellQuantity5);
+        boxCargo.controls.add(labelSellPrice5);
+        boxCargo.controls.add(labelTargetPct4);
+        boxCargo.controls.add(labelTargetDiff4);
+        boxCargo.controls.add(labelTargetPrice4);
+        boxCargo.controls.add(buttonBuyMax4);
+        boxCargo.controls.add(buttonBuyQuantity4);
+        boxCargo.controls.add(labelBuyPrice4);
+        boxCargo.controls.add(buttonSellAll4);
+        boxCargo.controls.add(buttonSellQuantity4);
+        boxCargo.controls.add(labelSellPrice4);
+        boxCargo.controls.add(labelTargetPct3);
+        boxCargo.controls.add(labelTargetDiff3);
+        boxCargo.controls.add(labelTargetPrice3);
+        boxCargo.controls.add(buttonBuyMax3);
+        boxCargo.controls.add(buttonBuyQuantity3);
+        boxCargo.controls.add(labelBuyPrice3);
+        boxCargo.controls.add(buttonSellAll3);
+        boxCargo.controls.add(buttonSellQuantity3);
+        boxCargo.controls.add(labelSellPrice3);
+        boxCargo.controls.add(labelTargetPct2);
+        boxCargo.controls.add(labelTargetDiff2);
+        boxCargo.controls.add(labelTargetPrice2);
+        boxCargo.controls.add(buttonBuyMax2);
+        boxCargo.controls.add(buttonBuyQuantity2);
+        boxCargo.controls.add(labelBuyPrice2);
+        boxCargo.controls.add(buttonSellAll2);
+        boxCargo.controls.add(buttonSellQuantity2);
+        boxCargo.controls.add(labelSellPrice2);
+        boxCargo.controls.add(labelTargetPct1);
+        boxCargo.controls.add(labelTargetDiff1);
+        boxCargo.controls.add(labelTargetPrice1);
+        boxCargo.controls.add(buttonBuyMax1);
+        boxCargo.controls.add(buttonBuyQuantity1);
+        boxCargo.controls.add(labelBuyPrice1);
+        boxCargo.controls.add(labelTargetPctLabel);
+        boxCargo.controls.add(labelTargetDiffLabel);
+        boxCargo.controls.add(labelTargetPriceLabel);
+        boxCargo.controls.add(labelTargetPct0);
+        boxCargo.controls.add(labelTargetDiff0);
+        boxCargo.controls.add(labelTargetPrice0);
+        boxCargo.controls.add(buttonBuyMax0);
+        boxCargo.controls.add(buttonBuyQuantity0);
+        boxCargo.controls.add(labelBuyPrice0);
+        boxCargo.controls.add(buttonSellAll1);
+        boxCargo.controls.add(buttonSellQuantity1);
+        boxCargo.controls.add(labelSellPrice1);
+        boxCargo.controls.add(buttonSellAll0);
+        boxCargo.controls.add(buttonSellQuantity0);
+        boxCargo.controls.add(labelSellPrice0);
+        boxCargo.controls.add(labelTradeTarget);
+        boxCargo.controls.add(labelBuy);
+        boxCargo.controls.add(labelSell);
+        boxCargo.controls.add(labelTradeCommodity9);
+        boxCargo.controls.add(labelTradeCommodity8);
+        boxCargo.controls.add(labelTradeCommodity2);
+        boxCargo.controls.add(labelTradeCommodity0);
+        boxCargo.controls.add(labelTradeCommodity1);
+        boxCargo.controls.add(labelTradeCommodity6);
+        boxCargo.controls.add(labelTradeCommodity5);
+        boxCargo.controls.add(labelTradeCommodity4);
+        boxCargo.controls.add(labelTradeCommodity3);
+        boxCargo.controls.add(labelTradeCommodity7);
         boxCargo.setLocation(new Point(252, 2));
         boxCargo.setName("boxCargo");
         boxCargo.setSize(new Dimension(512, 300));
@@ -1958,25 +1958,25 @@ public class MainWindow extends Window {
         labelTradeCommodity7.setTabIndex(16);
         labelTradeCommodity7.setText("Machines");
         // boxSystem
-        boxSystem.Controls.add(buttonMerc);
-        boxSystem.Controls.add(buttonSpecial);
-        boxSystem.Controls.add(buttonNews);
-        boxSystem.Controls.add(labelSystemPressure);
-        boxSystem.Controls.add(labelSystemPressurePre);
-        boxSystem.Controls.add(labelSystemPolSys);
-        boxSystem.Controls.add(labelSystemSize);
-        boxSystem.Controls.add(labelSystemTech);
-        boxSystem.Controls.add(labelSystemPirates);
-        boxSystem.Controls.add(labelSystemPolice);
-        boxSystem.Controls.add(labelSystemResource);
-        boxSystem.Controls.add(labelSystemPiratesLabel);
-        boxSystem.Controls.add(labelSystemPoliceLabel);
-        boxSystem.Controls.add(labelSystemResourceLabel);
-        boxSystem.Controls.add(labelSystemGovtLabel);
-        boxSystem.Controls.add(labelSystemTechLabel);
-        boxSystem.Controls.add(labelSystemSizeLabel);
-        boxSystem.Controls.add(labelSystemName);
-        boxSystem.Controls.add(labelSystemNameLabel);
+        boxSystem.controls.add(buttonMerc);
+        boxSystem.controls.add(buttonSpecial);
+        boxSystem.controls.add(buttonNews);
+        boxSystem.controls.add(labelSystemPressure);
+        boxSystem.controls.add(labelSystemPressurePre);
+        boxSystem.controls.add(labelSystemPolSys);
+        boxSystem.controls.add(labelSystemSize);
+        boxSystem.controls.add(labelSystemTech);
+        boxSystem.controls.add(labelSystemPirates);
+        boxSystem.controls.add(labelSystemPolice);
+        boxSystem.controls.add(labelSystemResource);
+        boxSystem.controls.add(labelSystemPiratesLabel);
+        boxSystem.controls.add(labelSystemPoliceLabel);
+        boxSystem.controls.add(labelSystemResourceLabel);
+        boxSystem.controls.add(labelSystemGovtLabel);
+        boxSystem.controls.add(labelSystemTechLabel);
+        boxSystem.controls.add(labelSystemSizeLabel);
+        boxSystem.controls.add(labelSystemName);
+        boxSystem.controls.add(labelSystemNameLabel);
         boxSystem.setLocation(new Point(4, 2));
         boxSystem.setName("boxSystem");
         boxSystem.setSize(new Dimension(240, 206));
@@ -2142,13 +2142,13 @@ public class MainWindow extends Window {
         labelSystemNameLabel.setTabIndex(0);
         labelSystemNameLabel.setText("Name:");
         // boxShipYard
-        boxShipYard.Controls.add(buttonDesign);
-        boxShipYard.Controls.add(buttonPod);
-        boxShipYard.Controls.add(labelEscapePod);
-        boxShipYard.Controls.add(buttonEquip);
-        boxShipYard.Controls.add(buttonBuyShip);
-        boxShipYard.Controls.add(labelEquipForSale);
-        boxShipYard.Controls.add(labelShipsForSale);
+        boxShipYard.controls.add(buttonDesign);
+        boxShipYard.controls.add(buttonPod);
+        boxShipYard.controls.add(labelEscapePod);
+        boxShipYard.controls.add(buttonEquip);
+        boxShipYard.controls.add(buttonBuyShip);
+        boxShipYard.controls.add(labelEquipForSale);
+        boxShipYard.controls.add(labelShipsForSale);
         boxShipYard.setLocation(new Point(4, 306));
         boxShipYard.setName("boxShipYard");
         boxShipYard.setSize(new Dimension(168, 168));
@@ -2226,12 +2226,12 @@ public class MainWindow extends Window {
         labelShipsForSale.setTabIndex(20);
         labelShipsForSale.setText("There are new ships for sale.");
         // boxDock
-        boxDock.Controls.add(buttonRepair);
-        boxDock.Controls.add(buttonFuel);
-        boxDock.Controls.add(labelFuelStatus);
-        boxDock.Controls.add(labelFuelCost);
-        boxDock.Controls.add(labelHullStatus);
-        boxDock.Controls.add(labelRepairCost);
+        boxDock.controls.add(buttonRepair);
+        boxDock.controls.add(buttonFuel);
+        boxDock.controls.add(labelFuelStatus);
+        boxDock.controls.add(labelFuelCost);
+        boxDock.controls.add(labelHullStatus);
+        boxDock.controls.add(labelRepairCost);
         boxDock.setLocation(new Point(4, 212));
         boxDock.setName("boxDock");
         boxDock.setSize(new Dimension(240, 90));
@@ -2729,13 +2729,13 @@ public class MainWindow extends Window {
             buttonNews.setVisible(true);
             buttonMerc.setVisible(mercs.length > 0);
             if (buttonMerc.getVisible()) {
-                buttonMerc.SetToolTip(Functions.StringVars(
+                buttonMerc.setToolTip(Functions.StringVars(
                         Strings.MercenariesForHire,
                         mercs.length == 1 ? mercs[0].Name() : mercs.length + Strings.Mercenaries));
             }
             buttonSpecial.setVisible(system.ShowSpecialButton());
             if (buttonSpecial.getVisible()) {
-                buttonSpecial.SetToolTip(system.SpecialEvent().Title());
+                buttonSpecial.setToolTip(system.SpecialEvent().getTitle());
             }
         }
     }
@@ -2780,7 +2780,7 @@ public class MainWindow extends Window {
                 SetRegistrySetting("Y", Top.toString());
             }
         } else {
-            e.Cancel = true;
+            e.cancel = true;
         }
     }
 
@@ -3123,7 +3123,7 @@ public class MainWindow extends Window {
         SpecialEvent specEvent = commander.CurrentSystem().SpecialEvent();
         String button1, button2;
         DialogResult res1, res2;
-        if (specEvent.MessageOnly()) {
+        if (specEvent.isMessageOnly()) {
             button1 = "Ok";
             button2 = null;
             res1 = DialogResult.OK;
@@ -3134,9 +3134,9 @@ public class MainWindow extends Window {
             res1 = DialogResult.Yes;
             res2 = DialogResult.No;
         }
-        FormAlert alert = new FormAlert(specEvent.Title(), specEvent.String(), button1, res1, button2, res2, null);
+        FormAlert alert = new FormAlert(specEvent.getTitle(), specEvent.String(), button1, res1, button2, res2, null);
         if (alert.ShowDialog() != DialogResult.No) {
-            if (commander.CashToSpend() < specEvent.Price()) {
+            if (commander.CashToSpend() < specEvent.getPrice()) {
                 FormAlert.Alert(AlertType.SpecialIF, this);
             } else {
                 try {
@@ -3261,18 +3261,18 @@ public class MainWindow extends Window {
     }
 
     private void pictureGalacticChart_MouseDown(Object sender, MouseEventData e) {
-        if (e.Button == MouseButtons.Left && game != null) {
-            StarSystem[] universe = game.Universe();
+        if (e.button == MouseButtons.Left && game != null) {
+            StarSystem[] universe = game.getUniverse();
             boolean clickedSystem = false;
             for (int i = 0; i < universe.length && !clickedSystem; i++) {
                 int x = universe[i].X() + OFF_X;
                 int y = universe[i].Y() + OFF_Y;
-                if (e.X >= x - 2 && e.X <= x + 2 && e.Y >= y - 2 && e.Y <= y + 2) {
+                if (e.x >= x - 2 && e.x <= x + 2 && e.y >= y - 2 && e.y <= y + 2) {
                     clickedSystem = true;
                     game.SelectedSystemId(StarSystemId.FromInt(i));
                 } else if (Functions.WormholeExists(i, -1)) {
                     int xW = x + OFF_X_WORM;
-                    if (e.X >= xW - 2 && e.X <= xW + 2 && e.Y >= y - 2 && e.Y <= y + 2) {
+                    if (e.x >= xW - 2 && e.x <= xW + 2 && e.y >= y - 2 && e.y <= y + 2) {
                         clickedSystem = true;
                         game.SelectedSystemId(StarSystemId.FromInt(i));
                         game.TargetWormhole(true);
@@ -3287,7 +3287,7 @@ public class MainWindow extends Window {
 
     private void pictureGalacticChart_Paint(Object sender, Graphics graphics) {
         if (game != null) {
-            StarSystem[] universe = game.Universe();
+            StarSystem[] universe = game.getUniverse();
             int[] wormholes = game.Wormholes();
             StarSystem targetSys = game.SelectedSystem();
             StarSystem currentSys = commander.CurrentSystem();
@@ -3333,8 +3333,8 @@ public class MainWindow extends Window {
     }
 
     private void pictureShortRangeChart_MouseDown(Object sender, MouseEventData e) {
-        if (e.Button == MouseButtons.Left && game != null) {
-            StarSystem[] universe = game.Universe();
+        if (e.button == MouseButtons.Left && game != null) {
+            StarSystem[] universe = game.getUniverse();
             StarSystem currentSys = commander.CurrentSystem();
             boolean clickedSystem = false;
             int centerX = pictureShortRangeChart.getWidth() / 2;
@@ -3345,12 +3345,12 @@ public class MainWindow extends Window {
                         && (Math.abs(universe[i].Y() - currentSys.Y()) * delta <= pictureShortRangeChart.getHeight() / 2 - 10)) {
                     int x = centerX + (universe[i].X() - currentSys.X()) * delta;
                     int y = centerY + (universe[i].Y() - currentSys.Y()) * delta;
-                    if (e.X >= x - OFF_X && e.X <= x + OFF_X && e.Y >= y - OFF_Y && e.Y <= y + OFF_Y) {
+                    if (e.x >= x - OFF_X && e.x <= x + OFF_X && e.y >= y - OFF_Y && e.y <= y + OFF_Y) {
                         clickedSystem = true;
                         game.SelectedSystemId(StarSystemId.FromInt(i));
                     } else if (Functions.WormholeExists(i, -1)) {
                         int xW = x + 9;
-                        if (e.X >= xW - OFF_X && e.X <= xW + OFF_X && e.Y >= y - OFF_Y && e.Y <= y + OFF_Y) {
+                        if (e.x >= xW - OFF_X && e.x <= xW + OFF_X && e.y >= y - OFF_Y && e.y <= y + OFF_Y) {
                             clickedSystem = true;
                             game.SelectedSystemId((StarSystemId.FromInt(i)));
                             game.TargetWormhole(true);
@@ -3399,7 +3399,7 @@ public class MainWindow extends Window {
             }
             // First, draw the names, then the systems.
             // The names may overlap and the systems may be drawn on the names, but at least every system is visible.
-            StarSystem[] universe = game.Universe();
+            StarSystem[] universe = game.getUniverse();
             for (int j = 0; j < 2; j++) {
                 for (int i = 0; i < universe.length; i++) {
                     if ((Math.abs(universe[i].X() - currentSys.X()) * delta <= pictureShortRangeChart.getWidth() / 2 - 10)
@@ -3440,11 +3440,11 @@ public class MainWindow extends Window {
         }
     }
 
-    private void statusBar_PanelClick(Object sender, StatusBarPanelClickEventData e) {
+    private void statusBar_PanelClick(Object sender, StatusBarPanel statusBarPanel) {
         if (game != null) {
-            if (e.StatusBarPanel == statusBarPanelCash) {
-                menuViewBank_Click(sender, e);
-            } else if (e.StatusBarPanel == statusBarPanelCosts) {
+            if (statusBarPanel == statusBarPanelCash) {
+                menuViewBank_Click(sender, statusBarPanel);
+            } else if (statusBarPanel == statusBarPanelCosts) {
                 (new FormCosts()).ShowDialog(this);
             }
         }

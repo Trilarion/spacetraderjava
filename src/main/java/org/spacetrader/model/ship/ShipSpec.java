@@ -12,7 +12,6 @@ import org.winforms.Image;
 
 import java.util.Hashtable;
 
-// TODO part of the model
 public class ShipSpec extends SerializableObject {
     private Activity pirates = Activity.NA;
     private Activity police = Activity.NA;
@@ -72,7 +71,7 @@ public class ShipSpec extends SerializableObject {
         hullStrength = GetValueFromHash(hash, "_hullStrength", hullStrength);
         repairCost = GetValueFromHash(hash, "_repairCost", repairCost);
         price = GetValueFromHash(hash, "_price", price);
-        occurrence = GetValueFromHash(hash, "_occurrentrence", occurrence);
+        occurrence = GetValueFromHash(hash, "_occurrence", occurrence);
         police = Activity.fromId(GetValueFromHash(hash, "_police", police, Integer.class));
         pirates = Activity.fromId(GetValueFromHash(hash, "_pirates", pirates, Integer.class));
         traders = Activity.fromId(GetValueFromHash(hash, "_traders", traders, Integer.class));
@@ -108,7 +107,7 @@ public class ShipSpec extends SerializableObject {
         hash.put("_hullStrength", hullStrength);
         hash.put("_repairCost", repairCost);
         hash.put("_price", price);
-        hash.put("_occurrentrence", occurrence);
+        hash.put("_occurrence", occurrence);
         hash.put("_police", police.getId());
         hash.put("_pirates", pirates.getId());
         hash.put("_traders", traders.getId());

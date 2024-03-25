@@ -125,7 +125,7 @@ public class CrewMember extends SerializableObject {
     }
 
     public StarSystem CurrentSystem() {
-        return StarSystemId.NA == currentSystemId ? null : Game.getCurrentGame().Universe()[currentSystemId.getId()];
+        return StarSystemId.NA == currentSystemId ? null : Game.getCurrentGame().getUniverse()[currentSystemId.getId()];
     }
 
     public void CurrentSystem(StarSystem value) {

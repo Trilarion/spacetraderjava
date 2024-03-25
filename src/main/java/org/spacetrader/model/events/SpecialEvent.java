@@ -4,7 +4,6 @@ import org.spacetrader.controller.Game;
 import org.spacetrader.model.system.StarSystem;
 import org.spacetrader.ui.Strings;
 
-// TODO part of model
 public class SpecialEvent {
 
     public final static int MoonCost = 500000;
@@ -68,50 +67,50 @@ public class SpecialEvent {
     public final static int StatusWildStarted = 1;
     public final static int StatusWildImpatient = 11;
     public final static int StatusWildDone = 12;
-    private final SpecialEventType _type;
-    private final int _price;
-    private final int _occurrentrence;
-    private final boolean _messageOnly;
+    private final SpecialEventType type;
+    private final int price;
+    private final int occurrence;
+    private final boolean messageOnly;
 
-    public SpecialEvent(SpecialEventType type, int price, int occurrentrence, boolean messageOnly) {
-        _type = type;
-        _price = price;
-        _occurrentrence = occurrentrence;
-        _messageOnly = messageOnly;
+    public SpecialEvent(SpecialEventType type, int price, int occurrence, boolean messageOnly) {
+        this.type = type;
+        this.price = price;
+        this.occurrence = occurrence;
+        this.messageOnly = messageOnly;
     }
 
-    public StarSystem Location() {
+    public StarSystem getLocation() {
         StarSystem location = null;
-        StarSystem[] universe = Game.getCurrentGame().Universe();
+        StarSystem[] universe = Game.getCurrentGame().getUniverse();
         for (int i = 0; i < universe.length && null == location; i++) {
-            if (universe[i].SpecialEventType() == Type()) {
+            if (universe[i].SpecialEventType() == getType()) {
                 location = universe[i];
             }
         }
         return location;
     }
 
-    public boolean MessageOnly() {
-        return _messageOnly;
+    public boolean isMessageOnly() {
+        return messageOnly;
     }
 
-    public int Occurrentrence() {
-        return _occurrentrence;
+    public int getOccurrence() {
+        return occurrence;
     }
 
-    public int Price() {
-        return _price;
+    public int getPrice() {
+        return price;
     }
 
     public String String() {
-        return Strings.SpecialEventStrings[_type.getId()];
+        return Strings.SpecialEventStrings[type.getId()];
     }
 
-    public String Title() {
-        return Strings.SpecialEventTitles[_type.getId()];
+    public String getTitle() {
+        return Strings.SpecialEventTitles[type.getId()];
     }
 
-    public SpecialEventType Type() {
-        return _type;
+    public SpecialEventType getType() {
+        return type;
     }
 }

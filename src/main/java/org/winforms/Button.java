@@ -67,7 +67,7 @@ public class Button extends Control {
         }
     }
 
-    public void SetToolTip(String text) {  // TODO could be static in utils or so
+    public void setToolTip(String text) {  // TODO could be static in utils or so
         asJButton().setToolTipText(text);
     }
 }

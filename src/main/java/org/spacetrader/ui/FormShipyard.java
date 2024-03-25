@@ -132,7 +132,7 @@ public class FormShipyard extends form {
         boxAllocation.suspendLayout();
         suspendLayout();
         // boxWelcome
-        boxWelcome.Controls.addAll(labelSkillDescription, labelSkill, labelSizeSpecialty, labelSkillLabel, labelSizeSpecialtyLabel, labelWarning, pictureLogo, labelWelcome);
+        boxWelcome.controls.addAll(labelSkillDescription, labelSkill, labelSizeSpecialty, labelSkillLabel, labelSizeSpecialtyLabel, labelWarning, pictureLogo, labelWelcome);
         boxWelcome.setLocation(new Point(8, 0));
         boxWelcome.setName("boxWelcome");
         boxWelcome.setSize(new Dimension(270, 204));
@@ -193,7 +193,7 @@ public class FormShipyard extends form {
         pictureLogo.setTabIndex(22);
         pictureLogo.setTabStop(false);
         // boxInfo
-        boxInfo.Controls.addAll(buttonSave, buttonLoad, pictureInfoLine, buttonPrevImage, buttonNextImage, labelImage, labelImageLabel, selTemplate,
+        boxInfo.controls.addAll(buttonSave, buttonLoad, pictureInfoLine, buttonPrevImage, buttonNextImage, labelImage, labelImageLabel, selTemplate,
                 labelTemplate, selSize, labelSize, buttonSetCustomImage, pictureShip, textName, labelName);
         boxInfo.setLocation(new Point(8, 208));
         boxInfo.setName("boxInfo");
@@ -376,7 +376,7 @@ public class FormShipyard extends form {
         labelUnitsUsedLabel.setTabIndex(16);
         labelUnitsUsedLabel.setText("Units Used:");
         // boxCosts
-        boxCosts.Controls.addAll(labelTradeIn, labelTradeInLabel, pictureCostsLine, labelPenalty, labelPenaltyLabel,
+        boxCosts.controls.addAll(labelTradeIn, labelTradeInLabel, pictureCostsLine, labelPenalty, labelPenaltyLabel,
                 labelShipCost, labelTotalCost, labelTotalCostLabel, labelShipCostLabel, labelDesignFee, labelDesignFeeLabel);
         boxCosts.setLocation(new Point(286, 230));
         boxCosts.setName("boxCosts");
@@ -496,7 +496,7 @@ public class FormShipyard extends form {
         buttonCancel.setTabIndex(5);
         buttonCancel.setText("Cancel Design");
         // boxAllocation
-        boxAllocation.Controls.addAll(labelPct, labelPctLabel, numHullStrength, labelHullStrengthLabel, numCargoBays, numCrewQuarters, numFuelTanks,
+        boxAllocation.controls.addAll(labelPct, labelPctLabel, numHullStrength, labelHullStrengthLabel, numCargoBays, numCrewQuarters, numFuelTanks,
                 numShieldSlots, numGadgetSlots, numWeaponSlots, labelCargoBays, labelFuelTanks, labelCrewQuarters,
                 labelShieldSlots, labelGadgetSlots, labelWeaponsSlots, labelUnitsUsedLabel, labelUnitsUsed);
         boxAllocation.setLocation(new Point(286, 0));

@@ -68,7 +68,7 @@ public class FormAlert extends form {
         };
         // FormAlert
         setAutoScaleBaseSize(new Dimension(5, 13));
-        setClientSize(new Dimension(270, 63));
+        setClientSize(new Dimension(270, 80));
         setControlBox(false);
         Controls.add(button2);
         Controls.add(button1);
