@@ -8,14 +8,17 @@ import org.spacetrader.model.crew.CrewMember;
 import org.spacetrader.model.enums.ShipyardId;
 import org.spacetrader.model.system.StarSystem;
 import org.spacetrader.util.Util;
-import org.winforms.controls.*;
 import org.winforms.Font;
-import org.winforms.*;
+import org.winforms.Link;
+import org.winforms.LinkArea;
+import org.winforms.LinkLabel;
 import org.winforms.controls.Button;
 import org.winforms.controls.Dialog;
 import org.winforms.controls.Label;
 import org.winforms.controls.Panel;
+import org.winforms.controls.*;
 import org.winforms.enums.*;
+import org.winforms.events.EventHandler;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -123,7 +126,7 @@ public class DialogMonster extends Dialog {
         labelMercSkillLabelPilot.textAlignment = ContentAlignment.TopRight;
         labelMercSkillLabelPilot.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelClickedEventData data) {
+            public void handle(Object sender, Link data) {
                 SortLinkClicked(sender, data);
             }
         };
@@ -138,7 +141,7 @@ public class DialogMonster extends Dialog {
         labelMercSkillLabelFighter.textAlignment = ContentAlignment.TopRight;
         labelMercSkillLabelFighter.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelClickedEventData data) {
+            public void handle(Object sender, Link data) {
                 SortLinkClicked(sender, data);
             }
         };
@@ -153,7 +156,7 @@ public class DialogMonster extends Dialog {
         labelMercSkillLabelTrader.textAlignment = ContentAlignment.TopRight;
         labelMercSkillLabelTrader.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelClickedEventData data) {
+            public void handle(Object sender, Link data) {
                 SortLinkClicked(sender, data);
             }
         };
@@ -168,7 +171,7 @@ public class DialogMonster extends Dialog {
         labelMercSkillLabelEngineer.textAlignment = ContentAlignment.TopRight;
         labelMercSkillLabelEngineer.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelClickedEventData data) {
+            public void handle(Object sender, Link data) {
                 SortLinkClicked(sender, data);
             }
         };
@@ -182,7 +185,7 @@ public class DialogMonster extends Dialog {
         labelMercSystemLabel.setText("System");
         labelMercSystemLabel.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelClickedEventData data) {
+            public void handle(Object sender, Link data) {
                 SortLinkClicked(sender, data);
             }
         };
@@ -196,7 +199,7 @@ public class DialogMonster extends Dialog {
         labelQuestSystemLabel.setText("System");
         labelQuestSystemLabel.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelClickedEventData data) {
+            public void handle(Object sender, Link data) {
                 SortLinkClicked(sender, data);
             }
         };
@@ -210,7 +213,7 @@ public class DialogMonster extends Dialog {
         labelQuestDescLabel.setText("Description");
         labelQuestDescLabel.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelClickedEventData data) {
+            public void handle(Object sender, Link data) {
                 SortLinkClicked(sender, data);
             }
         };
@@ -225,7 +228,7 @@ public class DialogMonster extends Dialog {
         labelMercIDLabel.textAlignment = ContentAlignment.TopRight;
         labelMercIDLabel.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelClickedEventData data) {
+            public void handle(Object sender, Link data) {
                 SortLinkClicked(sender, data);
             }
         };
@@ -239,7 +242,7 @@ public class DialogMonster extends Dialog {
         labelMercNameLabel.setText("Name");
         labelMercNameLabel.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelClickedEventData data) {
+            public void handle(Object sender, Link data) {
                 SortLinkClicked(sender, data);
             }
         };
@@ -253,7 +256,7 @@ public class DialogMonster extends Dialog {
         labelShipyardsDescLabel.setText("Description");
         labelShipyardsDescLabel.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelClickedEventData data) {
+            public void handle(Object sender, Link data) {
                 SortLinkClicked(sender, data);
             }
         };
@@ -267,7 +270,7 @@ public class DialogMonster extends Dialog {
         labelShipyardsSystemLabel.setText("System");
         labelShipyardsSystemLabel.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelClickedEventData data) {
+            public void handle(Object sender, Link data) {
                 SortLinkClicked(sender, data);
             }
         };
@@ -319,7 +322,7 @@ public class DialogMonster extends Dialog {
         labelMercSystems.setTabIndex(14);
         labelMercSystems.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelClickedEventData data) {
+            public void handle(Object sender, Link data) {
                 SystemLinkClicked(sender, data);
             }
         };
@@ -339,7 +342,7 @@ public class DialogMonster extends Dialog {
         labelMercSystems2.setTabIndex(148);
         labelMercSystems2.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelClickedEventData data) {
+            public void handle(Object sender, Link data) {
                 SystemLinkClicked(sender, data);
             }
         };
@@ -362,7 +365,7 @@ public class DialogMonster extends Dialog {
         labelQuestSystems.setTabIndex(12);
         labelQuestSystems.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelClickedEventData data) {
+            public void handle(Object sender, Link data) {
                 SystemLinkClicked(sender, data);
             }
         };
@@ -384,7 +387,7 @@ public class DialogMonster extends Dialog {
         labelShipyardSystems.setTabIndex(13);
         labelShipyardSystems.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelClickedEventData data) {
+            public void handle(Object sender, Link data) {
                 SystemLinkClicked(sender, data);
             }
         };
@@ -672,13 +675,13 @@ public class DialogMonster extends Dialog {
         labelShipyards.setText(labelShipyards.getText().trim());
     }
 
-    private void SystemLinkClicked(Object sender, LinkLabelClickedEventData e) {
-        game.setSelectedSystemByName(e.link.linkData.toString());
+    private void SystemLinkClicked(Object sender, Link e) {
+        game.setSelectedSystemByName(e.linkData.toString());
         game.getParentWindow().updateAll();
         Close();
     }
 
-    private void SortLinkClicked(Object sender, LinkLabelClickedEventData e) {
+    private void SortLinkClicked(Object sender, Link e) {
         Sort(((LinkLabel) sender).getName().substring(3, 1), ((LinkLabel) sender).getText().substring(0, 1));
         UpdateAll();
     }

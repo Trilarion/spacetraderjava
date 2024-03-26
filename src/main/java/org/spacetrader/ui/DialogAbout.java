@@ -1,12 +1,12 @@
 package org.spacetrader.ui;
 
-import org.winforms.controls.Button;
 import org.winforms.Font;
 import org.winforms.Image;
-import org.winforms.controls.Label;
-import org.winforms.*;
-import org.winforms.controls.PictureBox;
+import org.winforms.ResourceManager;
+import org.winforms.controls.Button;
 import org.winforms.controls.Dialog;
+import org.winforms.controls.Label;
+import org.winforms.controls.PictureBox;
 import org.winforms.enums.DialogResult;
 import org.winforms.enums.FontStyle;
 import org.winforms.enums.FormBorderStyle;

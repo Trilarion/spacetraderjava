@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Hashtable;
 
-// TODO part of model
 public class CrewMember extends SerializableObject {
 
     private final CrewMemberId crewMemberId;

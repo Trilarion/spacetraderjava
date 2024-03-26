@@ -5,13 +5,13 @@ import org.spacetrader.model.enums.AlertType;
 import org.spacetrader.model.events.SpecialEvent;
 import org.spacetrader.model.events.SpecialEventType;
 import org.winforms.controls.Button;
+import org.winforms.controls.Dialog;
 import org.winforms.controls.Label;
 import org.winforms.controls.TextField;
-import org.winforms.*;
-import org.winforms.controls.ComboBox;
-import org.winforms.controls.GroupBox;
-import org.winforms.controls.Dialog;
+import org.winforms.controls.*;
 import org.winforms.enums.*;
+import org.winforms.events.EventData;
+import org.winforms.events.EventHandler;
 
 import java.awt.*;
 import java.util.Arrays;

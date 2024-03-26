@@ -2,6 +2,7 @@ package org.winforms;
 
 import org.winforms.controls.Button;
 import org.winforms.controls.Control;
+import org.winforms.events.EventData;
 
 import javax.swing.*;
 import java.awt.Graphics;
@@ -16,8 +17,8 @@ public class wfPanel extends JPanel {  // TODO there is another Panel, what is t
 
     private static final long serialVersionUID = 1L;
     private final Pane form;
-    Map<Component, Integer> tabOrderMap = new HashMap<>(0);
     public Image backgroundImage;
+    Map<Component, Integer> tabOrderMap = new HashMap<>(0);
 
     public wfPanel(Pane wp) {
         super(null); // That's what winforms use.

@@ -1,7 +1,6 @@
 package org.winforms.controls;
 
 import org.winforms.Image;
-import org.winforms.controls.Control;
 import org.winforms.enums.ContentAlignment;
 
 import javax.swing.*;

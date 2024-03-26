@@ -1,4 +1,4 @@
-package org.winforms;
+package org.winforms.events;
 
 // TODO documentation of usage
 public interface EventData {

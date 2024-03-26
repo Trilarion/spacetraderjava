@@ -20,7 +20,7 @@ import org.winforms.enums.DialogResult;
 
 import java.util.Hashtable;
 
-// TODO part of model
+
 public class Commander extends CrewMember {
 
     private Ship ship = new Ship(ShipType.Gnat);

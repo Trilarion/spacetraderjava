@@ -1,12 +1,12 @@
 package org.winforms.controls;
 
-import org.winforms.EventHandler;
 import org.winforms.Graphics;
 import org.winforms.ImageLabel;
 import org.winforms.ImageMouseListener;
-import org.winforms.MouseEventData;
 import org.winforms.enums.BorderStyle;
 import org.winforms.enums.PictureBoxSizeMode;
+import org.winforms.events.EventHandler;
+import org.winforms.events.MouseEventData;
 
 import javax.swing.*;
 import java.awt.*;

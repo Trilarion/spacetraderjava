@@ -1,6 +1,8 @@
 package org.winforms;
 
 import org.winforms.controls.PictureBox;
+import org.winforms.events.EventHandler;
+import org.winforms.events.MouseEventData;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

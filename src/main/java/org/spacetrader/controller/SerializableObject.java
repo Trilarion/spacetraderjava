@@ -141,18 +141,18 @@ abstract public class SerializableObject {
     }
 
 
-    public static <U, T extends U> U GetValueFromHash(Hashtable hash, String key, T defaultValue, Class<U> requstedType) {
+    public static <U, T extends U> U GetValueFromHash(Hashtable hash, String key, T defaultValue, Class<U> requestedType) {
         if (!hash.containsKey(key)) {
             return defaultValue;
         }
-        if (IdentifiableEnum.class.isAssignableFrom(requstedType)) {
-            return (U) DWIM.dwim(hash.get(key), (Class<? extends IdentifiableEnum>) requstedType);
+        if (IdentifiableEnum.class.isAssignableFrom(requestedType)) {
+            return (U) DWIM.dwim(hash.get(key), (Class<? extends IdentifiableEnum>) requestedType);
         } else {
             return (U) hash.get(key);
         }
     }
 
-    public static int GetValueFromHash(Hashtable hash, String key, IdentifiableEnum defaultValue, Class<Integer> requstedType) {
+    public static int GetValueFromHash(Hashtable hash, String key, IdentifiableEnum defaultValue, Class<Integer> requestedType) {
         //TODO many of calls to this method then cast it back to the enum type; fix them to call generic form.
         if (!hash.containsKey(key)) {
             return defaultValue.getId();
@@ -160,7 +160,7 @@ abstract public class SerializableObject {
         Object saved = hash.get(key);
         if (saved instanceof Integer) {
             return (Integer) saved;
-        } else { //Assume its the enum
+        } else { // assume it's the enum
             return ((IdentifiableEnum) saved).getId();
         }
     }

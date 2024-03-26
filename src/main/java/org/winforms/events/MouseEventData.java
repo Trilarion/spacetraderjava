@@ -1,4 +1,4 @@
-package org.winforms;
+package org.winforms.events;
 
 import org.winforms.enums.MouseButtons;
 

@@ -1,7 +1,5 @@
 package org.winforms.controls;
 
-import org.winforms.controls.Control;
-
 import javax.swing.*;
 
 // TODO documentation of usage

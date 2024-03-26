@@ -1,7 +1,10 @@
 package org.winforms;
 
 
-public abstract class ChainedEventHandler<Sender, Data> extends EventHandler<Sender, Data> {
+import org.winforms.events.EventData;
+import org.winforms.events.EventHandler;
+
+public abstract class ChainedEventHandler<Sender, Data extends EventData> extends EventHandler<Sender, Data> {
     private final EventHandler<Sender, Data> chain;
 
     public ChainedEventHandler(EventHandler<Sender, Data> chain) {

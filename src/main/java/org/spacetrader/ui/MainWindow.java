@@ -19,19 +19,23 @@ import org.spacetrader.model.system.StarSystem;
 import org.spacetrader.util.Directory;
 import org.spacetrader.util.RegistryKey;
 import org.spacetrader.util.Util;
-import org.winforms.controls.*;
 import org.winforms.FileDialog;
 import org.winforms.Font;
 import org.winforms.Graphics;
 import org.winforms.Icon;
 import org.winforms.Image;
 import org.winforms.MenuItem;
-import org.winforms.controls.Window;
 import org.winforms.*;
 import org.winforms.controls.Button;
 import org.winforms.controls.Label;
 import org.winforms.controls.MenuBar;
+import org.winforms.controls.Window;
+import org.winforms.controls.*;
 import org.winforms.enums.*;
+import org.winforms.events.CancelEventData;
+import org.winforms.events.EventData;
+import org.winforms.events.EventHandler;
+import org.winforms.events.MouseEventData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -130,7 +134,7 @@ public class MainWindow extends Window {
 
     public MainWindow() {
         ResourceManager resources = new ResourceManager(Main.class);
-        
+
         // layout
         MenuBar menuMain = new MenuBar();
         SubMenu menuGame = new SubMenu();
@@ -2562,7 +2566,7 @@ public class MainWindow extends Window {
         } else {
             int[] buy = game.PriceCargoBuy();
             int[] sell = game.PriceCargoSell();
-            commander = game.Commander();//todo: is this unnecessary? GAC
+            commander = game.Commander();// todo: is this unnecessary? GAC
             StarSystem warpSys = game.WarpSystem();
             for (int i = 0; i < labelSellPrice.length; i++) {
                 int price = warpSys == null ? 0 : Constants.TradeItems[i].getStandardPrice(warpSys);

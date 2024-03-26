@@ -3,12 +3,12 @@ package org.spacetrader.ui;
 import org.spacetrader.controller.Functions;
 import org.spacetrader.controller.HighScoreRecord;
 import org.winforms.controls.Button;
+import org.winforms.controls.Dialog;
 import org.winforms.controls.Label;
 import org.winforms.enums.ContentAlignment;
 import org.winforms.enums.DialogResult;
 import org.winforms.enums.FormBorderStyle;
 import org.winforms.enums.FormStartPosition;
-import org.winforms.controls.Dialog;
 
 import java.awt.*;
 import java.util.Arrays;

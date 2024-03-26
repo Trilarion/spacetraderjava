@@ -1,11 +1,10 @@
 package org.winforms.controls;
 
-import org.winforms.EventHandler;
 import org.winforms.JStatusBar;
 import org.winforms.MouseAdapterExtension;
 import org.winforms.StatusBarPanel;
-import org.winforms.controls.Control;
 import org.winforms.enums.StatusBarPanelAutoSize;
+import org.winforms.events.EventHandler;
 
 // TODO documentation of usage
 public class StatusBar extends Control<JStatusBar> {

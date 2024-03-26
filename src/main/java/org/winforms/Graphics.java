@@ -1,5 +1,7 @@
 package org.winforms;
 
+import org.winforms.events.EventData;
+
 import java.awt.*;
 
 // TODO document implementation and usage
@@ -7,7 +9,7 @@ import java.awt.*;
 /**
  * Can be used as EventData.
  */
-public class Graphics implements EventData {
+public class Graphics implements EventData {  // TODO this can do so much more than just be an event data
     private final java.awt.Graphics graphics;
 
     public Graphics(java.awt.Graphics graphics) {
@@ -41,7 +43,7 @@ public class Graphics implements EventData {
         graphics.fillPolygon(xs, ys, points.length);
     }
 
-    public void drawString(String text, Font font, Color color, int x, int y) {
+    public void drawString(String text, org.winforms.Font font, Color color, int x, int y) {
         graphics.setColor(color);
         graphics.setFont(font);
         graphics.drawString(text, x, y);
@@ -54,7 +56,7 @@ public class Graphics implements EventData {
         graphics.setColor(color);
     }
 
-    public void drawImage(Image img, int x, int y, Rectangle rect) {
+    public void drawImage(org.winforms.Image img, int x, int y, org.winforms.Rectangle rect) {
         graphics.drawImage(img.asSwingImage(), x, y, x + rect.Width, y + rect.Height, rect.X, rect.Y, rect.X + rect.Width, rect.Y + rect.Height, null);
     }
 

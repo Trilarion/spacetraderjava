@@ -1,7 +1,6 @@
 package org.spacetrader.model;
 
 import org.spacetrader.controller.Constants;
-import org.spacetrader.controller.Game;
 import org.spacetrader.model.enums.ReputationType;
 import org.spacetrader.ui.Strings;
 

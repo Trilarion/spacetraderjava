@@ -7,12 +7,15 @@ import org.spacetrader.model.enums.CrewMemberId;
 import org.spacetrader.model.events.SpecialEvent;
 import org.spacetrader.model.events.SpecialEventType;
 import org.spacetrader.util.Util;
+import org.winforms.Link;
+import org.winforms.LinkArea;
+import org.winforms.LinkLabel;
 import org.winforms.controls.Button;
-import org.winforms.*;
 import org.winforms.controls.Dialog;
 import org.winforms.enums.DialogResult;
 import org.winforms.enums.FormBorderStyle;
 import org.winforms.enums.FormStartPosition;
+import org.winforms.events.EventHandler;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -55,7 +58,7 @@ public class DialogViewQuests extends Dialog {
                 + "Claim your moon at Utopia.");
         labelQuests.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, LinkLabelClickedEventData data) {
+            public void handle(Object sender, Link data) {
                 labelQuests_LinkClicked(sender, data);
             }
         };
@@ -209,8 +212,8 @@ public class DialogViewQuests extends Dialog {
         }
     }
 
-    private void labelQuests_LinkClicked(Object sender, LinkLabelClickedEventData e) {
-        game.setSelectedSystemByName(e.link.linkData.toString());
+    private void labelQuests_LinkClicked(Object sender, Link e) {
+        game.setSelectedSystemByName(e.linkData.toString());
         game.getParentWindow().updateAll();
         Close();
     }

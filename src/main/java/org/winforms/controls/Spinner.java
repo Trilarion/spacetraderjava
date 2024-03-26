@@ -1,8 +1,8 @@
 package org.winforms.controls;
 
-import org.winforms.EventData;
-import org.winforms.EventHandler;
 import org.winforms.enums.HorizontalAlignment;
+import org.winforms.events.EventData;
+import org.winforms.events.EventHandler;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -11,7 +11,6 @@ import javax.swing.text.JTextComponent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
-// TODO control in name, better name?
 public class Spinner extends Control<JSpinner> {
 
     private final SpinnerNumberModel model = new SpinnerNumberModel();

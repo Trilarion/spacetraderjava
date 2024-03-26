@@ -1,8 +1,8 @@
 package org.winforms.controls;
 
-import org.winforms.EventData;
-import org.winforms.EventHandler;
 import org.winforms.enums.ComboBoxStyle;
+import org.winforms.events.EventData;
+import org.winforms.events.EventHandler;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

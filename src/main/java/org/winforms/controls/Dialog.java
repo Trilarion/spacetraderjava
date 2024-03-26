@@ -1,11 +1,15 @@
 package org.winforms.controls;
 
-import org.winforms.*;
 import org.winforms.Graphics;
 import org.winforms.Image;
+import org.winforms.Pane;
 import org.winforms.enums.DialogResult;
 import org.winforms.enums.FormBorderStyle;
 import org.winforms.enums.FormStartPosition;
+import org.winforms.events.CancelEventData;
+import org.winforms.events.EventData;
+import org.winforms.events.EventHandler;
+import org.winforms.wfPanel;
 
 import javax.swing.*;
 import java.awt.Dialog.ModalityType;
@@ -44,7 +48,7 @@ public class Dialog extends Control<JDialog> implements Pane {
     }
 
 
-    public org.winforms.Graphics CreateGraphics() {
+    public Graphics CreateGraphics() {
         return new Graphics(jdialog.getGraphics());
     }
 
@@ -116,7 +120,6 @@ public class Dialog extends Control<JDialog> implements Pane {
         return CancelButton;
     }
 
-    // TODO handle.
     public void setCancelButton(Button cancelButton) {
         CancelButton = cancelButton;
     }
@@ -149,7 +152,6 @@ public class Dialog extends Control<JDialog> implements Pane {
         return ShowInTaskbar;
     }
 
-    // TODO ShowInTaskbar
     public void setShowInTaskbar(boolean showInTaskbar) {
         ShowInTaskbar = showInTaskbar;
     }

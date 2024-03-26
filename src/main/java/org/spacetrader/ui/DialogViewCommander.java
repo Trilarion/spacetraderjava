@@ -6,11 +6,11 @@ import org.spacetrader.controller.Game;
 import org.spacetrader.model.PoliceRecord;
 import org.spacetrader.model.Reputation;
 import org.spacetrader.model.crew.Commander;
-import org.winforms.controls.Button;
 import org.winforms.Font;
-import org.winforms.controls.Label;
-import org.winforms.controls.GroupBox;
+import org.winforms.controls.Button;
 import org.winforms.controls.Dialog;
+import org.winforms.controls.GroupBox;
+import org.winforms.controls.Label;
 import org.winforms.enums.*;
 
 import java.awt.*;

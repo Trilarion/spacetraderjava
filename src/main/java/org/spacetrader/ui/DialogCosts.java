@@ -2,11 +2,11 @@ package org.spacetrader.ui;
 
 import org.spacetrader.controller.Functions;
 import org.spacetrader.controller.Game;
-import org.winforms.controls.Button;
 import org.winforms.Font;
+import org.winforms.controls.Button;
+import org.winforms.controls.Dialog;
 import org.winforms.controls.Label;
 import org.winforms.controls.PictureBox;
-import org.winforms.controls.Dialog;
 import org.winforms.enums.*;
 
 import java.awt.*;

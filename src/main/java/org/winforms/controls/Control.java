@@ -1,11 +1,10 @@
 package org.winforms.controls;
 
-import org.winforms.EventData;
-import org.winforms.EventHandler;
 import org.winforms.MouseListener;
 import org.winforms.enums.BorderStyle;
+import org.winforms.events.EventData;
+import org.winforms.events.EventHandler;
 
-import java.awt.Font;
 import java.awt.*;
 
 // TODO documentation of usage

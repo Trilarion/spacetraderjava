@@ -1,6 +1,7 @@
 package org.winforms;
 
 import org.winforms.enums.StatusBarPanelAutoSize;
+import org.winforms.events.EventData;
 
 import java.awt.*;
 
@@ -8,7 +9,7 @@ import java.awt.*;
 public class StatusBarPanel implements EventData {
 
     public final StatusBarPanelAutoSize autoSize;
-    private final JStatusBarSection jpanel = new JStatusBarSection(" ");
+    private final StatusBarSection jpanel = new StatusBarSection(" ");
 
     public StatusBarPanel() {
         this(StatusBarPanelAutoSize.None);
@@ -30,7 +31,7 @@ public class StatusBarPanel implements EventData {
         jpanel.setSize(w, h);
     }
 
-    public JStatusBarSection asJStatusBarSection() {
+    public StatusBarSection asJStatusBarSection() {
         return jpanel;
     }
 

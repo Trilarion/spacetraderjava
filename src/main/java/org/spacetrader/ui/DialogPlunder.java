@@ -3,13 +3,14 @@ package org.spacetrader.ui;
 import org.spacetrader.controller.Game;
 import org.spacetrader.model.ship.Ship;
 import org.winforms.controls.Button;
-import org.winforms.controls.Label;
-import org.winforms.*;
 import org.winforms.controls.Dialog;
+import org.winforms.controls.Label;
 import org.winforms.enums.DialogResult;
 import org.winforms.enums.FlatStyle;
 import org.winforms.enums.FormBorderStyle;
 import org.winforms.enums.FormStartPosition;
+import org.winforms.events.EventData;
+import org.winforms.events.EventHandler;
 
 import java.awt.*;
 

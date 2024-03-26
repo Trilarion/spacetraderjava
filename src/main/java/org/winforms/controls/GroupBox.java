@@ -1,6 +1,5 @@
 package org.winforms.controls;
 
-import org.winforms.controls.Control;
 import org.winforms.enums.AnchorStyles;
 import org.winforms.wfPanel;
 

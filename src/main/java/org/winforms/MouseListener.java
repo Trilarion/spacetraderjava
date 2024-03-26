@@ -1,5 +1,9 @@
 package org.winforms;
 
+import org.winforms.events.EventData;
+import org.winforms.events.EventHandler;
+import org.winforms.events.MouseEventData;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 

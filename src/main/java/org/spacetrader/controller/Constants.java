@@ -13,14 +13,13 @@ import org.spacetrader.model.ship.ShipSpec;
 import org.spacetrader.model.ship.ShipType;
 import org.spacetrader.model.ship.Shipyard;
 import org.spacetrader.model.ship.equipment.*;
-import org.spacetrader.util.Environment;
 import org.spacetrader.util.Path;
 import org.winforms.Rectangle;
 
 // TODO lots of constants, maybe make several classes (name spaces), maybe some can become enums
 public class Constants {
     // Directory structure and File Constants.
-    public static final String BaseDirectory = Environment.CurrentDirectory;
+    public static final String BaseDirectory = System.getProperty("user.dir");
     public static final String CustomDirectory = Path.combine(BaseDirectory, "custom");
     public static final String CustomImagesDirectory = Path.combine(CustomDirectory, "images");
     public static final String CustomTemplatesDirectory = Path.combine(CustomDirectory, "templates");

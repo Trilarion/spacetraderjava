@@ -1,13 +1,14 @@
 package org.spacetrader.ui;
 
 import org.spacetrader.model.enums.Difficulty;
-import org.winforms.controls.*;
-import org.winforms.controls.Dialog;
-import org.winforms.controls.TextField;
-import org.winforms.*;
 import org.winforms.controls.Button;
+import org.winforms.controls.Dialog;
 import org.winforms.controls.Label;
+import org.winforms.controls.TextField;
+import org.winforms.controls.*;
 import org.winforms.enums.*;
+import org.winforms.events.EventData;
+import org.winforms.events.EventHandler;
 
 import java.awt.*;
 import java.util.Arrays;

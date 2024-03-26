@@ -7,13 +7,14 @@ import org.spacetrader.model.crew.Commander;
 import org.spacetrader.model.enums.AlertType;
 import org.spacetrader.model.ship.Ship;
 import org.spacetrader.model.ship.equipment.*;
-import org.winforms.controls.*;
 import org.winforms.Font;
-import org.winforms.*;
 import org.winforms.controls.Button;
 import org.winforms.controls.Dialog;
 import org.winforms.controls.Label;
+import org.winforms.controls.*;
 import org.winforms.enums.*;
+import org.winforms.events.EventData;
+import org.winforms.events.EventHandler;
 
 import java.awt.*;
 

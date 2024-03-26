@@ -1,6 +1,7 @@
 package org.winforms;
 
 import org.winforms.controls.PictureBox;
+import org.winforms.events.EventHandler;
 
 import javax.swing.*;
 import java.awt.*;

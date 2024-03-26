@@ -13,9 +13,9 @@ public class JStatusBarExample {
         JStatusBar panel = new JStatusBar();
         Container pane = frame.getContentPane();
         pane.add(panel, BorderLayout.SOUTH);
-        panel.addSection(new JStatusBarSection("left"), false);
-        panel.addSection(new JStatusBarSection("Foo bar!"), false);
-        panel.addSection(new JStatusBarSection("--fill--"), true);
+        panel.addSection(new StatusBarSection("left"), false);
+        panel.addSection(new StatusBarSection("Foo bar!"), false);
+        panel.addSection(new StatusBarSection("--fill--"), true);
         frame.setSize(400, 400);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(3);

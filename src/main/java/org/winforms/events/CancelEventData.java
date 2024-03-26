@@ -1,4 +1,4 @@
-package org.winforms;
+package org.winforms.events;
 
 
 public class CancelEventData implements EventData {
