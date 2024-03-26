@@ -1,5 +1,8 @@
 package org.winforms;
 
+import org.winforms.controls.Button;
+import org.winforms.controls.Control;
+
 import javax.swing.*;
 import java.awt.Graphics;
 import java.awt.*;
@@ -14,7 +17,7 @@ public class wfPanel extends JPanel {  // TODO there is another Panel, what is t
     private static final long serialVersionUID = 1L;
     private final Pane form;
     Map<Component, Integer> tabOrderMap = new HashMap<>(0);
-    Image backgroundImage;
+    public Image backgroundImage;
 
     public wfPanel(Pane wp) {
         super(null); // That's what winforms use.
@@ -49,8 +52,8 @@ public class wfPanel extends JPanel {  // TODO there is another Panel, what is t
     }
 
     public void add(final Control wc) {
-        if (wc instanceof Button) {
-            handleDialogResult((Button) wc);
+        if (wc instanceof org.winforms.controls.Button) {
+            handleDialogResult((org.winforms.controls.Button) wc);
         }
         Component c = wc.asSwingObject();
         add(c);

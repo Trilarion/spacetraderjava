@@ -19,17 +19,18 @@ import org.spacetrader.model.system.StarSystem;
 import org.spacetrader.util.Directory;
 import org.spacetrader.util.RegistryKey;
 import org.spacetrader.util.Util;
-import org.winforms.Button;
+import org.winforms.controls.*;
 import org.winforms.FileDialog;
 import org.winforms.Font;
 import org.winforms.Graphics;
 import org.winforms.Icon;
 import org.winforms.Image;
-import org.winforms.Label;
-import org.winforms.MenuBar;
 import org.winforms.MenuItem;
-import org.winforms.Window;
+import org.winforms.controls.Window;
 import org.winforms.*;
+import org.winforms.controls.Button;
+import org.winforms.controls.Label;
+import org.winforms.controls.MenuBar;
 import org.winforms.enums.*;
 
 import javax.swing.*;
@@ -2454,20 +2455,20 @@ public class MainWindow extends Window {
                 alertType = AlertType.GameEndBoughtMoon;
                 break;
         }
-        FormAlert.Alert(alertType, this);
-        FormAlert.Alert(AlertType.GameEndScore, this, Functions.FormatNumber(game.Score() / 10), Functions.FormatNumber(game.Score() % 10));
+        DialogAlert.Alert(alertType, this);
+        DialogAlert.Alert(AlertType.GameEndScore, this, Functions.FormatNumber(game.Score() / 10), Functions.FormatNumber(game.Score() % 10));
         HighScoreRecord candidate = new HighScoreRecord(
                 commander.Name(), game.Score(), game.getEndStatus(),
                 commander.getDays(), commander.Worth(), game.Difficulty());
         if (candidate.CompareTo(Functions.GetHighScores(this)[0]) > 0) {
             if (game.getCheatEnabled()) {
-                FormAlert.Alert(AlertType.GameEndHighScoreCheat, this);
+                DialogAlert.Alert(AlertType.GameEndHighScoreCheat, this);
             } else {
                 AddHighScore(candidate);
-                FormAlert.Alert(AlertType.GameEndHighScoreAchieved, this);
+                DialogAlert.Alert(AlertType.GameEndHighScoreAchieved, this);
             }
         } else {
-            FormAlert.Alert(AlertType.GameEndHighScoreMissed, this);
+            DialogAlert.Alert(AlertType.GameEndHighScoreMissed, this);
         }
         Game.setCurrentGame(null);
         game = null;
@@ -2483,7 +2484,7 @@ public class MainWindow extends Window {
             }
             key.Close();
         } catch (NullPointerException ex) {
-            FormAlert.Alert(AlertType.RegistryError, this, ex.getMessage());
+            DialogAlert.Alert(AlertType.RegistryError, this, ex.getMessage());
         }
         return settingValue;
     }
@@ -2500,7 +2501,7 @@ public class MainWindow extends Window {
                 updateAll();
             }
         } catch (FutureVersionException ex) {
-            FormAlert.Alert(AlertType.FileErrorOpen, this, fileName, Strings.FileFutureVersion);
+            DialogAlert.Alert(AlertType.FileErrorOpen, this, fileName, Strings.FileFutureVersion);
         }
     }
 
@@ -2528,7 +2529,7 @@ public class MainWindow extends Window {
             key.SetValue(settingName, settingValue);
             key.Close();
         } catch (NullPointerException ex) {
-            FormAlert.Alert(AlertType.RegistryError, this, ex.getMessage());
+            DialogAlert.Alert(AlertType.RegistryError, this, ex.getMessage());
         }
     }
 
@@ -2774,7 +2775,7 @@ public class MainWindow extends Window {
 
     private void SpaceTrader_Closing(Object sender, CancelEventData e) {
         if (game == null || commander.getDays() == SaveGameDays
-                || FormAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes) {
+                || DialogAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes) {
             if (windowState == FormWindowState.Normal) {
                 SetRegistrySetting("X", Left.toString());
                 SetRegistrySetting("Y", Top.toString());
@@ -2787,7 +2788,7 @@ public class MainWindow extends Window {
     private void SpaceTrader_Load(Object sender, EventData e) {
         Left = Integer.parseInt(GetRegistrySetting("X", "0"));
         Top = Integer.parseInt(GetRegistrySetting("Y", "0"));
-        FormAlert.Alert(AlertType.AppStart, this);
+        DialogAlert.Alert(AlertType.AppStart, this);
     }
 
     private void buttonBuySell_Click(Object sender, EventData e) {
@@ -2802,22 +2803,22 @@ public class MainWindow extends Window {
     }
 
     private void buttonBuyShip_Click(Object sender, EventData e) {
-        (new FormShipList()).ShowDialog(this);
+        (new DialogShipList()).ShowDialog(this);
         updateAll();
     }
 
     private void buttonDesign_Click(Object sender, EventData e) {
-        (new FormShipyard()).ShowDialog(this);
+        (new DialogShipyard()).ShowDialog(this);
         updateAll();
     }
 
     private void buttonEquip_Click(Object sender, EventData e) {
-        (new FormEquipment()).ShowDialog(this);
+        (new DialogEquipment()).ShowDialog(this);
         updateAll();
     }
 
     private void buttonFind_Click(Object sender, EventData e) {
-        FormFind form = new FormFind();
+        DialogFind form = new DialogFind();
         if (form.ShowDialog(this) == DialogResult.OK) {
             Ship ship = commander.getShip();
             String[] words = form.SystemName().split(" ");
@@ -2855,7 +2856,7 @@ public class MainWindow extends Window {
                                 text += Strings.VeryRareEncounters[veryRareEncounter.getId()] + Strings.newline;
                             }
                             text = text.trim();
-                            FormAlert.Alert(AlertType.Alert, this, "Remaining Very Rare Encounters", text);
+                            DialogAlert.Alert(AlertType.Alert, this, "Remaining Very Rare Encounters", text);
                         }
                         break;
                     case Fame:
@@ -2919,7 +2920,7 @@ public class MainWindow extends Window {
                         ship.setEscapePod(!ship.getEscapePod());
                         break;
                     case MonsterCom:
-                        (new FormMonster()).ShowDialog(this);
+                        (new DialogMonster()).ShowDialog(this);
                         break;
                     case PlanB:
                         game.setAutoSave(true);
@@ -3001,7 +3002,7 @@ public class MainWindow extends Window {
                                         + game.getQuestStatusSculpture() + Strings.newline + "SpaceMonster: "
                                         + game.getQuestStatusSpaceMonster() + Strings.newline + "Wild: "
                                         + game.getQuestStatusWild();
-                                FormAlert.Alert(AlertType.Alert, this, "Status of Quests", text);
+                                DialogAlert.Alert(AlertType.Alert, this, "Status of Quests", text);
                                 break;
                         }
                     }
@@ -3012,7 +3013,7 @@ public class MainWindow extends Window {
                         }
                         break;
                     case Test:
-                        (new FormTest()).ShowDialog(this);
+                        (new DialogTest()).ShowDialog(this);
                         break;
                     case Tool:
                         if (num1 >= 0 && num1 < ship.Gadgets().length && num2 >= 0 && num2 < Constants.Gadgets.length) {
@@ -3032,7 +3033,7 @@ public class MainWindow extends Window {
             } else {
                 switch (SomeStringsForSwitch.find(first)) {
                     case Cheetah:
-                        FormAlert.Alert(AlertType.Cheater, this);
+                        DialogAlert.Alert(AlertType.Cheater, this);
                         game.setCheatEnabled(true);
                         break;
                     default:
@@ -3051,7 +3052,7 @@ public class MainWindow extends Window {
     }
 
     private void buttonFuel_Click(Object sender, EventData e) {
-        FormBuyFuel form = new FormBuyFuel();
+        DialogBuyFuel form = new DialogBuyFuel();
         if (form.ShowDialog(this) == DialogResult.OK) {
             int toAdd = form.Amount() / commander.getShip().getFuelCost();
             commander.getShip().setFuel(commander.getShip().getFuel() + toAdd);
@@ -3062,10 +3063,10 @@ public class MainWindow extends Window {
 
     private void buttonJump_Click(Object sender, EventData e) {
         if (game.WarpSystem() == null) {
-            FormAlert.Alert(AlertType.ChartJumpNoSystemSelected, this);
+            DialogAlert.Alert(AlertType.ChartJumpNoSystemSelected, this);
         } else if (game.WarpSystem() == commander.CurrentSystem()) {
-            FormAlert.Alert(AlertType.ChartJumpCurrent, this);
-        } else if (FormAlert.Alert(AlertType.ChartJump, this, game.WarpSystem().Name()) == DialogResult.Yes) {
+            DialogAlert.Alert(AlertType.ChartJumpCurrent, this);
+        } else if (DialogAlert.Alert(AlertType.ChartJump, this, game.WarpSystem().Name()) == DialogResult.Yes) {
             game.setCanSuperWarp(false);
             try {
                 if (game.getAutoSave()) {
@@ -3083,7 +3084,7 @@ public class MainWindow extends Window {
     }
 
     private void buttonMerc_Click(Object sender, EventData e) {
-        (new FormViewPersonnel()).ShowDialog(this);
+        (new DialogViewPersonnel()).ShowDialog(this);
         updateAll();
     }
 
@@ -3097,7 +3098,7 @@ public class MainWindow extends Window {
     }
 
     private void buttonPod_Click(Object sender, EventData e) {
-        if (FormAlert.Alert(AlertType.EquipmentEscapePod, this) == DialogResult.Yes) {
+        if (DialogAlert.Alert(AlertType.EquipmentEscapePod, this) == DialogResult.Yes) {
             commander.setCash(commander.getCash() - 2000);
             commander.getShip().setEscapePod(true);
             updateAll();
@@ -3110,7 +3111,7 @@ public class MainWindow extends Window {
     }
 
     private void buttonRepair_Click(Object sender, EventData e) {
-        FormBuyRepairs form = new FormBuyRepairs();
+        DialogBuyRepairs form = new DialogBuyRepairs();
         if (form.ShowDialog(this) == DialogResult.OK) {
             int toAdd = form.Amount() / commander.getShip().getRepairCost();
             commander.getShip().setHull(commander.getShip().getHull() + toAdd);
@@ -3134,10 +3135,10 @@ public class MainWindow extends Window {
             res1 = DialogResult.Yes;
             res2 = DialogResult.No;
         }
-        FormAlert alert = new FormAlert(specEvent.getTitle(), specEvent.String(), button1, res1, button2, res2, null);
+        DialogAlert alert = new DialogAlert(specEvent.getTitle(), specEvent.String(), button1, res1, button2, res2, null);
         if (alert.ShowDialog() != DialogResult.No) {
             if (commander.CashToSpend() < specEvent.getPrice()) {
-                FormAlert.Alert(AlertType.SpecialIF, this);
+                DialogAlert.Alert(AlertType.SpecialIF, this);
             } else {
                 try {
                     game.HandleSpecialEvent();
@@ -3174,9 +3175,9 @@ public class MainWindow extends Window {
     }
 
     private void menuGameNew_Click(Object sender, EventData e) {
-        FormNewCommander form = new FormNewCommander();
+        DialogNewCommander form = new DialogNewCommander();
         if ((game == null || commander.getDays() == SaveGameDays
-                || FormAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes)
+                || DialogAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes)
                 && form.ShowDialog(this) == DialogResult.OK) {
             game = new Game(
                     form.CommanderName(), form.Difficulty(), form.Pilot(),
@@ -3194,7 +3195,7 @@ public class MainWindow extends Window {
 
     private void menuGameLoad_Click(Object sender, EventData e) {
         if ((game == null || commander.getDays() == SaveGameDays
-                || FormAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes)
+                || DialogAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes)
                 && dialogOpen.ShowDialog(this) == DialogResult.OK) {
             LoadGame(dialogOpen.getFileName());
         }
@@ -3217,15 +3218,15 @@ public class MainWindow extends Window {
     }
 
     private void menuHelpAbout_Click(Object sender, EventData e) {
-        (new FormAbout()).ShowDialog(this);
+        (new DialogAbout()).ShowDialog(this);
     }
 
     private void menuHighScores_Click(Object sender, EventData e) {
-        (new FormViewHighScores()).ShowDialog(this);
+        (new DialogViewHighScores()).ShowDialog(this);
     }
 
     private void menuOptions_Click(Object sender, EventData e) {
-        FormOptions form = new FormOptions();
+        DialogOptions form = new DialogOptions();
         if (form.ShowDialog(this) == DialogResult.OK) {
             game.Options().CopyValues(form.Options());
             updateAll();
@@ -3233,7 +3234,7 @@ public class MainWindow extends Window {
     }
 
     private void menuRetire_Click(Object sender, EventData e) {
-        if (FormAlert.Alert(AlertType.GameRetire, this) == DialogResult.Yes) {
+        if (DialogAlert.Alert(AlertType.GameRetire, this) == DialogResult.Yes) {
             game.setEndStatus(GameEndType.Retired);
             GameEnd();
             updateAll();
@@ -3241,23 +3242,23 @@ public class MainWindow extends Window {
     }
 
     private void menuViewBank_Click(Object sender, EventData e) {
-        (new FormViewBank()).ShowDialog(this);
+        (new DialogViewBank()).ShowDialog(this);
     }
 
     private void menuViewCommander_Click(Object sender, EventData e) {
-        (new FormViewCommander()).ShowDialog(this);
+        (new DialogViewCommander()).ShowDialog(this);
     }
 
     private void menuViewPersonnel_Click(Object sender, EventData e) {
-        (new FormViewPersonnel()).ShowDialog(this);
+        (new DialogViewPersonnel()).ShowDialog(this);
     }
 
     private void menuViewQuests_Click(Object sender, EventData e) {
-        (new FormViewQuests()).ShowDialog(this);
+        (new DialogViewQuests()).ShowDialog(this);
     }
 
     private void menuViewShip_Click(Object sender, EventData e) {
-        (new FormViewShip()).ShowDialog(this);
+        (new DialogViewShip()).ShowDialog(this);
     }
 
     private void pictureGalacticChart_MouseDown(Object sender, MouseEventData e) {
@@ -3445,7 +3446,7 @@ public class MainWindow extends Window {
             if (statusBarPanel == statusBarPanelCash) {
                 menuViewBank_Click(sender, statusBarPanel);
             } else if (statusBarPanel == statusBarPanelCosts) {
-                (new FormCosts()).ShowDialog(this);
+                (new DialogCosts()).ShowDialog(this);
             }
         }
     }

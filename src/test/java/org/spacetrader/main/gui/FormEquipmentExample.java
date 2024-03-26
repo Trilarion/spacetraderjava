@@ -1,13 +1,13 @@
 package org.spacetrader.main.gui;
 
-import org.spacetrader.ui.FormEquipment;
+import org.spacetrader.ui.DialogEquipment;
 
 public class FormEquipmentExample {
 
     private FormEquipmentExample() {}
 
     public static void main(String[] args) throws Exception {
-        FormEquipment fe = new FormEquipment();
+        DialogEquipment fe = new DialogEquipment();
         fe.ShowDialog(null);
     }
 }

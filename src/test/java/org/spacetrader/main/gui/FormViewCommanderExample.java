@@ -1,13 +1,13 @@
 package org.spacetrader.main.gui;
 
-import org.spacetrader.ui.FormViewCommander;
+import org.spacetrader.ui.DialogViewCommander;
 
 public class FormViewCommanderExample {
 
     private FormViewCommanderExample() {}
 
     public static void main(String[] args) throws Exception {
-        FormViewCommander form = new FormViewCommander();
+        DialogViewCommander form = new DialogViewCommander();
         form.ShowDialog(null);
     }
 }

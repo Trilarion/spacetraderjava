@@ -1,6 +1,6 @@
 package org.spacetrader.main.gui;
 
-import org.spacetrader.ui.FormAbout;
+import org.spacetrader.ui.DialogAbout;
 
 import javax.swing.*;
 
@@ -9,6 +9,6 @@ public class FormAboutExample {
     private FormAboutExample() {}
 
     public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-        new FormAbout().ShowDialog(null);
+        new DialogAbout().ShowDialog(null);
     }
 }

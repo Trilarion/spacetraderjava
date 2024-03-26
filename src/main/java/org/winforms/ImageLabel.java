@@ -1,5 +1,7 @@
 package org.winforms;
 
+import org.winforms.controls.PictureBox;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,12 +11,12 @@ import java.awt.*;
  *
  * @author Gregory
  */
-class ImageLabel extends JLabel {  // TODO better name and documentation of usage
+public class ImageLabel extends JLabel {  // TODO better name and documentation of usage
 
     private static final long serialVersionUID = 1L;
-    EventHandler<Object, Graphics> paintEventHandler;
-    PictureBox pictureBox;
-    Color background;
+    public EventHandler<Object, Graphics> paintEventHandler;
+    public PictureBox pictureBox;
+    public Color background;
 
     @Override
     public void paintComponent(java.awt.Graphics graphics) {

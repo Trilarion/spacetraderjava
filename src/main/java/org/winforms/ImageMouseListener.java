@@ -1,5 +1,7 @@
 package org.winforms;
 
+import org.winforms.controls.PictureBox;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -9,12 +11,12 @@ import java.awt.event.MouseEvent;
  *
  * @author Gregory
  */
-class ImageMouseListener extends MouseAdapter {
+public class ImageMouseListener extends MouseAdapter {
 
     private final PictureBox pictureBox;
     public EventHandler<Object, MouseEventData> pressed;
 
-    ImageMouseListener(PictureBox pictureBox) {
+    public ImageMouseListener(PictureBox pictureBox) {
         this.pictureBox = pictureBox;
     }
 

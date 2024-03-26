@@ -4,7 +4,7 @@ import org.spacetrader.model.enums.AlertType;
 import org.spacetrader.model.enums.Difficulty;
 import org.spacetrader.model.ship.Ship;
 import org.spacetrader.model.system.StarSystem;
-import org.spacetrader.ui.FormAlert;
+import org.spacetrader.ui.DialogAlert;
 import org.spacetrader.ui.Strings;
 import org.spacetrader.util.*;
 import org.winforms.Graphics;
@@ -128,12 +128,12 @@ public class Functions {
             obj = (new BinaryFormatter()).Deserialize(inStream);
         } catch (FileNotFoundException e) {
             if (!ignoreMissingFile) {
-                FormAlert.Alert(AlertType.FileErrorOpen, owner, fileName, e.getMessage());
+                DialogAlert.Alert(AlertType.FileErrorOpen, owner, fileName, e.getMessage());
             }
         } catch (IOException ex) {
-            FormAlert.Alert(AlertType.FileErrorOpen, owner, fileName, ex.getMessage());
+            DialogAlert.Alert(AlertType.FileErrorOpen, owner, fileName, ex.getMessage());
         } catch (SerializationException ex) {
-            FormAlert.Alert(AlertType.FileErrorOpen, owner, fileName, Strings.FileFormatBad);
+            DialogAlert.Alert(AlertType.FileErrorOpen, owner, fileName, Strings.FileFormatBad);
         } finally {
             if (null != inStream) {
                 try {
@@ -207,7 +207,7 @@ public class Functions {
             (new BinaryFormatter()).Serialize(outStream, toSerialize);
             saveOk = true;
         } catch (IOException ex) {
-            FormAlert.Alert(AlertType.FileErrorSave, owner, fileName, ex.getMessage());
+            DialogAlert.Alert(AlertType.FileErrorSave, owner, fileName, ex.getMessage());
         } finally {
             if (null != outStream) {
                 try {
