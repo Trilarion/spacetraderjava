@@ -1,6 +1,6 @@
 package org.spacetrader.model.events;
 
-import org.spacetrader.model.enums.IdentifiableEnum;
+import org.spacetrader.util.IdentifiableEnum;
 
 
 public enum EncounterResult implements IdentifiableEnum {

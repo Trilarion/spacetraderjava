@@ -1,6 +1,8 @@
 package org.spacetrader.model.enums;
 
 
+import org.spacetrader.util.IdentifiableEnum;
+
 public enum PoliticalSystemType implements IdentifiableEnum {
     Anarchy,//= 0,
     Capitalist,//= 1,

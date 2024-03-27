@@ -1,6 +1,6 @@
 package org.spacetrader.model.events;
 
-import org.spacetrader.model.enums.IdentifiableEnum;
+import org.spacetrader.util.IdentifiableEnum;
 
 
 public enum EncounterType implements IdentifiableEnum {
@@ -41,8 +41,8 @@ public enum EncounterType implements IdentifiableEnum {
     TraderBuy, // = 33,
     TraderSell; // = 34
 
-    public static EncounterType FromInt(int i) {
-        return values()[i];
+    public static EncounterType FromInt(final int i) {
+        return EncounterType.values()[i];
     }
 
     @Override

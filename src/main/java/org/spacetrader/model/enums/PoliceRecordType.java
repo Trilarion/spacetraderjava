@@ -1,6 +1,8 @@
 package org.spacetrader.model.enums;
 
 
+import org.spacetrader.util.IdentifiableEnum;
+
 public enum PoliceRecordType implements IdentifiableEnum {
     Psychopath, // = 0,
     Villain, // = 1,

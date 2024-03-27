@@ -114,7 +114,7 @@ public interface Strings {
     String QuestSpaceMonsterKill = "Kill the space monster at Acamar.";
     String QuestTribbles = "Get rid of those pesky tribbles.";
     String QuestWild = "Smuggle Jonathan Wild to Kravat.";
-    String QuestWildImpatient = QuestWild + newline + "Wild is getting impatient, and will no longer aid your crew along the way.";
+    String QuestWildImpatient = QuestWild + Strings.newline + "Wild is getting impatient, and will no longer aid your crew along the way.";
     String ShipBuyGotOne = "got one";
     String ShipBuyTransfer = ", and transfer your unique equipment to the new ship";
     String ShipInfoEscapePod = "Escape Pod";
@@ -386,7 +386,7 @@ public interface Strings {
     String[] ShipNames = {"Flea", "Gnat",
             "Firefly", "Mosquito", "Bumblebee", "Beetle", "Hornet",
             "Grasshopper", "Termite", "Wasp", "Space Monster", "Dragonfly",
-            "Mantis", "Scarab", "Bottle", ShipNameCustomShip, "Scorpion"};
+            "Mantis", "Scarab", "Bottle", Strings.ShipNameCustomShip, "Scorpion"};
     String[] ShipyardEngineers = {"Wedge", "Luke",
             "Lando", "Mara", "Obi-Wan"};
     String[] ShipyardNames = {

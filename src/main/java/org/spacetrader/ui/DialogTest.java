@@ -1,17 +1,21 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.Constants;
+import org.spacetrader.Constants;
 import org.spacetrader.model.enums.AlertType;
 import org.spacetrader.model.events.SpecialEvent;
 import org.spacetrader.model.events.SpecialEventType;
-import org.winforms.controls.Button;
-import org.winforms.controls.Dialog;
-import org.winforms.controls.Label;
-import org.winforms.controls.TextField;
-import org.winforms.controls.*;
-import org.winforms.enums.*;
-import org.winforms.events.EventData;
-import org.winforms.events.EventHandler;
+import org.winforms.alignment.FormStartPosition;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
+import org.winforms.widget.TextField;
+import org.winforms.widget.*;
+import org.winforms.dialog.DialogResult;
+import org.winforms.event.EventData;
+import org.winforms.event.EventHandler;
+import org.winforms.style.ComboBoxStyle;
+import org.winforms.style.FlatStyle;
+import org.winforms.style.FormBorderStyle;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -25,20 +29,20 @@ public class DialogTest extends Dialog {
     private final TextField textValue3;
 
     public DialogTest() {
-        Label labelAlertType = new Label();
-        GroupBox boxAlert = new GroupBox();
-        Button buttonTestAlert = new Button();
+        final Label labelAlertType = new Label();
+        final GroupBox boxAlert = new GroupBox();
+        final Button buttonTestAlert = new Button();
         textValue3 = new TextField();
         textValue2 = new TextField();
         textValue1 = new TextField();
         selAlertType = new ComboBox();
-        Label labelValue3 = new Label();
-        Label labelValue1 = new Label();
-        Label labelValue2 = new Label();
-        GroupBox groupBox1 = new GroupBox();
-        Button buttonTestSpecialEvent = new Button();
+        final Label labelValue3 = new Label();
+        final Label labelValue1 = new Label();
+        final Label labelValue2 = new Label();
+        final GroupBox groupBox1 = new GroupBox();
+        final Button buttonTestSpecialEvent = new Button();
         selSpecialEvent = new ComboBox();
-        Label labelSpecialEvent = new Label();
+        final Label labelSpecialEvent = new Label();
         boxAlert.suspendLayout();
         groupBox1.suspendLayout();
         suspendLayout();
@@ -66,7 +70,7 @@ public class DialogTest extends Dialog {
         buttonTestAlert.setText("Test");
         buttonTestAlert.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 buttonTestAlert_Click();
             }
         });
@@ -132,7 +136,7 @@ public class DialogTest extends Dialog {
         buttonTestSpecialEvent.setText("Test");
         buttonTestSpecialEvent.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 buttonTestSpecialEvent_Click();
             }
         });
@@ -163,13 +167,13 @@ public class DialogTest extends Dialog {
         boxAlert.resumeLayout(false);
         groupBox1.resumeLayout(false);
         resumeLayout(false);
-        AlertType[] alerts = Arrays.copyOfRange(AlertType.values(), AlertType.Alert.ordinal(), AlertType.WildWontStayAboardReactor.ordinal());
-        for (AlertType type : alerts) {
+        final AlertType[] alerts = Arrays.copyOfRange(AlertType.values(), AlertType.Alert.ordinal(), AlertType.WildWontStayAboardReactor.ordinal());
+        for (final AlertType type : alerts) {
             selAlertType.Items.addElement(type);
         }
         selAlertType.setSelectedIndex(0);
-        SpecialEventType[] events = Arrays.copyOfRange(SpecialEventType.values(), SpecialEventType.Artifact.ordinal(), SpecialEventType.WildGetsOut.ordinal());
-        for (SpecialEventType type : events) {
+        final SpecialEventType[] events = Arrays.copyOfRange(SpecialEventType.values(), SpecialEventType.Artifact.ordinal(), SpecialEventType.WildGetsOut.ordinal());
+        for (final SpecialEventType type : events) {
             selSpecialEvent.Items.addElement(type);
         }
         selSpecialEvent.setSelectedIndex(0);
@@ -182,9 +186,11 @@ public class DialogTest extends Dialog {
     }
 
     private void buttonTestSpecialEvent_Click() {
-        SpecialEvent se = Constants.SpecialEvents[((SpecialEventType) selSpecialEvent.getSelectedItem()).getId()];
-        String button1, button2;
-        DialogResult res1, res2;
+        final SpecialEvent se = Constants.SpecialEvents[((SpecialEventType) selSpecialEvent.getSelectedItem()).getId()];
+        final String button1;
+        final String button2;
+        final DialogResult res1;
+        final DialogResult res2;
         if (se.isMessageOnly()) {
             button1 = "Ok";
             button2 = null;

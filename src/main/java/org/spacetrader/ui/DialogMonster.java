@@ -1,24 +1,29 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.Constants;
-import org.spacetrader.controller.Functions;
+import org.spacetrader.Constants;
+import org.spacetrader.model.ModelUtils;
 import org.spacetrader.controller.Game;
 import org.spacetrader.model.crew.Commander;
 import org.spacetrader.model.crew.CrewMember;
 import org.spacetrader.model.enums.ShipyardId;
 import org.spacetrader.model.system.StarSystem;
-import org.spacetrader.util.Util;
-import org.winforms.Font;
-import org.winforms.Link;
-import org.winforms.LinkArea;
-import org.winforms.LinkLabel;
-import org.winforms.controls.Button;
-import org.winforms.controls.Dialog;
-import org.winforms.controls.Label;
-import org.winforms.controls.Panel;
-import org.winforms.controls.*;
-import org.winforms.enums.*;
-import org.winforms.events.EventHandler;
+import org.spacetrader.util.Utils;
+import org.winforms.util.Font;
+import org.winforms.link.Link;
+import org.winforms.link.LinkArea;
+import org.winforms.link.LinkLabel;
+import org.winforms.alignment.ContentAlignment;
+import org.winforms.alignment.FormStartPosition;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
+import org.winforms.widget.Panel;
+import org.winforms.widget.*;
+import org.winforms.dialog.DialogResult;
+import org.winforms.event.EventHandler;
+import org.winforms.style.BorderStyle;
+import org.winforms.style.FontStyle;
+import org.winforms.style.FormBorderStyle;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -484,7 +489,7 @@ public class DialogMonster extends Dialog {
                 compareVal = ((Integer) valA).compareTo((Integer) valB);
             }
             // Secondary sort by Name
-            if (0 == compareVal && !"N".equals(sortBy)) {
+            if (compareVal == 0 && !"N".equals(sortBy)) {
                 compareVal = A.Name().compareTo(B.Name());
             }
         } else {
@@ -505,7 +510,7 @@ public class DialogMonster extends Dialog {
                 }
                 compareVal = nameA.compareTo(nameB);
             }
-            if (0 == compareVal) { // Default sort - System Name
+            if (compareVal == 0) { // Default sort - System Name
                 compareVal = A.Name().compareTo(B.Name());
             }
         }
@@ -513,16 +518,16 @@ public class DialogMonster extends Dialog {
     }
 
     private String CurrentSystemDisplay(CrewMember merc) {
-        return (null == merc.CurrentSystem()
+        return (merc.CurrentSystem() == null
                 ? Strings.Unknown : (commander.getShip().HasCrew(merc.Id())
-                ? Functions.StringVars(Strings.MercOnBoard, merc.CurrentSystem().Name()) : merc.CurrentSystem().Name()));
+                ? ModelUtils.StringVars(Strings.MercOnBoard, merc.CurrentSystem().Name()) : merc.CurrentSystem().Name()));
     }
 
     private void PopulateIdArrays() {
         // Populate the mercenary ids array.
         ArrayList<Integer> ids = new ArrayList<>();
         for (CrewMember merc : game.Mercenaries()) {
-            if (!Util.arrayContains(Constants.SpecialCrewMemberIds, merc.Id())) {
+            if (!Utils.arrayContains(Constants.SpecialCrewMemberIds, merc.Id())) {
                 ids.add(merc.Id().getId());
             }
         }
@@ -534,7 +539,7 @@ public class DialogMonster extends Dialog {
             if (system.ShowSpecialButton()) {
                 quests.add(system.Id().getId());
             }
-            if (ShipyardId.NA != system.ShipyardId()) {
+            if (system.ShipyardId() != ShipyardId.NA) {
                 shipyards.add(system.Id().getId());
             }
         }
@@ -562,7 +567,7 @@ public class DialogMonster extends Dialog {
         labelMercSkillsEngineer.setHeight(mercHeight);
         // Due to a limitation of the LinkLabel control, no more than 32 links can exist in the LinkLabel.
         labelMercSystems.setHeight((int) Math.ceil(Math.min(mercIds.length, SplitSystems) * 12.5) + 1);
-        if (SplitSystems < mercIds.length) {
+        if (mercIds.length > SplitSystems) {
             labelMercSystems2.setVisible(true);
             labelMercSystems2.setHeight((int) Math.ceil((mercIds.length - SplitSystems) * 12.5) + 1);
         } else {
@@ -586,7 +591,7 @@ public class DialogMonster extends Dialog {
         }
         for (int i = 0; i < array.length - 1; i++) {
             for (int j = 0; j < array.length - i - 1; j++) {
-                if (0 < Compare(array[j], array[j + 1], sortWhat, sortBy)) {
+                if (Compare(array[j], array[j + 1], sortWhat, sortBy) > 0) {
                     int temp = array[j];
                     array[j] = array[j + 1];
                     array[j + 1] = temp;
@@ -614,14 +619,14 @@ public class DialogMonster extends Dialog {
         labelMercSystems2.links.clear();
         for (int i = 0; i < mercIds.length; i++) {
             CrewMember merc = game.Mercenaries()[mercIds[i]];
-            boolean link = null != merc.CurrentSystem() && !commander.getShip().HasCrew(merc.Id());
+            boolean link = merc.CurrentSystem() != null && !commander.getShip().HasCrew(merc.Id());
             labelMercIds.setText(labelMercIds.getText() + ((merc.Id().getId()) + Strings.newline));
             labelMercNames.setText(labelMercNames.getText() + (merc.Name() + Strings.newline));
             labelMercSkillsPilot.setText(labelMercSkillsPilot.getText() + (merc.Pilot() + Strings.newline));
             labelMercSkillsFighter.setText(labelMercSkillsFighter.getText() + (merc.Fighter() + Strings.newline));
             labelMercSkillsTrader.setText(labelMercSkillsTrader.getText() + (merc.Trader() + Strings.newline));
             labelMercSkillsEngineer.setText(labelMercSkillsEngineer.getText() + (merc.Engineer() + Strings.newline));
-            if (SplitSystems > i) {
+            if (i < SplitSystems) {
                 int start = labelMercSystems.getText().length();
                 labelMercSystems.setText(labelMercSystems.getText() + (CurrentSystemDisplay(merc) + Strings.newline));
                 if (link) {

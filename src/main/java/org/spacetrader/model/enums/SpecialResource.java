@@ -1,6 +1,8 @@
 package org.spacetrader.model.enums;
 
 
+import org.spacetrader.util.IdentifiableEnum;
+
 public enum SpecialResource implements IdentifiableEnum {
     NA(""), // = -1,
     Nothing("Nothing Special"), // = 0,
@@ -19,12 +21,12 @@ public enum SpecialResource implements IdentifiableEnum {
     ;
     public final String name;
 
-    SpecialResource(String name) {
+    SpecialResource(final String name) {
         this.name = name;
     }
 
-    public static SpecialResource FromInt(int i) {
-        return values()[i + 1];
+    public static SpecialResource FromInt(final int i) {
+        return SpecialResource.values()[i + 1];
     }
 
     @Override

@@ -1,20 +1,20 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.Constants;
-import org.spacetrader.controller.Functions;
+import org.spacetrader.Constants;
+import org.spacetrader.model.ModelUtils;
 import org.spacetrader.controller.Game;
 import org.spacetrader.model.cargo.CargoBuyOperation;
 import org.spacetrader.model.crew.Commander;
-import org.winforms.controls.Button;
-import org.winforms.controls.Dialog;
-import org.winforms.controls.Label;
-import org.winforms.controls.Spinner;
-import org.winforms.enums.DialogResult;
-import org.winforms.enums.FlatStyle;
-import org.winforms.enums.FormBorderStyle;
-import org.winforms.enums.FormStartPosition;
-import org.winforms.events.EventData;
-import org.winforms.events.EventHandler;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
+import org.winforms.widget.Spinner;
+import org.winforms.dialog.DialogResult;
+import org.winforms.style.FlatStyle;
+import org.winforms.style.FormBorderStyle;
+import org.winforms.alignment.FormStartPosition;
+import org.winforms.event.EventData;
+import org.winforms.event.EventHandler;
 
 import java.awt.*;
 
@@ -119,13 +119,13 @@ public class DialogCargoBuy extends Dialog {
         resumeLayout(false);
         numAmount.setMaximum(maxAmount);
         numAmount.setValue(numAmount.getMinimum());
-        setText(Functions.StringVars(Strings.CargoTitle, Strings.CargoBuyOps[op.id], Constants.TradeItems[item].Name()));
-        labelQuestion.setText(Functions.StringVars("How many do you want to ^1?", Strings.CargoBuyOps[op.id].toLowerCase()));
+        setText(ModelUtils.StringVars(Strings.CargoTitle, Strings.CargoBuyOps[op.id], Constants.TradeItems[item].Name()));
+        labelQuestion.setText(ModelUtils.StringVars("How many do you want to ^1?", Strings.CargoBuyOps[op.id].toLowerCase()));
         Game game = Game.getCurrentGame();
         Commander commander = game.Commander();
         switch (op) {
             case BuySystem:
-                labelStatement.setText(Functions.StringVars("At ^1 each, you can buy up to ^2.", Functions.FormatMoney(game.PriceCargoBuy()[item]), Functions.FormatNumber(maxAmount)));
+                labelStatement.setText(ModelUtils.StringVars("At ^1 each, you can buy up to ^2.", ModelUtils.FormatMoney(game.PriceCargoBuy()[item]), ModelUtils.FormatNumber(maxAmount)));
                 setHeight(buttonOk.getTop() + buttonOk.getHeight() + 34);
                 break;
             case BuyTrader:
@@ -133,9 +133,9 @@ public class DialogCargoBuy extends Dialog {
                 if (afford < maxAmount) {
                     numAmount.setMaximum(afford);
                 }
-                labelStatement.setText(Functions.StringVars("The trader wants to sell ^1 for the price of ^2 each.", Constants.TradeItems[item].Name(), Functions.FormatMoney(game.PriceCargoBuy()[item])));
-                labelAvailable.setText(Functions.StringVars("The trader has ^1 for sale.", Functions.Multiples(game.getOpponent().Cargo()[item], Strings.CargoUnit)));
-                labelAfford.setText(Functions.StringVars("You can afford to buy ^1.", Functions.Multiples(afford, Strings.CargoUnit)));
+                labelStatement.setText(ModelUtils.StringVars("The trader wants to sell ^1 for the price of ^2 each.", Constants.TradeItems[item].Name(), ModelUtils.FormatMoney(game.PriceCargoBuy()[item])));
+                labelAvailable.setText(ModelUtils.StringVars("The trader has ^1 for sale.", ModelUtils.Multiples(game.getOpponent().Cargo()[item], Strings.CargoUnit)));
+                labelAfford.setText(ModelUtils.StringVars("You can afford to buy ^1.", ModelUtils.Multiples(afford, Strings.CargoUnit)));
                 labelAvailable.setVisible(true);
                 labelAfford.setVisible(true);
                 buttonOk.setTop(buttonOk.getTop() + 26);
@@ -145,7 +145,7 @@ public class DialogCargoBuy extends Dialog {
                 numAmount.setTop(numAmount.getTop() + 26);
                 break;
             case InPlunder:
-                labelStatement.setText(Functions.StringVars("Your victim has ^1 of these goods.", Functions.FormatNumber(game.getOpponent().Cargo()[item])));
+                labelStatement.setText(ModelUtils.StringVars("Your victim has ^1 of these goods.", ModelUtils.FormatNumber(game.getOpponent().Cargo()[item])));
                 setHeight(buttonOk.getTop() + buttonOk.getHeight() + 34);
                 break;
         }

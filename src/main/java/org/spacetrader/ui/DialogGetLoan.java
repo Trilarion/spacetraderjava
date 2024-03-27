@@ -1,16 +1,16 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.Functions;
-import org.winforms.controls.Button;
-import org.winforms.controls.Dialog;
-import org.winforms.controls.Label;
-import org.winforms.controls.Spinner;
-import org.winforms.enums.DialogResult;
-import org.winforms.enums.FlatStyle;
-import org.winforms.enums.FormBorderStyle;
-import org.winforms.enums.FormStartPosition;
-import org.winforms.events.EventData;
-import org.winforms.events.EventHandler;
+import org.spacetrader.model.ModelUtils;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
+import org.winforms.widget.Spinner;
+import org.winforms.dialog.DialogResult;
+import org.winforms.style.FlatStyle;
+import org.winforms.style.FormBorderStyle;
+import org.winforms.alignment.FormStartPosition;
+import org.winforms.event.EventData;
+import org.winforms.event.EventHandler;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -19,13 +19,13 @@ import java.util.Arrays;
 public class DialogGetLoan extends Dialog {
     private final Spinner numAmount;
 
-    public DialogGetLoan(int max) {
-        Label labelQuestion = new Label();
+    public DialogGetLoan(final int max) {
+        final Label labelQuestion = new Label();
         numAmount = new Spinner();
-        Button buttonOk = new Button();
-        Button buttonMax = new Button();
-        Button buttonNothing = new Button();
-        Label labelStatement = new Label();
+        final Button buttonOk = new Button();
+        final Button buttonMax = new Button();
+        final Button buttonNothing = new Button();
+        final Label labelStatement = new Label();
         suspendLayout();
         // labelQuestion
         labelQuestion.setAutoSize(true);
@@ -61,7 +61,7 @@ public class DialogGetLoan extends Dialog {
         buttonMax.setText("Max");
         buttonMax.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 buttonMax_Click();
             }
         });
@@ -94,7 +94,7 @@ public class DialogGetLoan extends Dialog {
         resumeLayout(false);
         numAmount.setMaximum(max);
         numAmount.setValue(numAmount.getMinimum());
-        labelStatement.setText(Functions.StringVars("You can borrow up to ^1.", Functions.Multiples(max, Strings.MoneyUnit)));
+        labelStatement.setText(ModelUtils.StringVars("You can borrow up to ^1.", ModelUtils.Multiples(max, Strings.MoneyUnit)));
     }
 
 

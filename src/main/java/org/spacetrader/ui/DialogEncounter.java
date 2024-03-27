@@ -1,22 +1,29 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.Constants;
-import org.spacetrader.controller.Functions;
+import org.spacetrader.Constants;
+import org.spacetrader.model.ModelUtils;
 import org.spacetrader.controller.Game;
 import org.spacetrader.model.crew.Commander;
 import org.spacetrader.model.enums.AlertType;
 import org.spacetrader.model.events.EncounterResult;
 import org.spacetrader.model.ship.Ship;
-import org.winforms.Font;
-import org.winforms.Graphics;
-import org.winforms.*;
-import org.winforms.controls.Button;
-import org.winforms.controls.Dialog;
-import org.winforms.controls.Label;
-import org.winforms.controls.PictureBox;
-import org.winforms.enums.*;
-import org.winforms.events.EventData;
-import org.winforms.events.EventHandler;
+import org.winforms.resource.ResourceManager;
+import org.winforms.util.Font;
+import org.winforms.util.Graphics;
+import org.winforms.alignment.FormStartPosition;
+import org.winforms.util.Timer;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
+import org.winforms.widget.PictureBox;
+import org.winforms.event.EventData;
+import org.winforms.event.EventHandler;
+import org.winforms.image.ImageList;
+import org.winforms.image.ImageListStreamer;
+import org.winforms.style.BorderStyle;
+import org.winforms.style.FlatStyle;
+import org.winforms.style.FontStyle;
+import org.winforms.style.FormBorderStyle;
 
 import java.awt.*;
 
@@ -89,36 +96,36 @@ public class DialogEncounter extends Dialog {
     private EncounterResult _result = EncounterResult.Continue;
 
     public DialogEncounter() {
-        ResourceManager resources = new ResourceManager(DialogEncounter.class);
+        final ResourceManager resources = new ResourceManager(DialogEncounter.class);
         labelEncounter = new Label();
         pictureShipYou = new PictureBox();
         pictureShipOpponent = new PictureBox();
         labelAction = new Label();
-        Label labelOpponentLabel = new Label();
-        Label labelYouLabel = new Label();
+        final Label labelOpponentLabel = new Label();
+        final Label labelYouLabel = new Label();
         labelOpponentShip = new Label();
         labelYouShip = new Label();
         labelYouHull = new Label();
         labelYouShields = new Label();
         labelOpponentShields = new Label();
         labelOpponentHull = new Label();
-        Button buttonAttack = new Button();
+        final Button buttonAttack = new Button();
         buttonFlee = new Button();
-        Button buttonSubmit = new Button();
+        final Button buttonSubmit = new Button();
         buttonBribe = new Button();
         buttonSurrender = new Button();
         buttonIgnore = new Button();
-        Button buttonTrade = new Button();
-        Button buttonPlunder = new Button();
+        final Button buttonTrade = new Button();
+        final Button buttonPlunder = new Button();
         buttonBoard = new Button();
-        Button buttonMeet = new Button();
+        final Button buttonMeet = new Button();
         buttonDrink = new Button();
         buttonInt = new Button();
         buttonYield = new Button();
         pictureContinuous = new PictureBox();
         ilContinuous = new ImageList();
-        PictureBox pictureEncounterType = new PictureBox();
-        ImageList ilEncounterType = new ImageList();
+        final PictureBox pictureEncounterType = new PictureBox();
+        final ImageList ilEncounterType = new ImageList();
         pictureTribbles00 = new PictureBox();
         ilTribbles = new ImageList();
         pictureTribbles50 = new PictureBox();
@@ -174,7 +181,7 @@ public class DialogEncounter extends Dialog {
         pictureShipYou.setTabStop(false);
         pictureShipYou.setPaint(new EventHandler<>() {
             @Override
-            public void handle(Object sender, Graphics data) {
+            public void handle(final Object sender, final Graphics data) {
                 pictureShipYou_Paint(sender, data);
             }
         });
@@ -188,7 +195,7 @@ public class DialogEncounter extends Dialog {
         pictureShipOpponent.setTabStop(false);
         pictureShipOpponent.setPaint(new EventHandler<>() {
             @Override
-            public void handle(Object sender, Graphics data) {
+            public void handle(final Object sender, final Graphics data) {
                 pictureShipOpponent_Paint(sender, data);
             }
         });
@@ -260,7 +267,7 @@ public class DialogEncounter extends Dialog {
         buttonAttack.setVisible(false);
         buttonAttack.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 buttonAttack_Click(sender, data);
             }
         });
@@ -274,7 +281,7 @@ public class DialogEncounter extends Dialog {
         buttonFlee.setVisible(false);
         buttonFlee.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 buttonFlee_Click(sender, data);
             }
         });
@@ -288,7 +295,7 @@ public class DialogEncounter extends Dialog {
         buttonSubmit.setVisible(false);
         buttonSubmit.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 buttonSubmit_Click(sender, data);
             }
         });
@@ -302,7 +309,7 @@ public class DialogEncounter extends Dialog {
         buttonBribe.setVisible(false);
         buttonBribe.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 buttonBribe_Click(sender, data);
             }
         });
@@ -316,7 +323,7 @@ public class DialogEncounter extends Dialog {
         buttonSurrender.setVisible(false);
         buttonSurrender.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 buttonSurrender_Click(sender, data);
             }
         });
@@ -330,7 +337,7 @@ public class DialogEncounter extends Dialog {
         buttonIgnore.setVisible(false);
         buttonIgnore.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 buttonIgnore_Click(sender, data);
             }
         });
@@ -344,7 +351,7 @@ public class DialogEncounter extends Dialog {
         buttonTrade.setVisible(false);
         buttonTrade.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 buttonTrade_Click(sender, data);
             }
         });
@@ -358,7 +365,7 @@ public class DialogEncounter extends Dialog {
         buttonPlunder.setVisible(false);
         buttonPlunder.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 buttonPlunder_Click(sender, data);
             }
         });
@@ -372,7 +379,7 @@ public class DialogEncounter extends Dialog {
         buttonBoard.setVisible(false);
         buttonBoard.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 buttonBoard_Click(sender, data);
             }
         });
@@ -386,7 +393,7 @@ public class DialogEncounter extends Dialog {
         buttonMeet.setVisible(false);
         buttonMeet.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 buttonMeet_Click(sender, data);
             }
         });
@@ -400,7 +407,7 @@ public class DialogEncounter extends Dialog {
         buttonDrink.setVisible(false);
         buttonDrink.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 buttonDrink_Click(sender, data);
             }
         });
@@ -414,7 +421,7 @@ public class DialogEncounter extends Dialog {
         buttonInt.setVisible(false);
         buttonInt.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 buttonInt_Click(sender, data);
             }
         });
@@ -428,7 +435,7 @@ public class DialogEncounter extends Dialog {
         buttonYield.setVisible(false);
         buttonYield.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 buttonYield_Click(sender, data);
             }
         });
@@ -454,7 +461,7 @@ public class DialogEncounter extends Dialog {
         ilEncounterType.setImageStream(((ImageListStreamer) (resources.getObject("ilEncounterType.ImageStream"))));
         ilEncounterType.setTransparentColor(Color.white);
         // pictureTribbles00
-        pictureTribbles00.setBackgroundColor(SystemColors.Control);
+        pictureTribbles00.setBackgroundColor(Constants.ColorControl);
         pictureTribbles00.setLocation(new Point(16, 16));
         pictureTribbles00.setName("pictureTribbles00");
         pictureTribbles00.setSize(new Dimension(12, 12));
@@ -463,7 +470,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles00.setVisible(false);
         pictureTribbles00.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -472,7 +479,7 @@ public class DialogEncounter extends Dialog {
         ilTribbles.setImageStream(((ImageListStreamer) (resources.getObject("ilTribbles.ImageStream"))));
         ilTribbles.setTransparentColor(Color.white);
         // pictureTribbles50
-        pictureTribbles50.setBackgroundColor(SystemColors.Control);
+        pictureTribbles50.setBackgroundColor(Constants.ColorControl);
         pictureTribbles50.setLocation(new Point(16, 224));
         pictureTribbles50.setName("pictureTribbles50");
         pictureTribbles50.setSize(new Dimension(12, 12));
@@ -481,12 +488,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles50.setVisible(false);
         pictureTribbles50.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles10
-        pictureTribbles10.setBackgroundColor(SystemColors.Control);
+        pictureTribbles10.setBackgroundColor(Constants.ColorControl);
         pictureTribbles10.setLocation(new Point(8, 56));
         pictureTribbles10.setName("pictureTribbles10");
         pictureTribbles10.setSize(new Dimension(12, 12));
@@ -495,12 +502,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles10.setVisible(false);
         pictureTribbles10.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles40
-        pictureTribbles40.setBackgroundColor(SystemColors.Control);
+        pictureTribbles40.setBackgroundColor(Constants.ColorControl);
         pictureTribbles40.setLocation(new Point(8, 184));
         pictureTribbles40.setName("pictureTribbles40");
         pictureTribbles40.setSize(new Dimension(12, 12));
@@ -509,12 +516,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles40.setVisible(false);
         pictureTribbles40.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles20
-        pictureTribbles20.setBackgroundColor(SystemColors.Control);
+        pictureTribbles20.setBackgroundColor(Constants.ColorControl);
         pictureTribbles20.setLocation(new Point(8, 96));
         pictureTribbles20.setName("pictureTribbles20");
         pictureTribbles20.setSize(new Dimension(12, 12));
@@ -523,12 +530,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles20.setVisible(false);
         pictureTribbles20.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles30
-        pictureTribbles30.setBackgroundColor(SystemColors.Control);
+        pictureTribbles30.setBackgroundColor(Constants.ColorControl);
         pictureTribbles30.setLocation(new Point(16, 136));
         pictureTribbles30.setName("pictureTribbles30");
         pictureTribbles30.setSize(new Dimension(12, 12));
@@ -537,12 +544,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles30.setVisible(false);
         pictureTribbles30.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles04
-        pictureTribbles04.setBackgroundColor(SystemColors.Control);
+        pictureTribbles04.setBackgroundColor(Constants.ColorControl);
         pictureTribbles04.setLocation(new Point(176, 8));
         pictureTribbles04.setName("pictureTribbles04");
         pictureTribbles04.setSize(new Dimension(12, 12));
@@ -551,12 +558,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles04.setVisible(false);
         pictureTribbles04.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles03
-        pictureTribbles03.setBackgroundColor(SystemColors.Control);
+        pictureTribbles03.setBackgroundColor(Constants.ColorControl);
         pictureTribbles03.setLocation(new Point(128, 8));
         pictureTribbles03.setName("pictureTribbles03");
         pictureTribbles03.setSize(new Dimension(12, 12));
@@ -565,12 +572,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles03.setVisible(false);
         pictureTribbles03.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles02
-        pictureTribbles02.setBackgroundColor(SystemColors.Control);
+        pictureTribbles02.setBackgroundColor(Constants.ColorControl);
         pictureTribbles02.setLocation(new Point(96, 16));
         pictureTribbles02.setName("pictureTribbles02");
         pictureTribbles02.setSize(new Dimension(12, 12));
@@ -579,12 +586,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles02.setVisible(false);
         pictureTribbles02.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles01
-        pictureTribbles01.setBackgroundColor(SystemColors.Control);
+        pictureTribbles01.setBackgroundColor(Constants.ColorControl);
         pictureTribbles01.setLocation(new Point(56, 8));
         pictureTribbles01.setName("pictureTribbles01");
         pictureTribbles01.setSize(new Dimension(12, 12));
@@ -593,12 +600,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles01.setVisible(false);
         pictureTribbles01.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles05
-        pictureTribbles05.setBackgroundColor(SystemColors.Control);
+        pictureTribbles05.setBackgroundColor(Constants.ColorControl);
         pictureTribbles05.setLocation(new Point(208, 16));
         pictureTribbles05.setName("pictureTribbles05");
         pictureTribbles05.setSize(new Dimension(12, 12));
@@ -607,12 +614,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles05.setVisible(false);
         pictureTribbles05.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles11
-        pictureTribbles11.setBackgroundColor(SystemColors.Control);
+        pictureTribbles11.setBackgroundColor(Constants.ColorControl);
         pictureTribbles11.setLocation(new Point(32, 80));
         pictureTribbles11.setName("pictureTribbles11");
         pictureTribbles11.setSize(new Dimension(12, 12));
@@ -621,12 +628,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles11.setVisible(false);
         pictureTribbles11.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles12
-        pictureTribbles12.setBackgroundColor(SystemColors.Control);
+        pictureTribbles12.setBackgroundColor(Constants.ColorControl);
         pictureTribbles12.setLocation(new Point(88, 56));
         pictureTribbles12.setName("pictureTribbles12");
         pictureTribbles12.setSize(new Dimension(12, 12));
@@ -635,12 +642,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles12.setVisible(false);
         pictureTribbles12.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles13
-        pictureTribbles13.setBackgroundColor(SystemColors.Control);
+        pictureTribbles13.setBackgroundColor(Constants.ColorControl);
         pictureTribbles13.setLocation(new Point(128, 40));
         pictureTribbles13.setName("pictureTribbles13");
         pictureTribbles13.setSize(new Dimension(12, 12));
@@ -649,12 +656,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles13.setVisible(false);
         pictureTribbles13.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles14
-        pictureTribbles14.setBackgroundColor(SystemColors.Control);
+        pictureTribbles14.setBackgroundColor(Constants.ColorControl);
         pictureTribbles14.setLocation(new Point(192, 72));
         pictureTribbles14.setName("pictureTribbles14");
         pictureTribbles14.setSize(new Dimension(12, 12));
@@ -663,12 +670,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles14.setVisible(false);
         pictureTribbles14.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles15
-        pictureTribbles15.setBackgroundColor(SystemColors.Control);
+        pictureTribbles15.setBackgroundColor(Constants.ColorControl);
         pictureTribbles15.setLocation(new Point(216, 48));
         pictureTribbles15.setName("pictureTribbles15");
         pictureTribbles15.setSize(new Dimension(12, 12));
@@ -677,12 +684,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles15.setVisible(false);
         pictureTribbles15.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles21
-        pictureTribbles21.setBackgroundColor(SystemColors.Control);
+        pictureTribbles21.setBackgroundColor(Constants.ColorControl);
         pictureTribbles21.setLocation(new Point(56, 96));
         pictureTribbles21.setName("pictureTribbles21");
         pictureTribbles21.setSize(new Dimension(12, 12));
@@ -691,12 +698,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles21.setVisible(false);
         pictureTribbles21.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles22
-        pictureTribbles22.setBackgroundColor(SystemColors.Control);
+        pictureTribbles22.setBackgroundColor(Constants.ColorControl);
         pictureTribbles22.setLocation(new Point(96, 80));
         pictureTribbles22.setName("pictureTribbles22");
         pictureTribbles22.setSize(new Dimension(12, 12));
@@ -705,12 +712,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles22.setVisible(false);
         pictureTribbles22.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles23
-        pictureTribbles23.setBackgroundColor(SystemColors.Control);
+        pictureTribbles23.setBackgroundColor(Constants.ColorControl);
         pictureTribbles23.setLocation(new Point(136, 88));
         pictureTribbles23.setName("pictureTribbles23");
         pictureTribbles23.setSize(new Dimension(12, 12));
@@ -719,12 +726,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles23.setVisible(false);
         pictureTribbles23.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles24
-        pictureTribbles24.setBackgroundColor(SystemColors.Control);
+        pictureTribbles24.setBackgroundColor(Constants.ColorControl);
         pictureTribbles24.setLocation(new Point(176, 104));
         pictureTribbles24.setName("pictureTribbles24");
         pictureTribbles24.setSize(new Dimension(12, 12));
@@ -733,12 +740,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles24.setVisible(false);
         pictureTribbles24.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles25
-        pictureTribbles25.setBackgroundColor(SystemColors.Control);
+        pictureTribbles25.setBackgroundColor(Constants.ColorControl);
         pictureTribbles25.setLocation(new Point(216, 96));
         pictureTribbles25.setName("pictureTribbles25");
         pictureTribbles25.setSize(new Dimension(12, 12));
@@ -747,12 +754,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles25.setVisible(false);
         pictureTribbles25.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles31
-        pictureTribbles31.setBackgroundColor(SystemColors.Control);
+        pictureTribbles31.setBackgroundColor(Constants.ColorControl);
         pictureTribbles31.setLocation(new Point(56, 128));
         pictureTribbles31.setName("pictureTribbles31");
         pictureTribbles31.setSize(new Dimension(12, 12));
@@ -761,12 +768,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles31.setVisible(false);
         pictureTribbles31.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles32
-        pictureTribbles32.setBackgroundColor(SystemColors.Control);
+        pictureTribbles32.setBackgroundColor(Constants.ColorControl);
         pictureTribbles32.setLocation(new Point(96, 120));
         pictureTribbles32.setName("pictureTribbles32");
         pictureTribbles32.setSize(new Dimension(12, 12));
@@ -775,12 +782,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles32.setVisible(false);
         pictureTribbles32.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles33
-        pictureTribbles33.setBackgroundColor(SystemColors.Control);
+        pictureTribbles33.setBackgroundColor(Constants.ColorControl);
         pictureTribbles33.setLocation(new Point(128, 128));
         pictureTribbles33.setName("pictureTribbles33");
         pictureTribbles33.setSize(new Dimension(12, 12));
@@ -789,12 +796,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles33.setVisible(false);
         pictureTribbles33.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles34
-        pictureTribbles34.setBackgroundColor(SystemColors.Control);
+        pictureTribbles34.setBackgroundColor(Constants.ColorControl);
         pictureTribbles34.setLocation(new Point(168, 144));
         pictureTribbles34.setName("pictureTribbles34");
         pictureTribbles34.setSize(new Dimension(12, 12));
@@ -803,12 +810,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles34.setVisible(false);
         pictureTribbles34.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles35
-        pictureTribbles35.setBackgroundColor(SystemColors.Control);
+        pictureTribbles35.setBackgroundColor(Constants.ColorControl);
         pictureTribbles35.setLocation(new Point(208, 128));
         pictureTribbles35.setName("pictureTribbles35");
         pictureTribbles35.setSize(new Dimension(12, 12));
@@ -817,12 +824,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles35.setVisible(false);
         pictureTribbles35.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles41
-        pictureTribbles41.setBackgroundColor(SystemColors.Control);
+        pictureTribbles41.setBackgroundColor(Constants.ColorControl);
         pictureTribbles41.setLocation(new Point(48, 176));
         pictureTribbles41.setName("pictureTribbles41");
         pictureTribbles41.setSize(new Dimension(12, 12));
@@ -831,12 +838,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles41.setVisible(false);
         pictureTribbles41.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles51
-        pictureTribbles51.setBackgroundColor(SystemColors.Control);
+        pictureTribbles51.setBackgroundColor(Constants.ColorControl);
         pictureTribbles51.setLocation(new Point(64, 216));
         pictureTribbles51.setName("pictureTribbles51");
         pictureTribbles51.setSize(new Dimension(12, 12));
@@ -845,12 +852,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles51.setVisible(false);
         pictureTribbles51.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles42
-        pictureTribbles42.setBackgroundColor(SystemColors.Control);
+        pictureTribbles42.setBackgroundColor(Constants.ColorControl);
         pictureTribbles42.setLocation(new Point(88, 168));
         pictureTribbles42.setName("pictureTribbles42");
         pictureTribbles42.setSize(new Dimension(12, 12));
@@ -859,12 +866,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles42.setVisible(false);
         pictureTribbles42.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles52
-        pictureTribbles52.setBackgroundColor(SystemColors.Control);
+        pictureTribbles52.setBackgroundColor(Constants.ColorControl);
         pictureTribbles52.setLocation(new Point(96, 224));
         pictureTribbles52.setName("pictureTribbles52");
         pictureTribbles52.setSize(new Dimension(12, 12));
@@ -873,12 +880,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles52.setVisible(false);
         pictureTribbles52.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles43
-        pictureTribbles43.setBackgroundColor(SystemColors.Control);
+        pictureTribbles43.setBackgroundColor(Constants.ColorControl);
         pictureTribbles43.setLocation(new Point(136, 176));
         pictureTribbles43.setName("pictureTribbles43");
         pictureTribbles43.setSize(new Dimension(12, 12));
@@ -887,12 +894,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles43.setVisible(false);
         pictureTribbles43.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles53
-        pictureTribbles53.setBackgroundColor(SystemColors.Control);
+        pictureTribbles53.setBackgroundColor(Constants.ColorControl);
         pictureTribbles53.setLocation(new Point(144, 216));
         pictureTribbles53.setName("pictureTribbles53");
         pictureTribbles53.setSize(new Dimension(12, 12));
@@ -901,12 +908,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles53.setVisible(false);
         pictureTribbles53.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles44
-        pictureTribbles44.setBackgroundColor(SystemColors.Control);
+        pictureTribbles44.setBackgroundColor(Constants.ColorControl);
         pictureTribbles44.setLocation(new Point(184, 184));
         pictureTribbles44.setName("pictureTribbles44");
         pictureTribbles44.setSize(new Dimension(12, 12));
@@ -915,12 +922,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles44.setVisible(false);
         pictureTribbles44.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles45
-        pictureTribbles45.setBackgroundColor(SystemColors.Control);
+        pictureTribbles45.setBackgroundColor(Constants.ColorControl);
         pictureTribbles45.setLocation(new Point(216, 176));
         pictureTribbles45.setName("pictureTribbles45");
         pictureTribbles45.setSize(new Dimension(12, 12));
@@ -929,12 +936,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles45.setVisible(false);
         pictureTribbles45.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles54
-        pictureTribbles54.setBackgroundColor(SystemColors.Control);
+        pictureTribbles54.setBackgroundColor(Constants.ColorControl);
         pictureTribbles54.setLocation(new Point(176, 224));
         pictureTribbles54.setName("pictureTribbles54");
         pictureTribbles54.setSize(new Dimension(12, 12));
@@ -943,12 +950,12 @@ public class DialogEncounter extends Dialog {
         pictureTribbles54.setVisible(false);
         pictureTribbles54.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
         // pictureTribbles55
-        pictureTribbles55.setBackgroundColor(SystemColors.Control);
+        pictureTribbles55.setBackgroundColor(Constants.ColorControl);
         pictureTribbles55.setLocation(new Point(208, 216));
         pictureTribbles55.setName("pictureTribbles55");
         pictureTribbles55.setSize(new Dimension(12, 12));
@@ -957,7 +964,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles55.setVisible(false);
         pictureTribbles55.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -965,7 +972,7 @@ public class DialogEncounter extends Dialog {
         timerTick.setInterval(1000);
         timerTick.tick = new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 timerTick_Tick(sender, data);
             }
         };
@@ -1056,7 +1063,7 @@ public class DialogEncounter extends Dialog {
         UpdateShipInfo();
         UpdateTribbles();
         UpdateButtons();
-        if (0 <= game.EncounterImageIndex()) {
+        if (game.EncounterImageIndex() >= 0) {
             pictureEncounterType.setImage(ilEncounterType.getImages()[game.EncounterImageIndex()]);
         } else {
             pictureEncounterType.setVisible(false);
@@ -1076,7 +1083,7 @@ public class DialogEncounter extends Dialog {
 
     private void ExecuteAction() {
         _result = game.EncounterExecuteAction(this);
-        if (EncounterResult.Continue == _result) {
+        if (_result == EncounterResult.Continue) {
             UpdateButtons();
             UpdateShipStats();
             labelEncounter.setText(game.EncounterText());
@@ -1089,25 +1096,25 @@ public class DialogEncounter extends Dialog {
         }
     }
 
-    private void Exit(EncounterResult result) {
+    private void Exit(final EncounterResult result) {
         _result = result;
         Close();
     }
 
     private void UpdateButtons() {
-        boolean[] visible = new boolean[buttons.length];
-        int YIELD = 12;
-        int TRADE = 11;
-        int SURRENDER = 10;
-        int SUBMIT = 9;
-        int PLUNDER = 8;
-        int MEET = 7;
-        int IGNORE = 5;
-        int FLEE = 4;
-        int DRINK = 3;
-        int BRIBE = 2;
-        int BOARD = 1;
-        int ATTACK = 0;
+        final boolean[] visible = new boolean[buttons.length];
+        final int YIELD = 12;
+        final int TRADE = 11;
+        final int SURRENDER = 10;
+        final int SUBMIT = 9;
+        final int PLUNDER = 8;
+        final int MEET = 7;
+        final int IGNORE = 5;
+        final int FLEE = 4;
+        final int DRINK = 3;
+        final int BRIBE = 2;
+        final int BOARD = 1;
+        final int ATTACK = 0;
         switch (game.getEncounterType()) {
             case BottleGood:
             case BottleOld:
@@ -1187,7 +1194,7 @@ public class DialogEncounter extends Dialog {
                 visible[TRADE] = true;
                 break;
         }
-        int INT = 6;
+        final int INT = 6;
         if (game.getEncounterContinueAttacking() || game.getEncounterContinueFleeing()) {
             visible[INT] = true;
         }
@@ -1220,7 +1227,7 @@ public class DialogEncounter extends Dialog {
     }
 
     private void UpdateTribbles() {
-        PictureBox[] tribbles = {
+        final PictureBox[] tribbles = {
                 pictureTribbles00, pictureTribbles01, pictureTribbles02, pictureTribbles03, pictureTribbles04, pictureTribbles05,
                 pictureTribbles10, pictureTribbles11, pictureTribbles12, pictureTribbles13, pictureTribbles14, pictureTribbles15,
                 pictureTribbles20, pictureTribbles21, pictureTribbles22, pictureTribbles23, pictureTribbles24, pictureTribbles25,
@@ -1228,107 +1235,107 @@ public class DialogEncounter extends Dialog {
                 pictureTribbles40, pictureTribbles41, pictureTribbles42, pictureTribbles43, pictureTribbles44, pictureTribbles45,
                 pictureTribbles50, pictureTribbles51, pictureTribbles52, pictureTribbles53, pictureTribbles54, pictureTribbles55
         };
-        int toShow = Math.min(tribbles.length, (int) Math.sqrt(commandership.getTribbles() / Math.ceil(Constants.MaxTribbles / Math.pow(tribbles.length + 1, 2))));
+        final int toShow = Math.min(tribbles.length, (int) Math.sqrt(commandership.getTribbles() / Math.ceil(Constants.MaxTribbles / Math.pow(tribbles.length + 1, 2))));
         for (int i = 0; i < toShow; i++) {
-            int index = Functions.GetRandom(tribbles.length);
+            int index = ModelUtils.GetRandom(tribbles.length);
             while (tribbles[index].getVisible()) {
                 index = (index + 1) % tribbles.length;
             }
-            tribbles[index].setImage(ilTribbles.getImages()[Functions.GetRandom(ilTribbles.getImages().length)]);
+            tribbles[index].setImage(ilTribbles.getImages()[ModelUtils.GetRandom(ilTribbles.getImages().length)]);
             tribbles[index].setVisible(true);
         }
     }
 
-    private void buttonAttack_Click(Object sender, EventData e) {
+    private void buttonAttack_Click(final Object sender, final EventData e) {
         DisableAuto();
         if (game.EncounterVerifyAttack(this)) {
             ExecuteAction();
         }
     }
 
-    private void buttonBoard_Click(Object sender, EventData e) {
+    private void buttonBoard_Click(final Object sender, final EventData e) {
         if (game.EncounterVerifyBoard(this)) {
             Exit(EncounterResult.Normal);
         }
     }
 
-    private void buttonBribe_Click(Object sender, EventData e) {
+    private void buttonBribe_Click(final Object sender, final EventData e) {
         if (game.EncounterVerifyBribe(this)) {
             Exit(EncounterResult.Normal);
         }
     }
 
-    private void buttonDrink_Click(Object sender, EventData e) {
+    private void buttonDrink_Click(final Object sender, final EventData e) {
         game.EncounterDrink(this);
         Exit(EncounterResult.Normal);
     }
 
-    private void buttonFlee_Click(Object sender, EventData e) {
+    private void buttonFlee_Click(final Object sender, final EventData e) {
         DisableAuto();
         if (game.EncounterVerifyFlee(this)) {
             ExecuteAction();
         }
     }
 
-    private void buttonIgnore_Click(Object sender, EventData e) {
+    private void buttonIgnore_Click(final Object sender, final EventData e) {
         DisableAuto();
         Exit(EncounterResult.Normal);
     }
 
-    private void buttonInt_Click(Object sender, EventData e) {
+    private void buttonInt_Click(final Object sender, final EventData e) {
         DisableAuto();
     }
 
-    private void buttonMeet_Click(Object sender, EventData e) {
+    private void buttonMeet_Click(final Object sender, final EventData e) {
         game.EncounterMeet(this);
         Exit(EncounterResult.Normal);
     }
 
-    private void buttonPlunder_Click(Object sender, EventData e) {
+    private void buttonPlunder_Click(final Object sender, final EventData e) {
         DisableAuto();
         game.EncounterPlunder(this);
         Exit(EncounterResult.Normal);
     }
 
-    private void buttonSubmit_Click(Object sender, EventData e) {
+    private void buttonSubmit_Click(final Object sender, final EventData e) {
         if (game.EncounterVerifySubmit(this)) {
             Exit(commandership.IllegalSpecialCargo() ? EncounterResult.Arrested : EncounterResult.Normal);
         }
     }
 
-    private void buttonSurrender_Click(Object sender, EventData e) {
+    private void buttonSurrender_Click(final Object sender, final EventData e) {
         DisableAuto();
         _result = game.EncounterVerifySurrender(this);
-        if (EncounterResult.Continue != _result) {
+        if (_result != EncounterResult.Continue) {
             Close();
         }
     }
 
-    private void buttonTrade_Click(Object sender, EventData e) {
+    private void buttonTrade_Click(final Object sender, final EventData e) {
         game.EncounterTrade(this);
         Exit(EncounterResult.Normal);
     }
 
-    private void buttonYield_Click(Object sender, EventData e) {
+    private void buttonYield_Click(final Object sender, final EventData e) {
         _result = game.EncounterVerifyYield(this);
-        if (EncounterResult.Continue != _result) {
+        if (_result != EncounterResult.Continue) {
             Close();
         }
     }
 
-    private void pictureShipOpponent_Paint(Object sender, Graphics graphics) {
-        Functions.PaintShipImage(opponent, graphics, pictureShipOpponent.getBackgroundColor());
+    private void pictureShipOpponent_Paint(final Object sender, final Graphics graphics) {
+        ModelUtils.PaintShipImage(opponent, graphics, pictureShipOpponent.getBackgroundColor());
     }
 
-    private void pictureShipYou_Paint(Object sender, Graphics graphics) {
-        Functions.PaintShipImage(commandership, graphics, pictureShipYou.getBackgroundColor());
+    private void pictureShipYou_Paint(final Object sender, final Graphics graphics) {
+        ModelUtils.PaintShipImage(commandership, graphics, pictureShipYou.getBackgroundColor());
     }
 
-    private void pictureTribbles_Click(Object sender, EventData e) {
+    private void pictureTribbles_Click(final Object sender, final EventData e) {
         DialogAlert.Alert(AlertType.TribblesSqueek, this);
     }
 
-    private void timerTick_Tick(Object sender, EventData e) {
+    private void timerTick_Tick(final Object sender, final EventData e) {
         DisableAuto();
         ExecuteAction();
     }

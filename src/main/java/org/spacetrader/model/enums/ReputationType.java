@@ -1,6 +1,8 @@
 package org.spacetrader.model.enums;
 
 
+import org.spacetrader.util.IdentifiableEnum;
+
 public enum ReputationType implements IdentifiableEnum {
     Harmless, // = 0,
     MostlyHarmless, // = 1,

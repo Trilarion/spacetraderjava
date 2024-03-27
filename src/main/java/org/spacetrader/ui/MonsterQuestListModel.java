@@ -14,7 +14,7 @@ public class MonsterQuestListModel extends AbstractListModel<String> {
     }
 
     @Override
-    public String getElementAt(int index) {
+    public String getElementAt(final int index) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

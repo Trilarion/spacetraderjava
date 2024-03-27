@@ -1,11 +1,11 @@
 package org.spacetrader.model.ship.equipment;
 
 import org.spacetrader.controller.Game;
-import org.spacetrader.controller.SerializableObject;
+import org.spacetrader.model.SerializableObject;
 import org.spacetrader.model.crew.Commander;
 import org.spacetrader.model.enums.TechLevel;
 import org.spacetrader.ui.Strings;
-import org.winforms.Image;
+import org.winforms.image.Image;
 
 import java.util.Hashtable;
 
@@ -17,24 +17,24 @@ abstract public class Equipment extends SerializableObject implements Cloneable 
     protected int chance;
     protected int price;
 
-    public Equipment(EquipmentType type, int price, TechLevel minTechLevel, int chance) {
+    protected Equipment(final EquipmentType type, final int price, final TechLevel minTechLevel, final int chance) {
         equipType = type;
         this.price = price;
         minTech = minTechLevel;
         this.chance = chance;
     }
 
-    public Equipment(Hashtable hash) {
+    protected Equipment(final Hashtable hash) {
         super(hash);
-        equipType = EquipmentType.FromInt(GetValueFromHash(hash, "_equipType", Integer.class));
-        price = GetValueFromHash(hash, "_price", Integer.class);
-        minTech = TechLevel.FromInt(GetValueFromHash(hash, "_minTech", Integer.class));
-        chance = GetValueFromHash(hash, "_chance", Integer.class);
+        equipType = EquipmentType.FromInt(SerializableObject.GetValueFromHash(hash, "_equipType", Integer.class));
+        price = SerializableObject.GetValueFromHash(hash, "_price", Integer.class);
+        minTech = TechLevel.FromInt(SerializableObject.GetValueFromHash(hash, "_minTech", Integer.class));
+        chance = SerializableObject.GetValueFromHash(hash, "_chance", Integer.class);
     }
 
     @Override
     public Hashtable Serialize() {
-        Hashtable hash = super.Serialize();
+        final Hashtable hash = super.Serialize();
         hash.put("_equipType", equipType.getId());
         hash.put("_price", price);
         hash.put("_minTech", minTech.ordinal());
@@ -88,9 +88,9 @@ abstract public class Equipment extends SerializableObject implements Cloneable 
     }
 
     public int Price() {
-        Commander commander = Game.getCurrentGame().Commander();
+        final Commander commander = Game.getCurrentGame().Commander();
         int price = 0;
-        if (null != commander && commander.CurrentSystem().TechLevel().ordinal() >= MinimumTechLevel().ordinal()) {
+        if (commander != null && commander.CurrentSystem().TechLevel().ordinal() >= MinimumTechLevel().ordinal()) {
             price = (this.price * (100 - commander.getShip().Trader())) / 100;
         }
         return price;

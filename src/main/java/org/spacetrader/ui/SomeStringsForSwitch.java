@@ -63,19 +63,19 @@ public enum SomeStringsForSwitch {
     static final Hashtable<String, SomeStringsForSwitch> specialStrings = new Hashtable<>();
 
     static {
-        specialStrings.put("Monster.com", MonsterCom);
-        specialStrings.put("L'Engle", L_Engle);
+        SomeStringsForSwitch.specialStrings.put("Monster.com", SomeStringsForSwitch.MonsterCom);
+        SomeStringsForSwitch.specialStrings.put("L'Engle", SomeStringsForSwitch.L_Engle);
     }
 
-    static public SomeStringsForSwitch find(String string) {
-        SomeStringsForSwitch spacialvalue = specialStrings.get(string);
-        if (null != spacialvalue) {
+    static public SomeStringsForSwitch find(final String string) {
+        final SomeStringsForSwitch spacialvalue = SomeStringsForSwitch.specialStrings.get(string);
+        if (spacialvalue != null) {
             return spacialvalue;
         }
         try {
-            return valueOf(string);
-        } catch (IllegalArgumentException e) {
-            return __void__;
+            return SomeStringsForSwitch.valueOf(string);
+        } catch (final IllegalArgumentException e) {
+            return SomeStringsForSwitch.__void__;
         }
     }
 }

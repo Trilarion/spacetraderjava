@@ -1,16 +1,16 @@
 package org.spacetrader.ui;
 
-import org.winforms.controls.Button;
-import org.winforms.controls.Dialog;
-import org.winforms.controls.Label;
-import org.winforms.controls.TextField;
-import org.winforms.controls.*;
-import org.winforms.enums.DialogResult;
-import org.winforms.enums.FlatStyle;
-import org.winforms.enums.FormBorderStyle;
-import org.winforms.enums.FormStartPosition;
-import org.winforms.events.EventData;
-import org.winforms.events.EventHandler;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
+import org.winforms.widget.TextField;
+import org.winforms.widget.*;
+import org.winforms.dialog.DialogResult;
+import org.winforms.style.FlatStyle;
+import org.winforms.style.FormBorderStyle;
+import org.winforms.alignment.FormStartPosition;
+import org.winforms.event.EventData;
+import org.winforms.event.EventHandler;
 
 import java.awt.*;
 
@@ -22,9 +22,9 @@ public class DialogFind extends Dialog {
     private final TextField textSystem;
 
     public DialogFind() {
-        Label labelText = new Label();
-        Button buttonOk = new Button();
-        Button buttonCancel = new Button();
+        final Label labelText = new Label();
+        final Button buttonOk = new Button();
+        final Button buttonCancel = new Button();
         textSystem = new TextField();
         checkBoxTrack = new CheckBox();
         suspendLayout();
@@ -77,19 +77,19 @@ public class DialogFind extends Dialog {
         setText("Find System");
         Closed = new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 FormFind_Closed(sender, data);
             }
         };
         resumeLayout(false);
-        textSystem.setText(text);
-        checkBoxTrack.setChecked(boxChecked);
+        textSystem.setText(DialogFind.text);
+        checkBoxTrack.setChecked(DialogFind.boxChecked);
     }
 
 
-    private void FormFind_Closed(Object sender, EventData e) {
-        text = textSystem.getText();
-        boxChecked = checkBoxTrack.isChecked();
+    private void FormFind_Closed(final Object sender, final EventData e) {
+        DialogFind.text = textSystem.getText();
+        DialogFind.boxChecked = checkBoxTrack.isChecked();
     }
 
     public String SystemName() {

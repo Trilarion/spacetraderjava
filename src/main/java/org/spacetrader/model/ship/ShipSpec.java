@@ -1,14 +1,14 @@
 package org.spacetrader.model.ship;
 
-import org.spacetrader.controller.Constants;
-import org.spacetrader.controller.Functions;
+import org.spacetrader.Constants;
+import org.spacetrader.model.ModelUtils;
 import org.spacetrader.controller.Game;
-import org.spacetrader.controller.SerializableObject;
+import org.spacetrader.model.SerializableObject;
 import org.spacetrader.model.enums.Activity;
 import org.spacetrader.model.enums.TechLevel;
 import org.spacetrader.model.ship.equipment.EquipmentType;
 import org.spacetrader.ui.Strings;
-import org.winforms.Image;
+import org.winforms.image.Image;
 
 import java.util.Hashtable;
 
@@ -36,8 +36,8 @@ public class ShipSpec extends SerializableObject {
     public ShipSpec() {
     }
 
-    public ShipSpec(ShipType type, ShipSize size, int cargoBays, int weaponSlots, int shieldSlots, int gadgetSlots, int crewQuarters, int fuelTanks,
-                    int fuelCost, int hullStrength, int repairCost, int price, int occurrence, Activity police, Activity pirates, Activity traders, TechLevel minTechLevel) {
+    public ShipSpec(final ShipType type, final ShipSize size, final int cargoBays, final int weaponSlots, final int shieldSlots, final int gadgetSlots, final int crewQuarters, final int fuelTanks,
+                    final int fuelCost, final int hullStrength, final int repairCost, final int price, final int occurrence, final Activity police, final Activity pirates, final Activity traders, final TechLevel minTechLevel) {
         this.type = type;
         this.size = size;
         this.cargoBays = cargoBays;
@@ -57,34 +57,34 @@ public class ShipSpec extends SerializableObject {
         minTech = minTechLevel;
     }
 
-    public ShipSpec(Hashtable hash) {
+    public ShipSpec(final Hashtable hash) {
         super(hash);
-        type = ShipType.FromInt(GetValueFromHash(hash, "_type", type, Integer.class));
-        size = ShipSize.FromInt(GetValueFromHash(hash, "_size", size, Integer.class));
-        cargoBays = GetValueFromHash(hash, "_cargoBays", cargoBays);
-        weaponSlots = GetValueFromHash(hash, "_weaponSlots", weaponSlots);
-        shieldSlots = GetValueFromHash(hash, "_shieldSlots", shieldSlots);
-        gadgetSlots = GetValueFromHash(hash, "_gadgetSlots", gadgetSlots);
-        crewQuarters = GetValueFromHash(hash, "_crewQuarters", crewQuarters);
-        fuelTanks = GetValueFromHash(hash, "_fuelTanks", fuelTanks);
-        fuelCost = GetValueFromHash(hash, "_fuelCost", fuelCost);
-        hullStrength = GetValueFromHash(hash, "_hullStrength", hullStrength);
-        repairCost = GetValueFromHash(hash, "_repairCost", repairCost);
-        price = GetValueFromHash(hash, "_price", price);
-        occurrence = GetValueFromHash(hash, "_occurrence", occurrence);
-        police = Activity.fromId(GetValueFromHash(hash, "_police", police, Integer.class));
-        pirates = Activity.fromId(GetValueFromHash(hash, "_pirates", pirates, Integer.class));
-        traders = Activity.fromId(GetValueFromHash(hash, "_traders", traders, Integer.class));
-        minTech = TechLevel.FromInt(GetValueFromHash(hash, "_minTech", /*_minTech*/0, Integer.class));
-        isHullUpgraded = GetValueFromHash(hash, "_hullUpgraded", isHullUpgraded);
-        imageIndex = GetValueFromHash(hash, "_imageIndex", Constants.ShipImgUseDefault);
+        type = ShipType.FromInt(SerializableObject.GetValueFromHash(hash, "_type", type, Integer.class));
+        size = ShipSize.FromInt(SerializableObject.GetValueFromHash(hash, "_size", size, Integer.class));
+        cargoBays = SerializableObject.GetValueFromHash(hash, "_cargoBays", cargoBays);
+        weaponSlots = SerializableObject.GetValueFromHash(hash, "_weaponSlots", weaponSlots);
+        shieldSlots = SerializableObject.GetValueFromHash(hash, "_shieldSlots", shieldSlots);
+        gadgetSlots = SerializableObject.GetValueFromHash(hash, "_gadgetSlots", gadgetSlots);
+        crewQuarters = SerializableObject.GetValueFromHash(hash, "_crewQuarters", crewQuarters);
+        fuelTanks = SerializableObject.GetValueFromHash(hash, "_fuelTanks", fuelTanks);
+        fuelCost = SerializableObject.GetValueFromHash(hash, "_fuelCost", fuelCost);
+        hullStrength = SerializableObject.GetValueFromHash(hash, "_hullStrength", hullStrength);
+        repairCost = SerializableObject.GetValueFromHash(hash, "_repairCost", repairCost);
+        price = SerializableObject.GetValueFromHash(hash, "_price", price);
+        occurrence = SerializableObject.GetValueFromHash(hash, "_occurrence", occurrence);
+        police = Activity.fromId(SerializableObject.GetValueFromHash(hash, "_police", police, Integer.class));
+        pirates = Activity.fromId(SerializableObject.GetValueFromHash(hash, "_pirates", pirates, Integer.class));
+        traders = Activity.fromId(SerializableObject.GetValueFromHash(hash, "_traders", traders, Integer.class));
+        minTech = TechLevel.FromInt(SerializableObject.GetValueFromHash(hash, "_minTech", /*_minTech*/0, Integer.class));
+        isHullUpgraded = SerializableObject.GetValueFromHash(hash, "_hullUpgraded", isHullUpgraded);
+        imageIndex = SerializableObject.GetValueFromHash(hash, "_imageIndex", Constants.ShipImgUseDefault);
         // Get the images if the ship uses the custom images.
         if (imageIndex == ShipType.Custom.getId()) {
-            Game.getCurrentGame().getParentWindow().setCustomShipImages(GetValueFromHash(hash, "_images", Game.getCurrentGame().getParentWindow().CustomShipImages()));
+            Game.getCurrentGame().getParentWindow().setCustomShipImages(SerializableObject.GetValueFromHash(hash, "_images", Game.getCurrentGame().getParentWindow().CustomShipImages()));
         }
         // Get the name if the ship is a custom design.
-        if (ShipType.Custom == type) {
-            Strings.ShipNames[ShipType.Custom.getId()] = GetValueFromHash(hash, "_name", Strings.ShipNames[ShipType.Custom.getId()]);
+        if (type == ShipType.Custom) {
+            Strings.ShipNames[ShipType.Custom.getId()] = SerializableObject.GetValueFromHash(hash, "_name", Strings.ShipNames[ShipType.Custom.getId()]);
             Constants.ShipSpecs[ShipType.Custom.getId()] = new ShipSpec(
                     type, size, cargoBays, weaponSlots, shieldSlots, gadgetSlots, crewQuarters, fuelTanks,
                     fuelCost, hullStrength, repairCost, price, occurrence, police, pirates, traders, minTech);
@@ -94,7 +94,7 @@ public class ShipSpec extends SerializableObject {
 
     @Override
     public Hashtable Serialize() {
-        Hashtable hash = super.Serialize();
+        final Hashtable hash = super.Serialize();
         hash.put("_type", type.getId());
         hash.put("_size", size.getId());
         hash.put("_cargoBays", cargoBays);
@@ -114,11 +114,11 @@ public class ShipSpec extends SerializableObject {
         hash.put("_minTech", minTech.ordinal());
         hash.put("_hullUpgraded", isHullUpgraded);
         // Only save image index if it's not the default.
-        if (Constants.ShipImgUseDefault != imageIndex) {
+        if (imageIndex != Constants.ShipImgUseDefault) {
             hash.put("_imageIndex", imageIndex);
         }
         // Save the name if the ship is a custom design.
-        if (ShipType.Custom == Type()) {
+        if (Type() == ShipType.Custom) {
             hash.put("_name", Name());
         }
         // Save the images if the ship uses the custom images.
@@ -128,8 +128,8 @@ public class ShipSpec extends SerializableObject {
         return hash;
     }
 
-    protected void SetValues(ShipType type) {
-        int typeInt = type.getId();
+    protected void SetValues(final ShipType type) {
+        final int typeInt = type.getId();
         this.type = type;
         size = Constants.ShipSpecs[typeInt].size;
         cargoBays = Constants.ShipSpecs[typeInt].cargoBays;
@@ -151,7 +151,7 @@ public class ShipSpec extends SerializableObject {
         imageIndex = Constants.ShipSpecs[typeInt].imageIndex;
     }
 
-    public int Slots(EquipmentType type) {
+    public int Slots(final EquipmentType type) {
         int count = 0;
         switch (type) {
             case Weapon:
@@ -168,20 +168,20 @@ public class ShipSpec extends SerializableObject {
     }
 
     public void UpdateCustomImageOffsetConstants() {
-        Image image = Game.getCurrentGame().getParentWindow().CustomShipImages()[0];
-        int custIndex = ShipType.Custom.getId();
+        final Image image = Game.getCurrentGame().getParentWindow().CustomShipImages()[0];
+        final int custIndex = ShipType.Custom.getId();
         // Find the first column of pixels that has a non-white pixel for the X value, and the last column for the width.
-        int x = Functions.GetColumnOfFirstNonWhitePixel(image, 1);
-        int width = Functions.GetColumnOfFirstNonWhitePixel(image, -1) - x + 1;
-        Constants.ShipImageOffsets[custIndex].X = Math.max(2, x);
-        Constants.ShipImageOffsets[custIndex].Width = Math.min(62 - Constants.ShipImageOffsets[custIndex].X, width);
+        final int x = ModelUtils.GetColumnOfFirstNonWhitePixel(image, 1);
+        final int width = ModelUtils.GetColumnOfFirstNonWhitePixel(image, -1) - x + 1;
+        Constants.ShipImageOffsets[custIndex].x = Math.max(2, x);
+        Constants.ShipImageOffsets[custIndex].width = Math.min(62 - Constants.ShipImageOffsets[custIndex].x, width);
     }
 
     public int CargoBays() {
         return cargoBays;
     }
 
-    public void CargoBays(int value) {
+    public void CargoBays(final int value) {
         cargoBays = value;
     }
 
@@ -189,7 +189,7 @@ public class ShipSpec extends SerializableObject {
         return fuelTanks;
     }
 
-    public void FuelTanks(int value) {
+    public void FuelTanks(final int value) {
         fuelTanks = value;
     }
 
@@ -197,7 +197,7 @@ public class ShipSpec extends SerializableObject {
         return weaponSlots;
     }
 
-    public void setWeaponSlots(int weaponSlots) {
+    public void setWeaponSlots(final int weaponSlots) {
         this.weaponSlots = weaponSlots;
     }
 
@@ -205,7 +205,7 @@ public class ShipSpec extends SerializableObject {
         return size;
     }
 
-    public void setSize(ShipSize size) {
+    public void setSize(final ShipSize size) {
         this.size = size;
     }
 
@@ -213,7 +213,7 @@ public class ShipSpec extends SerializableObject {
         return shieldSlots;
     }
 
-    public void setShieldSlots(int shieldSlots) {
+    public void setShieldSlots(final int shieldSlots) {
         this.shieldSlots = shieldSlots;
     }
 
@@ -221,7 +221,7 @@ public class ShipSpec extends SerializableObject {
         return repairCost;
     }
 
-    public void setRepairCost(int repairCost) {
+    public void setRepairCost(final int repairCost) {
         this.repairCost = repairCost;
     }
 
@@ -229,7 +229,7 @@ public class ShipSpec extends SerializableObject {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(final int price) {
         this.price = price;
     }
 
@@ -237,7 +237,7 @@ public class ShipSpec extends SerializableObject {
         return isHullUpgraded;
     }
 
-    public void setHullUpgraded(boolean hullUpgraded) {
+    public void setHullUpgraded(final boolean hullUpgraded) {
         isHullUpgraded = hullUpgraded;
     }
 
@@ -245,7 +245,7 @@ public class ShipSpec extends SerializableObject {
         return gadgetSlots;
     }
 
-    public void setGadgetSlots(int gadgetSlots) {
+    public void setGadgetSlots(final int gadgetSlots) {
         this.gadgetSlots = gadgetSlots;
     }
 
@@ -253,7 +253,7 @@ public class ShipSpec extends SerializableObject {
         return fuelCost;
     }
 
-    public void setFuelCost(int fuelCost) {
+    public void setFuelCost(final int fuelCost) {
         this.fuelCost = fuelCost;
     }
 
@@ -261,7 +261,7 @@ public class ShipSpec extends SerializableObject {
         return crewQuarters;
     }
 
-    public void setCrewQuarters(int crewQuarters) {
+    public void setCrewQuarters(final int crewQuarters) {
         this.crewQuarters = crewQuarters;
     }
 
@@ -269,7 +269,7 @@ public class ShipSpec extends SerializableObject {
         return hullStrength + (isHullUpgraded ? Constants.HullUpgrade : 0);
     }
 
-    public void HullStrength(int value) {
+    public void HullStrength(final int value) {
         hullStrength = value;
     }
 
@@ -286,10 +286,10 @@ public class ShipSpec extends SerializableObject {
     }
 
     public int ImageIndex() {
-        return (Constants.ShipImgUseDefault == imageIndex ? Type().getId() : imageIndex);
+        return (imageIndex == Constants.ShipImgUseDefault ? Type().getId() : imageIndex);
     }
 
-    public void ImageIndex(int value) {
+    public void ImageIndex(final int value) {
         imageIndex = (value == Type().getId() ? Constants.ShipImgUseDefault : value);
     }
 

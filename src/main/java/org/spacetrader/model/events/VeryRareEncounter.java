@@ -1,6 +1,6 @@
 package org.spacetrader.model.events;
 
-import org.spacetrader.model.enums.IdentifiableEnum;
+import org.spacetrader.util.IdentifiableEnum;
 
 
 public enum VeryRareEncounter implements IdentifiableEnum {
@@ -14,7 +14,7 @@ public enum VeryRareEncounter implements IdentifiableEnum {
     public final String name;
     public final int id;
 
-    VeryRareEncounter(String name) {
+    VeryRareEncounter(final String name) {
         this.name = name;
         id = ordinal();
     }

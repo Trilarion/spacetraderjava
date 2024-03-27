@@ -1,6 +1,6 @@
 package org.spacetrader.model.ship.equipment;
 
-import org.spacetrader.model.enums.IdentifiableEnum;
+import org.spacetrader.util.IdentifiableEnum;
 
 
 public enum GadgetType implements EquipmentSubType, IdentifiableEnum {
@@ -12,8 +12,8 @@ public enum GadgetType implements EquipmentSubType, IdentifiableEnum {
     FuelCompactor, // = 5,
     HiddenCargoBays;// = 6
 
-    public static GadgetType FromInt(int i) {
-        return values()[i];
+    public static GadgetType FromInt(final int i) {
+        return GadgetType.values()[i];
     }
 
     @Override

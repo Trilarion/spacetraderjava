@@ -1,6 +1,8 @@
 package org.spacetrader.model.enums;
 
 
+import org.spacetrader.util.IdentifiableEnum;
+
 public enum ShipyardId implements IdentifiableEnum {
     NA, // = -1,
     Corellian, // = 0,
@@ -9,8 +11,8 @@ public enum ShipyardId implements IdentifiableEnum {
     Sienar, // = 3,
     Sorosuub;// = 4
 
-    public static ShipyardId FromInt(int i) {
-        return values()[i + 1];
+    public static ShipyardId FromInt(final int i) {
+        return ShipyardId.values()[i + 1];
     }
 
     @Override

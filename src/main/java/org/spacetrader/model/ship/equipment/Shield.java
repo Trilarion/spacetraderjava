@@ -1,5 +1,6 @@
 package org.spacetrader.model.ship.equipment;
 
+import org.spacetrader.model.SerializableObject;
 import org.spacetrader.model.enums.TechLevel;
 import org.spacetrader.ui.Strings;
 import org.spacetrader.util.Log;
@@ -13,14 +14,14 @@ public class Shield extends Equipment {
     private final int power;
     private int Charge;
 
-    public Shield(Hashtable hash) {
+    public Shield(final Hashtable hash) {
         super(hash);
-        type = ShieldType.fromId(GetValueFromHash(hash, "_type", Integer.class));
-        power = GetValueFromHash(hash, "_power", Integer.class);
-        charge = GetValueFromHash(hash, "_charge", Integer.class);
+        type = ShieldType.fromId(SerializableObject.GetValueFromHash(hash, "_type", Integer.class));
+        power = SerializableObject.GetValueFromHash(hash, "_power", Integer.class);
+        charge = SerializableObject.GetValueFromHash(hash, "_charge", Integer.class);
     }
 
-    public Shield(ShieldType type, int power, int price, TechLevel minTechLevel, int chance) {
+    public Shield(final ShieldType type, final int power, final int price, final TechLevel minTechLevel, final int chance) {
         super(EquipmentType.Shield, price, minTechLevel, chance);
         this.type = type;
         this.power = power;
@@ -29,7 +30,7 @@ public class Shield extends Equipment {
 
     @Override
     public Equipment Clone() {
-        Shield shield = new Shield(type, power, price, minTech, chance);
+        final Shield shield = new Shield(type, power, price, minTech, chance);
         shield.Charge = Charge;
         return shield;
     }
@@ -41,7 +42,7 @@ public class Shield extends Equipment {
 
     @Override
     public Hashtable Serialize() {
-        Hashtable hash = super.Serialize();
+        final Hashtable hash = super.Serialize();
         hash.put("_type", type);
         hash.put("_power", power);
         hash.put("_charge", charge);
@@ -54,10 +55,10 @@ public class Shield extends Equipment {
     }
 
     @Override
-    public boolean TypeEquals(Object type) {
+    public boolean TypeEquals(final Object type) {
         try {
             return (Type() == type);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.write("Ignored exception: " + e);
             return false;
         }
@@ -71,7 +72,7 @@ public class Shield extends Equipment {
         return Charge;
     }
 
-    public void setCharge(int charge) {
+    public void setCharge(final int charge) {
         Charge = charge;
     }
 

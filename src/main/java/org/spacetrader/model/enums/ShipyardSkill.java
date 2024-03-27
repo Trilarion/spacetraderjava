@@ -1,6 +1,8 @@
 package org.spacetrader.model.enums;
 
 
+import org.spacetrader.util.IdentifiableEnum;
+
 public enum ShipyardSkill implements IdentifiableEnum {
     CrewQuarters,    // = 0, // Crew Quarters take up 2 fewer units
     FuelBase,        // = 1, // Fuel Base is 2 greater

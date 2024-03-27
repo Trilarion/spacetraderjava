@@ -1,17 +1,25 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.Functions;
+import org.spacetrader.model.ModelUtils;
 import org.spacetrader.controller.Game;
 import org.spacetrader.model.enums.AlertType;
 import org.spacetrader.model.enums.GameEndType;
-import org.winforms.Graphics;
-import org.winforms.*;
-import org.winforms.controls.Button;
-import org.winforms.controls.Dialog;
-import org.winforms.controls.Label;
-import org.winforms.enums.*;
-import org.winforms.events.EventData;
-import org.winforms.events.EventHandler;
+import org.winforms.resource.ResourceManager;
+import org.winforms.util.Graphics;
+import org.winforms.alignment.FormStartPosition;
+import org.winforms.util.Timer;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
+import org.winforms.dialog.DialogResult;
+import org.winforms.dialog.Pane;
+import org.winforms.event.EventData;
+import org.winforms.event.EventHandler;
+import org.winforms.image.ColorDepth;
+import org.winforms.image.ImageList;
+import org.winforms.image.ImageListStreamer;
+import org.winforms.style.FlatStyle;
+import org.winforms.style.FormBorderStyle;
 
 import java.awt.*;
 
@@ -27,7 +35,7 @@ public class DialogAlert extends Dialog {
 
     private DialogAlert() {
 
-        ResourceManager resources = new ResourceManager(DialogAlert.class);
+        final ResourceManager resources = new ResourceManager(DialogAlert.class);
         labelText = new Label();
         button1 = new Button();
         button2 = new Button();
@@ -65,7 +73,7 @@ public class DialogAlert extends Dialog {
         timerTick.setInterval(4000);
         timerTick.tick = new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 timerTick_Tick();
             }
         };
@@ -83,22 +91,22 @@ public class DialogAlert extends Dialog {
         setText("Title");
         setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 FormAlert_Click(sender, data);
             }
         });
         resumeLayout(false);
     }
 
-    public DialogAlert(String title, String text, String button1Text, DialogResult button1Result, String button2Text, DialogResult button2Result, String[] args) {
+    public DialogAlert(String title, String text, final String button1Text, final DialogResult button1Result, final String button2Text, final DialogResult button2Result, final String[] args) {
         this();
-        Graphics graphics = CreateGraphics();
+        final Graphics graphics = CreateGraphics();
         // Replace any variables.
-        if (null != args) {
-            title = Functions.StringVars(title, args);
-            text = Functions.StringVars(text, args);
+        if (args != null) {
+            title = ModelUtils.StringVars(title, args);
+            text = ModelUtils.StringVars(text, args);
         }
-        labelText.setWidth(graphics.measureString((80 < text.length() ? _80_CHARS : text), getFont()).width + 25);
+        labelText.setWidth(graphics.measureString((text.length() > 80 ? DialogAlert._80_CHARS : text), getFont()).width + 25);
         labelText.setText(text);
         labelText.setHeight(30 + 30 * text.length() / 80);
         // Size the buttons.
@@ -106,7 +114,7 @@ public class DialogAlert extends Dialog {
         button1.setDialogResult(button1Result);
         button1.setWidth(Math.max(40, graphics.measureString(button1.getText(), getFont()).width + 35));
         int buttonWidth = button1.getWidth();
-        if (null != button2Text) {
+        if (button2Text != null) {
             button2.setText(button2Text);
             button2.setWidth(Math.max((int) Math.ceil(graphics.measureString(button2.getText(), getFont()).width) + 10, 40));
             button2.setVisible(true);
@@ -126,7 +134,7 @@ public class DialogAlert extends Dialog {
         setText(title);
     }
 
-    public DialogAlert(String title, int imageIndex) {
+    public DialogAlert(final String title, final int imageIndex) {
         this();
         // Make sure the extra controls are hidden.
         labelText.setVisible(false);
@@ -142,31 +150,31 @@ public class DialogAlert extends Dialog {
         // Set the title.
         setText(title);
         // If this is the splash screen, get rid of the title bar and start the timer.
-        if (SPLASH_INDEX == imageIndex) {
+        if (imageIndex == DialogAlert.SPLASH_INDEX) {
             setFormBorderStyle(FormBorderStyle.None);
             timerTick.Start();
         }
     }
 
-    public static DialogResult Alert(AlertType at, Pane wp) {
-        return Alert(at, wp, new String[]{});
+    public static DialogResult Alert(final AlertType at, final Pane wp) {
+        return DialogAlert.Alert(at, wp, new String[]{});
     }
 
-    public static DialogResult Alert(AlertType at, Pane wp, String s) {
-        return Alert(at, wp, new String[]{s});
+    public static DialogResult Alert(final AlertType at, final Pane wp, final String s) {
+        return DialogAlert.Alert(at, wp, new String[]{s});
     }
 
-    public static DialogResult Alert(AlertType at, Pane wp, String s, String t) {
-        return Alert(at, wp, new String[]{s, t});
+    public static DialogResult Alert(final AlertType at, final Pane wp, final String s, final String t) {
+        return DialogAlert.Alert(at, wp, new String[]{s, t});
     }
 
-    public static DialogResult Alert(AlertType at, Pane wp, String s, String t, String u) {
-        return Alert(at, wp, new String[]{s, t, u});
+    public static DialogResult Alert(final AlertType at, final Pane wp, final String s, final String t, final String u) {
+        return DialogAlert.Alert(at, wp, new String[]{s, t, u});
     }
 
-    public static DialogResult Alert(AlertType at, Pane wp, String[] ss) {
+    public static DialogResult Alert(final AlertType at, final Pane wp, String[] ss) {
         DialogResult dr = DialogResult.None;
-        if (0 == ss.length) {
+        if (ss.length == 0) {
             ss = null;
         }
         switch (at) {
@@ -186,7 +194,7 @@ public class DialogAlert extends Dialog {
                         "Ok", DialogResult.OK, null, DialogResult.None, ss)).ShowDialog(wp);
                 break;
             case AppStart:
-                (new DialogAlert("Space Trader for Windows", SPLASH_INDEX)).ShowDialog(wp);
+                (new DialogAlert("Space Trader for Windows", DialogAlert.SPLASH_INDEX)).ShowDialog(wp);
                 break;
             case ArrivalBuyNewspaper:
                 dr = (new DialogAlert("Buy Newspaper?", "The local newspaper costs ^1. Do you wish to buy a copy?",
@@ -917,9 +925,9 @@ public class DialogAlert extends Dialog {
         return dr;
     }
 
-    private void FormAlert_Click(Object sender, EventData e) {
+    private void FormAlert_Click(final Object sender, final EventData e) {
         // If the button is off-screen, this is an image and can be clicked away.
-        if (0 > button1.getLeft()) {
+        if (button1.getLeft() < 0) {
             Close();
         }
     }

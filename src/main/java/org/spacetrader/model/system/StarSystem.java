@@ -1,9 +1,9 @@
 package org.spacetrader.model.system;
 
-import org.spacetrader.controller.Constants;
-import org.spacetrader.controller.Functions;
+import org.spacetrader.Constants;
+import org.spacetrader.model.ModelUtils;
 import org.spacetrader.controller.Game;
-import org.spacetrader.controller.SerializableObject;
+import org.spacetrader.model.SerializableObject;
 import org.spacetrader.model.PoliticalSystem;
 import org.spacetrader.model.cargo.TradeItem;
 import org.spacetrader.model.cargo.TradeItemType;
@@ -36,8 +36,8 @@ public class StarSystem extends SerializableObject {
     private int y;
     private int[] tradeItems = new int[10];  // make 10 a constant
 
-    public StarSystem(StarSystemId id, int x, int y, ShipSize size, TechLevel techLevel,
-                      PoliticalSystemType politicalSystemType, SystemPressure systemPressure, SpecialResource specialResource) {
+    public StarSystem(final StarSystemId id, final int x, final int y, final ShipSize size, final TechLevel techLevel,
+                      final PoliticalSystemType politicalSystemType, final SystemPressure systemPressure, final SpecialResource specialResource) {
         systemId = id;
         this.x = x;
         this.y = y;
@@ -49,28 +49,28 @@ public class StarSystem extends SerializableObject {
         initializeTradeItems();
     }
 
-    public StarSystem(Hashtable hash) {
+    public StarSystem(final Hashtable hash) {
         super(hash);
-        systemId = StarSystemId.FromInt(GetValueFromHash(hash, "_id", Integer.class));
-        x = GetValueFromHash(hash, "_x", x);
-        y = GetValueFromHash(hash, "_y", y);
-        size = ShipSize.FromInt(GetValueFromHash(hash, "_size", size, Integer.class));
-        techLevel = TechLevel.FromInt(GetValueFromHash(hash, "_techLevel", /*_techLevel*/0, Integer.class));
-        politicalSystemType = PoliticalSystemType.FromInt(GetValueFromHash(hash, "_politicalSystemType", politicalSystemType, Integer.class));
-        systemPressure = SystemPressure.FromInt(GetValueFromHash(hash, "_systemPressure", systemPressure, Integer.class));
-        specialResource = SpecialResource.FromInt(GetValueFromHash(hash, "_specialResource", specialResource, Integer.class));
-        specialEventType = SpecialEventType.FromInt(GetValueFromHash(hash, "_specialEventType", specialEventType, Integer.class));
-        tradeItems = GetValueFromHash(hash, "_tradeItems", tradeItems, int[].class);
-        countDown = GetValueFromHash(hash, "_countDown", countDown);
-        visited = GetValueFromHash(hash, "_visited", visited);
-        shipyardId = ShipyardId.FromInt(GetValueFromHash(hash, "_shipyardId", shipyardId, Integer.class));
+        systemId = StarSystemId.FromInt(SerializableObject.GetValueFromHash(hash, "_id", Integer.class));
+        x = SerializableObject.GetValueFromHash(hash, "_x", x);
+        y = SerializableObject.GetValueFromHash(hash, "_y", y);
+        size = ShipSize.FromInt(SerializableObject.GetValueFromHash(hash, "_size", size, Integer.class));
+        techLevel = TechLevel.FromInt(SerializableObject.GetValueFromHash(hash, "_techLevel", /*_techLevel*/0, Integer.class));
+        politicalSystemType = PoliticalSystemType.FromInt(SerializableObject.GetValueFromHash(hash, "_politicalSystemType", politicalSystemType, Integer.class));
+        systemPressure = SystemPressure.FromInt(SerializableObject.GetValueFromHash(hash, "_systemPressure", systemPressure, Integer.class));
+        specialResource = SpecialResource.FromInt(SerializableObject.GetValueFromHash(hash, "_specialResource", specialResource, Integer.class));
+        specialEventType = SpecialEventType.FromInt(SerializableObject.GetValueFromHash(hash, "_specialEventType", specialEventType, Integer.class));
+        tradeItems = SerializableObject.GetValueFromHash(hash, "_tradeItems", tradeItems, int[].class);
+        countDown = SerializableObject.GetValueFromHash(hash, "_countDown", countDown);
+        visited = SerializableObject.GetValueFromHash(hash, "_visited", visited);
+        shipyardId = ShipyardId.FromInt(SerializableObject.GetValueFromHash(hash, "_shipyardId", shipyardId, Integer.class));
     }
 
     public void initializeTradeItems() {
         for (int i = 0; i < Constants.TradeItems.length; i++) {
             if (ItemTraded(Constants.TradeItems[i])) {
                 tradeItems[i] = (Size().getId() + 1)
-                        * (Functions.GetRandom(9, 14) - Math.abs(Constants.TradeItems[i].TechTopProduction().ordinal() - TechLevel().ordinal()));
+                        * (ModelUtils.GetRandom(9, 14) - Math.abs(Constants.TradeItems[i].TechTopProduction().ordinal() - TechLevel().ordinal()));
                 // Because of the enormous profits possible, there shouldn't be too many robots or narcotics available.
                 if (i >= TradeItemType.Narcotics.getId()) {
                     tradeItems[i] = ((tradeItems[i] * (5 - Game.getCurrentGame().Difficulty().getId())) / (6 - Game.getCurrentGame().Difficulty().getId())) + 1;
@@ -84,8 +84,8 @@ public class StarSystem extends SerializableObject {
                 if (SystemPressure() == Constants.TradeItems[i].PressurePriceHike()) {
                     tradeItems[i] /= 5;
                 }
-                tradeItems[i] = tradeItems[i] - Functions.GetRandom(10) + Functions.GetRandom(10);
-                if (0 > tradeItems[i]) {
+                tradeItems[i] = tradeItems[i] - ModelUtils.GetRandom(10) + ModelUtils.GetRandom(10);
+                if (tradeItems[i] < 0) {
                     tradeItems[i] = 0;
                 }
             } else {
@@ -94,19 +94,19 @@ public class StarSystem extends SerializableObject {
         }
     }
 
-    public boolean ItemTraded(TradeItem item) {
-        return ((TradeItemType.Narcotics != item.Type() || PoliticalSystem().DrugsOk())
-                && (TradeItemType.Firearms != item.Type() || PoliticalSystem().FirearmsOk()) && TechLevel().ordinal() >= item.TechProduction().ordinal());
+    public boolean ItemTraded(final TradeItem item) {
+        return ((item.Type() != TradeItemType.Narcotics || PoliticalSystem().DrugsOk())
+                && (item.Type() != TradeItemType.Firearms || PoliticalSystem().FirearmsOk()) && TechLevel().ordinal() >= item.TechProduction().ordinal());
     }
 
-    public boolean ItemUsed(TradeItem item) {
-        return ((TradeItemType.Narcotics != item.Type() || PoliticalSystem().DrugsOk())
-                && (TradeItemType.Firearms != item.Type() || PoliticalSystem().FirearmsOk()) && TechLevel().ordinal() >= item.TechUsage().ordinal());
+    public boolean ItemUsed(final TradeItem item) {
+        return ((item.Type() != TradeItemType.Narcotics || PoliticalSystem().DrugsOk())
+                && (item.Type() != TradeItemType.Firearms || PoliticalSystem().FirearmsOk()) && TechLevel().ordinal() >= item.TechUsage().ordinal());
     }
 
     @Override
     public Hashtable Serialize() {
-        Hashtable hash = super.Serialize();
+        final Hashtable hash = super.Serialize();
         hash.put("_id", systemId.getId());
         hash.put("_x", x);
         hash.put("_y", y);
@@ -124,35 +124,35 @@ public class StarSystem extends SerializableObject {
     }
 
     public boolean ShowSpecialButton() {
-        Game game = Game.getCurrentGame();
+        final Game game = Game.getCurrentGame();
         boolean show = false;
         switch (SpecialEventType()) {
             case Artifact:
             case Dragonfly:
             case Experiment:
             case Jarek:
-                show = Constants.PoliceRecordScoreDubious <= game.Commander().getPoliceRecordScore();
+                show = game.Commander().getPoliceRecordScore() >= Constants.PoliceRecordScoreDubious;
                 break;
             case ArtifactDelivery:
                 show = game.Commander().getShip().ArtifactOnBoard();
                 break;
             case CargoForSale:
-                show = 3 <= game.Commander().getShip().FreeCargoBays();
+                show = game.Commander().getShip().FreeCargoBays() >= 3;
                 break;
             case DragonflyBaratas:
-                show = SpecialEvent.StatusDragonflyNotStarted < game.getQuestStatusDragonfly()
-                        && SpecialEvent.StatusDragonflyDestroyed > game.getQuestStatusDragonfly();
+                show = game.getQuestStatusDragonfly() > SpecialEvent.StatusDragonflyNotStarted
+                        && game.getQuestStatusDragonfly() < SpecialEvent.StatusDragonflyDestroyed;
                 break;
             case DragonflyDestroyed:
-                show = SpecialEvent.StatusDragonflyDestroyed == game.getQuestStatusDragonfly();
+                show = game.getQuestStatusDragonfly() == SpecialEvent.StatusDragonflyDestroyed;
                 break;
             case DragonflyMelina:
-                show = SpecialEvent.StatusDragonflyFlyBaratas < game.getQuestStatusDragonfly()
-                        && SpecialEvent.StatusDragonflyDestroyed > game.getQuestStatusDragonfly();
+                show = game.getQuestStatusDragonfly() > SpecialEvent.StatusDragonflyFlyBaratas
+                        && game.getQuestStatusDragonfly() < SpecialEvent.StatusDragonflyDestroyed;
                 break;
             case DragonflyRegulas:
-                show = SpecialEvent.StatusDragonflyFlyMelina < game.getQuestStatusDragonfly()
-                        && SpecialEvent.StatusDragonflyDestroyed > game.getQuestStatusDragonfly();
+                show = game.getQuestStatusDragonfly() > SpecialEvent.StatusDragonflyFlyMelina
+                        && game.getQuestStatusDragonfly() < SpecialEvent.StatusDragonflyDestroyed;
                 break;
             case DragonflyShield:
             case ExperimentFailed:
@@ -170,81 +170,81 @@ public class StarSystem extends SerializableObject {
                 break;
             case EraseRecord:
             case Wild:
-                show = Constants.PoliceRecordScoreDubious > game.Commander().getPoliceRecordScore();
+                show = game.Commander().getPoliceRecordScore() < Constants.PoliceRecordScoreDubious;
                 break;
             case ExperimentStopped:
-                show = SpecialEvent.StatusExperimentNotStarted < game.getQuestStatusExperiment()
-                        && SpecialEvent.StatusExperimentPerformed > game.getQuestStatusExperiment();
+                show = game.getQuestStatusExperiment() > SpecialEvent.StatusExperimentNotStarted
+                        && game.getQuestStatusExperiment() < SpecialEvent.StatusExperimentPerformed;
                 break;
             case GemulonRescued:
-                show = SpecialEvent.StatusGemulonNotStarted < game.getQuestStatusGemulon()
-                        && SpecialEvent.StatusGemulonTooLate > game.getQuestStatusGemulon();
+                show = game.getQuestStatusGemulon() > SpecialEvent.StatusGemulonNotStarted
+                        && game.getQuestStatusGemulon() < SpecialEvent.StatusGemulonTooLate;
                 break;
             case Japori:
-                show = SpecialEvent.StatusJaporiNotStarted == game.getQuestStatusJapori()
-                        && Constants.PoliceRecordScoreDubious <= game.Commander().getPoliceRecordScore();
+                show = game.getQuestStatusJapori() == SpecialEvent.StatusJaporiNotStarted
+                        && game.Commander().getPoliceRecordScore() >= Constants.PoliceRecordScoreDubious;
                 break;
             case JaporiDelivery:
-                show = SpecialEvent.StatusJaporiInTransit == game.getQuestStatusJapori();
+                show = game.getQuestStatusJapori() == SpecialEvent.StatusJaporiInTransit;
                 break;
             case JarekGetsOut:
                 show = game.Commander().getShip().JarekOnBoard();
                 break;
             case Moon:
-                show = SpecialEvent.StatusMoonNotStarted == game.getQuestStatusMoon()
-                        && SpecialEvent.MoonCost * .8 < game.Commander().Worth();
+                show = game.getQuestStatusMoon() == SpecialEvent.StatusMoonNotStarted
+                        && game.Commander().Worth() > SpecialEvent.MoonCost * 0.8;
                 break;
             case MoonRetirement:
-                show = SpecialEvent.StatusMoonBought == game.getQuestStatusMoon();
+                show = game.getQuestStatusMoon() == SpecialEvent.StatusMoonBought;
                 break;
             case Princess:
-                show = Constants.PoliceRecordScoreLawful <= game.Commander().getPoliceRecordScore()
-                        && Constants.ReputationScoreAverage <= game.Commander().getReputationScore();
+                show = game.Commander().getPoliceRecordScore() >= Constants.PoliceRecordScoreLawful
+                        && game.Commander().getReputationScore() >= Constants.ReputationScoreAverage;
                 break;
             case PrincessCentauri:
-                show = SpecialEvent.StatusPrincessFlyCentauri <= game.getQuestStatusPrincess()
-                        && SpecialEvent.StatusPrincessFlyQonos >= game.getQuestStatusPrincess();
+                show = game.getQuestStatusPrincess() >= SpecialEvent.StatusPrincessFlyCentauri
+                        && game.getQuestStatusPrincess() <= SpecialEvent.StatusPrincessFlyQonos;
                 break;
             case PrincessInthara:
-                show = SpecialEvent.StatusPrincessFlyInthara <= game.getQuestStatusPrincess()
-                        && SpecialEvent.StatusPrincessFlyQonos >= game.getQuestStatusPrincess();
+                show = game.getQuestStatusPrincess() >= SpecialEvent.StatusPrincessFlyInthara
+                        && game.getQuestStatusPrincess() <= SpecialEvent.StatusPrincessFlyQonos;
                 break;
             case PrincessQonos:
-                show = SpecialEvent.StatusPrincessRescued == game.getQuestStatusPrincess()
+                show = game.getQuestStatusPrincess() == SpecialEvent.StatusPrincessRescued
                         && !game.Commander().getShip().PrincessOnBoard();
                 break;
             case PrincessReturned:
                 show = game.Commander().getShip().PrincessOnBoard();
                 break;
             case Reactor:
-                show = SpecialEvent.StatusReactorNotStarted == game.getQuestStatusReactor()
-                        && Constants.PoliceRecordScoreDubious > game.Commander().getPoliceRecordScore()
-                        && Constants.ReputationScoreAverage <= game.Commander().getReputationScore();
+                show = game.getQuestStatusReactor() == SpecialEvent.StatusReactorNotStarted
+                        && game.Commander().getPoliceRecordScore() < Constants.PoliceRecordScoreDubious
+                        && game.Commander().getReputationScore() >= Constants.ReputationScoreAverage;
                 break;
             case ReactorDelivered:
                 show = game.Commander().getShip().ReactorOnBoard();
                 break;
             case Scarab:
-                show = SpecialEvent.StatusScarabNotStarted == game.getQuestStatusScarab()
-                        && Constants.ReputationScoreAverage <= game.Commander().getReputationScore();
+                show = game.getQuestStatusScarab() == SpecialEvent.StatusScarabNotStarted
+                        && game.Commander().getReputationScore() >= Constants.ReputationScoreAverage;
                 break;
             case ScarabDestroyed:
             case ScarabUpgradeHull:
-                show = SpecialEvent.StatusScarabDestroyed == game.getQuestStatusScarab();
+                show = game.getQuestStatusScarab() == SpecialEvent.StatusScarabDestroyed;
                 break;
             case Sculpture:
-                show = SpecialEvent.StatusSculptureNotStarted == game.getQuestStatusSculpture()
-                        && Constants.PoliceRecordScoreDubious > game.Commander().getPoliceRecordScore()
-                        && Constants.ReputationScoreAverage <= game.Commander().getReputationScore();
+                show = game.getQuestStatusSculpture() == SpecialEvent.StatusSculptureNotStarted
+                        && game.Commander().getPoliceRecordScore() < Constants.PoliceRecordScoreDubious
+                        && game.Commander().getReputationScore() >= Constants.ReputationScoreAverage;
                 break;
             case SculptureDelivered:
-                show = SpecialEvent.StatusSculptureInTransit == game.getQuestStatusSculpture();
+                show = game.getQuestStatusSculpture() == SpecialEvent.StatusSculptureInTransit;
                 break;
             case SpaceMonsterKilled:
-                show = SpecialEvent.StatusSpaceMonsterDestroyed == game.getQuestStatusSpaceMonster();
+                show = game.getQuestStatusSpaceMonster() == SpecialEvent.StatusSpaceMonsterDestroyed;
                 break;
             case TribbleBuyer:
-                show = 0 < game.Commander().getShip().getTribbles();
+                show = game.Commander().getShip().getTribbles() > 0;
                 break;
             case WildGetsOut:
                 show = game.Commander().getShip().WildOnBoard();
@@ -259,17 +259,17 @@ public class StarSystem extends SerializableObject {
         return countDown;
     }
 
-    public void CountDown(int i) {
+    public void CountDown(final int i) {
         countDown = i;
     }
 
     public boolean DestOk() {
-        Commander comm = Game.getCurrentGame().Commander();
-        return this != comm.CurrentSystem() && (Distance() <= comm.getShip().getFuel() || Functions.WormholeExists(comm.CurrentSystem(), this));
+        final Commander comm = Game.getCurrentGame().Commander();
+        return this != comm.CurrentSystem() && (Distance() <= comm.getShip().getFuel() || ModelUtils.WormholeExists(comm.CurrentSystem(), this));
     }
 
     public int Distance() {
-        return Functions.distance(this, Game.getCurrentGame().Commander().CurrentSystem());
+        return ModelUtils.distance(this, Game.getCurrentGame().Commander().CurrentSystem());
     }
 
     public StarSystemId Id() {
@@ -277,9 +277,9 @@ public class StarSystem extends SerializableObject {
     }
 
     public CrewMember[] MercenariesForHire() {
-        Commander commander = Game.getCurrentGame().Commander();
-        CrewMember[] mercs = Game.getCurrentGame().Mercenaries();
-        ArrayList<CrewMember> forHire = new ArrayList<>(3);
+        final Commander commander = Game.getCurrentGame().Commander();
+        final CrewMember[] mercs = Game.getCurrentGame().Mercenaries();
+        final ArrayList<CrewMember> forHire = new ArrayList<>(3);
         for (int i = 1; i < mercs.length; i++) {
             if (mercs[i].CurrentSystem() == commander.CurrentSystem() && !commander.getShip().HasCrew(mercs[i].Id())) {
                 forHire.add(mercs[i]);
@@ -300,20 +300,20 @@ public class StarSystem extends SerializableObject {
         return politicalSystemType;
     }
 
-    public void PoliticalSystemType(PoliticalSystemType pst) {
+    public void PoliticalSystemType(final PoliticalSystemType pst) {
         politicalSystemType = pst;
     }
 
     public Shipyard Shipyard() {
         ShipyardId();
-        return (ShipyardId.NA == shipyardId ? null : Constants.Shipyards[shipyardId.getId()]);
+        return (shipyardId == ShipyardId.NA ? null : Constants.Shipyards[shipyardId.getId()]);
     }
 
     public ShipyardId ShipyardId() {
         return shipyardId;
     }
 
-    public void ShipyardId(ShipyardId si) {
+    public void ShipyardId(final ShipyardId si) {
         shipyardId = si;
     }
 
@@ -323,14 +323,14 @@ public class StarSystem extends SerializableObject {
 
     public SpecialEvent SpecialEvent() {
         SpecialEventType();
-        return (SpecialEventType.NA == specialEventType ? null : Constants.SpecialEvents[specialEventType.getId()]);
+        return (specialEventType == SpecialEventType.NA ? null : Constants.SpecialEvents[specialEventType.getId()]);
     }
 
     public SpecialEventType SpecialEventType() {
         return specialEventType;
     }
 
-    public void SpecialEventType(SpecialEventType set) {
+    public void SpecialEventType(final SpecialEventType set) {
         specialEventType = set;
     }
 
@@ -342,7 +342,7 @@ public class StarSystem extends SerializableObject {
         return systemPressure;
     }
 
-    public void SystemPressure(SystemPressure sp) {
+    public void SystemPressure(final SystemPressure sp) {
         systemPressure = sp;
     }
 
@@ -350,7 +350,7 @@ public class StarSystem extends SerializableObject {
         return techLevel;
     }
 
-    public void TechLevel(TechLevel tl) {
+    public void TechLevel(final TechLevel tl) {
         techLevel = tl;
     }
 
@@ -362,7 +362,7 @@ public class StarSystem extends SerializableObject {
         return visited;
     }
 
-    public void Visited(boolean b) {
+    public void Visited(final boolean b) {
         visited = b;
     }
 
@@ -370,7 +370,7 @@ public class StarSystem extends SerializableObject {
         return x;
     }
 
-    public void X(int i) {
+    public void X(final int i) {
         x = i;
     }
 
@@ -378,7 +378,7 @@ public class StarSystem extends SerializableObject {
         return y;
     }
 
-    public void Y(int i) {
+    public void Y(final int i) {
         y = i;
     }
 }

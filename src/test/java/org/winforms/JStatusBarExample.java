@@ -1,5 +1,8 @@
 package org.winforms;
 
+import org.winforms.widget.JStatusBar;
+import org.winforms.widget.StatusBarSection;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Container;

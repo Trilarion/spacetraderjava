@@ -1,7 +1,10 @@
 package org.spacetrader.ui;
 
+import org.spacetrader.Constants;
 import org.spacetrader.Main;
 import org.spacetrader.controller.*;
+import org.spacetrader.model.ModelUtils;
+import org.spacetrader.model.SerializableObject;
 import org.spacetrader.model.crew.Commander;
 import org.spacetrader.model.crew.CrewMember;
 import org.spacetrader.model.enums.AlertType;
@@ -16,26 +19,35 @@ import org.spacetrader.model.ship.equipment.Gadget;
 import org.spacetrader.model.ship.equipment.Shield;
 import org.spacetrader.model.ship.equipment.Weapon;
 import org.spacetrader.model.system.StarSystem;
-import org.spacetrader.util.Directory;
 import org.spacetrader.util.RegistryKey;
-import org.spacetrader.util.Util;
-import org.winforms.FileDialog;
-import org.winforms.Font;
-import org.winforms.Graphics;
-import org.winforms.Icon;
-import org.winforms.Image;
-import org.winforms.MenuItem;
-import org.winforms.*;
-import org.winforms.controls.Button;
-import org.winforms.controls.Label;
-import org.winforms.controls.MenuBar;
-import org.winforms.controls.Window;
-import org.winforms.controls.*;
-import org.winforms.enums.*;
-import org.winforms.events.CancelEventData;
-import org.winforms.events.EventData;
-import org.winforms.events.EventHandler;
-import org.winforms.events.MouseEventData;
+import org.spacetrader.util.Utils;
+import org.winforms.dialog.FileDialog;
+import org.winforms.menu.SubMenu;
+import org.winforms.mouse.MouseButtons;
+import org.winforms.resource.ResourceManager;
+import org.winforms.util.Font;
+import org.winforms.util.Graphics;
+import org.winforms.alignment.ContentAlignment;
+import org.winforms.alignment.FormStartPosition;
+import org.winforms.dialog.DialogResult;
+import org.winforms.image.Icon;
+import org.winforms.image.Image;
+import org.winforms.menu.MenuItem;
+import org.winforms.widget.Button;
+import org.winforms.widget.Label;
+import org.winforms.widget.MenuBar;
+import org.winforms.widget.Window;
+import org.winforms.widget.*;
+import org.winforms.event.CancelEventData;
+import org.winforms.event.EventData;
+import org.winforms.event.EventHandler;
+import org.winforms.event.MouseEventData;
+import org.winforms.image.ImageList;
+import org.winforms.image.ImageListStreamer;
+import org.winforms.style.AnchorStyle;
+import org.winforms.style.FlatStyle;
+import org.winforms.style.FontStyle;
+import org.winforms.style.FormBorderStyle;
 
 import javax.swing.*;
 import java.awt.*;
@@ -562,7 +574,7 @@ public class MainWindow extends Window {
         //statusBarPanelExtra.setWidth();
 
         // boxShortRangeChart
-        boxShortRangeChart.anchor = AnchorStyles.Top_Right;
+        boxShortRangeChart.anchor = AnchorStyle.Top_Right;
         boxShortRangeChart.controls.add(pictureShortRangeChart);
         boxShortRangeChart.setLocation(new Point(364, 306));
         boxShortRangeChart.setName("boxShortRangeChart");
@@ -571,8 +583,8 @@ public class MainWindow extends Window {
         boxShortRangeChart.setTabStop(false);
         boxShortRangeChart.setText("Short-Range Chart");
         // boxGalacticChart
-        boxGalacticChart.anchor = AnchorStyles.Top_Right;
-        boxGalacticChart.setBackgroundColor(SystemColors.Control);
+        boxGalacticChart.anchor = AnchorStyle.Top_Right;
+        boxGalacticChart.setBackgroundColor(Constants.ColorControl);
         boxGalacticChart.controls.add(labelWormhole);
         boxGalacticChart.controls.add(labelWormholeLabel);
         boxGalacticChart.controls.add(buttonJump);
@@ -623,7 +635,7 @@ public class MainWindow extends Window {
             }
         });
         // boxTargetSystem
-        boxTargetSystem.anchor = AnchorStyles.Top_Right;
+        boxTargetSystem.anchor = AnchorStyle.Top_Right;
         boxTargetSystem.controls.add(buttonTrack);
         boxTargetSystem.controls.add(buttonNextSystem);
         boxTargetSystem.controls.add(buttonPrevSystem);
@@ -831,7 +843,7 @@ public class MainWindow extends Window {
         labelTargetNameLabel.setTabIndex(0);
         labelTargetNameLabel.setText("Name:");
         // boxCargo
-        boxCargo.anchor = AnchorStyles.Top_Right;
+        boxCargo.anchor = AnchorStyle.Top_Right;
         boxCargo.controls.add(pictureCargoLine3);
         boxCargo.controls.add(pictureCargoLine2);
         boxCargo.controls.add(pictureCargoLine0);
@@ -2373,8 +2385,8 @@ public class MainWindow extends Window {
                 Constants.SaveDirectory
         };
         for (String path : paths) {
-            if (!Directory.exists(path)) {
-                Directory.CreateDirectory(path);
+            if (!Utils.existsFile(path)) {
+                Utils.createDirectory(path);
             }
         }
         dialogOpen.setInitialDirectory(Constants.SaveDirectory);
@@ -2420,10 +2432,10 @@ public class MainWindow extends Window {
     }
 
     private void AddHighScore(HighScoreRecord highScore) {
-        HighScoreRecord[] highScores = Functions.GetHighScores(this);
+        HighScoreRecord[] highScores = ModelUtils.GetHighScores(this);
         highScores[0] = highScore;
         Arrays.sort(highScores);
-        Functions.SaveFile(Constants.HighScoreFile, SerializableObject.ArrayToArrayList(highScores), this);
+        ModelUtils.SaveFile(Constants.HighScoreFile, SerializableObject.ArrayToArrayList(highScores), this);
     }
 
     private void CargoBuy(int tradeItem, boolean max) {
@@ -2442,7 +2454,7 @@ public class MainWindow extends Window {
 
     private void ClearHighScores() {
         HighScoreRecord[] highScores = new HighScoreRecord[3];
-        Functions.SaveFile(Constants.HighScoreFile, SerializableObject.ArrayToArrayList(highScores), this);
+        ModelUtils.SaveFile(Constants.HighScoreFile, SerializableObject.ArrayToArrayList(highScores), this);
     }
 
     private void GameEnd() {
@@ -2460,11 +2472,11 @@ public class MainWindow extends Window {
                 break;
         }
         DialogAlert.Alert(alertType, this);
-        DialogAlert.Alert(AlertType.GameEndScore, this, Functions.FormatNumber(game.Score() / 10), Functions.FormatNumber(game.Score() % 10));
+        DialogAlert.Alert(AlertType.GameEndScore, this, ModelUtils.FormatNumber(game.Score() / 10), ModelUtils.FormatNumber(game.Score() % 10));
         HighScoreRecord candidate = new HighScoreRecord(
                 commander.Name(), game.Score(), game.getEndStatus(),
                 commander.getDays(), commander.Worth(), game.Difficulty());
-        if (candidate.CompareTo(Functions.GetHighScores(this)[0]) > 0) {
+        if (candidate.CompareTo(ModelUtils.GetHighScores(this)[0]) > 0) {
             if (game.getCheatEnabled()) {
                 DialogAlert.Alert(AlertType.GameEndHighScoreCheat, this);
             } else {
@@ -2481,7 +2493,7 @@ public class MainWindow extends Window {
     private String GetRegistrySetting(String settingName, String defaultValue) {
         String settingValue = defaultValue;
         try {
-            RegistryKey key = Functions.GetRegistryKey();
+            RegistryKey key = ModelUtils.GetRegistryKey();
             Object ObjectValue = key.GetValue(settingName);
             if (ObjectValue != null) {
                 settingValue = ObjectValue.toString();
@@ -2495,7 +2507,7 @@ public class MainWindow extends Window {
 
     private void LoadGame(String fileName) {
         try {
-            Object obj = Functions.LoadFile(fileName, false, this);
+            Object obj = ModelUtils.LoadFile(fileName, false, this);
             if (obj != null) {
                 game = new Game((Hashtable) obj, this);
                 commander = game.Commander();
@@ -2510,7 +2522,7 @@ public class MainWindow extends Window {
     }
 
     private void SaveGame(String fileName, boolean saveFileName) {
-        if (Functions.SaveFile(fileName, game.Serialize(), this) && saveFileName) {
+        if (ModelUtils.SaveFile(fileName, game.Serialize(), this) && saveFileName) {
             SaveGameFile = fileName;
         }
         SaveGameDays = commander.getDays();
@@ -2529,7 +2541,7 @@ public class MainWindow extends Window {
 
     private void SetRegistrySetting(String settingName, String settingValue) {
         try {
-            RegistryKey key = Functions.GetRegistryKey();
+            RegistryKey key = ModelUtils.GetRegistryKey();
             key.SetValue(settingName, settingValue);
             key.Close();
         } catch (NullPointerException ex) {
@@ -2570,12 +2582,12 @@ public class MainWindow extends Window {
             StarSystem warpSys = game.WarpSystem();
             for (int i = 0; i < labelSellPrice.length; i++) {
                 int price = warpSys == null ? 0 : Constants.TradeItems[i].getStandardPrice(warpSys);
-                labelSellPrice[i].setText(sell[i] > 0 ? Functions.FormatMoney(sell[i]) : "no trade");
+                labelSellPrice[i].setText(sell[i] > 0 ? ModelUtils.FormatMoney(sell[i]) : "no trade");
                 buttonSellQuantity[i].setText("" + commander.getShip().Cargo()[i]);
                 buttonSellQuantity[i].setVisible(true);
                 buttonSellAll[i].setText(sell[i] > 0 ? "All" : "Dump");
                 buttonSellAll[i].setVisible(true);
-                labelBuyPrice[i].setText(buy[i] > 0 ? Functions.FormatMoney(buy[i]) : "not sold");
+                labelBuyPrice[i].setText(buy[i] > 0 ? ModelUtils.FormatMoney(buy[i]) : "not sold");
                 buttonBuyQuantity[i].setText("" + commander.CurrentSystem().TradeItems()[i]);
                 buttonBuyQuantity[i].setVisible(buy[i] > 0);
                 buttonBuyMax[i].setVisible(buy[i] > 0);
@@ -2585,14 +2597,14 @@ public class MainWindow extends Window {
                     labelSellPrice[i].setFont(labelSell.getFont());
                 }
                 if (warpSys != null && warpSys.DestOk() && price > 0) {
-                    labelTargetPrice[i].setText(Functions.FormatMoney(price));
+                    labelTargetPrice[i].setText(ModelUtils.FormatMoney(price));
                 } else {
                     labelTargetPrice[i].setText("-----------");
                 }
                 if (warpSys != null && warpSys.DestOk() && price > 0 && buy[i] > 0) {
                     int diff = price - buy[i];
-                    labelTargetDiff[i].setText((diff > 0 ? "+" : "") + Functions.FormatMoney(diff));
-                    labelTargetPct[i].setText((diff > 0 ? "+" : "") + Functions.FormatNumber(100 * diff / buy[i]) + "%");
+                    labelTargetDiff[i].setText((diff > 0 ? "+" : "") + ModelUtils.FormatMoney(diff));
+                    labelTargetPct[i].setText((diff > 0 ? "+" : "") + ModelUtils.FormatNumber(100 * diff / buy[i]) + "%");
                     labelBuyPrice[i].setFont(
                             (diff > 0 && commander.CurrentSystem().TradeItems()[i] > 0)
                                     ? labelSystemNameLabel.getFont() : labelBuy.getFont());
@@ -2641,18 +2653,18 @@ public class MainWindow extends Window {
         } else {
             Ship ship = commander.getShip();
             labelFuelStatus.setText(
-                    Functions.StringVars("You have fuel to fly ^1.", Functions.Multiples(ship.getFuel(), "parsec")));
+                    ModelUtils.StringVars("You have fuel to fly ^1.", ModelUtils.Multiples(ship.getFuel(), "parsec")));
             int tanksEmpty = ship.FuelTanks() - ship.getFuel();
             labelFuelCost.setText(tanksEmpty > 0
-                    ? Functions.StringVars("A full tank costs ^1", Functions.FormatMoney(tanksEmpty * ship.getFuelCost()))
+                    ? ModelUtils.StringVars("A full tank costs ^1", ModelUtils.FormatMoney(tanksEmpty * ship.getFuelCost()))
                     : "Your tank is full.");
             buttonFuel.setVisible(tanksEmpty > 0);
             labelHullStatus.setText(
-                    Functions.StringVars("Your hull strength is at ^1%.",
-                            Functions.FormatNumber((int) Math.floor((double) 100 * ship.getHull() / ship.HullStrength()))));
+                    ModelUtils.StringVars("Your hull strength is at ^1%.",
+                            ModelUtils.FormatNumber((int) Math.floor((double) 100 * ship.getHull() / ship.HullStrength()))));
             int hullLoss = ship.HullStrength() - ship.getHull();
             labelRepairCost.setText(hullLoss > 0
-                    ? Functions.StringVars("Full repairs will cost ^1", Functions.FormatMoney(hullLoss * ship.getRepairCost()))
+                    ? ModelUtils.StringVars("Full repairs will cost ^1", ModelUtils.FormatMoney(hullLoss * ship.getRepairCost()))
                     : "No repairs are needed.");
             buttonRepair.setVisible(hullLoss > 0);
         }
@@ -2697,10 +2709,10 @@ public class MainWindow extends Window {
             statusBarPanelCosts.setText("");
             statusBarPanelExtra.setText("No Game Loaded.");
         } else {
-            statusBarPanelCash.setText("Cash: " + Functions.FormatMoney(commander.getCash()));
+            statusBarPanelCash.setText("Cash: " + ModelUtils.FormatMoney(commander.getCash()));
             statusBarPanelBays.setText(
                     "Bays: " + commander.getShip().FilledCargoBays() + "/" + commander.getShip().CargoBays());
-            statusBarPanelCosts.setText("Current Costs: " + Functions.FormatMoney(game.CurrentCosts()));
+            statusBarPanelCosts.setText("Current Costs: " + ModelUtils.FormatMoney(game.CurrentCosts()));
             statusBarPanelExtra.setText("");
         }
     }
@@ -2734,7 +2746,7 @@ public class MainWindow extends Window {
             buttonNews.setVisible(true);
             buttonMerc.setVisible(mercs.length > 0);
             if (buttonMerc.getVisible()) {
-                buttonMerc.setToolTip(Functions.StringVars(
+                buttonMerc.setToolTip(ModelUtils.StringVars(
                         Strings.MercenariesForHire,
                         mercs.length == 1 ? mercs[0].Name() : mercs.length + Strings.Mercenaries));
             }
@@ -2762,7 +2774,7 @@ public class MainWindow extends Window {
             buttonTrack.setVisible(false);
         } else {
             StarSystem system = game.WarpSystem();
-            int distance = Functions.distance(commander.CurrentSystem(), system);
+            int distance = ModelUtils.distance(commander.CurrentSystem(), system);
             labelTargetName.setText(system.Name());
             labelTargetSize.setText(Strings.Sizes[system.Size().getId()]);
             labelTargetTech.setText(system.TechLevel().name);
@@ -2829,8 +2841,8 @@ public class MainWindow extends Window {
             String first = words.length > 0 ? words[0] : "";
             String second = words.length > 1 ? words[1] : "";
             String third = words.length > 2 ? words[2] : "";
-            int num1 = Functions.IsInt(second) ? Integer.parseInt(second) : 0;
-            int num2 = Functions.IsInt(third) ? Integer.parseInt(third) : 0;
+            int num1 = ModelUtils.IsInt(second) ? Integer.parseInt(second) : 0;
+            int num2 = ModelUtils.IsInt(third) ? Integer.parseInt(third) : 0;
             boolean find = false;
             if (game.getCheatEnabled()) {
                 switch (SomeStringsForSwitch.find(first)) {
@@ -2910,7 +2922,7 @@ public class MainWindow extends Window {
                         if (num1 >= 0 && num1 < game.Mercenaries().length) {
                             String[] skills = third.split(",");
                             for (int i = 0; i < game.Mercenaries()[num1].Skills().length && i < skills.length; i++) {
-                                if (Functions.IsInt(skills[i])) {
+                                if (ModelUtils.IsInt(skills[i])) {
                                     game.Mercenaries()[num1].Skills()[i] =
                                             Math.max(1, Math.min(Constants.MaxSkill, Integer.parseInt(skills[i])));
                                 }
@@ -2931,7 +2943,7 @@ public class MainWindow extends Window {
                         break;
                     case Posse:
                         if (num1 > 0 && num1 < ship.Crew().length && num2 > 0 && num2 < game.Mercenaries().length
-                                && !Util.arrayContains(Constants.SpecialCrewMemberIds, (CrewMemberId.FromInt(num2)))) {
+                                && !Utils.arrayContains(Constants.SpecialCrewMemberIds, (CrewMemberId.FromInt(num2)))) {
                             int skill = ship.Trader();
                             ship.Crew()[num1] = game.Mercenaries()[num2];
                             if (ship.Trader() != skill) {
@@ -3275,7 +3287,7 @@ public class MainWindow extends Window {
                 if (e.x >= x - 2 && e.x <= x + 2 && e.y >= y - 2 && e.y <= y + 2) {
                     clickedSystem = true;
                     game.SelectedSystemId(StarSystemId.FromInt(i));
-                } else if (Functions.WormholeExists(i, -1)) {
+                } else if (ModelUtils.WormholeExists(i, -1)) {
                     int xW = x + OFF_X_WORM;
                     if (e.x >= xW - 2 && e.x <= xW + 2 && e.y >= y - 2 && e.y <= y + 2) {
                         clickedSystem = true;
@@ -3302,7 +3314,7 @@ public class MainWindow extends Window {
             }
             int index = game.SelectedSystemId().getId();
             if (game.TargetWormhole()) {
-                int destination = wormholes[(Util.bruteSeek(wormholes, index) + 1) % wormholes.length];
+                int destination = wormholes[(Utils.bruteSeek(wormholes, index) + 1) % wormholes.length];
                 StarSystem destinationSystem = universe[destination];
                 graphics.drawLine(
                         Color_BLACK, targetSys.X() + OFF_X_WORM + OFF_X,
@@ -3326,7 +3338,7 @@ public class MainWindow extends Window {
                             universe[i].X() + image.getWidth() - 1, universe[i].Y());
                 }
                 ilChartImages.draw(graphics, universe[i].X(), universe[i].Y(), imageIndex);
-                if (Functions.WormholeExists(i, -1)) {
+                if (ModelUtils.WormholeExists(i, -1)) {
                     //  private final int IMG_S_VS = 6;
                     int IMG_S_W = 7;
                     ilChartImages.draw(graphics, universe[i].X() + OFF_X_WORM, universe[i].Y(), IMG_S_W);
@@ -3353,7 +3365,7 @@ public class MainWindow extends Window {
                     if (e.x >= x - OFF_X && e.x <= x + OFF_X && e.y >= y - OFF_Y && e.y <= y + OFF_Y) {
                         clickedSystem = true;
                         game.SelectedSystemId(StarSystemId.FromInt(i));
-                    } else if (Functions.WormholeExists(i, -1)) {
+                    } else if (ModelUtils.WormholeExists(i, -1)) {
                         int xW = x + 9;
                         if (e.x >= xW - OFF_X && e.x <= xW + OFF_X && e.y >= y - OFF_Y && e.y <= y + OFF_Y) {
                             clickedSystem = true;
@@ -3386,7 +3398,7 @@ public class MainWindow extends Window {
             StarSystem currentSys = commander.CurrentSystem();
             StarSystem trackSys = game.TrackedSystem();
             if (trackSys != null) {
-                int dist = Functions.distance(currentSys, trackSys);
+                int dist = ModelUtils.distance(currentSys, trackSys);
                 if (dist > 0) {
                     int dX = (int) Math.round(25 * (trackSys.X() - currentSys.X()) / (double) dist);
                     int dY = (int) Math.round(25 * (trackSys.Y() - currentSys.Y()) / (double) dist);
@@ -3398,7 +3410,7 @@ public class MainWindow extends Window {
                 }
                 if (game.Options().getShowTrackedRange()) {
                     graphics.drawString(
-                            Functions.StringVars("^1 to ^2.", Functions.Multiples(dist, Strings.DistanceUnit), trackSys.Name()),
+                            ModelUtils.StringVars("^1 to ^2.", ModelUtils.Multiples(dist, Strings.DistanceUnit), trackSys.Name()),
                             getFont(), java.awt.Color.black, 0, pictureShortRangeChart.getHeight() - 13);
                 }
             }
@@ -3423,7 +3435,7 @@ public class MainWindow extends Window {
                             int IMG_G_N = 0;
                             int IMG_G_V = 1;
                             ilChartImages.draw(graphics, x - OFF_X, y - OFF_Y, universe[i].Visited() ? IMG_G_V : IMG_G_N);
-                            if (Functions.WormholeExists(i, -1)) {
+                            if (ModelUtils.WormholeExists(i, -1)) {
                                 int xW = x + 9;
                                 if (game.TargetWormhole() && universe[i] == game.SelectedSystem()) {
                                     graphics.drawLine(Color_BLACK, xW - 6, y, xW + 6, y);

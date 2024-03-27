@@ -1,6 +1,6 @@
 package org.spacetrader.model.ship.equipment;
 
-import org.spacetrader.model.enums.IdentifiableEnum;
+import org.spacetrader.util.IdentifiableEnum;
 
 
 public enum EquipmentType implements IdentifiableEnum {
@@ -8,8 +8,8 @@ public enum EquipmentType implements IdentifiableEnum {
     Shield,
     Gadget;
 
-    public static EquipmentType FromInt(int i) {
-        return values()[i];
+    public static EquipmentType FromInt(final int i) {
+        return EquipmentType.values()[i];
     }
 
     @Override

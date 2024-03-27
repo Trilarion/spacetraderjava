@@ -1,6 +1,6 @@
 package org.spacetrader.model.ship.equipment;
 
-import org.spacetrader.model.enums.IdentifiableEnum;
+import org.spacetrader.util.IdentifiableEnum;
 
 
 public enum ShieldType implements IdentifiableEnum, EquipmentSubType {
@@ -13,8 +13,8 @@ public enum ShieldType implements IdentifiableEnum, EquipmentSubType {
         id = ordinal();
     }
 
-    public static ShieldType fromId(int i) {
-        return values()[i];
+    public static ShieldType fromId(final int i) {
+        return ShieldType.values()[i];
     }
 
     @Override

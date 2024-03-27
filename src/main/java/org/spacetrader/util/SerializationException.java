@@ -6,18 +6,17 @@ public class SerializationException extends Exception {
 
     private static final long serialVersionUID = 1L;
 
-    public SerializationException() {
-    }
+    public SerializationException() {}
 
-    public SerializationException(String message) {
+    public SerializationException(final String message) {
         super(message);
     }
 
-    public SerializationException(String message, Throwable cause) {
+    public SerializationException(final String message, final Throwable cause) {
         super(message, cause);
     }
 
-    public SerializationException(Throwable cause) {
+    public SerializationException(final Throwable cause) {
         super(cause);
     }
 }

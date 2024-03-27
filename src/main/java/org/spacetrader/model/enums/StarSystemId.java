@@ -1,6 +1,8 @@
 package org.spacetrader.model.enums;
 
 
+import org.spacetrader.util.IdentifiableEnum;
+
 public enum StarSystemId implements IdentifiableEnum {
     NA, // = -1,
     Acamar, // = 0,
@@ -132,8 +134,8 @@ public enum StarSystemId implements IdentifiableEnum {
     Weytahn, // ,//= 126,
     Zonama;// ,//= 127
 
-    public static StarSystemId FromInt(int i) {
-        return values()[i + 1];
+    public static StarSystemId FromInt(final int i) {
+        return StarSystemId.values()[i + 1];
     }
 
     @Override

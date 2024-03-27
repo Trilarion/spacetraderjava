@@ -1,6 +1,6 @@
 package org.spacetrader.model.ship;
 
-import org.spacetrader.model.enums.IdentifiableEnum;
+import org.spacetrader.util.IdentifiableEnum;
 
 public enum ShipSize implements IdentifiableEnum {
 

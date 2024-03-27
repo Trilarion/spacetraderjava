@@ -1,14 +1,20 @@
 package org.spacetrader.ui;
 
 import org.spacetrader.model.enums.Difficulty;
-import org.winforms.controls.Button;
-import org.winforms.controls.Dialog;
-import org.winforms.controls.Label;
-import org.winforms.controls.TextField;
-import org.winforms.controls.*;
-import org.winforms.enums.*;
-import org.winforms.events.EventData;
-import org.winforms.events.EventHandler;
+import org.winforms.alignment.ContentAlignment;
+import org.winforms.alignment.FormStartPosition;
+import org.winforms.alignment.HorizontalAlignment;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
+import org.winforms.widget.TextField;
+import org.winforms.widget.*;
+import org.winforms.dialog.DialogResult;
+import org.winforms.event.EventData;
+import org.winforms.event.EventHandler;
+import org.winforms.style.ComboBoxStyle;
+import org.winforms.style.FlatStyle;
+import org.winforms.style.FormBorderStyle;
 
 import java.awt.*;
 import java.util.Arrays;

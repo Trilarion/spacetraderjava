@@ -2,16 +2,16 @@ package org.spacetrader.ui;
 
 import org.spacetrader.controller.Game;
 import org.spacetrader.model.crew.Commander;
-import org.winforms.controls.Button;
-import org.winforms.controls.Dialog;
-import org.winforms.controls.Label;
-import org.winforms.controls.Spinner;
-import org.winforms.enums.DialogResult;
-import org.winforms.enums.FlatStyle;
-import org.winforms.enums.FormBorderStyle;
-import org.winforms.enums.FormStartPosition;
-import org.winforms.events.EventData;
-import org.winforms.events.EventHandler;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
+import org.winforms.widget.Spinner;
+import org.winforms.dialog.DialogResult;
+import org.winforms.style.FlatStyle;
+import org.winforms.style.FormBorderStyle;
+import org.winforms.alignment.FormStartPosition;
+import org.winforms.event.EventData;
+import org.winforms.event.EventHandler;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -21,11 +21,11 @@ public class DialogBuyFuel extends Dialog {
     private final Spinner numAmount;
 
     public DialogBuyFuel() {
-        Label labelQuestion = new Label();
+        final Label labelQuestion = new Label();
         numAmount = new Spinner();
-        Button buttonOk = new Button();
-        Button buttonMax = new Button();
-        Button buttonNothing = new Button();
+        final Button buttonOk = new Button();
+        final Button buttonMax = new Button();
+        final Button buttonNothing = new Button();
         suspendLayout();
         // labelQuestion
         labelQuestion.setAutoSize(true);
@@ -60,7 +60,7 @@ public class DialogBuyFuel extends Dialog {
         buttonMax.setText("Max");
         buttonMax.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 buttonMax_Click();
             }
         });
@@ -85,8 +85,8 @@ public class DialogBuyFuel extends Dialog {
         setStartPosition(FormStartPosition.CenterParent);
         setText("Buy Fuel");
         resumeLayout(false);
-        Game game = Game.getCurrentGame();
-        Commander commander = game.Commander();
+        final Game game = Game.getCurrentGame();
+        final Commander commander = game.Commander();
         numAmount.setMaximum(Math.min(commander.getCash(), (commander.getShip().FuelTanks() - commander.getShip().getFuel()) * commander.getShip().getFuelCost()));
         numAmount.setValue(numAmount.getMaximum());
     }

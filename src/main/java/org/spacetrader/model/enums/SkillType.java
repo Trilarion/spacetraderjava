@@ -1,6 +1,8 @@
 package org.spacetrader.model.enums;
 
 
+import org.spacetrader.util.IdentifiableEnum;
+
 public enum SkillType implements IdentifiableEnum {
     NA, // = -1,
     Pilot, // = 0,

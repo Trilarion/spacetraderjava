@@ -1,21 +1,27 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.Constants;
-import org.spacetrader.controller.Functions;
+import org.spacetrader.Constants;
+import org.spacetrader.model.ModelUtils;
 import org.spacetrader.controller.Game;
 import org.spacetrader.model.crew.Commander;
 import org.spacetrader.model.enums.AlertType;
 import org.spacetrader.model.events.SpecialEvent;
 import org.spacetrader.model.ship.Ship;
 import org.spacetrader.model.ship.ShipSpec;
-import org.winforms.Font;
-import org.winforms.controls.Button;
-import org.winforms.controls.Dialog;
-import org.winforms.controls.Label;
-import org.winforms.controls.*;
-import org.winforms.enums.*;
-import org.winforms.events.EventData;
-import org.winforms.events.EventHandler;
+import org.winforms.util.Font;
+import org.winforms.alignment.ContentAlignment;
+import org.winforms.alignment.FormStartPosition;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
+import org.winforms.widget.*;
+import org.winforms.dialog.DialogResult;
+import org.winforms.event.EventData;
+import org.winforms.event.EventHandler;
+import org.winforms.style.BorderStyle;
+import org.winforms.style.FlatStyle;
+import org.winforms.style.FontStyle;
+import org.winforms.style.FormBorderStyle;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -751,7 +757,7 @@ public class DialogShipList extends Dialog {
                 buttonBuy9,};
         UpdateAll();
         Info(ship.Type().getId());
-        if (0 < ship.getTribbles() && !game.getTribbleMessage()) {
+        if (ship.getTribbles() > 0 && !game.getTribbleMessage()) {
             DialogAlert.Alert(AlertType.TribblesTradeIn, this);
             game.setTribbleMessage(true);
         }
@@ -761,7 +767,7 @@ public class DialogShipList extends Dialog {
     private void Buy(int id) {
         Info(id);
         if (commander.TradeShip(Constants.ShipSpecs[id], prices[id], this)) {
-            if (SpecialEvent.StatusScarabDone == game.getQuestStatusScarab()) {
+            if (game.getQuestStatusScarab() == SpecialEvent.StatusScarabDone) {
                 game.setQuestStatusScarab(SpecialEvent.StatusScarabNotStarted);
             }
             UpdateAll();
@@ -774,13 +780,13 @@ public class DialogShipList extends Dialog {
         pictureShip.setImage(spec.Image());
         labelName.setText(spec.Name());
         labelSize.setText(Strings.Sizes[spec.getSize().getId()]);
-        labelBays.setText(Functions.FormatNumber(spec.CargoBays()));
-        labelRange.setText(Functions.Multiples(spec.FuelTanks(), Strings.DistanceUnit));
-        labelHull.setText(Functions.FormatNumber(spec.HullStrength()));
-        labelWeapon.setText(Functions.FormatNumber(spec.getWeaponSlots()));
-        labelShield.setText(Functions.FormatNumber(spec.getShieldSlots()));
-        labelGadget.setText(Functions.FormatNumber(spec.getGadgetSlots()));
-        labelCrew.setText(Functions.FormatNumber(spec.getCrewQuarters()));
+        labelBays.setText(ModelUtils.FormatNumber(spec.CargoBays()));
+        labelRange.setText(ModelUtils.Multiples(spec.FuelTanks(), Strings.DistanceUnit));
+        labelHull.setText(ModelUtils.FormatNumber(spec.HullStrength()));
+        labelWeapon.setText(ModelUtils.FormatNumber(spec.getWeaponSlots()));
+        labelShield.setText(ModelUtils.FormatNumber(spec.getShieldSlots()));
+        labelGadget.setText(ModelUtils.FormatNumber(spec.getGadgetSlots()));
+        labelCrew.setText(ModelUtils.FormatNumber(spec.getCrewQuarters()));
     }
 
     private void UpdateAll() {
@@ -793,7 +799,7 @@ public class DialogShipList extends Dialog {
             } else {
                 buttonBuy[i].setVisible(true);
                 prices[i] = Constants.ShipSpecs[i].getPrice() - ship.Worth(false);
-                labelPrice[i].setText(Functions.FormatMoney(prices[i]));
+                labelPrice[i].setText(ModelUtils.FormatMoney(prices[i]));
             }
         }
     }

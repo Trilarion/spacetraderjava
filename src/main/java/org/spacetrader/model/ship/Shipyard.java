@@ -1,6 +1,6 @@
 package org.spacetrader.model.ship;
 
-import org.spacetrader.controller.Constants;
+import org.spacetrader.Constants;
 import org.spacetrader.controller.Game;
 import org.spacetrader.model.enums.ShipyardId;
 import org.spacetrader.model.enums.ShipyardSkill;
@@ -158,9 +158,9 @@ public class Shipyard {
 
     public int PenaltyCost() {
         int penalty = 0;
-        if (PENALTY_SECOND_PCT <= PercentOfMaxUnits()) {
+        if (PercentOfMaxUnits() >= PENALTY_SECOND_PCT) {
             penalty = PENALTY_SECOND_FEE;
-        } else if (PENALTY_FIRST_PCT <= PercentOfMaxUnits()) {
+        } else if (PercentOfMaxUnits() >= PENALTY_FIRST_PCT) {
             penalty = PENALTY_FIRST_FEE;
         }
         return BasePrice() * penalty / 100;

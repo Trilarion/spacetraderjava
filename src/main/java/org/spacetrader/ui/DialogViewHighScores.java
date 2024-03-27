@@ -1,14 +1,14 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.Functions;
+import org.spacetrader.model.ModelUtils;
 import org.spacetrader.controller.HighScoreRecord;
-import org.winforms.controls.Button;
-import org.winforms.controls.Dialog;
-import org.winforms.controls.Label;
-import org.winforms.enums.ContentAlignment;
-import org.winforms.enums.DialogResult;
-import org.winforms.enums.FormBorderStyle;
-import org.winforms.enums.FormStartPosition;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
+import org.winforms.alignment.ContentAlignment;
+import org.winforms.dialog.DialogResult;
+import org.winforms.style.FormBorderStyle;
+import org.winforms.alignment.FormStartPosition;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -17,19 +17,19 @@ import java.util.Arrays;
 public class DialogViewHighScores extends Dialog {
 
     public DialogViewHighScores() {
-        Button buttonClose = new Button();
-        Label labelRank0 = new Label();
-        Label labelRank2 = new Label();
-        Label labelRank1 = new Label();
-        Label labelScore0 = new Label();
-        Label labelScore1 = new Label();
-        Label labelScore2 = new Label();
-        Label labelName0 = new Label();
-        Label labelName1 = new Label();
-        Label labelName2 = new Label();
-        Label labelStatus0 = new Label();
-        Label labelStatus1 = new Label();
-        Label labelStatus2 = new Label();
+        final Button buttonClose = new Button();
+        final Label labelRank0 = new Label();
+        final Label labelRank2 = new Label();
+        final Label labelRank1 = new Label();
+        final Label labelScore0 = new Label();
+        final Label labelScore1 = new Label();
+        final Label labelScore2 = new Label();
+        final Label labelName0 = new Label();
+        final Label labelName1 = new Label();
+        final Label labelName2 = new Label();
+        final Label labelStatus0 = new Label();
+        final Label labelStatus1 = new Label();
+        final Label labelStatus2 = new Label();
         suspendLayout();
         // buttonClose
         buttonClose.setDialogResult(DialogResult.Cancel);
@@ -141,17 +141,17 @@ public class DialogViewHighScores extends Dialog {
         setStartPosition(FormStartPosition.CenterParent);
         setText("High Scores");
         resumeLayout(false);
-        Label[] labelName = {labelName0, labelName1, labelName2};
-        Label[] labelScore = {labelScore0, labelScore1, labelScore2};
-        Label[] labelStatus = {labelStatus0, labelStatus1, labelStatus2};
-        HighScoreRecord[] highScores = Functions.GetHighScores(this);
-        for (int i = highScores.length - 1; 0 <= i && null != highScores[i]; i--) {
+        final Label[] labelName = {labelName0, labelName1, labelName2};
+        final Label[] labelScore = {labelScore0, labelScore1, labelScore2};
+        final Label[] labelStatus = {labelStatus0, labelStatus1, labelStatus2};
+        final HighScoreRecord[] highScores = ModelUtils.GetHighScores(this);
+        for (int i = highScores.length - 1; i >= 0 && highScores[i] != null; i--) {
             labelName[2 - i].setText(highScores[i].Name());
-            labelScore[2 - i].setText(Functions.FormatNumber(highScores[i].Score() / 10) + "." + highScores[i].Score() % 10);
-            labelStatus[2 - i].setText(Functions.StringVars(Strings.HighScoreStatus, new String[]{
+            labelScore[2 - i].setText(ModelUtils.FormatNumber(highScores[i].Score() / 10) + "." + highScores[i].Score() % 10);
+            labelStatus[2 - i].setText(ModelUtils.StringVars(Strings.HighScoreStatus, new String[]{
                     Strings.GameCompletionTypes[highScores[i].Type().getId()],
-                    Functions.Multiples(highScores[i].Days(), Strings.TimeUnit),
-                    Functions.Multiples(highScores[i].Worth(), Strings.MoneyUnit),
+                    ModelUtils.Multiples(highScores[i].Days(), Strings.TimeUnit),
+                    ModelUtils.Multiples(highScores[i].Worth(), Strings.MoneyUnit),
                     Strings.DifficultyLevels[highScores[i].Difficulty().getId()].toLowerCase()
             }));
             labelScore[2 - i].setVisible(true);

@@ -1,13 +1,17 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.Functions;
+import org.spacetrader.model.ModelUtils;
 import org.spacetrader.controller.Game;
-import org.winforms.Font;
-import org.winforms.controls.Button;
-import org.winforms.controls.Dialog;
-import org.winforms.controls.Label;
-import org.winforms.controls.PictureBox;
-import org.winforms.enums.*;
+import org.winforms.util.Font;
+import org.winforms.alignment.ContentAlignment;
+import org.winforms.alignment.FormStartPosition;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
+import org.winforms.widget.PictureBox;
+import org.winforms.dialog.DialogResult;
+import org.winforms.style.FontStyle;
+import org.winforms.style.FormBorderStyle;
 
 import java.awt.*;
 
@@ -132,11 +136,11 @@ public class DialogCosts extends Dialog {
         setText("Cost Specification");
         resumeLayout(false);
         Game game = Game.getCurrentGame();
-        labelMerc.setText(Functions.FormatMoney(game.MercenaryCosts()));
-        labelIns.setText(Functions.FormatMoney(game.InsuranceCosts()));
-        labelInt.setText(Functions.FormatMoney(game.InterestCosts()));
-        labelTax.setText(Functions.FormatMoney(game.WormholeCosts()));
-        labelTotal.setText(Functions.FormatMoney(game.CurrentCosts()));
+        labelMerc.setText(ModelUtils.FormatMoney(game.MercenaryCosts()));
+        labelIns.setText(ModelUtils.FormatMoney(game.InsuranceCosts()));
+        labelInt.setText(ModelUtils.FormatMoney(game.InterestCosts()));
+        labelTax.setText(ModelUtils.FormatMoney(game.WormholeCosts()));
+        labelTotal.setText(ModelUtils.FormatMoney(game.CurrentCosts()));
     }
 
 }

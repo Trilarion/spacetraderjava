@@ -1,6 +1,6 @@
 package org.spacetrader.model.ship;
 
-import org.spacetrader.model.enums.IdentifiableEnum;
+import org.spacetrader.util.IdentifiableEnum;
 
 
 public enum ShipType implements IdentifiableEnum {
@@ -22,8 +22,8 @@ public enum ShipType implements IdentifiableEnum {
     Custom, // 15
     Scorpion;    // 16
 
-    public static ShipType FromInt(int i) {
-        return values()[i];
+    public static ShipType FromInt(final int i) {
+        return ShipType.values()[i];
     }
 
     @Override

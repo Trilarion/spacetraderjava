@@ -1,6 +1,6 @@
 package org.spacetrader.model.cargo;
 
-import org.spacetrader.model.enums.IdentifiableEnum;
+import org.spacetrader.util.IdentifiableEnum;
 
 
 public enum CargoSellOperation implements IdentifiableEnum {

@@ -1,7 +1,6 @@
 package org.spacetrader.ui;
 
 import javax.swing.*;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 
@@ -17,12 +16,12 @@ public class DialogMonsterDotCom extends JDialog {
     /**
      * Creates new form DialogMonsterDotCom
      */
-    public DialogMonsterDotCom(Frame parent, boolean modal) {
+    public DialogMonsterDotCom(final Frame parent, final boolean modal) {
         super(parent, modal);
 
-        JPanel panel1 = new JPanel();
-        JScrollPane scrollPane1 = new JScrollPane();
-        JList<String> list1 = new JList<>();
+        final JPanel panel1 = new JPanel();
+        final JScrollPane scrollPane1 = new JScrollPane();
+        final JList<String> list1 = new JList<>();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("The Monster-Dot-Com Jobs Board");
@@ -36,17 +35,17 @@ public class DialogMonsterDotCom extends JDialog {
         list1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         scrollPane1.setViewportView(list1);
 
-        GroupLayout panel1Layout = new GroupLayout(panel1);
+        final GroupLayout panel1Layout = new GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
-                panel1Layout.createParallelGroup(Alignment.LEADING)
+                panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(panel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                                 .addContainerGap())
         );
         panel1Layout.setVerticalGroup(
-                panel1Layout.createParallelGroup(Alignment.LEADING)
+                panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(panel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
@@ -56,14 +55,14 @@ public class DialogMonsterDotCom extends JDialog {
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(Alignment.LEADING)
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(397, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(Alignment.LEADING)
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)

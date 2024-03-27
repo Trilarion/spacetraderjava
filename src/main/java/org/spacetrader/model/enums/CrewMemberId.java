@@ -1,5 +1,7 @@
 package org.spacetrader.model.enums;
 
+import org.spacetrader.util.IdentifiableEnum;
+
 // TODO is this the best way of having autonumbered enums? are the exact ids important?
 public enum CrewMemberId implements IdentifiableEnum {
     NA, // = -1,
@@ -59,8 +61,8 @@ public enum CrewMemberId implements IdentifiableEnum {
     Princess, // = 53,
     Scorpion;// = 54
 
-    public static CrewMemberId FromInt(int i) {
-        return values()[i + 1];
+    public static CrewMemberId FromInt(final int i) {
+        return CrewMemberId.values()[i + 1];
     }
 
     @Override

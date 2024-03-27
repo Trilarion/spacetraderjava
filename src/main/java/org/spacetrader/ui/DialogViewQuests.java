@@ -1,21 +1,21 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.Constants;
-import org.spacetrader.controller.Functions;
+import org.spacetrader.Constants;
+import org.spacetrader.model.ModelUtils;
 import org.spacetrader.controller.Game;
 import org.spacetrader.model.enums.CrewMemberId;
 import org.spacetrader.model.events.SpecialEvent;
 import org.spacetrader.model.events.SpecialEventType;
-import org.spacetrader.util.Util;
-import org.winforms.Link;
-import org.winforms.LinkArea;
-import org.winforms.LinkLabel;
-import org.winforms.controls.Button;
-import org.winforms.controls.Dialog;
-import org.winforms.enums.DialogResult;
-import org.winforms.enums.FormBorderStyle;
-import org.winforms.enums.FormStartPosition;
-import org.winforms.events.EventHandler;
+import org.spacetrader.util.Utils;
+import org.winforms.link.Link;
+import org.winforms.link.LinkArea;
+import org.winforms.link.LinkLabel;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.dialog.DialogResult;
+import org.winforms.style.FormBorderStyle;
+import org.winforms.alignment.FormStartPosition;
+import org.winforms.event.EventHandler;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class DialogViewQuests extends Dialog {
     private final LinkLabel labelQuests;
 
     public DialogViewQuests() {
-        Button buttonClose = new Button();
+        final Button buttonClose = new Button();
         labelQuests = new LinkLabel();
         suspendLayout();
         // buttonClose
@@ -58,7 +58,7 @@ public class DialogViewQuests extends Dialog {
                 + "Claim your moon at Utopia.");
         labelQuests.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(Object sender, Link data) {
+            public void handle(final Object sender, final Link data) {
                 labelQuests_LinkClicked(sender, data);
             }
         };
@@ -80,36 +80,36 @@ public class DialogViewQuests extends Dialog {
 
 
     private String[] GetQuestStrings() {
-        ArrayList<String> quests = new ArrayList<>(12);
-        if (SpecialEvent.StatusGemulonNotStarted < game.getQuestStatusGemulon() && SpecialEvent.StatusGemulonDate > game.getQuestStatusGemulon()) {
-            if (SpecialEvent.StatusGemulonDate - 1 == game.getQuestStatusGemulon()) {
+        final ArrayList<String> quests = new ArrayList<>(12);
+        if (game.getQuestStatusGemulon() > SpecialEvent.StatusGemulonNotStarted && game.getQuestStatusGemulon() < SpecialEvent.StatusGemulonDate) {
+            if (game.getQuestStatusGemulon() == SpecialEvent.StatusGemulonDate - 1) {
                 quests.add(Strings.QuestGemulonInformTomorrow);
             } else {
-                quests.add(Functions.StringVars(Strings.QuestGemulonInformDays, Functions.Multiples(SpecialEvent.StatusGemulonDate - game.getQuestStatusGemulon(), "day")));
+                quests.add(ModelUtils.StringVars(Strings.QuestGemulonInformDays, ModelUtils.Multiples(SpecialEvent.StatusGemulonDate - game.getQuestStatusGemulon(), "day")));
             }
-        } else if (SpecialEvent.StatusGemulonFuel == game.getQuestStatusGemulon()) {
+        } else if (game.getQuestStatusGemulon() == SpecialEvent.StatusGemulonFuel) {
             quests.add(Strings.QuestGemulonFuel);
         }
-        if (SpecialEvent.StatusExperimentNotStarted < game.getQuestStatusExperiment() && SpecialEvent.StatusExperimentDate > game.getQuestStatusExperiment()) {
-            if (SpecialEvent.StatusExperimentDate - 1 == game.getQuestStatusExperiment()) {
+        if (game.getQuestStatusExperiment() > SpecialEvent.StatusExperimentNotStarted && game.getQuestStatusExperiment() < SpecialEvent.StatusExperimentDate) {
+            if (game.getQuestStatusExperiment() == SpecialEvent.StatusExperimentDate - 1) {
                 quests.add(Strings.QuestExperimentInformTomorrow);
             } else {
-                quests.add(Functions.StringVars(Strings.QuestExperimentInformDays, Functions.Multiples(SpecialEvent.StatusExperimentDate - game.getQuestStatusExperiment(), "day")));
+                quests.add(ModelUtils.StringVars(Strings.QuestExperimentInformDays, ModelUtils.Multiples(SpecialEvent.StatusExperimentDate - game.getQuestStatusExperiment(), "day")));
             }
         }
         if (game.Commander().getShip().ReactorOnBoard()) {
-            if (SpecialEvent.StatusReactorFuelOk == game.getQuestStatusReactor()) {
+            if (game.getQuestStatusReactor() == SpecialEvent.StatusReactorFuelOk) {
                 quests.add(Strings.QuestReactor);
             } else {
                 quests.add(Strings.QuestReactorFuel);
             }
-        } else if (SpecialEvent.StatusReactorDelivered == game.getQuestStatusReactor()) {
+        } else if (game.getQuestStatusReactor() == SpecialEvent.StatusReactorDelivered) {
             quests.add(Strings.QuestReactorLaser);
         }
-        if (SpecialEvent.StatusSpaceMonsterAtAcamar == game.getQuestStatusSpaceMonster()) {
+        if (game.getQuestStatusSpaceMonster() == SpecialEvent.StatusSpaceMonsterAtAcamar) {
             quests.add(Strings.QuestSpaceMonsterKill);
         }
-        if (SpecialEvent.StatusJaporiInTransit == game.getQuestStatusJapori()) {
+        if (game.getQuestStatusJapori() == SpecialEvent.StatusJaporiInTransit) {
             quests.add(Strings.QuestJaporiDeliver);
         }
         switch (game.getQuestStatusDragonfly()) {
@@ -141,70 +141,70 @@ public class DialogViewQuests extends Dialog {
                 break;
             case SpecialEvent.StatusPrincessRescued:
                 if (game.Commander().getShip().PrincessOnBoard()) {
-                    if (SpecialEvent.StatusPrincessImpatient == game.getQuestStatusPrincess()) {
-                        quests.add(Functions.StringVars(Strings.QuestPrincessReturningImpatient, game.Mercenaries()[CrewMemberId.Princess.getId()].Name()));
+                    if (game.getQuestStatusPrincess() == SpecialEvent.StatusPrincessImpatient) {
+                        quests.add(ModelUtils.StringVars(Strings.QuestPrincessReturningImpatient, game.Mercenaries()[CrewMemberId.Princess.getId()].Name()));
                     } else {
-                        quests.add(Functions.StringVars(Strings.QuestPrincessReturning, game.Mercenaries()[CrewMemberId.Princess.getId()].Name()));
+                        quests.add(ModelUtils.StringVars(Strings.QuestPrincessReturning, game.Mercenaries()[CrewMemberId.Princess.getId()].Name()));
                     }
                 } else {
-                    quests.add(Functions.StringVars(Strings.QuestPrincessReturn, game.Mercenaries()[CrewMemberId.Princess.getId()].Name()));
+                    quests.add(ModelUtils.StringVars(Strings.QuestPrincessReturn, game.Mercenaries()[CrewMemberId.Princess.getId()].Name()));
                 }
                 break;
             case SpecialEvent.StatusPrincessReturned:
                 quests.add(Strings.QuestPrincessQuantum);
                 break;
         }
-        if (SpecialEvent.StatusScarabHunting == game.getQuestStatusScarab()) {
+        if (game.getQuestStatusScarab() == SpecialEvent.StatusScarabHunting) {
             quests.add(Strings.QuestScarabFind);
-        } else if (SpecialEvent.StatusScarabDestroyed == game.getQuestStatusScarab()) {
-            if (null == Constants.SpecialEvents[SpecialEventType.ScarabUpgradeHull.getId()].getLocation()) {
-                quests.add(Functions.StringVars(Strings.QuestScarabNotify, Constants.SpecialEvents[SpecialEventType.ScarabDestroyed.getId()].getLocation().Name()));
+        } else if (game.getQuestStatusScarab() == SpecialEvent.StatusScarabDestroyed) {
+            if (Constants.SpecialEvents[SpecialEventType.ScarabUpgradeHull.getId()].getLocation() == null) {
+                quests.add(ModelUtils.StringVars(Strings.QuestScarabNotify, Constants.SpecialEvents[SpecialEventType.ScarabDestroyed.getId()].getLocation().Name()));
             } else {
-                quests.add(Functions.StringVars(Strings.QuestScarabHull, Constants.SpecialEvents[SpecialEventType.ScarabUpgradeHull.getId()].getLocation().Name()));
+                quests.add(ModelUtils.StringVars(Strings.QuestScarabHull, Constants.SpecialEvents[SpecialEventType.ScarabUpgradeHull.getId()].getLocation().Name()));
             }
         }
         if (game.Commander().getShip().SculptureOnBoard()) {
             quests.add(Strings.QuestSculpture);
-        } else if (SpecialEvent.StatusReactorDelivered == game.getQuestStatusReactor()) {
+        } else if (game.getQuestStatusReactor() == SpecialEvent.StatusReactorDelivered) {
             quests.add(Strings.QuestSculptureHiddenBays);
         }
-        if (SpecialEvent.StatusArtifactOnBoard == game.getQuestStatusArtifact()) {
+        if (game.getQuestStatusArtifact() == SpecialEvent.StatusArtifactOnBoard) {
             quests.add(Strings.QuestArtifact);
         }
         if (game.Commander().getShip().JarekOnBoard()) {
-            if (SpecialEvent.StatusJarekImpatient == game.getQuestStatusJarek()) {
+            if (game.getQuestStatusJarek() == SpecialEvent.StatusJarekImpatient) {
                 quests.add(Strings.QuestJarekImpatient);
             } else {
                 quests.add(Strings.QuestJarek);
             }
         }
         if (game.Commander().getShip().WildOnBoard()) {
-            if (SpecialEvent.StatusWildImpatient == game.getQuestStatusWild()) {
+            if (game.getQuestStatusWild() == SpecialEvent.StatusWildImpatient) {
                 quests.add(Strings.QuestWildImpatient);
             } else {
                 quests.add(Strings.QuestWild);
             }
         }
-        if (0 < game.Commander().getShip().getTribbles()) {
+        if (game.Commander().getShip().getTribbles() > 0) {
             quests.add(Strings.QuestTribbles);
         }
-        if (SpecialEvent.StatusMoonBought == game.getQuestStatusMoon()) {
+        if (game.getQuestStatusMoon() == SpecialEvent.StatusMoonBought) {
             quests.add(Strings.QuestMoon);
         }
-        return Functions.arrayListtoStringArray(quests);
+        return ModelUtils.arrayListtoStringArray(quests);
     }
 
     private void UpdateAll() {
-        String[] quests = GetQuestStrings();
-        if (0 == quests.length) {
+        final String[] quests = GetQuestStrings();
+        if (quests.length == 0) {
             labelQuests.setText(Strings.QuestNone);
         } else {
-            labelQuests.setText(Util.stringsJoin(Strings.newline + Strings.newline, quests));
+            labelQuests.setText(Utils.stringsJoin(Strings.newline + Strings.newline, quests));
             for (int i = 0; i < Strings.SystemNames.length; i++) {
-                String systemName = Strings.SystemNames[i];
+                final String systemName = Strings.SystemNames[i];
                 int start = 0;
                 int index = -1;
-                while (0 <= (index = labelQuests.getText().indexOf(systemName, start))) {
+                while ((index = labelQuests.getText().indexOf(systemName, start)) >= 0) {
                     labelQuests.links.add(index, systemName.length(), systemName);
                     start = index + systemName.length();
                 }
@@ -212,7 +212,7 @@ public class DialogViewQuests extends Dialog {
         }
     }
 
-    private void labelQuests_LinkClicked(Object sender, Link e) {
+    private void labelQuests_LinkClicked(final Object sender, final Link e) {
         game.setSelectedSystemByName(e.linkData.toString());
         game.getParentWindow().updateAll();
         Close();

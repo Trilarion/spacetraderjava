@@ -19,7 +19,7 @@ public class RegistryKey {
         } catch (IOException e) {
             throw new Error("Can't create/load regfile.");
         } finally {
-            if (null != stream) {
+            if (stream != null) {
                 try {
                     stream.close();
                 } catch (IOException e) {

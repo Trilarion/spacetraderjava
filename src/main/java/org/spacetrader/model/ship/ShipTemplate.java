@@ -1,9 +1,9 @@
 package org.spacetrader.model.ship;
 
-import org.spacetrader.controller.Constants;
+import org.spacetrader.Constants;
 import org.spacetrader.controller.Game;
-import org.spacetrader.controller.SerializableObject;
-import org.winforms.Image;
+import org.spacetrader.model.SerializableObject;
+import org.winforms.image.Image;
 
 import java.util.Hashtable;
 
@@ -21,27 +21,27 @@ public class ShipTemplate extends SerializableObject implements Comparable<ShipT
     private int fuelTanks;
     private int hullStrength;
 
-    public ShipTemplate(Hashtable ht) {
-        name = GetValueFromHash(ht, "_name", name, String.class);
-        size = (GetValueFromHash(ht, "_size", size));
-        imageIndex = GetValueFromHash(ht, "_imageIndex", imageIndex);
-        cargoBays = GetValueFromHash(ht, "_cargoBays", cargoBays);
-        weaponSlots = GetValueFromHash(ht, "_weaponSlots", weaponSlots);
-        shieldSlots = GetValueFromHash(ht, "_shieldSlots", shieldSlots);
-        gadgetSlots = GetValueFromHash(ht, "_gadgetSlots", gadgetSlots);
-        crewQuarters = GetValueFromHash(ht, "_crewQuarters", crewQuarters);
-        fuelTanks = GetValueFromHash(ht, "_fuelTanks", fuelTanks);
-        hullStrength = GetValueFromHash(ht, "_hullStrength", hullStrength);
-        images = GetValueFromHash(ht, "_images", images);
+    public ShipTemplate(final Hashtable ht) {
+        name = SerializableObject.GetValueFromHash(ht, "_name", name, String.class);
+        size = (SerializableObject.GetValueFromHash(ht, "_size", size));
+        imageIndex = SerializableObject.GetValueFromHash(ht, "_imageIndex", imageIndex);
+        cargoBays = SerializableObject.GetValueFromHash(ht, "_cargoBays", cargoBays);
+        weaponSlots = SerializableObject.GetValueFromHash(ht, "_weaponSlots", weaponSlots);
+        shieldSlots = SerializableObject.GetValueFromHash(ht, "_shieldSlots", shieldSlots);
+        gadgetSlots = SerializableObject.GetValueFromHash(ht, "_gadgetSlots", gadgetSlots);
+        crewQuarters = SerializableObject.GetValueFromHash(ht, "_crewQuarters", crewQuarters);
+        fuelTanks = SerializableObject.GetValueFromHash(ht, "_fuelTanks", fuelTanks);
+        hullStrength = SerializableObject.GetValueFromHash(ht, "_hullStrength", hullStrength);
+        images = SerializableObject.GetValueFromHash(ht, "_images", images);
     }
 
-    public ShipTemplate(ShipSize s, String t) {
+    public ShipTemplate(final ShipSize s, final String t) {
         size = s;
         name = t;
         images = Game.getCurrentGame().getParentWindow().CustomShipImages();
     }
 
-    public ShipTemplate(ShipSpec s, String t) {
+    public ShipTemplate(final ShipSpec s, final String t) {
         name = t;
         size = s.getSize();
         imageIndex = s.ImageIndex();
@@ -52,14 +52,14 @@ public class ShipTemplate extends SerializableObject implements Comparable<ShipT
         crewQuarters = s.getCrewQuarters();
         fuelTanks = s.FuelTanks();
         hullStrength = s.HullStrength();
-        if (Constants.ShipImgUseDefault == imageIndex) {
+        if (imageIndex == Constants.ShipImgUseDefault) {
             images = Game.getCurrentGame().getParentWindow().CustomShipImages();
         }
     }
 
     @Override
-    public int compareTo(ShipTemplate st) {
-        if (null == st) {
+    public int compareTo(final ShipTemplate st) {
+        if (st == null) {
             return 1;
         } else {
             return name.compareTo(st.name);
@@ -68,7 +68,7 @@ public class ShipTemplate extends SerializableObject implements Comparable<ShipT
 
     @Override
     public Hashtable Serialize() {
-        Hashtable hash = super.Serialize();
+        final Hashtable hash = super.Serialize();
         hash.put("_name", name);
         hash.put("_size", size.getId());
         hash.put("_imageIndex", imageIndex);
@@ -79,7 +79,7 @@ public class ShipTemplate extends SerializableObject implements Comparable<ShipT
         hash.put("_crewQuarters", crewQuarters);
         hash.put("_fuelTanks", fuelTanks);
         hash.put("_hullStrength", hullStrength);
-        if (null != images) {
+        if (images != null) {
             hash.put("_images", images);
         }
         return hash;
@@ -94,7 +94,7 @@ public class ShipTemplate extends SerializableObject implements Comparable<ShipT
         return cargoBays;
     }
 
-    public void CargoBays(int i) {
+    public void CargoBays(final int i) {
         cargoBays = i;
     }
 
@@ -102,7 +102,7 @@ public class ShipTemplate extends SerializableObject implements Comparable<ShipT
         return crewQuarters;
     }
 
-    public void CrewQuarters(int i) {
+    public void CrewQuarters(final int i) {
         crewQuarters = i;
     }
 
@@ -110,7 +110,7 @@ public class ShipTemplate extends SerializableObject implements Comparable<ShipT
         return fuelTanks;
     }
 
-    public void FuelTanks(int i) {
+    public void FuelTanks(final int i) {
         fuelTanks = i;
     }
 
@@ -118,7 +118,7 @@ public class ShipTemplate extends SerializableObject implements Comparable<ShipT
         return gadgetSlots;
     }
 
-    public void GadgetSlots(int i) {
+    public void GadgetSlots(final int i) {
         gadgetSlots = i;
     }
 
@@ -126,7 +126,7 @@ public class ShipTemplate extends SerializableObject implements Comparable<ShipT
         return hullStrength;
     }
 
-    public void HullStrength(int i) {
+    public void HullStrength(final int i) {
         hullStrength = i;
     }
 
@@ -134,7 +134,7 @@ public class ShipTemplate extends SerializableObject implements Comparable<ShipT
         return imageIndex;
     }
 
-    public void ImageIndex(int i) {
+    public void ImageIndex(final int i) {
         imageIndex = i;
     }
 
@@ -142,7 +142,7 @@ public class ShipTemplate extends SerializableObject implements Comparable<ShipT
         return images;
     }
 
-    public void Images(Image[] is) {
+    public void Images(final Image[] is) {
         images = is;
     }
 
@@ -150,7 +150,7 @@ public class ShipTemplate extends SerializableObject implements Comparable<ShipT
         return name;
     }
 
-    public void Name(String s) {
+    public void Name(final String s) {
         name = s;
     }
 
@@ -158,7 +158,7 @@ public class ShipTemplate extends SerializableObject implements Comparable<ShipT
         return shieldSlots;
     }
 
-    public void ShieldSlots(int i) {
+    public void ShieldSlots(final int i) {
         shieldSlots = i;
     }
 
@@ -166,7 +166,7 @@ public class ShipTemplate extends SerializableObject implements Comparable<ShipT
         return size;
     }
 
-    public void Size(ShipSize ss) {
+    public void Size(final ShipSize ss) {
         size = ss;
     }
 
@@ -174,7 +174,7 @@ public class ShipTemplate extends SerializableObject implements Comparable<ShipT
         return weaponSlots;
     }
 
-    public void WeaponSlots(int i) {
+    public void WeaponSlots(final int i) {
         weaponSlots = i;
     }
 }

@@ -1,6 +1,6 @@
 package org.spacetrader.model.events;
 
-import org.spacetrader.model.enums.IdentifiableEnum;
+import org.spacetrader.util.IdentifiableEnum;
 
 
 public enum NewsEvent implements IdentifiableEnum {
@@ -45,8 +45,8 @@ public enum NewsEvent implements IdentifiableEnum {
     PrincessRescued, // = 37,
     PrincessReturned;// = 38
 
-    public static NewsEvent FromInt(int i) {
-        return values()[i];
+    public static NewsEvent FromInt(final int i) {
+        return NewsEvent.values()[i];
     }
 
     @Override

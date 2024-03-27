@@ -1,16 +1,16 @@
 package org.spacetrader.ui;
 
-import org.winforms.Font;
-import org.winforms.Image;
-import org.winforms.ResourceManager;
-import org.winforms.controls.Button;
-import org.winforms.controls.Dialog;
-import org.winforms.controls.Label;
-import org.winforms.controls.PictureBox;
-import org.winforms.enums.DialogResult;
-import org.winforms.enums.FontStyle;
-import org.winforms.enums.FormBorderStyle;
-import org.winforms.enums.FormStartPosition;
+import org.winforms.util.Font;
+import org.winforms.image.Image;
+import org.winforms.resource.ResourceManager;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
+import org.winforms.widget.PictureBox;
+import org.winforms.dialog.DialogResult;
+import org.winforms.style.FontStyle;
+import org.winforms.style.FormBorderStyle;
+import org.winforms.alignment.FormStartPosition;
 
 import java.awt.*;
 
@@ -18,11 +18,11 @@ import java.awt.*;
 public class DialogAbout extends Dialog {
 
     public DialogAbout() {
-        ResourceManager resources = new ResourceManager(DialogAbout.class);
-        Button buttonClose = new Button();
-        Label labelTitle = new Label();
-        Label labelAbout = new Label();
-        PictureBox pictureLogo = new PictureBox();
+        final ResourceManager resources = new ResourceManager(DialogAbout.class);
+        final Button buttonClose = new Button();
+        final Label labelTitle = new Label();
+        final Label labelAbout = new Label();
+        final PictureBox pictureLogo = new PictureBox();
         suspendLayout();
         // buttonClose
         buttonClose.setDialogResult(DialogResult.Cancel);

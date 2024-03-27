@@ -1,20 +1,20 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.Constants;
-import org.spacetrader.controller.Functions;
+import org.spacetrader.Constants;
+import org.spacetrader.model.ModelUtils;
 import org.spacetrader.controller.Game;
 import org.spacetrader.model.cargo.CargoSellOperation;
 import org.spacetrader.model.crew.Commander;
-import org.winforms.controls.Button;
-import org.winforms.controls.Dialog;
-import org.winforms.controls.Label;
-import org.winforms.controls.Spinner;
-import org.winforms.enums.DialogResult;
-import org.winforms.enums.FlatStyle;
-import org.winforms.enums.FormBorderStyle;
-import org.winforms.enums.FormStartPosition;
-import org.winforms.events.EventData;
-import org.winforms.events.EventHandler;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
+import org.winforms.widget.Spinner;
+import org.winforms.dialog.DialogResult;
+import org.winforms.style.FlatStyle;
+import org.winforms.style.FormBorderStyle;
+import org.winforms.alignment.FormStartPosition;
+import org.winforms.event.EventData;
+import org.winforms.event.EventHandler;
 
 import java.awt.*;
 
@@ -118,26 +118,26 @@ public class DialogCargoSell extends Dialog {
         int cost = commander.PriceCargo()[item] / commander.getShip().Cargo()[item];
         numAmount.setMaximum(maxAmount);
         numAmount.setValue(numAmount.getMinimum());
-        setText(Functions.StringVars(Strings.CargoTitle, Strings.CargoSellOps[op.getId()], Constants.TradeItems[item].Name()));
-        labelQuestion.setText(Functions.StringVars("How many do you want to ^1?", Strings.CargoSellOps[op.getId()].toLowerCase()));
-        labelPaid.setText(Functions.StringVars(CargoSellOperation.SellTrader == op
-                ? "You paid about ^1 per unit, and can sell ^2." : "You paid about ^1 per unit.", Functions.FormatMoney(cost), Functions.Multiples(maxAmount, Strings.CargoUnit)));
-        labelProfit.setText(Functions.StringVars("Your ^1 per unit is ^2", price >= cost
-                ? "profit" : "loss", Functions.FormatMoney(price >= cost ? price - cost : cost - price)));
+        setText(ModelUtils.StringVars(Strings.CargoTitle, Strings.CargoSellOps[op.getId()], Constants.TradeItems[item].Name()));
+        labelQuestion.setText(ModelUtils.StringVars("How many do you want to ^1?", Strings.CargoSellOps[op.getId()].toLowerCase()));
+        labelPaid.setText(ModelUtils.StringVars(op == CargoSellOperation.SellTrader
+                ? "You paid about ^1 per unit, and can sell ^2." : "You paid about ^1 per unit.", ModelUtils.FormatMoney(cost), ModelUtils.Multiples(maxAmount, Strings.CargoUnit)));
+        labelProfit.setText(ModelUtils.StringVars("Your ^1 per unit is ^2", price >= cost
+                ? "profit" : "loss", ModelUtils.FormatMoney(price >= cost ? price - cost : cost - price)));
         // Override defaults for some ops.
         switch (op) {
             case Dump:
-                labelStatement.setText(Functions.StringVars(Strings.CargoSellStatementDump, Strings.CargoSellOps[op.getId()].toLowerCase(), Functions.FormatNumber(maxAmount)));
-                labelProfit.setText(Functions.StringVars("It costs ^1 per unit for disposal.", Functions.FormatMoney(-price)));
+                labelStatement.setText(ModelUtils.StringVars(Strings.CargoSellStatementDump, Strings.CargoSellOps[op.getId()].toLowerCase(), ModelUtils.FormatNumber(maxAmount)));
+                labelProfit.setText(ModelUtils.StringVars("It costs ^1 per unit for disposal.", ModelUtils.FormatMoney(-price)));
                 break;
             case Jettison:
-                labelStatement.setText(Functions.StringVars(Strings.CargoSellStatementDump, Strings.CargoSellOps[op.getId()].toLowerCase(), Functions.FormatNumber(maxAmount)));
+                labelStatement.setText(ModelUtils.StringVars(Strings.CargoSellStatementDump, Strings.CargoSellOps[op.getId()].toLowerCase(), ModelUtils.FormatNumber(maxAmount)));
                 break;
             case SellSystem:
-                labelStatement.setText(Functions.StringVars("You can sell up to ^1 at ^2 each.", Functions.FormatNumber(maxAmount), Functions.FormatMoney(price)));
+                labelStatement.setText(ModelUtils.StringVars("You can sell up to ^1 at ^2 each.", ModelUtils.FormatNumber(maxAmount), ModelUtils.FormatMoney(price)));
                 break;
             case SellTrader:
-                labelStatement.setText(Functions.StringVars("The trader wants to buy ^1 and offers ^2 each.", Constants.TradeItems[item].Name(), Functions.FormatMoney(price)));
+                labelStatement.setText(ModelUtils.StringVars("The trader wants to buy ^1 and offers ^2 each.", Constants.TradeItems[item].Name(), ModelUtils.FormatMoney(price)));
                 break;
         }
     }

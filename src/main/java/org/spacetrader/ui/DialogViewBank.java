@@ -1,17 +1,22 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.Constants;
-import org.spacetrader.controller.Functions;
+import org.spacetrader.Constants;
+import org.spacetrader.model.ModelUtils;
 import org.spacetrader.controller.Game;
 import org.spacetrader.model.crew.Commander;
 import org.spacetrader.model.enums.AlertType;
-import org.winforms.Font;
-import org.winforms.controls.Button;
-import org.winforms.controls.Dialog;
-import org.winforms.controls.Label;
-import org.winforms.enums.*;
-import org.winforms.events.EventData;
-import org.winforms.events.EventHandler;
+import org.winforms.util.Font;
+import org.winforms.alignment.ContentAlignment;
+import org.winforms.alignment.FormStartPosition;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
+import org.winforms.dialog.DialogResult;
+import org.winforms.event.EventData;
+import org.winforms.event.EventHandler;
+import org.winforms.style.FlatStyle;
+import org.winforms.style.FontStyle;
+import org.winforms.style.FormBorderStyle;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -20,7 +25,7 @@ import java.util.Arrays;
 public class DialogViewBank extends Dialog {
     private final Game game = Game.getCurrentGame();
     private final Commander commander = game.Commander();
-    private final int MaxLoan = Constants.PoliceRecordScoreClean <= commander.getPoliceRecordScore()
+    private final int MaxLoan = commander.getPoliceRecordScore() >= Constants.PoliceRecordScoreClean
             ? Math.min(25000, Math.max(1000, commander.Worth() / 5000 * 500)) : 500;
     private final Button buttonBuyInsurance;
     private final Button buttonPayBack;
@@ -32,27 +37,27 @@ public class DialogViewBank extends Dialog {
     private final Label labelMaxNoClaim;
 
     public DialogViewBank() {
-        Label labelLoan = new Label();
-        Label labelCurrentDebtLabel = new Label();
-        Label labelMaxLoanLabel = new Label();
+        final Label labelLoan = new Label();
+        final Label labelCurrentDebtLabel = new Label();
+        final Label labelMaxLoanLabel = new Label();
         labelCurrentDebt = new Label();
         labelMaxLoan = new Label();
-        Button buttonGetLoan = new Button();
+        final Button buttonGetLoan = new Button();
         buttonBuyInsurance = new Button();
         labelNoClaim = new Label();
         labelShipValue = new Label();
-        Label labelNoClaimLabel = new Label();
-        Label labelShipValueLabel = new Label();
-        Label labelInsurance = new Label();
+        final Label labelNoClaimLabel = new Label();
+        final Label labelShipValueLabel = new Label();
+        final Label labelInsurance = new Label();
         labelInsAmt = new Label();
-        Label labelInsAmtLabel = new Label();
+        final Label labelInsAmtLabel = new Label();
         buttonPayBack = new Button();
-        Button buttonClose = new Button();
+        final Button buttonClose = new Button();
         labelMaxNoClaim = new Label();
         suspendLayout();
         // labelLoan
         labelLoan.setAutoSize(true);
-        labelLoan.setFont(new Font("Microsoft Sans Serif", FontStyle.Bold, (int) 12F));
+        labelLoan.setFont(new Font("Microsoft Sans Serif", FontStyle.Bold, (int) 12.0F));
         labelLoan.setLocation(new Point(8, 8));
         labelLoan.setName("labelLoan");
         labelLoan.setSize(new Dimension(44, 19));
@@ -97,7 +102,7 @@ public class DialogViewBank extends Dialog {
         buttonGetLoan.setText("Get Loan");
         buttonGetLoan.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 buttonGetLoan_Click(sender, data);
             }
         });
@@ -110,7 +115,7 @@ public class DialogViewBank extends Dialog {
         buttonBuyInsurance.setText("Stop Insurance");
         buttonBuyInsurance.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 buttonBuyInsurance_Click(sender, data);
             }
         });
@@ -146,7 +151,7 @@ public class DialogViewBank extends Dialog {
         labelShipValueLabel.setText("Ship Value:");
         // labelInsurance
         labelInsurance.setAutoSize(true);
-        labelInsurance.setFont(new Font("Microsoft Sans Serif", FontStyle.Bold, (int) 12F));
+        labelInsurance.setFont(new Font("Microsoft Sans Serif", FontStyle.Bold, (int) 12.0F));
         labelInsurance.setLocation(new Point(8, 112));
         labelInsurance.setName("labelInsurance");
         labelInsurance.setSize(new Dimension(81, 19));
@@ -176,7 +181,7 @@ public class DialogViewBank extends Dialog {
         buttonPayBack.setText("Pay Back Loan");
         buttonPayBack.setClick(new EventHandler<>() {
             @Override
-            public void handle(Object sender, EventData data) {
+            public void handle(final Object sender, final EventData data) {
                 buttonPayBack_Click(sender, data);
             }
         });
@@ -232,23 +237,23 @@ public class DialogViewBank extends Dialog {
 
     private void UpdateAll() {
         // Loan Info
-        labelCurrentDebt.setText(Functions.FormatMoney(commander.getDebt()));
-        labelMaxLoan.setText(Functions.FormatMoney(MaxLoan));
-        buttonPayBack.setVisible((0 < commander.getDebt()));
+        labelCurrentDebt.setText(ModelUtils.FormatMoney(commander.getDebt()));
+        labelMaxLoan.setText(ModelUtils.FormatMoney(MaxLoan));
+        buttonPayBack.setVisible((commander.getDebt() > 0));
         // Insurance Info
-        labelShipValue.setText(Functions.FormatMoney(commander.getShip().getBaseWorth(true)));
-        labelNoClaim.setText(Functions.FormatPercent(commander.NoClaim()));
-        labelMaxNoClaim.setVisible((Constants.MaxNoClaim == commander.NoClaim()));
-        labelInsAmt.setText(Functions.StringVars(Strings.MoneyRateSuffix, Functions.FormatMoney(game.InsuranceCosts())));
-        buttonBuyInsurance.setText(Functions.StringVars("^1 Insurance", commander.getInsurance() ? "Stop" : "Buy"));
+        labelShipValue.setText(ModelUtils.FormatMoney(commander.getShip().getBaseWorth(true)));
+        labelNoClaim.setText(ModelUtils.FormatPercent(commander.NoClaim()));
+        labelMaxNoClaim.setVisible((commander.NoClaim() == Constants.MaxNoClaim));
+        labelInsAmt.setText(ModelUtils.StringVars(Strings.MoneyRateSuffix, ModelUtils.FormatMoney(game.InsuranceCosts())));
+        buttonBuyInsurance.setText(ModelUtils.StringVars("^1 Insurance", commander.getInsurance() ? "Stop" : "Buy"));
     }
 
-    private void buttonGetLoan_Click(Object sender, EventData e) {
+    private void buttonGetLoan_Click(final Object sender, final EventData e) {
         if (commander.getDebt() >= MaxLoan) {
             DialogAlert.Alert(AlertType.DebtTooLargeLoan, this);
         } else {
-            DialogGetLoan form = new DialogGetLoan(MaxLoan - commander.getDebt());
-            if (DialogResult.OK == form.ShowDialog(this)) {
+            final DialogGetLoan form = new DialogGetLoan(MaxLoan - commander.getDebt());
+            if (form.ShowDialog(this) == DialogResult.OK) {
                 commander.setCash(commander.getCash() + form.Amount());
                 commander.setDebt(commander.getDebt() + form.Amount());
                 UpdateAll();
@@ -257,12 +262,12 @@ public class DialogViewBank extends Dialog {
         }
     }
 
-    private void buttonPayBack_Click(Object sender, EventData e) {
-        if (0 == commander.getDebt()) {
+    private void buttonPayBack_Click(final Object sender, final EventData e) {
+        if (commander.getDebt() == 0) {
             DialogAlert.Alert(AlertType.DebtNone, this);
         } else {
-            DialogPayBackLoan form = new DialogPayBackLoan();
-            if (DialogResult.OK == form.ShowDialog(this)) {
+            final DialogPayBackLoan form = new DialogPayBackLoan();
+            if (form.ShowDialog(this) == DialogResult.OK) {
                 commander.setCash(commander.getCash() - form.Amount());
                 commander.setDebt(commander.getDebt() - form.Amount());
                 UpdateAll();
@@ -271,9 +276,9 @@ public class DialogViewBank extends Dialog {
         }
     }
 
-    private void buttonBuyInsurance_Click(Object sender, EventData e) {
+    private void buttonBuyInsurance_Click(final Object sender, final EventData e) {
         if (commander.getInsurance()) {
-            if (DialogResult.Yes == DialogAlert.Alert(AlertType.InsuranceStop, this)) {
+            if (DialogAlert.Alert(AlertType.InsuranceStop, this) == DialogResult.Yes) {
                 commander.setInsurance(false);
                 commander.NoClaim(0);
             }

@@ -1,6 +1,6 @@
 package org.spacetrader.model.ship.equipment;
 
-import org.spacetrader.model.enums.IdentifiableEnum;
+import org.spacetrader.util.IdentifiableEnum;
 import org.spacetrader.model.enums.TechLevel;
 
 
@@ -22,7 +22,7 @@ public enum WeaponType implements IdentifiableEnum, EquipmentSubType {
     public final int id;
     public final int power;
 
-    WeaponType(TechLevel techLevel, boolean b, int change, int power, int cost, String abbreviation, String name) {
+    WeaponType(final TechLevel techLevel, final boolean b, final int change, final int power, final int cost, final String abbreviation, final String name) {
         this.techLevel = techLevel;
         disabler = b;
         chance = change;
@@ -33,8 +33,8 @@ public enum WeaponType implements IdentifiableEnum, EquipmentSubType {
         id = ordinal();
     }
 
-    public static WeaponType fromId(int i) {
-        return values()[i];
+    public static WeaponType fromId(final int i) {
+        return WeaponType.values()[i];
     }
 
     @Override

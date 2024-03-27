@@ -1,21 +1,21 @@
 package org.spacetrader.ui;
 
-import org.spacetrader.controller.Constants;
-import org.spacetrader.controller.Functions;
+import org.spacetrader.Constants;
+import org.spacetrader.model.ModelUtils;
 import org.spacetrader.controller.Game;
 import org.spacetrader.model.events.SpecialEvent;
 import org.spacetrader.model.ship.Ship;
 import org.spacetrader.model.ship.equipment.GadgetType;
-import org.spacetrader.util.Util;
-import org.winforms.Font;
-import org.winforms.controls.Button;
-import org.winforms.controls.Dialog;
-import org.winforms.controls.GroupBox;
-import org.winforms.controls.Label;
-import org.winforms.enums.DialogResult;
-import org.winforms.enums.FontStyle;
-import org.winforms.enums.FormBorderStyle;
-import org.winforms.enums.FormStartPosition;
+import org.spacetrader.util.Utils;
+import org.winforms.util.Font;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.GroupBox;
+import org.winforms.widget.Label;
+import org.winforms.dialog.DialogResult;
+import org.winforms.style.FontStyle;
+import org.winforms.style.FormBorderStyle;
+import org.winforms.alignment.FormStartPosition;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -30,12 +30,12 @@ public class DialogViewShip extends Dialog {
     private final Ship ship = game.Commander().getShip();
 
     public DialogViewShip() {
-        Label labelTypeLabel = new Label();
-        Label labelType = new Label();
-        Button buttonClose = new Button();
+        final Label labelTypeLabel = new Label();
+        final Label labelType = new Label();
+        final Button buttonClose = new Button();
         labelEquipLabel = new Label();
         labelEquip = new Label();
-        GroupBox boxSpecialCargo = new GroupBox();
+        final GroupBox boxSpecialCargo = new GroupBox();
         labelSpecialCargo = new Label();
         boxSpecialCargo.suspendLayout();
         suspendLayout();
@@ -105,7 +105,7 @@ public class DialogViewShip extends Dialog {
 
 
     private void DisplayEquipment() {
-        if (SpecialEvent.StatusScarabDone == game.getQuestStatusScarab()) {
+        if (game.getQuestStatusScarab() == SpecialEvent.StatusScarabDone) {
             labelEquipLabel.setText(labelEquipLabel.getText() + ("Hull:" + Strings.newline + Strings.newline));
             labelEquip.setText(labelEquip.getText() + ("Hardened" + Strings.newline + Strings.newline));
         }
@@ -113,43 +113,43 @@ public class DialogViewShip extends Dialog {
         for (int i = 0; i < Constants.WeaponObjects.length; i++) {
             int count = 0;
             for (int j = 0; j < ship.Weapons().length; j++) {
-                if (null != ship.Weapons()[j] && ship.Weapons()[j].Type() == Constants.WeaponObjects[i].Type()) {
+                if (ship.Weapons()[j] != null && ship.Weapons()[j].Type() == Constants.WeaponObjects[i].Type()) {
                     count++;
                 }
             }
-            if (0 < count) {
+            if (count > 0) {
                 labelEquipLabel.setText(labelEquipLabel.getText() + (equipPrinted ? Strings.newline : "Equipment:" + Strings.newline));
-                labelEquip.setText(labelEquip.getText() + (Functions.Multiples(count, Constants.WeaponObjects[i].Name()) + Strings.newline));
+                labelEquip.setText(labelEquip.getText() + (ModelUtils.Multiples(count, Constants.WeaponObjects[i].Name()) + Strings.newline));
                 equipPrinted = true;
             }
         }
         for (int i = 0; i < Constants.Shields.length; i++) {
             int count = 0;
             for (int j = 0; j < ship.Shields().length; j++) {
-                if (null != ship.Shields()[j] && ship.Shields()[j].Type() == Constants.Shields[i].Type()) {
+                if (ship.Shields()[j] != null && ship.Shields()[j].Type() == Constants.Shields[i].Type()) {
                     count++;
                 }
             }
-            if (0 < count) {
+            if (count > 0) {
                 labelEquipLabel.setText(labelEquipLabel.getText() + (equipPrinted ? Strings.newline : "Equipment:" + Strings.newline));
-                labelEquip.setText(labelEquip.getText() + (Functions.Multiples(count, Constants.Shields[i].Name()) + Strings.newline));
+                labelEquip.setText(labelEquip.getText() + (ModelUtils.Multiples(count, Constants.Shields[i].Name()) + Strings.newline));
                 equipPrinted = true;
             }
         }
         for (int i = 0; i < Constants.Gadgets.length; i++) {
             int count = 0;
             for (int j = 0; j < ship.Gadgets().length; j++) {
-                if (null != ship.Gadgets()[j] && ship.Gadgets()[j].Type() == Constants.Gadgets[i].Type()) {
+                if (ship.Gadgets()[j] != null && ship.Gadgets()[j].Type() == Constants.Gadgets[i].Type()) {
                     count++;
                 }
             }
-            if (0 < count) {
+            if (count > 0) {
                 labelEquipLabel.setText(labelEquipLabel.getText() + (equipPrinted ? Strings.newline : "Equipment:" + Strings.newline));
                 if (i == GadgetType.ExtraCargoBays.asInteger() || i == GadgetType.HiddenCargoBays.asInteger()) {
                     count *= 5;
-                    labelEquip.setText(labelEquip.getText() + (Functions.FormatNumber(count) + Constants.Gadgets[i].Name().substring(1) + Strings.newline));
+                    labelEquip.setText(labelEquip.getText() + (ModelUtils.FormatNumber(count) + Constants.Gadgets[i].Name().substring(1) + Strings.newline));
                 } else {
-                    labelEquip.setText(labelEquip.getText() + (Functions.Multiples(count, Constants.Gadgets[i].Name()) + Strings.newline));
+                    labelEquip.setText(labelEquip.getText() + (ModelUtils.Multiples(count, Constants.Gadgets[i].Name()) + Strings.newline));
                 }
                 equipPrinted = true;
             }
@@ -159,42 +159,42 @@ public class DialogViewShip extends Dialog {
             labelEquip.setText(labelEquip.getText() + ("1 " + Strings.ShipInfoEscapePod + Strings.newline));
             equipPrinted = true;
         }
-        if (0 < ship.FreeSlots()) {
+        if (ship.FreeSlots() > 0) {
             labelEquipLabel.setText(labelEquipLabel.getText() + ((equipPrinted ? Strings.newline : "") + "Unfilled:"));
             labelEquip.setText(labelEquip.getText() + (equipPrinted ? Strings.newline : ""));
-            if (0 < ship.FreeSlotsWeapon()) {
-                labelEquip.setText(labelEquip.getText() + (Functions.Multiples(ship.FreeSlotsWeapon(), "weapon slot") + Strings.newline));
+            if (ship.FreeSlotsWeapon() > 0) {
+                labelEquip.setText(labelEquip.getText() + (ModelUtils.Multiples(ship.FreeSlotsWeapon(), "weapon slot") + Strings.newline));
             }
-            if (0 < ship.FreeSlotsShield()) {
-                labelEquip.setText(labelEquip.getText() + (Functions.Multiples(ship.FreeSlotsShield(), "shield slot") + Strings.newline));
+            if (ship.FreeSlotsShield() > 0) {
+                labelEquip.setText(labelEquip.getText() + (ModelUtils.Multiples(ship.FreeSlotsShield(), "shield slot") + Strings.newline));
             }
-            if (0 < ship.FreeSlotsGadget()) {
-                labelEquip.setText(labelEquip.getText() + (Functions.Multiples(ship.FreeSlotsGadget(), "gadget slot") + Strings.newline));
+            if (ship.FreeSlotsGadget() > 0) {
+                labelEquip.setText(labelEquip.getText() + (ModelUtils.Multiples(ship.FreeSlotsGadget(), "gadget slot") + Strings.newline));
             }
         }
     }
 
     private void DisplaySpecialCargo() {
-        ArrayList<String> specialCargo = new ArrayList<>(12);
-        if (0 < ship.getTribbles()) {
-            if (Constants.MaxTribbles == ship.getTribbles()) {
+        final ArrayList<String> specialCargo = new ArrayList<>(12);
+        if (ship.getTribbles() > 0) {
+            if (ship.getTribbles() == Constants.MaxTribbles) {
                 specialCargo.add(Strings.SpecialCargoTribblesInfest);
             } else {
-                specialCargo.add(Functions.Multiples(ship.getTribbles(), Strings.SpecialCargoTribblesCute) + ".");
+                specialCargo.add(ModelUtils.Multiples(ship.getTribbles(), Strings.SpecialCargoTribblesCute) + ".");
             }
         }
-        if (SpecialEvent.StatusJaporiInTransit == game.getQuestStatusJapori()) {
+        if (game.getQuestStatusJapori() == SpecialEvent.StatusJaporiInTransit) {
             specialCargo.add(Strings.SpecialCargoJapori);
         }
         if (ship.ArtifactOnBoard()) {
             specialCargo.add(Strings.SpecialCargoArtifact);
         }
-        if (SpecialEvent.StatusJarekDone == game.getQuestStatusJarek()) {
+        if (game.getQuestStatusJarek() == SpecialEvent.StatusJarekDone) {
             specialCargo.add(Strings.SpecialCargoJarek);
         }
         if (ship.ReactorOnBoard()) {
             specialCargo.add(Strings.SpecialCargoReactor);
-            specialCargo.add(Functions.Multiples(10 - ((game.getQuestStatusReactor() - 1) / 2), "bay") + Strings.SpecialCargoReactorBays);
+            specialCargo.add(ModelUtils.Multiples(10 - ((game.getQuestStatusReactor() - 1) / 2), "bay") + Strings.SpecialCargoReactorBays);
         }
         if (ship.SculptureOnBoard()) {
             specialCargo.add(Strings.SpecialCargoSculpture);
@@ -204,6 +204,6 @@ public class DialogViewShip extends Dialog {
         }
         labelSpecialCargo.setText(specialCargo.isEmpty()
                 ? Strings.SpecialCargoNone
-                : Util.stringsJoin(Strings.newline + Strings.newline, Functions.arrayListtoStringArray(specialCargo)));
+                : Utils.stringsJoin(Strings.newline + Strings.newline, ModelUtils.arrayListtoStringArray(specialCargo)));
     }
 }

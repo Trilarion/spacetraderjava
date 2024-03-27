@@ -19,14 +19,14 @@ public enum TechLevel {
     public final int id;
     public final int value;
 
-    TechLevel(int value, String abbreviation, String name) {
+    TechLevel(final int value, final String abbreviation, final String name) {
         this.value = value;
         this.abbreviation = abbreviation;
         this.name = name;
         id = ordinal();
     }
 
-    public static TechLevel FromInt(int i) {
-        return values()[i];
+    public static TechLevel FromInt(final int i) {
+        return TechLevel.values()[i];
     }
 }

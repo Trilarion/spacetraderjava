@@ -1,5 +1,6 @@
 package org.spacetrader.model.ship.equipment;
 
+import org.spacetrader.model.SerializableObject;
 import org.spacetrader.model.enums.SkillType;
 import org.spacetrader.model.enums.TechLevel;
 import org.spacetrader.ui.Strings;
@@ -12,16 +13,16 @@ public class Gadget extends Equipment {
     private final GadgetType type;
     private final SkillType skillBonus;
 
-    public Gadget(GadgetType type, SkillType skillBonus, int price, TechLevel minTechLevel, int chance) {
+    public Gadget(final GadgetType type, final SkillType skillBonus, final int price, final TechLevel minTechLevel, final int chance) {
         super(EquipmentType.Gadget, price, minTechLevel, chance);
         this.type = type;
         this.skillBonus = skillBonus;
     }
 
-    public Gadget(Hashtable hash) {
+    public Gadget(final Hashtable hash) {
         super(hash);
-        type = GadgetType.FromInt(GetValueFromHash(hash, "_type", Integer.class));
-        skillBonus = (GetValueFromHash(hash, "_skillBonus", SkillType.NA, SkillType.class));
+        type = GadgetType.FromInt(SerializableObject.GetValueFromHash(hash, "_type", Integer.class));
+        skillBonus = (SerializableObject.GetValueFromHash(hash, "_skillBonus", SkillType.NA, SkillType.class));
     }
 
     @Override
@@ -36,7 +37,7 @@ public class Gadget extends Equipment {
 
     @Override
     public Hashtable Serialize() {
-        Hashtable hash = super.Serialize();
+        final Hashtable hash = super.Serialize();
         hash.put("_type", type.asInteger());
         hash.put("_skillBonus", skillBonus.getId());
         return hash;
@@ -48,13 +49,13 @@ public class Gadget extends Equipment {
     }
 
     @Override
-    public boolean TypeEquals(Object type) {
+    public boolean TypeEquals(final Object type) {
         boolean equal = false;
         try {
             if (Type() == type) {
                 equal = true;
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.write("Ignored Exception " + e);
         }
         return equal;

@@ -22,9 +22,9 @@ public class TradeItem implements Comparable<TradeItem> {
     private final int maxTradePrice; // Minimum price to buy/sell in orbit
     private final int roundOff;      // Roundoff price for trade in orbit
 
-    public TradeItem(TradeItemType type, TechLevel techProduction, TechLevel techUsage, TechLevel techTopProduction, int pictureeLowTech,
-                     int priceInc, int priceVariance, SystemPressure pressurePriceHike, SpecialResource resourceLowPrice,
-                     SpecialResource resourceHighPrice, int minTradePrice, int maxTradePrice, int roundOff) {
+    public TradeItem(final TradeItemType type, final TechLevel techProduction, final TechLevel techUsage, final TechLevel techTopProduction, final int pictureeLowTech,
+                     final int priceInc, final int priceVariance, final SystemPressure pressurePriceHike, final SpecialResource resourceLowPrice,
+                     final SpecialResource resourceHighPrice, final int minTradePrice, final int maxTradePrice, final int roundOff) {
         this.type = type;
         this.techProduction = techProduction;
         this.techUsage = techUsage;
@@ -41,24 +41,24 @@ public class TradeItem implements Comparable<TradeItem> {
     }
 
     @Override
-    public int compareTo(TradeItem tradeItem) {
+    public int compareTo(final TradeItem tradeItem) {
         return CompareTo(tradeItem);
     }
 
-    public int CompareTo(Object value) {
+    public int CompareTo(final Object value) {
         int compared = 0;
-        if (null == value) {
+        if (value == null) {
             compared = 1;
         } else {
             compared = ((Integer) pictureLowTech).compareTo(((TradeItem) value).pictureLowTech);
-            if (0 == compared) {
+            if (compared == 0) {
                 compared = -((Integer) priceIncrease).compareTo(((TradeItem) value).priceIncrease);
             }
         }
         return compared;
     }
 
-    public int getStandardPrice(StarSystem target) {
+    public int getStandardPrice(final StarSystem target) {
         int price = 0;
         if (target.ItemUsed(this)) {
             // Determine base price on techlevel of system
@@ -82,7 +82,7 @@ public class TradeItem implements Comparable<TradeItem> {
     }
 
     public boolean isIllegal() {
-        return TradeItemType.Firearms == type || TradeItemType.Narcotics == type;
+        return type == TradeItemType.Firearms || type == TradeItemType.Narcotics;
     }
 
     public int MaxTradePrice() {

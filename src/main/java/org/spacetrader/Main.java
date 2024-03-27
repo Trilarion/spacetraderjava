@@ -8,16 +8,16 @@ public class Main {
     /**
      * Main entry point for the game.
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
-                 UnsupportedLookAndFeelException e) {
+        } catch (final ClassNotFoundException | InstantiationException | IllegalAccessException |
+                       UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
 
-        MainWindow mainWindow = new MainWindow();
+        final MainWindow mainWindow = new MainWindow();
         mainWindow.showWindow();
     }
 

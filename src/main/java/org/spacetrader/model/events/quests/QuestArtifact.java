@@ -12,7 +12,7 @@ public enum QuestArtifact {
     public final String name;
     public final int id;
 
-    QuestArtifact(String s) {
+    QuestArtifact(final String s) {
         name = s;
         id = ordinal();
     }

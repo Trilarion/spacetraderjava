@@ -1,6 +1,6 @@
 package org.spacetrader.model;
 
-import org.spacetrader.controller.Constants;
+import org.spacetrader.Constants;
 import org.spacetrader.controller.Game;
 import org.spacetrader.model.cargo.TradeItemType;
 import org.spacetrader.model.enums.*;
@@ -21,9 +21,9 @@ public class PoliticalSystem {
     private final boolean firearmsOk; // Firearms can be traded (if not, people aren't interested or the government is too strict)
     private final TradeItemType wanted; // Trade item requested in particular in this type of government
 
-    public PoliticalSystem(PoliticalSystemType type, int reactionIllegal, Activity activityPolice,
-                           Activity activityPirates, Activity activityTraders, TechLevel minTechLevel, TechLevel maxTechLevel,
-                           int bribeLevel, boolean drugsOk, boolean firearmsOk, TradeItemType wanted) {
+    public PoliticalSystem(final PoliticalSystemType type, final int reactionIllegal, final Activity activityPolice,
+                           final Activity activityPirates, final Activity activityTraders, final TechLevel minTechLevel, final TechLevel maxTechLevel,
+                           final int bribeLevel, final boolean drugsOk, final boolean firearmsOk, final TradeItemType wanted) {
         this.type = type;
         this.reactionIllegal = reactionIllegal;
         this.activityPolice = activityPolice;
@@ -37,9 +37,9 @@ public class PoliticalSystem {
         this.wanted = wanted;
     }
 
-    public boolean ShipTypeLikely(ShipType shipType, OpponentType oppType) {
+    public boolean ShipTypeLikely(final ShipType shipType, final OpponentType oppType) {
         boolean likely = false;
-        int diffMod = Math.max(0, Game.getCurrentGame().Difficulty().getId() - Difficulty.Normal.getId());
+        final int diffMod = Math.max(0, Game.getCurrentGame().Difficulty().getId() - Difficulty.Normal.getId());
         switch (oppType) {
             case Pirate:
                 likely = ActivityPirates().getId() + diffMod >= Constants.ShipSpecs[shipType.getId()].Pirates().getId();

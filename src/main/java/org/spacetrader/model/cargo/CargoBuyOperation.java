@@ -9,12 +9,12 @@ public enum CargoBuyOperation {
     public final String name;
     public final int id;
 
-    CargoBuyOperation(int id, String name) {
+    CargoBuyOperation(final int id, final String name) {
         this.name = name;
         this.id = id;
     }
 
-    public static CargoBuyOperation fromId(int i) {
-        return values()[i];
+    public static CargoBuyOperation fromId(final int i) {
+        return CargoBuyOperation.values()[i];
     }
 }

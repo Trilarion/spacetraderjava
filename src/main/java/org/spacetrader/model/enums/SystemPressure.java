@@ -1,6 +1,8 @@
 package org.spacetrader.model.enums;
 
 
+import org.spacetrader.util.IdentifiableEnum;
+
 public enum SystemPressure implements IdentifiableEnum {
     None("under no particular pressure"),//= 0,
     War("at war"),//= 1,
@@ -12,12 +14,12 @@ public enum SystemPressure implements IdentifiableEnum {
     Employment("lacking enough workers");//= 7
     public final String name;
 
-    SystemPressure(String name) {
+    SystemPressure(final String name) {
         this.name = name;
     }
 
-    public static SystemPressure FromInt(int i) {
-        return values()[i];
+    public static SystemPressure FromInt(final int i) {
+        return SystemPressure.values()[i];
     }
 
     @Override
