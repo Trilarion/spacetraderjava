@@ -8,17 +8,17 @@ public class Font extends java.awt.Font {
     public final String fontFamily;
     public final String fontName;
 
-    public Font(final String fontName, final float size) {
+    public Font(String fontName, float size) {
         this(fontName, FontStyle.Regular, size);
     }
 
-    public Font(final String fontName, final FontStyle style, final float size) {
+    public Font(String fontName, FontStyle style, float size) {
         super(fontName, style.awtFontstyle, (int) (size * 1.3));
         this.fontName = getName();
         fontFamily = getFamily();
     }
 
-    public Font(final java.awt.Font source) {
+    public Font(java.awt.Font source) {
         super(source);
         fontName = getName();
         fontFamily = getFamily();

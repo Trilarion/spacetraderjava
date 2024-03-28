@@ -25,12 +25,12 @@ public class Button extends Control<JButton> {
         return asJButton().getText();
     }
 
-    public void setText(final String text) {
+    public void setText(String text) {
         asJButton().setText(text);
     }
 
     @Override
-    public void setSize(final Dimension size) {
+    public void setSize(Dimension size) {
         // width should be bigger because font is bigger(?).
         super.setSize(new Dimension(size.width, size.height));
     }
@@ -39,7 +39,7 @@ public class Button extends Control<JButton> {
         return swingComponent;
     }
 
-    public void setDialogResult(final DialogResult dialogResult) {
+    public void setDialogResult(DialogResult dialogResult) {
         this.dialogResult = dialogResult;
     }
 
@@ -50,7 +50,7 @@ public class Button extends Control<JButton> {
             private static final long serialVersionUID = 1L;
 
             @Override
-            public void actionPerformed(final ActionEvent arg0) {
+            public void actionPerformed(ActionEvent arg0) {
                 click.handle(Button.this, null);
             }
         };
@@ -59,7 +59,7 @@ public class Button extends Control<JButton> {
         super.setClick(click);
     }
 
-    public void setFlatStyle(final FlatStyle flatStyle) {
+    public void setFlatStyle(FlatStyle flatStyle) {
         switch (flatStyle) {
             case Flat:
                 asJButton().setBorder(BorderFactory.createLineBorder(Color.black));
@@ -69,7 +69,7 @@ public class Button extends Control<JButton> {
         }
     }
 
-    public void setToolTip(final String text) {  // TODO could be static in utils or so
+    public void setToolTip(String text) {  // TODO could be static in utils or so
         asJButton().setToolTipText(text);
     }
 }

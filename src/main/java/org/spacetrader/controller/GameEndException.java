@@ -7,7 +7,7 @@ import org.spacetrader.model.enums.GameEndType;
 public class GameEndException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
-    public GameEndException(final GameEndType endType) {
+    public GameEndException(GameEndType endType) {
         Game.getCurrentGame().setEndStatus(endType);
     }
 }

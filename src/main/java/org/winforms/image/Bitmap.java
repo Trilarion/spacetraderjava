@@ -19,26 +19,26 @@ public class Bitmap extends Image implements Icon, Serializable {
     transient boolean transSet;
     Color transparent;
 
-    public Bitmap(final Image source) {
+    public Bitmap(Image source) {
         image = ((Bitmap) source).image;  // TODO casts necessary?
         imageUrl = ((Bitmap) source).imageUrl;
     }
 
-    public Bitmap(final String fileName) { // TODO move the reading of the Image to some static helper class
+    public Bitmap(String fileName) { // TODO move the reading of the Image to some static helper class
         try {
-            final File input = new File(fileName);
+            File input = new File(fileName);
             imageUrl = input.toURI().toURL();
             image = ImageIO.read(input);
-        } catch (final IOException e) {
+        } catch (IOException e) {
             throw new Error(e);
         }
     }
 
-    public Bitmap(final URL imageUrl) {
+    public Bitmap(URL imageUrl) {
         try {
             this.imageUrl = imageUrl;
             image = ImageIO.read(imageUrl);
-        } catch (final IOException e) {
+        } catch (IOException e) {
             throw new Error(e);
         }
     }
@@ -59,7 +59,7 @@ public class Bitmap extends Image implements Icon, Serializable {
     }
 
     @Override
-    public void setTransparentColor(final Color transparentColor) {
+    public void setTransparentColor(Color transparentColor) {
         if (transSet) {
             throw new Error("setTransparentColor called twice");
         }
@@ -69,10 +69,10 @@ public class Bitmap extends Image implements Icon, Serializable {
         }
         // Don't yet support all colors.
         if (!transparentColor.equals(Color.white)) {
-            final BufferedImage bi = (BufferedImage) asSwingImage();
-            final int[] pixel = bi.getRaster().getPixel(0, 0, new int[4]);
+            BufferedImage bi = (BufferedImage) asSwingImage();
+            int[] pixel = bi.getRaster().getPixel(0, 0, new int[4]);
             System.out.print("Trying to set unknown background: color at 0x0:");
-            for (final int i : pixel) {
+            for (int i : pixel) {
                 System.out.print(" " + i);
             }
             System.out.println();
@@ -81,12 +81,12 @@ public class Bitmap extends Image implements Icon, Serializable {
         }
         final int transparent = 0;
         this.transparent = transparentColor;
-        final BufferedImage bufferedImage = (BufferedImage) asSwingImage();
-        final BufferedImage newImage = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
-        final int[] arr = new int[1];
-        final WritableRaster raster1 = bufferedImage.getRaster();
-        final WritableRaster raster2 = newImage.getRaster();
-        final ColorTranslate translate = new ColorTranslate(bufferedImage.getColorModel(), transparent);
+        BufferedImage bufferedImage = (BufferedImage) asSwingImage();
+        BufferedImage newImage = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
+        int[] arr = new int[1];
+        WritableRaster raster1 = bufferedImage.getRaster();
+        WritableRaster raster2 = newImage.getRaster();
+        ColorTranslate translate = new ColorTranslate(bufferedImage.getColorModel(), transparent);
         for (int x = 0; x < getWidth(); x++) {
             for (int y = 0; y < getHeight(); y++) {
                 raster1.getPixel(x, y, arr);
@@ -97,13 +97,13 @@ public class Bitmap extends Image implements Icon, Serializable {
         image = newImage;
     }
 
-    private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
         image = ImageIO.read(imageUrl);
         setTransparentColor(transparent);
     }
 
-    public int toArgb(final int col, final int row) {
+    public int toArgb(int col, int row) {
         // note that alpha is ignored.
         return image.getRGB(col, row);
     }

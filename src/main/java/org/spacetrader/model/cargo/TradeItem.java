@@ -22,9 +22,9 @@ public class TradeItem implements Comparable<TradeItem> {
     private final int maxTradePrice; // Minimum price to buy/sell in orbit
     private final int roundOff;      // Roundoff price for trade in orbit
 
-    public TradeItem(final TradeItemType type, final TechLevel techProduction, final TechLevel techUsage, final TechLevel techTopProduction, final int pictureeLowTech,
-                     final int priceInc, final int priceVariance, final SystemPressure pressurePriceHike, final SpecialResource resourceLowPrice,
-                     final SpecialResource resourceHighPrice, final int minTradePrice, final int maxTradePrice, final int roundOff) {
+    public TradeItem(TradeItemType type, TechLevel techProduction, TechLevel techUsage, TechLevel techTopProduction, int pictureeLowTech,
+                     int priceInc, int priceVariance, SystemPressure pressurePriceHike, SpecialResource resourceLowPrice,
+                     SpecialResource resourceHighPrice, int minTradePrice, int maxTradePrice, int roundOff) {
         this.type = type;
         this.techProduction = techProduction;
         this.techUsage = techUsage;
@@ -41,11 +41,11 @@ public class TradeItem implements Comparable<TradeItem> {
     }
 
     @Override
-    public int compareTo(final TradeItem tradeItem) {
+    public int compareTo(TradeItem tradeItem) {
         return CompareTo(tradeItem);
     }
 
-    public int CompareTo(final Object value) {
+    public int CompareTo(Object value) {
         int compared = 0;
         if (value == null) {
             compared = 1;
@@ -58,7 +58,7 @@ public class TradeItem implements Comparable<TradeItem> {
         return compared;
     }
 
-    public int getStandardPrice(final StarSystem target) {
+    public int getStandardPrice(StarSystem target) {
         int price = 0;
         if (target.ItemUsed(this)) {
             // Determine base price on techlevel of system

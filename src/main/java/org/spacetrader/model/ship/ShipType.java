@@ -22,7 +22,7 @@ public enum ShipType implements IdentifiableEnum {
     Custom, // 15
     Scorpion;    // 16
 
-    public static ShipType FromInt(final int i) {
+    public static ShipType FromInt(int i) {
         return ShipType.values()[i];
     }
 

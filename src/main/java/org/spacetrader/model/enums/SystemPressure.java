@@ -14,11 +14,11 @@ public enum SystemPressure implements IdentifiableEnum {
     Employment("lacking enough workers");//= 7
     public final String name;
 
-    SystemPressure(final String name) {
+    SystemPressure(String name) {
         this.name = name;
     }
 
-    public static SystemPressure FromInt(final int i) {
+    public static SystemPressure FromInt(int i) {
         return SystemPressure.values()[i];
     }
 

@@ -18,11 +18,11 @@ public class Control<T extends Component> {  // TODO make generic for the type o
     private int tabIndex;
     private Color backgroundColor;
 
-    public Control(final T swingComponent) {
+    public Control(T swingComponent) {
         this.swingComponent = swingComponent;
     }
 
-    public void setDoubleClick(final EventHandler<Object, EventData> doubleClick) {
+    public void setDoubleClick(EventHandler<Object, EventData> doubleClick) {
         this.doubleClick = doubleClick;
     }
 
@@ -34,7 +34,7 @@ public class Control<T extends Component> {  // TODO make generic for the type o
         return tabIndex;
     }
 
-    public void setTabIndex(final int tabIndex) {
+    public void setTabIndex(int tabIndex) {
         this.tabIndex = tabIndex;
     }
 
@@ -49,16 +49,16 @@ public class Control<T extends Component> {  // TODO make generic for the type o
     /**
      * TODO not really deprecated, just doesn't work.
      */
-    public void setBackgroundColor(final Color backgroundColor) {
+    public void setBackgroundColor(Color backgroundColor) {
         this.backgroundColor = backgroundColor;
     }
 
     public org.winforms.util.Font getFont() {
-        final Font font = swingComponent.getFont();
+        Font font = swingComponent.getFont();
         return font == null ? null : new org.winforms.util.Font(font);
     }
 
-    public void setFont(final Font font) {
+    public void setFont(Font font) {
         swingComponent.setFont(font);
     }
 
@@ -66,7 +66,7 @@ public class Control<T extends Component> {  // TODO make generic for the type o
         return foregroundColor;
     }
 
-    public void setForegroundColor(final Color foregroundColor) {
+    public void setForegroundColor(Color foregroundColor) {
         this.foregroundColor = foregroundColor;
     }
 
@@ -74,8 +74,8 @@ public class Control<T extends Component> {  // TODO make generic for the type o
         return getSize().height;
     }
 
-    public void setHeight(final int height) {
-        final Dimension size = (Dimension) getSize().clone();
+    public void setHeight(int height) {
+        Dimension size = (Dimension) getSize().clone();
         size.height = height;
         setSize(size);
     }
@@ -84,8 +84,8 @@ public class Control<T extends Component> {  // TODO make generic for the type o
         return swingComponent.getLocation().x;
     }
 
-    public void setLeft(final int left) {
-        final Point location = (Point) swingComponent.getLocation().clone();
+    public void setLeft(int left) {
+        Point location = (Point) swingComponent.getLocation().clone();
         location.x = left;
         swingComponent.setLocation(location);
     }
@@ -97,7 +97,7 @@ public class Control<T extends Component> {  // TODO make generic for the type o
     /**
      * I think this is nothing.
      */
-    public void setName(final String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -105,8 +105,8 @@ public class Control<T extends Component> {  // TODO make generic for the type o
         return swingComponent.getLocation().y;
     }
 
-    public void setTop(final int top) {
-        final Point location = (Point) swingComponent.getLocation().clone();
+    public void setTop(int top) {
+        Point location = (Point) swingComponent.getLocation().clone();
         location.y = top;
         swingComponent.setLocation(location);
     }
@@ -115,7 +115,7 @@ public class Control<T extends Component> {  // TODO make generic for the type o
         return swingComponent.isVisible();
     }
 
-    public void setVisible(final boolean visible) {
+    public void setVisible(boolean visible) {
         swingComponent.setVisible(visible);
     }
 
@@ -123,45 +123,45 @@ public class Control<T extends Component> {  // TODO make generic for the type o
         return getSize().width;
     }
 
-    public void setWidth(final int width) {
-        final Dimension size = (Dimension) getSize().clone();
+    public void setWidth(int width) {
+        Dimension size = (Dimension) getSize().clone();
         size.width = width;
         setSize(size);
     }
 
-    public void resumeLayout(final boolean b) {
+    public void resumeLayout(boolean b) {
         // TODO implementation?
     }
 
-    public void setAutoSize(final boolean autoSize) {
+    public void setAutoSize(boolean autoSize) {
         // TODO implementation?
     }
 
     @Deprecated
-    public void setBorderStyle(final BorderStyle borderStyle) {
+    public void setBorderStyle(BorderStyle borderStyle) {
     }
 
-    public void setClick(final EventHandler<Object, EventData> click) {
+    public void setClick(EventHandler<Object, EventData> click) {
         this.click = click;
     }
 
-    public void setEnabled(final boolean enabled) {
+    public void setEnabled(boolean enabled) {
         swingComponent.setEnabled(enabled);
     }
 
-    public void setEnter(final EventHandler<Object, EventData> enter) {
+    public void setEnter(EventHandler<Object, EventData> enter) {
         // TODO implementation?
     }
 
-    public void setLocation(final Point location) {
+    public void setLocation(Point location) {
         swingComponent.setLocation(location);
     }
 
-    public void setMouseEnter(final EventHandler<Object, EventData> mouseEnter) {
+    public void setMouseEnter(EventHandler<Object, EventData> mouseEnter) {
         // TODO implementation?
     }
 
-    public void setMouseLeave(final EventHandler<Object, EventData> mouseLeave) {
+    public void setMouseLeave(EventHandler<Object, EventData> mouseLeave) {
         // TODO implementation?
     }
 
@@ -169,17 +169,13 @@ public class Control<T extends Component> {  // TODO make generic for the type o
         return swingComponent.getPreferredSize();
     }
 
-    public void setSize(final Dimension size) {
+    public void setSize(Dimension size) {
         swingComponent.setPreferredSize(size);
         swingComponent.setSize(size);
     }
 
-    public void setTabStop(final boolean tabStop) {
+    public void setTabStop(boolean tabStop) {
         swingComponent.setFocusable(tabStop);
     }
 
-    public void suspendLayout() {
-        // TODO implementation?
-
-    }
 }

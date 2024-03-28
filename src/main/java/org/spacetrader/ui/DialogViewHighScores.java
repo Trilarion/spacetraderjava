@@ -17,20 +17,19 @@ import java.util.Arrays;
 public class DialogViewHighScores extends Dialog {
 
     public DialogViewHighScores() {
-        final Button buttonClose = new Button();
-        final Label labelRank0 = new Label();
-        final Label labelRank2 = new Label();
-        final Label labelRank1 = new Label();
-        final Label labelScore0 = new Label();
-        final Label labelScore1 = new Label();
-        final Label labelScore2 = new Label();
-        final Label labelName0 = new Label();
-        final Label labelName1 = new Label();
-        final Label labelName2 = new Label();
-        final Label labelStatus0 = new Label();
-        final Label labelStatus1 = new Label();
-        final Label labelStatus2 = new Label();
-        suspendLayout();
+        Button buttonClose = new Button();
+        Label labelRank0 = new Label();
+        Label labelRank2 = new Label();
+        Label labelRank1 = new Label();
+        Label labelScore0 = new Label();
+        Label labelScore1 = new Label();
+        Label labelScore2 = new Label();
+        Label labelName0 = new Label();
+        Label labelName1 = new Label();
+        Label labelName2 = new Label();
+        Label labelStatus0 = new Label();
+        Label labelStatus1 = new Label();
+        Label labelStatus2 = new Label();
         // buttonClose
         buttonClose.setDialogResult(DialogResult.Cancel);
         buttonClose.setLocation(new Point(-32, -32));
@@ -141,17 +140,17 @@ public class DialogViewHighScores extends Dialog {
         setStartPosition(FormStartPosition.CenterParent);
         setText("High Scores");
         resumeLayout(false);
-        final Label[] labelName = {labelName0, labelName1, labelName2};
-        final Label[] labelScore = {labelScore0, labelScore1, labelScore2};
-        final Label[] labelStatus = {labelStatus0, labelStatus1, labelStatus2};
-        final HighScoreRecord[] highScores = ModelUtils.GetHighScores(this);
+        Label[] labelName = {labelName0, labelName1, labelName2};
+        Label[] labelScore = {labelScore0, labelScore1, labelScore2};
+        Label[] labelStatus = {labelStatus0, labelStatus1, labelStatus2};
+        HighScoreRecord[] highScores = ModelUtils.GetHighScores(this);
         for (int i = highScores.length - 1; i >= 0 && highScores[i] != null; i--) {
             labelName[2 - i].setText(highScores[i].Name());
-            labelScore[2 - i].setText(ModelUtils.FormatNumber(highScores[i].Score() / 10) + "." + highScores[i].Score() % 10);
+            labelScore[2 - i].setText(ModelUtils.formatNumber(highScores[i].Score() / 10) + "." + highScores[i].Score() % 10);
             labelStatus[2 - i].setText(ModelUtils.StringVars(Strings.HighScoreStatus, new String[]{
                     Strings.GameCompletionTypes[highScores[i].Type().getId()],
-                    ModelUtils.Multiples(highScores[i].Days(), Strings.TimeUnit),
-                    ModelUtils.Multiples(highScores[i].Worth(), Strings.MoneyUnit),
+                    ModelUtils.multiples(highScores[i].Days(), Strings.TimeUnit),
+                    ModelUtils.multiples(highScores[i].Worth(), Strings.MoneyUnit),
                     Strings.DifficultyLevels[highScores[i].Difficulty().getId()].toLowerCase()
             }));
             labelScore[2 - i].setVisible(true);

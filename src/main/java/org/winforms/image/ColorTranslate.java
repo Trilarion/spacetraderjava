@@ -8,12 +8,12 @@ public class ColorTranslate {
     public ColorModel model;
     public int reference;
 
-    public ColorTranslate(final ColorModel model, final int reference) {
+    public ColorTranslate(ColorModel model, int reference) {
         this.model = model;
         this.reference = reference;
     }
 
-    int[] translate(final int pixel) {
+    int[] translate(int pixel) {
         if (pixel == reference) {
             return ColorTranslate.transparent;
         } else {

@@ -2,16 +2,16 @@ package org.spacetrader.ui;
 
 import org.spacetrader.controller.Game;
 import org.spacetrader.model.crew.Commander;
-import org.winforms.widget.Button;
-import org.winforms.widget.Dialog;
-import org.winforms.widget.Label;
-import org.winforms.widget.Spinner;
+import org.winforms.widget.*;
 import org.winforms.dialog.DialogResult;
 import org.winforms.style.FlatStyle;
 import org.winforms.style.FormBorderStyle;
 import org.winforms.alignment.FormStartPosition;
 import org.winforms.event.EventData;
 import org.winforms.event.EventHandler;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -21,12 +21,11 @@ public class DialogBuyFuel extends Dialog {
     private final Spinner numAmount;
 
     public DialogBuyFuel() {
-        final Label labelQuestion = new Label();
+        Label labelQuestion = new Label();
         numAmount = new Spinner();
-        final Button buttonOk = new Button();
-        final Button buttonMax = new Button();
-        final Button buttonNothing = new Button();
-        suspendLayout();
+        Button buttonOk = new Button();
+        Button buttonMax = new Button();
+        Button buttonNothing = new Button();
         // labelQuestion
         labelQuestion.setAutoSize(true);
         labelQuestion.setLocation(new Point(8, 8));
@@ -43,7 +42,7 @@ public class DialogBuyFuel extends Dialog {
         numAmount.setTabIndex(1);
         numAmount.setValue(888);
         // buttonOk
-        buttonOk.setDialogResult(DialogResult.OK);
+        buttonOk.setDialogResult(DialogResult.Ok);
         buttonOk.setFlatStyle(FlatStyle.Flat);
         buttonOk.setLocation(new Point(61, 32));
         buttonOk.setName("buttonOk");
@@ -51,7 +50,7 @@ public class DialogBuyFuel extends Dialog {
         buttonOk.setTabIndex(2);
         buttonOk.setText("Ok");
         // buttonMax
-        buttonMax.setDialogResult(DialogResult.OK);
+        buttonMax.setDialogResult(DialogResult.Ok);
         buttonMax.setFlatStyle(FlatStyle.Flat);
         buttonMax.setLocation(new Point(109, 32));
         buttonMax.setName("buttonMax");
@@ -60,7 +59,7 @@ public class DialogBuyFuel extends Dialog {
         buttonMax.setText("Max");
         buttonMax.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonMax_Click();
             }
         });
@@ -85,8 +84,8 @@ public class DialogBuyFuel extends Dialog {
         setStartPosition(FormStartPosition.CenterParent);
         setText("Buy Fuel");
         resumeLayout(false);
-        final Game game = Game.getCurrentGame();
-        final Commander commander = game.Commander();
+        Game game = Game.getCurrentGame();
+        Commander commander = game.Commander();
         numAmount.setMaximum(Math.min(commander.getCash(), (commander.getShip().FuelTanks() - commander.getShip().getFuel()) * commander.getShip().getFuelCost()));
         numAmount.setValue(numAmount.getMaximum());
     }

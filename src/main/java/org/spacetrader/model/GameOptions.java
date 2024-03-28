@@ -94,7 +94,7 @@ public class GameOptions extends SerializableObject {
 
     public GameOptions(boolean loadFromDefaults) {
         if (loadFromDefaults) {
-            LoadFromDefaults(false);
+            loadFromDefaults(false);
         }
     }
 
@@ -139,13 +139,13 @@ public class GameOptions extends SerializableObject {
         leaveEmpty = source.leaveEmpty;
     }
 
-    public void LoadFromDefaults(boolean errorIfFileNotFound) {
-        LoadFromDefaults(errorIfFileNotFound, null);
+    public void loadFromDefaults(boolean errorIfFileNotFound) {
+        loadFromDefaults(errorIfFileNotFound, null);
     }
 
-    public void LoadFromDefaults(boolean errorIfFileNotFound, Pane owner) {
+    public void loadFromDefaults(boolean errorIfFileNotFound, Pane owner) {
         GameOptions defaults = null;
-        Object obj = ModelUtils.LoadFile(Constants.DefaultSettingsFile, !errorIfFileNotFound, owner);
+        Object obj = ModelUtils.loadFile(Constants.DefaultSettingsFile, !errorIfFileNotFound, owner);
         if (obj == null) {
             defaults = new GameOptions(false);
         } else {
@@ -154,8 +154,8 @@ public class GameOptions extends SerializableObject {
         CopyValues(defaults);
     }
 
-    public void SaveAsDefaults(Pane owner) {
-        ModelUtils.SaveFile(Constants.DefaultSettingsFile, Serialize(), owner);
+    public void saveAsDefaults(Pane owner) {
+        ModelUtils.saveFile(Constants.DefaultSettingsFile, Serialize(), owner);
     }
 
     public boolean getAlwaysIgnorePirates() {

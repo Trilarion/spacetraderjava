@@ -29,23 +29,20 @@ public class DialogTest extends Dialog {
     private final TextField textValue3;
 
     public DialogTest() {
-        final Label labelAlertType = new Label();
-        final GroupBox boxAlert = new GroupBox();
-        final Button buttonTestAlert = new Button();
+        Label labelAlertType = new Label();
+        GroupBox boxAlert = new GroupBox();
+        Button buttonTestAlert = new Button();
         textValue3 = new TextField();
         textValue2 = new TextField();
         textValue1 = new TextField();
         selAlertType = new ComboBox();
-        final Label labelValue3 = new Label();
-        final Label labelValue1 = new Label();
-        final Label labelValue2 = new Label();
-        final GroupBox groupBox1 = new GroupBox();
-        final Button buttonTestSpecialEvent = new Button();
+        Label labelValue3 = new Label();
+        Label labelValue1 = new Label();
+        Label labelValue2 = new Label();
+        GroupBox groupBox1 = new GroupBox();
+        Button buttonTestSpecialEvent = new Button();
         selSpecialEvent = new ComboBox();
-        final Label labelSpecialEvent = new Label();
-        boxAlert.suspendLayout();
-        groupBox1.suspendLayout();
-        suspendLayout();
+        Label labelSpecialEvent = new Label();
         // labelAlertType
         labelAlertType.setAutoSize(true);
         labelAlertType.setLocation(new Point(8, 19));
@@ -70,7 +67,7 @@ public class DialogTest extends Dialog {
         buttonTestAlert.setText("Test");
         buttonTestAlert.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonTestAlert_Click();
             }
         });
@@ -136,7 +133,7 @@ public class DialogTest extends Dialog {
         buttonTestSpecialEvent.setText("Test");
         buttonTestSpecialEvent.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonTestSpecialEvent_Click();
             }
         });
@@ -167,13 +164,13 @@ public class DialogTest extends Dialog {
         boxAlert.resumeLayout(false);
         groupBox1.resumeLayout(false);
         resumeLayout(false);
-        final AlertType[] alerts = Arrays.copyOfRange(AlertType.values(), AlertType.Alert.ordinal(), AlertType.WildWontStayAboardReactor.ordinal());
-        for (final AlertType type : alerts) {
+        AlertType[] alerts = Arrays.copyOfRange(AlertType.values(), AlertType.Alert.ordinal(), AlertType.WildWontStayAboardReactor.ordinal());
+        for (AlertType type : alerts) {
             selAlertType.Items.addElement(type);
         }
         selAlertType.setSelectedIndex(0);
-        final SpecialEventType[] events = Arrays.copyOfRange(SpecialEventType.values(), SpecialEventType.Artifact.ordinal(), SpecialEventType.WildGetsOut.ordinal());
-        for (final SpecialEventType type : events) {
+        SpecialEventType[] events = Arrays.copyOfRange(SpecialEventType.values(), SpecialEventType.Artifact.ordinal(), SpecialEventType.WildGetsOut.ordinal());
+        for (SpecialEventType type : events) {
             selSpecialEvent.Items.addElement(type);
         }
         selSpecialEvent.setSelectedIndex(0);
@@ -186,15 +183,15 @@ public class DialogTest extends Dialog {
     }
 
     private void buttonTestSpecialEvent_Click() {
-        final SpecialEvent se = Constants.SpecialEvents[((SpecialEventType) selSpecialEvent.getSelectedItem()).getId()];
-        final String button1;
-        final String button2;
-        final DialogResult res1;
-        final DialogResult res2;
+        SpecialEvent se = Constants.SpecialEvents[((SpecialEventType) selSpecialEvent.getSelectedItem()).getId()];
+        String button1;
+        String button2;
+        DialogResult res1;
+        DialogResult res2;
         if (se.isMessageOnly()) {
             button1 = "Ok";
             button2 = null;
-            res1 = DialogResult.OK;
+            res1 = DialogResult.Ok;
             res2 = DialogResult.None;
         } else {
             button1 = "Yes";

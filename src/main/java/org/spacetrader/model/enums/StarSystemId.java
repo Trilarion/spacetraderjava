@@ -134,7 +134,7 @@ public enum StarSystemId implements IdentifiableEnum {
     Weytahn, // ,//= 126,
     Zonama;// ,//= 127
 
-    public static StarSystemId FromInt(final int i) {
+    public static StarSystemId FromInt(int i) {
         return StarSystemId.values()[i + 1];
     }
 

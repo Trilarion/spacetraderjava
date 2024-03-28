@@ -14,7 +14,7 @@ import java.util.Map;
 
 
 public class ImageStreamResourceManager extends ResourceManager {
-    public ImageStreamResourceManager(final URL url, final String s) {
+    public ImageStreamResourceManager(URL url, String s) {
         super(url, s);
     }
 
@@ -32,9 +32,9 @@ public class ImageStreamResourceManager extends ResourceManager {
 
     private static class EntryComparator implements Comparator<Map.Entry<Object, Object>> {
         @Override
-        public int compare(Map.Entry<Object, Object> arg0, final Map.Entry<Object, Object> arg1) {
-            final String left = (String) arg0.getKey();
-            final String right = (String) arg1.getKey();
+        public int compare(Map.Entry<Object, Object> arg0, Map.Entry<Object, Object> arg1) {
+            String left = (String) arg0.getKey();
+            String right = (String) arg1.getKey();
             return left.compareTo(right);
         }
     }

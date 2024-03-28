@@ -12,10 +12,7 @@ import org.winforms.util.Font;
 import org.winforms.util.Graphics;
 import org.winforms.alignment.FormStartPosition;
 import org.winforms.util.Timer;
-import org.winforms.widget.Button;
-import org.winforms.widget.Dialog;
-import org.winforms.widget.Label;
-import org.winforms.widget.PictureBox;
+import org.winforms.widget.*;
 import org.winforms.event.EventData;
 import org.winforms.event.EventHandler;
 import org.winforms.image.ImageList;
@@ -24,6 +21,9 @@ import org.winforms.style.BorderStyle;
 import org.winforms.style.FlatStyle;
 import org.winforms.style.FontStyle;
 import org.winforms.style.FormBorderStyle;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
 
 import java.awt.*;
 
@@ -96,36 +96,36 @@ public class DialogEncounter extends Dialog {
     private EncounterResult _result = EncounterResult.Continue;
 
     public DialogEncounter() {
-        final ResourceManager resources = new ResourceManager(DialogEncounter.class);
+        ResourceManager resources = new ResourceManager(DialogEncounter.class);
         labelEncounter = new Label();
         pictureShipYou = new PictureBox();
         pictureShipOpponent = new PictureBox();
         labelAction = new Label();
-        final Label labelOpponentLabel = new Label();
-        final Label labelYouLabel = new Label();
+        Label labelOpponentLabel = new Label();
+        Label labelYouLabel = new Label();
         labelOpponentShip = new Label();
         labelYouShip = new Label();
         labelYouHull = new Label();
         labelYouShields = new Label();
         labelOpponentShields = new Label();
         labelOpponentHull = new Label();
-        final Button buttonAttack = new Button();
+        Button buttonAttack = new Button();
         buttonFlee = new Button();
-        final Button buttonSubmit = new Button();
+        Button buttonSubmit = new Button();
         buttonBribe = new Button();
         buttonSurrender = new Button();
         buttonIgnore = new Button();
-        final Button buttonTrade = new Button();
-        final Button buttonPlunder = new Button();
+        Button buttonTrade = new Button();
+        Button buttonPlunder = new Button();
         buttonBoard = new Button();
-        final Button buttonMeet = new Button();
+        Button buttonMeet = new Button();
         buttonDrink = new Button();
         buttonInt = new Button();
         buttonYield = new Button();
         pictureContinuous = new PictureBox();
         ilContinuous = new ImageList();
-        final PictureBox pictureEncounterType = new PictureBox();
-        final ImageList ilEncounterType = new ImageList();
+        PictureBox pictureEncounterType = new PictureBox();
+        ImageList ilEncounterType = new ImageList();
         pictureTribbles00 = new PictureBox();
         ilTribbles = new ImageList();
         pictureTribbles50 = new PictureBox();
@@ -164,7 +164,6 @@ public class DialogEncounter extends Dialog {
         pictureTribbles54 = new PictureBox();
         pictureTribbles55 = new PictureBox();
         timerTick = new Timer();
-        suspendLayout();
         // labelEncounter
         labelEncounter.setLocation(new Point(8, 152));
         labelEncounter.setName("labelEncounter");
@@ -181,7 +180,7 @@ public class DialogEncounter extends Dialog {
         pictureShipYou.setTabStop(false);
         pictureShipYou.setPaint(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final Graphics data) {
+            public void handle(Object sender, Graphics data) {
                 pictureShipYou_Paint(sender, data);
             }
         });
@@ -195,7 +194,7 @@ public class DialogEncounter extends Dialog {
         pictureShipOpponent.setTabStop(false);
         pictureShipOpponent.setPaint(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final Graphics data) {
+            public void handle(Object sender, Graphics data) {
                 pictureShipOpponent_Paint(sender, data);
             }
         });
@@ -267,7 +266,7 @@ public class DialogEncounter extends Dialog {
         buttonAttack.setVisible(false);
         buttonAttack.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonAttack_Click(sender, data);
             }
         });
@@ -281,7 +280,7 @@ public class DialogEncounter extends Dialog {
         buttonFlee.setVisible(false);
         buttonFlee.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonFlee_Click(sender, data);
             }
         });
@@ -295,7 +294,7 @@ public class DialogEncounter extends Dialog {
         buttonSubmit.setVisible(false);
         buttonSubmit.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonSubmit_Click(sender, data);
             }
         });
@@ -309,7 +308,7 @@ public class DialogEncounter extends Dialog {
         buttonBribe.setVisible(false);
         buttonBribe.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonBribe_Click(sender, data);
             }
         });
@@ -323,7 +322,7 @@ public class DialogEncounter extends Dialog {
         buttonSurrender.setVisible(false);
         buttonSurrender.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonSurrender_Click(sender, data);
             }
         });
@@ -337,7 +336,7 @@ public class DialogEncounter extends Dialog {
         buttonIgnore.setVisible(false);
         buttonIgnore.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonIgnore_Click(sender, data);
             }
         });
@@ -351,7 +350,7 @@ public class DialogEncounter extends Dialog {
         buttonTrade.setVisible(false);
         buttonTrade.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonTrade_Click(sender, data);
             }
         });
@@ -365,7 +364,7 @@ public class DialogEncounter extends Dialog {
         buttonPlunder.setVisible(false);
         buttonPlunder.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
             }
         });
@@ -379,7 +378,7 @@ public class DialogEncounter extends Dialog {
         buttonBoard.setVisible(false);
         buttonBoard.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonBoard_Click(sender, data);
             }
         });
@@ -393,7 +392,7 @@ public class DialogEncounter extends Dialog {
         buttonMeet.setVisible(false);
         buttonMeet.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonMeet_Click(sender, data);
             }
         });
@@ -407,7 +406,7 @@ public class DialogEncounter extends Dialog {
         buttonDrink.setVisible(false);
         buttonDrink.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonDrink_Click(sender, data);
             }
         });
@@ -421,7 +420,7 @@ public class DialogEncounter extends Dialog {
         buttonInt.setVisible(false);
         buttonInt.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonInt_Click(sender, data);
             }
         });
@@ -435,7 +434,7 @@ public class DialogEncounter extends Dialog {
         buttonYield.setVisible(false);
         buttonYield.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonYield_Click(sender, data);
             }
         });
@@ -470,7 +469,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles00.setVisible(false);
         pictureTribbles00.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -488,7 +487,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles50.setVisible(false);
         pictureTribbles50.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -502,7 +501,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles10.setVisible(false);
         pictureTribbles10.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -516,7 +515,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles40.setVisible(false);
         pictureTribbles40.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -530,7 +529,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles20.setVisible(false);
         pictureTribbles20.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -544,7 +543,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles30.setVisible(false);
         pictureTribbles30.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -558,7 +557,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles04.setVisible(false);
         pictureTribbles04.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -572,7 +571,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles03.setVisible(false);
         pictureTribbles03.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -586,7 +585,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles02.setVisible(false);
         pictureTribbles02.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -600,7 +599,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles01.setVisible(false);
         pictureTribbles01.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -614,7 +613,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles05.setVisible(false);
         pictureTribbles05.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -628,7 +627,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles11.setVisible(false);
         pictureTribbles11.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -642,7 +641,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles12.setVisible(false);
         pictureTribbles12.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -656,7 +655,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles13.setVisible(false);
         pictureTribbles13.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -670,7 +669,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles14.setVisible(false);
         pictureTribbles14.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -684,7 +683,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles15.setVisible(false);
         pictureTribbles15.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -698,7 +697,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles21.setVisible(false);
         pictureTribbles21.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -712,7 +711,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles22.setVisible(false);
         pictureTribbles22.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -726,7 +725,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles23.setVisible(false);
         pictureTribbles23.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -740,7 +739,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles24.setVisible(false);
         pictureTribbles24.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -754,7 +753,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles25.setVisible(false);
         pictureTribbles25.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -768,7 +767,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles31.setVisible(false);
         pictureTribbles31.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -782,7 +781,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles32.setVisible(false);
         pictureTribbles32.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -796,7 +795,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles33.setVisible(false);
         pictureTribbles33.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -810,7 +809,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles34.setVisible(false);
         pictureTribbles34.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -824,7 +823,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles35.setVisible(false);
         pictureTribbles35.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -838,7 +837,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles41.setVisible(false);
         pictureTribbles41.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -852,7 +851,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles51.setVisible(false);
         pictureTribbles51.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -866,7 +865,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles42.setVisible(false);
         pictureTribbles42.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -880,7 +879,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles52.setVisible(false);
         pictureTribbles52.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -894,7 +893,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles43.setVisible(false);
         pictureTribbles43.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -908,7 +907,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles53.setVisible(false);
         pictureTribbles53.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -922,7 +921,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles44.setVisible(false);
         pictureTribbles44.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -936,7 +935,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles45.setVisible(false);
         pictureTribbles45.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -950,7 +949,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles54.setVisible(false);
         pictureTribbles54.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -964,7 +963,7 @@ public class DialogEncounter extends Dialog {
         pictureTribbles55.setVisible(false);
         pictureTribbles55.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 pictureTribbles_Click(sender, data);
             }
         });
@@ -972,7 +971,7 @@ public class DialogEncounter extends Dialog {
         timerTick.setInterval(1000);
         timerTick.tick = new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 timerTick_Tick(sender, data);
             }
         };
@@ -1052,7 +1051,7 @@ public class DialogEncounter extends Dialog {
         setText("Encounter");
         resumeLayout(false);
         // Set up the Game encounter variables.
-        game.EncounterBegin();
+        game.beginEncounter();
         // Enable the control box (the X button) if cheats are enabled.
         if (game.getEasyEncounters()) {
             setControlBox(true);
@@ -1096,13 +1095,13 @@ public class DialogEncounter extends Dialog {
         }
     }
 
-    private void Exit(final EncounterResult result) {
+    private void Exit(EncounterResult result) {
         _result = result;
         Close();
     }
 
     private void UpdateButtons() {
-        final boolean[] visible = new boolean[buttons.length];
+        boolean[] visible = new boolean[buttons.length];
         final int YIELD = 12;
         final int TRADE = 11;
         final int SURRENDER = 10;
@@ -1227,7 +1226,7 @@ public class DialogEncounter extends Dialog {
     }
 
     private void UpdateTribbles() {
-        final PictureBox[] tribbles = {
+        PictureBox[] tribbles = {
                 pictureTribbles00, pictureTribbles01, pictureTribbles02, pictureTribbles03, pictureTribbles04, pictureTribbles05,
                 pictureTribbles10, pictureTribbles11, pictureTribbles12, pictureTribbles13, pictureTribbles14, pictureTribbles15,
                 pictureTribbles20, pictureTribbles21, pictureTribbles22, pictureTribbles23, pictureTribbles24, pictureTribbles25,
@@ -1235,75 +1234,75 @@ public class DialogEncounter extends Dialog {
                 pictureTribbles40, pictureTribbles41, pictureTribbles42, pictureTribbles43, pictureTribbles44, pictureTribbles45,
                 pictureTribbles50, pictureTribbles51, pictureTribbles52, pictureTribbles53, pictureTribbles54, pictureTribbles55
         };
-        final int toShow = Math.min(tribbles.length, (int) Math.sqrt(commandership.getTribbles() / Math.ceil(Constants.MaxTribbles / Math.pow(tribbles.length + 1, 2))));
+        int toShow = Math.min(tribbles.length, (int) Math.sqrt(commandership.getTribbles() / Math.ceil(Constants.MaxTribbles / Math.pow(tribbles.length + 1, 2))));
         for (int i = 0; i < toShow; i++) {
-            int index = ModelUtils.GetRandom(tribbles.length);
+            int index = ModelUtils.getRandom(tribbles.length);
             while (tribbles[index].getVisible()) {
                 index = (index + 1) % tribbles.length;
             }
-            tribbles[index].setImage(ilTribbles.getImages()[ModelUtils.GetRandom(ilTribbles.getImages().length)]);
+            tribbles[index].setImage(ilTribbles.getImages()[ModelUtils.getRandom(ilTribbles.getImages().length)]);
             tribbles[index].setVisible(true);
         }
     }
 
-    private void buttonAttack_Click(final Object sender, final EventData e) {
+    private void buttonAttack_Click(Object sender, EventData e) {
         DisableAuto();
         if (game.EncounterVerifyAttack(this)) {
             ExecuteAction();
         }
     }
 
-    private void buttonBoard_Click(final Object sender, final EventData e) {
+    private void buttonBoard_Click(Object sender, EventData e) {
         if (game.EncounterVerifyBoard(this)) {
             Exit(EncounterResult.Normal);
         }
     }
 
-    private void buttonBribe_Click(final Object sender, final EventData e) {
+    private void buttonBribe_Click(Object sender, EventData e) {
         if (game.EncounterVerifyBribe(this)) {
             Exit(EncounterResult.Normal);
         }
     }
 
-    private void buttonDrink_Click(final Object sender, final EventData e) {
+    private void buttonDrink_Click(Object sender, EventData e) {
         game.EncounterDrink(this);
         Exit(EncounterResult.Normal);
     }
 
-    private void buttonFlee_Click(final Object sender, final EventData e) {
+    private void buttonFlee_Click(Object sender, EventData e) {
         DisableAuto();
         if (game.EncounterVerifyFlee(this)) {
             ExecuteAction();
         }
     }
 
-    private void buttonIgnore_Click(final Object sender, final EventData e) {
+    private void buttonIgnore_Click(Object sender, EventData e) {
         DisableAuto();
         Exit(EncounterResult.Normal);
     }
 
-    private void buttonInt_Click(final Object sender, final EventData e) {
+    private void buttonInt_Click(Object sender, EventData e) {
         DisableAuto();
     }
 
-    private void buttonMeet_Click(final Object sender, final EventData e) {
+    private void buttonMeet_Click(Object sender, EventData e) {
         game.EncounterMeet(this);
         Exit(EncounterResult.Normal);
     }
 
-    private void buttonPlunder_Click(final Object sender, final EventData e) {
+    private void buttonPlunder_Click(Object sender, EventData e) {
         DisableAuto();
         game.EncounterPlunder(this);
         Exit(EncounterResult.Normal);
     }
 
-    private void buttonSubmit_Click(final Object sender, final EventData e) {
+    private void buttonSubmit_Click(Object sender, EventData e) {
         if (game.EncounterVerifySubmit(this)) {
             Exit(commandership.IllegalSpecialCargo() ? EncounterResult.Arrested : EncounterResult.Normal);
         }
     }
 
-    private void buttonSurrender_Click(final Object sender, final EventData e) {
+    private void buttonSurrender_Click(Object sender, EventData e) {
         DisableAuto();
         _result = game.EncounterVerifySurrender(this);
         if (_result != EncounterResult.Continue) {
@@ -1311,31 +1310,31 @@ public class DialogEncounter extends Dialog {
         }
     }
 
-    private void buttonTrade_Click(final Object sender, final EventData e) {
+    private void buttonTrade_Click(Object sender, EventData e) {
         game.EncounterTrade(this);
         Exit(EncounterResult.Normal);
     }
 
-    private void buttonYield_Click(final Object sender, final EventData e) {
+    private void buttonYield_Click(Object sender, EventData e) {
         _result = game.EncounterVerifyYield(this);
         if (_result != EncounterResult.Continue) {
             Close();
         }
     }
 
-    private void pictureShipOpponent_Paint(final Object sender, final Graphics graphics) {
-        ModelUtils.PaintShipImage(opponent, graphics, pictureShipOpponent.getBackgroundColor());
+    private void pictureShipOpponent_Paint(Object sender, Graphics graphics) {
+        ModelUtils.paintShipImage(opponent, graphics, pictureShipOpponent.getBackgroundColor());
     }
 
-    private void pictureShipYou_Paint(final Object sender, final Graphics graphics) {
-        ModelUtils.PaintShipImage(commandership, graphics, pictureShipYou.getBackgroundColor());
+    private void pictureShipYou_Paint(Object sender, Graphics graphics) {
+        ModelUtils.paintShipImage(commandership, graphics, pictureShipYou.getBackgroundColor());
     }
 
-    private void pictureTribbles_Click(final Object sender, final EventData e) {
+    private void pictureTribbles_Click(Object sender, EventData e) {
         DialogAlert.Alert(AlertType.TribblesSqueek, this);
     }
 
-    private void timerTick_Tick(final Object sender, final EventData e) {
+    private void timerTick_Tick(Object sender, EventData e) {
         DisableAuto();
         ExecuteAction();
     }

@@ -7,7 +7,7 @@ import java.io.File;
 
 
 public class FileDialog {
-    protected final JFileChooser chooser = new JFileChooser();
+    private final JFileChooser chooser = new JFileChooser();
     private String buttonText;
     private String filter; // TODO why is filter not used, use?
 
@@ -33,16 +33,16 @@ public class FileDialog {
         buttonText = text;
     }
 
-    public DialogResult ShowDialog(Pane owner) {
+    public DialogResult showDialog(Pane owner) {
         int returnVal = chooser.showDialog(owner.asSwingObject(), buttonText);
         switch (returnVal) {
             case JFileChooser.CANCEL_OPTION:
             case JFileChooser.ERROR_OPTION:
                 return DialogResult.Cancel;
             case JFileChooser.APPROVE_OPTION:
-                return DialogResult.OK;
+                return DialogResult.Ok;
             default:
-                throw new Error("JFileChooser returned unknown value " + returnVal);
+                throw new RuntimeException("JFileChooser returned unknown value " + returnVal);
         }
     }
 

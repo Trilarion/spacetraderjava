@@ -26,12 +26,12 @@ public class PictureBox extends Control<ImageLabel> {
     }
 
     @Override
-    public void setBackgroundColor(final Color backgroundColor) {
+    public void setBackgroundColor(Color backgroundColor) {
         asJLabel().background = backgroundColor;
     }
 
     @Override
-    public void setBorderStyle(final BorderStyle borderStyle) {
+    public void setBorderStyle(BorderStyle borderStyle) {
         switch (borderStyle) {
             case FixedSingle:
                 asJLabel().setBorder(BorderFactory.createLineBorder(Color.black, 1));
@@ -49,17 +49,17 @@ public class PictureBox extends Control<ImageLabel> {
         asJLabel().repaint();
     }
 
-    public void setImage(final Image image) {
+    public void setImage(Image image) {
         if (image != null) {
             asJLabel().setIcon(new ImageIcon(image.asSwingImage()));
         }
     }
 
-    public void setMouseDown(final EventHandler<Object, MouseEventData> mouseDown) {
+    public void setMouseDown(EventHandler<Object, MouseEventData> mouseDown) {
         mouseListener.pressed = mouseDown;
     }
 
-    public void setPaint(final EventHandler<Object, Graphics> paint) {
+    public void setPaint(EventHandler<Object, Graphics> paint) {
         if (asJLabel().paintEventHandler != null) {
             throw new Error("2 handlers same event");
         }

@@ -21,41 +21,40 @@ public class DialogPlunder extends Dialog {
     private final Label labelBays;
 
     public DialogPlunder() {
-        final Button buttonPlunderAll9 = new Button();
-        final Button buttonPlunderQuantity9 = new Button();
-        final Button buttonPlunderAll8 = new Button();
-        final Button buttonPlunderQuantity8 = new Button();
-        final Button buttonPlunderAll7 = new Button();
-        final Button buttonPlunderQuantity7 = new Button();
-        final Button buttonPlunderAll6 = new Button();
-        final Button buttonPlunderQuantity6 = new Button();
-        final Button buttonPlunderAll5 = new Button();
-        final Button buttonPlunderQuantity5 = new Button();
-        final Button buttonPlunderAll4 = new Button();
-        final Button buttonPlunderQuantity4 = new Button();
-        final Button buttonPlunderAll3 = new Button();
-        final Button buttonPlunderQuantity3 = new Button();
-        final Button buttonPlunderAll2 = new Button();
-        final Button buttonPlunderQuantity2 = new Button();
-        final Button buttonPlunderAll1 = new Button();
-        final Button buttonPlunderQuantity1 = new Button();
-        final Button buttonPlunderAll0 = new Button();
-        final Button buttonPlunderQuantity0 = new Button();
-        final Label labelTradeCommodity9 = new Label();
-        final Label labelTradeCommodity8 = new Label();
-        final Label labelTradeCommodity2 = new Label();
-        final Label labelTradeCommodity0 = new Label();
-        final Label labelTradeCommodity1 = new Label();
-        final Label labelTradeCommodity6 = new Label();
-        final Label labelTradeCommodity5 = new Label();
-        final Label labelTradeCommodity4 = new Label();
-        final Label labelTradeCommodity3 = new Label();
-        final Label labelTradeCommodity7 = new Label();
-        final Label labelBaysLabel = new Label();
+        Button buttonPlunderAll9 = new Button();
+        Button buttonPlunderQuantity9 = new Button();
+        Button buttonPlunderAll8 = new Button();
+        Button buttonPlunderQuantity8 = new Button();
+        Button buttonPlunderAll7 = new Button();
+        Button buttonPlunderQuantity7 = new Button();
+        Button buttonPlunderAll6 = new Button();
+        Button buttonPlunderQuantity6 = new Button();
+        Button buttonPlunderAll5 = new Button();
+        Button buttonPlunderQuantity5 = new Button();
+        Button buttonPlunderAll4 = new Button();
+        Button buttonPlunderQuantity4 = new Button();
+        Button buttonPlunderAll3 = new Button();
+        Button buttonPlunderQuantity3 = new Button();
+        Button buttonPlunderAll2 = new Button();
+        Button buttonPlunderQuantity2 = new Button();
+        Button buttonPlunderAll1 = new Button();
+        Button buttonPlunderQuantity1 = new Button();
+        Button buttonPlunderAll0 = new Button();
+        Button buttonPlunderQuantity0 = new Button();
+        Label labelTradeCommodity9 = new Label();
+        Label labelTradeCommodity8 = new Label();
+        Label labelTradeCommodity2 = new Label();
+        Label labelTradeCommodity0 = new Label();
+        Label labelTradeCommodity1 = new Label();
+        Label labelTradeCommodity6 = new Label();
+        Label labelTradeCommodity5 = new Label();
+        Label labelTradeCommodity4 = new Label();
+        Label labelTradeCommodity3 = new Label();
+        Label labelTradeCommodity7 = new Label();
+        Label labelBaysLabel = new Label();
         labelBays = new Label();
-        final Button buttonDone = new Button();
-        final Button buttonJettison = new Button();
-        suspendLayout();
+        Button buttonDone = new Button();
+        Button buttonJettison = new Button();
         // buttonPlunderAll9
         buttonPlunderAll9.setFlatStyle(FlatStyle.Flat);
         buttonPlunderAll9.setLocation(new Point(100, 220));
@@ -65,7 +64,7 @@ public class DialogPlunder extends Dialog {
         buttonPlunderAll9.setText("All");
         buttonPlunderAll9.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
             }
         });
@@ -78,7 +77,7 @@ public class DialogPlunder extends Dialog {
         buttonPlunderQuantity9.setText("88");
         buttonPlunderQuantity9.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
             }
         });
@@ -91,7 +90,7 @@ public class DialogPlunder extends Dialog {
         buttonPlunderAll8.setText("All");
         buttonPlunderAll8.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
             }
         });
@@ -104,7 +103,7 @@ public class DialogPlunder extends Dialog {
         buttonPlunderQuantity8.setText("88");
         buttonPlunderQuantity8.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
             }
         });
@@ -117,7 +116,7 @@ public class DialogPlunder extends Dialog {
         buttonPlunderAll7.setText("All");
         buttonPlunderAll7.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
             }
         });
@@ -130,7 +129,7 @@ public class DialogPlunder extends Dialog {
         buttonPlunderQuantity7.setText("88");
         buttonPlunderQuantity7.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
             }
         });
@@ -143,7 +142,7 @@ public class DialogPlunder extends Dialog {
         buttonPlunderAll6.setText("All");
         buttonPlunderAll6.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
             }
         });
@@ -156,7 +155,7 @@ public class DialogPlunder extends Dialog {
         buttonPlunderQuantity6.setText("88");
         buttonPlunderQuantity6.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
             }
         });
@@ -169,7 +168,7 @@ public class DialogPlunder extends Dialog {
         buttonPlunderAll5.setText("All");
         buttonPlunderAll5.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
             }
         });
@@ -182,7 +181,7 @@ public class DialogPlunder extends Dialog {
         buttonPlunderQuantity5.setText("88");
         buttonPlunderQuantity5.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
             }
         });
@@ -195,7 +194,7 @@ public class DialogPlunder extends Dialog {
         buttonPlunderAll4.setText("All");
         buttonPlunderAll4.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
             }
         });
@@ -208,7 +207,7 @@ public class DialogPlunder extends Dialog {
         buttonPlunderQuantity4.setText("88");
         buttonPlunderQuantity4.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
             }
         });
@@ -221,7 +220,7 @@ public class DialogPlunder extends Dialog {
         buttonPlunderAll3.setText("All");
         buttonPlunderAll3.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
             }
         });
@@ -234,7 +233,7 @@ public class DialogPlunder extends Dialog {
         buttonPlunderQuantity3.setText("88");
         buttonPlunderQuantity3.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
             }
         });
@@ -247,7 +246,7 @@ public class DialogPlunder extends Dialog {
         buttonPlunderAll2.setText("All");
         buttonPlunderAll2.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
             }
         });
@@ -260,7 +259,7 @@ public class DialogPlunder extends Dialog {
         buttonPlunderQuantity2.setText("88");
         buttonPlunderQuantity2.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
             }
         });
@@ -273,7 +272,7 @@ public class DialogPlunder extends Dialog {
         buttonPlunderAll1.setText("All");
         buttonPlunderAll1.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
             }
         });
@@ -286,7 +285,7 @@ public class DialogPlunder extends Dialog {
         buttonPlunderQuantity1.setText("88");
         buttonPlunderQuantity1.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
             }
         });
@@ -299,7 +298,7 @@ public class DialogPlunder extends Dialog {
         buttonPlunderAll0.setText("All");
         buttonPlunderAll0.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
             }
         });
@@ -312,7 +311,7 @@ public class DialogPlunder extends Dialog {
         buttonPlunderQuantity0.setText("88");
         buttonPlunderQuantity0.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPlunder_Click(sender, data);
             }
         });
@@ -416,7 +415,7 @@ public class DialogPlunder extends Dialog {
         buttonJettison.setText("Jettison");
         buttonJettison.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonJettison_Click();
             }
         });
@@ -472,7 +471,7 @@ public class DialogPlunder extends Dialog {
                 buttonPlunderQuantity0, buttonPlunderQuantity1, buttonPlunderQuantity2, buttonPlunderQuantity3, buttonPlunderQuantity4,
                 buttonPlunderQuantity5, buttonPlunderQuantity6, buttonPlunderQuantity7, buttonPlunderQuantity8, buttonPlunderQuantity9
         };
-        final Button[] buttonPlunderAll = {
+        Button[] buttonPlunderAll = {
                 buttonPlunderAll0, buttonPlunderAll1, buttonPlunderAll2, buttonPlunderAll3, buttonPlunderAll4,
                 buttonPlunderAll5, buttonPlunderAll6, buttonPlunderAll7, buttonPlunderAll8, buttonPlunderAll9
         };
@@ -480,14 +479,14 @@ public class DialogPlunder extends Dialog {
     }
 
 
-    private void Plunder(final int tradeItem, final boolean all) {
-        game.CargoPlunder(tradeItem, all, this);
+    private void Plunder(int tradeItem, boolean all) {
+        game.plunderCargo(tradeItem, all, this);
         UpdateAll();
     }
 
     private void UpdateAll() {
-        final Ship ship = game.Commander().getShip();
-        final Ship opp = game.getOpponent();
+        Ship ship = game.Commander().getShip();
+        Ship opp = game.getOpponent();
         for (int i = 0; i < buttonPlunderQuantity.length; i++) {
             buttonPlunderQuantity[i].setText("" + opp.Cargo()[i]);
         }
@@ -498,10 +497,10 @@ public class DialogPlunder extends Dialog {
         (new DialogJettison()).ShowDialog(this);
     }
 
-    private void buttonPlunder_Click(final Object sender, final EventData e) {
-        final String name = ((Button) sender).getName();
-        final boolean all = !name.contains("Quantity");
-        final int index = Integer.parseInt(name.substring(name.length() - 1));
+    private void buttonPlunder_Click(Object sender, EventData e) {
+        String name = ((Button) sender).getName();
+        boolean all = !name.contains("Quantity");
+        int index = Integer.parseInt(name.substring(name.length() - 1));
         Plunder(index, all);
     }
 }

@@ -3,14 +3,14 @@ package org.spacetrader.ui;
 import org.winforms.util.Font;
 import org.winforms.image.Image;
 import org.winforms.resource.ResourceManager;
-import org.winforms.widget.Button;
-import org.winforms.widget.Dialog;
-import org.winforms.widget.Label;
-import org.winforms.widget.PictureBox;
+import org.winforms.widget.*;
 import org.winforms.dialog.DialogResult;
 import org.winforms.style.FontStyle;
 import org.winforms.style.FormBorderStyle;
 import org.winforms.alignment.FormStartPosition;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
 
 import java.awt.*;
 
@@ -18,12 +18,11 @@ import java.awt.*;
 public class DialogAbout extends Dialog {
 
     public DialogAbout() {
-        final ResourceManager resources = new ResourceManager(DialogAbout.class);
-        final Button buttonClose = new Button();
-        final Label labelTitle = new Label();
-        final Label labelAbout = new Label();
-        final PictureBox pictureLogo = new PictureBox();
-        suspendLayout();
+        ResourceManager resources = new ResourceManager(DialogAbout.class);
+        Button buttonClose = new Button();
+        Label labelTitle = new Label();
+        Label labelAbout = new Label();
+        PictureBox pictureLogo = new PictureBox();
         // buttonClose
         buttonClose.setDialogResult(DialogResult.Cancel);
         buttonClose.setLocation(new Point(-32, -32));

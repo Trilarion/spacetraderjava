@@ -61,7 +61,7 @@ public enum CrewMemberId implements IdentifiableEnum {
     Princess, // = 53,
     Scorpion;// = 54
 
-    public static CrewMemberId FromInt(final int i) {
+    public static CrewMemberId FromInt(int i) {
         return CrewMemberId.values()[i + 1];
     }
 

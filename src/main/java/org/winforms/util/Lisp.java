@@ -8,25 +8,25 @@ import java.util.List;
 public enum Lisp {
     ;
 
-    public static <To, From> List<To> map(final Iterable<From> k, final Convertor<To, From> conv) {
-        final LinkedList<To> fname = new LinkedList<>();
-        for (final From from : k) {
+    public static <To, From> List<To> map(Iterable<From> k, Convertor<To, From> conv) {
+        LinkedList<To> fname = new LinkedList<>();
+        for (From from : k) {
             fname.addLast(conv.convert(from));
         }
         return fname;
     }
 
-    public static <To, From> List<To> map(final From[] k, final Convertor<To, From> conv) {
-        final LinkedList<To> fname = new LinkedList<>();
-        for (final From from : k) {
+    public static <To, From> List<To> map(From[] k, Convertor<To, From> conv) {
+        LinkedList<To> fname = new LinkedList<>();
+        for (From from : k) {
             fname.addLast(conv.convert(from));
         }
         return fname;
     }
 
-    public static <T> List<T> filter(final T[] k, final Predicate<T> pred) {
-        final LinkedList<T> fname = new LinkedList<>();
-        for (final T t : k) {
+    public static <T> List<T> filter(T[] k, Predicate<T> pred) {
+        LinkedList<T> fname = new LinkedList<>();
+        for (T t : k) {
             if (pred.consider(t)) {
                 fname.addLast(t);
             }
@@ -34,9 +34,9 @@ public enum Lisp {
         return fname;
     }
 
-    public static <T> List<T> filter(final Iterable<T> k, final Predicate<T> pred) {
-        final LinkedList<T> fname = new LinkedList<>();
-        for (final T t : k) {
+    public static <T> List<T> filter(Iterable<T> k, Predicate<T> pred) {
+        LinkedList<T> fname = new LinkedList<>();
+        for (T t : k) {
             if (pred.consider(t)) {
                 fname.addLast(t);
             }

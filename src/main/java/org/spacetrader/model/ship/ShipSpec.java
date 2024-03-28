@@ -36,8 +36,8 @@ public class ShipSpec extends SerializableObject {
     public ShipSpec() {
     }
 
-    public ShipSpec(final ShipType type, final ShipSize size, final int cargoBays, final int weaponSlots, final int shieldSlots, final int gadgetSlots, final int crewQuarters, final int fuelTanks,
-                    final int fuelCost, final int hullStrength, final int repairCost, final int price, final int occurrence, final Activity police, final Activity pirates, final Activity traders, final TechLevel minTechLevel) {
+    public ShipSpec(ShipType type, ShipSize size, int cargoBays, int weaponSlots, int shieldSlots, int gadgetSlots, int crewQuarters, int fuelTanks,
+                    int fuelCost, int hullStrength, int repairCost, int price, int occurrence, Activity police, Activity pirates, Activity traders, TechLevel minTechLevel) {
         this.type = type;
         this.size = size;
         this.cargoBays = cargoBays;
@@ -57,7 +57,7 @@ public class ShipSpec extends SerializableObject {
         minTech = minTechLevel;
     }
 
-    public ShipSpec(final Hashtable hash) {
+    public ShipSpec(Hashtable hash) {
         super(hash);
         type = ShipType.FromInt(SerializableObject.GetValueFromHash(hash, "_type", type, Integer.class));
         size = ShipSize.FromInt(SerializableObject.GetValueFromHash(hash, "_size", size, Integer.class));
@@ -94,7 +94,7 @@ public class ShipSpec extends SerializableObject {
 
     @Override
     public Hashtable Serialize() {
-        final Hashtable hash = super.Serialize();
+        Hashtable hash = super.Serialize();
         hash.put("_type", type.getId());
         hash.put("_size", size.getId());
         hash.put("_cargoBays", cargoBays);
@@ -128,8 +128,8 @@ public class ShipSpec extends SerializableObject {
         return hash;
     }
 
-    protected void SetValues(final ShipType type) {
-        final int typeInt = type.getId();
+    protected void SetValues(ShipType type) {
+        int typeInt = type.getId();
         this.type = type;
         size = Constants.ShipSpecs[typeInt].size;
         cargoBays = Constants.ShipSpecs[typeInt].cargoBays;
@@ -151,7 +151,7 @@ public class ShipSpec extends SerializableObject {
         imageIndex = Constants.ShipSpecs[typeInt].imageIndex;
     }
 
-    public int Slots(final EquipmentType type) {
+    public int Slots(EquipmentType type) {
         int count = 0;
         switch (type) {
             case Weapon:
@@ -168,11 +168,11 @@ public class ShipSpec extends SerializableObject {
     }
 
     public void UpdateCustomImageOffsetConstants() {
-        final Image image = Game.getCurrentGame().getParentWindow().CustomShipImages()[0];
-        final int custIndex = ShipType.Custom.getId();
+        Image image = Game.getCurrentGame().getParentWindow().CustomShipImages()[0];
+        int custIndex = ShipType.Custom.getId();
         // Find the first column of pixels that has a non-white pixel for the X value, and the last column for the width.
-        final int x = ModelUtils.GetColumnOfFirstNonWhitePixel(image, 1);
-        final int width = ModelUtils.GetColumnOfFirstNonWhitePixel(image, -1) - x + 1;
+        int x = ModelUtils.getColumnOfFirstNonWhitePixel(image, 1);
+        int width = ModelUtils.getColumnOfFirstNonWhitePixel(image, -1) - x + 1;
         Constants.ShipImageOffsets[custIndex].x = Math.max(2, x);
         Constants.ShipImageOffsets[custIndex].width = Math.min(62 - Constants.ShipImageOffsets[custIndex].x, width);
     }
@@ -181,7 +181,7 @@ public class ShipSpec extends SerializableObject {
         return cargoBays;
     }
 
-    public void CargoBays(final int value) {
+    public void CargoBays(int value) {
         cargoBays = value;
     }
 
@@ -189,7 +189,7 @@ public class ShipSpec extends SerializableObject {
         return fuelTanks;
     }
 
-    public void FuelTanks(final int value) {
+    public void FuelTanks(int value) {
         fuelTanks = value;
     }
 
@@ -197,7 +197,7 @@ public class ShipSpec extends SerializableObject {
         return weaponSlots;
     }
 
-    public void setWeaponSlots(final int weaponSlots) {
+    public void setWeaponSlots(int weaponSlots) {
         this.weaponSlots = weaponSlots;
     }
 
@@ -205,7 +205,7 @@ public class ShipSpec extends SerializableObject {
         return size;
     }
 
-    public void setSize(final ShipSize size) {
+    public void setSize(ShipSize size) {
         this.size = size;
     }
 
@@ -213,7 +213,7 @@ public class ShipSpec extends SerializableObject {
         return shieldSlots;
     }
 
-    public void setShieldSlots(final int shieldSlots) {
+    public void setShieldSlots(int shieldSlots) {
         this.shieldSlots = shieldSlots;
     }
 
@@ -221,7 +221,7 @@ public class ShipSpec extends SerializableObject {
         return repairCost;
     }
 
-    public void setRepairCost(final int repairCost) {
+    public void setRepairCost(int repairCost) {
         this.repairCost = repairCost;
     }
 
@@ -229,7 +229,7 @@ public class ShipSpec extends SerializableObject {
         return price;
     }
 
-    public void setPrice(final int price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -237,7 +237,7 @@ public class ShipSpec extends SerializableObject {
         return isHullUpgraded;
     }
 
-    public void setHullUpgraded(final boolean hullUpgraded) {
+    public void setHullUpgraded(boolean hullUpgraded) {
         isHullUpgraded = hullUpgraded;
     }
 
@@ -245,7 +245,7 @@ public class ShipSpec extends SerializableObject {
         return gadgetSlots;
     }
 
-    public void setGadgetSlots(final int gadgetSlots) {
+    public void setGadgetSlots(int gadgetSlots) {
         this.gadgetSlots = gadgetSlots;
     }
 
@@ -253,7 +253,7 @@ public class ShipSpec extends SerializableObject {
         return fuelCost;
     }
 
-    public void setFuelCost(final int fuelCost) {
+    public void setFuelCost(int fuelCost) {
         this.fuelCost = fuelCost;
     }
 
@@ -261,7 +261,7 @@ public class ShipSpec extends SerializableObject {
         return crewQuarters;
     }
 
-    public void setCrewQuarters(final int crewQuarters) {
+    public void setCrewQuarters(int crewQuarters) {
         this.crewQuarters = crewQuarters;
     }
 
@@ -269,7 +269,7 @@ public class ShipSpec extends SerializableObject {
         return hullStrength + (isHullUpgraded ? Constants.HullUpgrade : 0);
     }
 
-    public void HullStrength(final int value) {
+    public void HullStrength(int value) {
         hullStrength = value;
     }
 
@@ -289,7 +289,7 @@ public class ShipSpec extends SerializableObject {
         return (imageIndex == Constants.ShipImgUseDefault ? Type().getId() : imageIndex);
     }
 
-    public void ImageIndex(final int value) {
+    public void ImageIndex(int value) {
         imageIndex = (value == Type().getId() ? Constants.ShipImgUseDefault : value);
     }
 

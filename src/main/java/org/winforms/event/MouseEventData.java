@@ -9,7 +9,7 @@ public class MouseEventData implements EventData {
     public final MouseButtons button;
     public final int x, y;
 
-    public MouseEventData(final MouseEvent e) {
+    public MouseEventData(MouseEvent e) {
 
         x = e.getX();
         y = e.getY();

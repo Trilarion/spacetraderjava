@@ -47,12 +47,12 @@ public class DialogViewPersonnel extends Dialog {
     private boolean handlingSelect;
 
     public DialogViewPersonnel() {
-        final Button buttonClose = new Button();
-        final GroupBox boxCurrentCrew = new GroupBox();
+        Button buttonClose = new Button();
+        GroupBox boxCurrentCrew = new GroupBox();
         listCrew = new ListBox();
-        final GroupBox boxForHire = new GroupBox();
+        GroupBox boxForHire = new GroupBox();
         listForHire = new ListBox();
-        final GroupBox boxInfo = new GroupBox();
+        GroupBox boxInfo = new GroupBox();
         buttonHireFire = new Button();
         labelRate = new Label();
         labelName = new Label();
@@ -66,10 +66,6 @@ public class DialogViewPersonnel extends Dialog {
         labelPilotLabel = new Label();
         labelCrewNoQuarters = new Label();
         labelForHireNone = new Label();
-        boxCurrentCrew.suspendLayout();
-        boxForHire.suspendLayout();
-        boxInfo.suspendLayout();
-        suspendLayout();
         // buttonClose
         buttonClose.setDialogResult(DialogResult.Cancel);
         buttonClose.setLocation(new Point(-32, -32));
@@ -95,13 +91,13 @@ public class DialogViewPersonnel extends Dialog {
         listCrew.setTabIndex(6);
         listCrew.setDoubleClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 HireFire(sender, data);
             }
         });
         listCrew.setSelectedIndexChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 SelectedIndexChanged(sender, data);
             }
         });
@@ -122,13 +118,13 @@ public class DialogViewPersonnel extends Dialog {
         listForHire.setTabIndex(5);
         listForHire.setDoubleClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 HireFire(sender, data);
             }
         });
         listForHire.setSelectedIndexChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 SelectedIndexChanged(sender, data);
             }
         });
@@ -159,7 +155,7 @@ public class DialogViewPersonnel extends Dialog {
         buttonHireFire.setText("Hire");
         buttonHireFire.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 HireFire(sender, data);
             }
         });
@@ -278,7 +274,7 @@ public class DialogViewPersonnel extends Dialog {
     }
 
     private void UpdateCurrentCrew() {
-        final CrewMember[] crew = ship.Crew();
+        CrewMember[] crew = ship.Crew();
         listCrew.Items.clear();
         for (int i = 1; i < crew.length; i++) {
             if (crew[i] == null) {
@@ -287,7 +283,7 @@ public class DialogViewPersonnel extends Dialog {
                 listCrew.Items.addElement(crew[i]);
             }
         }
-        final boolean entries = (!listCrew.Items.isEmpty());
+        boolean entries = (!listCrew.Items.isEmpty());
         listCrew.setVisible(entries);
         labelCrewNoQuarters.setVisible(!entries);
         if (entries) {
@@ -298,12 +294,12 @@ public class DialogViewPersonnel extends Dialog {
     }
 
     private void UpdateForHire() {
-        final CrewMember[] mercs = commander.CurrentSystem().MercenariesForHire();
+        CrewMember[] mercs = commander.CurrentSystem().MercenariesForHire();
         listForHire.Items.clear();
-        for (final CrewMember merc : mercs) {
+        for (CrewMember merc : mercs) {
             listForHire.Items.addElement(merc);
         }
-        final boolean entries = (!listForHire.Items.isEmpty());
+        boolean entries = (!listForHire.Items.isEmpty());
         listForHire.setVisible(entries);
         labelForHireNone.setVisible(!entries);
         if (entries) {
@@ -323,7 +319,7 @@ public class DialogViewPersonnel extends Dialog {
                 rateVisible = true;
             }
             labelName.setText(selectedCrewMember.Name());
-            labelRate.setText(ModelUtils.StringVars(Strings.MoneyRateSuffix, ModelUtils.FormatMoney(selectedCrewMember.Rate())));
+            labelRate.setText(ModelUtils.StringVars(Strings.MoneyRateSuffix, ModelUtils.formatMoney(selectedCrewMember.Rate())));
             labelPilot.setText(selectedCrewMember.Pilot() + "");
             labelFighter.setText(selectedCrewMember.Fighter() + "");
             labelTrader.setText(selectedCrewMember.Trader() + "");
@@ -344,7 +340,7 @@ public class DialogViewPersonnel extends Dialog {
         buttonHireFire.setVisible(hireFireVisible);
     }
 
-    private void HireFire(final Object sender, final EventData e) {
+    private void HireFire(Object sender, EventData e) {
         if (selectedCrewMember != null && buttonHireFire.getVisible()) {
             if (ship.HasCrew(selectedCrewMember.Id())) {
                 if (DialogAlert.Alert(AlertType.CrewFireMercenary, this, selectedCrewMember.Name()) == DialogResult.Yes) {
@@ -364,10 +360,10 @@ public class DialogViewPersonnel extends Dialog {
         }
     }
 
-    private void SelectedIndexChanged(final Object sender, final EventData e) {
+    private void SelectedIndexChanged(Object sender, EventData e) {
         if (!handlingSelect) {
             handlingSelect = true;
-            final Object obj = ((ListBox) sender).getSelectedItem();
+            Object obj = ((ListBox) sender).getSelectedItem();
             DeselectAll();
             if (obj instanceof CrewMember) {
                 ((ListBox) sender).setSelectedItem(obj);

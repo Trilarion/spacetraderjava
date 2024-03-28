@@ -5,7 +5,7 @@ package org.spacetrader.util;
 public enum Log {
     ;
 
-    public static void write(final String string) {
+    public static void write(String string) {
         System.out.println(string);
     }
 }

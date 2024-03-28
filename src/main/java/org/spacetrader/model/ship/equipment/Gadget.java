@@ -13,13 +13,13 @@ public class Gadget extends Equipment {
     private final GadgetType type;
     private final SkillType skillBonus;
 
-    public Gadget(final GadgetType type, final SkillType skillBonus, final int price, final TechLevel minTechLevel, final int chance) {
+    public Gadget(GadgetType type, SkillType skillBonus, int price, TechLevel minTechLevel, int chance) {
         super(EquipmentType.Gadget, price, minTechLevel, chance);
         this.type = type;
         this.skillBonus = skillBonus;
     }
 
-    public Gadget(final Hashtable hash) {
+    public Gadget(Hashtable hash) {
         super(hash);
         type = GadgetType.FromInt(SerializableObject.GetValueFromHash(hash, "_type", Integer.class));
         skillBonus = (SerializableObject.GetValueFromHash(hash, "_skillBonus", SkillType.NA, SkillType.class));
@@ -37,7 +37,7 @@ public class Gadget extends Equipment {
 
     @Override
     public Hashtable Serialize() {
-        final Hashtable hash = super.Serialize();
+        Hashtable hash = super.Serialize();
         hash.put("_type", type.asInteger());
         hash.put("_skillBonus", skillBonus.getId());
         return hash;
@@ -49,13 +49,13 @@ public class Gadget extends Equipment {
     }
 
     @Override
-    public boolean TypeEquals(final Object type) {
+    public boolean TypeEquals(Object type) {
         boolean equal = false;
         try {
             if (Type() == type) {
                 equal = true;
             }
-        } catch (final Exception e) {
+        } catch (Exception e) {
             Log.write("Ignored Exception " + e);
         }
         return equal;

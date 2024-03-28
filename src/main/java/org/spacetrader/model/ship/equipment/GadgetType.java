@@ -12,7 +12,7 @@ public enum GadgetType implements EquipmentSubType, IdentifiableEnum {
     FuelCompactor, // = 5,
     HiddenCargoBays;// = 6
 
-    public static GadgetType FromInt(final int i) {
+    public static GadgetType FromInt(int i) {
         return GadgetType.values()[i];
     }
 

@@ -77,7 +77,7 @@ public class MainWindow extends Window {
     private final Button buttonDesign;
     private final Button buttonNews;
     private final Button buttonSpecial;
-    private final Button buttonMerc;
+    private final Button buttonMercenary;
     private final Button buttonFuel;
     private final Button buttonRepair;
     private final Button buttonBuyShip;
@@ -139,10 +139,10 @@ public class MainWindow extends Window {
     private final StatusBarPanel statusBarPanelCash;
     private final StatusBarPanel statusBarPanelCosts;
     private final StatusBarPanel statusBarPanelExtra;
-    private Game game = null;
-    private Commander commander = null;
-    private String SaveGameFile = null;
-    private int SaveGameDays = -1;
+    private Game game;
+    private Commander commander;
+    private String saveGameFile;
+    private int saveGameDays = -1;
 
     public MainWindow() {
         ResourceManager resources = new ResourceManager(Main.class);
@@ -313,7 +313,7 @@ public class MainWindow extends Window {
         Label labelTradeCommodity3 = new Label();
         Label labelTradeCommodity7 = new Label();
         GroupBox boxSystem = new GroupBox();
-        buttonMerc = new Button();
+        buttonMercenary = new Button();
         buttonSpecial = new Button();
         buttonNews = new Button();
         labelSystemPressure = new Label();
@@ -352,14 +352,7 @@ public class MainWindow extends Window {
         ilShipImages = new ImageList();
         ilDirectionImages = new ImageList();
         ilEquipmentImages = new ImageList();
-        boxShortRangeChart.suspendLayout();
-        boxGalacticChart.suspendLayout();
-        boxTargetSystem.suspendLayout();
-        boxCargo.suspendLayout();
-        boxSystem.suspendLayout();
-        boxShipYard.suspendLayout();
-        boxDock.suspendLayout();
-        suspendLayout();
+
         // menuMain
         menuMain.addAll(menuGame, menuView, menuHelp);
         // menuGame
@@ -375,7 +368,7 @@ public class MainWindow extends Window {
         menuGameNew.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                menuGameNew_Click(sender, data);
+                menuGameNewClick();
             }
         });
         // menuGameLoad
@@ -384,7 +377,7 @@ public class MainWindow extends Window {
         menuGameLoad.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                menuGameLoad_Click(sender, data);
+                menuGameLoadClick();
             }
         });
         // menuGameSave
@@ -394,7 +387,7 @@ public class MainWindow extends Window {
         menuGameSave.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                menuGameSave_Click(sender, data);
+                menuGameSaveClick();
             }
         });
         // menuGameSaveAs
@@ -403,7 +396,7 @@ public class MainWindow extends Window {
         menuGameSaveAs.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                menuGameSaveAs_Click(sender, data);
+                menuGameSaveAsClick();
             }
         });
         // menuRetire
@@ -412,7 +405,7 @@ public class MainWindow extends Window {
         menuRetire.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                menuRetire_Click(sender, data);
+                menuRetireClick();
             }
         });
         // menuGameExit
@@ -421,7 +414,7 @@ public class MainWindow extends Window {
         menuGameExit.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                menuGameExit_Click(sender, data);
+                close();
             }
         });
         // menuView
@@ -437,7 +430,7 @@ public class MainWindow extends Window {
         menuViewCommander.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                menuViewCommander_Click(sender, data);
+                (new DialogViewCommander()).ShowDialog(MainWindow.this);
             }
         });
         // menuViewShip
@@ -446,7 +439,7 @@ public class MainWindow extends Window {
         menuViewShip.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                menuViewShip_Click(sender, data);
+                (new DialogViewShip()).ShowDialog(MainWindow.this);
             }
         });
         // menuViewPersonnel
@@ -455,7 +448,7 @@ public class MainWindow extends Window {
         menuViewPersonnel.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                menuViewPersonnel_Click(sender, data);
+                (new DialogViewPersonnel()).ShowDialog(MainWindow.this);
             }
         });
         // menuViewQuests
@@ -464,7 +457,7 @@ public class MainWindow extends Window {
         menuViewQuests.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                menuViewQuests_Click(sender, data);
+                (new DialogViewQuests()).ShowDialog(MainWindow.this);
             }
         });
         // menuViewBank
@@ -473,7 +466,7 @@ public class MainWindow extends Window {
         menuViewBank.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                menuViewBank_Click(sender, data);
+                (new DialogViewBank()).ShowDialog(MainWindow.this);
             }
         });
         // menuHighScores
@@ -481,7 +474,7 @@ public class MainWindow extends Window {
         menuHighScores.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                menuHighScores_Click(sender, data);
+                (new DialogViewHighScores()).ShowDialog(MainWindow.this);
             }
         });
         // menuOptions
@@ -489,7 +482,7 @@ public class MainWindow extends Window {
         menuOptions.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                menuOptions_Click(sender, data);
+                menuOptionsClick();
             }
         });
         // menuHelp
@@ -501,7 +494,7 @@ public class MainWindow extends Window {
         menuHelpAbout.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                menuHelpAbout_Click(sender, data);
+                (new DialogAbout()).ShowDialog(MainWindow.this);
             }
         });
         // pictureGalacticChart
@@ -513,14 +506,14 @@ public class MainWindow extends Window {
         pictureGalacticChart.setTabStop(false);
         pictureGalacticChart.setPaint(new EventHandler<>() {
             @Override
-            public void handle(Object sender, Graphics data) {
-                pictureGalacticChart_Paint(sender, data);
+            public void handle(Object sender, Graphics graphics) {
+                pictureGalacticChartPaint(graphics);
             }
         });
         pictureGalacticChart.setMouseDown(new EventHandler<>() {
             @Override
             public void handle(Object sender, MouseEventData data) {
-                pictureGalacticChart_MouseDown(sender, data);
+                pictureGalacticChartMouseDown(data);
             }
         });
         // pictureShortRangeChart
@@ -533,13 +526,13 @@ public class MainWindow extends Window {
         pictureShortRangeChart.setPaint(new EventHandler<>() {
             @Override
             public void handle(Object sender, Graphics data) {
-                pictureShortRangeChart_Paint(sender, data);
+                pictureShortRangeChartPaint(data);
             }
         });
         pictureShortRangeChart.setMouseDown(new EventHandler<>() {
             @Override
             public void handle(Object sender, MouseEventData data) {
-                pictureShortRangeChart_MouseDown(sender, data);
+                pictureShortRangeChartMouseDown(data);
             }
         });
         // statusBar
@@ -553,7 +546,7 @@ public class MainWindow extends Window {
         statusBar.panelClick = new EventHandler<>() {
             @Override
             public void handle(Object sender, StatusBarPanel data) {
-                statusBar_PanelClick(sender, data);
+                statusBarPanelClick(data);
             }
         };
         // statusBarPanelCash
@@ -568,10 +561,6 @@ public class MainWindow extends Window {
         statusBarPanelCosts.setMinWidth(120);
         statusBarPanelCosts.setText(" Current Costs: 888 cr.");
         statusBarPanelCosts.setWidth(120);
-        // statusBarPanelExtra
-        //statusBarPanelExtra.AutoSize = StatusBarPanelAutoSize.Spring;
-        //statusBarPanelExtra.setMinWidth(120);
-        //statusBarPanelExtra.setWidth();
 
         // boxShortRangeChart
         boxShortRangeChart.anchor = AnchorStyle.Top_Right;
@@ -618,7 +607,7 @@ public class MainWindow extends Window {
         buttonJump.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonJump_Click(sender, data);
+                buttonJumpClick();
             }
         });
         // buttonFind
@@ -631,7 +620,7 @@ public class MainWindow extends Window {
         buttonFind.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonFind_Click(sender, data);
+                buttonFindClick();
             }
         });
         // boxTargetSystem
@@ -674,7 +663,7 @@ public class MainWindow extends Window {
         buttonTrack.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonTrack_Click(sender, data);
+                buttonTrackClick();
             }
         });
         // buttonNextSystem
@@ -687,7 +676,7 @@ public class MainWindow extends Window {
         buttonNextSystem.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonNextSystem_Click(sender, data);
+                buttonNextSystemClick();
             }
         });
         // buttonPrevSystem
@@ -700,7 +689,7 @@ public class MainWindow extends Window {
         buttonPrevSystem.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonPrevSystem_Click(sender, data);
+                buttonPrevSystemClick();
             }
         });
         // labelTargetOutOfRange
@@ -719,7 +708,7 @@ public class MainWindow extends Window {
         buttonWarp.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonWarp_Click(sender, data);
+                buttonWarpClick();
             }
         });
         // labelTargetPolSys
@@ -1019,7 +1008,7 @@ public class MainWindow extends Window {
         buttonBuyMax9.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // buttonBuyQuantity9
@@ -1032,7 +1021,7 @@ public class MainWindow extends Window {
         buttonBuyQuantity9.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // labelBuyPrice9
@@ -1052,7 +1041,7 @@ public class MainWindow extends Window {
         buttonSellAll9.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // buttonSellQuantity9
@@ -1065,7 +1054,7 @@ public class MainWindow extends Window {
         buttonSellQuantity9.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // labelSellPrice9
@@ -1106,7 +1095,7 @@ public class MainWindow extends Window {
         buttonBuyMax8.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // buttonBuyQuantity8
@@ -1119,7 +1108,7 @@ public class MainWindow extends Window {
         buttonBuyQuantity8.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // labelBuyPrice8
@@ -1139,7 +1128,7 @@ public class MainWindow extends Window {
         buttonSellAll8.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // buttonSellQuantity8
@@ -1152,7 +1141,7 @@ public class MainWindow extends Window {
         buttonSellQuantity8.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // labelSellPrice8
@@ -1195,7 +1184,7 @@ public class MainWindow extends Window {
         buttonBuyMax7.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // buttonBuyQuantity7
@@ -1208,7 +1197,7 @@ public class MainWindow extends Window {
         buttonBuyQuantity7.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // labelBuyPrice7
@@ -1228,7 +1217,7 @@ public class MainWindow extends Window {
         buttonSellAll7.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // buttonSellQuantity7
@@ -1241,7 +1230,7 @@ public class MainWindow extends Window {
         buttonSellQuantity7.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // labelSellPrice7
@@ -1282,7 +1271,7 @@ public class MainWindow extends Window {
         buttonBuyMax6.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // buttonBuyQuantity6
@@ -1295,7 +1284,7 @@ public class MainWindow extends Window {
         buttonBuyQuantity6.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // labelBuyPrice6
@@ -1315,7 +1304,7 @@ public class MainWindow extends Window {
         buttonSellAll6.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // buttonSellQuantity6
@@ -1328,7 +1317,7 @@ public class MainWindow extends Window {
         buttonSellQuantity6.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // labelSellPrice6
@@ -1369,7 +1358,7 @@ public class MainWindow extends Window {
         buttonBuyMax5.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // buttonBuyQuantity5
@@ -1382,7 +1371,7 @@ public class MainWindow extends Window {
         buttonBuyQuantity5.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // labelBuyPrice5
@@ -1402,7 +1391,7 @@ public class MainWindow extends Window {
         buttonSellAll5.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // buttonSellQuantity5
@@ -1415,7 +1404,7 @@ public class MainWindow extends Window {
         buttonSellQuantity5.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // labelSellPrice5
@@ -1456,7 +1445,7 @@ public class MainWindow extends Window {
         buttonBuyMax4.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // buttonBuyQuantity4
@@ -1469,7 +1458,7 @@ public class MainWindow extends Window {
         buttonBuyQuantity4.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // labelBuyPrice4
@@ -1489,7 +1478,7 @@ public class MainWindow extends Window {
         buttonSellAll4.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // buttonSellQuantity4
@@ -1502,7 +1491,7 @@ public class MainWindow extends Window {
         buttonSellQuantity4.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // labelSellPrice4
@@ -1543,7 +1532,7 @@ public class MainWindow extends Window {
         buttonBuyMax3.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // buttonBuyQuantity3
@@ -1556,7 +1545,7 @@ public class MainWindow extends Window {
         buttonBuyQuantity3.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // labelBuyPrice3
@@ -1576,7 +1565,7 @@ public class MainWindow extends Window {
         buttonSellAll3.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // buttonSellQuantity3
@@ -1589,7 +1578,7 @@ public class MainWindow extends Window {
         buttonSellQuantity3.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // labelSellPrice3
@@ -1630,7 +1619,7 @@ public class MainWindow extends Window {
         buttonBuyMax2.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // buttonBuyQuantity2
@@ -1643,7 +1632,7 @@ public class MainWindow extends Window {
         buttonBuyQuantity2.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // labelBuyPrice2
@@ -1663,7 +1652,7 @@ public class MainWindow extends Window {
         buttonSellAll2.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // buttonSellQuantity2
@@ -1676,7 +1665,7 @@ public class MainWindow extends Window {
         buttonSellQuantity2.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // labelSellPrice2
@@ -1717,7 +1706,7 @@ public class MainWindow extends Window {
         buttonBuyMax1.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // buttonBuyQuantity1
@@ -1730,7 +1719,7 @@ public class MainWindow extends Window {
         buttonBuyQuantity1.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // labelBuyPrice1
@@ -1792,7 +1781,7 @@ public class MainWindow extends Window {
         buttonBuyMax0.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // buttonBuyQuantity0
@@ -1805,7 +1794,7 @@ public class MainWindow extends Window {
         buttonBuyQuantity0.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // labelBuyPrice0
@@ -1825,7 +1814,7 @@ public class MainWindow extends Window {
         buttonSellAll1.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // buttonSellQuantity1
@@ -1838,7 +1827,7 @@ public class MainWindow extends Window {
         buttonSellQuantity1.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // labelSellPrice1
@@ -1858,7 +1847,7 @@ public class MainWindow extends Window {
         buttonSellAll0.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // buttonSellQuantity0
@@ -1871,7 +1860,7 @@ public class MainWindow extends Window {
         buttonSellQuantity0.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuySell_Click(sender, data);
+                buttonBuySellClick(sender);
             }
         });
         // labelSellPrice0
@@ -1975,7 +1964,7 @@ public class MainWindow extends Window {
         labelTradeCommodity7.setTabIndex(16);
         labelTradeCommodity7.setText("Machines");
         // boxSystem
-        boxSystem.controls.add(buttonMerc);
+        boxSystem.controls.add(buttonMercenary);
         boxSystem.controls.add(buttonSpecial);
         boxSystem.controls.add(buttonNews);
         boxSystem.controls.add(labelSystemPressure);
@@ -2000,17 +1989,17 @@ public class MainWindow extends Window {
         boxSystem.setTabIndex(1);
         boxSystem.setTabStop(false);
         boxSystem.setText("System Info");
-        // buttonMerc
-        buttonMerc.setFlatStyle(FlatStyle.Flat);
-        buttonMerc.setLocation(new Point(118, 174));
-        buttonMerc.setName("buttonMerc");
-        buttonMerc.setSize(new Dimension(112, 22));
-        buttonMerc.setTabIndex(3);
-        buttonMerc.setText("Mercenary For Hire");
-        buttonMerc.setClick(new EventHandler<>() {
+        // buttonMercenary
+        buttonMercenary.setFlatStyle(FlatStyle.Flat);
+        buttonMercenary.setLocation(new Point(118, 174));
+        buttonMercenary.setName("buttonMerc");
+        buttonMercenary.setSize(new Dimension(112, 22));
+        buttonMercenary.setTabIndex(3);
+        buttonMercenary.setText("Mercenary For Hire");
+        buttonMercenary.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonMerc_Click(sender, data);
+                buttonMercenaryClick();
             }
         });
         // buttonSpecial
@@ -2024,7 +2013,7 @@ public class MainWindow extends Window {
         buttonSpecial.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonSpecial_Click(sender, data);
+                buttonSpecialClick();
             }
         });
         // buttonNews
@@ -2037,7 +2026,7 @@ public class MainWindow extends Window {
         buttonNews.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonNews_Click(sender, data);
+                game.showNewspaper();
             }
         });
         // labelSystemPressure
@@ -2182,7 +2171,7 @@ public class MainWindow extends Window {
         buttonDesign.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonDesign_Click(sender, data);
+                buttonDesignClick();
             }
         });
         // buttonPod
@@ -2195,7 +2184,7 @@ public class MainWindow extends Window {
         buttonPod.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonPod_Click(sender, data);
+                buttonPodClick();
             }
         });
         // labelEscapePod
@@ -2203,7 +2192,7 @@ public class MainWindow extends Window {
         labelEscapePod.setName("labelEscapePod");
         labelEscapePod.setSize(new Dimension(152, 26));
         labelEscapePod.setTabIndex(27);
-        labelEscapePod.setText("You can buy an escape pod for  2,000 cr.");
+        labelEscapePod.setText("You can buy an escape pod for 2,000 cr.");
         // buttonEquip
         buttonEquip.setFlatStyle(FlatStyle.Flat);
         buttonEquip.setLocation(new Point(43, 85));
@@ -2214,7 +2203,7 @@ public class MainWindow extends Window {
         buttonEquip.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonEquip_Click(sender, data);
+                buttonEquipClick();
             }
         });
         // buttonBuyShip
@@ -2227,7 +2216,7 @@ public class MainWindow extends Window {
         buttonBuyShip.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonBuyShip_Click(sender, data);
+                buttonBuyShipClick();
             }
         });
         // labelEquipForSale
@@ -2265,7 +2254,7 @@ public class MainWindow extends Window {
         buttonRepair.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonRepair_Click(sender, data);
+                buttonRepairClick();
             }
         });
         // buttonFuel
@@ -2278,7 +2267,7 @@ public class MainWindow extends Window {
         buttonFuel.setClick(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                buttonFuel_Click(sender, data);
+                buttonFuelClick();
             }
         });
         // labelFuelStatus
@@ -2358,13 +2347,13 @@ public class MainWindow extends Window {
         setClosing(new EventHandler<>() {
             @Override
             public void handle(Object sender, CancelEventData data) {
-                SpaceTrader_Closing(sender, data);
+                closeWindow(data);
             }
         });
         setLoad(new EventHandler<>() {
             @Override
             public void handle(Object sender, EventData data) {
-                SpaceTrader_Load(sender, data);
+                loadWindow();
             }
         });
         boxShortRangeChart.resumeLayout(false);
@@ -2431,34 +2420,34 @@ public class MainWindow extends Window {
         updateAll();
     }
 
-    private void AddHighScore(HighScoreRecord highScore) {
-        HighScoreRecord[] highScores = ModelUtils.GetHighScores(this);
-        highScores[0] = highScore;
-        Arrays.sort(highScores);
-        ModelUtils.SaveFile(Constants.HighScoreFile, SerializableObject.ArrayToArrayList(highScores), this);
-    }
-
-    private void CargoBuy(int tradeItem, boolean max) {
-        game.CargoBuySystem(tradeItem, max, this);
+    private void buyCargo(int tradeItem, boolean max) {
+        game.buyCargoSystem(tradeItem, max, this);
         updateAll();
     }
 
-    private void CargoSell(int tradeItem, boolean all) {
-        if (game.PriceCargoSell()[tradeItem] > 0) {
-            game.CargoSellSystem(tradeItem, all, this);
+    private void sellCargo(int tradeItem, boolean all) {
+        if (game.PricesellCargo()[tradeItem] > 0) {
+            game.sellCargoSystem(tradeItem, all, this);
         } else {
-            game.CargoDump(tradeItem, this);
+            game.dumpCargo(tradeItem, this);
         }
         updateAll();
     }
 
-    private void ClearHighScores() {
+    private void addHighScore(HighScoreRecord highScore) {
+        HighScoreRecord[] highScores = ModelUtils.GetHighScores(this);
+        highScores[0] = highScore;
+        Arrays.sort(highScores);
+        ModelUtils.saveFile(Constants.HighScoreFile, SerializableObject.ArrayToArrayList(highScores), this);
+    }    
+
+    private void clearHighScores() {
         HighScoreRecord[] highScores = new HighScoreRecord[3];
-        ModelUtils.SaveFile(Constants.HighScoreFile, SerializableObject.ArrayToArrayList(highScores), this);
+        ModelUtils.saveFile(Constants.HighScoreFile, SerializableObject.ArrayToArrayList(highScores), this);
     }
 
-    private void GameEnd() {
-        SetInGameControlsEnabled(false);
+    private void endGame() {
+        setInGameControlsEnabled(false);
         AlertType alertType = AlertType.Alert;
         switch (game.getEndStatus()) {
             case Killed:
@@ -2472,7 +2461,7 @@ public class MainWindow extends Window {
                 break;
         }
         DialogAlert.Alert(alertType, this);
-        DialogAlert.Alert(AlertType.GameEndScore, this, ModelUtils.FormatNumber(game.Score() / 10), ModelUtils.FormatNumber(game.Score() % 10));
+        DialogAlert.Alert(AlertType.GameEndScore, this, ModelUtils.formatNumber(game.Score() / 10), ModelUtils.formatNumber(game.Score() % 10));
         HighScoreRecord candidate = new HighScoreRecord(
                 commander.Name(), game.Score(), game.getEndStatus(),
                 commander.getDays(), commander.Worth(), game.Difficulty());
@@ -2480,7 +2469,7 @@ public class MainWindow extends Window {
             if (game.getCheatEnabled()) {
                 DialogAlert.Alert(AlertType.GameEndHighScoreCheat, this);
             } else {
-                AddHighScore(candidate);
+                addHighScore(candidate);
                 DialogAlert.Alert(AlertType.GameEndHighScoreAchieved, this);
             }
         } else {
@@ -2490,30 +2479,15 @@ public class MainWindow extends Window {
         game = null;
     }
 
-    private String GetRegistrySetting(String settingName, String defaultValue) {
-        String settingValue = defaultValue;
+    private void loadGame(String fileName) {
         try {
-            RegistryKey key = ModelUtils.GetRegistryKey();
-            Object ObjectValue = key.GetValue(settingName);
-            if (ObjectValue != null) {
-                settingValue = ObjectValue.toString();
-            }
-            key.Close();
-        } catch (NullPointerException ex) {
-            DialogAlert.Alert(AlertType.RegistryError, this, ex.getMessage());
-        }
-        return settingValue;
-    }
-
-    private void LoadGame(String fileName) {
-        try {
-            Object obj = ModelUtils.LoadFile(fileName, false, this);
+            Object obj = ModelUtils.loadFile(fileName, false, this);
             if (obj != null) {
                 game = new Game((Hashtable) obj, this);
                 commander = game.Commander();
-                SaveGameFile = fileName;
-                SaveGameDays = commander.getDays();
-                SetInGameControlsEnabled(true);
+                saveGameFile = fileName;
+                saveGameDays = commander.getDays();
+                setInGameControlsEnabled(true);
                 updateAll();
             }
         } catch (FutureVersionException ex) {
@@ -2521,14 +2495,14 @@ public class MainWindow extends Window {
         }
     }
 
-    private void SaveGame(String fileName, boolean saveFileName) {
-        if (ModelUtils.SaveFile(fileName, game.Serialize(), this) && saveFileName) {
-            SaveGameFile = fileName;
+    private void saveGame(String fileName, boolean saveFileName) {
+        if (ModelUtils.saveFile(fileName, game.Serialize(), this) && saveFileName) {
+            saveGameFile = fileName;
         }
-        SaveGameDays = commander.getDays();
+        saveGameDays = commander.getDays();
     }
 
-    private void SetInGameControlsEnabled(boolean enabled) {
+    private void setInGameControlsEnabled(boolean enabled) {
         menuGameSave.setEnabled(enabled);
         menuGameSaveAs.setEnabled(enabled);
         menuRetire.setEnabled(enabled);
@@ -2539,9 +2513,24 @@ public class MainWindow extends Window {
         menuViewBank.setEnabled(enabled);
     }
 
-    private void SetRegistrySetting(String settingName, String settingValue) {
+    private String getRegistrySetting(String settingName, String defaultValue) {
+        String settingValue = defaultValue;
         try {
-            RegistryKey key = ModelUtils.GetRegistryKey();
+            RegistryKey key = ModelUtils.getRegistryKey();
+            Object ObjectValue = key.GetValue(settingName);
+            if (ObjectValue != null) {
+                settingValue = ObjectValue.toString();
+            }
+            key.Close();
+        } catch (NullPointerException ex) {
+            DialogAlert.Alert(AlertType.RegistryError, this, ex.getMessage());
+        }
+        return settingValue;
+    }    
+
+    private void setRegistrySetting(String settingName, String settingValue) {
+        try {
+            RegistryKey key = ModelUtils.getRegistryKey();
             key.SetValue(settingName, settingValue);
             key.Close();
         } catch (NullPointerException ex) {
@@ -2576,18 +2565,18 @@ public class MainWindow extends Window {
                 buttonBuyMax[i].setVisible(false);
             }
         } else {
-            int[] buy = game.PriceCargoBuy();
-            int[] sell = game.PriceCargoSell();
+            int[] buy = game.PricebuyCargo();
+            int[] sell = game.PricesellCargo();
             commander = game.Commander();// todo: is this unnecessary? GAC
             StarSystem warpSys = game.WarpSystem();
             for (int i = 0; i < labelSellPrice.length; i++) {
                 int price = warpSys == null ? 0 : Constants.TradeItems[i].getStandardPrice(warpSys);
-                labelSellPrice[i].setText(sell[i] > 0 ? ModelUtils.FormatMoney(sell[i]) : "no trade");
+                labelSellPrice[i].setText(sell[i] > 0 ? ModelUtils.formatMoney(sell[i]) : "no trade");
                 buttonSellQuantity[i].setText("" + commander.getShip().Cargo()[i]);
                 buttonSellQuantity[i].setVisible(true);
                 buttonSellAll[i].setText(sell[i] > 0 ? "All" : "Dump");
                 buttonSellAll[i].setVisible(true);
-                labelBuyPrice[i].setText(buy[i] > 0 ? ModelUtils.FormatMoney(buy[i]) : "not sold");
+                labelBuyPrice[i].setText(buy[i] > 0 ? ModelUtils.formatMoney(buy[i]) : "not sold");
                 buttonBuyQuantity[i].setText("" + commander.CurrentSystem().TradeItems()[i]);
                 buttonBuyQuantity[i].setVisible(buy[i] > 0);
                 buttonBuyMax[i].setVisible(buy[i] > 0);
@@ -2597,14 +2586,14 @@ public class MainWindow extends Window {
                     labelSellPrice[i].setFont(labelSell.getFont());
                 }
                 if (warpSys != null && warpSys.DestOk() && price > 0) {
-                    labelTargetPrice[i].setText(ModelUtils.FormatMoney(price));
+                    labelTargetPrice[i].setText(ModelUtils.formatMoney(price));
                 } else {
                     labelTargetPrice[i].setText("-----------");
                 }
                 if (warpSys != null && warpSys.DestOk() && price > 0 && buy[i] > 0) {
                     int diff = price - buy[i];
-                    labelTargetDiff[i].setText((diff > 0 ? "+" : "") + ModelUtils.FormatMoney(diff));
-                    labelTargetPct[i].setText((diff > 0 ? "+" : "") + ModelUtils.FormatNumber(100 * diff / buy[i]) + "%");
+                    labelTargetDiff[i].setText((diff > 0 ? "+" : "") + ModelUtils.formatMoney(diff));
+                    labelTargetPct[i].setText((diff > 0 ? "+" : "") + ModelUtils.formatNumber(100 * diff / buy[i]) + "%");
                     labelBuyPrice[i].setFont(
                             (diff > 0 && commander.CurrentSystem().TradeItems()[i] > 0)
                                     ? labelSystemNameLabel.getFont() : labelBuy.getFont());
@@ -2629,7 +2618,7 @@ public class MainWindow extends Window {
             buttonJump.setVisible(false);
             buttonFind.setVisible(false);
         } else {
-            if (game.TargetWormhole()) {
+            if (game.isTargetingWormhole()) {
                 labelWormholeLabel.setVisible(true);
                 labelWormhole.setVisible(true);
                 labelWormhole.setText(game.WarpSystem().Name());
@@ -2653,18 +2642,18 @@ public class MainWindow extends Window {
         } else {
             Ship ship = commander.getShip();
             labelFuelStatus.setText(
-                    ModelUtils.StringVars("You have fuel to fly ^1.", ModelUtils.Multiples(ship.getFuel(), "parsec")));
+                    ModelUtils.StringVars("You have fuel to fly ^1.", ModelUtils.multiples(ship.getFuel(), "parsec")));
             int tanksEmpty = ship.FuelTanks() - ship.getFuel();
             labelFuelCost.setText(tanksEmpty > 0
-                    ? ModelUtils.StringVars("A full tank costs ^1", ModelUtils.FormatMoney(tanksEmpty * ship.getFuelCost()))
+                    ? ModelUtils.StringVars("A full tank costs ^1", ModelUtils.formatMoney(tanksEmpty * ship.getFuelCost()))
                     : "Your tank is full.");
             buttonFuel.setVisible(tanksEmpty > 0);
             labelHullStatus.setText(
                     ModelUtils.StringVars("Your hull strength is at ^1%.",
-                            ModelUtils.FormatNumber((int) Math.floor((double) 100 * ship.getHull() / ship.HullStrength()))));
+                            ModelUtils.formatNumber((int) Math.floor((double) 100 * ship.getHull() / ship.HullStrength()))));
             int hullLoss = ship.HullStrength() - ship.getHull();
             labelRepairCost.setText(hullLoss > 0
-                    ? ModelUtils.StringVars("Full repairs will cost ^1", ModelUtils.FormatMoney(hullLoss * ship.getRepairCost()))
+                    ? ModelUtils.StringVars("Full repairs will cost ^1", ModelUtils.formatMoney(hullLoss * ship.getRepairCost()))
                     : "No repairs are needed.");
             buttonRepair.setVisible(hullLoss > 0);
         }
@@ -2709,10 +2698,10 @@ public class MainWindow extends Window {
             statusBarPanelCosts.setText("");
             statusBarPanelExtra.setText("No Game Loaded.");
         } else {
-            statusBarPanelCash.setText("Cash: " + ModelUtils.FormatMoney(commander.getCash()));
+            statusBarPanelCash.setText("Cash: " + ModelUtils.formatMoney(commander.getCash()));
             statusBarPanelBays.setText(
                     "Bays: " + commander.getShip().FilledCargoBays() + "/" + commander.getShip().CargoBays());
-            statusBarPanelCosts.setText("Current Costs: " + ModelUtils.FormatMoney(game.CurrentCosts()));
+            statusBarPanelCosts.setText("Current Costs: " + ModelUtils.formatMoney(game.CurrentCosts()));
             statusBarPanelExtra.setText("");
         }
     }
@@ -2729,11 +2718,11 @@ public class MainWindow extends Window {
             labelSystemPressure.setText("");
             labelSystemPressurePre.setVisible(false);
             buttonNews.setVisible(false);
-            buttonMerc.setVisible(false);
+            buttonMercenary.setVisible(false);
             buttonSpecial.setVisible(false);
         } else {
             StarSystem system = commander.CurrentSystem();
-            CrewMember[] mercs = system.MercenariesForHire();
+            CrewMember[] Mercenarys = system.MercenariesForHire();
             labelSystemName.setText(system.Name());
             labelSystemSize.setText(Strings.Sizes[system.Size().getId()]);
             labelSystemTech.setText(system.TechLevel().name);
@@ -2744,11 +2733,11 @@ public class MainWindow extends Window {
             labelSystemPressure.setText(system.SystemPressure().name);
             labelSystemPressurePre.setVisible(true);
             buttonNews.setVisible(true);
-            buttonMerc.setVisible(mercs.length > 0);
-            if (buttonMerc.getVisible()) {
-                buttonMerc.setToolTip(ModelUtils.StringVars(
+            buttonMercenary.setVisible(Mercenarys.length > 0);
+            if (buttonMercenary.getVisible()) {
+                buttonMercenary.setToolTip(ModelUtils.StringVars(
                         Strings.MercenariesForHire,
-                        mercs.length == 1 ? mercs[0].Name() : mercs.length + Strings.Mercenaries));
+                        Mercenarys.length == 1 ? Mercenarys[0].Name() : Mercenarys.length + Strings.Mercenaries));
             }
             buttonSpecial.setVisible(system.ShowSpecialButton());
             if (buttonSpecial.getVisible()) {
@@ -2789,60 +2778,60 @@ public class MainWindow extends Window {
         }
     }
 
-    private void SpaceTrader_Closing(Object sender, CancelEventData e) {
-        if (game == null || commander.getDays() == SaveGameDays
+    private void closeWindow(CancelEventData e) {
+        if (game == null || commander.getDays() == saveGameDays
                 || DialogAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes) {
             if (windowState == FormWindowState.Normal) {
-                SetRegistrySetting("X", Left.toString());
-                SetRegistrySetting("Y", Top.toString());
+                setRegistrySetting("X", Left.toString());
+                setRegistrySetting("Y", Top.toString());
             }
         } else {
             e.cancel = true;
         }
     }
 
-    private void SpaceTrader_Load(Object sender, EventData e) {
-        Left = Integer.parseInt(GetRegistrySetting("X", "0"));
-        Top = Integer.parseInt(GetRegistrySetting("Y", "0"));
+    private void loadWindow() {
+        Left = Integer.parseInt(getRegistrySetting("X", "0"));
+        Top = Integer.parseInt(getRegistrySetting("Y", "0"));
         DialogAlert.Alert(AlertType.AppStart, this);
     }
 
-    private void buttonBuySell_Click(Object sender, EventData e) {
+    private void buttonBuySellClick(Object sender) {
         String name = ((Button) sender).getName();
         boolean all = !name.contains("Quantity");
         int index = Integer.parseInt(name.substring(name.length() - 1));
         if (!name.contains("Buy")) {
-            CargoSell(index, all);
+            sellCargo(index, all);
         } else {
-            CargoBuy(index, all);
+            buyCargo(index, all);
         }
     }
 
-    private void buttonBuyShip_Click(Object sender, EventData e) {
+    private void buttonBuyShipClick() {
         (new DialogShipList()).ShowDialog(this);
         updateAll();
     }
 
-    private void buttonDesign_Click(Object sender, EventData e) {
+    private void buttonDesignClick() {
         (new DialogShipyard()).ShowDialog(this);
         updateAll();
     }
 
-    private void buttonEquip_Click(Object sender, EventData e) {
+    private void buttonEquipClick() {
         (new DialogEquipment()).ShowDialog(this);
         updateAll();
     }
 
-    private void buttonFind_Click(Object sender, EventData e) {
+    private void buttonFindClick() {
         DialogFind form = new DialogFind();
-        if (form.ShowDialog(this) == DialogResult.OK) {
+        if (form.ShowDialog(this) == DialogResult.Ok) {
             Ship ship = commander.getShip();
             String[] words = form.SystemName().split(" ");
             String first = words.length > 0 ? words[0] : "";
             String second = words.length > 1 ? words[1] : "";
             String third = words.length > 2 ? words[2] : "";
-            int num1 = ModelUtils.IsInt(second) ? Integer.parseInt(second) : 0;
-            int num2 = ModelUtils.IsInt(third) ? Integer.parseInt(third) : 0;
+            int num1 = ModelUtils.isInt(second) ? Integer.parseInt(second) : 0;
+            int num2 = ModelUtils.isInt(third) ? Integer.parseInt(third) : 0;
             boolean find = false;
             if (game.getCheatEnabled()) {
                 switch (SomeStringsForSwitch.find(first)) {
@@ -2865,7 +2854,7 @@ public class MainWindow extends Window {
                         break;
                     case Events:
                         if (second.equals("Reset")) {
-                            game.ResetVeryRareEncounters();
+                            game.resetVeryRareEncounters();
                         } else {
                             String text = "";
                             for (VeryRareEncounter veryRareEncounter : game.VeryRareEncounters()) {
@@ -2882,11 +2871,11 @@ public class MainWindow extends Window {
                         game.setSelectedSystemByName(second);
                         if (game.SelectedSystem().Name().equalsIgnoreCase(second)) {
                             if (game.getAutoSave()) {
-                                SaveGame(SAVE_DEPARTURE, false);
+                                saveGame(SAVE_DEPARTURE, false);
                             }
-                            game.WarpDirect();
+                            game.warpDirect();
                             if (game.getAutoSave()) {
-                                SaveGame(SAVE_ARRIVAL, false);
+                                saveGame(SAVE_ARRIVAL, false);
                             }
                         }
                         break;
@@ -2922,7 +2911,7 @@ public class MainWindow extends Window {
                         if (num1 >= 0 && num1 < game.Mercenaries().length) {
                             String[] skills = third.split(",");
                             for (int i = 0; i < game.Mercenaries()[num1].Skills().length && i < skills.length; i++) {
-                                if (ModelUtils.IsInt(skills[i])) {
+                                if (ModelUtils.isInt(skills[i])) {
                                     game.Mercenaries()[num1].Skills()[i] =
                                             Math.max(1, Math.min(Constants.MaxSkill, Integer.parseInt(skills[i])));
                                 }
@@ -2947,7 +2936,7 @@ public class MainWindow extends Window {
                             int skill = ship.Trader();
                             ship.Crew()[num1] = game.Mercenaries()[num2];
                             if (ship.Trader() != skill) {
-                                game.RecalculateBuyPrices(commander.CurrentSystem());
+                                game.recalculateBuyPrices(commander.CurrentSystem());
                             }
                         }
                         break;
@@ -3060,16 +3049,16 @@ public class MainWindow extends Window {
             if (find) {
                 game.setSelectedSystemByName(form.SystemName());
                 if (form.TrackSystem() && game.SelectedSystem().Name().equalsIgnoreCase(form.SystemName())) {
-                    game.setTrackedSystemId(game.SelectedSystemId());
+                    game.setTrackedSystemId(game.selectedSystemId());
                 }
             }
             updateAll();
         }
     }
 
-    private void buttonFuel_Click(Object sender, EventData e) {
+    private void buttonFuelClick() {
         DialogBuyFuel form = new DialogBuyFuel();
-        if (form.ShowDialog(this) == DialogResult.OK) {
+        if (form.ShowDialog(this) == DialogResult.Ok) {
             int toAdd = form.Amount() / commander.getShip().getFuelCost();
             commander.getShip().setFuel(commander.getShip().getFuel() + toAdd);
             commander.setCash(commander.getCash() - (toAdd * commander.getShip().getFuelCost()));
@@ -3077,7 +3066,7 @@ public class MainWindow extends Window {
         }
     }
 
-    private void buttonJump_Click(Object sender, EventData e) {
+    private void buttonJumpClick() {
         if (game.WarpSystem() == null) {
             DialogAlert.Alert(AlertType.ChartJumpNoSystemSelected, this);
         } else if (game.WarpSystem() == commander.CurrentSystem()) {
@@ -3086,34 +3075,30 @@ public class MainWindow extends Window {
             game.setCanSuperWarp(false);
             try {
                 if (game.getAutoSave()) {
-                    SaveGame(SAVE_DEPARTURE, false);
+                    saveGame(SAVE_DEPARTURE, false);
                 }
-                game.Warp(true);
+                game.warp(true);
                 if (game.getAutoSave()) {
-                    SaveGame(SAVE_ARRIVAL, false);
+                    saveGame(SAVE_ARRIVAL, false);
                 }
             } catch (GameEndException ex) {
-                GameEnd();
+                endGame();
             }
             updateAll();
         }
     }
 
-    private void buttonMerc_Click(Object sender, EventData e) {
+    private void buttonMercenaryClick() {
         (new DialogViewPersonnel()).ShowDialog(this);
         updateAll();
     }
 
-    private void buttonNews_Click(Object sender, EventData e) {
-        game.ShowNewspaper();
-    }
-
-    private void buttonNextSystem_Click(Object sender, EventData e) {
-        game.SelectNextSystemWithinRange(true);
+    private void buttonNextSystemClick() {
+        game.selectNextSystemWithinRange(true);
         updateAll();
     }
 
-    private void buttonPod_Click(Object sender, EventData e) {
+    private void buttonPodClick() {
         if (DialogAlert.Alert(AlertType.EquipmentEscapePod, this) == DialogResult.Yes) {
             commander.setCash(commander.getCash() - 2000);
             commander.getShip().setEscapePod(true);
@@ -3121,14 +3106,14 @@ public class MainWindow extends Window {
         }
     }
 
-    private void buttonPrevSystem_Click(Object sender, EventData e) {
-        game.SelectNextSystemWithinRange(false);
+    private void buttonPrevSystemClick() {
+        game.selectNextSystemWithinRange(false);
         updateAll();
     }
 
-    private void buttonRepair_Click(Object sender, EventData e) {
+    private void buttonRepairClick() {
         DialogBuyRepairs form = new DialogBuyRepairs();
-        if (form.ShowDialog(this) == DialogResult.OK) {
+        if (form.ShowDialog(this) == DialogResult.Ok) {
             int toAdd = form.Amount() / commander.getShip().getRepairCost();
             commander.getShip().setHull(commander.getShip().getHull() + toAdd);
             commander.setCash(commander.getCash() - (toAdd * commander.getShip().getRepairCost()));
@@ -3136,14 +3121,14 @@ public class MainWindow extends Window {
         }
     }
 
-    private void buttonSpecial_Click(Object sender, EventData e) {
+    private void buttonSpecialClick() {
         SpecialEvent specEvent = commander.CurrentSystem().SpecialEvent();
         String button1, button2;
         DialogResult res1, res2;
         if (specEvent.isMessageOnly()) {
             button1 = "Ok";
             button2 = null;
-            res1 = DialogResult.OK;
+            res1 = DialogResult.Ok;
             res2 = DialogResult.None;
         } else {
             button1 = "Yes";
@@ -3157,127 +3142,95 @@ public class MainWindow extends Window {
                 DialogAlert.Alert(AlertType.SpecialIF, this);
             } else {
                 try {
-                    game.HandleSpecialEvent();
+                    game.handleSpecialEvent();
                 } catch (GameEndException ex) {
-                    GameEnd();
+                    endGame();
                 }
             }
         }
         updateAll();
     }
 
-    private void buttonTrack_Click(Object sender, EventData e) {
-        game.setTrackedSystemId(game.SelectedSystemId());
+    private void buttonTrackClick() {
+        game.setTrackedSystemId(game.selectedSystemId());
         updateAll();
     }
 
-    private void buttonWarp_Click(Object sender, EventData e) {
+    private void buttonWarpClick() {
         try {
             if (game.getAutoSave()) {
-                SaveGame(SAVE_DEPARTURE, false);
+                saveGame(SAVE_DEPARTURE, false);
             }
-            game.Warp(false);
+            game.warp(false);
             if (game.getAutoSave()) {
-                SaveGame(SAVE_ARRIVAL, false);
+                saveGame(SAVE_ARRIVAL, false);
             }
         } catch (GameEndException ex) {
-            GameEnd();
+            endGame();
         }
         updateAll();
     }
 
-    private void menuGameExit_Click(Object sender, EventData e) {
-        close();
-    }
-
-    private void menuGameNew_Click(Object sender, EventData e) {
+    private void menuGameNewClick() {
         DialogNewCommander form = new DialogNewCommander();
-        if ((game == null || commander.getDays() == SaveGameDays
+        if ((game == null || commander.getDays() == saveGameDays
                 || DialogAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes)
-                && form.ShowDialog(this) == DialogResult.OK) {
+                && form.ShowDialog(this) == DialogResult.Ok) {
             game = new Game(
                     form.CommanderName(), form.Difficulty(), form.Pilot(),
                     form.Fighter(), form.Trader(), form.Engineer(), this);
             commander = game.Commander();
-            SaveGameFile = null;
-            SaveGameDays = 0;
-            SetInGameControlsEnabled(true);
+            saveGameFile = null;
+            saveGameDays = 0;
+            setInGameControlsEnabled(true);
             updateAll();
             if (game.Options().getNewsAutoShow()) {
-                game.ShowNewspaper();
+                game.showNewspaper();
             }
         }
     }
 
-    private void menuGameLoad_Click(Object sender, EventData e) {
-        if ((game == null || commander.getDays() == SaveGameDays
+    private void menuGameLoadClick() {
+        if ((game == null || commander.getDays() == saveGameDays
                 || DialogAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes)
-                && dialogOpen.ShowDialog(this) == DialogResult.OK) {
-            LoadGame(dialogOpen.getFileName());
+                && dialogOpen.showDialog(this) == DialogResult.Ok) {
+            loadGame(dialogOpen.getFileName());
         }
     }
 
-    private void menuGameSave_Click(Object sender, EventData e) {
+    private void menuGameSaveClick() {
         if (game != null) {
-            if (SaveGameFile != null) {
-                SaveGame(SaveGameFile, false);
+            if (saveGameFile != null) {
+                saveGame(saveGameFile, false);
             } else {
-                menuGameSaveAs_Click(sender, e);
+                menuGameSaveAsClick();
             }
         }
     }
 
-    private void menuGameSaveAs_Click(Object sender, EventData e) {
-        if (game != null && dialogSave.ShowDialog(this) == DialogResult.OK) {
-            SaveGame(dialogSave.getFileName(), true);
+    private void menuGameSaveAsClick() {
+        if (game != null && dialogSave.showDialog(this) == DialogResult.Ok) {
+            saveGame(dialogSave.getFileName(), true);
         }
     }
 
-    private void menuHelpAbout_Click(Object sender, EventData e) {
-        (new DialogAbout()).ShowDialog(this);
-    }
-
-    private void menuHighScores_Click(Object sender, EventData e) {
-        (new DialogViewHighScores()).ShowDialog(this);
-    }
-
-    private void menuOptions_Click(Object sender, EventData e) {
+    private void menuOptionsClick() {
         DialogOptions form = new DialogOptions();
-        if (form.ShowDialog(this) == DialogResult.OK) {
+        if (form.ShowDialog(this) == DialogResult.Ok) {
             game.Options().CopyValues(form.Options());
             updateAll();
         }
     }
 
-    private void menuRetire_Click(Object sender, EventData e) {
+    private void menuRetireClick() {
         if (DialogAlert.Alert(AlertType.GameRetire, this) == DialogResult.Yes) {
             game.setEndStatus(GameEndType.Retired);
-            GameEnd();
+            endGame();
             updateAll();
         }
     }
 
-    private void menuViewBank_Click(Object sender, EventData e) {
-        (new DialogViewBank()).ShowDialog(this);
-    }
-
-    private void menuViewCommander_Click(Object sender, EventData e) {
-        (new DialogViewCommander()).ShowDialog(this);
-    }
-
-    private void menuViewPersonnel_Click(Object sender, EventData e) {
-        (new DialogViewPersonnel()).ShowDialog(this);
-    }
-
-    private void menuViewQuests_Click(Object sender, EventData e) {
-        (new DialogViewQuests()).ShowDialog(this);
-    }
-
-    private void menuViewShip_Click(Object sender, EventData e) {
-        (new DialogViewShip()).ShowDialog(this);
-    }
-
-    private void pictureGalacticChart_MouseDown(Object sender, MouseEventData e) {
+    private void pictureGalacticChartMouseDown(MouseEventData e) {
         if (e.button == MouseButtons.Left && game != null) {
             StarSystem[] universe = game.getUniverse();
             boolean clickedSystem = false;
@@ -3286,13 +3239,13 @@ public class MainWindow extends Window {
                 int y = universe[i].Y() + OFF_Y;
                 if (e.x >= x - 2 && e.x <= x + 2 && e.y >= y - 2 && e.y <= y + 2) {
                     clickedSystem = true;
-                    game.SelectedSystemId(StarSystemId.FromInt(i));
+                    game.selectedSystemId(StarSystemId.FromInt(i));
                 } else if (ModelUtils.WormholeExists(i, -1)) {
                     int xW = x + OFF_X_WORM;
                     if (e.x >= xW - 2 && e.x <= xW + 2 && e.y >= y - 2 && e.y <= y + 2) {
                         clickedSystem = true;
-                        game.SelectedSystemId(StarSystemId.FromInt(i));
-                        game.TargetWormhole(true);
+                        game.selectedSystemId(StarSystemId.FromInt(i));
+                        game.setTargetingWormhole();
                     }
                 }
             }
@@ -3302,7 +3255,7 @@ public class MainWindow extends Window {
         }
     }
 
-    private void pictureGalacticChart_Paint(Object sender, Graphics graphics) {
+    private void pictureGalacticChartPaint(Graphics graphics) {
         if (game != null) {
             StarSystem[] universe = game.getUniverse();
             int[] wormholes = game.Wormholes();
@@ -3312,8 +3265,8 @@ public class MainWindow extends Window {
             if (fuel > 0) {
                 graphics.drawEllipse(Color_BLACK, currentSys.X() + OFF_X - fuel, currentSys.Y() + OFF_Y - fuel, fuel * 2, fuel * 2);
             }
-            int index = game.SelectedSystemId().getId();
-            if (game.TargetWormhole()) {
+            int index = game.selectedSystemId().getId();
+            if (game.isTargetingWormhole()) {
                 int destination = wormholes[(Utils.bruteSeek(wormholes, index) + 1) % wormholes.length];
                 StarSystem destinationSystem = universe[destination];
                 graphics.drawLine(
@@ -3349,7 +3302,7 @@ public class MainWindow extends Window {
         }
     }
 
-    private void pictureShortRangeChart_MouseDown(Object sender, MouseEventData e) {
+    private void pictureShortRangeChartMouseDown(MouseEventData e) {
         if (e.button == MouseButtons.Left && game != null) {
             StarSystem[] universe = game.getUniverse();
             StarSystem currentSys = commander.CurrentSystem();
@@ -3364,13 +3317,13 @@ public class MainWindow extends Window {
                     int y = centerY + (universe[i].Y() - currentSys.Y()) * delta;
                     if (e.x >= x - OFF_X && e.x <= x + OFF_X && e.y >= y - OFF_Y && e.y <= y + OFF_Y) {
                         clickedSystem = true;
-                        game.SelectedSystemId(StarSystemId.FromInt(i));
+                        game.selectedSystemId(StarSystemId.FromInt(i));
                     } else if (ModelUtils.WormholeExists(i, -1)) {
                         int xW = x + 9;
                         if (e.x >= xW - OFF_X && e.x <= xW + OFF_X && e.y >= y - OFF_Y && e.y <= y + OFF_Y) {
                             clickedSystem = true;
-                            game.SelectedSystemId((StarSystemId.FromInt(i)));
-                            game.TargetWormhole(true);
+                            game.selectedSystemId((StarSystemId.FromInt(i)));
+                            game.setTargetingWormhole();
                         }
                     }
                 }
@@ -3381,7 +3334,7 @@ public class MainWindow extends Window {
         }
     }
 
-    private void pictureShortRangeChart_Paint(Object sender, Graphics graphics) {
+    private void pictureShortRangeChartPaint(Graphics graphics) {
         if (game == null) {
             graphics.fillRectangle(Color_WHITE, 0, 0, pictureShortRangeChart.getWidth(), pictureShortRangeChart.getHeight());
         } else {
@@ -3410,7 +3363,7 @@ public class MainWindow extends Window {
                 }
                 if (game.Options().getShowTrackedRange()) {
                     graphics.drawString(
-                            ModelUtils.StringVars("^1 to ^2.", ModelUtils.Multiples(dist, Strings.DistanceUnit), trackSys.Name()),
+                            ModelUtils.StringVars("^1 to ^2.", ModelUtils.multiples(dist, Strings.DistanceUnit), trackSys.Name()),
                             getFont(), java.awt.Color.black, 0, pictureShortRangeChart.getHeight() - 13);
                 }
             }
@@ -3437,7 +3390,7 @@ public class MainWindow extends Window {
                             ilChartImages.draw(graphics, x - OFF_X, y - OFF_Y, universe[i].Visited() ? IMG_G_V : IMG_G_N);
                             if (ModelUtils.WormholeExists(i, -1)) {
                                 int xW = x + 9;
-                                if (game.TargetWormhole() && universe[i] == game.SelectedSystem()) {
+                                if (game.isTargetingWormhole() && universe[i] == game.SelectedSystem()) {
                                     graphics.drawLine(Color_BLACK, xW - 6, y, xW + 6, y);
                                     graphics.drawLine(Color_BLACK, xW, y - 6, xW, y + 6);
                                 }
@@ -3457,10 +3410,10 @@ public class MainWindow extends Window {
         }
     }
 
-    private void statusBar_PanelClick(Object sender, StatusBarPanel statusBarPanel) {
+    private void statusBarPanelClick(StatusBarPanel statusBarPanel) {
         if (game != null) {
             if (statusBarPanel == statusBarPanelCash) {
-                menuViewBank_Click(sender, statusBarPanel);
+                (new DialogViewBank()).ShowDialog(this);
             } else if (statusBarPanel == statusBarPanelCosts) {
                 (new DialogCosts()).ShowDialog(this);
             }

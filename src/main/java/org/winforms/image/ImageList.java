@@ -12,7 +12,7 @@ public class ImageList {
     private Image[] images;
     private Dimension size;
 
-    public void draw(final Graphics graphics, final int x, final int y, final int imageIndex) {
+    public void draw(Graphics graphics, int x, int y, int imageIndex) {
         graphics.drawImage(images[imageIndex], x, y, new Rectangle(0, 0, size.width, size.height));
     }
 
@@ -20,21 +20,21 @@ public class ImageList {
         return images;
     }
 
-    public void setImageStream(final ImageListStreamer imageStream) {
-        final ArrayList<Image> al = new ArrayList<>();
-        for (final Image image : imageStream.images) {
+    public void setImageStream(ImageListStreamer imageStream) {
+        ArrayList<Image> al = new ArrayList<>();
+        for (Image image : imageStream.images) {
             al.add(image);
         }
         images = al.toArray(new Image[0]);
     }
 
-    public void setTransparentColor(final Color transparentColor) {
-        for (final Image image : images) {
+    public void setTransparentColor(Color transparentColor) {
+        for (Image image : images) {
             image.setTransparentColor(transparentColor);
         }
     }
 
-    public void setImageSize(final Dimension imageSize) {
+    public void setImageSize(Dimension imageSize) {
         size = imageSize;
     }
 }

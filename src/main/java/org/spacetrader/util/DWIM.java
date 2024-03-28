@@ -20,8 +20,8 @@ public enum DWIM {
      * }
      */
 
-    public static <T extends IdentifiableEnum> T dwim(final Object ob, final Class<T> cls) {
-        final int value;
+    public static <T extends IdentifiableEnum> T dwim(Object ob, Class<T> cls) {
+        int value;
         if (ob instanceof Integer) {
             value = (Integer) ob;
         } else if (ob instanceof IdentifiableEnum) {
@@ -31,25 +31,25 @@ public enum DWIM {
         }
         try {
             return (T) DWIM.getFromInt(cls).invoke(null, value);
-        } catch (final Exception e) {
+        } catch (Exception e) {
             throw new Error("dwim(" + ob.getClass() + ", " + cls + ") ", e);
         }
     }
 
 
-    public static <T extends IdentifiableEnum> T[] dwim(final Object[] ob, final Class<T> cls) {
+    public static <T extends IdentifiableEnum> T[] dwim(Object[] ob, Class<T> cls) {
         try {
-            final T[] arrayVal = (T[]) Array.newInstance(cls, ob.length);
+            T[] arrayVal = (T[]) Array.newInstance(cls, ob.length);
             for (int i = 0; i < ob.length; i++) {
                 arrayVal[i] = DWIM.dwim(ob[i], cls);
             }
             return arrayVal;
-        } catch (final Exception e) {
+        } catch (Exception e) {
             throw new Error("dwim[](" + ob.getClass() + ", " + cls + ") ", e);
         }
     }
 
-    private static Method getFromInt(final Class<?> cls) throws NoSuchMethodException, SecurityException {
+    private static Method getFromInt(Class<?> cls) throws NoSuchMethodException, SecurityException {
         return cls.getMethod("FromInt", int.class);
     }
 }

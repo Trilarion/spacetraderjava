@@ -5,16 +5,16 @@ import org.spacetrader.model.ModelUtils;
 import org.spacetrader.controller.Game;
 import org.spacetrader.model.cargo.CargoBuyOperation;
 import org.spacetrader.model.crew.Commander;
-import org.winforms.widget.Button;
-import org.winforms.widget.Dialog;
-import org.winforms.widget.Label;
-import org.winforms.widget.Spinner;
+import org.winforms.widget.*;
 import org.winforms.dialog.DialogResult;
 import org.winforms.style.FlatStyle;
 import org.winforms.style.FormBorderStyle;
 import org.winforms.alignment.FormStartPosition;
 import org.winforms.event.EventData;
 import org.winforms.event.EventHandler;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
 
 import java.awt.*;
 
@@ -31,7 +31,6 @@ public class DialogCargoBuy extends Dialog {
         Button buttonNone = new Button();
         Label labelAvailable = new Label();
         Label labelAfford = new Label();
-        suspendLayout();
         // labelQuestion
         labelQuestion.setAutoSize(true);
         labelQuestion.setLocation(new Point(8, 24));
@@ -54,7 +53,7 @@ public class DialogCargoBuy extends Dialog {
         numAmount.setTabIndex(1);
         numAmount.setValue(1);
         // buttonOk
-        buttonOk.setDialogResult(DialogResult.OK);
+        buttonOk.setDialogResult(DialogResult.Ok);
         buttonOk.setFlatStyle(FlatStyle.Flat);
         buttonOk.setLocation(new Point(95, 48));
         buttonOk.setName("buttonOk");
@@ -62,7 +61,7 @@ public class DialogCargoBuy extends Dialog {
         buttonOk.setTabIndex(2);
         buttonOk.setText("Ok");
         // buttonAll
-        buttonAll.setDialogResult(DialogResult.OK);
+        buttonAll.setDialogResult(DialogResult.Ok);
         buttonAll.setFlatStyle(FlatStyle.Flat);
         buttonAll.setLocation(new Point(143, 48));
         buttonAll.setName("buttonAll");
@@ -97,7 +96,7 @@ public class DialogCargoBuy extends Dialog {
         labelAfford.setTabIndex(6);
         labelAfford.setText("You can afford to buy 88 units.");
         labelAfford.setVisible(false);
-        // FormCargoBuy
+        // FormbuyCargo
         setAcceptButton(buttonOk);
         setAutoScaleBaseSize(new Dimension(5, 13));
         setCancelButton(buttonNone);
@@ -112,30 +111,30 @@ public class DialogCargoBuy extends Dialog {
         Controls.add(labelAfford);
         Controls.add(labelAvailable);
         setFormBorderStyle(FormBorderStyle.FixedDialog);
-        setName("FormCargoBuy");
+        setName("FormbuyCargo");
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Buy Xxxxxxxxxx");
         resumeLayout(false);
         numAmount.setMaximum(maxAmount);
         numAmount.setValue(numAmount.getMinimum());
-        setText(ModelUtils.StringVars(Strings.CargoTitle, Strings.CargoBuyOps[op.id], Constants.TradeItems[item].Name()));
-        labelQuestion.setText(ModelUtils.StringVars("How many do you want to ^1?", Strings.CargoBuyOps[op.id].toLowerCase()));
+        setText(ModelUtils.StringVars(Strings.CargoTitle, Strings.buyCargoOps[op.id], Constants.TradeItems[item].Name()));
+        labelQuestion.setText(ModelUtils.StringVars("How many do you want to ^1?", Strings.buyCargoOps[op.id].toLowerCase()));
         Game game = Game.getCurrentGame();
         Commander commander = game.Commander();
         switch (op) {
             case BuySystem:
-                labelStatement.setText(ModelUtils.StringVars("At ^1 each, you can buy up to ^2.", ModelUtils.FormatMoney(game.PriceCargoBuy()[item]), ModelUtils.FormatNumber(maxAmount)));
+                labelStatement.setText(ModelUtils.StringVars("At ^1 each, you can buy up to ^2.", ModelUtils.formatMoney(game.PricebuyCargo()[item]), ModelUtils.formatNumber(maxAmount)));
                 setHeight(buttonOk.getTop() + buttonOk.getHeight() + 34);
                 break;
             case BuyTrader:
-                int afford = Math.min(commander.getCash() / game.PriceCargoBuy()[item], commander.getShip().FreeCargoBays());
+                int afford = Math.min(commander.getCash() / game.PricebuyCargo()[item], commander.getShip().FreeCargoBays());
                 if (afford < maxAmount) {
                     numAmount.setMaximum(afford);
                 }
-                labelStatement.setText(ModelUtils.StringVars("The trader wants to sell ^1 for the price of ^2 each.", Constants.TradeItems[item].Name(), ModelUtils.FormatMoney(game.PriceCargoBuy()[item])));
-                labelAvailable.setText(ModelUtils.StringVars("The trader has ^1 for sale.", ModelUtils.Multiples(game.getOpponent().Cargo()[item], Strings.CargoUnit)));
-                labelAfford.setText(ModelUtils.StringVars("You can afford to buy ^1.", ModelUtils.Multiples(afford, Strings.CargoUnit)));
+                labelStatement.setText(ModelUtils.StringVars("The trader wants to sell ^1 for the price of ^2 each.", Constants.TradeItems[item].Name(), ModelUtils.formatMoney(game.PricebuyCargo()[item])));
+                labelAvailable.setText(ModelUtils.StringVars("The trader has ^1 for sale.", ModelUtils.multiples(game.getOpponent().Cargo()[item], Strings.CargoUnit)));
+                labelAfford.setText(ModelUtils.StringVars("You can afford to buy ^1.", ModelUtils.multiples(afford, Strings.CargoUnit)));
                 labelAvailable.setVisible(true);
                 labelAfford.setVisible(true);
                 buttonOk.setTop(buttonOk.getTop() + 26);
@@ -145,7 +144,7 @@ public class DialogCargoBuy extends Dialog {
                 numAmount.setTop(numAmount.getTop() + 26);
                 break;
             case InPlunder:
-                labelStatement.setText(ModelUtils.StringVars("Your victim has ^1 of these goods.", ModelUtils.FormatNumber(game.getOpponent().Cargo()[item])));
+                labelStatement.setText(ModelUtils.StringVars("Your victim has ^1 of these goods.", ModelUtils.formatNumber(game.getOpponent().Cargo()[item])));
                 setHeight(buttonOk.getTop() + buttonOk.getHeight() + 34);
                 break;
         }

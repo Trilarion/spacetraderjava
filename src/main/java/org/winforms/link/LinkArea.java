@@ -5,7 +5,7 @@ package org.winforms.link;
 public class LinkArea {
     int x, y;
 
-    public LinkArea(final int x, final int y) {
+    public LinkArea(int x, int y) {
         this.x = x;
         this.y = y;
     }

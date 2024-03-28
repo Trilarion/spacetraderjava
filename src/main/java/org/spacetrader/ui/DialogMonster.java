@@ -83,10 +83,6 @@ public class DialogMonster extends Dialog {
         labelShipyards = new Label();
         labelShipyardSystems = new LinkLabel();
         PictureBox pictureLine2 = new PictureBox();
-        pnlMercs.suspendLayout();
-        pnlQuests.suspendLayout();
-        pnlShipyards.suspendLayout();
-        suspendLayout();
         // buttonClose
         buttonClose.setDialogResult(DialogResult.Cancel);
         buttonClose.setLocation(new Point(-32, -32));

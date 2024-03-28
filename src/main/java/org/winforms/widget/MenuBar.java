@@ -11,12 +11,12 @@ public class MenuBar extends Control<JMenuBar> {
         super(new JMenuBar());
     }
 
-    public void add(final MenuItem item) {
+    public void add(MenuItem item) {
         asJMenuBar().add(item.asJMenuItem());
     }
 
-    public void addAll(final MenuItem... items) {
-        for (final MenuItem item : items) {
+    public void addAll(MenuItem... items) {
+        for (MenuItem item : items) {
             add(item);
         }
     }

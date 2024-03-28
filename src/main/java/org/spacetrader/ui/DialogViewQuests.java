@@ -27,9 +27,8 @@ public class DialogViewQuests extends Dialog {
     private final LinkLabel labelQuests;
 
     public DialogViewQuests() {
-        final Button buttonClose = new Button();
+        Button buttonClose = new Button();
         labelQuests = new LinkLabel();
-        suspendLayout();
         // buttonClose
         buttonClose.setDialogResult(DialogResult.Cancel);
         buttonClose.setLocation(new Point(-32, -32));
@@ -58,7 +57,7 @@ public class DialogViewQuests extends Dialog {
                 + "Claim your moon at Utopia.");
         labelQuests.linkClicked = new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final Link data) {
+            public void handle(Object sender, Link data) {
                 labelQuests_LinkClicked(sender, data);
             }
         };
@@ -80,12 +79,12 @@ public class DialogViewQuests extends Dialog {
 
 
     private String[] GetQuestStrings() {
-        final ArrayList<String> quests = new ArrayList<>(12);
+        ArrayList<String> quests = new ArrayList<>(12);
         if (game.getQuestStatusGemulon() > SpecialEvent.StatusGemulonNotStarted && game.getQuestStatusGemulon() < SpecialEvent.StatusGemulonDate) {
             if (game.getQuestStatusGemulon() == SpecialEvent.StatusGemulonDate - 1) {
                 quests.add(Strings.QuestGemulonInformTomorrow);
             } else {
-                quests.add(ModelUtils.StringVars(Strings.QuestGemulonInformDays, ModelUtils.Multiples(SpecialEvent.StatusGemulonDate - game.getQuestStatusGemulon(), "day")));
+                quests.add(ModelUtils.StringVars(Strings.QuestGemulonInformDays, ModelUtils.multiples(SpecialEvent.StatusGemulonDate - game.getQuestStatusGemulon(), "day")));
             }
         } else if (game.getQuestStatusGemulon() == SpecialEvent.StatusGemulonFuel) {
             quests.add(Strings.QuestGemulonFuel);
@@ -94,7 +93,7 @@ public class DialogViewQuests extends Dialog {
             if (game.getQuestStatusExperiment() == SpecialEvent.StatusExperimentDate - 1) {
                 quests.add(Strings.QuestExperimentInformTomorrow);
             } else {
-                quests.add(ModelUtils.StringVars(Strings.QuestExperimentInformDays, ModelUtils.Multiples(SpecialEvent.StatusExperimentDate - game.getQuestStatusExperiment(), "day")));
+                quests.add(ModelUtils.StringVars(Strings.QuestExperimentInformDays, ModelUtils.multiples(SpecialEvent.StatusExperimentDate - game.getQuestStatusExperiment(), "day")));
             }
         }
         if (game.Commander().getShip().ReactorOnBoard()) {
@@ -195,13 +194,13 @@ public class DialogViewQuests extends Dialog {
     }
 
     private void UpdateAll() {
-        final String[] quests = GetQuestStrings();
+        String[] quests = GetQuestStrings();
         if (quests.length == 0) {
             labelQuests.setText(Strings.QuestNone);
         } else {
             labelQuests.setText(Utils.stringsJoin(Strings.newline + Strings.newline, quests));
             for (int i = 0; i < Strings.SystemNames.length; i++) {
-                final String systemName = Strings.SystemNames[i];
+                String systemName = Strings.SystemNames[i];
                 int start = 0;
                 int index = -1;
                 while ((index = labelQuests.getText().indexOf(systemName, start)) >= 0) {
@@ -212,7 +211,7 @@ public class DialogViewQuests extends Dialog {
         }
     }
 
-    private void labelQuests_LinkClicked(final Object sender, final Link e) {
+    private void labelQuests_LinkClicked(Object sender, Link e) {
         game.setSelectedSystemByName(e.linkData.toString());
         game.getParentWindow().updateAll();
         Close();

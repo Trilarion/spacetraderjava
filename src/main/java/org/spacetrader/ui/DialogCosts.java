@@ -5,13 +5,13 @@ import org.spacetrader.controller.Game;
 import org.winforms.util.Font;
 import org.winforms.alignment.ContentAlignment;
 import org.winforms.alignment.FormStartPosition;
-import org.winforms.widget.Button;
-import org.winforms.widget.Dialog;
-import org.winforms.widget.Label;
-import org.winforms.widget.PictureBox;
+import org.winforms.widget.*;
 import org.winforms.dialog.DialogResult;
 import org.winforms.style.FontStyle;
 import org.winforms.style.FormBorderStyle;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
 
 import java.awt.*;
 
@@ -31,7 +31,6 @@ public class DialogCosts extends Dialog {
         Label labelMercLabel = new Label();
         Label labelInsLabel = new Label();
         PictureBox pictureLine = new PictureBox();
-        suspendLayout();
         // buttonClose
         buttonClose.setDialogResult(DialogResult.Cancel);
         buttonClose.setLocation(new Point(-32, -32));
@@ -136,11 +135,11 @@ public class DialogCosts extends Dialog {
         setText("Cost Specification");
         resumeLayout(false);
         Game game = Game.getCurrentGame();
-        labelMerc.setText(ModelUtils.FormatMoney(game.MercenaryCosts()));
-        labelIns.setText(ModelUtils.FormatMoney(game.InsuranceCosts()));
-        labelInt.setText(ModelUtils.FormatMoney(game.InterestCosts()));
-        labelTax.setText(ModelUtils.FormatMoney(game.WormholeCosts()));
-        labelTotal.setText(ModelUtils.FormatMoney(game.CurrentCosts()));
+        labelMerc.setText(ModelUtils.formatMoney(game.MercenaryCosts()));
+        labelIns.setText(ModelUtils.formatMoney(game.InsuranceCosts()));
+        labelInt.setText(ModelUtils.formatMoney(game.InterestCosts()));
+        labelTax.setText(ModelUtils.formatMoney(game.WormholeCosts()));
+        labelTotal.setText(ModelUtils.formatMoney(game.CurrentCosts()));
     }
 
 }

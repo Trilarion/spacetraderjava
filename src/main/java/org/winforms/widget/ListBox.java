@@ -21,7 +21,7 @@ public class ListBox extends Control<JList> {
 
     @Override
 
-    public void setBorderStyle(final BorderStyle borderStyle) {
+    public void setBorderStyle(BorderStyle borderStyle) {
         if (borderStyle != BorderStyle.FixedSingle) {
             throw new Error("Unknown border style");
         }
@@ -39,7 +39,7 @@ public class ListBox extends Control<JList> {
     public void setSelectedIndexChanged(EventHandler<Object, EventData> handler) {
         asJList().addListSelectionListener(new ListSelectionListener() {
             @Override
-            public void valueChanged(final ListSelectionEvent e) {
+            public void valueChanged(ListSelectionEvent e) {
                 handler.handle(ListBox.this, null);
             }
         });
@@ -57,7 +57,7 @@ public class ListBox extends Control<JList> {
         return asJList().getSelectedValue();
     }
 
-    public void setSelectedItem(final Object selectedItem) {
+    public void setSelectedItem(Object selectedItem) {
         asJList().setSelectedValue(selectedItem, true);
     }
 }

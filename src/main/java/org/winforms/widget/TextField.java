@@ -14,7 +14,7 @@ public class TextField extends Control<JTextField> {
         super(new JTextField());
     }
 
-    public void setTextChanged(final EventHandler<Object, EventData> valueChanged) {
+    public void setTextChanged(EventHandler<Object, EventData> valueChanged) {
         asJTextField().getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void changedUpdate(DocumentEvent e) {

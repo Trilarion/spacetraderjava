@@ -37,9 +37,9 @@ public class DialogOptions extends Dialog {
     private boolean initializing = true;
 
     public DialogOptions() {
-        final Button buttonOk = new Button();
-        final Button buttonCancel = new Button();
-        final Label labelEmpty = new Label();
+        Button buttonOk = new Button();
+        Button buttonCancel = new Button();
+        Label labelEmpty = new Label();
         checkBoxFuel = new CheckBox();
         checkBoxContinuousAttack = new CheckBox();
         checkBoxAttackFleeing = new CheckBox();
@@ -53,15 +53,14 @@ public class DialogOptions extends Dialog {
         checkBoxIgnorePirates = new CheckBox();
         checkBoxIgnorePolice = new CheckBox();
         checkBoxRepair = new CheckBox();
-        final Label labelIgnore = new Label();
+        Label labelIgnore = new Label();
         numEmpty = new Spinner();
-        final Button buttonSave = new Button();
-        final Button buttonLoad = new Button();
+        Button buttonSave = new Button();
+        Button buttonLoad = new Button();
         checkBoxNewspaperShow = new CheckBox();
         checkBoxDisable = new CheckBox();
-        suspendLayout();
         // buttonOk
-        buttonOk.setDialogResult(DialogResult.OK);
+        buttonOk.setDialogResult(DialogResult.Ok);
         buttonOk.setFlatStyle(FlatStyle.Flat);
         buttonOk.setLocation(new Point(14, 240));
         buttonOk.setName("buttonOk");
@@ -91,7 +90,7 @@ public class DialogOptions extends Dialog {
         checkBoxFuel.setText("Get full fuel tanks on arrival");
         checkBoxFuel.setCheckedChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 controlChanged();
             }
         });
@@ -103,7 +102,7 @@ public class DialogOptions extends Dialog {
         checkBoxContinuousAttack.setText("Continuous attack and flight");
         checkBoxContinuousAttack.setCheckedChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 controlChanged();
             }
         });
@@ -115,7 +114,7 @@ public class DialogOptions extends Dialog {
         checkBoxAttackFleeing.setText("Continue attacking fleeing ship");
         checkBoxAttackFleeing.setCheckedChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 controlChanged();
             }
         });
@@ -127,7 +126,7 @@ public class DialogOptions extends Dialog {
         checkBoxNewspaper.setText("Always pay for newspaper");
         checkBoxNewspaper.setCheckedChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 controlChanged();
             }
         });
@@ -139,7 +138,7 @@ public class DialogOptions extends Dialog {
         checkBoxRange.setText("Show range to tracked system");
         checkBoxRange.setCheckedChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 controlChanged();
             }
         });
@@ -151,7 +150,7 @@ public class DialogOptions extends Dialog {
         checkBoxStopTracking.setText("Stop tracking on arrival");
         checkBoxStopTracking.setCheckedChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 controlChanged();
             }
         });
@@ -163,7 +162,7 @@ public class DialogOptions extends Dialog {
         checkBoxLoan.setText("Remind about loans");
         checkBoxLoan.setCheckedChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 controlChanged();
             }
         });
@@ -175,7 +174,7 @@ public class DialogOptions extends Dialog {
         checkBoxIgnoreTradersDealing.setText("Ignore dealing traders");
         checkBoxIgnoreTradersDealing.setCheckedChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 controlChanged();
             }
         });
@@ -187,7 +186,7 @@ public class DialogOptions extends Dialog {
         checkBoxReserveMoney.setText("Reserve money for warp costs");
         checkBoxReserveMoney.setCheckedChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 controlChanged();
             }
         });
@@ -199,7 +198,7 @@ public class DialogOptions extends Dialog {
         checkBoxIgnoreTraders.setText("Traders");
         checkBoxIgnoreTraders.setCheckedChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 controlChanged();
             }
         });
@@ -211,7 +210,7 @@ public class DialogOptions extends Dialog {
         checkBoxIgnorePirates.setText("Pirates");
         checkBoxIgnorePirates.setCheckedChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 controlChanged();
             }
         });
@@ -223,7 +222,7 @@ public class DialogOptions extends Dialog {
         checkBoxIgnorePolice.setText("Police");
         checkBoxIgnorePolice.setCheckedChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 controlChanged();
             }
         });
@@ -235,7 +234,7 @@ public class DialogOptions extends Dialog {
         checkBoxRepair.setText("Get full hull repairs on arrival");
         checkBoxRepair.setCheckedChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 controlChanged();
             }
         });
@@ -255,7 +254,7 @@ public class DialogOptions extends Dialog {
         numEmpty.setValue(88);
         numEmpty.setValueChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 controlChanged();
             }
         });
@@ -268,7 +267,7 @@ public class DialogOptions extends Dialog {
         buttonSave.setText("Save As Defaults");
         buttonSave.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonSave_Click();
             }
         });
@@ -281,7 +280,7 @@ public class DialogOptions extends Dialog {
         buttonLoad.setText("Load from Defaults");
         buttonLoad.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonLoad_Click();
             }
         });
@@ -293,7 +292,7 @@ public class DialogOptions extends Dialog {
         checkBoxNewspaperShow.setText("Show newspaper on arrival");
         checkBoxNewspaperShow.setCheckedChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 controlChanged();
             }
         });
@@ -305,7 +304,7 @@ public class DialogOptions extends Dialog {
         checkBoxDisable.setText("Attempt to disable opponents when possible");
         checkBoxDisable.setCheckedChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 controlChanged();
             }
         });
@@ -344,11 +343,11 @@ public class DialogOptions extends Dialog {
         setStartPosition(FormStartPosition.CenterParent);
         setText("Options");
         resumeLayout(false);
-        final Game game = Game.getCurrentGame();
+        Game game = Game.getCurrentGame();
         if (game != null) {
             opts.CopyValues(game.Options());
         } else {
-            opts.LoadFromDefaults(false, this);
+            opts.loadFromDefaults(false, this);
             buttonOk.setEnabled(false);
             // no game set, only allow to change default options
         }
@@ -402,12 +401,12 @@ public class DialogOptions extends Dialog {
     }
 
     private void buttonLoad_Click() {
-        opts.LoadFromDefaults(true, this);
+        opts.loadFromDefaults(true, this);
         UpdateAll();
     }
 
     private void buttonSave_Click() {
-        opts.SaveAsDefaults(this);
+        opts.saveAsDefaults(this);
     }
 
     private void controlChanged() {

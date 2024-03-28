@@ -8,7 +8,7 @@ public class SubMenu extends MenuItem {  // TODO difference to MenuItem (JMenu a
         super(new JMenu());
     }
 
-    public void add(final MenuItem item) {
+    public void add(MenuItem item) {
         asJMenu().add(item.asJMenuItem());
     }
 
@@ -16,8 +16,8 @@ public class SubMenu extends MenuItem {  // TODO difference to MenuItem (JMenu a
         asJMenu().addSeparator();
     }
 
-    public void addAll(final MenuItem... items) {
-        for (final MenuItem item : items) {
+    public void addAll(MenuItem... items) {
+        for (MenuItem item : items) {
             add(item);
         }
     }

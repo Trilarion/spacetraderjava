@@ -8,7 +8,7 @@ public enum EquipmentType implements IdentifiableEnum {
     Shield,
     Gadget;
 
-    public static EquipmentType FromInt(final int i) {
+    public static EquipmentType FromInt(int i) {
         return EquipmentType.values()[i];
     }
 

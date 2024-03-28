@@ -35,11 +35,11 @@ public class Ship extends ShipSpec {
     // The following does not need to be saved. It's more of a temp variable.
     private boolean[] tradeableItems;
 
-    public Ship(final ShipType type) {
+    public Ship(ShipType type) {
         SetValues(type);
     }
 
-    public Ship(final OpponentType opponentType) {
+    public Ship(OpponentType opponentType) {
         if (opponentType == OpponentType.FamousCaptain) {
             SetValues(Constants.ShipSpecs[Constants.MaxShip].Type());
             for (int i = 0; i < shields.length; i++) {
@@ -54,7 +54,7 @@ public class Ship extends ShipSpec {
         } else if (opponentType == OpponentType.Bottle) {
             SetValues(ShipType.Bottle);
         } else {
-            final int tries = opponentType == OpponentType.Mantis
+            int tries = opponentType == OpponentType.Mantis
                     ? Game.getCurrentGame().Difficulty().getId() + 1
                     : Math.max(1, Game.getCurrentGame().Commander().Worth() / 150000 + Game.getCurrentGame().Difficulty().getId() - Difficulty.Normal.getId());
             generateOpponentShip(opponentType);
@@ -72,7 +72,7 @@ public class Ship extends ShipSpec {
     }
 
 
-    public Ship(final Hashtable hash) {
+    public Ship(Hashtable hash) {
         super(hash);
         fuel = SerializableObject.GetValueFromHash(hash, "_fuel", Integer.class);
         hull = SerializableObject.GetValueFromHash(hash, "_hull", Integer.class);
@@ -82,16 +82,16 @@ public class Ship extends ShipSpec {
         shields = (Shield[]) SerializableObject.ArrayListToArray(SerializableObject.GetValueFromHash(hash, "_shields", ArrayList.class), "Shield");
         gadgets = (Gadget[]) SerializableObject.ArrayListToArray(SerializableObject.GetValueFromHash(hash, "_gadgets", ArrayList.class), "Gadget");
         pod = SerializableObject.GetValueFromHash(hash, "_pod", pod);
-        final int[] crewIds = SerializableObject.GetValueFromHash(hash, "_crewIds", (new int[0]), int[].class);
+        int[] crewIds = SerializableObject.GetValueFromHash(hash, "_crewIds", (new int[0]), int[].class);
         crew = new CrewMember[crewIds.length];
         for (int index = 0; index < crew.length; index++) {
-            final CrewMemberId id = CrewMemberId.FromInt(crewIds[index]);
+            CrewMemberId id = CrewMemberId.FromInt(crewIds[index]);
             crew[index] = (id == CrewMemberId.NA ? null : Game.getCurrentGame().Mercenaries()[id.getId()]);
         }
     }
 
-    public void addEquipment(final Equipment item) {
-        final Equipment[] equip = getEquipmentByType(item.EquipmentType());
+    public void addEquipment(Equipment item) {
+        Equipment[] equip = getEquipmentByType(item.EquipmentType());
         int slot = -1;
         for (int i = 0; i < equip.length && slot == -1; i++) {
             if (equip[i] == null) {
@@ -103,7 +103,7 @@ public class Ship extends ShipSpec {
         }
     }
 
-    public int getBaseWorth(final boolean forInsurance) {
+    public int getBaseWorth(boolean forInsurance) {
         int price =
                 // Trade-in value is three-fourths the original price
                 getPrice() * (tribbles > 0 && !forInsurance ? 1 : 3) / 4
@@ -112,17 +112,17 @@ public class Ship extends ShipSpec {
                         // subtract costs to fill tank with fuel
                         - (FuelTanks() - fuel) * getFuelCost();
         // Add 3/4 of the price of each item of equipment
-        for (final Weapon weapon : weapons) {
+        for (Weapon weapon : weapons) {
             if (weapon != null) {
                 price += weapon.SellPrice();
             }
         }
-        for (final Shield shield : shields) {
+        for (Shield shield : shields) {
             if (shield != null) {
                 price += shield.SellPrice();
             }
         }
-        for (final Gadget gadget : gadgets) {
+        for (Gadget gadget : gadgets) {
             if (gadget != null) {
                 price += gadget.SellPrice();
             }
@@ -132,12 +132,12 @@ public class Ship extends ShipSpec {
 
     public int getBounty() {
         int price = getPrice();
-        for (final Weapon weapon : weapons) {
+        for (Weapon weapon : weapons) {
             if (weapon != null) {
                 price += weapon.Price();
             }
         }
-        for (final Shield shield : shields) {
+        for (Shield shield : shields) {
             if (shield != null) {
                 price += shield.Price();
             }
@@ -145,11 +145,11 @@ public class Ship extends ShipSpec {
         // Gadgets aren't counted in the price, because they are already taken into account in the skill adjustment of the price.
         price = price * (2 * Pilot() + Engineer() + 3 * Fighter()) / 60;
         // Divide by 200 to get the bounty, then round down to the nearest 25.
-        final int bounty = price / 200 / 25 * 25;
+        int bounty = price / 200 / 25 * 25;
         return Math.max(25, Math.min(2500, bounty));
     }
 
-    public Equipment[] getEquipmentByType(final EquipmentType type) {
+    public Equipment[] getEquipmentByType(EquipmentType type) {
         Equipment[] equip = null;
         switch (type) {
             case Weapon:
@@ -168,8 +168,8 @@ public class Ship extends ShipSpec {
     /**
      * @param crewId The surviving crew member??
      */
-    public void handleFire(final CrewMemberId crewId) {
-        final int skill = Trader();
+    public void handleFire(CrewMemberId crewId) {
+        int skill = Trader();
         boolean found = false;
         CrewMember merc = null;
         for (int i = 0; i < Crew().length; i++) {
@@ -182,14 +182,14 @@ public class Ship extends ShipSpec {
             }
         }
         if (Trader() != skill) {
-            Game.getCurrentGame().RecalculateBuyPrices(Game.getCurrentGame().Commander().CurrentSystem());
+            Game.getCurrentGame().recalculateBuyPrices(Game.getCurrentGame().Commander().CurrentSystem());
         }
         if (merc != null && !Utils.arrayContains(Constants.SpecialCrewMemberIds, (merc.Id()))) {
-            final StarSystem[] universe = Game.getCurrentGame().getUniverse();
+            StarSystem[] universe = Game.getCurrentGame().getUniverse();
             // The leaving Mercenary travels to a nearby random system.
             merc.setCurrentSystemId(StarSystemId.NA);
             while (merc.getCurrentSystemId() == StarSystemId.NA) {
-                final StarSystem system = universe[ModelUtils.GetRandom(universe.length)];
+                StarSystem system = universe[ModelUtils.getRandom(universe.length)];
                 if (ModelUtils.distance(system, Game.getCurrentGame().Commander().CurrentSystem()) < Constants.MaxRange) {
                     merc.setCurrentSystemId(system.Id());
                 }
@@ -197,12 +197,12 @@ public class Ship extends ShipSpec {
         }
     }
 
-    private void generateOpponentAddCargo(final boolean pirate) {
+    private void generateOpponentAddCargo(boolean pirate) {
         if (CargoBays() > 0) {
-            final Difficulty diff = Game.getCurrentGame().Difficulty();
+            Difficulty diff = Game.getCurrentGame().Difficulty();
             int baysToFill = CargoBays();
             if (diff.getId() >= Difficulty.Normal.getId()) {
-                baysToFill = Math.min(15, 3 + ModelUtils.GetRandom(baysToFill - 5));
+                baysToFill = Math.min(15, 3 + ModelUtils.getRandom(baysToFill - 5));
             }
             if (pirate) {
                 if (diff.getId() < Difficulty.Normal.getId()) {
@@ -212,30 +212,30 @@ public class Ship extends ShipSpec {
                 }
             }
             for (int bays, i = 0; i < baysToFill; i += bays) {
-                final int item = ModelUtils.GetRandom(Constants.TradeItems.length);
-                bays = Math.min(baysToFill - i, 1 + ModelUtils.GetRandom(10 - item));
+                int item = ModelUtils.getRandom(Constants.TradeItems.length);
+                bays = Math.min(baysToFill - i, 1 + ModelUtils.getRandom(10 - item));
                 Cargo()[item] += bays;
             }
         }
     }
 
     private void generateOpponentAddCrew() {
-        final CrewMember[] mercs = Game.getCurrentGame().Mercenaries();
-        final Difficulty diff = Game.getCurrentGame().Difficulty();
+        CrewMember[] mercs = Game.getCurrentGame().Mercenaries();
+        Difficulty diff = Game.getCurrentGame().Difficulty();
         Crew()[0] = mercs[CrewMemberId.Opponent.getId()];
-        Crew()[0].Pilot(1 + ModelUtils.GetRandom(Constants.MaxSkill));
-        Crew()[0].Fighter(1 + ModelUtils.GetRandom(Constants.MaxSkill));
-        Crew()[0].Trader(1 + ModelUtils.GetRandom(Constants.MaxSkill));
-        if (Game.getCurrentGame().WarpSystem().Id() == StarSystemId.Kravat && WildOnBoard() && ModelUtils.GetRandom(10) < diff.getId() + 1) {
+        Crew()[0].Pilot(1 + ModelUtils.getRandom(Constants.MaxSkill));
+        Crew()[0].Fighter(1 + ModelUtils.getRandom(Constants.MaxSkill));
+        Crew()[0].Trader(1 + ModelUtils.getRandom(Constants.MaxSkill));
+        if (Game.getCurrentGame().WarpSystem().Id() == StarSystemId.Kravat && WildOnBoard() && ModelUtils.getRandom(10) < diff.getId() + 1) {
             Crew()[0].Engineer(Constants.MaxSkill);
         } else {
-            Crew()[0].Engineer(1 + ModelUtils.GetRandom(Constants.MaxSkill));
+            Crew()[0].Engineer(1 + ModelUtils.getRandom(Constants.MaxSkill));
         }
         int numCrew;
         if (diff == Difficulty.Impossible) {
             numCrew = getCrewQuarters();
         } else {
-            numCrew = 1 + ModelUtils.GetRandom(getCrewQuarters());
+            numCrew = 1 + ModelUtils.getRandom(getCrewQuarters());
             if (diff == Difficulty.Hard && numCrew < getCrewQuarters()) {
                 numCrew++;
             }
@@ -243,26 +243,26 @@ public class Ship extends ShipSpec {
         for (int i = 1; i < numCrew; i++) {
             // Keep getting a new random mercenary until we have a non-special one.
             while (Crew()[i] == null || Utils.arrayContains(Constants.SpecialCrewMemberIds, Crew()[i].Id())) {
-                Crew()[i] = mercs[ModelUtils.GetRandom(mercs.length)];
+                Crew()[i] = mercs[ModelUtils.getRandom(mercs.length)];
             }
         }
     }
 
-    private void generateOpponentAddGadgets(final int tries) {
+    private void generateOpponentAddGadgets(int tries) {
         if (getGadgetSlots() > 0) {
             int numGadgets;
             if (Game.getCurrentGame().Difficulty() == Difficulty.Impossible) {
                 numGadgets = getGadgetSlots();
             } else {
-                numGadgets = ModelUtils.GetRandom(getGadgetSlots() + 1);
-                if (numGadgets < getGadgetSlots() && (tries > 4 || (tries > 2 && ModelUtils.GetRandom(2) > 0))) {
+                numGadgets = ModelUtils.getRandom(getGadgetSlots() + 1);
+                if (numGadgets < getGadgetSlots() && (tries > 4 || (tries > 2 && ModelUtils.getRandom(2) > 0))) {
                     numGadgets++;
                 }
             }
             for (int i = 0; i < numGadgets; i++) {
                 int bestGadgetType = 0;
                 for (int j = 0; j < tries; j++) {
-                    final int x = ModelUtils.GetRandom(100);
+                    int x = ModelUtils.getRandom(100);
                     int sum = Constants.Gadgets[0].Chance();
                     int gadgetType = 0;
                     while (sum < x && gadgetType <= Constants.Gadgets.length - 1) {
@@ -282,7 +282,7 @@ public class Ship extends ShipSpec {
         return tribbles;
     }
 
-    public void setTribbles(final int tribbles) {
+    public void setTribbles(int tribbles) {
         this.tribbles = tribbles;
     }
 
@@ -290,7 +290,7 @@ public class Ship extends ShipSpec {
         return hull;
     }
 
-    public void setHull(final int hull) {
+    public void setHull(int hull) {
         this.hull = hull;
     }
 
@@ -298,7 +298,7 @@ public class Ship extends ShipSpec {
         return fuel;
     }
 
-    public void setFuel(final int fuel) {
+    public void setFuel(int fuel) {
         this.fuel = fuel;
     }
 
@@ -306,25 +306,25 @@ public class Ship extends ShipSpec {
         return EscapePod;
     }
 
-    public void setEscapePod(final boolean escapePod) {
+    public void setEscapePod(boolean escapePod) {
         EscapePod = escapePod;
     }
 
-    private void generateOpponentAddShields(final int tries) {
+    private void generateOpponentAddShields(int tries) {
         if (getShieldSlots() > 0) {
             int numShields;
             if (Game.getCurrentGame().Difficulty() == Difficulty.Impossible) {
                 numShields = getShieldSlots();
             } else {
-                numShields = ModelUtils.GetRandom(getShieldSlots() + 1);
-                if (numShields < getShieldSlots() && (tries > 3 || (tries > 1 && ModelUtils.GetRandom(2) > 0))) {
+                numShields = ModelUtils.getRandom(getShieldSlots() + 1);
+                if (numShields < getShieldSlots() && (tries > 3 || (tries > 1 && ModelUtils.getRandom(2) > 0))) {
                     numShields++;
                 }
             }
             for (int i = 0; i < numShields; i++) {
                 int bestShieldType = 0;
                 for (int j = 0; j < tries; j++) {
-                    final int x = ModelUtils.GetRandom(100);
+                    int x = ModelUtils.getRandom(100);
                     int sum = Constants.Shields[0].Chance();
                     int shieldType = 0;
                     while (sum < x && shieldType <= Constants.Shields.length - 1) {
@@ -338,7 +338,7 @@ public class Ship extends ShipSpec {
                 addEquipment(Constants.Shields[bestShieldType]);
                 shields[i].setCharge(0);
                 for (int j = 0; j < 5; j++) {
-                    final int charge = 1 + ModelUtils.GetRandom(shields[i].Power());
+                    int charge = 1 + ModelUtils.getRandom(shields[i].Power());
                     if (charge > shields[i].getCharge()) {
                         shields[i].setCharge(charge);
                     }
@@ -347,7 +347,7 @@ public class Ship extends ShipSpec {
         }
     }
 
-    private void generateOpponentAddWeapons(final int tries) {
+    private void generateOpponentAddWeapons(int tries) {
         if (getWeaponSlots() > 0) {
             int numWeapons;
             if (Game.getCurrentGame().Difficulty() == Difficulty.Impossible) {
@@ -355,15 +355,15 @@ public class Ship extends ShipSpec {
             } else if (getWeaponSlots() == 1) {
                 numWeapons = 1;
             } else {
-                numWeapons = 1 + ModelUtils.GetRandom(getWeaponSlots());
-                if (numWeapons < getWeaponSlots() && (tries > 4 || (tries > 3 && ModelUtils.GetRandom(2) > 0))) {
+                numWeapons = 1 + ModelUtils.getRandom(getWeaponSlots());
+                if (numWeapons < getWeaponSlots() && (tries > 4 || (tries > 3 && ModelUtils.getRandom(2) > 0))) {
                     numWeapons++;
                 }
             }
             for (int i = 0; i < numWeapons; i++) {
                 int bestWeaponType = 0;
                 for (int j = 0; j < tries; j++) {
-                    final int x = ModelUtils.GetRandom(100);
+                    int x = ModelUtils.getRandom(100);
                     int sum = Constants.WeaponObjects[0].Chance();
                     int weaponType = 0;
                     while (sum < x && weaponType <= Constants.WeaponObjects.length - 1) {
@@ -381,10 +381,10 @@ public class Ship extends ShipSpec {
 
     private void generateOpponentSetHullStrength() {
         // If there are shields, the hull will probably be stronger
-        if (ShieldStrength() == 0 || ModelUtils.GetRandom(5) == 0) {
+        if (ShieldStrength() == 0 || ModelUtils.getRandom(5) == 0) {
             hull = 0;
             for (int i = 0; i < 5; i++) {
-                final int hull = 1 + ModelUtils.GetRandom(HullStrength());
+                int hull = 1 + ModelUtils.getRandom(HullStrength());
                 if (hull > this.hull) {
                     this.hull = hull;
                 }
@@ -392,9 +392,9 @@ public class Ship extends ShipSpec {
         }
     }
 
-    private void generateOpponentShip(final OpponentType opponentType) {
-        final Commander commander = Game.getCurrentGame().Commander();
-        final PoliticalSystem polSys = Game.getCurrentGame().WarpSystem().PoliticalSystem();
+    private void generateOpponentShip(OpponentType opponentType) {
+        Commander commander = Game.getCurrentGame().Commander();
+        PoliticalSystem polSys = Game.getCurrentGame().WarpSystem().PoliticalSystem();
         if (opponentType == OpponentType.Mantis) {
             SetValues(ShipType.Mantis);
         } else {
@@ -426,13 +426,13 @@ public class Ship extends ShipSpec {
             }
             int total = 0;
             for (int i = 0; i < Constants.MaxShip; i++) {
-                final ShipSpec spec = Constants.ShipSpecs[i];
+                ShipSpec spec = Constants.ShipSpecs[i];
                 if (polSys.ShipTypeLikely(spec.Type(), opponentType)) {
                     total += spec.getOccurrence();
                 }
             }
             for (int i = 0; i < tries; i++) {
-                final int x = ModelUtils.GetRandom(total);
+                int x = ModelUtils.getRandom(total);
                 int sum = -1;
                 int j = -1;
                 do {
@@ -461,14 +461,14 @@ public class Ship extends ShipSpec {
      * JAF - Made this MUCH simpler by storing an array of booleans indicating the tradeable goods when HasTradeableItem is called.
      */
     public int getRandomTradeableItem() {
-        int index = ModelUtils.GetRandom(tradeableItems.length);
+        int index = ModelUtils.getRandom(tradeableItems.length);
         while (!tradeableItems[index]) {
             index = (index + 1) % tradeableItems.length;
         }
         return index;
     }
 
-    public boolean HasCrew(final CrewMemberId id) {
+    public boolean HasCrew(CrewMemberId id) {
         boolean found = false;
         for (int i = 0; i < Crew().length && !found; i++) {
             if (Crew()[i] != null && Crew()[i].Id() == id) {
@@ -478,7 +478,7 @@ public class Ship extends ShipSpec {
         return found;
     }
 
-    public boolean HasEquipment(final Equipment item) {
+    public boolean HasEquipment(Equipment item) {
         boolean found = false;
         switch (item.EquipmentType()) {
             case Weapon:
@@ -494,7 +494,7 @@ public class Ship extends ShipSpec {
         return found;
     }
 
-    public boolean HasGadget(final GadgetType gadgetType) {
+    public boolean HasGadget(GadgetType gadgetType) {
         boolean found = false;
         for (int i = 0; i < gadgets.length && !found; i++) {
             if (gadgets[i] != null && gadgets[i].Type() == gadgetType) {
@@ -504,7 +504,7 @@ public class Ship extends ShipSpec {
         return found;
     }
 
-    public boolean HasShield(final ShieldType shieldType) {
+    public boolean HasShield(ShieldType shieldType) {
         boolean found = false;
         for (int i = 0; i < shields.length && !found; i++) {
             if (shields[i] != null && shields[i].Type() == shieldType) {
@@ -517,7 +517,7 @@ public class Ship extends ShipSpec {
     // Determines if a given ship is carrying items that can be bought or sold in the current system.
     public boolean HasTradeableItems() {
         boolean found = false;
-        final boolean criminal = Game.getCurrentGame().Commander().getPoliceRecordScore() < Constants.PoliceRecordScoreDubious;
+        boolean criminal = Game.getCurrentGame().Commander().getPoliceRecordScore() < Constants.PoliceRecordScoreDubious;
         tradeableItems = new boolean[10];
         for (int i = 0; i < Cargo().length; i++) {
             // Trade only if trader is selling and the item has a buy price on the local system,
@@ -526,7 +526,7 @@ public class Ship extends ShipSpec {
             // Simplified this - JAF
             if (Cargo()[i] > 0
                     && criminal == Constants.TradeItems[i].isIllegal()
-                    && ((!CommandersShip() && Game.getCurrentGame().PriceCargoBuy()[i] > 0) || (CommandersShip() && Game.getCurrentGame().PriceCargoSell()[i] > 0))) {
+                    && ((!CommandersShip() && Game.getCurrentGame().PricebuyCargo()[i] > 0) || (CommandersShip() && Game.getCurrentGame().PricesellCargo()[i] > 0))) {
                 found = true;
                 tradeableItems[i] = true;
             }
@@ -534,7 +534,7 @@ public class Ship extends ShipSpec {
         return found;
     }
 
-    public boolean HasWeapon(final WeaponType weaponType, final boolean exactCompare) {
+    public boolean HasWeapon(WeaponType weaponType, boolean exactCompare) {
         boolean found = false;
         for (int i = 0; i < weapons.length && !found; i++) {
             if (weapons[i] != null && (weapons[i].Type() == weaponType || !exactCompare && weapons[i].Type().id > weaponType.id)) {
@@ -544,8 +544,8 @@ public class Ship extends ShipSpec {
         return found;
     }
 
-    public void Hire(final CrewMember merc) {
-        final int skill = Trader();
+    public void Hire(CrewMember merc) {
+        int skill = Trader();
         int slot = -1;
         for (int i = 0; i < Crew().length && slot == -1; i++) {
             if (Crew()[i] == null) {
@@ -556,12 +556,12 @@ public class Ship extends ShipSpec {
             Crew()[slot] = merc;
         }
         if (Trader() != skill) {
-            Game.getCurrentGame().RecalculateBuyPrices(Game.getCurrentGame().Commander().CurrentSystem());
+            Game.getCurrentGame().recalculateBuyPrices(Game.getCurrentGame().Commander().CurrentSystem());
         }
     }
 
     public String IllegalSpecialCargoActions() {
-        final ArrayList<String> actions = new ArrayList<>();
+        ArrayList<String> actions = new ArrayList<>();
         if (ReactorOnBoard()) {
             actions.add(Strings.EncounterPoliceSurrenderReactor);
         } else if (WildOnBoard()) {
@@ -571,11 +571,11 @@ public class Ship extends ShipSpec {
             actions.add(Strings.EncounterPoliceSurrenderSculpt);
         }
         return actions.isEmpty()
-                ? "" : ModelUtils.StringVars(Strings.EncounterPoliceSurrenderAction, ModelUtils.FormatList(ModelUtils.arrayListtoStringArray(actions)));
+                ? "" : ModelUtils.StringVars(Strings.EncounterPoliceSurrenderAction, ModelUtils.formatList(ModelUtils.arrayListtoStringArray(actions)));
     }
 
-    public String IllegalSpecialCargoDescription(final String wrapper, final boolean includePassengers, final boolean includeTradeItems) {
-        final ArrayList<String> items = new ArrayList<>();
+    public String IllegalSpecialCargoDescription(String wrapper, boolean includePassengers, boolean includeTradeItems) {
+        ArrayList<String> items = new ArrayList<>();
         if (includePassengers && WildOnBoard()) {
             items.add(Strings.EncounterPoliceSubmitWild);
         }
@@ -588,7 +588,7 @@ public class Ship extends ShipSpec {
         if (includeTradeItems && DetectableIllegalCargo()) {
             items.add(Strings.EncounterPoliceSubmitGoods);
         }
-        String allItems = ModelUtils.FormatList(ModelUtils.arrayListtoStringArray(items));
+        String allItems = ModelUtils.formatList(ModelUtils.arrayListtoStringArray(items));
         if (!allItems.isEmpty() && !wrapper.isEmpty()) {
             allItems = ModelUtils.StringVars(wrapper, allItems);
         }
@@ -599,9 +599,9 @@ public class Ship extends ShipSpec {
         // A disabled ship cannot be repaired.
         if (CommandersShip() || !Game.getCurrentGame().getOpponentDisabled()) {
             // Engineer may do some repairs
-            int repairs = ModelUtils.GetRandom(Engineer());
+            int repairs = ModelUtils.getRandom(Engineer());
             if (repairs > 0) {
-                final int used = Math.min(repairs, HullStrength() - hull);
+                int used = Math.min(repairs, HullStrength() - hull);
                 hull = hull + used;
                 repairs -= used;
             }
@@ -610,7 +610,7 @@ public class Ship extends ShipSpec {
                 repairs *= 2;
                 for (int i = 0; i < shields.length && repairs > 0; i++) {
                     if (shields[i] != null) {
-                        final int used = Math.min(repairs, shields[i].Power() - shields[i].getCharge());
+                        int used = Math.min(repairs, shields[i].Power() - shields[i].getCharge());
                         shields[i].setCharge(shields[i].getCharge() + used);
                         repairs -= used;
                     }
@@ -619,18 +619,18 @@ public class Ship extends ShipSpec {
         }
     }
 
-    public void RemoveEquipment(final EquipmentType type, final int slot) {
-        final Equipment[] equip = getEquipmentByType(type);
-        final int last = equip.length - 1;
+    public void RemoveEquipment(EquipmentType type, int slot) {
+        Equipment[] equip = getEquipmentByType(type);
+        int last = equip.length - 1;
         for (int i = slot; i < last; i++) {
             equip[i] = equip[i + 1];
         }
         equip[last] = null;
     }
 
-    public void RemoveEquipment(final EquipmentType type, final Object subType) {
+    public void RemoveEquipment(EquipmentType type, Object subType) {
         boolean found = false;
-        final Equipment[] equip = getEquipmentByType(type);
+        Equipment[] equip = getEquipmentByType(type);
         for (int i = 0; i < equip.length && !found; i++) {
             if (equip[i] != null && equip[i].TypeEquals(subType)) {
                 RemoveEquipment(type, i);
@@ -650,9 +650,9 @@ public class Ship extends ShipSpec {
 
     @Override
     public Hashtable Serialize() {
-        final Hashtable hash = super.Serialize();
+        Hashtable hash = super.Serialize();
         // We don't want the actual CrewMember Objects - we just want the ids.
-        final int[] crewIds = new int[crew.length];
+        int[] crewIds = new int[crew.length];
         for (int i = 0; i < crewIds.length; i++) {
             crewIds[i] = (crew[i] == null ? CrewMemberId.NA : crew[i].Id()).getId();
         }
@@ -669,7 +669,7 @@ public class Ship extends ShipSpec {
     }
 
     @Override
-    protected void SetValues(final ShipType type) {
+    protected void SetValues(ShipType type) {
         super.SetValues(type);
         weapons = new Weapon[getWeaponSlots()];
         shields = new Shield[getShieldSlots()];
@@ -683,9 +683,9 @@ public class Ship extends ShipSpec {
         return WeaponStrength(WeaponType.PulseLaser, WeaponType.QuantumDisruptor);
     }
 
-    public int WeaponStrength(final WeaponType min, final WeaponType max) {
+    public int WeaponStrength(WeaponType min, WeaponType max) {
         int total = 0;
-        for (final Weapon weapon : weapons) {
+        for (Weapon weapon : weapons) {
             if (weapon != null && weapon.Type().id >= min.id && weapon.Type().id <= max.id) {
                 total += weapon.Power();
             }
@@ -693,7 +693,7 @@ public class Ship extends ShipSpec {
         return total;
     }
 
-    public int Worth(final boolean forInsurance) {
+    public int Worth(boolean forInsurance) {
         int price = getBaseWorth(forInsurance);
         for (int i = 0; i < cargo.length; i++) {
             price += Game.getCurrentGame().Commander().PriceCargo()[i];
@@ -724,7 +724,7 @@ public class Ship extends ShipSpec {
     @Override
     public int CargoBays() {
         int bays = super.CargoBays();
-        for (final Gadget gadget : gadgets) {
+        for (Gadget gadget : gadgets) {
             if (gadget != null && (gadget.Type() == GadgetType.ExtraCargoBays || gadget.Type() == GadgetType.HiddenCargoBays)) {
                 bays += 5;
             }
@@ -733,7 +733,7 @@ public class Ship extends ShipSpec {
     }
 
     public boolean Cloaked() {
-        final int oppEng = CommandersShip() ? Game.getCurrentGame().getOpponent().Engineer() : Game.getCurrentGame().Commander().getShip().Engineer();
+        int oppEng = CommandersShip() ? Game.getCurrentGame().getOpponent().Engineer() : Game.getCurrentGame().Commander().getShip().Engineer();
         return HasGadget(GadgetType.CloakingDevice) && Engineer() > oppEng;
     }
 
@@ -780,7 +780,7 @@ public class Ship extends ShipSpec {
 
     public int ExtraCargoBays() {
         int bays = 0;
-        for (final Gadget gadget : gadgets) {
+        for (Gadget gadget : gadgets) {
             if (gadget != null && gadget.Type() == GadgetType.ExtraCargoBays) {
                 bays += 5;
             }
@@ -807,7 +807,7 @@ public class Ship extends ShipSpec {
 
     public int FilledNormalCargoBays() {
         int filled = 0;
-        for (final int cargo : cargo) {
+        for (int cargo : cargo) {
             filled += cargo;
         }
         return filled;
@@ -833,7 +833,7 @@ public class Ship extends ShipSpec {
 
     public int FreeSlotsGadget() {
         int count = 0;
-        for (final Gadget gadget : gadgets) {
+        for (Gadget gadget : gadgets) {
             if (gadget == null) {
                 count++;
             }
@@ -843,7 +843,7 @@ public class Ship extends ShipSpec {
 
     public int FreeSlotsShield() {
         int count = 0;
-        for (final Shield shield : shields) {
+        for (Shield shield : shields) {
             if (shield == null) {
                 count++;
             }
@@ -853,7 +853,7 @@ public class Ship extends ShipSpec {
 
     public int FreeSlotsWeapon() {
         int count = 0;
-        for (final Weapon weapon : weapons) {
+        for (Weapon weapon : weapons) {
             if (weapon == null) {
                 count++;
             }
@@ -876,7 +876,7 @@ public class Ship extends ShipSpec {
 
     public int HiddenCargoBays() {
         int bays = 0;
-        for (final Gadget gadget : gadgets) {
+        for (Gadget gadget : gadgets) {
             if (gadget != null && gadget.Type() == GadgetType.HiddenCargoBays) {
                 bays += 5;
             }
@@ -885,7 +885,7 @@ public class Ship extends ShipSpec {
     }
 
     public String HullText() {
-        return ModelUtils.StringVars(Strings.EncounterHullStrength, ModelUtils.FormatNumber((int) Math.floor((double) 100 * hull / HullStrength())));
+        return ModelUtils.StringVars(Strings.EncounterHullStrength, ModelUtils.formatNumber((int) Math.floor((double) 100 * hull / HullStrength())));
     }
 
     public boolean IllegalSpecialCargo() {
@@ -905,7 +905,7 @@ public class Ship extends ShipSpec {
     }
 
     public boolean ReactorOnBoard() {
-        final int status = Game.getCurrentGame().getQuestStatusReactor();
+        int status = Game.getCurrentGame().getQuestStatusReactor();
         return CommandersShip() && status > SpecialEvent.StatusReactorNotStarted && status < SpecialEvent.StatusReactorDelivered;
     }
 
@@ -915,7 +915,7 @@ public class Ship extends ShipSpec {
 
     public int ShieldCharge() {
         int total = 0;
-        for (final Shield shield : shields) {
+        for (Shield shield : shields) {
             if (shield != null) {
                 total += shield.getCharge();
             }
@@ -929,7 +929,7 @@ public class Ship extends ShipSpec {
 
     public int ShieldStrength() {
         int total = 0;
-        for (final Shield shield : shields) {
+        for (Shield shield : shields) {
             if (shield != null) {
                 total += shield.Power();
             }
@@ -939,12 +939,12 @@ public class Ship extends ShipSpec {
 
     public String ShieldText() {
         return (shields.length > 0 && shields[0] != null)
-                ? ModelUtils.StringVars(Strings.EncounterShieldStrength, ModelUtils.FormatNumber((int) Math.floor((double) 100 * ShieldCharge() / ShieldStrength())))
+                ? ModelUtils.StringVars(Strings.EncounterShieldStrength, ModelUtils.formatNumber((int) Math.floor((double) 100 * ShieldCharge() / ShieldStrength())))
                 : Strings.EncounterShieldNone;
     }
 
     public int[] Skills() {
-        final int[] skills = new int[4];
+        int[] skills = new int[4];
         // Get the best skill value among the crew for each skill.
         for (int skill = 0; skill < skills.length; skill++) {
             int max = 1;
@@ -956,7 +956,7 @@ public class Ship extends ShipSpec {
             skills[skill] = Math.max(1, ModelUtils.adjustSkillForDifficulty(max));
         }
         // Adjust skills based on any gadgets on board.
-        for (final Gadget gadget : gadgets) {
+        for (Gadget gadget : gadgets) {
             if (gadget != null && gadget.SkillBonus() != SkillType.NA) {
                 skills[gadget.SkillBonus().getId()] += Constants.SkillBonus;
             }
@@ -966,13 +966,13 @@ public class Ship extends ShipSpec {
 
     // Crew members that are not hired/fired - Commander, Jarek, Princess, and Wild - JAF
     public CrewMember[] SpecialCrew() {
-        final ArrayList<CrewMember> list = new ArrayList<>();
+        ArrayList<CrewMember> list = new ArrayList<>();
         for (int i = 0; i < Crew().length; i++) {
             if (Crew()[i] != null && Utils.arrayContains(Constants.SpecialCrewMemberIds, Crew()[i].Id())) {
                 list.add(Crew()[i]);
             }
         }
-        final CrewMember[] crew = new CrewMember[list.size()];
+        CrewMember[] crew = new CrewMember[list.size()];
         for (int i = 0; i < crew.length; i++) {
             crew[i] = list.get(i);
         }
@@ -982,7 +982,7 @@ public class Ship extends ShipSpec {
     // Sort all cargo based on value and put some of it in hidden bays, if they are present.
     public ArrayList<Integer> StealableCargo() {
         // Put all the cargo items in a list and sort it. Reverse it so the most expensive items are first.
-        final ArrayList<Integer> tradeItems = new ArrayList<>();
+        ArrayList<Integer> tradeItems = new ArrayList<>();
         for (int tradeItem = 0; tradeItem < Cargo().length; tradeItem++) {
             for (int count = 0; count < Cargo()[tradeItem]; count++) {
                 tradeItems.add(tradeItem);

@@ -16,12 +16,12 @@ public class DialogMonsterDotCom extends JDialog {
     /**
      * Creates new form DialogMonsterDotCom
      */
-    public DialogMonsterDotCom(final Frame parent, final boolean modal) {
+    public DialogMonsterDotCom(Frame parent, boolean modal) {
         super(parent, modal);
 
-        final JPanel panel1 = new JPanel();
-        final JScrollPane scrollPane1 = new JScrollPane();
-        final JList<String> list1 = new JList<>();
+        JPanel panel1 = new JPanel();
+        JScrollPane scrollPane1 = new JScrollPane();
+        JList<String> list1 = new JList<>();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("The Monster-Dot-Com Jobs Board");
@@ -35,7 +35,7 @@ public class DialogMonsterDotCom extends JDialog {
         list1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         scrollPane1.setViewportView(list1);
 
-        final GroupLayout panel1Layout = new GroupLayout(panel1);
+        GroupLayout panel1Layout = new GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
                 panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)

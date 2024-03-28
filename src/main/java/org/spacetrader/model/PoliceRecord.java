@@ -8,12 +8,12 @@ public class PoliceRecord {
     private final PoliceRecordType type;
     private final int minScore;
 
-    public PoliceRecord(final PoliceRecordType type, final int minScore) {
+    public PoliceRecord(PoliceRecordType type, int minScore) {
         this.type = type;
         this.minScore = minScore;
     }
 
-    public static PoliceRecord getPoliceRecordFromScore(final int policeRecordScore) {
+    public static PoliceRecord getPoliceRecordFromScore(int policeRecordScore) {
         int i;
         for (i = 0; i < Constants.PoliceRecords.length && policeRecordScore >= Constants.PoliceRecords[i].minScore(); i++) {
         }

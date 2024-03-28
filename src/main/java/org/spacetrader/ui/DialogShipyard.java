@@ -72,73 +72,68 @@ public class DialogShipyard extends Dialog {
     private int imgIndex;
 
     public DialogShipyard() {
-        final ResourceManager resources = new ResourceManager(DialogShipyard.class);
-        final GroupBox boxWelcome = new GroupBox();
-        final Label labelSkillDescription = new Label();
-        final Label labelSkill = new Label();
-        final Label labelSizeSpecialty = new Label();
+        ResourceManager resources = new ResourceManager(DialogShipyard.class);
+        GroupBox boxWelcome = new GroupBox();
+        Label labelSkillDescription = new Label();
+        Label labelSkill = new Label();
+        Label labelSizeSpecialty = new Label();
         labelSkillLabel = new Label();
-        final Label labelSizeSpecialtyLabel = new Label();
-        final Label labelWelcome = new Label();
-        final Label labelWarning = new Label();
-        final PictureBox pictureLogo = new PictureBox();
-        final GroupBox boxInfo = new GroupBox();
+        Label labelSizeSpecialtyLabel = new Label();
+        Label labelWelcome = new Label();
+        Label labelWarning = new Label();
+        PictureBox pictureLogo = new PictureBox();
+        GroupBox boxInfo = new GroupBox();
         buttonSave = new Button();
-        final Button buttonLoad = new Button();
-        final PictureBox pictureInfoLine = new PictureBox();
-        final Button buttonPrevImage = new Button();
-        final Button buttonNextImage = new Button();
+        Button buttonLoad = new Button();
+        PictureBox pictureInfoLine = new PictureBox();
+        Button buttonPrevImage = new Button();
+        Button buttonNextImage = new Button();
         labelImage = new Label();
-        final Label labelImageLabel = new Label();
+        Label labelImageLabel = new Label();
         selTemplate = new ComboBox();
-        final Label labelTemplate = new Label();
+        Label labelTemplate = new Label();
         selSize = new ComboBox();
-        final Label labelSize = new Label();
-        final Button buttonSetCustomImage = new Button();
+        Label labelSize = new Label();
+        Button buttonSetCustomImage = new Button();
         pictureShip = new PictureBox();
         textName = new TextField();
-        final Label labelName = new Label();
+        Label labelName = new Label();
         labelUnitsUsed = new Label();
-        final Label labelUnitsUsedLabel = new Label();
-        final GroupBox boxCosts = new GroupBox();
+        Label labelUnitsUsedLabel = new Label();
+        GroupBox boxCosts = new GroupBox();
         labelTradeIn = new Label();
-        final Label labelTradeInLabel = new Label();
-        final PictureBox pictureCostsLine = new PictureBox();
+        Label labelTradeInLabel = new Label();
+        PictureBox pictureCostsLine = new PictureBox();
         labelPenalty = new Label();
-        final Label labelPenaltyLabel = new Label();
+        Label labelPenaltyLabel = new Label();
         labelShipCost = new Label();
         labelTotalCost = new Label();
-        final Label labelTotalCostLabel = new Label();
-        final Label labelShipCostLabel = new Label();
+        Label labelTotalCostLabel = new Label();
+        Label labelShipCostLabel = new Label();
         labelDesignFee = new Label();
-        final Label labelDesignFeeLabel = new Label();
+        Label labelDesignFeeLabel = new Label();
         buttonConstruct = new Button();
-        final Button buttonCancel = new Button();
-        final GroupBox boxAllocation = new GroupBox();
+        Button buttonCancel = new Button();
+        GroupBox boxAllocation = new GroupBox();
         labelPct = new Label();
         labelPctLabel = new Label();
         numHullStrength = new Spinner();
-        final Label labelHullStrengthLabel = new Label();
+        Label labelHullStrengthLabel = new Label();
         numCargoBays = new Spinner();
         numCrewQuarters = new Spinner();
         numFuelTanks = new Spinner();
         numShieldSlots = new Spinner();
         numGadgetSlots = new Spinner();
         numWeaponSlots = new Spinner();
-        final Label labelCargoBays = new Label();
-        final Label labelFuelTanks = new Label();
-        final Label labelCrewQuarters = new Label();
-        final Label labelShieldSlots = new Label();
-        final Label labelGadgetSlots = new Label();
-        final Label labelWeaponsSlots = new Label();
-        final ImageList ilShipyardLogos = new ImageList();
+        Label labelCargoBays = new Label();
+        Label labelFuelTanks = new Label();
+        Label labelCrewQuarters = new Label();
+        Label labelShieldSlots = new Label();
+        Label labelGadgetSlots = new Label();
+        Label labelWeaponsSlots = new Label();
+        ImageList ilShipyardLogos = new ImageList();
         labelDisabledPct = new Label();
         labelDisabledName = new Label();
-        boxWelcome.suspendLayout();
-        boxInfo.suspendLayout();
-        boxCosts.suspendLayout();
-        boxAllocation.suspendLayout();
-        suspendLayout();
         // boxWelcome
         boxWelcome.controls.addAll(labelSkillDescription, labelSkill, labelSizeSpecialty, labelSkillLabel, labelSizeSpecialtyLabel, labelWarning, pictureLogo, labelWelcome);
         boxWelcome.setLocation(new Point(8, 0));
@@ -219,21 +214,21 @@ public class DialogShipyard extends Dialog {
         buttonSave.setClick(
                 new EventHandler<>() {
                     @Override
-                    public void handle(final Object sender, final EventData data) {
+                    public void handle(Object sender, EventData data) {
                         buttonSave_Click(sender, data);
                     }
                 });
         buttonSave.setMouseEnter(
                 new EventHandler<>() {
                     @Override
-                    public void handle(final Object sender, final EventData data) {
+                    public void handle(Object sender, EventData data) {
                         buttonSave_MouseEnter(sender, data);
                     }
                 });
         buttonSave.setMouseLeave(
                 new EventHandler<>() {
                     @Override
-                    public void handle(final Object sender, final EventData data) {
+                    public void handle(Object sender, EventData data) {
                         buttonSave_MouseLeave(sender, data);
                     }
                 });
@@ -246,7 +241,7 @@ public class DialogShipyard extends Dialog {
         buttonLoad.setText("Load");
         buttonLoad.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonLoad_Click(sender, data);
             }
         });
@@ -266,7 +261,7 @@ public class DialogShipyard extends Dialog {
         buttonPrevImage.setText("<");
         buttonPrevImage.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPrevImage_Click(sender, data);
             }
         });
@@ -279,7 +274,7 @@ public class DialogShipyard extends Dialog {
         buttonNextImage.setText(">");
         buttonNextImage.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonNextImage_Click(sender, data);
             }
         });
@@ -318,7 +313,7 @@ public class DialogShipyard extends Dialog {
         selSize.setTabIndex(5);
         selSize.setSelectedIndexChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 selSize_SelectedIndexChanged(sender, data);
             }
         });
@@ -338,7 +333,7 @@ public class DialogShipyard extends Dialog {
         buttonSetCustomImage.setText("Set Custom...");
         buttonSetCustomImage.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonSetCustomImage_Click(sender, data);
             }
         });
@@ -358,7 +353,7 @@ public class DialogShipyard extends Dialog {
         textName.setText("");
         textName.setTextChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 textName_TextChanged(sender, data);
             }
         });
@@ -479,19 +474,19 @@ public class DialogShipyard extends Dialog {
         buttonConstruct.setText("Construct Ship");
         buttonConstruct.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonConstruct_Click(sender, data);
             }
         });
         buttonConstruct.setMouseEnter(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonConstruct_MouseEnter(sender, data);
             }
         });
         buttonConstruct.setMouseLeave(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonConstruct_MouseLeave(sender, data);
             }
         });
@@ -540,13 +535,13 @@ public class DialogShipyard extends Dialog {
         numHullStrength.textAlignment = HorizontalAlignment.Right;
         numHullStrength.setEnter(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 num_ValueEnter(sender, data);
             }
         });
         numHullStrength.setValueChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 num_ValueChanged(sender, data);
             }
         });
@@ -568,13 +563,13 @@ public class DialogShipyard extends Dialog {
         numCargoBays.textAlignment = HorizontalAlignment.Right;
         numCargoBays.setEnter(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 num_ValueEnter(sender, data);
             }
         });
         numCargoBays.setValueChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 num_ValueChanged(sender, data);
             }
         });
@@ -590,13 +585,13 @@ public class DialogShipyard extends Dialog {
         numCrewQuarters.setValue(1);
         numCrewQuarters.setEnter(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 num_ValueEnter(sender, data);
             }
         });
         numCrewQuarters.setValueChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 num_ValueChanged(sender, data);
             }
         });
@@ -610,13 +605,13 @@ public class DialogShipyard extends Dialog {
         numFuelTanks.textAlignment = HorizontalAlignment.Right;
         numFuelTanks.setEnter(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 num_ValueEnter(sender, data);
             }
         });
         numFuelTanks.setValueChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 num_ValueChanged(sender, data);
             }
         });
@@ -630,13 +625,13 @@ public class DialogShipyard extends Dialog {
         numShieldSlots.textAlignment = HorizontalAlignment.Right;
         numShieldSlots.setEnter(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 num_ValueEnter(sender, data);
             }
         });
         numShieldSlots.setValueChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 num_ValueChanged(sender, data);
             }
         });
@@ -650,13 +645,13 @@ public class DialogShipyard extends Dialog {
         numGadgetSlots.textAlignment = HorizontalAlignment.Right;
         numGadgetSlots.setEnter(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 num_ValueEnter(sender, data);
             }
         });
         numGadgetSlots.setValueChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 num_ValueChanged(sender, data);
             }
         });
@@ -670,13 +665,13 @@ public class DialogShipyard extends Dialog {
         numWeaponSlots.textAlignment = HorizontalAlignment.Right;
         numWeaponSlots.setEnter(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 num_ValueEnter(sender, data);
             }
         });
         numWeaponSlots.setValueChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 num_ValueChanged(sender, data);
             }
         });
@@ -796,11 +791,11 @@ public class DialogShipyard extends Dialog {
         return yard.PercentOfMaxUnits() <= 100 && !textName.getText().isEmpty();
     }
 
-    private Bitmap GetImageFile(final String fileName) {
+    private Bitmap GetImageFile(String fileName) {
         Bitmap image = null;
         try {
             image = new Bitmap(fileName);
-        } catch (final Exception ex) {
+        } catch (Exception ex) {
             DialogAlert.Alert(AlertType.FileErrorOpen, this, fileName, ex.getMessage());
         }
         return image;
@@ -809,7 +804,7 @@ public class DialogShipyard extends Dialog {
     private void LoadSelectedTemplate() {
         if (selTemplate.getSelectedItem() instanceof ShipTemplate) {
             loading = true;
-            final ShipTemplate template = (ShipTemplate) selTemplate.getSelectedItem();
+            ShipTemplate template = (ShipTemplate) selTemplate.getSelectedItem();
             if (template.Name().equals(Strings.ShipNameCurrentShip)) {
                 textName.setText(commander.getShip().Name());
             } else if (template.Name().endsWith(Strings.ShipNameTemplateSuffixDefault) || template.Name().endsWith(Strings.ShipNameTemplateSuffixMinimum)) {
@@ -842,42 +837,42 @@ public class DialogShipyard extends Dialog {
 
     private void LoadSizes() {
         sizes = new ArrayList<>(6);
-        for (final ShipSize size : yard.AvailableSizes()) {
+        for (ShipSize size : yard.AvailableSizes()) {
             sizes.add(size);
             selSize.Items.addElement(ModelUtils.StringVars(
                     Strings.ShipyardSizeItem, Strings.Sizes[size.getId()],
-                    ModelUtils.Multiples(Shipyard.MAX_UNITS[size.getId()], Strings.ShipyardUnit)));
+                    ModelUtils.multiples(Shipyard.MAX_UNITS[size.getId()], Strings.ShipyardUnit)));
         }
     }
 
     private void LoadTemplateList() {
-        final ShipTemplate currentShip = new ShipTemplate(commander.getShip(), Strings.ShipNameCurrentShip);
+        ShipTemplate currentShip = new ShipTemplate(commander.getShip(), Strings.ShipNameCurrentShip);
         selTemplate.Items.addElement(currentShip);
         selTemplate.Items.addElement(Constants.ShipTemplateSeparator);
         // Add the minimal sizes templates.
-        for (final ShipSize size : sizes) {
-            final Object obj = new ShipTemplate(size, Strings.Sizes[size.getId()] + Strings.ShipNameTemplateSuffixMinimum);
+        for (ShipSize size : sizes) {
+            Object obj = new ShipTemplate(size, Strings.Sizes[size.getId()] + Strings.ShipNameTemplateSuffixMinimum);
             selTemplate.Items.addElement(obj);
         }
         selTemplate.Items.addElement(Constants.ShipTemplateSeparator);
         // Add the buyable ship spec templates.
-        for (final ShipSpec spec : Constants.ShipSpecs) {
+        for (ShipSpec spec : Constants.ShipSpecs) {
             if (sizes.contains(spec.getSize()) && spec.Type().getId() <= Constants.MaxShip) {
-                final Object obj = new ShipTemplate(spec, spec.Name() + Strings.ShipNameTemplateSuffixDefault);
+                Object obj = new ShipTemplate(spec, spec.Name() + Strings.ShipNameTemplateSuffixDefault);
                 selTemplate.Items.addElement(obj);
             }
         }
         selTemplate.Items.addElement(Constants.ShipTemplateSeparator);
         // Add the user-created templates.
-        final List<ShipTemplate> userTemplates = new ArrayList<>();
-        for (final String fileName : Utils.getFiles(Constants.CustomTemplatesDirectory, "*.sst")) {
-            final ShipTemplate template = new ShipTemplate((Hashtable) ModelUtils.LoadFile(fileName, true, this));
+        List<ShipTemplate> userTemplates = new ArrayList<>();
+        for (String fileName : Utils.getFiles(Constants.CustomTemplatesDirectory, "*.sst")) {
+            ShipTemplate template = new ShipTemplate((Hashtable) ModelUtils.loadFile(fileName, true, this));
             if (sizes.contains(template.Size())) {
                 userTemplates.add(template);
             }
         }
         Collections.sort(userTemplates);
-        for (final Object obj : userTemplates.toArray(new ShipTemplate[0])) {
+        for (Object obj : userTemplates.toArray(new ShipTemplate[0])) {
             selTemplate.Items.addElement(obj);
         }
         selTemplate.setSelectedIndex(0);
@@ -897,8 +892,8 @@ public class DialogShipyard extends Dialog {
     }
 
     private void UpdateAllocation() {
-        final boolean fuelMinimum = numFuelTanks.getValue() == numFuelTanks.getMinimum();
-        final boolean hullMinimum = numHullStrength.getValue() == numHullStrength.getMinimum();
+        boolean fuelMinimum = numFuelTanks.getValue() == numFuelTanks.getMinimum();
+        boolean hullMinimum = numHullStrength.getValue() == numHullStrength.getMinimum();
         numFuelTanks.setMinimum(yard.BaseFuel());
         numFuelTanks.setIncrement(yard.PerUnitFuel());
         numFuelTanks.setMaximum(Constants.MaxFuelTanks);
@@ -918,13 +913,13 @@ public class DialogShipyard extends Dialog {
 
     private void UpdateCalculatedFigures() {
         // Fix the fuel value to be a multiple of the per unit value less the super.
-        final int extraFuel = numFuelTanks.getValue() - yard.BaseFuel();
+        int extraFuel = numFuelTanks.getValue() - yard.BaseFuel();
         if (extraFuel % yard.PerUnitFuel() > 0 && numFuelTanks.getValue() < numFuelTanks.getMaximum()) {
             numFuelTanks.setValue(Math.max(numFuelTanks.getMinimum(),
                     Math.min(numFuelTanks.getMaximum(), (extraFuel + yard.PerUnitFuel()) / yard.PerUnitFuel() * yard.PerUnitFuel() + yard.BaseFuel())));
         }
         // Fix the hull value to be a multiple of the unit value less the super.
-        final int extraHull = numHullStrength.getValue() - yard.BaseHull();
+        int extraHull = numHullStrength.getValue() - yard.BaseHull();
         if (extraHull % yard.PerUnitHull() > 0) {
             numHullStrength.setValue(Math.max(numHullStrength.getMinimum(), (extraHull + yard.PerUnitHull()) / yard.PerUnitHull() * yard.PerUnitHull() + yard.BaseHull()));
         }
@@ -937,7 +932,7 @@ public class DialogShipyard extends Dialog {
         yard.ShipSpec().setCrewQuarters(numCrewQuarters.getValue());
         yard.CalculateDependantVariables();
         labelUnitsUsed.setText(yard.UnitsUsed() + "");
-        labelPct.setText(ModelUtils.FormatPercent(yard.PercentOfMaxUnits()));
+        labelPct.setText(ModelUtils.formatPercent(yard.PercentOfMaxUnits()));
         if (yard.PercentOfMaxUnits() >= Shipyard.PENALTY_FIRST_PCT) {
             labelPct.setFont(labelSkillLabel.getFont());
         } else {
@@ -952,11 +947,11 @@ public class DialogShipyard extends Dialog {
         } else {
             labelPct.setForegroundColor(labelPctLabel.getForegroundColor());
         }
-        labelShipCost.setText(ModelUtils.FormatMoney(yard.AdjustedPrice()));
-        labelDesignFee.setText(ModelUtils.FormatMoney(yard.AdjustedDesignFee()));
-        labelPenalty.setText(ModelUtils.FormatMoney(yard.AdjustedPenaltyCost()));
-        labelTradeIn.setText(ModelUtils.FormatMoney(-yard.TradeIn()));
-        labelTotalCost.setText(ModelUtils.FormatMoney(yard.TotalCost()));
+        labelShipCost.setText(ModelUtils.formatMoney(yard.AdjustedPrice()));
+        labelDesignFee.setText(ModelUtils.formatMoney(yard.AdjustedDesignFee()));
+        labelPenalty.setText(ModelUtils.formatMoney(yard.AdjustedPenaltyCost()));
+        labelTradeIn.setText(ModelUtils.formatMoney(-yard.TradeIn()));
+        labelTotalCost.setText(ModelUtils.formatMoney(yard.TotalCost()));
         UpdateButtonEnabledState();
     }
 
@@ -971,7 +966,7 @@ public class DialogShipyard extends Dialog {
         labelImage.setText((imgIndex > Constants.MaxShip ? Strings.ShipNameCustomShip : Constants.ShipSpecs[imgTypes[imgIndex].getId()].Name()));
     }
 
-    private void buttonConstruct_Click(final Object sender, final EventData e) {
+    private void buttonConstruct_Click(Object sender, EventData e) {
         if (ConstructButtonEnabled()) {
             if (commander.TradeShip(yard.ShipSpec(), yard.TotalCost(), textName.getText(), this)) {
                 Strings.ShipNames[ShipType.Custom.getId()] = textName.getText();
@@ -989,64 +984,64 @@ public class DialogShipyard extends Dialog {
         }
     }
 
-    private void buttonConstruct_MouseEnter(final Object sender, final EventData e) {
+    private void buttonConstruct_MouseEnter(Object sender, EventData e) {
         labelDisabledName.setVisible(textName.getText().isEmpty());
         labelDisabledPct.setVisible(yard.PercentOfMaxUnits() > 100);
     }
 
-    private void buttonConstruct_MouseLeave(final Object sender, final EventData e) {
+    private void buttonConstruct_MouseLeave(Object sender, EventData e) {
         labelDisabledName.setVisible(false);
         labelDisabledPct.setVisible(false);
     }
 
-    private void buttonLoad_Click(final Object sender, final EventData e) {
+    private void buttonLoad_Click(Object sender, EventData e) {
         LoadSelectedTemplate();
     }
 
-    private void buttonNextImage_Click(final Object sender, final EventData e) {
+    private void buttonNextImage_Click(Object sender, EventData e) {
         SetTemplateModified();
         imgIndex = (imgIndex + 1) % imgTypes.length;
         UpdateShip();
     }
 
-    private void buttonPrevImage_Click(final Object sender, final EventData e) {
+    private void buttonPrevImage_Click(Object sender, EventData e) {
         SetTemplateModified();
         imgIndex = (imgIndex + imgTypes.length - 1) % imgTypes.length;
         UpdateShip();
     }
 
-    private void buttonSave_Click(final Object sender, final EventData e) {
+    private void buttonSave_Click(Object sender, EventData e) {
         if (SaveButtonEnabled()) {
-            if (dialogSave.ShowDialog(this) == DialogResult.OK) {
-                final ShipTemplate template = new ShipTemplate(yard.ShipSpec(), textName.getText());
+            if (dialogSave.showDialog(this) == DialogResult.Ok) {
+                ShipTemplate template = new ShipTemplate(yard.ShipSpec(), textName.getText());
                 if (imgIndex > Constants.MaxShip) {
                     template.ImageIndex(ShipType.Custom.getId());
                     template.Images(customImages);
                 } else {
                     template.ImageIndex(imgIndex);
                 }
-                ModelUtils.SaveFile(dialogSave.getFileName(), template.Serialize(), this);
+                ModelUtils.saveFile(dialogSave.getFileName(), template.Serialize(), this);
                 LoadTemplateList();
             }
         }
     }
 
-    private void buttonSave_MouseEnter(final Object sender, final EventData e) {
+    private void buttonSave_MouseEnter(Object sender, EventData e) {
         labelDisabledName.setVisible(textName.getText().isEmpty());
     }
 
-    private void buttonSave_MouseLeave(final Object sender, final EventData e) {
+    private void buttonSave_MouseLeave(Object sender, EventData e) {
         labelDisabledName.setVisible(false);
     }
 
-    private void buttonSetCustomImage_Click(final Object sender, final EventData e) {
-        if (dialogOpen.ShowDialog(this) == DialogResult.OK) {
-            final String baseFileName = Utils.removeExtension(dialogOpen.getFileName());
-            final String ext = Utils.getExtension(dialogOpen.getFileName());
-            final Bitmap image = GetImageFile(baseFileName + ext);
-            final Bitmap imageDamaged = GetImageFile(baseFileName + "d" + ext);
-            final Bitmap imageShields = GetImageFile(baseFileName + "s" + ext);
-            final Bitmap imageShieldsDamaged = GetImageFile(baseFileName + "sd" + ext);
+    private void buttonSetCustomImage_Click(Object sender, EventData e) {
+        if (dialogOpen.showDialog(this) == DialogResult.Ok) {
+            String baseFileName = Utils.removeExtension(dialogOpen.getFileName());
+            String ext = Utils.getExtension(dialogOpen.getFileName());
+            Bitmap image = GetImageFile(baseFileName + ext);
+            Bitmap imageDamaged = GetImageFile(baseFileName + "d" + ext);
+            Bitmap imageShields = GetImageFile(baseFileName + "s" + ext);
+            Bitmap imageShieldsDamaged = GetImageFile(baseFileName + "sd" + ext);
             if (image != null && imageDamaged != null && imageShields != null && imageShieldsDamaged != null) {
                 customImages[Constants.ShipImgOffsetNormal] = image;
                 customImages[Constants.ShipImgOffsetDamage] = imageDamaged;
@@ -1058,23 +1053,23 @@ public class DialogShipyard extends Dialog {
         }
     }
 
-    private void num_ValueChanged(final Object sender, final EventData e) {
+    private void num_ValueChanged(Object sender, EventData e) {
         SetTemplateModified();
         UpdateCalculatedFigures();
     }
 
-    private void num_ValueEnter(final Object sender, final EventData e) {
+    private void num_ValueEnter(Object sender, EventData e) {
         ((Spinner) sender).select(0, ("" + ((Spinner) sender).getValue()).length());
     }
 
-    private void selSize_SelectedIndexChanged(final Object sender, final EventData e) {
+    private void selSize_SelectedIndexChanged(Object sender, EventData e) {
         SetTemplateModified();
         yard.ShipSpec().setSize(sizes.get(selSize.getSelectedIndex()));
         UpdateAllocation();
         UpdateCalculatedFigures();
     }
 
-    private void textName_TextChanged(final Object sender, final EventData e) {
+    private void textName_TextChanged(Object sender, EventData e) {
         SetTemplateModified();
         UpdateButtonEnabledState();
     }

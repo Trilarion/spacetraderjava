@@ -14,7 +14,7 @@ public enum VeryRareEncounter implements IdentifiableEnum {
     public final String name;
     public final int id;
 
-    VeryRareEncounter(final String name) {
+    VeryRareEncounter(String name) {
         this.name = name;
         id = ordinal();
     }

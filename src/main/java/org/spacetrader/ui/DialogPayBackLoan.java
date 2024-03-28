@@ -3,16 +3,16 @@ package org.spacetrader.ui;
 import org.spacetrader.model.ModelUtils;
 import org.spacetrader.controller.Game;
 import org.spacetrader.model.crew.Commander;
-import org.winforms.widget.Button;
-import org.winforms.widget.Dialog;
-import org.winforms.widget.Label;
-import org.winforms.widget.Spinner;
+import org.winforms.widget.*;
 import org.winforms.dialog.DialogResult;
 import org.winforms.style.FlatStyle;
 import org.winforms.style.FormBorderStyle;
 import org.winforms.alignment.FormStartPosition;
 import org.winforms.event.EventData;
 import org.winforms.event.EventHandler;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
 
 import java.awt.*;
 
@@ -21,13 +21,12 @@ public class DialogPayBackLoan extends Dialog {
     private final Spinner numAmount;
 
     public DialogPayBackLoan() {
-        final Label labelQuestion = new Label();
+        Label labelQuestion = new Label();
         numAmount = new Spinner();
-        final Button buttonOk = new Button();
-        final Button buttonMax = new Button();
-        final Button buttonNothing = new Button();
-        final Label labelStatement = new Label();
-        suspendLayout();
+        Button buttonOk = new Button();
+        Button buttonMax = new Button();
+        Button buttonNothing = new Button();
+        Label labelStatement = new Label();
         // labelQuestion
         labelQuestion.setAutoSize(true);
         labelQuestion.setLocation(new Point(8, 24));
@@ -45,7 +44,7 @@ public class DialogPayBackLoan extends Dialog {
         numAmount.thousandsSeparator = true;
         numAmount.setValue(88888);
         // buttonOk
-        buttonOk.setDialogResult(DialogResult.OK);
+        buttonOk.setDialogResult(DialogResult.Ok);
         buttonOk.setFlatStyle(FlatStyle.Flat);
         buttonOk.setLocation(new Point(58, 48));
         buttonOk.setName("buttonOk");
@@ -53,7 +52,7 @@ public class DialogPayBackLoan extends Dialog {
         buttonOk.setTabIndex(2);
         buttonOk.setText("Ok");
         // buttonMax
-        buttonMax.setDialogResult(DialogResult.OK);
+        buttonMax.setDialogResult(DialogResult.Ok);
         buttonMax.setFlatStyle(FlatStyle.Flat);
         buttonMax.setLocation(new Point(106, 48));
         buttonMax.setName("buttonMax");
@@ -62,7 +61,7 @@ public class DialogPayBackLoan extends Dialog {
         buttonMax.setText("Max");
         buttonMax.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonMax_Click();
             }
         });
@@ -93,12 +92,12 @@ public class DialogPayBackLoan extends Dialog {
         setStartPosition(FormStartPosition.CenterParent);
         setText("Pay Back Loan");
         resumeLayout(false);
-        final Game game = Game.getCurrentGame();
-        final Commander commander = game.Commander();
-        final int max = Math.min(commander.getDebt(), commander.getCash());
+        Game game = Game.getCurrentGame();
+        Commander commander = game.Commander();
+        int max = Math.min(commander.getDebt(), commander.getCash());
         numAmount.setMaximum(max);
         numAmount.setValue(numAmount.getMinimum());
-        labelStatement.setText(ModelUtils.StringVars("You have a debt of ^1.", ModelUtils.Multiples(commander.getDebt(), Strings.MoneyUnit)));
+        labelStatement.setText(ModelUtils.StringVars("You have a debt of ^1.", ModelUtils.multiples(commander.getDebt(), Strings.MoneyUnit)));
     }
 
 

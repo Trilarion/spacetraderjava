@@ -10,7 +10,7 @@ public enum GameEndType implements IdentifiableEnum {
     BoughtMoon, // = 2,
     BoughtMoonGirl; // = 3
 
-    public static GameEndType FromInt(final int i) {
+    public static GameEndType FromInt(int i) {
         return GameEndType.values()[i + 1];
     }
 

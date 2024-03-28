@@ -14,7 +14,7 @@ public enum Activity implements IdentifiableEnum {
     Swarms, // = 7,
     NA;// = 100
 
-    public static Activity fromId(final int id) {
+    public static Activity fromId(int id) {
         return (id == 100) ? Activity.NA : Activity.values()[id];
     }
 

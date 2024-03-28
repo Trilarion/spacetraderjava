@@ -30,9 +30,6 @@ import java.util.Hashtable;
 // TODO this should not have a reference to the parent window, it's part of the model, not the controller
 public class Game extends SerializableObject {
 
-    public static final int GalaxyHeight = 110;
-    public static final int GalaxyWidth = 154;
-    public static final int MinDistance = 7;
     private static Game game; // TODO this doesn't work, is a singleton pattern intended, than how to serialize, better have a even bigger singleton (World)
     private final Commander commander;
     // Game Data
@@ -64,9 +61,9 @@ public class Game extends SerializableObject {
     private StarSystemId selectedSystemId = StarSystemId.NA; // Current system on chart
     private StarSystemId warpSystemId = StarSystemId.NA; // Target system for warp
     private StarSystemId trackedSystemId = StarSystemId.NA; // The short-range chart will display an arrow towards this system if the value is not null
-    private boolean targetWormhole; // Wormhole selected?
-    private int[] priceCargoBuy = new int[10];
-    private int[] priceCargoSell = new int[10];
+    private boolean targetingWormhole; // Wormhole selected?
+    private int[] buyCargoPrices = new int[10];
+    private int[] sellCargoPrices = new int[10];
     // Status of Quests
     private int questStatusArtifact; // 0 = not given yet, 1 = Artifact on board, 2 = Artifact no longer on board (either delivered or lost)
     private int questStatusDragonfly; // 0 = not available, 1 = Go to Baratas, 2 = Go to Melina, 3 = Go to Regulas, 4 = Go to Zalkon, 5 = Dragonfly destroyed, 6 = Got Shield
@@ -89,7 +86,7 @@ public class Game extends SerializableObject {
     // Options
     private GameOptions options = new GameOptions(true);
     // The rest of the member variables are not saved between games.
-    private MainWindow mainWindow;
+    private MainWindow mainWindow;  // TODO should the game hold a reference to main window? maybe not (mostly used for showing alerts)
     private boolean encounterContinueFleeing;
     private boolean encounterContinueAttacking;
     private boolean encounterCmdrFleeing;
@@ -98,7 +95,7 @@ public class Game extends SerializableObject {
     private boolean encounterOppFleeing;
     private boolean encounterOppHit;
 
-    public Game(final String name, final Difficulty difficulty, final int pilot, final int fighter, final int trader, final int engineer, final MainWindow mainWindow) {
+    public Game(String name, Difficulty difficulty, int pilot, int fighter, int trader, int engineer, MainWindow mainWindow) {
         game = this;
         this.mainWindow = mainWindow;
         this.difficulty = difficulty;
@@ -108,41 +105,41 @@ public class Game extends SerializableObject {
             universe = new StarSystem[Strings.SystemNames.length];
             int i, j;
             for (i = 0; i < universe.length; i++) {
-                final StarSystemId id = (StarSystemId.FromInt(i));
+                StarSystemId id = (StarSystemId.FromInt(i));
                 SystemPressure pressure = SystemPressure.None;
                 SpecialResource specRes = SpecialResource.Nothing;
-                ShipSize size = ShipSize.FromInt(ModelUtils.GetRandom(ShipSize.Huge.getId() + 1));
-                PoliticalSystem polSys = Constants.PoliticalSystems[ModelUtils.GetRandom(Constants.PoliticalSystems.length)];
-                TechLevel tech = TechLevel.FromInt(ModelUtils.GetRandom(polSys.MinimumTechLevel().ordinal(), polSys.MaximumTechLevel().ordinal() + 1));
+                ShipSize size = ShipSize.FromInt(ModelUtils.getRandom(ShipSize.Huge.getId() + 1));
+                PoliticalSystem polSys = Constants.PoliticalSystems[ModelUtils.getRandom(Constants.PoliticalSystems.length)];
+                TechLevel tech = TechLevel.FromInt(ModelUtils.getRandom(polSys.MinimumTechLevel().ordinal(), polSys.MaximumTechLevel().ordinal() + 1));
                 // Galvon must be a Monarchy.
                 if (id == StarSystemId.Galvon) {
                     size = ShipSize.Large;
                     polSys = Constants.PoliticalSystems[PoliticalSystemType.Monarchy.getId()];
                     tech = TechLevel.t7;
                 }
-                if (ModelUtils.GetRandom(100) < 15) {
-                    pressure = SystemPressure.FromInt(ModelUtils.GetRandom(SystemPressure.War.getId(), SystemPressure.Employment.getId() + 1));
+                if (ModelUtils.getRandom(100) < 15) {
+                    pressure = SystemPressure.FromInt(ModelUtils.getRandom(SystemPressure.War.getId(), SystemPressure.Employment.getId() + 1));
                 }
-                if (ModelUtils.GetRandom(5) >= 3) {
-                    specRes = SpecialResource.FromInt(ModelUtils.GetRandom(SpecialResource.MineralRich.getId(), SpecialResource.Warlike.getId() + 1));
+                if (ModelUtils.getRandom(5) >= 3) {
+                    specRes = SpecialResource.FromInt(ModelUtils.getRandom(SpecialResource.MineralRich.getId(), SpecialResource.Warlike.getId() + 1));
                 }
                 int x = 0;
                 int y = 0;
                 if (i < wormholes.length) {
                     // Place the first systems somewhere in the center.
-                    x = ((Game.GalaxyWidth * (1 + 2 * (i % 3))) / 6) - ModelUtils.GetRandom(-Constants.CloseDistance + 1, Constants.CloseDistance);
-                    y = ((Game.GalaxyHeight * (i < 3 ? 1 : 3)) / 4) - ModelUtils.GetRandom(-Constants.CloseDistance + 1, Constants.CloseDistance);
+                    x = ((Constants.GalaxyWidth * (1 + 2 * (i % 3))) / 6) - ModelUtils.getRandom(-Constants.CloseDistance + 1, Constants.CloseDistance);
+                    y = ((Constants.GalaxyHeight * (i < 3 ? 1 : 3)) / 4) - ModelUtils.getRandom(-Constants.CloseDistance + 1, Constants.CloseDistance);
                     wormholes[i] = i;
                 } else {
                     boolean ok = false;
                     while (!ok) {
-                        x = ModelUtils.GetRandom(1, Game.GalaxyWidth);
-                        y = ModelUtils.GetRandom(1, Game.GalaxyHeight);
+                        x = ModelUtils.getRandom(1, Constants.GalaxyWidth);
+                        y = ModelUtils.getRandom(1, Constants.GalaxyHeight);
                         boolean closeFound = false;
                         boolean tooClose = false;
                         for (j = 0; j < i && !tooClose; j++) {
                             // Minimum distance between any two systems not to be accepted.
-                            if (ModelUtils.distance(universe[j], x, y) < Game.MinDistance) {
+                            if (ModelUtils.distance(universe[j], x, y) < Constants.MinDistance) {
                                 tooClose = true;
                             }
                             // There should be at least one system which is close enough.
@@ -157,15 +154,15 @@ public class Game extends SerializableObject {
             }
             // Randomize the system locations a bit more, otherwise the systems with the first names in the alphabet are all in the center.
             for (i = 0; i < universe.length; i++) {
-                j = ModelUtils.GetRandom(universe.length);
+                j = ModelUtils.getRandom(universe.length);
                 if (!ModelUtils.WormholeExists(j, -1)) {
-                    final int x = universe[i].X();
-                    final int y = universe[i].Y();
+                    int x = universe[i].X();
+                    int y = universe[i].Y();
                     universe[i].X(universe[j].X());
                     universe[i].Y(universe[j].Y());
                     universe[j].X(x);
                     universe[j].Y(y);
-                    final int w = Utils.bruteSeek(wormholes, i);
+                    int w = Utils.bruteSeek(wormholes, i);
                     if (w >= 0) {
                         wormholes[w] = j;
                     }
@@ -173,19 +170,19 @@ public class Game extends SerializableObject {
             }
             // Randomize wormhole order
             for (i = 0; i < wormholes.length; i++) {
-                j = ModelUtils.GetRandom(wormholes.length);
-                final int w = wormholes[i];
+                j = ModelUtils.getRandom(wormholes.length);
+                int w = wormholes[i];
                 wormholes[i] = wormholes[j];
                 wormholes[j] = w;
             }
         } while (!(PlaceSpecialEvents() && PlaceShipyards()));
         // initialize commander
-        final CrewMember commanderCrewMember = new CrewMember(CrewMemberId.Commander, pilot, fighter, trader, engineer, StarSystemId.NA);
+        CrewMember commanderCrewMember = new CrewMember(CrewMemberId.Commander, pilot, fighter, trader, engineer, StarSystemId.NA);
         commander = new Commander(commanderCrewMember);
         Mercenaries()[CrewMemberId.Commander.getId()] = Commander();
         Strings.CrewMemberNames[CrewMemberId.Commander.getId()] = name;
         while (commander.CurrentSystem() == null) {
-            final StarSystem system = universe[ModelUtils.GetRandom(universe.length)];
+            StarSystem system = universe[ModelUtils.getRandom(universe.length)];
             if (system.SpecialEventType() == SpecialEventType.NA
                     && system.TechLevel().ordinal() > TechLevel.t0.ordinal()
                     && system.TechLevel().ordinal() < TechLevel.t7.ordinal()) {
@@ -205,7 +202,7 @@ public class Game extends SerializableObject {
         GenerateCrewMemberList();
         CreateShips();
         CalculatePrices(commander.CurrentSystem());
-        ResetVeryRareEncounters();
+        resetVeryRareEncounters();
         if (this.difficulty.getId() < Difficulty.Normal.getId()) {
             commander.CurrentSystem().SpecialEventType(SpecialEventType.Lottery);
         }
@@ -221,11 +218,11 @@ public class Game extends SerializableObject {
     }
 
 
-    public Game(final Hashtable hash, final MainWindow mainWindow) {
+    public Game(Hashtable hash, MainWindow mainWindow) {
         super(hash);
         Game.game = game;
         this.mainWindow = mainWindow;
-        final String version = SerializableObject.GetValueFromHash(hash, "_version", String.class);
+        String version = SerializableObject.GetValueFromHash(hash, "_version", String.class);
         if (version.compareTo(Constants.CurrentVersion) > 0) {
             throw new FutureVersionException();
         }
@@ -256,9 +253,9 @@ public class Game extends SerializableObject {
         selectedSystemId = StarSystemId.FromInt(SerializableObject.GetValueFromHash(hash, "_selectedSystemId", selectedSystemId, Integer.class));
         warpSystemId = StarSystemId.FromInt(SerializableObject.GetValueFromHash(hash, "_warpSystemId", warpSystemId, Integer.class));
         trackedSystemId = StarSystemId.FromInt(SerializableObject.GetValueFromHash(hash, "_trackedSystemId", trackedSystemId, Integer.class));
-        targetWormhole = SerializableObject.GetValueFromHash(hash, "_targetWormhole", targetWormhole);
-        priceCargoBuy = SerializableObject.GetValueFromHash(hash, "_priceCargoBuy", priceCargoBuy, int[].class);
-        priceCargoSell = SerializableObject.GetValueFromHash(hash, "_priceCargoSell", priceCargoSell, int[].class);
+        targetingWormhole = SerializableObject.GetValueFromHash(hash, "_targetWormhole", targetingWormhole);
+        buyCargoPrices = SerializableObject.GetValueFromHash(hash, "_pricebuyCargo", buyCargoPrices, int[].class);
+        sellCargoPrices = SerializableObject.GetValueFromHash(hash, "_pricesellCargo", sellCargoPrices, int[].class);
         questStatusArtifact = SerializableObject.GetValueFromHash(hash, "_questStatusArtifact", questStatusArtifact);
         questStatusDragonfly = SerializableObject.GetValueFromHash(hash, "_questStatusDragonfly", questStatusDragonfly);
         questStatusExperiment = SerializableObject.GetValueFromHash(hash, "_questStatusExperiment", questStatusExperiment);
@@ -285,13 +282,13 @@ public class Game extends SerializableObject {
         return Game.game;
     }
 
-    public static void setCurrentGame(final Game game) {
+    public static void setCurrentGame(Game game) {
         Game.game = game;
     }
 
     @Override
     public Hashtable Serialize() {
-        final Hashtable hash = super.Serialize();
+        Hashtable hash = super.Serialize();
         hash.put("_version", "2.00");
         hash.put("_universe", SerializableObject.ArrayToArrayList(universe));
         hash.put("_commander", commander.Serialize());
@@ -320,9 +317,9 @@ public class Game extends SerializableObject {
         hash.put("_selectedSystemId", selectedSystemId.getId());
         hash.put("_warpSystemId", warpSystemId.getId());
         hash.put("_trackedSystemId", trackedSystemId.getId());
-        hash.put("_targetWormhole", targetWormhole);
-        hash.put("_priceCargoBuy", priceCargoBuy);
-        hash.put("_priceCargoSell", priceCargoSell);
+        hash.put("_targetWormhole", targetingWormhole);
+        hash.put("_pricebuyCargo", buyCargoPrices);
+        hash.put("_pricesellCargo", sellCargoPrices);
         hash.put("_questStatusArtifact", questStatusArtifact);
         hash.put("_questStatusDragonfly", questStatusDragonfly);
         hash.put("_questStatusExperiment", questStatusExperiment);
@@ -384,7 +381,7 @@ public class Game extends SerializableObject {
         return showEncounter;
     }
 
-    private boolean DeterminePirateEncounter(final boolean mantis) {
+    private boolean DeterminePirateEncounter(boolean mantis) {
         boolean showEncounter = false;
         if (mantis) {
             GenerateOpponent(OpponentType.Mantis);
@@ -396,7 +393,7 @@ public class Game extends SerializableObject {
                 encounterType = EncounterType.PirateIgnore;
             } else if (opponent.Type().getId() > commander.getShip().Type().getId()
                     || opponent.Type().getId() >= ShipType.Grasshopper.getId()
-                    || ModelUtils.GetRandom(Constants.ReputationScoreElite) > (commander.getReputationScore() * 4)
+                    || ModelUtils.getRandom(Constants.ReputationScoreElite) > (commander.getReputationScore() * 4)
                     / (1 + opponent.Type().getId())) {
                 // Pirates will mostly attack, but they are cowardly: if your rep is too high, they tend to flee
                 // if Pirates are in a better ship, they won't flee, even if you have a very scary reputation.
@@ -425,7 +422,7 @@ public class Game extends SerializableObject {
                 // if you're suddenly stuck in a lousy ship, Police won't flee even if you have a fearsome reputation.
                 if (opponent.WeaponStrength() > 0
                         && (commander.getReputationScore() < Constants.ReputationScoreAverage
-                        || ModelUtils.GetRandom(Constants.ReputationScoreElite) > (commander.getReputationScore() / (1 + opponent.Type().getId())))
+                        || ModelUtils.getRandom(Constants.ReputationScoreElite) > (commander.getReputationScore() / (1 + opponent.Type().getId())))
                         || opponent.Type().getId() > commander.getShip().Type().getId()) {
                     if (commander.getPoliceRecordScore() >= Constants.PoliceRecordScoreCriminal) {
                         getEncounterType();
@@ -440,8 +437,8 @@ public class Game extends SerializableObject {
                 }
             } else if (!inspected
                     && (commander.getPoliceRecordScore() < Constants.PoliceRecordScoreClean
-                    || (commander.getPoliceRecordScore() < Constants.PoliceRecordScoreLawful && ModelUtils.GetRandom(12 - difficulty.getId()) < 1)
-                    || (commander.getPoliceRecordScore() >= Constants.PoliceRecordScoreLawful && ModelUtils.GetRandom(40) == 0))) {
+                    || (commander.getPoliceRecordScore() < Constants.PoliceRecordScoreLawful && ModelUtils.getRandom(12 - difficulty.getId()) < 1)
+                    || (commander.getPoliceRecordScore() >= Constants.PoliceRecordScoreLawful && ModelUtils.getRandom(40) == 0))) {
                 // If you're reputation is dubious, the police will inspect you
                 // If your record is clean, the police will inspect you with a chance of 10% on Normal
                 // If your record indicates you are a lawful trader, the chance on inspection drops to 2.5%
@@ -465,13 +462,13 @@ public class Game extends SerializableObject {
         boolean police = false;
         boolean trader = false;
         if (WarpSystem().Id() == StarSystemId.Gemulon && questStatusGemulon == SpecialEvent.StatusGemulonTooLate) {
-            if (ModelUtils.GetRandom(10) > 4) {
+            if (ModelUtils.getRandom(10) > 4) {
                 mantis = true;
             }
         } else {
             // Check if it is time for an encounter
-            int encounter = ModelUtils.GetRandom(44 - (2 * difficulty.getId()));
-            final int policeModifier = Math.max(1, 3 - PoliceRecord.getPoliceRecordFromScore(commander.getPoliceRecordScore()).getType().getId());
+            int encounter = ModelUtils.getRandom(44 - (2 * difficulty.getId()));
+            int policeModifier = Math.max(1, 3 - PoliceRecord.getPoliceRecordFromScore(commander.getPoliceRecordScore()).getType().getId());
             // encounters are half as likely if you're in a flea.
             if (commander.getShip().Type() == ShipType.Flea) {
                 encounter *= 2;
@@ -488,8 +485,8 @@ public class Game extends SerializableObject {
                 trader = true;
             } else if (commander.getShip().WildOnBoard() && WarpSystem().Id() == StarSystemId.Kravat) {
                 // if you're coming in to Kravat & you have Wild onboard, there'll be swarms o' cops.
-                police = ModelUtils.GetRandom(100) < 100 / Math.max(2, Math.min(4, 5 - difficulty.getId()));
-            } else if (commander.getShip().ArtifactOnBoard() && ModelUtils.GetRandom(20) <= 3) {
+                police = ModelUtils.getRandom(100) < 100 / Math.max(2, Math.min(4, 5 - difficulty.getId()));
+            } else if (commander.getShip().ArtifactOnBoard() && ModelUtils.getRandom(20) <= 3) {
                 mantis = true;
             }
         }
@@ -499,7 +496,7 @@ public class Game extends SerializableObject {
             showEncounter = DeterminePirateEncounter(mantis);
         } else if (trader) {
             showEncounter = DetermineTraderEncounter();
-        } else if (commander.getDays() > 10 && ModelUtils.GetRandom(1000) < chanceOfVeryRareEncounter && !veryRareEncounters.isEmpty()) {
+        } else if (commander.getDays() > 10 && ModelUtils.getRandom(1000) < chanceOfVeryRareEncounter && !veryRareEncounters.isEmpty()) {
             showEncounter = DetermineVeryRareEncounter();
         }
         return showEncounter;
@@ -513,9 +510,9 @@ public class Game extends SerializableObject {
         if (!commander.getShip().Cloaked()) {
             // If you're a criminal, traders tend to flee if you've got at least some reputation
             if (!commander.getShip().Cloaked() && commander.getPoliceRecordScore() <= Constants.PoliceRecordScoreCriminal
-                    && ModelUtils.GetRandom(Constants.ReputationScoreElite) <= (commander.getReputationScore() * 10) / (1 + opponent.Type().getId())) {
+                    && ModelUtils.getRandom(Constants.ReputationScoreElite) <= (commander.getReputationScore() * 10) / (1 + opponent.Type().getId())) {
                 encounterType = EncounterType.TraderFlee;
-            } else if (ModelUtils.GetRandom(1000) < chanceOfTradeInOrbit) { // Will there be trade in orbit?
+            } else if (ModelUtils.getRandom(1000) < chanceOfTradeInOrbit) { // Will there be trade in orbit?
                 if (commander.getShip().FreeCargoBays() > 0 && opponent.HasTradeableItems()) {
                     encounterType = EncounterType.TraderSell;
                 } else if (commander.getShip().HasTradeableItems()) {
@@ -543,7 +540,7 @@ public class Game extends SerializableObject {
         // 4. Captain Huie will trade your Military Laser for points in Trading.
         // 5. Encounter an out-of-date bottle of Captain Marmoset's Skill Tonic. This will affect skills depending on game difficulty level.
         // 6. Encounter a good bottle of Captain Marmoset's Skill Tonic, which will invoke IncreaseRandomSkill one or two times, depending on game difficulty.
-        switch (veryRareEncounters.get(ModelUtils.GetRandom(veryRareEncounters.size()))) {
+        switch (veryRareEncounters.get(ModelUtils.getRandom(veryRareEncounters.size()))) {
             case MarieCeleste:
                 // Marie Celeste cannot be at Acamar, Qonos, or Zalkon as it may cause problems with the Space Monster, Scorpion, or Dragonfly
                 if (clicks > 1 && commander.getCurrentSystemId() != StarSystemId.Acamar
@@ -604,15 +601,15 @@ public class Game extends SerializableObject {
         return showEncounter;
     }
 
-    private boolean EncounterExecuteAttack(final Ship attacker, final Ship defender, final boolean fleeing) {
+    private boolean EncounterExecuteAttack(Ship attacker, Ship defender, boolean fleeing) {
         boolean hit = false;
         // On beginner level, if you flee, you will escape unharmed.
         // Otherwise, Fighterskill attacker is pitted against pilotskill defender;
         // if defender is fleeing the attacker has a free shot, but the chance to hit is smaller
         // JAF - if the opponent is disabled and attacker has targeting system, they WILL be hit.
         if (!(difficulty == Difficulty.Beginner && defender.CommandersShip() && fleeing) && (attacker.CommandersShip() && opponentDisabled
-                && attacker.HasGadget(GadgetType.TargetingSystem) || ModelUtils.GetRandom(attacker.Fighter() + defender.getSize().getId()) >= (fleeing ? 2 : 1)
-                * ModelUtils.GetRandom(5 + defender.Pilot() / 2))) {
+                && attacker.HasGadget(GadgetType.TargetingSystem) || ModelUtils.getRandom(attacker.Fighter() + defender.getSize().getId()) >= (fleeing ? 2 : 1)
+                * ModelUtils.getRandom(5 + defender.Pilot() / 2))) {
             // If the defender is disabled, it only takes one shot to destroy it completely.
             if (attacker.CommandersShip() && opponentDisabled) {
                 defender.setHull(0);
@@ -623,14 +620,14 @@ public class Game extends SerializableObject {
                     attackerLasers -= attacker.WeaponStrength(WeaponType.BeamLaser, WeaponType.MilitaryLaser);
                     attackerDisruptors -= attacker.WeaponStrength(WeaponType.PhotonDisruptor, WeaponType.PhotonDisruptor);
                 }
-                final int attackerWeapons = attackerLasers + attackerDisruptors;
+                int attackerWeapons = attackerLasers + attackerDisruptors;
                 int disrupt = 0;
                 // Attempt to disable the opponent if they're not already disabled, their shields are down, we have disabling weapons, and the option is checked.
                 if (defender.Disableable() && defender.ShieldCharge() == 0 && !opponentDisabled
                         && options.getDisableOpponents() && attackerDisruptors > 0) {
-                    disrupt = ModelUtils.GetRandom(attackerDisruptors * (100 + 2 * attacker.Fighter()) / 100);
+                    disrupt = ModelUtils.getRandom(attackerDisruptors * (100 + 2 * attacker.Fighter()) / 100);
                 } else {
-                    int damage = attackerWeapons == 0 ? 0 : ModelUtils.GetRandom(attackerWeapons * (100 + 2 * attacker.Fighter()) / 100);
+                    int damage = attackerWeapons == 0 ? 0 : ModelUtils.getRandom(attackerWeapons * (100 + 2 * attacker.Fighter()) / 100);
                     if (damage > 0) {
                         hit = true;
                         // Reactor on board -- damage is boosted!
@@ -639,14 +636,14 @@ public class Game extends SerializableObject {
                         }
                         // First, shields are depleted
                         for (int i = 0; i < defender.Shields().length && defender.Shields()[i] != null && damage > 0; i++) {
-                            final int applied = Math.min(defender.Shields()[i].getCharge(), damage);
+                            int applied = Math.min(defender.Shields()[i].getCharge(), damage);
                             defender.Shields()[i].setCharge(defender.Shields()[i].getCharge() - applied);
                             damage -= applied;
                         }
                         // If there still is damage after the shields have been depleted, this is subtracted from the hull, modified by the engineering skill of the defender.
                         // JAF - If the player only has disabling weapons, no damage will be done to the hull.
                         if (damage > 0) {
-                            damage = Math.max(1, damage - ModelUtils.GetRandom(defender.Engineer()));
+                            damage = Math.max(1, damage - ModelUtils.getRandom(defender.Engineer()));
                             disrupt = damage * attackerDisruptors / attackerWeapons;
                             // Only that damage coming from Lasers will deplete the hull.
                             damage -= disrupt;
@@ -663,7 +660,7 @@ public class Game extends SerializableObject {
                     }
                 }
                 // Did the opponent get disabled? (Disruptors are 3 times more effective against the ship's systems than they are against the shields).
-                if (defender.getHull() > 0 && defender.Disableable() && ModelUtils.GetRandom(100) < disrupt * Constants.DisruptorSystemsMultiplier * 100 / defender.getHull()) {
+                if (defender.getHull() > 0 && defender.Disableable() && ModelUtils.getRandom(100) < disrupt * Constants.DisruptorSystemsMultiplier * 100 / defender.getHull()) {
                     setOpponentDisabled(true);
                 }
                 // Make sure the Scorpion doesn't get destroyed.
@@ -676,11 +673,11 @@ public class Game extends SerializableObject {
         return hit;
     }
 
-    private boolean FindDistantSystem(final StarSystemId baseSystem, final SpecialEventType specEvent) {
+    private boolean FindDistantSystem(StarSystemId baseSystem, SpecialEventType specEvent) {
         int bestDistance = 999;
         int system = -1;
         for (int i = 0; i < universe.length; i++) {
-            final int distance = ModelUtils.distance(universe[baseSystem.getId()], universe[i]);
+            int distance = ModelUtils.distance(universe[baseSystem.getId()], universe[i]);
             if (distance >= 70 && distance < bestDistance && universe[i].SpecialEventType() == SpecialEventType.NA) {
                 system = i;
                 bestDistance = distance;
@@ -694,7 +691,7 @@ public class Game extends SerializableObject {
 
     private boolean PlaceShipyards() {
         boolean goodUniverse = true;
-        final ArrayList<Integer> systemIdList = new ArrayList<>();
+        ArrayList<Integer> systemIdList = new ArrayList<>();
         for (int system = 0; system < universe.length; system++) {
             if (universe[system].TechLevel() == TechLevel.t7) {
                 systemIdList.add(system);
@@ -705,7 +702,7 @@ public class Game extends SerializableObject {
         } else {
             // Assign the shipyards to High-Tech systems.
             for (int shipyard = 0; shipyard < Constants.Shipyards.length; shipyard++) {
-                universe[systemIdList.get(ModelUtils.GetRandom(systemIdList.size()))].ShipyardId(ShipyardId.FromInt(shipyard));
+                universe[systemIdList.get(ModelUtils.getRandom(systemIdList.size()))].ShipyardId(ShipyardId.FromInt(shipyard));
             }
         }
         return goodUniverse;
@@ -770,7 +767,7 @@ public class Game extends SerializableObject {
             for (int i = 0; i < Constants.SpecialEvents.length; i++) {
                 for (int j = 0; j < Constants.SpecialEvents[i].getOccurrence(); j++) {
                     do {
-                        system = ModelUtils.GetRandom(universe.length);
+                        system = ModelUtils.getRandom(universe.length);
                     } while (universe[system].SpecialEventType() != SpecialEventType.NA);
                     universe[system].SpecialEventType(Constants.SpecialEvents[i].getType());
                 }
@@ -793,9 +790,9 @@ public class Game extends SerializableObject {
         ArrivalUpdatePressuresAndQuantities();
         ArrivalCheckEasterEgg();
         CalculatePrices(commander.CurrentSystem());
-        NewsAddEventsOnArrival();
+        addNewsEventsOnArrival();
         if (options.getNewsAutoShow()) {
-            ShowNewspaper();
+            showNewspaper();
         }
     }
 
@@ -804,7 +801,7 @@ public class Game extends SerializableObject {
         if (commander.getDebt() >= Constants.DebtWarning) {
             DialogAlert.Alert(AlertType.DebtWarning, mainWindow);
         } else if (commander.getDebt() > 0 && options.getRemindLoans() && commander.getDays() % 5 == 0) { // Debt Reminder
-            DialogAlert.Alert(AlertType.DebtReminder, mainWindow, ModelUtils.Multiples(commander.getDebt(), Strings.MoneyUnit));
+            DialogAlert.Alert(AlertType.DebtReminder, mainWindow, ModelUtils.multiples(commander.getDebt(), Strings.MoneyUnit));
         }
     }
 
@@ -833,7 +830,7 @@ public class Game extends SerializableObject {
             DialogAlert.Alert(AlertType.ReactorMeltdown, mainWindow);
             questStatusReactor = SpecialEvent.StatusReactorNotStarted;
             if (commander.getShip().getEscapePod()) {
-                EscapeWithPod();
+                escapeWithPod();
             } else {
                 DialogAlert.Alert(AlertType.ReactorDestroyed, mainWindow);
                 throw new GameEndException(GameEndType.Killed);
@@ -851,11 +848,11 @@ public class Game extends SerializableObject {
     }
 
     private void ArrivalCheckTribbles() {
-        final Ship ship = commander.getShip();
+        Ship ship = commander.getShip();
         if (ship.getTribbles() > 0) {
-            final int previousTribbles = ship.getTribbles();
-            final int narc = TradeItemType.Narcotics.getId();
-            final int food = TradeItemType.Food.getId();
+            int previousTribbles = ship.getTribbles();
+            int narc = TradeItemType.Narcotics.getId();
+            int food = TradeItemType.Food.getId();
             if (ship.ReactorOnBoard()) {
                 if (ship.getTribbles() < 20) {
                     ship.setTribbles(0);
@@ -865,22 +862,22 @@ public class Game extends SerializableObject {
                     DialogAlert.Alert(AlertType.TribblesHalfDied, mainWindow);
                 }
             } else if (ship.Cargo()[narc] > 0) {
-                final int dead = Math.min(1 + ModelUtils.GetRandom(3), ship.Cargo()[narc]);
+                int dead = Math.min(1 + ModelUtils.getRandom(3), ship.Cargo()[narc]);
                 commander.PriceCargo()[narc] = commander.PriceCargo()[narc] * (ship.Cargo()[narc] - dead) / ship.Cargo()[narc];
                 ship.Cargo()[narc] -= dead;
                 ship.Cargo()[TradeItemType.Furs.getId()] += dead;
-                ship.setTribbles(ship.getTribbles() - Math.min(dead * (ModelUtils.GetRandom(5) + 98), ship.getTribbles() - 1));
+                ship.setTribbles(ship.getTribbles() - Math.min(dead * (ModelUtils.getRandom(5) + 98), ship.getTribbles() - 1));
                 DialogAlert.Alert(AlertType.TribblesMostDied, mainWindow);
             } else {
                 if (ship.Cargo()[food] > 0 && ship.getTribbles() < Constants.MaxTribbles) {
-                    final int eaten = ship.Cargo()[food] - ModelUtils.GetRandom(ship.Cargo()[food]);
+                    int eaten = ship.Cargo()[food] - ModelUtils.getRandom(ship.Cargo()[food]);
                     commander.PriceCargo()[food] -= commander.PriceCargo()[food] * eaten / ship.Cargo()[food];
                     ship.Cargo()[food] -= eaten;
                     ship.setTribbles(ship.getTribbles() + (eaten * 100));
                     DialogAlert.Alert(AlertType.TribblesAteFood, mainWindow);
                 }
                 if (ship.getTribbles() < Constants.MaxTribbles) {
-                    ship.setTribbles(ship.getTribbles() + (1 + ModelUtils.GetRandom(ship.Cargo()[food] > 0 ? ship.getTribbles() : ship.getTribbles() / 2)));
+                    ship.setTribbles(ship.getTribbles() + (1 + ModelUtils.getRandom(ship.Cargo()[food] > 0 ? ship.getTribbles() : ship.getTribbles() / 2)));
                 }
                 if (ship.getTribbles() > Constants.MaxTribbles) {
                     ship.setTribbles(Constants.MaxTribbles);
@@ -890,7 +887,7 @@ public class Game extends SerializableObject {
                         || (previousTribbles < 10000 && ship.getTribbles() >= 10000)
                         || (previousTribbles < 50000 && ship.getTribbles() >= 50000)
                         || (previousTribbles < Constants.MaxTribbles && ship.getTribbles() == Constants.MaxTribbles)) {
-                    final String qty = ship.getTribbles() == Constants.MaxTribbles ? Strings.TribbleDangerousNumber : ModelUtils.FormatNumber(ship.getTribbles());
+                    String qty = ship.getTribbles() == Constants.MaxTribbles ? Strings.TribbleDangerousNumber : ModelUtils.formatNumber(ship.getTribbles());
                     DialogAlert.Alert(AlertType.TribblesInspector, mainWindow, qty);
                 }
             }
@@ -899,9 +896,9 @@ public class Game extends SerializableObject {
     }
 
     private void ArrivalPerformRepairs() {
-        final Ship ship = commander.getShip();
+        Ship ship = commander.getShip();
         if (ship.getHull() < ship.HullStrength()) {
-            ship.setHull(ship.getHull() + Math.min(ship.HullStrength() - ship.getHull(), ModelUtils.GetRandom(ship.Engineer())));
+            ship.setHull(ship.getHull() + Math.min(ship.HullStrength() - ship.getHull(), ModelUtils.getRandom(ship.Engineer())));
         }
         for (int i = 0; i < ship.Shields().length; ++i) {
             if (ship.Shields()[i] != null) {
@@ -938,10 +935,10 @@ public class Game extends SerializableObject {
     }
 
     private void ArrivalUpdatePressuresAndQuantities() {
-        for (final StarSystem starSystem : universe) {
-            if (ModelUtils.GetRandom(100) < 15) {
+        for (StarSystem starSystem : universe) {
+            if (ModelUtils.getRandom(100) < 15) {
                 starSystem.SystemPressure((SystemPressure.FromInt(starSystem.SystemPressure() == SystemPressure.None
-                        ? ModelUtils.GetRandom(SystemPressure.War.getId(), SystemPressure.Employment.getId() + 1) : SystemPressure.None.getId())));
+                        ? ModelUtils.getRandom(SystemPressure.War.getId(), SystemPressure.Employment.getId() + 1) : SystemPressure.None.getId())));
             }
             if (starSystem.CountDown() > 0) {
                 starSystem.CountDown(starSystem.CountDown() - 1);
@@ -952,7 +949,7 @@ public class Game extends SerializableObject {
                 } else {
                     for (int j = 0; j < Constants.TradeItems.length; j++) {
                         if (WarpSystem().ItemTraded(Constants.TradeItems[j])) {
-                            starSystem.TradeItems()[j] = Math.max(0, starSystem.TradeItems()[j] + ModelUtils.GetRandom(-4, 5));
+                            starSystem.TradeItems()[j] = Math.max(0, starSystem.TradeItems()[j] + ModelUtils.getRandom(-4, 5));
                         }
                     }
                 }
@@ -960,7 +957,7 @@ public class Game extends SerializableObject {
         }
     }
 
-    private void CalculatePrices(final StarSystem system) {
+    private void CalculatePrices(StarSystem system) {
         for (int i = 0; i < Constants.TradeItems.length; i++) {
             int price = Constants.TradeItems[i].getStandardPrice(system);
             if (price > 0) {
@@ -969,19 +966,19 @@ public class Game extends SerializableObject {
                     price = price * 3 / 2;
                 }
                 // Randomize price a bit
-                final int variance = Math.min(Constants.TradeItems[i].PriceVariance(), price - 1);
-                price += ModelUtils.GetRandom(-variance, variance + 1);
+                int variance = Math.min(Constants.TradeItems[i].PriceVariance(), price - 1);
+                price += ModelUtils.getRandom(-variance, variance + 1);
                 // Criminals have to pay off an intermediary
                 if (commander.getPoliceRecordScore() < Constants.PoliceRecordScoreDubious) {
                     price = price * 90 / 100;
                 }
             }
-            priceCargoSell[i] = price;
+            sellCargoPrices[i] = price;
         }
-        RecalculateBuyPrices(system);
+        recalculateBuyPrices(system);
     }
 
-    private void CargoBuy(final int tradeItem, final boolean max, final Pane owner, final CargoBuyOperation op) {
+    private void buyCargo(int tradeItem, boolean max, Pane owner, CargoBuyOperation op) {
         int freeBays = commander.getShip().FreeCargoBays();
         int[] items = null;
         int unitPrice = 0;
@@ -990,15 +987,15 @@ public class Game extends SerializableObject {
             case BuySystem:
                 freeBays = Math.max(0, commander.getShip().FreeCargoBays() - options.getLeaveEmpty());
                 items = commander.CurrentSystem().TradeItems();
-                unitPrice = priceCargoBuy[tradeItem];
+                unitPrice = buyCargoPrices[tradeItem];
                 cashToSpend = commander.CashToSpend();
                 break;
             case BuyTrader:
                 items = opponent.Cargo();
-                final TradeItem item = Constants.TradeItems[tradeItem];
-                final int chance = item.isIllegal() ? 45 : 10;
-                final double adj = ModelUtils.GetRandom(100) < chance ? 1.1 : (item.isIllegal() ? 0.8 : 0.9);
-                unitPrice = Math.min(item.MaxTradePrice(), Math.max(item.MinTradePrice(), (int) Math.round(priceCargoBuy[tradeItem] * adj / item.RoundOff()) * item.RoundOff()));
+                TradeItem item = Constants.TradeItems[tradeItem];
+                int chance = item.isIllegal() ? 45 : 10;
+                double adj = ModelUtils.getRandom(100) < chance ? 1.1 : (item.isIllegal() ? 0.8 : 0.9);
+                unitPrice = Math.min(item.MaxTradePrice(), Math.max(item.MinTradePrice(), (int) Math.round(buyCargoPrices[tradeItem] * adj / item.RoundOff()) * item.RoundOff()));
                 break;
             case InPlunder:
                 items = opponent.Cargo();
@@ -1021,13 +1018,13 @@ public class Game extends SerializableObject {
             if (max) {
                 qty = maxAmount;
             } else {
-                final DialogCargoBuy form = new DialogCargoBuy(tradeItem, maxAmount, op);
-                if (form.ShowDialog(owner) == DialogResult.OK) {
+                DialogCargoBuy form = new DialogCargoBuy(tradeItem, maxAmount, op);
+                if (form.ShowDialog(owner) == DialogResult.Ok) {
                     qty = form.Amount();
                 }
             }
             if (qty > 0) {
-                final int totalPrice = qty * unitPrice;
+                int totalPrice = qty * unitPrice;
                 commander.getShip().Cargo()[tradeItem] += qty;
                 items[tradeItem] -= qty;
                 commander.setCash(commander.getCash() - totalPrice);
@@ -1036,25 +1033,25 @@ public class Game extends SerializableObject {
         }
     }
 
-    private void CargoSell(final int tradeItem, final boolean all, final Pane owner, final CargoSellOperation op) {
-        final int qtyInHand = commander.getShip().Cargo()[tradeItem];
-        final int unitPrice;
+    private void sellCargo(int tradeItem, boolean all, Pane owner, CargoSellOperation op) {
+        int qtyInHand = commander.getShip().Cargo()[tradeItem];
+        int unitPrice;
         switch (op) {
             case SellSystem:
-                unitPrice = priceCargoSell[tradeItem];
+                unitPrice = sellCargoPrices[tradeItem];
                 break;
             case SellTrader:
-                final TradeItem item = Constants.TradeItems[tradeItem];
-                final int chance = item.isIllegal() ? 45 : 10;
-                final double adj = ModelUtils.GetRandom(100) < chance ? (item.isIllegal() ? 0.8 : 0.9) : 1.1;
-                unitPrice = Math.min(item.MaxTradePrice(), Math.max(item.MinTradePrice(), (int) Math.round(priceCargoSell[tradeItem] * adj / item.RoundOff()) * item.RoundOff()));
+                TradeItem item = Constants.TradeItems[tradeItem];
+                int chance = item.isIllegal() ? 45 : 10;
+                double adj = ModelUtils.getRandom(100) < chance ? (item.isIllegal() ? 0.8 : 0.9) : 1.1;
+                unitPrice = Math.min(item.MaxTradePrice(), Math.max(item.MinTradePrice(), (int) Math.round(sellCargoPrices[tradeItem] * adj / item.RoundOff()) * item.RoundOff()));
                 break;
             default:
                 unitPrice = 0;
                 break;
         }
         if (qtyInHand == 0) {
-            DialogAlert.Alert(AlertType.CargoNoneToSell, owner, Strings.CargoSellOps[op.getId()]);
+            DialogAlert.Alert(AlertType.CargoNoneToSell, owner, Strings.sellCargoOps[op.getId()]);
         } else if (op == CargoSellOperation.SellSystem && unitPrice <= 0) {
             DialogAlert.Alert(AlertType.CargoNotInterested, owner);
         } else {
@@ -1066,29 +1063,29 @@ public class Game extends SerializableObject {
                     unitCost = 5 * (difficulty.getId() + 1);
                     maxAmount = Math.min(maxAmount, commander.CashToSpend() / unitCost);
                 }
-                final int price = unitPrice > 0 ? unitPrice : -unitCost;
+                int price = unitPrice > 0 ? unitPrice : -unitCost;
                 int qty = 0;
                 if (all) {
                     qty = maxAmount;
                 } else {
-                    final DialogCargoSell form = new DialogCargoSell(tradeItem, maxAmount, op, price);
-                    if (form.ShowDialog(owner) == DialogResult.OK) {
+                    DialogCargoSell form = new DialogCargoSell(tradeItem, maxAmount, op, price);
+                    if (form.ShowDialog(owner) == DialogResult.Ok) {
                         qty = form.Amount();
                     }
                 }
                 if (qty > 0) {
-                    final int totalPrice = qty * price;
+                    int totalPrice = qty * price;
                     commander.getShip().Cargo()[tradeItem] -= qty;
                     commander.PriceCargo()[tradeItem] = (commander.PriceCargo()[tradeItem] * (qtyInHand - qty)) / qtyInHand;
                     commander.setCash(commander.getCash() + totalPrice);
                     if (op == CargoSellOperation.Jettison) {
-                        if (ModelUtils.GetRandom(10) < difficulty.getId() + 1) {
+                        if (ModelUtils.getRandom(10) < difficulty.getId() + 1) {
                             if (commander.getPoliceRecordScore() > Constants.PoliceRecordScoreDubious) {
                                 commander.setPoliceRecordScore(Constants.PoliceRecordScoreDubious);
                             } else {
                                 commander.setPoliceRecordScore(commander.getPoliceRecordScore() - 1);
                             }
-                            NewsAddEvent(NewsEvent.CaughtLittering);
+                            addNewsEvent(NewsEvent.CaughtLittering);
                         }
                     }
                 }
@@ -1143,12 +1140,12 @@ public class Game extends SerializableObject {
         questStatusPrincess = SpecialEvent.StatusPrincessRescued;
     }
 
-    private void EncounterScoop(final Pane owner) {
+    private void EncounterScoop(Pane owner) {
         // Chance 50% to picturek something up on Normal level, 33% on Hard level, 25% on Impossible level, and 100% on Easy or Beginner.
-        if ((difficulty.getId() < Difficulty.Normal.getId() || ModelUtils.GetRandom(difficulty.getId()) == 0)
+        if ((difficulty.getId() < Difficulty.Normal.getId() || ModelUtils.getRandom(difficulty.getId()) == 0)
                 && opponent.FilledCargoBays() > 0) {
             // Changed this to actually picturek a good that was in the opponent's cargo hold - JAF.
-            final int index = ModelUtils.GetRandom(opponent.FilledCargoBays());
+            int index = ModelUtils.getRandom(opponent.FilledCargoBays());
             int tradeItem = -1;
             for (int sum = 0; sum <= index; sum += opponent.Cargo()[++tradeItem]) {
             }
@@ -1167,8 +1164,8 @@ public class Game extends SerializableObject {
         }
     }
 
-    private void EncounterUpdateEncounterType(final int prevCmdrHull, final int prevOppHull) {
-        final int chance = ModelUtils.GetRandom(100);
+    private void EncounterUpdateEncounterType(int prevCmdrHull, int prevOppHull) {
+        int chance = ModelUtils.getRandom(100);
         if (opponent.getHull() < prevOppHull || opponentDisabled) {
             switch (encounterType) {
                 case FamousCaptainAttack:
@@ -1229,12 +1226,12 @@ public class Game extends SerializableObject {
         }
     }
 
-    private void EncounterWon(final Pane owner) {
+    private void EncounterWon(Pane owner) {
         if (encounterType.getId() >= EncounterType.PirateAttack.getId()
                 && encounterType.getId() <= EncounterType.PirateDisabled.getId()
                 && opponent.Type() != ShipType.Mantis
                 && commander.getPoliceRecordScore() >= Constants.PoliceRecordScoreDubious) {
-            DialogAlert.Alert(AlertType.EncounterPiratesBounty, owner, Strings.EncounterPiratesDestroyed, "", ModelUtils.Multiples(opponent.getBounty(), Strings.MoneyUnit));
+            DialogAlert.Alert(AlertType.EncounterPiratesBounty, owner, Strings.EncounterPiratesDestroyed, "", ModelUtils.multiples(opponent.getBounty(), Strings.MoneyUnit));
         } else {
             DialogAlert.Alert(AlertType.EncounterYouWin, owner);
         }
@@ -1247,7 +1244,7 @@ public class Game extends SerializableObject {
                     commander.setReputationScore(commander.getReputationScore() + Constants.ScoreKillCaptain);
                 }
                 // bump news flag from attacked to ship destroyed
-                NewsReplaceEvent(NewsLatestEvent(), NewsEvent.FromInt(NewsLatestEvent() + 1).getId());
+                replaceNewsEvent(NewsLatestEvent(), NewsEvent.FromInt(NewsLatestEvent() + 1).getId());
                 break;
             case DragonflyAttack:
                 EncounterDefeatDragonfly();
@@ -1291,8 +1288,8 @@ public class Game extends SerializableObject {
     }
 
     private void GenerateCrewMemberList() {
-        final int[] used = new int[universe.length];
-        final int d = difficulty.getId();
+        int[] used = new int[universe.length];
+        int d = difficulty.getId();
         // Zeethibal may be on Kravat
         used[StarSystemId.Kravat.getId()] = 1;
         // special individuals:
@@ -1317,26 +1314,26 @@ public class Game extends SerializableObject {
                 StarSystemId id;
                 boolean ok = false;
                 do {
-                    id = StarSystemId.FromInt(ModelUtils.GetRandom(universe.length));
+                    id = StarSystemId.FromInt(ModelUtils.getRandom(universe.length));
                     if (used[id.getId()] < 3) {
                         used[id.getId()]++;
                         ok = true;
                     }
                 } while (!ok);
-                Mercenaries()[i] = new CrewMember(CrewMemberId.FromInt(i), ModelUtils.RandomSkill(), ModelUtils.RandomSkill(), ModelUtils.RandomSkill(), ModelUtils.RandomSkill(), id);
+                Mercenaries()[i] = new CrewMember(CrewMemberId.FromInt(i), ModelUtils.getRandomSkill(), ModelUtils.getRandomSkill(), ModelUtils.getRandomSkill(), ModelUtils.getRandomSkill(), id);
             }
         }
     }
 
-    private void GenerateOpponent(final OpponentType oppType) {
+    private void GenerateOpponent(OpponentType oppType) {
         opponent = new Ship(oppType);
     }
 
-    private void NormalDeparture(final int fuel) {
+    private void NormalDeparture(int fuel) {
         commander.setCash(commander.getCash() - (MercenaryCosts() + InsuranceCosts() + WormholeCosts()));
         commander.getShip().setFuel(commander.getShip().getFuel() - fuel);
         commander.PayInterest();
-        IncDays(1, mainWindow);
+        increaseDays(1, mainWindow);
     }
 
     public ArrayList<Integer> NewsEvents() {
@@ -1359,10 +1356,10 @@ public class Game extends SerializableObject {
         return difficulty;
     }
 
-    public EncounterResult EncounterExecuteAction(final Pane owner) {
+    public EncounterResult EncounterExecuteAction(Pane owner) {
         EncounterResult result = EncounterResult.Continue;
-        final int prevCmdrHull = commander.getShip().getHull();
-        final int prevOppHull = opponent.getHull();
+        int prevCmdrHull = commander.getShip().getHull();
+        int prevOppHull = opponent.getHull();
         encounterCmdrHit = false;
         encounterOppHit = false;
         encounterOppFleeingPrev = encounterOppFleeing;
@@ -1430,11 +1427,11 @@ public class Game extends SerializableObject {
             boolean escaped = false;
             // Determine whether someone gets away.
             if (encounterCmdrFleeing
-                    && (difficulty == Difficulty.Beginner || (ModelUtils.GetRandom(7) + commander.getShip().Pilot() / 3) * 2 >= ModelUtils.GetRandom(opponent.Pilot())
+                    && (difficulty == Difficulty.Beginner || (ModelUtils.getRandom(7) + commander.getShip().Pilot() / 3) * 2 >= ModelUtils.getRandom(opponent.Pilot())
                     * (2 + difficulty.getId()))) {
                 DialogAlert.Alert(encounterCmdrHit ? AlertType.EncounterEscapedHit : AlertType.EncounterEscaped, owner);
                 escaped = true;
-            } else if (encounterOppFleeing && ModelUtils.GetRandom(commander.getShip().Pilot()) * 4 <= ModelUtils.GetRandom(7 + opponent.Pilot() / 3) * 2) {
+            } else if (encounterOppFleeing && ModelUtils.getRandom(commander.getShip().Pilot()) * 4 <= ModelUtils.getRandom(7 + opponent.Pilot() / 3) * 2) {
                 DialogAlert.Alert(AlertType.EncounterOpponentEscaped, owner);
                 escaped = true;
             }
@@ -1443,7 +1440,7 @@ public class Game extends SerializableObject {
                 result = EncounterResult.Normal;
             } else {
                 // Determine whether the opponent's actions must be changed
-                final EncounterType prevEncounter = encounterType;
+                EncounterType prevEncounter = encounterType;
                 EncounterUpdateEncounterType(prevCmdrHull, prevOppHull);
                 // Update the opponent fleeing flag.
                 switch (encounterType) {
@@ -1473,7 +1470,7 @@ public class Game extends SerializableObject {
         return result;
     }
 
-    public EncounterResult EncounterVerifySurrender(final Pane owner) {
+    public EncounterResult EncounterVerifySurrender(Pane owner) {
         EncounterResult result = EncounterResult.Continue;
         if (opponent.Type() == ShipType.Mantis) {
             if (commander.getShip().ArtifactOnBoard()) {
@@ -1498,7 +1495,7 @@ public class Game extends SerializableObject {
         } else {
             raided = true;
             if (commander.getShip().HasGadget(GadgetType.HiddenCargoBays)) {
-                final ArrayList<String> precious = new ArrayList<>();
+                ArrayList<String> precious = new ArrayList<>();
                 if (commander.getShip().PrincessOnBoard()) {
                     precious.add(Strings.EncounterHidePrincess);
                 }
@@ -1510,19 +1507,19 @@ public class Game extends SerializableObject {
                 questStatusSculpture = SpecialEvent.StatusSculptureNotStarted;
                 DialogAlert.Alert(AlertType.EncounterPiratesTakeSculpture, owner);
             }
-            final ArrayList<Integer> cargoToSteal = commander.getShip().StealableCargo();
+            ArrayList<Integer> cargoToSteal = commander.getShip().StealableCargo();
             if (cargoToSteal.isEmpty()) {
-                final int blackmail = Math.min(25000, Math.max(500, commander.Worth() / 20));
-                final int cashPayment = Math.min(commander.getCash(), blackmail);
+                int blackmail = Math.min(25000, Math.max(500, commander.Worth() / 20));
+                int cashPayment = Math.min(commander.getCash(), blackmail);
                 commander.setDebt(commander.getDebt() + (blackmail - cashPayment));
                 commander.setCash(commander.getCash() - cashPayment);
-                DialogAlert.Alert(AlertType.EncounterPiratesFindNoCargo, owner, ModelUtils.Multiples(blackmail, Strings.MoneyUnit));
+                DialogAlert.Alert(AlertType.EncounterPiratesFindNoCargo, owner, ModelUtils.multiples(blackmail, Strings.MoneyUnit));
             } else {
                 DialogAlert.Alert(AlertType.EncounterLooting, owner);
                 // Pirates steal as much as they have room for, which could be everything - JAF.
                 // Take most high-priced items - JAF.
                 while (opponent.FreeCargoBays() > 0 && !cargoToSteal.isEmpty()) {
-                    final int item = cargoToSteal.get(0);
+                    int item = cargoToSteal.get(0);
                     commander.PriceCargo()[item] -= commander.PriceCargo()[item] / commander.getShip().Cargo()[item];
                     commander.getShip().Cargo()[item]--;
                     opponent.Cargo()[item]++;
@@ -1546,7 +1543,7 @@ public class Game extends SerializableObject {
         return result;
     }
 
-    public EncounterResult EncounterVerifyYield(final Pane owner) {
+    public EncounterResult EncounterVerifyYield(Pane owner) {
         EncounterResult result = EncounterResult.Continue;
         if (commander.getShip().IllegalSpecialCargo()) {
             if (DialogAlert.Alert(AlertType.EncounterPoliceSurrender, owner, new String[]{
@@ -1555,7 +1552,7 @@ public class Game extends SerializableObject {
                 result = EncounterResult.Arrested;
             }
         } else {
-            final String str1 = commander.getShip().IllegalSpecialCargoDescription("", false, true);
+            String str1 = commander.getShip().IllegalSpecialCargoDescription("", false, true);
             if (DialogAlert.Alert(AlertType.EncounterPoliceSubmit, owner, str1, "") == DialogResult.Yes) {
                 // Police Record becomes dubious, if it wasn't already.
                 if (commander.getPoliceRecordScore() > Constants.PoliceRecordScoreDubious) {
@@ -1572,7 +1569,7 @@ public class Game extends SerializableObject {
         return encounterType;
     }
 
-    public void setEncounterType(final EncounterType encounterType) {
+    public void setEncounterType(EncounterType encounterType) {
         this.encounterType = encounterType;
     }
 
@@ -1580,7 +1577,7 @@ public class Game extends SerializableObject {
         return endStatus;
     }
 
-    public void setEndStatus(final GameEndType endStatus) {
+    public void setEndStatus(GameEndType endStatus) {
         this.endStatus = endStatus;
     }
 
@@ -1600,7 +1597,7 @@ public class Game extends SerializableObject {
         return opponent;
     }
 
-    public void setOpponent(final Ship opponent) {
+    public void setOpponent(Ship opponent) {
         this.opponent = opponent;
     }
 
@@ -1620,7 +1617,7 @@ public class Game extends SerializableObject {
         return mainWindow;
     }
 
-    public void setParentWindow(final MainWindow parentWindow) {
+    public void setParentWindow(MainWindow parentWindow) {
         mainWindow = parentWindow;
     }
 
@@ -1644,11 +1641,11 @@ public class Game extends SerializableObject {
         return trackedSystemId;
     }
 
-    public void setTrackedSystemId(final StarSystemId trackedSystemId) {
+    public void setTrackedSystemId(StarSystemId trackedSystemId) {
         this.trackedSystemId = trackedSystemId;
     }
 
-    public StarSystemId SelectedSystemId() {
+    public StarSystemId selectedSystemId() {
         return selectedSystemId;
     }
 
@@ -1657,7 +1654,7 @@ public class Game extends SerializableObject {
     }
 
     public String EncounterAction() {
-        final String action;
+        String action;
         if (opponentDisabled) {
             action = ModelUtils.StringVars("The ^1 has been disabled.", EncounterShipText());
         } else if (encounterOppFleeing) {
@@ -1770,7 +1767,7 @@ public class Game extends SerializableObject {
     }
 
     public String EncounterText() {
-        final String commanderStatus;
+        String commanderStatus;
         if (encounterCmdrFleeing) {
             commanderStatus = ModelUtils.StringVars("The ^1 is still following you.", EncounterShipText());
         } else if (encounterOppHit) {
@@ -1778,7 +1775,7 @@ public class Game extends SerializableObject {
         } else {
             commanderStatus = ModelUtils.StringVars("You missed the ^1.", EncounterShipText());
         }
-        final String oppStatus;
+        String oppStatus;
         if (encounterOppFleeingPrev) {
             oppStatus = ModelUtils.StringVars("The ^1 didn't get away.", EncounterShipText());
         } else if (encounterCmdrHit) {
@@ -1858,22 +1855,22 @@ public class Game extends SerializableObject {
         }
         return ModelUtils.StringVars(Strings.EncounterText,
                 new String[]{
-                        ModelUtils.Multiples(clicks, "click"), WarpSystem().Name(), encounterPretext, opponent.Name().toLowerCase()
+                        ModelUtils.multiples(clicks, "click"), WarpSystem().Name(), encounterPretext, opponent.Name().toLowerCase()
                 });
     }
 
     public String NewspaperHead() {
-        final String[] heads = Strings.NewsMastheads[commander.CurrentSystem().PoliticalSystemType().getId()];
-        final String head = heads[commander.CurrentSystem().Id().getId() % heads.length];
+        String[] heads = Strings.NewsMastheads[commander.CurrentSystem().PoliticalSystemType().getId()];
+        String head = heads[commander.CurrentSystem().Id().getId() % heads.length];
         return ModelUtils.StringVars(head, commander.CurrentSystem().Name());
     }
 
     public String NewspaperText() {
-        final StarSystem currentSys = commander.CurrentSystem();
-        final ArrayList<String> items = new ArrayList<>();
+        StarSystem currentSys = commander.CurrentSystem();
+        ArrayList<String> items = new ArrayList<>();
         // We're using the GetRandom2 function so that the same number is generated each time for the same "version" of the newspaper. -JAF
         ModelUtils.RandSeed(currentSys.Id().getId(), commander.getDays());
-        for (final Integer newsEvent : newsEvents) {
+        for (Integer newsEvent : newsEvents) {
             items.add(ModelUtils.StringVars(Strings.NewsEvent[newsEvent], new String[]{
                     commander.Name(), commander.CurrentSystem().Name(), commander.getShip().Name()}));
         }
@@ -1881,17 +1878,17 @@ public class Game extends SerializableObject {
             items.add(Strings.NewsPressureInternal[currentSys.SystemPressure().getId()]);
         }
         if (commander.getPoliceRecordScore() <= Constants.PoliceRecordScoreVillain) {
-            final String baseStr = Strings.NewsPoliceRecordPsychopath[ModelUtils.GetRandom2(Strings.NewsPoliceRecordPsychopath.length)];
+            String baseStr = Strings.NewsPoliceRecordPsychopath[ModelUtils.getRandom2(Strings.NewsPoliceRecordPsychopath.length)];
             items.add(ModelUtils.StringVars(baseStr, commander.Name(), currentSys.Name()));
         } else if (commander.getPoliceRecordScore() >= Constants.PoliceRecordScoreHero) {
-            final String baseStr = Strings.NewsPoliceRecordHero[ModelUtils.GetRandom2(Strings.NewsPoliceRecordHero.length)];
+            String baseStr = Strings.NewsPoliceRecordHero[ModelUtils.getRandom2(Strings.NewsPoliceRecordHero.length)];
             items.add(ModelUtils.StringVars(baseStr, commander.Name(), currentSys.Name()));
         }
         // and now, finally, useful news (if any); base probability of a story showing up is (50 / MAXTECHLEVEL) * Current Tech Level
         // This is then modified by adding 10% for every level of play less than Impossible
         boolean realNews = false;
-        final int minProbability = Constants.StoryProbability * currentSys.TechLevel().ordinal() + 10 * (5 - difficulty.getId());
-        for (final StarSystem starSystem : universe) {
+        int minProbability = Constants.StoryProbability * currentSys.TechLevel().ordinal() + 10 * (5 - difficulty.getId());
+        for (StarSystem starSystem : universe) {
             if (starSystem.DestOk() && starSystem != currentSys) {
                 // Special stories that always get shown: moon, millionaire, shipyard
                 if (starSystem.SpecialEventType() != SpecialEventType.NA) {
@@ -1906,10 +1903,10 @@ public class Game extends SerializableObject {
                 }
                 // And not-always-shown stories
                 if (starSystem.SystemPressure() != SystemPressure.None
-                        && ModelUtils.GetRandom2(100) <= Constants.StoryProbability * currentSys.TechLevel().ordinal() + 10 * (5 - difficulty.getId())) {
-                    final int index = ModelUtils.GetRandom2(Strings.NewsPressureExternal.length);
-                    final String baseStr = Strings.NewsPressureExternal[index];
-                    final String pressure = Strings.NewsPressureExternalPressures[starSystem.SystemPressure().getId()];
+                        && ModelUtils.getRandom2(100) <= Constants.StoryProbability * currentSys.TechLevel().ordinal() + 10 * (5 - difficulty.getId())) {
+                    int index = ModelUtils.getRandom2(Strings.NewsPressureExternal.length);
+                    String baseStr = Strings.NewsPressureExternal[index];
+                    String pressure = Strings.NewsPressureExternalPressures[starSystem.SystemPressure().getId()];
                     items.add(ModelUtils.StringVars(baseStr, pressure, starSystem.Name()));
                     realNews = true;
                 }
@@ -1917,11 +1914,11 @@ public class Game extends SerializableObject {
         }
         // if there's no useful news, we throw up at least one headline from our canned news list.
         if (!realNews) {
-            final String[] headlines = Strings.NewsHeadlines[currentSys.PoliticalSystemType().getId()];
-            final boolean[] shown = new boolean[headlines.length];
-            final int toShow = ModelUtils.GetRandom2(headlines.length);
+            String[] headlines = Strings.NewsHeadlines[currentSys.PoliticalSystemType().getId()];
+            boolean[] shown = new boolean[headlines.length];
+            int toShow = ModelUtils.getRandom2(headlines.length);
             for (int i = 0; i <= toShow; i++) {
-                final int index = ModelUtils.GetRandom2(headlines.length);
+                int index = ModelUtils.getRandom2(headlines.length);
                 if (!shown[index]) {
                     items.add(headlines[index]);
                     shown[index] = true;
@@ -1932,7 +1929,7 @@ public class Game extends SerializableObject {
     }
 
     @SuppressWarnings("fallthrough")
-    public boolean EncounterVerifyAttack(final Pane owner) {
+    public boolean EncounterVerifyAttack(Pane owner) {
         boolean attack = true;
         if (commander.getShip().WeaponStrength() == 0) {
             DialogAlert.Alert(AlertType.EncounterAttackNoWeapons, owner);
@@ -1992,7 +1989,7 @@ public class Game extends SerializableObject {
                     }// else goto case TraderAttack;
                 case TraderAttack:
                 case TraderSurrender:
-                    if (ModelUtils.GetRandom(Constants.ReputationScoreElite) <= commander.getReputationScore() * 10 / (opponent.Type().getId() + 1)
+                    if (ModelUtils.getRandom(Constants.ReputationScoreElite) <= commander.getReputationScore() * 10 / (opponent.Type().getId() + 1)
                             || opponent.WeaponStrength() == 0) {
                         encounterType = EncounterType.TraderFlee;
                     } else {
@@ -2009,13 +2006,13 @@ public class Game extends SerializableObject {
                         commander.setPoliceRecordScore(commander.getPoliceRecordScore() + Constants.ScoreAttackTrader);
                         switch (encounterType) {
                             case CaptainAhab:
-                                NewsAddEvent(NewsEvent.CaptAhabAttacked);
+                                addNewsEvent(NewsEvent.CaptAhabAttacked);
                                 break;
                             case CaptainConrad:
-                                NewsAddEvent(NewsEvent.CaptConradAttacked);
+                                addNewsEvent(NewsEvent.CaptConradAttacked);
                                 break;
                             case CaptainHuie:
-                                NewsAddEvent(NewsEvent.CaptHuieAttacked);
+                                addNewsEvent(NewsEvent.CaptHuieAttacked);
                                 break;
                         }
                         encounterType = EncounterType.FamousCaptainAttack;
@@ -2032,11 +2029,11 @@ public class Game extends SerializableObject {
         return attack;
     }
 
-    public boolean EncounterVerifyBoard(final Pane owner) {
+    public boolean EncounterVerifyBoard(Pane owner) {
         boolean board = false;
         if (DialogAlert.Alert(AlertType.EncounterMarieCeleste, owner) == DialogResult.Yes) {
             board = true;
-            final int narcs = commander.getShip().Cargo()[TradeItemType.Narcotics.getId()];
+            int narcs = commander.getShip().Cargo()[TradeItemType.Narcotics.getId()];
             (new DialogPlunder()).ShowDialog(owner);
             if (commander.getShip().Cargo()[TradeItemType.Narcotics.getId()] > narcs) {
                 justLootedMarie = true;
@@ -2045,7 +2042,7 @@ public class Game extends SerializableObject {
         return board;
     }
 
-    public boolean EncounterVerifyBribe(final Pane owner) {
+    public boolean EncounterVerifyBribe(Pane owner) {
         boolean bribed = false;
         if (encounterType == EncounterType.MarieCelestePolice) {
             DialogAlert.Alert(AlertType.EncounterMarieCelesteNoBribe, owner);
@@ -2053,10 +2050,10 @@ public class Game extends SerializableObject {
             DialogAlert.Alert(AlertType.EncounterPoliceBribeCant, owner);
         } else if (commander.getShip().DetectableIllegalCargoOrPassengers() || DialogAlert.Alert(AlertType.EncounterPoliceNothingIllegal, owner) == DialogResult.Yes) {
             // Bribe depends on how easy it is to bribe the police and commander's current worth
-            final int diffMod = 10 + 5 * (Difficulty.Impossible.getId() - difficulty.getId());
-            final int passMod = commander.getShip().IllegalSpecialCargo() ? (difficulty.getId() <= Difficulty.Normal.getId() ? 2 : 3) : 1;
-            final int bribe = Math.max(100, Math.min(10000, (int) Math.ceil((double) commander.Worth() / WarpSystem().PoliticalSystem().BribeLevel() / diffMod / 100) * 100 * passMod));
-            if (DialogAlert.Alert(AlertType.EncounterPoliceBribe, owner, ModelUtils.Multiples(bribe, Strings.MoneyUnit)) == DialogResult.Yes) {
+            int diffMod = 10 + 5 * (Difficulty.Impossible.getId() - difficulty.getId());
+            int passMod = commander.getShip().IllegalSpecialCargo() ? (difficulty.getId() <= Difficulty.Normal.getId() ? 2 : 3) : 1;
+            int bribe = Math.max(100, Math.min(10000, (int) Math.ceil((double) commander.Worth() / WarpSystem().PoliticalSystem().BribeLevel() / diffMod / 100) * 100 * passMod));
+            if (DialogAlert.Alert(AlertType.EncounterPoliceBribe, owner, ModelUtils.multiples(bribe, Strings.MoneyUnit)) == DialogResult.Yes) {
                 if (commander.getCash() >= bribe) {
                     commander.setCash(commander.getCash() - bribe);
                     bribed = true;
@@ -2068,7 +2065,7 @@ public class Game extends SerializableObject {
         return bribed;
     }
 
-    public boolean EncounterVerifyFlee(final Pane owner) {
+    public boolean EncounterVerifyFlee(Pane owner) {
         encounterCmdrFleeing = false;
         if (encounterType != EncounterType.PoliceInspect || commander.getShip().DetectableIllegalCargoOrPassengers()
                 || DialogAlert.Alert(AlertType.EncounterPoliceNothingIllegal, owner) == DialogResult.Yes) {
@@ -2076,8 +2073,8 @@ public class Game extends SerializableObject {
             if (encounterType == EncounterType.MarieCelestePolice && DialogAlert.Alert(AlertType.EncounterPostMarieFlee, owner) == DialogResult.No) {
                 encounterCmdrFleeing = false;
             } else if (encounterType == EncounterType.PoliceInspect || encounterType == EncounterType.MarieCelestePolice) {
-                final int scoreMod = encounterType == EncounterType.PoliceInspect ? Constants.ScoreFleePolice : Constants.ScoreAttackPolice;
-                final int scoreMin = encounterType == EncounterType.PoliceInspect
+                int scoreMod = encounterType == EncounterType.PoliceInspect ? Constants.ScoreFleePolice : Constants.ScoreAttackPolice;
+                int scoreMin = encounterType == EncounterType.PoliceInspect
                         ? Constants.PoliceRecordScoreDubious - (difficulty.getId() < Difficulty.Normal.getId() ? 0 : 1) : Constants.PoliceRecordScoreCriminal;
                 encounterType = EncounterType.PoliceAttack;
                 commander.setPoliceRecordScore(Math.min(commander.getPoliceRecordScore() + scoreMod, scoreMin));
@@ -2086,22 +2083,22 @@ public class Game extends SerializableObject {
         return encounterCmdrFleeing;
     }
 
-    public boolean EncounterVerifySubmit(final Pane owner) {
+    public boolean EncounterVerifySubmit(Pane owner) {
         boolean submit = false;
         if (commander.getShip().DetectableIllegalCargoOrPassengers()) {
-            final String str1 = commander.getShip().IllegalSpecialCargoDescription("", true, true);
-            final String str2 = commander.getShip().IllegalSpecialCargo() ? Strings.EncounterPoliceSubmitArrested : "";
+            String str1 = commander.getShip().IllegalSpecialCargoDescription("", true, true);
+            String str2 = commander.getShip().IllegalSpecialCargo() ? Strings.EncounterPoliceSubmitArrested : "";
             if (DialogAlert.Alert(AlertType.EncounterPoliceSubmit, owner, str1, str2) == DialogResult.Yes) {
                 submit = true;
                 // If you carry illegal goods, they are impounded and you are fined
                 if (commander.getShip().DetectableIllegalCargo()) {
                     commander.getShip().RemoveIllegalGoods();
-                    final int fine = (int) Math.max(100, Math.min(10000,
+                    int fine = (int) Math.max(100, Math.min(10000,
                             Math.ceil((double) commander.Worth() / ((Difficulty.Impossible.getId() - difficulty.getId() + 2) * 10) / 50) * 50));
-                    final int cashPayment = Math.min(commander.getCash(), fine);
+                    int cashPayment = Math.min(commander.getCash(), fine);
                     commander.setDebt(commander.getDebt() + (fine - cashPayment));
                     commander.setCash(commander.getCash() - cashPayment);
-                    DialogAlert.Alert(AlertType.EncounterPoliceFine, owner, ModelUtils.Multiples(fine, Strings.MoneyUnit));
+                    DialogAlert.Alert(AlertType.EncounterPoliceFine, owner, ModelUtils.multiples(fine, Strings.MoneyUnit));
                     commander.setPoliceRecordScore(commander.getPoliceRecordScore() + Constants.ScoreTrafficking);
                 }
             }
@@ -2118,7 +2115,7 @@ public class Game extends SerializableObject {
         return arrivedViaWormhole;
     }
 
-    public void setArrivedViaWormhole(final boolean arrivedViaWormhole) {
+    public void setArrivedViaWormhole(boolean arrivedViaWormhole) {
         this.arrivedViaWormhole = arrivedViaWormhole;
     }
 
@@ -2126,7 +2123,7 @@ public class Game extends SerializableObject {
         return autoSave;
     }
 
-    public void setAutoSave(final boolean autoSave) {
+    public void setAutoSave(boolean autoSave) {
         this.autoSave = autoSave;
     }
 
@@ -2134,7 +2131,7 @@ public class Game extends SerializableObject {
         return canSuperWarp;
     }
 
-    public void setCanSuperWarp(final boolean canSuperWarp) {
+    public void setCanSuperWarp(boolean canSuperWarp) {
         this.canSuperWarp = canSuperWarp;
     }
 
@@ -2142,7 +2139,7 @@ public class Game extends SerializableObject {
         return cheatEnabled;
     }
 
-    public void setCheatEnabled(final boolean cheatEnabled) {
+    public void setCheatEnabled(boolean cheatEnabled) {
         this.cheatEnabled = cheatEnabled;
     }
 
@@ -2150,7 +2147,7 @@ public class Game extends SerializableObject {
         return easyEncounters;
     }
 
-    public void setEasyEncounters(final boolean easyEncounters) {
+    public void setEasyEncounters(boolean easyEncounters) {
         this.easyEncounters = easyEncounters;
     }
 
@@ -2158,7 +2155,7 @@ public class Game extends SerializableObject {
         return encounterCmdrFleeing;
     }
 
-    public void setEncounterCmdrFleeing(final boolean encounterCmdrFleeing) {
+    public void setEncounterCmdrFleeing(boolean encounterCmdrFleeing) {
         this.encounterCmdrFleeing = encounterCmdrFleeing;
     }
 
@@ -2166,7 +2163,7 @@ public class Game extends SerializableObject {
         return encounterCmdrHit;
     }
 
-    public void setEncounterCmdrHit(final boolean encounterCmdrHit) {
+    public void setEncounterCmdrHit(boolean encounterCmdrHit) {
         this.encounterCmdrHit = encounterCmdrHit;
     }
 
@@ -2174,7 +2171,7 @@ public class Game extends SerializableObject {
         return encounterContinueAttacking;
     }
 
-    public boolean setEncounterContinueAttacking(final boolean encounterContinueAttacking) {
+    public boolean setEncounterContinueAttacking(boolean encounterContinueAttacking) {
         this.encounterContinueAttacking = encounterContinueAttacking;
         return encounterContinueAttacking;
     }
@@ -2183,7 +2180,7 @@ public class Game extends SerializableObject {
         return encounterContinueFleeing;
     }
 
-    public void setEncounterContinueFleeing(final boolean encounterContinueFleeing) {
+    public void setEncounterContinueFleeing(boolean encounterContinueFleeing) {
         this.encounterContinueFleeing = encounterContinueFleeing;
     }
 
@@ -2191,7 +2188,7 @@ public class Game extends SerializableObject {
         return encounterOppFleeing;
     }
 
-    public void setEncounterOppFleeing(final boolean encounterOppFleeing) {
+    public void setEncounterOppFleeing(boolean encounterOppFleeing) {
         this.encounterOppFleeing = encounterOppFleeing;
     }
 
@@ -2199,7 +2196,7 @@ public class Game extends SerializableObject {
         return encounterOppFleeingPrev;
     }
 
-    public void setEncounterOppFleeingPrev(final boolean encounterOppFleeingPrev) {
+    public void setEncounterOppFleeingPrev(boolean encounterOppFleeingPrev) {
         this.encounterOppFleeingPrev = encounterOppFleeingPrev;
     }
 
@@ -2207,7 +2204,7 @@ public class Game extends SerializableObject {
         return encounterOppHit;
     }
 
-    public void setEncounterOppHit(final boolean encounterOppHit) {
+    public void setEncounterOppHit(boolean encounterOppHit) {
         this.encounterOppHit = encounterOppHit;
     }
 
@@ -2215,7 +2212,7 @@ public class Game extends SerializableObject {
         return inspected;
     }
 
-    public void setInspected(final boolean inspected) {
+    public void setInspected(boolean inspected) {
         this.inspected = inspected;
     }
 
@@ -2223,7 +2220,7 @@ public class Game extends SerializableObject {
         return justLootedMarie;
     }
 
-    public void setJustLootedMarie(final boolean justLootedMarie) {
+    public void setJustLootedMarie(boolean justLootedMarie) {
         this.justLootedMarie = justLootedMarie;
     }
 
@@ -2231,7 +2228,7 @@ public class Game extends SerializableObject {
         return litterWarning;
     }
 
-    public void setLitterWarning(final boolean litterWarning) {
+    public void setLitterWarning(boolean litterWarning) {
         this.litterWarning = litterWarning;
     }
 
@@ -2239,7 +2236,7 @@ public class Game extends SerializableObject {
         return opponentDisabled;
     }
 
-    public boolean setOpponentDisabled(final boolean opponentDisabled) {
+    public boolean setOpponentDisabled(boolean opponentDisabled) {
         this.opponentDisabled = opponentDisabled;
         return opponentDisabled;
     }
@@ -2248,7 +2245,7 @@ public class Game extends SerializableObject {
         return paidForNewspaper;
     }
 
-    public void setPaidForNewspaper(final boolean paidForNewspaper) {
+    public void setPaidForNewspaper(boolean paidForNewspaper) {
         this.paidForNewspaper = paidForNewspaper;
     }
 
@@ -2256,7 +2253,7 @@ public class Game extends SerializableObject {
         return raided;
     }
 
-    public void setRaided(final boolean raided) {
+    public void setRaided(boolean raided) {
         this.raided = raided;
     }
 
@@ -2264,21 +2261,21 @@ public class Game extends SerializableObject {
         return tribbleMessage;
     }
 
-    public void setTribbleMessage(final boolean b) {
+    public void setTribbleMessage(boolean b) {
         tribbleMessage = b;
     }
 
-    public boolean TargetWormhole() {
-        return targetWormhole;
+    public boolean isTargetingWormhole() {
+        return targetingWormhole;
     }
 
     public boolean Travel() {
         // Returns true if an encounter occurrentred.
         // if spacetime is ripped, we may switch the warp system here.
         if (questStatusExperiment == SpecialEvent.StatusExperimentPerformed && fabricRipProbability > 0
-                && (fabricRipProbability == Constants.FabricRipInitialProbability || ModelUtils.GetRandom(100) < fabricRipProbability)) {
+                && (fabricRipProbability == Constants.FabricRipInitialProbability || ModelUtils.getRandom(100) < fabricRipProbability)) {
             DialogAlert.Alert(AlertType.SpecialSpacetimeFabricRip, mainWindow);
-            SelectedSystemId(StarSystemId.FromInt(ModelUtils.GetRandom(universe.length)));
+            selectedSystemId(StarSystemId.FromInt(ModelUtils.getRandom(universe.length)));
         }
         boolean uneventful = true;
         raided = false;
@@ -2289,7 +2286,7 @@ public class Game extends SerializableObject {
             commander.getShip().PerformRepairs();
             if (DetermineEncounter()) {
                 uneventful = false;
-                final DialogEncounter form = new DialogEncounter();
+                DialogEncounter form = new DialogEncounter();
                 form.ShowDialog(mainWindow);
                 mainWindow.updateStatusBar();
                 switch (form.Result()) {
@@ -2299,7 +2296,7 @@ public class Game extends SerializableObject {
                         break;
                     case EscapePod:
                         clicks = 0;
-                        EscapeWithPod();
+                        escapeWithPod();
                         break;
                     case Killed:
                         throw new GameEndException(GameEndType.Killed);
@@ -2382,7 +2379,7 @@ public class Game extends SerializableObject {
         return chanceOfTradeInOrbit;
     }
 
-    public void setChanceOfTradeInOrbit(final int chanceOfTradeInOrbit) {
+    public void setChanceOfTradeInOrbit(int chanceOfTradeInOrbit) {
         this.chanceOfTradeInOrbit = chanceOfTradeInOrbit;
     }
 
@@ -2390,7 +2387,7 @@ public class Game extends SerializableObject {
         return chanceOfVeryRareEncounter;
     }
 
-    public void setChanceOfVeryRareEncounter(final int chanceOfVeryRareEncounter) {
+    public void setChanceOfVeryRareEncounter(int chanceOfVeryRareEncounter) {
         this.chanceOfVeryRareEncounter = chanceOfVeryRareEncounter;
     }
 
@@ -2398,7 +2395,7 @@ public class Game extends SerializableObject {
         return clicks;
     }
 
-    public void setClicks(final int clicks) {
+    public void setClicks(int clicks) {
         this.clicks = clicks;
     }
 
@@ -2406,7 +2403,7 @@ public class Game extends SerializableObject {
         return fabricRipProbability;
     }
 
-    public void setFabricRipProbability(final int fabricRipProbability) {
+    public void setFabricRipProbability(int fabricRipProbability) {
         this.fabricRipProbability = fabricRipProbability;
     }
 
@@ -2414,7 +2411,7 @@ public class Game extends SerializableObject {
         return questStatusArtifact;
     }
 
-    public void setQuestStatusArtifact(final int questStatusArtifact) {
+    public void setQuestStatusArtifact(int questStatusArtifact) {
         this.questStatusArtifact = questStatusArtifact;
     }
 
@@ -2422,7 +2419,7 @@ public class Game extends SerializableObject {
         return questStatusDragonfly;
     }
 
-    public void setQuestStatusDragonfly(final int questStatusDragonfly) {
+    public void setQuestStatusDragonfly(int questStatusDragonfly) {
         this.questStatusDragonfly = questStatusDragonfly;
     }
 
@@ -2430,7 +2427,7 @@ public class Game extends SerializableObject {
         return questStatusExperiment;
     }
 
-    public void setQuestStatusExperiment(final int questStatusExperiment) {
+    public void setQuestStatusExperiment(int questStatusExperiment) {
         this.questStatusExperiment = questStatusExperiment;
     }
 
@@ -2438,7 +2435,7 @@ public class Game extends SerializableObject {
         return questStatusGemulon;
     }
 
-    public void setQuestStatusGemulon(final int questStatusGemulon) {
+    public void setQuestStatusGemulon(int questStatusGemulon) {
         this.questStatusGemulon = questStatusGemulon;
     }
 
@@ -2446,7 +2443,7 @@ public class Game extends SerializableObject {
         return questStatusJapori;
     }
 
-    public void setQuestStatusJapori(final int questStatusJapori) {
+    public void setQuestStatusJapori(int questStatusJapori) {
         this.questStatusJapori = questStatusJapori;
     }
 
@@ -2454,7 +2451,7 @@ public class Game extends SerializableObject {
         return questStatusJarek;
     }
 
-    public void setQuestStatusJarek(final int questStatusJarek) {
+    public void setQuestStatusJarek(int questStatusJarek) {
         this.questStatusJarek = questStatusJarek;
     }
 
@@ -2462,7 +2459,7 @@ public class Game extends SerializableObject {
         return questStatusMoon;
     }
 
-    public void setQuestStatusMoon(final int questStatusMoon) {
+    public void setQuestStatusMoon(int questStatusMoon) {
         this.questStatusMoon = questStatusMoon;
     }
 
@@ -2470,7 +2467,7 @@ public class Game extends SerializableObject {
         return questStatusPrincess;
     }
 
-    public void setQuestStatusPrincess(final int questStatusPrincess) {
+    public void setQuestStatusPrincess(int questStatusPrincess) {
         this.questStatusPrincess = questStatusPrincess;
     }
 
@@ -2478,7 +2475,7 @@ public class Game extends SerializableObject {
         return questStatusReactor;
     }
 
-    public void setQuestStatusReactor(final int questStatusReactor) {
+    public void setQuestStatusReactor(int questStatusReactor) {
         this.questStatusReactor = questStatusReactor;
     }
 
@@ -2486,7 +2483,7 @@ public class Game extends SerializableObject {
         return questStatusScarab;
     }
 
-    public void setQuestStatusScarab(final int questStatusScarab) {
+    public void setQuestStatusScarab(int questStatusScarab) {
         this.questStatusScarab = questStatusScarab;
     }
 
@@ -2494,7 +2491,7 @@ public class Game extends SerializableObject {
         return questStatusSculpture;
     }
 
-    public void setQuestStatusSculpture(final int questStatusSculpture) {
+    public void setQuestStatusSculpture(int questStatusSculpture) {
         this.questStatusSculpture = questStatusSculpture;
     }
 
@@ -2502,7 +2499,7 @@ public class Game extends SerializableObject {
         return questStatusSpaceMonster;
     }
 
-    public void setQuestStatusSpaceMonster(final int questStatusSpaceMonster) {
+    public void setQuestStatusSpaceMonster(int questStatusSpaceMonster) {
         this.questStatusSpaceMonster = questStatusSpaceMonster;
     }
 
@@ -2510,7 +2507,7 @@ public class Game extends SerializableObject {
         return questStatusWild;
     }
 
-    public void setQuestStatusWild(final int questStatusWild) {
+    public void setQuestStatusWild(int questStatusWild) {
         this.questStatusWild = questStatusWild;
     }
 
@@ -2531,7 +2528,7 @@ public class Game extends SerializableObject {
     }
 
     public int Score() {
-        final int worth = commander.Worth() < 1000000 ? commander.Worth() : 1000000 + ((commander.Worth() - 1000000) / 10);
+        int worth = commander.Worth() < 1000000 ? commander.Worth() : 1000000 + ((commander.Worth() - 1000000) / 10);
         int daysMoon = 0;
         int modifier = 0;
         switch (endStatus) {
@@ -2554,25 +2551,25 @@ public class Game extends SerializableObject {
     }
 
     public int[] Destinations() {
-        final ArrayList<Integer> list = new ArrayList<>();
+        ArrayList<Integer> list = new ArrayList<>();
         for (int i = 0; i < universe.length; i++) {
             if (universe[i].DestOk()) {
                 list.add(i);
             }
         }
-        final int[] ids = new int[list.size()];
+        int[] ids = new int[list.size()];
         for (int i = 0; i < ids.length; i++) {
             ids[i] = list.get(i);
         }
         return ids;
     }
 
-    public int[] PriceCargoBuy() {
-        return priceCargoBuy;
+    public int[] PricebuyCargo() {
+        return buyCargoPrices;
     }
 
-    public int[] PriceCargoSell() {
-        return priceCargoSell;
+    public int[] PricesellCargo() {
+        return sellCargoPrices;
     }
 
     public int[] Wormholes() {
@@ -2580,13 +2577,13 @@ public class Game extends SerializableObject {
     }
 
     public void Arrested() {
-        final int term = Math.max(30, -commander.getPoliceRecordScore());
+        int term = Math.max(30, -commander.getPoliceRecordScore());
         int fine = (1 + commander.Worth() * Math.min(80, -commander.getPoliceRecordScore()) / 50000) * 500;
         if (commander.getShip().WildOnBoard()) {
             fine = (int) (fine * 1.05);
         }
         DialogAlert.Alert(AlertType.EncounterArrested, mainWindow);
-        DialogAlert.Alert(AlertType.JailConvicted, mainWindow, ModelUtils.Multiples(term, Strings.TimeUnit), ModelUtils.Multiples(fine, Strings.MoneyUnit));
+        DialogAlert.Alert(AlertType.JailConvicted, mainWindow, ModelUtils.multiples(term, Strings.TimeUnit), ModelUtils.multiples(fine, Strings.MoneyUnit));
         if (commander.getShip().HasGadget(GadgetType.HiddenCargoBays)) {
             while (commander.getShip().HasGadget(GadgetType.HiddenCargoBays)) {
                 commander.getShip().RemoveEquipment(EquipmentType.Gadget, GadgetType.HiddenCargoBays);
@@ -2603,7 +2600,7 @@ public class Game extends SerializableObject {
         }
         if (commander.getShip().WildOnBoard()) {
             DialogAlert.Alert(AlertType.WildArrested, mainWindow);
-            NewsAddEvent(NewsEvent.WildArrested);
+            addNewsEvent(NewsEvent.WildArrested);
             questStatusWild = SpecialEvent.StatusWildNotStarted;
         }
         if (commander.getShip().AnyIllegalCargo()) {
@@ -2642,10 +2639,10 @@ public class Game extends SerializableObject {
                 DialogAlert.Alert(AlertType.TribblesRemoved, mainWindow);
             }
             DialogAlert.Alert(AlertType.FleaBuilt, mainWindow);
-            CreateFlea();
+            createFlea();
         }
         if (commander.getDebt() > 0) {
-            final int paydown = Math.min(commander.getCash(), commander.getDebt());
+            int paydown = Math.min(commander.getCash(), commander.getDebt());
             commander.setDebt(commander.getDebt() - paydown);
             commander.setCash(commander.getCash() - paydown);
             if (commander.getDebt() > 0) {
@@ -2655,50 +2652,50 @@ public class Game extends SerializableObject {
             }
         }
         commander.setPoliceRecordScore(Constants.PoliceRecordScoreDubious);
-        IncDays(term, mainWindow);
+        increaseDays(term, mainWindow);
     }
 
-    public void CargoBuySystem(final int tradeItem, final boolean max, final Pane owner) {
-        CargoBuy(tradeItem, max, owner, CargoBuyOperation.BuySystem);
+    public void buyCargoSystem(int tradeItem, boolean max, Pane owner) {
+        buyCargo(tradeItem, max, owner, CargoBuyOperation.BuySystem);
     }
 
-    public void CargoBuyTrader(final int tradeItem, final Pane owner) {
-        CargoBuy(tradeItem, false, owner, CargoBuyOperation.BuyTrader);
+    public void buyCargoTrader(int tradeItem, Pane owner) {
+        buyCargo(tradeItem, false, owner, CargoBuyOperation.BuyTrader);
     }
 
-    public void CargoDump(final int tradeItem, final Pane owner) {
-        CargoSell(tradeItem, false, owner, CargoSellOperation.Dump);
+    public void dumpCargo(int tradeItem, Pane owner) {
+        sellCargo(tradeItem, false, owner, CargoSellOperation.Dump);
     }
 
-    public void CargoJettison(final int tradeItem, final boolean all, final Pane owner) {
-        CargoSell(tradeItem, all, owner, CargoSellOperation.Jettison);
+    public void jettisonCargo(int tradeItem, boolean all, Pane owner) {
+        sellCargo(tradeItem, all, owner, CargoSellOperation.Jettison);
     }
 
-    public void CargoPlunder(final int tradeItem, final boolean max, final Pane owner) {
-        CargoBuy(tradeItem, max, owner, CargoBuyOperation.InPlunder);
+    public void plunderCargo(int tradeItem, boolean max, Pane owner) {
+        buyCargo(tradeItem, max, owner, CargoBuyOperation.InPlunder);
     }
 
-    public void CargoSellSystem(final int tradeItem, final boolean all, final Pane owner) {
-        CargoSell(tradeItem, all, owner, CargoSellOperation.SellSystem);
+    public void sellCargoSystem(int tradeItem, boolean all, Pane owner) {
+        sellCargo(tradeItem, all, owner, CargoSellOperation.SellSystem);
     }
 
-    public void CargoSellTrader(final int tradeItem, final Pane owner) {
-        CargoSell(tradeItem, false, owner, CargoSellOperation.SellTrader);
+    public void sellCargoTrader(int tradeItem, Pane owner) {
+        sellCargo(tradeItem, false, owner, CargoSellOperation.SellTrader);
     }
 
-    public void CreateFlea() {
+    public void createFlea() {
         commander.setShip(new Ship(ShipType.Flea));
         commander.getShip().Crew()[0] = Commander();
         commander.setInsurance(false);
         commander.NoClaim(0);
     }
 
-    public void EncounterBegin() {
+    public void beginEncounter() {
         // Set up the encounter variables.
         encounterContinueFleeing = setEncounterContinueAttacking(setOpponentDisabled(false));
     }
 
-    public void EncounterDrink(final Pane owner) {
+    public void EncounterDrink(Pane owner) {
         if (DialogAlert.Alert(AlertType.EncounterDrinkContents, owner) == DialogResult.Yes) {
             if (encounterType == EncounterType.BottleGood) {
                 // two points if you're on beginner-normal, one otherwise
@@ -2714,7 +2711,7 @@ public class Game extends SerializableObject {
         }
     }
 
-    public void EncounterMeet(final Pane owner) {
+    public void EncounterMeet(Pane owner) {
         AlertType initialAlert = AlertType.Alert;
         int skill = 0;
         EquipmentType equipType = EquipmentType.Gadget;
@@ -2752,7 +2749,7 @@ public class Game extends SerializableObject {
         }
     }
 
-    public void EncounterPlunder(final Pane owner) {
+    public void EncounterPlunder(Pane owner) {
         (new DialogPlunder()).ShowDialog(owner);
         if (encounterType.getId() >= EncounterType.TraderAttack.getId()) {
             commander.setPoliceRecordScore(commander.getPoliceRecordScore() + Constants.ScorePlunderTrader);
@@ -2762,7 +2759,7 @@ public class Game extends SerializableObject {
         } else if (opponentDisabled) {
             if (commander.getPoliceRecordScore() >= Constants.PoliceRecordScoreDubious) {
                 DialogAlert.Alert(AlertType.EncounterPiratesBounty, owner, Strings.EncounterPiratesDisabled,
-                        Strings.EncounterPiratesLocation, ModelUtils.Multiples(opponent.getBounty(), Strings.MoneyUnit));
+                        Strings.EncounterPiratesLocation, ModelUtils.multiples(opponent.getBounty(), Strings.MoneyUnit));
                 commander.setCash(commander.getCash() + opponent.getBounty());
             }
             commander.setKillsPirate(commander.getKillsPirate() + 1);
@@ -2773,22 +2770,22 @@ public class Game extends SerializableObject {
         commander.setReputationScore(commander.getReputationScore() + (opponent.Type().getId() / 2 + 1));
     }
 
-    public void EncounterTrade(final Pane owner) {
-        final boolean buy = (encounterType == EncounterType.TraderBuy);
-        final int item = (buy ? commander.getShip() : opponent).getRandomTradeableItem();
-        final String alertStr = buy ? "selling" : "buying";
-        final int cash = commander.getCash();
+    public void EncounterTrade(Pane owner) {
+        boolean buy = (encounterType == EncounterType.TraderBuy);
+        int item = (buy ? commander.getShip() : opponent).getRandomTradeableItem();
+        String alertStr = buy ? "selling" : "buying";
+        int cash = commander.getCash();
         if (encounterType == EncounterType.TraderBuy) {
-            CargoSellTrader(item, owner);
+            sellCargoTrader(item, owner);
         } else { // EncounterType.TraderSell
-            CargoBuyTrader(item, owner);
+            buyCargoTrader(item, owner);
         }
         if (commander.getCash() != cash) {
             DialogAlert.Alert(AlertType.EncounterTradeCompleted, owner, alertStr, Constants.TradeItems[item].Name());
         }
     }
 
-    public void EscapeWithPod() {
+    public void escapeWithPod() {
         DialogAlert.Alert(AlertType.EncounterEscapePodActivated, mainWindow);
         if (commander.getShip().SculptureOnBoard()) {
             DialogAlert.Alert(AlertType.SculptureSaved, mainWindow);
@@ -2822,7 +2819,7 @@ public class Game extends SerializableObject {
         if (commander.getShip().WildOnBoard()) {
             DialogAlert.Alert(AlertType.WildArrested, mainWindow);
             commander.setPoliceRecordScore(commander.getPoliceRecordScore() + Constants.ScoreCaughtWithWild);
-            NewsAddEvent(NewsEvent.WildArrested);
+            addNewsEvent(NewsEvent.WildArrested);
             questStatusWild = SpecialEvent.StatusWildNotStarted;
         }
         if (commander.getInsurance()) {
@@ -2836,13 +2833,13 @@ public class Game extends SerializableObject {
             commander.setCash(0);
         }
         DialogAlert.Alert(AlertType.FleaBuilt, mainWindow);
-        IncDays(3, mainWindow);
-        CreateFlea();
+        increaseDays(3, mainWindow);
+        createFlea();
     }
 
-    public void HandleSpecialEvent() {
-        final StarSystem currentSys = commander.CurrentSystem();
-        final Ship ship = commander.getShip();
+    public void handleSpecialEvent() {
+        StarSystem currentSys = commander.CurrentSystem();
+        Ship ship = commander.getShip();
         boolean remove = true;
         switch (currentSys.SpecialEventType()) {
             case Artifact:
@@ -2853,7 +2850,7 @@ public class Game extends SerializableObject {
                 break;
             case CargoForSale:
                 DialogAlert.Alert(AlertType.SpecialSealedCanisters, mainWindow);
-                final int tradeItem = ModelUtils.GetRandom(Constants.TradeItems.length);
+                int tradeItem = ModelUtils.getRandom(Constants.TradeItems.length);
                 ship.Cargo()[tradeItem] += 3;
                 commander.PriceCargo()[tradeItem] += commander.CurrentSystem().SpecialEvent().getPrice();
                 break;
@@ -2880,7 +2877,7 @@ public class Game extends SerializableObject {
             case EraseRecord:
                 DialogAlert.Alert(AlertType.SpecialCleanRecord, mainWindow);
                 commander.setPoliceRecordScore(Constants.PoliceRecordScoreClean);
-                RecalculateSellPrices(currentSys);
+                recalculateSellPrices(currentSys);
                 break;
             case Experiment:
                 questStatusExperiment = SpecialEvent.StatusExperimentStarted;
@@ -2929,7 +2926,7 @@ public class Game extends SerializableObject {
                     DialogAlert.Alert(AlertType.SpecialNoQuarters, mainWindow);
                     remove = false;
                 } else {
-                    final CrewMember jarek = Mercenaries()[CrewMemberId.Jarek.getId()];
+                    CrewMember jarek = Mercenaries()[CrewMemberId.Jarek.getId()];
                     DialogAlert.Alert(AlertType.SpecialPassengerOnBoard, mainWindow, jarek.Name());
                     ship.Hire(jarek);
                     questStatusJarek = SpecialEvent.StatusJarekStarted;
@@ -2962,7 +2959,7 @@ public class Game extends SerializableObject {
                     DialogAlert.Alert(AlertType.SpecialNoQuarters, mainWindow);
                     remove = false;
                 } else {
-                    final CrewMember princess = Mercenaries()[CrewMemberId.Princess.getId()];
+                    CrewMember princess = Mercenaries()[CrewMemberId.Princess.getId()];
                     DialogAlert.Alert(AlertType.SpecialPassengerOnBoard, mainWindow, princess.Name());
                     ship.Hire(princess);
                 }
@@ -2989,7 +2986,7 @@ public class Game extends SerializableObject {
                     remove = false;
                 } else {
                     if (ship.WildOnBoard()) {
-                        if (DialogAlert.Alert(AlertType.WildWontStayAboardReactor, mainWindow, currentSys.Name()) == DialogResult.OK) {
+                        if (DialogAlert.Alert(AlertType.WildWontStayAboardReactor, mainWindow, currentSys.Name()) == DialogResult.Ok) {
                             DialogAlert.Alert(AlertType.WildLeavesShip, mainWindow, currentSys.Name());
                             questStatusWild = SpecialEvent.StatusWildNotStarted;
                         } else {
@@ -3081,7 +3078,7 @@ public class Game extends SerializableObject {
                     DialogAlert.Alert(AlertType.WildWontBoardReactor, mainWindow);
                     remove = false;
                 } else {
-                    final CrewMember wild = Mercenaries()[CrewMemberId.Wild.getId()];
+                    CrewMember wild = Mercenaries()[CrewMemberId.Wild.getId()];
                     DialogAlert.Alert(AlertType.SpecialPassengerOnBoard, mainWindow, wild.Name());
                     ship.Hire(wild);
                     questStatusWild = SpecialEvent.StatusWildStarted;
@@ -3092,17 +3089,17 @@ public class Game extends SerializableObject {
                 break;
             case WildGetsOut:
                 // Zeethibal has a 10 in player's lowest score, an 8 in the next lowest score, and 5 elsewhere.
-                final CrewMember zeethibal = Mercenaries()[CrewMemberId.Zeethibal.getId()];
+                CrewMember zeethibal = Mercenaries()[CrewMemberId.Zeethibal.getId()];
                 zeethibal.CurrentSystem(universe[StarSystemId.Kravat.getId()]);
-                final int lowest1 = commander.NthLowestSkill(1);
-                final int lowest2 = commander.NthLowestSkill(2);
+                int lowest1 = commander.NthLowestSkill(1);
+                int lowest2 = commander.NthLowestSkill(2);
                 for (int i = 0; i < zeethibal.Skills().length; i++) {
                     zeethibal.Skills()[i] = (i == lowest1 ? 10 : (i == lowest2 ? 8 : 5));
                 }
                 questStatusWild = SpecialEvent.StatusWildDone;
                 commander.setPoliceRecordScore(Constants.PoliceRecordScoreClean);
                 ship.handleFire(CrewMemberId.Wild);
-                RecalculateSellPrices(currentSys);
+                recalculateSellPrices(currentSys);
                 break;
         }
         if (currentSys.SpecialEvent().getPrice() != 0) {
@@ -3113,7 +3110,7 @@ public class Game extends SerializableObject {
         }
     }
 
-    public void IncDays(final int num, final Pane owner) {
+    public void increaseDays(int num, Pane owner) {
         commander.setDays(commander.getDays() + num);
         if (commander.getInsurance()) {
             commander.NoClaim(commander.NoClaim() + num);
@@ -3132,7 +3129,7 @@ public class Game extends SerializableObject {
         if (questStatusGemulon > SpecialEvent.StatusGemulonNotStarted && questStatusGemulon < SpecialEvent.StatusGemulonTooLate) {
             questStatusGemulon = Math.min(questStatusGemulon + num, SpecialEvent.StatusGemulonTooLate);
             if (questStatusGemulon == SpecialEvent.StatusGemulonTooLate) {
-                final StarSystem gemulon = universe[StarSystemId.Gemulon.getId()];
+                StarSystem gemulon = universe[StarSystemId.Gemulon.getId()];
                 gemulon.SpecialEventType(SpecialEventType.GemulonInvaded);
                 gemulon.TechLevel(TechLevel.t0);
                 gemulon.PoliticalSystemType(PoliticalSystemType.Anarchy);
@@ -3148,7 +3145,7 @@ public class Game extends SerializableObject {
                 fabricRipProbability = Constants.FabricRipInitialProbability;
                 universe[StarSystemId.Daled.getId()].SpecialEventType(SpecialEventType.ExperimentFailed);
                 DialogAlert.Alert(AlertType.SpecialExperimentPerformed, owner);
-                NewsAddEvent(NewsEvent.ExperimentPerformed);
+                addNewsEvent(NewsEvent.ExperimentPerformed);
             }
         } else if (questStatusExperiment == SpecialEvent.StatusExperimentPerformed && fabricRipProbability > 0) {
             fabricRipProbability = fabricRipProbability - num;
@@ -3197,172 +3194,172 @@ public class Game extends SerializableObject {
         }
     }
 
-    public void NewsAddEvent(final NewsEvent ne) {
-        newsEvents.add(ne.getId());
+    public void addNewsEvent(NewsEvent newsEvent) {
+        newsEvents.add(newsEvent.getId());
     }
 
-    public void NewsAddEventsOnArrival() {
+    public void addNewsEventsOnArrival() {
         if (commander.CurrentSystem().SpecialEventType() != SpecialEventType.NA) {
             switch (commander.CurrentSystem().SpecialEventType()) {
                 case ArtifactDelivery:
                     if (commander.getShip().ArtifactOnBoard()) {
-                        NewsAddEvent(NewsEvent.ArtifactDelivery);
+                        addNewsEvent(NewsEvent.ArtifactDelivery);
                     }
                     break;
                 case Dragonfly:
-                    NewsAddEvent(NewsEvent.Dragonfly);
+                    addNewsEvent(NewsEvent.Dragonfly);
                     break;
                 case DragonflyBaratas:
                     if (questStatusDragonfly == SpecialEvent.StatusDragonflyFlyBaratas) {
-                        NewsAddEvent(NewsEvent.DragonflyBaratas);
+                        addNewsEvent(NewsEvent.DragonflyBaratas);
                     }
                     break;
                 case DragonflyDestroyed:
                     if (questStatusDragonfly == SpecialEvent.StatusDragonflyFlyZalkon) {
-                        NewsAddEvent(NewsEvent.DragonflyZalkon);
+                        addNewsEvent(NewsEvent.DragonflyZalkon);
                     } else if (questStatusDragonfly == SpecialEvent.StatusDragonflyDestroyed) {
-                        NewsAddEvent(NewsEvent.DragonflyDestroyed);
+                        addNewsEvent(NewsEvent.DragonflyDestroyed);
                     }
                     break;
                 case DragonflyMelina:
                     if (questStatusDragonfly == SpecialEvent.StatusDragonflyFlyMelina) {
-                        NewsAddEvent(NewsEvent.DragonflyMelina);
+                        addNewsEvent(NewsEvent.DragonflyMelina);
                     }
                     break;
                 case DragonflyRegulas:
                     if (questStatusDragonfly == SpecialEvent.StatusDragonflyFlyRegulas) {
-                        NewsAddEvent(NewsEvent.DragonflyRegulas);
+                        addNewsEvent(NewsEvent.DragonflyRegulas);
                     }
                     break;
                 case ExperimentFailed:
-                    NewsAddEvent(NewsEvent.ExperimentFailed);
+                    addNewsEvent(NewsEvent.ExperimentFailed);
                     break;
                 case ExperimentStopped:
                     if (questStatusExperiment > SpecialEvent.StatusExperimentNotStarted
                             && questStatusExperiment < SpecialEvent.StatusExperimentPerformed) {
-                        NewsAddEvent(NewsEvent.ExperimentStopped);
+                        addNewsEvent(NewsEvent.ExperimentStopped);
                     }
                     break;
                 case Gemulon:
-                    NewsAddEvent(NewsEvent.Gemulon);
+                    addNewsEvent(NewsEvent.Gemulon);
                     break;
                 case GemulonRescued:
                     if (questStatusGemulon > SpecialEvent.StatusGemulonNotStarted) {
                         if (questStatusGemulon < SpecialEvent.StatusGemulonTooLate) {
-                            NewsAddEvent(NewsEvent.GemulonRescued);
+                            addNewsEvent(NewsEvent.GemulonRescued);
                         } else {
-                            NewsAddEvent(NewsEvent.GemulonInvaded);
+                            addNewsEvent(NewsEvent.GemulonInvaded);
                         }
                     }
                     break;
                 case Japori:
                     if (questStatusJapori == SpecialEvent.StatusJaporiNotStarted) {
-                        NewsAddEvent(NewsEvent.Japori);
+                        addNewsEvent(NewsEvent.Japori);
                     }
                     break;
                 case JaporiDelivery:
                     if (questStatusJapori == SpecialEvent.StatusJaporiInTransit) {
-                        NewsAddEvent(NewsEvent.JaporiDelivery);
+                        addNewsEvent(NewsEvent.JaporiDelivery);
                     }
                     break;
                 case JarekGetsOut:
                     if (commander.getShip().JarekOnBoard()) {
-                        NewsAddEvent(NewsEvent.JarekGetsOut);
+                        addNewsEvent(NewsEvent.JarekGetsOut);
                     }
                     break;
                 case Princess:
-                    NewsAddEvent(NewsEvent.Princess);
+                    addNewsEvent(NewsEvent.Princess);
                     break;
                 case PrincessCentauri:
                     if (questStatusPrincess == SpecialEvent.StatusPrincessFlyCentauri) {
-                        NewsAddEvent(NewsEvent.PrincessCentauri);
+                        addNewsEvent(NewsEvent.PrincessCentauri);
                     }
                     break;
                 case PrincessInthara:
                     if (questStatusPrincess == SpecialEvent.StatusPrincessFlyInthara) {
-                        NewsAddEvent(NewsEvent.PrincessInthara);
+                        addNewsEvent(NewsEvent.PrincessInthara);
                     }
                     break;
                 case PrincessQonos:
                     if (questStatusPrincess == SpecialEvent.StatusPrincessFlyQonos) {
-                        NewsAddEvent(NewsEvent.PrincessQonos);
+                        addNewsEvent(NewsEvent.PrincessQonos);
                     } else if (questStatusPrincess == SpecialEvent.StatusPrincessRescued) {
-                        NewsAddEvent(NewsEvent.PrincessRescued);
+                        addNewsEvent(NewsEvent.PrincessRescued);
                     }
                     break;
                 case PrincessReturned:
                     if (questStatusPrincess == SpecialEvent.StatusPrincessReturned) {
-                        NewsAddEvent(NewsEvent.PrincessReturned);
+                        addNewsEvent(NewsEvent.PrincessReturned);
                     }
                     break;
                 case Scarab:
-                    NewsAddEvent(NewsEvent.Scarab);
+                    addNewsEvent(NewsEvent.Scarab);
                     break;
                 case ScarabDestroyed:
                     if (questStatusScarab == SpecialEvent.StatusScarabHunting) {
-                        NewsAddEvent(NewsEvent.ScarabHarass);
+                        addNewsEvent(NewsEvent.ScarabHarass);
                     } else if (questStatusScarab >= SpecialEvent.StatusScarabDestroyed) {
-                        NewsAddEvent(NewsEvent.ScarabDestroyed);
+                        addNewsEvent(NewsEvent.ScarabDestroyed);
                     }
                     break;
                 case Sculpture:
-                    NewsAddEvent(NewsEvent.SculptureStolen);
+                    addNewsEvent(NewsEvent.SculptureStolen);
                     break;
                 case SculptureDelivered:
-                    NewsAddEvent(NewsEvent.SculptureTracked);
+                    addNewsEvent(NewsEvent.SculptureTracked);
                     break;
                 case SpaceMonsterKilled:
                     if (questStatusSpaceMonster == SpecialEvent.StatusSpaceMonsterAtAcamar) {
-                        NewsAddEvent(NewsEvent.SpaceMonster);
+                        addNewsEvent(NewsEvent.SpaceMonster);
                     } else if (questStatusSpaceMonster >= SpecialEvent.StatusSpaceMonsterDestroyed) {
-                        NewsAddEvent(NewsEvent.SpaceMonsterKilled);
+                        addNewsEvent(NewsEvent.SpaceMonsterKilled);
                     }
                     break;
                 case WildGetsOut:
                     if (commander.getShip().WildOnBoard()) {
-                        NewsAddEvent(NewsEvent.WildGetsOut);
+                        addNewsEvent(NewsEvent.WildGetsOut);
                     }
                     break;
             }
         }
     }
 
-    public void NewsReplaceEvent(final int oldEvent, final int newEvent) {
+    public void replaceNewsEvent(int oldEvent, int newEvent) {
         if (newsEvents.contains(oldEvent)) {
             newsEvents.remove(oldEvent);
         }
         newsEvents.add(newEvent);
     }
 
-    public void NewsResetEvents() {
+    public void clearNewsEvents() {
         newsEvents.clear();
     }
 
-    public void RecalculateBuyPrices(final StarSystem system) {
+    public void recalculateBuyPrices(StarSystem system) {
         for (int i = 0; i < Constants.TradeItems.length; i++) {
             if (system.ItemTraded(Constants.TradeItems[i])) {
-                priceCargoBuy[i] = priceCargoSell[i];
+                buyCargoPrices[i] = sellCargoPrices[i];
                 if (commander.getPoliceRecordScore() < Constants.PoliceRecordScoreDubious) {
-                    priceCargoBuy[i] = priceCargoBuy[i] * 100 / 90;
+                    buyCargoPrices[i] = buyCargoPrices[i] * 100 / 90;
                 }
                 // BuyPrice = SellPrice + 1 to 12% (depending on trader skill (minimum is 1, max 12))
-                priceCargoBuy[i] = priceCargoBuy[i] * (103 + Constants.MaxSkill - commander.getShip().Trader()) / 100;
-                if (priceCargoBuy[i] <= priceCargoSell[i]) {
-                    priceCargoBuy[i] = priceCargoSell[i] + 1;
+                buyCargoPrices[i] = buyCargoPrices[i] * (103 + Constants.MaxSkill - commander.getShip().Trader()) / 100;
+                if (buyCargoPrices[i] <= sellCargoPrices[i]) {
+                    buyCargoPrices[i] = sellCargoPrices[i] + 1;
                 }
             } else {
-                priceCargoBuy[i] = 0;
+                buyCargoPrices[i] = 0;
             }
         }
     }
 
-    public void RecalculateSellPrices(final StarSystem system) { // After erasure of police record, selling prices must be recalculated
+    public void recalculateSellPrices(StarSystem system) { // After erasure of police record, selling prices must be recalculated
         for (int i = 0; i < Constants.TradeItems.length; i++) {
-            priceCargoSell[i] = priceCargoSell[i] * 100 / 90;
+            sellCargoPrices[i] = sellCargoPrices[i] * 100 / 90;
         }
     }
 
-    public void ResetVeryRareEncounters() {
+    public void resetVeryRareEncounters() {
         veryRareEncounters.clear();
         veryRareEncounters.add(VeryRareEncounter.MarieCeleste);
         veryRareEncounters.add(VeryRareEncounter.CaptainAhab);
@@ -3372,8 +3369,8 @@ public class Game extends SerializableObject {
         veryRareEncounters.add(VeryRareEncounter.BottleGood);
     }
 
-    public void SelectNextSystemWithinRange(final boolean forward) {
-        final int[] destinations = Destinations();
+    public void selectNextSystemWithinRange(boolean forward) {
+        int[] destinations = Destinations();
         if (destinations.length > 0) {
             int index = Utils.bruteSeek(destinations, warpSystemId.getId());
             if (index < 0) {
@@ -3382,27 +3379,27 @@ public class Game extends SerializableObject {
                 index = (destinations.length + index + (forward ? 1 : -1)) % destinations.length;
             }
             if (ModelUtils.WormholeExists(commander.CurrentSystem(), universe[destinations[index]])) {
-                SelectedSystemId(commander.getCurrentSystemId());
-                TargetWormhole(true);
+                selectedSystemId(commander.getCurrentSystemId());
+                setTargetingWormhole();
             } else {
-                SelectedSystemId(StarSystemId.FromInt(destinations[index]));
+                selectedSystemId(StarSystemId.FromInt(destinations[index]));
             }
         }
     }
 
-    public void SelectedSystemId(final StarSystemId value) {
+    public void selectedSystemId(StarSystemId value) {
         selectedSystemId = value;
         warpSystemId = value;
-        targetWormhole = false;
+        targetingWormhole = false;
     }
 
-    public void ShowNewspaper() {
+    public void showNewspaper() {
         if (!paidForNewspaper) {
-            final int cost = difficulty.getId() + 1;
+            int cost = difficulty.getId() + 1;
             if (commander.getCash() < cost) {
-                DialogAlert.Alert(AlertType.ArrivalIFNewspaper, mainWindow, ModelUtils.Multiples(cost, "credit"));
+                DialogAlert.Alert(AlertType.ArrivalIFNewspaper, mainWindow, ModelUtils.multiples(cost, "credit"));
             } else if (options.getNewsAutoPay()
-                    || DialogAlert.Alert(AlertType.ArrivalBuyNewspaper, mainWindow, ModelUtils.Multiples(cost, "credit")) == DialogResult.Yes) {
+                    || DialogAlert.Alert(AlertType.ArrivalBuyNewspaper, mainWindow, ModelUtils.multiples(cost, "credit")) == DialogResult.Yes) {
                 commander.setCash(commander.getCash() - cost);
                 paidForNewspaper = true;
                 mainWindow.updateAll();
@@ -3413,15 +3410,13 @@ public class Game extends SerializableObject {
         }
     }
 
-    public void TargetWormhole(final boolean b) {
-        targetWormhole = b;
-        if (targetWormhole) {
-            final int wormIndex = Utils.bruteSeek(wormholes, selectedSystemId.getId());
-            warpSystemId = StarSystemId.FromInt(wormholes[(wormIndex + 1) % wormholes.length]);
-        }
+    public void setTargetingWormhole() {
+        targetingWormhole = true;
+        int wormIndex = Utils.bruteSeek(wormholes, selectedSystemId.getId());
+        warpSystemId = StarSystemId.FromInt(wormholes[(wormIndex + 1) % wormholes.length]);
     }
 
-    public void Warp(final boolean viaSingularity) {
+    public void warp(boolean viaSingularity) {
         if (commander.getDebt() > Constants.DebtTooLarge) {
             DialogAlert.Alert(AlertType.DebtTooLargeGrounded, mainWindow);
         } else if (commander.getCash() < MercenaryCosts()) {
@@ -3444,12 +3439,12 @@ public class Game extends SerializableObject {
             if (wildOk) {
                 arrivedViaWormhole = ModelUtils.WormholeExists(commander.CurrentSystem(), WarpSystem());
                 if (viaSingularity) {
-                    NewsAddEvent(NewsEvent.ExperimentArrival);
+                    addNewsEvent(NewsEvent.ExperimentArrival);
                 } else {
                     NormalDeparture(viaSingularity || arrivedViaWormhole ? 0 : ModelUtils.distance(commander.CurrentSystem(), WarpSystem()));
                 }
                 commander.CurrentSystem().CountDown(CountDownStart());
-                NewsResetEvents();
+                clearNewsEvents();
                 CalculatePrices(WarpSystem());
                 if (Travel()) {
                     // Clicks will be -1 if we were arrested or used the escape pod.
@@ -3464,20 +3459,20 @@ public class Game extends SerializableObject {
         }
     }
 
-    public void WarpDirect() {
+    public void warpDirect() {
         warpSystemId = selectedSystemId;
         commander.CurrentSystem().CountDown(CountDownStart());
-        NewsResetEvents();
+        clearNewsEvents();
         CalculatePrices(WarpSystem());
         Arrival();
     }
 
-    public void setSelectedSystemByName(final String value) {
+    public void setSelectedSystemByName(String value) {
         boolean found = false;
         for (int i = 0; i < universe.length && !found; i++) {
-            final String name = universe[i].Name();
+            String name = universe[i].Name();
             if (name.toLowerCase().contains(value.toLowerCase())) {
-                SelectedSystemId(StarSystemId.FromInt(i));
+                selectedSystemId(StarSystemId.FromInt(i));
                 found = true;
             }
         }

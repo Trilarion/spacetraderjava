@@ -37,24 +37,23 @@ public class DialogViewBank extends Dialog {
     private final Label labelMaxNoClaim;
 
     public DialogViewBank() {
-        final Label labelLoan = new Label();
-        final Label labelCurrentDebtLabel = new Label();
-        final Label labelMaxLoanLabel = new Label();
+        Label labelLoan = new Label();
+        Label labelCurrentDebtLabel = new Label();
+        Label labelMaxLoanLabel = new Label();
         labelCurrentDebt = new Label();
         labelMaxLoan = new Label();
-        final Button buttonGetLoan = new Button();
+        Button buttonGetLoan = new Button();
         buttonBuyInsurance = new Button();
         labelNoClaim = new Label();
         labelShipValue = new Label();
-        final Label labelNoClaimLabel = new Label();
-        final Label labelShipValueLabel = new Label();
-        final Label labelInsurance = new Label();
+        Label labelNoClaimLabel = new Label();
+        Label labelShipValueLabel = new Label();
+        Label labelInsurance = new Label();
         labelInsAmt = new Label();
-        final Label labelInsAmtLabel = new Label();
+        Label labelInsAmtLabel = new Label();
         buttonPayBack = new Button();
-        final Button buttonClose = new Button();
+        Button buttonClose = new Button();
         labelMaxNoClaim = new Label();
-        suspendLayout();
         // labelLoan
         labelLoan.setAutoSize(true);
         labelLoan.setFont(new Font("Microsoft Sans Serif", FontStyle.Bold, (int) 12.0F));
@@ -102,7 +101,7 @@ public class DialogViewBank extends Dialog {
         buttonGetLoan.setText("Get Loan");
         buttonGetLoan.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonGetLoan_Click(sender, data);
             }
         });
@@ -115,7 +114,7 @@ public class DialogViewBank extends Dialog {
         buttonBuyInsurance.setText("Stop Insurance");
         buttonBuyInsurance.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonBuyInsurance_Click(sender, data);
             }
         });
@@ -181,7 +180,7 @@ public class DialogViewBank extends Dialog {
         buttonPayBack.setText("Pay Back Loan");
         buttonPayBack.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonPayBack_Click(sender, data);
             }
         });
@@ -237,23 +236,23 @@ public class DialogViewBank extends Dialog {
 
     private void UpdateAll() {
         // Loan Info
-        labelCurrentDebt.setText(ModelUtils.FormatMoney(commander.getDebt()));
-        labelMaxLoan.setText(ModelUtils.FormatMoney(MaxLoan));
+        labelCurrentDebt.setText(ModelUtils.formatMoney(commander.getDebt()));
+        labelMaxLoan.setText(ModelUtils.formatMoney(MaxLoan));
         buttonPayBack.setVisible((commander.getDebt() > 0));
         // Insurance Info
-        labelShipValue.setText(ModelUtils.FormatMoney(commander.getShip().getBaseWorth(true)));
-        labelNoClaim.setText(ModelUtils.FormatPercent(commander.NoClaim()));
+        labelShipValue.setText(ModelUtils.formatMoney(commander.getShip().getBaseWorth(true)));
+        labelNoClaim.setText(ModelUtils.formatPercent(commander.NoClaim()));
         labelMaxNoClaim.setVisible((commander.NoClaim() == Constants.MaxNoClaim));
-        labelInsAmt.setText(ModelUtils.StringVars(Strings.MoneyRateSuffix, ModelUtils.FormatMoney(game.InsuranceCosts())));
+        labelInsAmt.setText(ModelUtils.StringVars(Strings.MoneyRateSuffix, ModelUtils.formatMoney(game.InsuranceCosts())));
         buttonBuyInsurance.setText(ModelUtils.StringVars("^1 Insurance", commander.getInsurance() ? "Stop" : "Buy"));
     }
 
-    private void buttonGetLoan_Click(final Object sender, final EventData e) {
+    private void buttonGetLoan_Click(Object sender, EventData e) {
         if (commander.getDebt() >= MaxLoan) {
             DialogAlert.Alert(AlertType.DebtTooLargeLoan, this);
         } else {
-            final DialogGetLoan form = new DialogGetLoan(MaxLoan - commander.getDebt());
-            if (form.ShowDialog(this) == DialogResult.OK) {
+            DialogGetLoan form = new DialogGetLoan(MaxLoan - commander.getDebt());
+            if (form.ShowDialog(this) == DialogResult.Ok) {
                 commander.setCash(commander.getCash() + form.Amount());
                 commander.setDebt(commander.getDebt() + form.Amount());
                 UpdateAll();
@@ -262,12 +261,12 @@ public class DialogViewBank extends Dialog {
         }
     }
 
-    private void buttonPayBack_Click(final Object sender, final EventData e) {
+    private void buttonPayBack_Click(Object sender, EventData e) {
         if (commander.getDebt() == 0) {
             DialogAlert.Alert(AlertType.DebtNone, this);
         } else {
-            final DialogPayBackLoan form = new DialogPayBackLoan();
-            if (form.ShowDialog(this) == DialogResult.OK) {
+            DialogPayBackLoan form = new DialogPayBackLoan();
+            if (form.ShowDialog(this) == DialogResult.Ok) {
                 commander.setCash(commander.getCash() - form.Amount());
                 commander.setDebt(commander.getDebt() - form.Amount());
                 UpdateAll();
@@ -276,7 +275,7 @@ public class DialogViewBank extends Dialog {
         }
     }
 
-    private void buttonBuyInsurance_Click(final Object sender, final EventData e) {
+    private void buttonBuyInsurance_Click(Object sender, EventData e) {
         if (commander.getInsurance()) {
             if (DialogAlert.Alert(AlertType.InsuranceStop, this) == DialogResult.Yes) {
                 commander.setInsurance(false);

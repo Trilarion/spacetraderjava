@@ -18,16 +18,16 @@ public class ImageMouseListener extends MouseAdapter {
     private final PictureBox pictureBox;
     public EventHandler<Object, MouseEventData> pressed;
 
-    public ImageMouseListener(final PictureBox pictureBox) {
+    public ImageMouseListener(PictureBox pictureBox) {
         this.pictureBox = pictureBox;
     }
 
     @Override
-    public void mousePressed(final MouseEvent e) {
+    public void mousePressed(MouseEvent e) {
         tryEvent(pressed, new MouseEventData(e));
     }
 
-    private void tryEvent(final EventHandler<Object, MouseEventData> handler, final MouseEventData e) {
+    private void tryEvent(EventHandler<Object, MouseEventData> handler, MouseEventData e) {
         if (handler != null) {
             handler.handle(pictureBox, e);
         }

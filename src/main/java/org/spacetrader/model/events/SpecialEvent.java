@@ -72,7 +72,7 @@ public class SpecialEvent {
     private final int occurrence;
     private final boolean messageOnly;
 
-    public SpecialEvent(final SpecialEventType type, final int price, final int occurrence, final boolean messageOnly) {
+    public SpecialEvent(SpecialEventType type, int price, int occurrence, boolean messageOnly) {
         this.type = type;
         this.price = price;
         this.occurrence = occurrence;
@@ -81,7 +81,7 @@ public class SpecialEvent {
 
     public StarSystem getLocation() {
         StarSystem location = null;
-        final StarSystem[] universe = Game.getCurrentGame().getUniverse();
+        StarSystem[] universe = Game.getCurrentGame().getUniverse();
         for (int i = 0; i < universe.length && location == null; i++) {
             if (universe[i].SpecialEventType() == type) {
                 location = universe[i];

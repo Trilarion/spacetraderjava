@@ -11,7 +11,7 @@ public enum ShipyardId implements IdentifiableEnum {
     Sienar, // = 3,
     Sorosuub;// = 4
 
-    public static ShipyardId FromInt(final int i) {
+    public static ShipyardId FromInt(int i) {
         return ShipyardId.values()[i + 1];
     }
 

@@ -11,8 +11,8 @@ public class JStatusBar extends JPanel {
         super(new GridBagLayout());
     }
 
-    public void addSection(final StatusBarSection section, final boolean stretch) {
-        final GridBagConstraints c = new GridBagConstraints();
+    public void addSection(StatusBarSection section, boolean stretch) {
+        GridBagConstraints c = new GridBagConstraints();
         if (stretch) {
             c.fill = GridBagConstraints.HORIZONTAL;
             c.weightx = 1.0;

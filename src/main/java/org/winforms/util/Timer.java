@@ -12,12 +12,12 @@ public class Timer {
     public EventHandler<Object, EventData> tick;
     private final javax.swing.Timer timer = new javax.swing.Timer(0, new ActionListener() {
         @Override
-        public void actionPerformed(final ActionEvent arg0) {
+        public void actionPerformed(ActionEvent arg0) {
             tick.handle(Timer.this, null);
         }
     });
 
-    public void setInterval(final int interval) {
+    public void setInterval(int interval) {
         timer.setDelay(interval);
         timer.setInitialDelay(interval);
     }

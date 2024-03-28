@@ -22,12 +22,11 @@ public class DialogFind extends Dialog {
     private final TextField textSystem;
 
     public DialogFind() {
-        final Label labelText = new Label();
-        final Button buttonOk = new Button();
-        final Button buttonCancel = new Button();
+        Label labelText = new Label();
+        Button buttonOk = new Button();
+        Button buttonCancel = new Button();
         textSystem = new TextField();
         checkBoxTrack = new CheckBox();
-        suspendLayout();
         // labelText
         labelText.setAutoSize(true);
         labelText.setLocation(new Point(8, 8));
@@ -36,7 +35,7 @@ public class DialogFind extends Dialog {
         labelText.setTabIndex(3);
         labelText.setText("Which system are you looking for?");
         // buttonOk
-        buttonOk.setDialogResult(DialogResult.OK);
+        buttonOk.setDialogResult(DialogResult.Ok);
         buttonOk.setFlatStyle(FlatStyle.Flat);
         buttonOk.setLocation(new Point(43, 68));
         buttonOk.setName("buttonOk");
@@ -77,7 +76,7 @@ public class DialogFind extends Dialog {
         setText("Find System");
         Closed = new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 FormFind_Closed(sender, data);
             }
         };
@@ -87,7 +86,7 @@ public class DialogFind extends Dialog {
     }
 
 
-    private void FormFind_Closed(final Object sender, final EventData e) {
+    private void FormFind_Closed(Object sender, EventData e) {
         DialogFind.text = textSystem.getText();
         DialogFind.boxChecked = checkBoxTrack.isChecked();
     }

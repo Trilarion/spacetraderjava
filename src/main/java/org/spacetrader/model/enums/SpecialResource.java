@@ -21,11 +21,11 @@ public enum SpecialResource implements IdentifiableEnum {
     ;
     public final String name;
 
-    SpecialResource(final String name) {
+    SpecialResource(String name) {
         this.name = name;
     }
 
-    public static SpecialResource FromInt(final int i) {
+    public static SpecialResource FromInt(int i) {
         return SpecialResource.values()[i + 1];
     }
 

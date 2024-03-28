@@ -22,7 +22,7 @@ public class CheckBox extends Control<JCheckBox> {
         return asJCheckBox().getText();
     }
 
-    public void setText(final String text) {
+    public void setText(String text) {
         asJCheckBox().setText(text);
     }
 
@@ -30,14 +30,14 @@ public class CheckBox extends Control<JCheckBox> {
         return asJCheckBox().isSelected();
     }
 
-    public void setChecked(final boolean checked) {
+    public void setChecked(boolean checked) {
         asJCheckBox().setSelected(checked);
     }
 
     public void setCheckedChanged(EventHandler<Object, EventData> handler) {
         asJCheckBox().addChangeListener(new ChangeListener() {
             @Override
-            public void stateChanged(final ChangeEvent e) {
+            public void stateChanged(ChangeEvent e) {
                 handler.handle(CheckBox.this, null);
             }
         });

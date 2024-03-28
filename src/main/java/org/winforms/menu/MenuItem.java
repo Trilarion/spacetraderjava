@@ -16,7 +16,7 @@ public class MenuItem {  // TODO composition or inheritance, in this case inheri
         this(new JMenuItem());
     }
 
-    protected MenuItem(final JMenuItem swingVersion) {
+    protected MenuItem(JMenuItem swingVersion) {
         this.swingVersion = swingVersion;
     }
 
@@ -24,20 +24,20 @@ public class MenuItem {  // TODO composition or inheritance, in this case inheri
         return swingVersion;
     }
 
-    public void setText(final String text) {
+    public void setText(String text) {
         asJMenuItem().setText(text);
     }
 
     public void setClick(EventHandler<Object, EventData> eventHandler) {
         asJMenuItem().addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(final ActionEvent arg0) {
+            public void actionPerformed(ActionEvent arg0) {
                 eventHandler.handle(this, null);
             }
         });
     }
 
-    public void setEnabled(final boolean enabled) {
+    public void setEnabled(boolean enabled) {
         asJMenuItem().setEnabled(enabled);
     }
 }

@@ -5,16 +5,16 @@ import org.spacetrader.model.ModelUtils;
 import org.spacetrader.controller.Game;
 import org.spacetrader.model.cargo.CargoSellOperation;
 import org.spacetrader.model.crew.Commander;
-import org.winforms.widget.Button;
-import org.winforms.widget.Dialog;
-import org.winforms.widget.Label;
-import org.winforms.widget.Spinner;
+import org.winforms.widget.*;
 import org.winforms.dialog.DialogResult;
 import org.winforms.style.FlatStyle;
 import org.winforms.style.FormBorderStyle;
 import org.winforms.alignment.FormStartPosition;
 import org.winforms.event.EventData;
 import org.winforms.event.EventHandler;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
 
 import java.awt.*;
 
@@ -31,7 +31,6 @@ public class DialogCargoSell extends Dialog {
         Button buttonNone = new Button();
         Label labelPaid = new Label();
         Label labelProfit = new Label();
-        suspendLayout();
         // labelQuestion
         labelQuestion.setLocation(new Point(8, 50));
         labelQuestion.setName("labelQuestion");
@@ -52,7 +51,7 @@ public class DialogCargoSell extends Dialog {
         numAmount.setTabIndex(1);
         numAmount.setValue(88);
         // buttonOk
-        buttonOk.setDialogResult(DialogResult.OK);
+        buttonOk.setDialogResult(DialogResult.Ok);
         buttonOk.setFlatStyle(FlatStyle.Flat);
         buttonOk.setLocation(new Point(83, 74));
         buttonOk.setName("buttonOk");
@@ -60,7 +59,7 @@ public class DialogCargoSell extends Dialog {
         buttonOk.setTabIndex(2);
         buttonOk.setText("Ok");
         // buttonAll
-        buttonAll.setDialogResult(DialogResult.OK);
+        buttonAll.setDialogResult(DialogResult.Ok);
         buttonAll.setFlatStyle(FlatStyle.Flat);
         buttonAll.setLocation(new Point(131, 74));
         buttonAll.setName("buttonAll");
@@ -93,7 +92,7 @@ public class DialogCargoSell extends Dialog {
         labelProfit.setSize(new Dimension(200, 13));
         labelProfit.setTabIndex(6);
         labelProfit.setText("It costs 8,888 cr. per unit for disposal.");
-        // FormCargoSell
+        // FormsellCargo
         setAcceptButton(buttonOk);
         setAutoScaleBaseSize(new Dimension(5, 13));
         setCancelButton(buttonNone);
@@ -108,7 +107,7 @@ public class DialogCargoSell extends Dialog {
         Controls.add(labelQuestion);
         Controls.add(labelStatement);
         setFormBorderStyle(FormBorderStyle.FixedDialog);
-        setName("FormCargoSell");
+        setName("FormsellCargo");
         setShowInTaskbar(false);
         setStartPosition(FormStartPosition.CenterParent);
         setText("Sell Xxxxxxxxxx");
@@ -118,26 +117,26 @@ public class DialogCargoSell extends Dialog {
         int cost = commander.PriceCargo()[item] / commander.getShip().Cargo()[item];
         numAmount.setMaximum(maxAmount);
         numAmount.setValue(numAmount.getMinimum());
-        setText(ModelUtils.StringVars(Strings.CargoTitle, Strings.CargoSellOps[op.getId()], Constants.TradeItems[item].Name()));
-        labelQuestion.setText(ModelUtils.StringVars("How many do you want to ^1?", Strings.CargoSellOps[op.getId()].toLowerCase()));
+        setText(ModelUtils.StringVars(Strings.CargoTitle, Strings.sellCargoOps[op.getId()], Constants.TradeItems[item].Name()));
+        labelQuestion.setText(ModelUtils.StringVars("How many do you want to ^1?", Strings.sellCargoOps[op.getId()].toLowerCase()));
         labelPaid.setText(ModelUtils.StringVars(op == CargoSellOperation.SellTrader
-                ? "You paid about ^1 per unit, and can sell ^2." : "You paid about ^1 per unit.", ModelUtils.FormatMoney(cost), ModelUtils.Multiples(maxAmount, Strings.CargoUnit)));
+                ? "You paid about ^1 per unit, and can sell ^2." : "You paid about ^1 per unit.", ModelUtils.formatMoney(cost), ModelUtils.multiples(maxAmount, Strings.CargoUnit)));
         labelProfit.setText(ModelUtils.StringVars("Your ^1 per unit is ^2", price >= cost
-                ? "profit" : "loss", ModelUtils.FormatMoney(price >= cost ? price - cost : cost - price)));
+                ? "profit" : "loss", ModelUtils.formatMoney(price >= cost ? price - cost : cost - price)));
         // Override defaults for some ops.
         switch (op) {
             case Dump:
-                labelStatement.setText(ModelUtils.StringVars(Strings.CargoSellStatementDump, Strings.CargoSellOps[op.getId()].toLowerCase(), ModelUtils.FormatNumber(maxAmount)));
-                labelProfit.setText(ModelUtils.StringVars("It costs ^1 per unit for disposal.", ModelUtils.FormatMoney(-price)));
+                labelStatement.setText(ModelUtils.StringVars(Strings.sellCargoStatementDump, Strings.sellCargoOps[op.getId()].toLowerCase(), ModelUtils.formatNumber(maxAmount)));
+                labelProfit.setText(ModelUtils.StringVars("It costs ^1 per unit for disposal.", ModelUtils.formatMoney(-price)));
                 break;
             case Jettison:
-                labelStatement.setText(ModelUtils.StringVars(Strings.CargoSellStatementDump, Strings.CargoSellOps[op.getId()].toLowerCase(), ModelUtils.FormatNumber(maxAmount)));
+                labelStatement.setText(ModelUtils.StringVars(Strings.sellCargoStatementDump, Strings.sellCargoOps[op.getId()].toLowerCase(), ModelUtils.formatNumber(maxAmount)));
                 break;
             case SellSystem:
-                labelStatement.setText(ModelUtils.StringVars("You can sell up to ^1 at ^2 each.", ModelUtils.FormatNumber(maxAmount), ModelUtils.FormatMoney(price)));
+                labelStatement.setText(ModelUtils.StringVars("You can sell up to ^1 at ^2 each.", ModelUtils.formatNumber(maxAmount), ModelUtils.formatMoney(price)));
                 break;
             case SellTrader:
-                labelStatement.setText(ModelUtils.StringVars("The trader wants to buy ^1 and offers ^2 each.", Constants.TradeItems[item].Name(), ModelUtils.FormatMoney(price)));
+                labelStatement.setText(ModelUtils.StringVars("The trader wants to buy ^1 and offers ^2 each.", Constants.TradeItems[item].Name(), ModelUtils.formatMoney(price)));
                 break;
         }
     }

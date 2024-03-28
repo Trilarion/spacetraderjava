@@ -13,14 +13,14 @@ public class MouseListener extends MouseAdapter {
     private final EventHandler<Object, EventData> doubleClick;
     private final Object sender;
 
-    public MouseListener(final Object o, final EventHandler<Object, EventData> e1, final EventHandler<Object, EventData> e2) {
+    public MouseListener(Object o, EventHandler<Object, EventData> e1, EventHandler<Object, EventData> e2) {
         sender = o;
         normalClick = e1;
         doubleClick = e2;
     }
 
     @Override
-    public void mouseClicked(final MouseEvent e) {
+    public void mouseClicked(MouseEvent e) {
         switch (e.getClickCount()) {
             case 1:
                 if (normalClick != null) {

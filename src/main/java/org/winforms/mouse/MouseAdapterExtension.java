@@ -11,13 +11,13 @@ public class MouseAdapterExtension extends MouseAdapter {
     private final StatusBar statusBar;
     private final StatusBarPanel source;
 
-    public MouseAdapterExtension(final StatusBar statusBar, final StatusBarPanel source) {
+    public MouseAdapterExtension(StatusBar statusBar, StatusBarPanel source) {
         this.statusBar = statusBar;
         this.source = source;
     }
 
     @Override
-    public void mouseClicked(final MouseEvent e) {
+    public void mouseClicked(MouseEvent e) {
         if (statusBar.panelClick != null) {
             statusBar.panelClick.handle(source, source);
         }

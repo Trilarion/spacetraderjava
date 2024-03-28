@@ -62,28 +62,28 @@ public class DialogEquipment extends Dialog {
     private boolean handlingSelect;
 
     public DialogEquipment() {
-        final Button buttonClose = new Button();
-        final GroupBox boxSell = new GroupBox();
+        Button buttonClose = new Button();
+        GroupBox boxSell = new GroupBox();
         labelSellGadgetNoSlots = new Label();
         labelSellShieldNoSlots = new Label();
         labelSellWeaponNoSlots = new Label();
-        final Label labelSellGadgets = new Label();
-        final Label labelSellShields = new Label();
-        final Label labelSellWeapons = new Label();
+        Label labelSellGadgets = new Label();
+        Label labelSellShields = new Label();
+        Label labelSellWeapons = new Label();
         listSellGadget = new ListBox();
         listSellShield = new ListBox();
         listSellWeapon = new ListBox();
-        final GroupBox boxBuy = new GroupBox();
+        GroupBox boxBuy = new GroupBox();
         labelBuyGadgetNone = new Label();
         labelBuyShieldNone = new Label();
         labelBuyWeaponNone = new Label();
-        final Label labelBuyGadgets = new Label();
-        final Label labelBuyShields = new Label();
-        final Label labelBuyWeapons = new Label();
+        Label labelBuyGadgets = new Label();
+        Label labelBuyShields = new Label();
+        Label labelBuyWeapons = new Label();
         listBuyGadget = new ListBox();
         listBuyShield = new ListBox();
         listBuyWeapon = new ListBox();
-        final GroupBox boxShipInfo = new GroupBox();
+        GroupBox boxShipInfo = new GroupBox();
         labelCharge = new Label();
         labelPower = new Label();
         labelChargeLabel = new Label();
@@ -100,10 +100,6 @@ public class DialogEquipment extends Dialog {
         labelSellPrice = new Label();
         labelDescription = new Label();
         labelName = new Label();
-        boxSell.suspendLayout();
-        boxBuy.suspendLayout();
-        boxShipInfo.suspendLayout();
-        suspendLayout();
         // buttonClose
         buttonClose.setDialogResult(DialogResult.Cancel);
         buttonClose.setLocation(new Point(-32, -32));
@@ -178,13 +174,13 @@ public class DialogEquipment extends Dialog {
         listSellGadget.setTabIndex(3);
         listSellGadget.setDoubleClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 SellClick();
             }
         });
         listSellGadget.setSelectedIndexChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 SelectedIndexChanged(sender, data);
             }
         });
@@ -196,13 +192,13 @@ public class DialogEquipment extends Dialog {
         listSellShield.setTabIndex(2);
         listSellShield.setDoubleClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 SellClick();
             }
         });
         listSellShield.setSelectedIndexChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 SelectedIndexChanged(sender, data);
             }
         });
@@ -214,13 +210,13 @@ public class DialogEquipment extends Dialog {
         listSellWeapon.setTabIndex(1);
         listSellWeapon.setDoubleClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 SellClick();
             }
         });
         listSellWeapon.setSelectedIndexChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 SelectedIndexChanged(sender, data);
             }
         });
@@ -290,13 +286,13 @@ public class DialogEquipment extends Dialog {
         listBuyGadget.setTabIndex(6);
         listBuyGadget.setDoubleClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 BuyClick(sender, data);
             }
         });
         listBuyGadget.setSelectedIndexChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 SelectedIndexChanged(sender, data);
             }
         });
@@ -308,13 +304,13 @@ public class DialogEquipment extends Dialog {
         listBuyShield.setTabIndex(5);
         listBuyShield.setDoubleClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 BuyClick(sender, data);
             }
         });
         listBuyShield.setSelectedIndexChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 SelectedIndexChanged(sender, data);
             }
         });
@@ -326,13 +322,13 @@ public class DialogEquipment extends Dialog {
         listBuyWeapon.setTabIndex(4);
         listBuyWeapon.setDoubleClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 BuyClick(sender, data);
             }
         });
         listBuyWeapon.setSelectedIndexChanged(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 SelectedIndexChanged(sender, data);
             }
         });
@@ -418,7 +414,7 @@ public class DialogEquipment extends Dialog {
         buttonSell.setText("Sell");
         buttonSell.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 SellClick();
             }
         });
@@ -431,7 +427,7 @@ public class DialogEquipment extends Dialog {
         buttonBuy.setText("Buy");
         buttonBuy.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 BuyClick(sender, data);
             }
         });
@@ -508,7 +504,7 @@ public class DialogEquipment extends Dialog {
 
     private void Buy() {
         if (selectedEquipment != null && !sellSideSelected) {
-            final EquipmentType baseType = selectedEquipment.EquipmentType();
+            EquipmentType baseType = selectedEquipment.EquipmentType();
             if (baseType == EquipmentType.Gadget && ship.HasGadget(((Gadget) selectedEquipment).Type())
                     && ((Gadget) selectedEquipment).Type() != GadgetType.ExtraCargoBays) {
                 DialogAlert.Alert(AlertType.EquipmentAlreadyOwn, this);
@@ -520,7 +516,7 @@ public class DialogEquipment extends Dialog {
                     || (baseType == EquipmentType.Shield && ship.FreeSlotsShield() == 0)
                     || (baseType == EquipmentType.Gadget && ship.FreeSlotsGadget() == 0)) {
                 DialogAlert.Alert(AlertType.EquipmentNotEnoughSlots, this);
-            } else if (DialogAlert.Alert(AlertType.EquipmentBuy, this, selectedEquipment.Name(), ModelUtils.FormatNumber(selectedEquipment.Price())) == DialogResult.Yes) {
+            } else if (DialogAlert.Alert(AlertType.EquipmentBuy, this, selectedEquipment.Name(), ModelUtils.formatNumber(selectedEquipment.Price())) == DialogResult.Yes) {
                 ship.addEquipment(selectedEquipment);
                 commander.setCash(commander.getCash() - selectedEquipment.Price());
                 DeselectAll();
@@ -543,7 +539,7 @@ public class DialogEquipment extends Dialog {
         if (selectedEquipment != null && sellSideSelected) {
             if (DialogAlert.Alert(AlertType.EquipmentSell, this) == DialogResult.Yes) {
                 // The slot is the selected index. Two of the three list boxes will have selected indices of -1, so adding 2 to the total cancels those out.
-                final int slot = listSellWeapon.getSelectedIndex() + listSellShield.getSelectedIndex() + listSellGadget.getSelectedIndex() + 2;
+                int slot = listSellWeapon.getSelectedIndex() + listSellShield.getSelectedIndex() + listSellGadget.getSelectedIndex() + 2;
                 if (selectedEquipment.EquipmentType() == EquipmentType.Gadget
                         && (((Gadget) selectedEquipment).Type() == GadgetType.ExtraCargoBays || ((Gadget) selectedEquipment).Type() == GadgetType.HiddenCargoBays)
                         && ship.FreeCargoBays() < 5) {
@@ -559,7 +555,7 @@ public class DialogEquipment extends Dialog {
     }
 
     private void UpdateBuy() {
-        for (final Equipment equipment : equipBuy) {
+        for (Equipment equipment : equipBuy) {
             if (equipment.Price() > 0) {
                 switch (equipment.EquipmentType()) {
                     case Weapon:
@@ -574,10 +570,10 @@ public class DialogEquipment extends Dialog {
                 }
             }
         }
-        final ListBox[] buyBoxes = {listBuyWeapon, listBuyShield, listBuyGadget};
-        final Label[] buyLabels = {labelBuyWeaponNone, labelBuyShieldNone, labelBuyGadgetNone};
+        ListBox[] buyBoxes = {listBuyWeapon, listBuyShield, listBuyGadget};
+        Label[] buyLabels = {labelBuyWeaponNone, labelBuyShieldNone, labelBuyGadgetNone};
         for (int i = 0; i < buyBoxes.length; i++) {
-            final boolean entries = (!buyBoxes[i].Items.isEmpty());
+            boolean entries = (!buyBoxes[i].Items.isEmpty());
             buyBoxes[i].setVisible(entries);
             buyLabels[i].setVisible(!entries);
             if (entries) {
@@ -587,7 +583,7 @@ public class DialogEquipment extends Dialog {
     }
 
     private void UpdateInfo() {
-        final boolean visible = selectedEquipment != null;
+        boolean visible = selectedEquipment != null;
         pictureEquipment.setVisible(visible);
         labelNameLabel.setVisible(visible);
         labelTypeLabel.setVisible(visible);
@@ -625,8 +621,8 @@ public class DialogEquipment extends Dialog {
             labelName.setText(selectedEquipment.Name());
             labelType.setText(Strings.EquipmentTypes[selectedEquipment.EquipmentType().getId()]);
             labelDescription.setText(Strings.EquipmentDescriptions[selectedEquipment.EquipmentType().getId()][selectedEquipment.SubType().asInteger()]);
-            labelBuyPrice.setText(ModelUtils.FormatMoney(selectedEquipment.Price()));
-            labelSellPrice.setText(ModelUtils.FormatMoney(selectedEquipment.SellPrice()));
+            labelBuyPrice.setText(ModelUtils.formatMoney(selectedEquipment.Price()));
+            labelSellPrice.setText(ModelUtils.formatMoney(selectedEquipment.SellPrice()));
             labelPower.setText(power);
             labelCharge.setText(charge);
             pictureEquipment.setImage(selectedEquipment.Image());
@@ -646,23 +642,23 @@ public class DialogEquipment extends Dialog {
         int index;
         equipSell = ship.getEquipmentByType(EquipmentType.Weapon);
         for (index = 0; index < equipSell.length; index++) {
-            final Object obj = equipSell[index] == null ? Strings.EquipmentFreeSlot : equipSell[index];
+            Object obj = equipSell[index] == null ? Strings.EquipmentFreeSlot : equipSell[index];
             listSellWeapon.Items.addElement(obj);
         }
         equipSell = ship.getEquipmentByType(EquipmentType.Shield);
         for (index = 0; index < equipSell.length; index++) {
-            final Object obj = equipSell[index] == null ? Strings.EquipmentFreeSlot : equipSell[index];
+            Object obj = equipSell[index] == null ? Strings.EquipmentFreeSlot : equipSell[index];
             listSellShield.Items.addElement(obj);
         }
         equipSell = ship.getEquipmentByType(EquipmentType.Gadget);
         for (index = 0; index < equipSell.length; index++) {
-            final Object obj = equipSell[index] == null ? Strings.EquipmentFreeSlot : equipSell[index];
+            Object obj = equipSell[index] == null ? Strings.EquipmentFreeSlot : equipSell[index];
             listSellGadget.Items.addElement(obj);
         }
-        final ListBox[] sellBoxes = {listSellWeapon, listSellShield, listSellGadget};
-        final Label[] sellLabels = {labelSellWeaponNoSlots, labelSellShieldNoSlots, labelSellGadgetNoSlots};
+        ListBox[] sellBoxes = {listSellWeapon, listSellShield, listSellGadget};
+        Label[] sellLabels = {labelSellWeaponNoSlots, labelSellShieldNoSlots, labelSellGadgetNoSlots};
         for (int i = 0; i < sellBoxes.length; i++) {
-            final boolean entries = (!sellBoxes[i].Items.isEmpty());
+            boolean entries = (!sellBoxes[i].Items.isEmpty());
             sellBoxes[i].setVisible(entries);
             sellLabels[i].setVisible(!entries);
             if (entries) {
@@ -671,16 +667,16 @@ public class DialogEquipment extends Dialog {
         }
     }
 
-    private void BuyClick(final Object sender, final EventData e) {
+    private void BuyClick(Object sender, EventData e) {
         if (selectedEquipment != null) {
             Buy();
         }
     }
 
-    private void SelectedIndexChanged(final Object sender, final EventData e) {
+    private void SelectedIndexChanged(Object sender, EventData e) {
         if (!handlingSelect) {
             handlingSelect = true;
-            final Object obj = ((ListBox) sender).getSelectedItem();
+            Object obj = ((ListBox) sender).getSelectedItem();
             DeselectAll();
             ((ListBox) sender).setSelectedItem(obj);
             sellSideSelected = (((ListBox) sender).getName().contains("Sell"));

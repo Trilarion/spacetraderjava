@@ -314,6 +314,9 @@ public enum Constants {
             Constants.Gadgets[GadgetType.TargetingSystem.asInteger()],
             Constants.Gadgets[GadgetType.CloakingDevice.asInteger()]
     };
+    public static final int GalaxyHeight = 110;
+    public static final int GalaxyWidth = 154;
+    public static final int MinDistance = 7;
     public static Color ColorControl;
     public static Color ColorControlText;
     public static Color ColorInfo;

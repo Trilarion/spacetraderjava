@@ -41,7 +41,7 @@ public enum EncounterType implements IdentifiableEnum {
     TraderBuy, // = 33,
     TraderSell; // = 34
 
-    public static EncounterType FromInt(final int i) {
+    public static EncounterType FromInt(int i) {
         return EncounterType.values()[i];
     }
 

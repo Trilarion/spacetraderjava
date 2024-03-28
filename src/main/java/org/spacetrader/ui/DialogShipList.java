@@ -107,8 +107,6 @@ public class DialogShipList extends Dialog {
         Label labelBaysLabel = new Label();
         Label labelNameLabel = new Label();
         Label labelSizeLabel = new Label();
-        boxShipInfo.suspendLayout();
-        suspendLayout();
         // buttonClose
         buttonClose.setDialogResult(DialogResult.Cancel);
         buttonClose.setLocation(new Point(-32, -32));
@@ -780,13 +778,13 @@ public class DialogShipList extends Dialog {
         pictureShip.setImage(spec.Image());
         labelName.setText(spec.Name());
         labelSize.setText(Strings.Sizes[spec.getSize().getId()]);
-        labelBays.setText(ModelUtils.FormatNumber(spec.CargoBays()));
-        labelRange.setText(ModelUtils.Multiples(spec.FuelTanks(), Strings.DistanceUnit));
-        labelHull.setText(ModelUtils.FormatNumber(spec.HullStrength()));
-        labelWeapon.setText(ModelUtils.FormatNumber(spec.getWeaponSlots()));
-        labelShield.setText(ModelUtils.FormatNumber(spec.getShieldSlots()));
-        labelGadget.setText(ModelUtils.FormatNumber(spec.getGadgetSlots()));
-        labelCrew.setText(ModelUtils.FormatNumber(spec.getCrewQuarters()));
+        labelBays.setText(ModelUtils.formatNumber(spec.CargoBays()));
+        labelRange.setText(ModelUtils.multiples(spec.FuelTanks(), Strings.DistanceUnit));
+        labelHull.setText(ModelUtils.formatNumber(spec.HullStrength()));
+        labelWeapon.setText(ModelUtils.formatNumber(spec.getWeaponSlots()));
+        labelShield.setText(ModelUtils.formatNumber(spec.getShieldSlots()));
+        labelGadget.setText(ModelUtils.formatNumber(spec.getGadgetSlots()));
+        labelCrew.setText(ModelUtils.formatNumber(spec.getCrewQuarters()));
     }
 
     private void UpdateAll() {
@@ -799,7 +797,7 @@ public class DialogShipList extends Dialog {
             } else {
                 buttonBuy[i].setVisible(true);
                 prices[i] = Constants.ShipSpecs[i].getPrice() - ship.Worth(false);
-                labelPrice[i].setText(ModelUtils.FormatMoney(prices[i]));
+                labelPrice[i].setText(ModelUtils.formatMoney(prices[i]));
             }
         }
     }

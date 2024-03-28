@@ -13,7 +13,7 @@ public enum ShieldType implements IdentifiableEnum, EquipmentSubType {
         id = ordinal();
     }
 
-    public static ShieldType fromId(final int i) {
+    public static ShieldType fromId(int i) {
         return ShieldType.values()[i];
     }
 

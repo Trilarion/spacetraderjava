@@ -35,7 +35,7 @@ public class Window extends Control<JFrame> implements Pane {
         super(new JFrame());
         frame = swingComponent;
         // panel = (WinformJPanel)swingVersion;
-        final wfPanel panel = new wfPanel(this);
+        wfPanel panel = new wfPanel(this);
         frame.getContentPane().add(panel, BorderLayout.CENTER);
         controls = panel;
         frame.setResizable(false);
@@ -43,7 +43,7 @@ public class Window extends Control<JFrame> implements Pane {
     }
 
     public void showWindow() {
-        final EventHandler<Object, EventData> loadHandler = onLoad;
+        EventHandler<Object, EventData> loadHandler = onLoad;
         if (loadHandler != null) {
             loadHandler.handle(this, null);
         }
@@ -66,7 +66,7 @@ public class Window extends Control<JFrame> implements Pane {
         return autoScaleBaseSize;
     }
 
-    public void setAutoScaleBaseSize(final Dimension autoScaleBaseSize) {
+    public void setAutoScaleBaseSize(Dimension autoScaleBaseSize) {
         this.autoScaleBaseSize = autoScaleBaseSize;
     }
 
@@ -74,11 +74,11 @@ public class Window extends Control<JFrame> implements Pane {
         return title;
     }
 
-    public void setTitle(final String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public void setLoad(final EventHandler<Object, EventData> load) {
+    public void setLoad(EventHandler<Object, EventData> load) {
         onLoad = load;
     }
 
@@ -86,15 +86,15 @@ public class Window extends Control<JFrame> implements Pane {
         return closing;
     }
 
-    public void setClosing(final EventHandler<Object, CancelEventData> closing) {
+    public void setClosing(EventHandler<Object, CancelEventData> closing) {
         this.closing = closing;
     }
 
-    public void setStartPosition(final FormStartPosition startPosition) {
+    public void setStartPosition(FormStartPosition startPosition) {
         // TODO implementation?
     }
 
-    public void setMenu(final MenuBar menu) {
+    public void setMenu(MenuBar menu) {
         frame.getContentPane().add(menu.asSwingObject(), BorderLayout.PAGE_START);
     }
 
@@ -102,7 +102,7 @@ public class Window extends Control<JFrame> implements Pane {
         return controlBox;
     }
 
-    public void setControlBox(final boolean controlBox) {
+    public void setControlBox(boolean controlBox) {
         this.controlBox = controlBox;
     }
 
@@ -110,7 +110,7 @@ public class Window extends Control<JFrame> implements Pane {
         return minimizeBox;
     }
 
-    public void setMinimizeBox(final boolean minimizeBox) {
+    public void setMinimizeBox(boolean minimizeBox) {
         this.minimizeBox = minimizeBox;
     }
 
@@ -118,11 +118,11 @@ public class Window extends Control<JFrame> implements Pane {
         return maximizeBox;
     }
 
-    public void setMaximizeBox(final boolean maximizeBox) {
+    public void setMaximizeBox(boolean maximizeBox) {
         this.maximizeBox = maximizeBox;
     }
 
-    public void setIcon(final Icon icon) {
+    public void setIcon(Icon icon) {
         //		Image icon = Toolkit.getDefaultToolkit().getImage("icon.gif");
         frame.setIconImage(icon.asSwingImage());
     }
@@ -131,11 +131,11 @@ public class Window extends Control<JFrame> implements Pane {
         return formBorderStyle;
     }
 
-    public void setFormBorderStyle(final FormBorderStyle formBorderStyle) {
+    public void setFormBorderStyle(FormBorderStyle formBorderStyle) {
         this.formBorderStyle = formBorderStyle;
     }
 
-    public void setClientSize(final Dimension clientSize) {
+    public void setClientSize(Dimension clientSize) {
         // higher, cause decorations count in swing.
         frame.setSize(new Dimension(clientSize.width, clientSize.height + 45));
     }
@@ -144,11 +144,11 @@ public class Window extends Control<JFrame> implements Pane {
         return frame.getTitle();
     }
 
-    public void setText(final String text) {
+    public void setText(String text) {
         frame.setTitle(text);
     }
 
-    public void setStatusBar(final StatusBar statusBar) {
+    public void setStatusBar(StatusBar statusBar) {
         frame.getContentPane().add(statusBar.asSwingObject(), BorderLayout.PAGE_END);
     }
 
@@ -158,7 +158,7 @@ public class Window extends Control<JFrame> implements Pane {
     }
 
     @Override
-    public void setResult(final DialogResult dialogResult) {
+    public void setResult(DialogResult dialogResult) {
         result = dialogResult;
     }
 

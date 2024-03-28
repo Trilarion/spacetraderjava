@@ -2,15 +2,15 @@ package org.spacetrader.ui;
 
 import org.spacetrader.controller.Game;
 import org.spacetrader.model.crew.Commander;
-import org.winforms.widget.Button;
-import org.winforms.widget.Dialog;
-import org.winforms.widget.Label;
-import org.winforms.widget.Spinner;
+import org.winforms.widget.*;
 import org.winforms.dialog.DialogResult;
 import org.winforms.style.FlatStyle;
 import org.winforms.style.FormBorderStyle;
 import org.winforms.alignment.FormStartPosition;
 import org.winforms.event.EventData;
+import org.winforms.widget.Button;
+import org.winforms.widget.Dialog;
+import org.winforms.widget.Label;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -20,12 +20,11 @@ public class DialogBuyRepairs extends Dialog {
     private final Spinner numAmount;
 
     public DialogBuyRepairs() {
-        final Label labelQuestion = new Label();
+        Label labelQuestion = new Label();
         numAmount = new Spinner();
-        final Button buttonOk = new Button();
-        final Button buttonMax = new Button();
-        final Button buttonNothing = new Button();
-        suspendLayout();
+        Button buttonOk = new Button();
+        Button buttonMax = new Button();
+        Button buttonNothing = new Button();
         // labelQuestion
         labelQuestion.setAutoSize(true);
         labelQuestion.setLocation(new Point(8, 8));
@@ -42,7 +41,7 @@ public class DialogBuyRepairs extends Dialog {
         numAmount.setTabIndex(1);
         numAmount.setValue(888);
         // buttonOk
-        buttonOk.setDialogResult(DialogResult.OK);
+        buttonOk.setDialogResult(DialogResult.Ok);
         buttonOk.setFlatStyle(FlatStyle.Flat);
         buttonOk.setLocation(new Point(69, 32));
         buttonOk.setName("buttonOk");
@@ -50,7 +49,7 @@ public class DialogBuyRepairs extends Dialog {
         buttonOk.setTabIndex(2);
         buttonOk.setText("Ok");
         // buttonMax
-        buttonMax.setDialogResult(DialogResult.OK);
+        buttonMax.setDialogResult(DialogResult.Ok);
         buttonMax.setFlatStyle(FlatStyle.Flat);
         buttonMax.setLocation(new Point(117, 32));
         buttonMax.setName("buttonMax");
@@ -78,14 +77,14 @@ public class DialogBuyRepairs extends Dialog {
         setStartPosition(FormStartPosition.CenterParent);
         setText("Hull Repair");
         resumeLayout(false);
-        final Game game = Game.getCurrentGame();
-        final Commander commander = game.Commander();
+        Game game = Game.getCurrentGame();
+        Commander commander = game.Commander();
         numAmount.setMaximum(Math.min(commander.getCash(), (commander.getShip().HullStrength() - commander.getShip().getHull()) * commander.getShip().getRepairCost()));
         numAmount.setValue(numAmount.getMaximum());
     }
 
     // TODO This action is not connected in the .NET version either.
-    private void buttonMax_Click(final Object sender, final EventData e) {
+    private void buttonMax_Click(Object sender, EventData e) {
         numAmount.setValue(numAmount.getMaximum());
     }
 

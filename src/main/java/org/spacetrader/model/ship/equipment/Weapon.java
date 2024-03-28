@@ -16,14 +16,14 @@ public class Weapon extends Equipment {
     private final boolean disabling;
     private final int power;
 
-    public Weapon(final Hashtable ht) {
+    public Weapon(Hashtable ht) {
         super(ht);
         type = WeaponType.fromId(SerializableObject.GetValueFromHash(ht, Weapon.ss[0], Integer.class));
         power = SerializableObject.GetValueFromHash(ht, Weapon.ss[1], Integer.class);
         disabling = SerializableObject.GetValueFromHash(ht, Weapon.ss[2], false);
     }
 
-    public Weapon(final WeaponType weaponType, final int power, final boolean disabling, final int price, final TechLevel techLevel, final int chance) {
+    public Weapon(WeaponType weaponType, int power, boolean disabling, int price, TechLevel techLevel, int chance) {
         super(EquipmentType.Weapon, price, techLevel, chance);
         type = weaponType;
         this.power = power;
@@ -43,7 +43,7 @@ public class Weapon extends Equipment {
 
     @Override
     public Hashtable Serialize() {
-        final Hashtable hash = super.Serialize();
+        Hashtable hash = super.Serialize();
         hash.put(Weapon.ss[0], type.id);
         hash.put(Weapon.ss[1], power);
         hash.put(Weapon.ss[2], disabling);
@@ -56,13 +56,13 @@ public class Weapon extends Equipment {
     }
 
     @Override
-    public boolean TypeEquals(final Object type) {
+    public boolean TypeEquals(Object type) {
         boolean equal = false;
         try {
             if (this.type == type) {
                 equal = true;
             }
-        } catch (final Exception e) {
+        } catch (Exception e) {
             Log.write("Ignored exception " + e);
         }
         return equal;

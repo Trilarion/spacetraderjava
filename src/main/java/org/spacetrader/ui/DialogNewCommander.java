@@ -48,7 +48,6 @@ public class DialogNewCommander extends Dialog {
         buttonOk = new Button();
         Label labelPointsRemaining = new Label();
         labelPoints = new Label();
-        suspendLayout();
         // labelName
         labelName.setAutoSize(true);
         labelName.setLocation(new Point(8, 8));
@@ -236,7 +235,7 @@ public class DialogNewCommander extends Dialog {
             }
         });
         // buttonOk
-        buttonOk.setDialogResult(DialogResult.OK);
+        buttonOk.setDialogResult(DialogResult.Ok);
         buttonOk.setEnabled(false);
         buttonOk.setFlatStyle(FlatStyle.Flat);
         buttonOk.setLocation(new Point(83, 200));

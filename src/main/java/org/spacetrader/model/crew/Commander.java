@@ -37,14 +37,14 @@ public class Commander extends CrewMember {
     private int noclaim;
     private int[] priceCargo = new int[10]; // Total price paid for trade goods
 
-    public Commander(final CrewMember crewMember) {
+    public Commander(CrewMember crewMember) {
         super(crewMember);
         // Start off with a crew of only the commander and a Pulse Laser.
         ship.Crew()[0] = this;
         ship.addEquipment(Constants.WeaponObjects[WeaponType.PulseLaser.id]);
     }
 
-    public Commander(final Hashtable hash) {
+    public Commander(Hashtable hash) {
         super(hash);
         cash = SerializableObject.GetValueFromHash(hash, "_cash", cash);
         debt = SerializableObject.GetValueFromHash(hash, "_debt", debt);
@@ -64,7 +64,7 @@ public class Commander extends CrewMember {
 
     public void PayInterest() {
         if (debt > 0) {
-            final int interest = Math.max(1, (int) (debt * Constants.IntRate));
+            int interest = Math.max(1, (int) (debt * Constants.IntRate));
             if (cash > interest) {
                 cash = cash - interest;
             } else {
@@ -76,7 +76,7 @@ public class Commander extends CrewMember {
 
     @Override
     public Hashtable Serialize() {
-        final Hashtable hash = super.Serialize();
+        Hashtable hash = super.Serialize();
         hash.put("_cash", cash);
         hash.put("_debt", debt);
         hash.put("_killsPirate", killsPirate);
@@ -93,11 +93,11 @@ public class Commander extends CrewMember {
         return hash;
     }
 
-    public boolean TradeShip(final ShipSpec specToBuy, final int netPrice, final Pane owner) {
+    public boolean TradeShip(ShipSpec specToBuy, int netPrice, Pane owner) {
         return TradeShip(specToBuy, netPrice, specToBuy.Name(), owner);
     }
 
-    public boolean TradeShip(final ShipSpec specToBuy, final int netPrice, final String newShipName, final Pane owner) {
+    public boolean TradeShip(ShipSpec specToBuy, int netPrice, String newShipName, Pane owner) {
         boolean traded = false;
         if (netPrice > 0 && debt > 0) {
             DialogAlert.Alert(AlertType.DebtNoBuy, owner);
@@ -114,14 +114,14 @@ public class Commander extends CrewMember {
         } else if (ship.ReactorOnBoard()) {
             DialogAlert.Alert(AlertType.ShipBuyReactor, owner);
         } else {
-            final Equipment[] special = {
+            Equipment[] special = {
                     Constants.WeaponObjects[WeaponType.MorgansLaser.id],
                     Constants.WeaponObjects[WeaponType.QuantumDisruptor.id],
                     Constants.Shields[ShieldType.Lightning.id],
                     Constants.Gadgets[GadgetType.FuelCompactor.asInteger()],
                     Constants.Gadgets[GadgetType.HiddenCargoBays.asInteger()]
             };
-            final boolean[] add = new boolean[special.length];
+            boolean[] add = new boolean[special.length];
             boolean addPod = false;
             int extraCost = 0;
             for (int i = 0; i < special.length; i++) {
@@ -146,7 +146,7 @@ public class Commander extends CrewMember {
                 if (add[i]) {
                     if (netPrice + extraCost + special[i].TransferPrice() > CashToSpend()) {
                         DialogAlert.Alert(AlertType.ShipBuyNoTransfer, owner, special[i].Name());
-                    } else if (DialogAlert.Alert(AlertType.ShipBuyTransfer, owner, special[i].Name(), special[i].Name().toLowerCase(), ModelUtils.FormatNumber(special[i].TransferPrice())) == DialogResult.Yes) {
+                    } else if (DialogAlert.Alert(AlertType.ShipBuyTransfer, owner, special[i].Name(), special[i].Name().toLowerCase(), ModelUtils.formatNumber(special[i].TransferPrice())) == DialogResult.Yes) {
                         extraCost += special[i].TransferPrice();
                     } else {
                         add[i] = false;
@@ -157,7 +157,7 @@ public class Commander extends CrewMember {
                 if (netPrice + extraCost + Constants.PodTransferCost > CashToSpend()) {
                     DialogAlert.Alert(AlertType.ShipBuyNoTransfer, owner, Strings.ShipInfoEscapePod);
                 } else if (DialogAlert.Alert(AlertType.ShipBuyTransfer, owner, Strings.ShipInfoEscapePod,
-                        Strings.ShipInfoEscapePod.toLowerCase(), ModelUtils.FormatNumber(Constants.PodTransferCost)) == DialogResult.Yes) {
+                        Strings.ShipInfoEscapePod.toLowerCase(), ModelUtils.formatNumber(Constants.PodTransferCost)) == DialogResult.Yes) {
                     extraCost += Constants.PodTransferCost;
                 } else {
                     addPod = false;
@@ -165,7 +165,7 @@ public class Commander extends CrewMember {
             }
             if (DialogAlert.Alert(AlertType.ShipBuyConfirm, owner, ship.Name(), newShipName, (add[0] || add[1]
                     || add[2] || addPod ? Strings.ShipBuyTransfer : "")) == DialogResult.Yes) {
-                final CrewMember[] oldCrew = ship.Crew();
+                CrewMember[] oldCrew = ship.Crew();
                 ship = new Ship(specToBuy.Type());
                 cash = cash - (netPrice + extraCost);
                 System.arraycopy(oldCrew, 0, ship.Crew(), 0, Math.min(oldCrew.length, ship.Crew().length));
@@ -194,7 +194,7 @@ public class Commander extends CrewMember {
         return noclaim;
     }
 
-    public void NoClaim(final int value) {
+    public void NoClaim(int value) {
         noclaim = Math.max(0, Math.min(Constants.MaxNoClaim, value));
     }
 
@@ -210,7 +210,7 @@ public class Commander extends CrewMember {
         return ship;
     }
 
-    public void setShip(final Ship ship) {
+    public void setShip(Ship ship) {
         this.ship = ship;
     }
 
@@ -218,7 +218,7 @@ public class Commander extends CrewMember {
         return reputationScore;
     }
 
-    public void setReputationScore(final int reputationScore) {
+    public void setReputationScore(int reputationScore) {
         this.reputationScore = reputationScore;
     }
 
@@ -226,7 +226,7 @@ public class Commander extends CrewMember {
         return policeRecordScore;
     }
 
-    public void setPoliceRecordScore(final int policeRecordScore) {
+    public void setPoliceRecordScore(int policeRecordScore) {
         this.policeRecordScore = policeRecordScore;
     }
 
@@ -234,7 +234,7 @@ public class Commander extends CrewMember {
         return killsTrader;
     }
 
-    public void setKillsTrader(final int killsTrader) {
+    public void setKillsTrader(int killsTrader) {
         this.killsTrader = killsTrader;
     }
 
@@ -242,7 +242,7 @@ public class Commander extends CrewMember {
         return killsPolice;
     }
 
-    public void setKillsPolice(final int killsPolice) {
+    public void setKillsPolice(int killsPolice) {
         this.killsPolice = killsPolice;
     }
 
@@ -250,7 +250,7 @@ public class Commander extends CrewMember {
         return killsPirate;
     }
 
-    public void setKillsPirate(final int killsPirate) {
+    public void setKillsPirate(int killsPirate) {
         this.killsPirate = killsPirate;
     }
 
@@ -258,7 +258,7 @@ public class Commander extends CrewMember {
         return insurance;
     }
 
-    public void setInsurance(final boolean insurance) {
+    public void setInsurance(boolean insurance) {
         this.insurance = insurance;
     }
 
@@ -266,7 +266,7 @@ public class Commander extends CrewMember {
         return debt;
     }
 
-    public void setDebt(final int debt) {
+    public void setDebt(int debt) {
         this.debt = debt;
     }
 
@@ -274,7 +274,7 @@ public class Commander extends CrewMember {
         return days;
     }
 
-    public void setDays(final int days) {
+    public void setDays(int days) {
         this.days = days;
     }
 
@@ -282,7 +282,7 @@ public class Commander extends CrewMember {
         return cash;
     }
 
-    public void setCash(final int cash) {
+    public void setCash(int cash) {
         this.cash = cash;
     }
 }

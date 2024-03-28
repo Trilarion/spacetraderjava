@@ -15,7 +15,7 @@ public class HighScoreRecord extends SerializableObject implements Comparable<Hi
     private final int days;
     private final int worth;
 
-    public HighScoreRecord(final String name, final int score, final GameEndType gameEndType, final int days, final int worth, final Difficulty difficulty) {
+    public HighScoreRecord(String name, int score, GameEndType gameEndType, int days, int worth, Difficulty difficulty) {
         this.name = name;
         this.score = score;
         this.gameEndType = gameEndType;
@@ -24,7 +24,7 @@ public class HighScoreRecord extends SerializableObject implements Comparable<Hi
         this.difficulty = difficulty;
     }
 
-    public HighScoreRecord(final Hashtable hash) {
+    public HighScoreRecord(Hashtable hash) {
         super(hash);
         name = SerializableObject.GetValueFromHash(hash, "_name", String.class);
         score = SerializableObject.GetValueFromHash(hash, "_score", Integer.class);
@@ -34,13 +34,13 @@ public class HighScoreRecord extends SerializableObject implements Comparable<Hi
         difficulty = SerializableObject.GetValueFromHash(hash, "_difficulty", Difficulty.class);
     }
 
-    public int CompareTo(final HighScoreRecord value) {
+    public int CompareTo(HighScoreRecord value) {
         return compareTo(value);
     }
 
     @Override
-    public int compareTo(final HighScoreRecord record) {
-        final int compared;
+    public int compareTo(HighScoreRecord record) {
+        int compared;
         if (record == null) {
             compared = 1;
         } else if (record.Score() < Score()) {
@@ -63,7 +63,7 @@ public class HighScoreRecord extends SerializableObject implements Comparable<Hi
 
     @Override
     public Hashtable Serialize() {
-        final Hashtable hash = super.Serialize();
+        Hashtable hash = super.Serialize();
         hash.put("_name", name);
         hash.put("_score", score);
         hash.put("_type", gameEndType.getId());

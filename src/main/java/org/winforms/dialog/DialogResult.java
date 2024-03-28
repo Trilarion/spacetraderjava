@@ -2,7 +2,7 @@ package org.winforms.dialog;
 
 
 public enum DialogResult {
-    OK,
+    Ok,
     Cancel,
     Yes,
     No,

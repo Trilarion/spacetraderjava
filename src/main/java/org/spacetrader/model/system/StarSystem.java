@@ -36,8 +36,8 @@ public class StarSystem extends SerializableObject {
     private int y;
     private int[] tradeItems = new int[10];  // make 10 a constant
 
-    public StarSystem(final StarSystemId id, final int x, final int y, final ShipSize size, final TechLevel techLevel,
-                      final PoliticalSystemType politicalSystemType, final SystemPressure systemPressure, final SpecialResource specialResource) {
+    public StarSystem(StarSystemId id, int x, int y, ShipSize size, TechLevel techLevel,
+                      PoliticalSystemType politicalSystemType, SystemPressure systemPressure, SpecialResource specialResource) {
         systemId = id;
         this.x = x;
         this.y = y;
@@ -49,7 +49,7 @@ public class StarSystem extends SerializableObject {
         initializeTradeItems();
     }
 
-    public StarSystem(final Hashtable hash) {
+    public StarSystem(Hashtable hash) {
         super(hash);
         systemId = StarSystemId.FromInt(SerializableObject.GetValueFromHash(hash, "_id", Integer.class));
         x = SerializableObject.GetValueFromHash(hash, "_x", x);
@@ -70,7 +70,7 @@ public class StarSystem extends SerializableObject {
         for (int i = 0; i < Constants.TradeItems.length; i++) {
             if (ItemTraded(Constants.TradeItems[i])) {
                 tradeItems[i] = (Size().getId() + 1)
-                        * (ModelUtils.GetRandom(9, 14) - Math.abs(Constants.TradeItems[i].TechTopProduction().ordinal() - TechLevel().ordinal()));
+                        * (ModelUtils.getRandom(9, 14) - Math.abs(Constants.TradeItems[i].TechTopProduction().ordinal() - TechLevel().ordinal()));
                 // Because of the enormous profits possible, there shouldn't be too many robots or narcotics available.
                 if (i >= TradeItemType.Narcotics.getId()) {
                     tradeItems[i] = ((tradeItems[i] * (5 - Game.getCurrentGame().Difficulty().getId())) / (6 - Game.getCurrentGame().Difficulty().getId())) + 1;
@@ -84,7 +84,7 @@ public class StarSystem extends SerializableObject {
                 if (SystemPressure() == Constants.TradeItems[i].PressurePriceHike()) {
                     tradeItems[i] /= 5;
                 }
-                tradeItems[i] = tradeItems[i] - ModelUtils.GetRandom(10) + ModelUtils.GetRandom(10);
+                tradeItems[i] = tradeItems[i] - ModelUtils.getRandom(10) + ModelUtils.getRandom(10);
                 if (tradeItems[i] < 0) {
                     tradeItems[i] = 0;
                 }
@@ -94,19 +94,19 @@ public class StarSystem extends SerializableObject {
         }
     }
 
-    public boolean ItemTraded(final TradeItem item) {
+    public boolean ItemTraded(TradeItem item) {
         return ((item.Type() != TradeItemType.Narcotics || PoliticalSystem().DrugsOk())
                 && (item.Type() != TradeItemType.Firearms || PoliticalSystem().FirearmsOk()) && TechLevel().ordinal() >= item.TechProduction().ordinal());
     }
 
-    public boolean ItemUsed(final TradeItem item) {
+    public boolean ItemUsed(TradeItem item) {
         return ((item.Type() != TradeItemType.Narcotics || PoliticalSystem().DrugsOk())
                 && (item.Type() != TradeItemType.Firearms || PoliticalSystem().FirearmsOk()) && TechLevel().ordinal() >= item.TechUsage().ordinal());
     }
 
     @Override
     public Hashtable Serialize() {
-        final Hashtable hash = super.Serialize();
+        Hashtable hash = super.Serialize();
         hash.put("_id", systemId.getId());
         hash.put("_x", x);
         hash.put("_y", y);
@@ -124,7 +124,7 @@ public class StarSystem extends SerializableObject {
     }
 
     public boolean ShowSpecialButton() {
-        final Game game = Game.getCurrentGame();
+        Game game = Game.getCurrentGame();
         boolean show = false;
         switch (SpecialEventType()) {
             case Artifact:
@@ -259,12 +259,12 @@ public class StarSystem extends SerializableObject {
         return countDown;
     }
 
-    public void CountDown(final int i) {
+    public void CountDown(int i) {
         countDown = i;
     }
 
     public boolean DestOk() {
-        final Commander comm = Game.getCurrentGame().Commander();
+        Commander comm = Game.getCurrentGame().Commander();
         return this != comm.CurrentSystem() && (Distance() <= comm.getShip().getFuel() || ModelUtils.WormholeExists(comm.CurrentSystem(), this));
     }
 
@@ -277,9 +277,9 @@ public class StarSystem extends SerializableObject {
     }
 
     public CrewMember[] MercenariesForHire() {
-        final Commander commander = Game.getCurrentGame().Commander();
-        final CrewMember[] mercs = Game.getCurrentGame().Mercenaries();
-        final ArrayList<CrewMember> forHire = new ArrayList<>(3);
+        Commander commander = Game.getCurrentGame().Commander();
+        CrewMember[] mercs = Game.getCurrentGame().Mercenaries();
+        ArrayList<CrewMember> forHire = new ArrayList<>(3);
         for (int i = 1; i < mercs.length; i++) {
             if (mercs[i].CurrentSystem() == commander.CurrentSystem() && !commander.getShip().HasCrew(mercs[i].Id())) {
                 forHire.add(mercs[i]);
@@ -300,7 +300,7 @@ public class StarSystem extends SerializableObject {
         return politicalSystemType;
     }
 
-    public void PoliticalSystemType(final PoliticalSystemType pst) {
+    public void PoliticalSystemType(PoliticalSystemType pst) {
         politicalSystemType = pst;
     }
 
@@ -313,7 +313,7 @@ public class StarSystem extends SerializableObject {
         return shipyardId;
     }
 
-    public void ShipyardId(final ShipyardId si) {
+    public void ShipyardId(ShipyardId si) {
         shipyardId = si;
     }
 
@@ -330,7 +330,7 @@ public class StarSystem extends SerializableObject {
         return specialEventType;
     }
 
-    public void SpecialEventType(final SpecialEventType set) {
+    public void SpecialEventType(SpecialEventType set) {
         specialEventType = set;
     }
 
@@ -342,7 +342,7 @@ public class StarSystem extends SerializableObject {
         return systemPressure;
     }
 
-    public void SystemPressure(final SystemPressure sp) {
+    public void SystemPressure(SystemPressure sp) {
         systemPressure = sp;
     }
 
@@ -350,7 +350,7 @@ public class StarSystem extends SerializableObject {
         return techLevel;
     }
 
-    public void TechLevel(final TechLevel tl) {
+    public void TechLevel(TechLevel tl) {
         techLevel = tl;
     }
 
@@ -362,7 +362,7 @@ public class StarSystem extends SerializableObject {
         return visited;
     }
 
-    public void Visited(final boolean b) {
+    public void Visited(boolean b) {
         visited = b;
     }
 
@@ -370,7 +370,7 @@ public class StarSystem extends SerializableObject {
         return x;
     }
 
-    public void X(final int i) {
+    public void X(int i) {
         x = i;
     }
 
@@ -378,7 +378,7 @@ public class StarSystem extends SerializableObject {
         return y;
     }
 
-    public void Y(final int i) {
+    public void Y(int i) {
         y = i;
     }
 }

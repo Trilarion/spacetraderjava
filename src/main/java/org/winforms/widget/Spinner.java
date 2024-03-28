@@ -29,7 +29,7 @@ public class Spinner extends Control<JSpinner> {
         // TODO implement
     }
 
-    public void setValueChanged(final EventHandler<Object, EventData> valueChanged) {
+    public void setValueChanged(EventHandler<Object, EventData> valueChanged) {
         asJSpinner().addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -95,7 +95,7 @@ public class Spinner extends Control<JSpinner> {
         @Override
         public void focusGained(FocusEvent e) {
             if (e.getSource() instanceof JTextComponent) {
-                final JTextComponent textComponent = ((JTextComponent) e.getSource());
+                JTextComponent textComponent = ((JTextComponent) e.getSource());
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {

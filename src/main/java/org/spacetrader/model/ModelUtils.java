@@ -56,23 +56,23 @@ public class ModelUtils {
         g.drawImage(img, 2 + start, 2, new Rectangle(start, 0, stop - start, img.getHeight()));
     }
 
-    public static String FormatNumber(int num) {
+    public static String formatNumber(int num) {
         return String.format("%,d", num);
     }
 
-    public static String FormatList(String[] listItems) {
+    public static String formatList(String[] listItems) {
         return StringVars(Strings.ListStrings[listItems.length], listItems);
     }
 
-    public static String FormatMoney(int num) {
+    public static String formatMoney(int num) {
         return String.format("%,d cr.", num);
     }
 
-    public static String FormatPercent(int num) {
+    public static String formatPercent(int num) {
         return String.format("%,d%%", num);
     }
 
-    public static int GetColumnOfFirstNonWhitePixel(Image image, int direction) {
+    public static int getColumnOfFirstNonWhitePixel(Image image, int direction) {
         Bitmap bitmap = new Bitmap(image);
         int step = direction < 0 ? -1 : 1;
         int col = step > 0 ? 0 : bitmap.getWidth() - 1;
@@ -89,32 +89,32 @@ public class ModelUtils {
 
     public static HighScoreRecord[] GetHighScores(Pane owner) {
         HighScoreRecord[] highScores = new HighScoreRecord[3];
-        Object obj = LoadFile(Constants.HighScoreFile, true, owner);
+        Object obj = loadFile(Constants.HighScoreFile, true, owner);
         if (obj != null) {
             highScores = (HighScoreRecord[]) SerializableObject.ArrayListToArray((ArrayList<Hashtable>) obj, "HighScoreRecord");
         }
         return highScores;
     }
 
-    public static int GetRandom(int max) {
-        return GetRandom(0, max);
+    public static int getRandom(int max) {
+        return getRandom(0, max);
     }
 
-    public static int GetRandom(int min, int max) {
+    public static int getRandom(int min, int max) {
         return rand.nextInt(max - min) + min;
     }
 
     // Pieter's new random functions, tweaked a bit by SjG
-    public static int GetRandom2(int max) {
-        return (int) (Rand() % max);
+    public static int getRandom2(int max) {
+        return (int) (rand() % max);
     }
 
-    public static RegistryKey GetRegistryKey() {
+    public static RegistryKey getRegistryKey() {
         File regfile = new File("registryKey.properties");
         return new RegistryKey(regfile);
     }
 
-    public static boolean IsInt(String toParse) {
+    public static boolean isInt(String toParse) {
         boolean isInt = true;
         try {
             Integer.parseInt(toParse);
@@ -124,7 +124,7 @@ public class ModelUtils {
         return isInt;
     }
 
-    public static Object LoadFile(String fileName, boolean ignoreMissingFile, Pane owner) {
+    public static Object loadFile(String fileName, boolean ignoreMissingFile, Pane owner) {
         Object obj = null;
         FileInputStream inStream = null;
         try {
@@ -150,11 +150,11 @@ public class ModelUtils {
         return obj;
     }
 
-    public static String Multiples(int num, String unit) {
-        return FormatNumber(num) + " " + unit + (num == 1 ? "" : "s");
+    public static String multiples(int num, String unit) {
+        return formatNumber(num) + " " + unit + (num == 1 ? "" : "s");
     }
 
-    public static void PaintShipImage(Ship ship, Graphics graphics, Color backgroundColor) {
+    public static void paintShipImage(Ship ship, Graphics graphics, Color backgroundColor) {
         int x = Constants.ShipImageOffsets[ship.Type().getId()].x;
         int width = Constants.ShipImageOffsets[ship.Type().getId()].width;
         int startDamage = x + width - ship.getHull() * width / ship.HullStrength();
@@ -176,7 +176,7 @@ public class ModelUtils {
         }
     }
 
-    private static long Rand() {
+    private static long rand() {
         final int a = 18000;
         final int b = 30903;
         SeedX = a * (SeedX & MAX_WORD) + (SeedX >> 16);
@@ -184,8 +184,8 @@ public class ModelUtils {
         return ((SeedX << 16) + (SeedY & MAX_WORD));
     }
 
-    public static int RandomSkill() {
-        return 1 + GetRandom(5) + GetRandom(6);
+    public static int getRandomSkill() {
+        return 1 + getRandom(5) + getRandom(6);
     }
 
     public static void RandSeed(int seed1, int seed2) {
@@ -201,7 +201,7 @@ public class ModelUtils {
         }
     }
 
-    public static boolean SaveFile(String fileName, Object toSerialize, Pane owner) {
+    public static boolean saveFile(String fileName, Object toSerialize, Pane owner) {
         System.out.println(fileName);
         FileOutputStream outStream = null;
         boolean saveOk = false;
@@ -254,11 +254,5 @@ public class ModelUtils {
         int[] wormholes = Game.getCurrentGame().Wormholes();
         int i = Utils.bruteSeek(wormholes, a.Id().getId());
         return (i >= 0 && (universe[wormholes[(i + 1) % wormholes.length]] == b));
-    }
-
-    public static StarSystem WormholeTarget(int a) {
-        int[] wormholes = Game.getCurrentGame().Wormholes();
-        int i = Utils.bruteSeek(wormholes, a);
-        return (i >= 0 ? (Game.getCurrentGame().getUniverse()[wormholes[(i + 1) % wormholes.length]]) : null);
     }
 }

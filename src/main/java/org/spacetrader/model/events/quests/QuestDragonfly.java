@@ -16,7 +16,7 @@ public enum QuestDragonfly {
     public final String name;
     public final int id;
 
-    QuestDragonfly(final String s) {
+    QuestDragonfly(String s) {
         name = s;
         id = ordinal();
     }

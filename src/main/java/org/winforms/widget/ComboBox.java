@@ -31,14 +31,14 @@ public class ComboBox extends Control<JComboBox> {
         return asJComboBox().getSelectedIndex();
     }
 
-    public void setSelectedIndex(final int index) {
+    public void setSelectedIndex(int index) {
         asJComboBox().setSelectedIndex(index);
     }
 
     public void setSelectedIndexChanged(EventHandler<Object, EventData> handler) {
         asJComboBox().addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(final ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 handler.handle(ComboBox.this, null);
             }
         });

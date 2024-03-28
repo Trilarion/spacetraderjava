@@ -11,27 +11,27 @@ public class StatusBarSection extends JLabel {
         setBorder(BorderFactory.createLoweredBevelBorder());
     }
 
-    public StatusBarSection(final Icon image, final int horizontalAlignment) {
+    public StatusBarSection(Icon image, int horizontalAlignment) {
         super(image, horizontalAlignment);
         setBorder(BorderFactory.createLoweredBevelBorder());
     }
 
-    public StatusBarSection(final Icon image) {
+    public StatusBarSection(Icon image) {
         super(image);
         setBorder(BorderFactory.createLoweredBevelBorder());
     }
 
-    public StatusBarSection(final String text, final Icon icon, final int horizontalAlignment) {
+    public StatusBarSection(String text, Icon icon, int horizontalAlignment) {
         super(text, icon, horizontalAlignment);
         setBorder(BorderFactory.createLoweredBevelBorder());
     }
 
-    public StatusBarSection(final String text, final int horizontalAlignment) {
+    public StatusBarSection(String text, int horizontalAlignment) {
         super(text, horizontalAlignment);
         setBorder(BorderFactory.createLoweredBevelBorder());
     }
 
-    public StatusBarSection(final String text) {
+    public StatusBarSection(String text) {
         super(text);
         setBorder(BorderFactory.createLoweredBevelBorder());
     }

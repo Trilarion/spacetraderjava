@@ -14,14 +14,14 @@ public class Shield extends Equipment {
     private final int power;
     private int Charge;
 
-    public Shield(final Hashtable hash) {
+    public Shield(Hashtable hash) {
         super(hash);
         type = ShieldType.fromId(SerializableObject.GetValueFromHash(hash, "_type", Integer.class));
         power = SerializableObject.GetValueFromHash(hash, "_power", Integer.class);
         charge = SerializableObject.GetValueFromHash(hash, "_charge", Integer.class);
     }
 
-    public Shield(final ShieldType type, final int power, final int price, final TechLevel minTechLevel, final int chance) {
+    public Shield(ShieldType type, int power, int price, TechLevel minTechLevel, int chance) {
         super(EquipmentType.Shield, price, minTechLevel, chance);
         this.type = type;
         this.power = power;
@@ -30,7 +30,7 @@ public class Shield extends Equipment {
 
     @Override
     public Equipment Clone() {
-        final Shield shield = new Shield(type, power, price, minTech, chance);
+        Shield shield = new Shield(type, power, price, minTech, chance);
         shield.Charge = Charge;
         return shield;
     }
@@ -42,7 +42,7 @@ public class Shield extends Equipment {
 
     @Override
     public Hashtable Serialize() {
-        final Hashtable hash = super.Serialize();
+        Hashtable hash = super.Serialize();
         hash.put("_type", type);
         hash.put("_power", power);
         hash.put("_charge", charge);
@@ -55,10 +55,10 @@ public class Shield extends Equipment {
     }
 
     @Override
-    public boolean TypeEquals(final Object type) {
+    public boolean TypeEquals(Object type) {
         try {
             return (Type() == type);
-        } catch (final Exception e) {
+        } catch (Exception e) {
             Log.write("Ignored exception: " + e);
             return false;
         }
@@ -72,7 +72,7 @@ public class Shield extends Equipment {
         return Charge;
     }
 
-    public void setCharge(final int charge) {
+    public void setCharge(int charge) {
         Charge = charge;
     }
 

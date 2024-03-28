@@ -9,12 +9,12 @@ public class Reputation {
     private final ReputationType type;
     private final int minScore;
 
-    public Reputation(final ReputationType type, final int minScore) {
+    public Reputation(ReputationType type, int minScore) {
         this.type = type;
         this.minScore = minScore;
     }
 
-    public static Reputation getReputationFromScore(final int reputationScore) {
+    public static Reputation getReputationFromScore(int reputationScore) {
         int i;
         for (i = 0; i < Constants.Reputations.length && reputationScore >= Constants.Reputations[i].minScore; i++) {
         }

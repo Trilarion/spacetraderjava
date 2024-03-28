@@ -23,7 +23,7 @@ public class GroupBox extends Control<wfPanel> {
         return border.getTitle();
     }
 
-    public void setText(final String text) {
+    public void setText(String text) {
         border.setTitle(text);
     }
 

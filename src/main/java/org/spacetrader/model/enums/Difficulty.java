@@ -11,11 +11,11 @@ public enum Difficulty implements IdentifiableEnum {
     Impossible(-2);
     private final int skillAdjust;
 
-    Difficulty(final int skillAdjust) {
+    Difficulty(int skillAdjust) {
         this.skillAdjust = skillAdjust;
     }
 
-    public static Difficulty FromInt(final int i) {
+    public static Difficulty FromInt(int i) {
         return Difficulty.values()[i];
     }
 
@@ -25,7 +25,7 @@ public enum Difficulty implements IdentifiableEnum {
     }
 
     // TODO since this is a simple addition, it might be somewhere else
-    public int adjustSkill(final int skill) {
+    public int adjustSkill(int skill) {
         return skill + skillAdjust;
     }
 }

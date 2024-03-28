@@ -45,7 +45,7 @@ public enum NewsEvent implements IdentifiableEnum {
     PrincessRescued, // = 37,
     PrincessReturned;// = 38
 
-    public static NewsEvent FromInt(final int i) {
+    public static NewsEvent FromInt(int i) {
         return NewsEvent.values()[i];
     }
 

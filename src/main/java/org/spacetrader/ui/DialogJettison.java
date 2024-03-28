@@ -24,40 +24,39 @@ public class DialogJettison extends Dialog {
     private final Button[] buttonJettisonQuantity;
 
     public DialogJettison() {
-        final Button buttonJettisonAll9 = new Button();
-        final Button buttonJettisonQuantity9 = new Button();
-        final Button buttonJettisonAll8 = new Button();
-        final Button buttonJettisonQuantity8 = new Button();
-        final Button buttonJettisonAll7 = new Button();
-        final Button buttonJettisonQuantity7 = new Button();
-        final Button buttonJettisonAll6 = new Button();
-        final Button buttonJettisonQuantity6 = new Button();
-        final Button buttonJettisonAll5 = new Button();
-        final Button buttonJettisonQuantity5 = new Button();
-        final Button buttonJettisonAll4 = new Button();
-        final Button buttonJettisonQuantity4 = new Button();
-        final Button buttonJettisonAll3 = new Button();
-        final Button buttonJettisonQuantity3 = new Button();
-        final Button buttonJettisonAll2 = new Button();
-        final Button buttonJettisonQuantity2 = new Button();
-        final Button buttonJettisonAll1 = new Button();
-        final Button buttonJettisonQuantity1 = new Button();
-        final Button buttonJettisonAll0 = new Button();
-        final Button buttonJettisonQuantity0 = new Button();
-        final Label labelTradeCommodity9 = new Label();
-        final Label labelTradeCommodity8 = new Label();
-        final Label labelTradeCommodity2 = new Label();
-        final Label labelTradeCommodity0 = new Label();
-        final Label labelTradeCommodity1 = new Label();
-        final Label labelTradeCommodity6 = new Label();
-        final Label labelTradeCommodity5 = new Label();
-        final Label labelTradeCommodity4 = new Label();
-        final Label labelTradeCommodity3 = new Label();
-        final Label labelTradeCommodity7 = new Label();
-        final Label labelBaysLabel = new Label();
+        Button buttonJettisonAll9 = new Button();
+        Button buttonJettisonQuantity9 = new Button();
+        Button buttonJettisonAll8 = new Button();
+        Button buttonJettisonQuantity8 = new Button();
+        Button buttonJettisonAll7 = new Button();
+        Button buttonJettisonQuantity7 = new Button();
+        Button buttonJettisonAll6 = new Button();
+        Button buttonJettisonQuantity6 = new Button();
+        Button buttonJettisonAll5 = new Button();
+        Button buttonJettisonQuantity5 = new Button();
+        Button buttonJettisonAll4 = new Button();
+        Button buttonJettisonQuantity4 = new Button();
+        Button buttonJettisonAll3 = new Button();
+        Button buttonJettisonQuantity3 = new Button();
+        Button buttonJettisonAll2 = new Button();
+        Button buttonJettisonQuantity2 = new Button();
+        Button buttonJettisonAll1 = new Button();
+        Button buttonJettisonQuantity1 = new Button();
+        Button buttonJettisonAll0 = new Button();
+        Button buttonJettisonQuantity0 = new Button();
+        Label labelTradeCommodity9 = new Label();
+        Label labelTradeCommodity8 = new Label();
+        Label labelTradeCommodity2 = new Label();
+        Label labelTradeCommodity0 = new Label();
+        Label labelTradeCommodity1 = new Label();
+        Label labelTradeCommodity6 = new Label();
+        Label labelTradeCommodity5 = new Label();
+        Label labelTradeCommodity4 = new Label();
+        Label labelTradeCommodity3 = new Label();
+        Label labelTradeCommodity7 = new Label();
+        Label labelBaysLabel = new Label();
         labelBays = new Label();
-        final Button buttonDone = new Button();
-        suspendLayout();
+        Button buttonDone = new Button();
         // buttonJettisonAll9
         buttonJettisonAll9.setFlatStyle(FlatStyle.Flat);
         buttonJettisonAll9.setLocation(new Point(100, 220));
@@ -67,7 +66,7 @@ public class DialogJettison extends Dialog {
         buttonJettisonAll9.setText("All");
         buttonJettisonAll9.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
             }
         });
@@ -80,7 +79,7 @@ public class DialogJettison extends Dialog {
         buttonJettisonQuantity9.setText("88");
         buttonJettisonQuantity9.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
             }
         });
@@ -93,7 +92,7 @@ public class DialogJettison extends Dialog {
         buttonJettisonAll8.setText("All");
         buttonJettisonAll8.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
             }
         });
@@ -106,7 +105,7 @@ public class DialogJettison extends Dialog {
         buttonJettisonQuantity8.setText("88");
         buttonJettisonQuantity8.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
             }
         });
@@ -119,7 +118,7 @@ public class DialogJettison extends Dialog {
         buttonJettisonAll7.setText("All");
         buttonJettisonAll7.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
             }
         });
@@ -132,7 +131,7 @@ public class DialogJettison extends Dialog {
         buttonJettisonQuantity7.setText("88");
         buttonJettisonQuantity7.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
             }
         });
@@ -145,7 +144,7 @@ public class DialogJettison extends Dialog {
         buttonJettisonAll6.setText("All");
         buttonJettisonAll6.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
             }
         });
@@ -158,7 +157,7 @@ public class DialogJettison extends Dialog {
         buttonJettisonQuantity6.setText("88");
         buttonJettisonQuantity6.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
             }
         });
@@ -171,7 +170,7 @@ public class DialogJettison extends Dialog {
         buttonJettisonAll5.setText("All");
         buttonJettisonAll5.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
             }
         });
@@ -184,7 +183,7 @@ public class DialogJettison extends Dialog {
         buttonJettisonQuantity5.setText("88");
         buttonJettisonQuantity5.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
             }
         });
@@ -197,7 +196,7 @@ public class DialogJettison extends Dialog {
         buttonJettisonAll4.setText("All");
         buttonJettisonAll4.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
             }
         });
@@ -210,7 +209,7 @@ public class DialogJettison extends Dialog {
         buttonJettisonQuantity4.setText("88");
         buttonJettisonQuantity4.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
             }
         });
@@ -223,7 +222,7 @@ public class DialogJettison extends Dialog {
         buttonJettisonAll3.setText("All");
         buttonJettisonAll3.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
             }
         });
@@ -236,7 +235,7 @@ public class DialogJettison extends Dialog {
         buttonJettisonQuantity3.setText("88");
         buttonJettisonQuantity3.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
             }
         });
@@ -249,7 +248,7 @@ public class DialogJettison extends Dialog {
         buttonJettisonAll2.setText("All");
         buttonJettisonAll2.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
             }
         });
@@ -262,7 +261,7 @@ public class DialogJettison extends Dialog {
         buttonJettisonQuantity2.setText("88");
         buttonJettisonQuantity2.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
             }
         });
@@ -275,7 +274,7 @@ public class DialogJettison extends Dialog {
         buttonJettisonAll1.setText("All");
         buttonJettisonAll1.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
             }
         });
@@ -288,7 +287,7 @@ public class DialogJettison extends Dialog {
         buttonJettisonQuantity1.setText("88");
         buttonJettisonQuantity1.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
             }
         });
@@ -301,7 +300,7 @@ public class DialogJettison extends Dialog {
         buttonJettisonAll0.setText("All");
         buttonJettisonAll0.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
             }
         });
@@ -314,7 +313,7 @@ public class DialogJettison extends Dialog {
         buttonJettisonQuantity0.setText("88");
         buttonJettisonQuantity0.setClick(new EventHandler<>() {
             @Override
-            public void handle(final Object sender, final EventData data) {
+            public void handle(Object sender, EventData data) {
                 buttonJettison_Click(sender, data);
             }
         });
@@ -468,7 +467,7 @@ public class DialogJettison extends Dialog {
                 buttonJettisonQuantity8,
                 buttonJettisonQuantity9
         };
-        final Button[] buttonJettisonAll = {
+        Button[] buttonJettisonAll = {
                 buttonJettisonAll0,
                 buttonJettisonAll1,
                 buttonJettisonAll2,
@@ -484,23 +483,23 @@ public class DialogJettison extends Dialog {
     }
 
 
-    private void Jettison(final int tradeItem, final boolean all) {
-        game.CargoJettison(tradeItem, all, this);
+    private void Jettison(int tradeItem, boolean all) {
+        game.jettisonCargo(tradeItem, all, this);
         UpdateAll();
     }
 
     private void UpdateAll() {
-        final Ship ship = commander.getShip();
+        Ship ship = commander.getShip();
         for (int i = 0; i < buttonJettisonQuantity.length; i++) {
             buttonJettisonQuantity[i].setText("" + ship.Cargo()[i]);
         }
         labelBays.setText(ship.FilledCargoBays() + "/" + ship.CargoBays());
     }
 
-    private void buttonJettison_Click(final Object sender, final EventData e) {
-        final String name = ((Button) sender).getName();
-        final boolean all = !name.contains("Quantity");
-        final int index = Integer.parseInt(name.substring(name.length() - 1));
+    private void buttonJettison_Click(Object sender, EventData e) {
+        String name = ((Button) sender).getName();
+        boolean all = !name.contains("Quantity");
+        int index = Integer.parseInt(name.substring(name.length() - 1));
         Jettison(index, all);
     }
 }

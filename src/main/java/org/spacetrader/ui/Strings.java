@@ -6,7 +6,7 @@ import org.spacetrader.model.ship.equipment.WeaponType;
 // TODO for internationalization, this should be in a properties file
 public interface Strings {
     String newline = "\n";
-    String CargoSellStatementDump = "You can ^1 up to ^2.";
+    String sellCargoStatementDump = "You can ^1 up to ^2.";
     String CargoTitle = "^1 ^2";
     String CargoUnit = "unit";
     String DistanceUnit = "parsec";
@@ -150,8 +150,8 @@ public interface Strings {
     String TribbleDangerousNumber = "a dangerous number of";
     String Unknown = "Unknown";
     String[] ActivityLevels = {"Absent", "Minimal", "Few", "Some", "Moderate", "Many", "Abundant", "Swarms"};
-    String[] CargoBuyOps = {"Buy", "Buy", "Steal"};
-    String[] CargoSellOps = {"Sell", "Sell", "Dump", "Jettison"};
+    String[] buyCargoOps = {"Buy", "Buy", "Steal"};
+    String[] sellCargoOps = {"Sell", "Sell", "Dump", "Jettison"};
     String[] CrewMemberNames = {"Commander",
             "Alyssa", "Armatur", "Bentos", "C2U2", "Chi'Ti", "Crystal", "Dane",
             "Deirdre", "Doc", "Draco", "Iranda", "Jeremiah", "Jujubal",
